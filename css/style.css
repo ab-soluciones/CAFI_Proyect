@@ -1,0 +1,35 @@
+body {
+    background-color: gray;
+}
+
+#logo {
+    height: 15rem;
+}
+
+#index_form {
+    font-weight: bold;
+    background-color: lightgray;
+    margin: auto;
+    box-shadow: grey 1px 1px 10px;
+}
+
+.index_input {
+    border: 1px solid gray;
+    background-color: lightgrey;
+}
+
+#index_button {
+    background-color: #2a727a;
+}
+
+#op_titulo {
+    color: white;
+}
+
+#op_card {
+    background-color: black;
+}
+
+#op_card_body {
+    background-color: lightgrey;
+}
