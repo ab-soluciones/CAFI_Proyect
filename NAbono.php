@@ -17,6 +17,10 @@ if (
     && isset($_GET['cam'])  && isset($_GET['tt'])
     && isset($_GET['frm_pg'])
 ) {
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+    $result = $con->consultaRetorno($query);
+    $con->cerrarConexion();
     $cantidad = $_GET['cant'];
     $pago = $_GET['pg'];
     $adeudo = (int) $_GET['ad'];
@@ -34,9 +38,9 @@ if (
     $abono->setNegocio($_SESSION['idnegocio']);
     $abono->setTrabajador($_SESSION['id']);
     $abono->guardar($adeudo, $total);
-    if ($result === "A") {
+    if ($result['impresora'] === "A") {
         header("location: ticketabono.php?ad=$adeudo");
-    } else if ($result === "I") {
+    } else if ($result['impresora'] === "I") {
         header('location: VConsultasAdeudos.php');
     }
    

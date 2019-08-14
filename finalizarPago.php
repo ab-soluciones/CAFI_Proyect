@@ -39,9 +39,9 @@ if (isset($_GET['total']) && !isset($_GET['pago'])) {
     $_SESSION['idven'] = null;
     $_SESSION['forma_pago'] = null;
     $_SESSION['clienteid'] = null;
-    if ($result === "A") {
+    if ($result['impresora'] === "A") {
         header("location: ticket.php?idventa=$idventa");
-    } else if ($result === "I") {
+    } else if ($result['impresora'] === "I") {
         header("location: OPCAFI.php");
     }
    
@@ -77,9 +77,9 @@ if (
     $_SESSION['idven'] = null;
     $_SESSION['forma_pago'] = null;
     $_SESSION['clienteid'] = null;
-    if ($result === "A") {
+    if ($result['impresora'] === "A") {
         header("location: ticket.php?idventa=$idventa");
-    } else if ($result === "I") {
+    } else if ($result['impresora'] === "I") {
         header("location: OPCAFI.php");
     }
 }
@@ -124,9 +124,9 @@ if (
     $_SESSION['clienteid'] = null;
     $_SESSION['idven'] = null;
     $_SESSION['forma_pago'] = null;
-    if ($result === "A") {
+    if ($result['impresora'] === "A") {
         header("location: ticket.php?idventa=$idventa");
-    } else if ($result === "I") {
+    } else if ($result['impresora'] === "I") {
         header("location: OPCAFI.php");
     }
 }
