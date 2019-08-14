@@ -14,13 +14,6 @@ if (!isset($_SESSION['acceso'])) {
 }
 $negocio = $_SESSION['idnegocio'];
 
-if($_SESSION['mensaje'] === true){
-  echo "<script>mensaje();</script>";
-  $_SESSION['memsaje'] = null;
-}else {
-
-}
-
 function registrar($imagen, $negocio)
 {
     $producto = new Models\Producto();
@@ -59,7 +52,13 @@ function registrar($imagen, $negocio)
     $result = $con->consultaRetorno($query);
     $con->cerrarConexion();
     $clienteab = $result['clientesab_idclienteab'];
-    $producto->guardar($clienteab, $_SESSION['id']);
+    $result = $producto->guardar($clienteab, $_SESSION['id']);
+    if($result === 1){
+        echo "<script>alert('Producto Registrado Exitosamente');</script>";
+    }else{
+        echo "<script>alert('Producto no registrado compruebe los campos unicos');</script>";
+    }
+
 }
 if (
     isset($_POST['TNombre'])  && isset($_POST['TColor'])

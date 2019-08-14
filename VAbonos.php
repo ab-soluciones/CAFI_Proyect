@@ -5,7 +5,7 @@ $con = new Models\Conexion();
 session_start();
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
-} elseif ($_SESSION['estado'] == "I") {
+} else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
     $_SESSION['acceso'] == "CEO" || $_SESSION['acceso'] == "ManagerAB"
