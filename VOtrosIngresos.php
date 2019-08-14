@@ -31,7 +31,19 @@ if (
     $otro_ingreso->setFormaIngreso($_POST['SFIngreso']);
     $otro_ingreso->setFecha($_POST['DFecha']);
     $otro_ingreso->setEstado("A");
-    $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
+    $result = $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
+
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
 ?>
 <!DOCTYPE html>

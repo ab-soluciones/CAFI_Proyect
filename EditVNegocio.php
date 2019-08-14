@@ -120,7 +120,7 @@ if (!isset($_SESSION['acceso'])) {
     }
     if (
         isset($_POST['TNombre']) && isset($_POST['TDomicilio'])
-        && isset($_POST['TCiudad']) && isset($_POST['DlClientes'])  
+        && isset($_POST['TCiudad']) && isset($_POST['DlClientes'])
         && isset($_POST['TTelefono'])  && isset($_POST['RImpresora'])
     ) {
         $idusuario = $_SESSION['id'];
@@ -139,8 +139,23 @@ if (!isset($_SESSION['acceso'])) {
         $idc = (int) $idc['id_clienteab'];
         var_dump($idc);
         $negocio->setIdCliente($idc);
-        $negocio->editar($id, $idusuario);
-        header('location: VNegociosab.php');
+        $result = $negocio->editar($id, $idusuario);
+        if ($result === 1) {
+            ?>
+<script>
+    alert('editado Exitosamente');
+</script>
+<?php } else if ($result === 0) {
+            ?>
+<script>
+    alert('No se a realizado ningún cambio');
+</script>
+<?php } else if ($result === -1) {
+            ?>
+<script>
+    alert('no editado compruebe los campos unicos');
+</script>
+<?php }
     }
 }
 ?>

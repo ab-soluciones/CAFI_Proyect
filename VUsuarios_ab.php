@@ -23,12 +23,21 @@ if (
     $usab->setLogin($_POST['TLogin']);
     $usab->setPassword($_POST['TPContraseña']);
     $usab->setEstado($_POST['REstado']);
-    $usab->guardar();
+    $result = $usab->guardar();
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
+
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 

@@ -34,7 +34,19 @@ if (
     $cliente->setLogin($_POST['TLogin']);
     $cliente->setPassword($_POST['TPContraseña']);
     $cliente->setEstado("A");
-    $cliente->guardar($_SESSION['id']);
+    $result = $cliente->guardar($_SESSION['id']);
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
+
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
 
 ?>
@@ -158,26 +170,26 @@ if (
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td><?php echo $renglon['apaterno']; ?></td>
-                            <td><?php echo $renglon['amaterno']; ?></td>
-                            <td><?php echo $renglon['tipo_documento']; ?></td>
-                            <td><?php echo $renglon['numero_documento']; ?></td>
-                            <td><?php echo $renglon['direccion']; ?></td>
-                            <td><?php echo $renglon['telefono']; ?></td>
-                            <td><?php echo $renglon['correo']; ?></td>
-                            <td><?php echo $renglon['login']; ?></td>
-                            <td><?php echo $renglon['password']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVClienteAB.php?id=<?php echo $renglon['id_clienteab'] ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><?php echo $renglon['nombre']; ?></td>
+                        <td><?php echo $renglon['apaterno']; ?></td>
+                        <td><?php echo $renglon['amaterno']; ?></td>
+                        <td><?php echo $renglon['tipo_documento']; ?></td>
+                        <td><?php echo $renglon['numero_documento']; ?></td>
+                        <td><?php echo $renglon['direccion']; ?></td>
+                        <td><?php echo $renglon['telefono']; ?></td>
+                        <td><?php echo $renglon['correo']; ?></td>
+                        <td><?php echo $renglon['login']; ?></td>
+                        <td><?php echo $renglon['password']; ?></td>
+                        <td><?php echo $renglon['estado']; ?></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVClienteAB.php?id=<?php echo $renglon['id_clienteab'] ?>">
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>

@@ -42,14 +42,21 @@ if (
     $trabajador->setSueldo($sueldo);
     $negocio = $_SESSION['idnegocio'];
     $trabajador->setEstado($_POST['REstado']);
-    $trabajador->guardar($_SESSION['idnegocio']);
+    $result = $trabajador->guardar($_SESSION['idnegocio']);
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
 
-    //se guarda el trabajador
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -227,30 +234,30 @@ if (
                     //a continuacion se mustra en la tabla el resultado de la consulta
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td><?php echo $renglon['apaterno']; ?></td>
-                            <td><?php echo $renglon['amaterno']; ?></td>
-                            <td><?php echo $renglon['tipo_documento']; ?></td>
-                            <td><?php echo $renglon['numero_documento']; ?></td>
-                            <td><?php echo $renglon['direccion']; ?></td>
-                            <td><?php echo $renglon['telefono']; ?></td>
-                            <td><?php echo $renglon['correo']; ?></td>
-                            <td><?php echo $renglon['acceso']; ?></td>
-                            <td><?php echo $renglon['login']; ?></td>
-                            <td><?php echo $renglon['password']; ?></td>
-                            <td><?php echo $renglon['sueldo']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVTrabajador.php?id=<?php echo $renglon['idtrabajador'];
+                    <tr>
+                        <td><?php echo $renglon['nombre']; ?></td>
+                        <td><?php echo $renglon['apaterno']; ?></td>
+                        <td><?php echo $renglon['amaterno']; ?></td>
+                        <td><?php echo $renglon['tipo_documento']; ?></td>
+                        <td><?php echo $renglon['numero_documento']; ?></td>
+                        <td><?php echo $renglon['direccion']; ?></td>
+                        <td><?php echo $renglon['telefono']; ?></td>
+                        <td><?php echo $renglon['correo']; ?></td>
+                        <td><?php echo $renglon['acceso']; ?></td>
+                        <td><?php echo $renglon['login']; ?></td>
+                        <td><?php echo $renglon['password']; ?></td>
+                        <td><?php echo $renglon['sueldo']; ?></td>
+                        <td><?php echo $renglon['estado']; ?></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVTrabajador.php?id=<?php echo $renglon['idtrabajador'];
                                                                                                                         //se envia el id del registro para ser editado
                                                                                                                         ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>

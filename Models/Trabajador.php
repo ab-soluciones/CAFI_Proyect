@@ -94,7 +94,7 @@ class Trabajador
          '{$this->numerodoc}', '{$this->direccion}', '{$this->telefono}','{$this->correo}','{$this->acceso}',
          '{$this->login}', '{$this->password}', '{$this->sueldo}' ,'{$this->estado}' ,'$idnegocio')";
 
-        $this->con->consultaSimple($sql);
+         return $this->con->consultaSimple($sql);
     }
 
     public function eliminar($id)
@@ -109,7 +109,8 @@ class Trabajador
         ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
         ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', acceso ='{$this->acceso}'
         , login='{$this->login}',password ='{$this->password}', sueldo = '{$this->sueldo}', estado ='{$this->estado}'  WHERE idtrabajador ='$id'";
-        $this->con->consultaSimple($sql);
+        
+        return $this->con->consultaSimple($sql);
     }
 
     public function __destruct()

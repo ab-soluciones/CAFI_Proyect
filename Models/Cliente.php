@@ -103,7 +103,7 @@ class Cliente
         VALUES('{$this->id}', '{$this->nombre}', '{$this->apaterno}', '{$this->amaterno}', '{$this->documento}','{$this->numerodoc}'
         ,'{$this->direccion}','{$this->telefono}','{$this->correo}','{$this->estado}','$negocio' ,'$trabajador')";
 
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function eliminar($id)
@@ -118,7 +118,7 @@ class Cliente
         ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
         ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}'
         , estado ='{$this->estado}', trabajador_idtrabajador = '$trabajador' WHERE idcliente ='$id'";
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function __destruct()

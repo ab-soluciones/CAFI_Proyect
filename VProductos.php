@@ -13,7 +13,7 @@ if (!isset($_SESSION['acceso'])) {
     header('location: OPCAFI.php');
 }
 $negocio = $_SESSION['idnegocio'];
-           
+
 function registrar($imagen, $negocio)
 {
     $producto = new Models\Producto();
@@ -25,9 +25,9 @@ function registrar($imagen, $negocio)
         $codigob  = $_POST['TCodigoB'];
     }
 
-   $descripcion = $_POST['TADescription'];
+    $descripcion = $_POST['TADescription'];
 
-    if (strlen($descripcion) === 0 ) {
+    if (strlen($descripcion) === 0) {
         $descripcion = null;
     }
 
@@ -53,12 +53,18 @@ function registrar($imagen, $negocio)
     $con->cerrarConexion();
     $clienteab = $result['clientesab_idclienteab'];
     $result = $producto->guardar($clienteab, $_SESSION['id']);
-    if($result === 1){
-        echo "<script>alert('Producto Registrado Exitosamente');</script>";
-    }else{
-        echo "<script>alert('Producto no registrado compruebe los campos unicos');</script>";
-    }
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
 
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
 if (
     isset($_POST['TNombre'])  && isset($_POST['TColor'])
@@ -311,41 +317,41 @@ if (
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['codigo_barras']; ?></td>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
-                            <td><?php echo $renglon['color']; ?></td>
-                            <td><?php echo $renglon['marca']; ?></td>
-                            <td><?php
+                    <tr>
+                        <td><?php echo $renglon['codigo_barras']; ?></td>
+                        <td><?php echo $renglon['nombre']; ?></td>
+                        <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
+                        <td><?php echo $renglon['color']; ?></td>
+                        <td><?php echo $renglon['marca']; ?></td>
+                        <td><?php
                                 if (strlen($renglon['descripcion']) === 0) {
                                     echo "Sin descripcion";
                                 } else {
                                     echo $renglon['descripcion'];
                                 }
                                 ?></td>
-                            <td><?php echo $renglon['cantidad']; ?></td>
-                            <td><?php echo $renglon['unidad_medida']; ?></td>
-                            <td><?php
+                        <td><?php echo $renglon['cantidad']; ?></td>
+                        <td><?php echo $renglon['unidad_medida']; ?></td>
+                        <td><?php
                                 if (strlen($renglon['talla_numero']) === 0) {
                                     echo "N.A";
                                 } else {
                                     echo  $renglon['talla_numero'];
                                 }
                                 ?></td>
-                            <td>$<?php echo $renglon['precio_compra']; ?></td>
-                            <td>$<?php echo $renglon['precio_venta']; ?></td>
-                            <td><?php echo $renglon['pestado']; ?></td>
-                            <td>
-                                <div class="row" style="position: absolute;">
-                                    <div class="container" style="margin: 0 auto;">
-                                        <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
-                                            <img src="img/edit.png">
-                                        </a>
-                                    </div>
+                        <td>$<?php echo $renglon['precio_compra']; ?></td>
+                        <td>$<?php echo $renglon['precio_venta']; ?></td>
+                        <td><?php echo $renglon['pestado']; ?></td>
+                        <td>
+                            <div class="row" style="position: absolute;">
+                                <div class="container" style="margin: 0 auto;">
+                                    <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
+                                        <img src="img/edit.png">
+                                    </a>
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>

@@ -37,13 +37,24 @@ if (
     $abono->setHora();
     $abono->setNegocio($_SESSION['idnegocio']);
     $abono->setTrabajador($_SESSION['id']);
-    $abono->guardar($adeudo, $total);
+    $result = $abono->guardar($adeudo, $total);
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
+
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
     if ($result['impresora'] === "A") {
         header("location: ticketabono.php?ad=$adeudo");
     } else if ($result['impresora'] === "I") {
         header('location: VConsultasAdeudos.php');
     }
-   
 }
 if (isset($_GET['tt']) && isset($_GET['ad']) && isset($_GET['edoda']) && isset($_GET['frm_pg'])) {
     $total = $_GET['tt'];
@@ -74,55 +85,55 @@ if (isset($_GET['tt']) && isset($_GET['ad']) && isset($_GET['edoda']) && isset($
         }
     }
     ?>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <title>Abono</title>
-        <script>
-            var parametro;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Abono</title>
+    <script>
+        var parametro;
 
-            function ini() {
-                parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-            }
+        function ini() {
+            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
+        }
 
-            function parar() {
-                clearTimeout(parametro);
-                parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-            }
-        </script>
-    </head>
+        function parar() {
+            clearTimeout(parametro);
+            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
+        }
+    </script>
+</head>
 
-    <body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #e6e6e6">
-        <div class="row">
-            <div class="col-xl-3" style="margin: 0 auto;  margin-top:12%;">
-                <div class="card card-body">
-                    <form class="form-group" action="#" method="post">
-                        <?php
+<body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #e6e6e6">
+    <div class="row">
+        <div class="col-xl-3" style="margin: 0 auto;  margin-top:12%;">
+            <div class="card card-body">
+                <form class="form-group" action="#" method="post">
+                    <?php
                         if ($forma_pago === "Tarjeta") {
                             ?>
-                            <h5><label for="cant" class="badge badge-success">Abono:</label></h5>
-                            <input id="cant" class="form form-control" type="text" name="TCantidad" placeholder="Ingrese la cantidad cargada a la tarjeta"><br>
-                        <?php } else if ($forma_pago === "Efectivo") {
+                    <h5><label for="cant" class="badge badge-success">Abono:</label></h5>
+                    <input id="cant" class="form form-control" type="text" name="TCantidad" placeholder="Ingrese la cantidad cargada a la tarjeta"><br>
+                    <?php } else if ($forma_pago === "Efectivo") {
                             ?>
-                            <h5><label for="cant" class="badge badge-success">Abono:</label></h5>
-                            <input id="cant" class="form form-control" type="text" name="TCantidad" placeholder="Ingrese la cantidad $"><br>
-                            <h5><label for="pago" class="badge badge-success">Pago:</label></h5>
-                            <input id="pago" class="form form-control" type="text" name="TPago" placeholder="Ingrese la cantidad $"><br>
+                    <h5><label for="cant" class="badge badge-success">Abono:</label></h5>
+                    <input id="cant" class="form form-control" type="text" name="TCantidad" placeholder="Ingrese la cantidad $"><br>
+                    <h5><label for="pago" class="badge badge-success">Pago:</label></h5>
+                    <input id="pago" class="form form-control" type="text" name="TPago" placeholder="Ingrese la cantidad $"><br>
 
-                        <?php }
+                    <?php }
                         ?>
-                        <input type="submit" class="btn  btn-block btn-dark" value="Agregar">
-                    </form>
-                </div>
+                    <input type="submit" class="btn  btn-block btn-dark" value="Agregar">
+                </form>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
-    </html>
+</html>
 <?php }
 
 ?>
