@@ -13,6 +13,7 @@ if (!isset($_SESSION['acceso'])) {
     header('location: OPCAFI.php');
 }
 $negocio = $_SESSION['idnegocio'];
+           
 function registrar($imagen, $negocio)
 {
     $producto = new Models\Producto();
@@ -51,7 +52,13 @@ function registrar($imagen, $negocio)
     $result = $con->consultaRetorno($query);
     $con->cerrarConexion();
     $clienteab = $result['clientesab_idclienteab'];
-    $producto->guardar($clienteab, $_SESSION['id']);
+    $result = $producto->guardar($clienteab, $_SESSION['id']);
+    if($result === 1){
+        echo "<script>alert('Producto Registrado Exitosamente');</script>";
+    }else{
+        echo "<script>alert('Producto no registrado compruebe los campos unicos');</script>";
+    }
+
 }
 if (
     isset($_POST['TNombre'])  && isset($_POST['TColor'])

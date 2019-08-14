@@ -5,6 +5,10 @@
 las partes de los CRUD en donde se hagan procedimientos diferentes.. El CRUD Comentado es el CRUD de trabajador*/
 
 session_start();
+
+//se inicializa las variables globales
+$_SESSION['idven'] = null;
+
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 if (isset($_SESSION['acceso'])) {
@@ -146,8 +150,6 @@ if (isset($_POST['nombre-us']) && isset($_POST['password'])) {
   //si ninguna consulta regreso nada es por el el usuario y contraseña son incorrectos
 }
 
-//se inicializa la variable idventa
-$_SESSION['idven'] = null;
 
 if (isset($_GET['cerrar_sesion'])) {
   session_unset();
