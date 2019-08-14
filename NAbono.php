@@ -34,7 +34,12 @@ if (
     $abono->setNegocio($_SESSION['idnegocio']);
     $abono->setTrabajador($_SESSION['id']);
     $abono->guardar($adeudo, $total);
-    header("location: ticketabono.php?ad=$adeudo");
+    if ($result === "A") {
+        header("location: ticketabono.php?ad=$adeudo");
+    } else if ($result === "I") {
+        header('location: VConsultasAdeudos.php');
+    }
+   
 }
 if (isset($_GET['tt']) && isset($_GET['ad']) && isset($_GET['edoda']) && isset($_GET['frm_pg'])) {
     $total = $_GET['tt'];

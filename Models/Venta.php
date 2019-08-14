@@ -108,7 +108,7 @@ class Venta
         SET venta.estado_venta = '{$this->estado}', adeudos.estado_deuda='$adeudo' , 
         venta.idtrabajador = '{$this->trabajador}' WHERE adeudos.ventas_idventas ='$id' AND venta.idventas='$id'";
         $renglones = $this->con->consultaSimple($sql);
-        var_dump($renglones);
+
         if ($renglones === 0) {
             $sql = "UPDATE venta SET  estado_venta = '{$this->estado}', idtrabajador = '{$this->trabajador}' WHERE idventas ='$id'";
             $this->con->consultaSimple($sql);

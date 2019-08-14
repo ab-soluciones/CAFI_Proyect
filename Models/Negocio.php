@@ -9,6 +9,7 @@ class Negocio
     private $ciudad;
     private $idcliente;
     private $telefono;
+    private $impresora;
     private $con;
 
     public function __construct()
@@ -40,11 +41,15 @@ class Negocio
     {
         $this->telefono = $telefono;
     }
+    public function setImpresora($impresora)
+    {
+        $this->impresora = $impresora;
+    }
 
     public function guardar($idusuario)
     {
-        $sql = "INSERT INTO negocios(idnegocios,nombre_negocio,domicilio,ciudad,telefono_negocio,clientesab_idclienteab,usuariosab_idusuariosab) VALUES('null', 
-        '{$this->nombre}','{$this->domicilio}','{$this->ciudad}','{$this->telefono}','{$this->idcliente}','$idusuario')";
+        $sql = "INSERT INTO negocios(idnegocios,nombre_negocio,domicilio,ciudad,telefono_negocio,impresora,clientesab_idclienteab,usuariosab_idusuariosab) VALUES('null', 
+        '{$this->nombre}','{$this->domicilio}','{$this->ciudad}','{$this->telefono}','{$this->impresora}','{$this->idcliente}','$idusuario')";
 
         $this->con->consultaSimple($sql);
     }
@@ -58,7 +63,7 @@ class Negocio
     public function editar($id, $idusuario)
     {
         $sql = "UPDATE negocios SET nombre_negocio = '{$this->nombre}', domicilio = '{$this->domicilio}'
-        ,ciudad ='{$this->ciudad}',telefono_negocio = '{$this->telefono}', clientesab_idclienteab ='{$this->idcliente}'
+        ,ciudad ='{$this->ciudad}',telefono_negocio = '{$this->telefono}',impresora = '{$this->impresora}', clientesab_idclienteab ='{$this->idcliente}'
         , usuariosab_idusuariosab = '$idusuario' WHERE idnegocios ='$id'";
         $this->con->consultaSimple($sql);
     }

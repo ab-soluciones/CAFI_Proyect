@@ -1,5 +1,4 @@
 <?php namespace Models;
-
 class Producto
 {
     private $codigo_barras;
@@ -82,7 +81,7 @@ class Producto
         '{$this->unidad_medida}','{$this->talla_numero}', '{$this->tipo}','{$this->precio_compra}'
         ,'{$this->precio_venta}','{$this->pestado}','$trabajador','$negocio')";
 
-        $this->con->consultaSimple($sql);
+     return $this->con->consultaSimple($sql);
     }
 
     public function editar($id, $trabajador)
