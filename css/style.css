@@ -18,6 +18,10 @@ body {
     background-color: lightgrey;
 }
 
+.alert{
+  height: 5rem;
+}
+
 #index_button {
     background-color: #2a727a;
 }

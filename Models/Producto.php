@@ -1,4 +1,5 @@
 <?php namespace Models;
+session_start();
 
 class Producto
 {
@@ -78,11 +79,20 @@ class Producto
     {
         $sql = "INSERT INTO producto (codigo_barras, nombre, imagen,color,marca ,descripcion, unidad_medida, talla_numero,
         tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab) 
+        tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab)
         VALUES('{$this->codigo_barras}', '{$this->nombre}', '{$this->imagen}','{$this->color}','{$this->marca}','{$this->descripcion}',
         '{$this->unidad_medida}','{$this->talla_numero}', '{$this->tipo}','{$this->precio_compra}'
         ,'{$this->precio_venta}','{$this->pestado}','$trabajador','$negocio')";
 
         $this->con->consultaSimple($sql);
+
+        $resultado = $this->con->consultaSimple($sql);
+          if (!$resultado){
+
+        }else{
+           $_SESSION['mensaje'] = true;
+        }
+
     }
 
     public function editar($id, $trabajador)

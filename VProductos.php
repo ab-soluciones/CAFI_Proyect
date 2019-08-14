@@ -13,6 +13,14 @@ if (!isset($_SESSION['acceso'])) {
     header('location: OPCAFI.php');
 }
 $negocio = $_SESSION['idnegocio'];
+
+if($_SESSION['mensaje'] === true){
+  echo "<script>mensaje();</script>";
+  $_SESSION['memsaje'] = null;
+}else {
+
+}
+
 function registrar($imagen, $negocio)
 {
     $producto = new Models\Producto();
@@ -91,6 +99,10 @@ if (
     <title>Administracion Productos</title>
     <script type="text/javascript">
         var parametro;
+
+  funcion mensaje(){
+    alert('hola');
+  }
 
         function ini() {
             parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 15 min
@@ -298,7 +310,7 @@ if (
                     <?php
                     $con = new Models\Conexion();
                     $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
-                    FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras 
+                    FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
                     WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
                     $row = $con->consultaListar($query);
 

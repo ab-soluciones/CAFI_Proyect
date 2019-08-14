@@ -56,5 +56,4 @@ if (isset($_GET['id']) && isset($_GET['can']) && isset($_GET['precio']) && isset
     </body>
 
     </html>
-<?php
-} ?>
+<?php } ?>

@@ -10,10 +10,10 @@ Config\Autoload::run();
 if (isset($_SESSION['acceso'])) {
 
   header('location: OPCAFI.php');
- 
+
    //si el usuario ya esta logiado y se dirige al index se le redirige a la pagina que en debe de estar segun su rol para evitar el relogeo
  }
- 
+
 function comprobar($negocio, $idnegocio)
 {
   if (
@@ -69,7 +69,7 @@ if (isset($_POST['nombre-us']) && isset($_POST['password'])) {
   $comprobar->comprobarFv();
 
   /*Ejecucion de la funcion comprobar de la clase Comprobar.. su tarea es cambiar a estado inactivo
-   la cuenta del dueño del negocio y las cuentas de todos los trabajadores pertenecientes a dicho negocio 
+   la cuenta del dueño del negocio y las cuentas de todos los trabajadores pertenecientes a dicho negocio
    cuando la fecha actual sea igual a la fecha de vencimiento de la suscripcion */
 
   $nombre = $_POST['nombre-us'];
@@ -80,7 +80,7 @@ if (isset($_POST['nombre-us']) && isset($_POST['password'])) {
 
   $query = "SELECT acceso,estado,idusuariosab FROM usuariosab WHERE login= '$nombre' AND password='$password'";
   $query2 = "SELECT acceso,estado,negocios_idnegocios,idtrabajador FROM trabajador WHERE login= '$nombre' AND password='$password'";
-  $query3 = "SELECT nombre_negocio,acceso,estado,idnegocios,id_clienteab FROM clientesab INNER JOIN negocios ON negocios.clientesab_idclienteab=clientesab.id_clienteab 
+  $query3 = "SELECT nombre_negocio,acceso,estado,idnegocios,id_clienteab FROM clientesab INNER JOIN negocios ON negocios.clientesab_idclienteab=clientesab.id_clienteab
   WHERE login = '$nombre' AND password ='$password'";
   $datos1 = $con->consultaRetorno($query);
   $datos2 = $con->consultaRetorno($query2);
@@ -104,8 +104,8 @@ if (isset($_POST['nombre-us']) && isset($_POST['password'])) {
     comprobar(null, null);
 
     /*esta funcion comprueba el rol/acceso de la cuenta para mandar al usuario al apartado correspodiente
-    en caso de que se logie un dueño/clienteab la funcion recibe como parametro dos arreglos, 
-    uno con el nombre de cada negocio perteneciente al dueño y otro con el id, estos arreglos son utilizados para que el usuario 
+    en caso de que se logie un dueño/clienteab la funcion recibe como parametro dos arreglos,
+    uno con el nombre de cada negocio perteneciente al dueño y otro con el id, estos arreglos son utilizados para que el usuario
     seleccione en que negocio registrara trabajadores o consultara informacion financiera  */
   } else if (isset($datos2)) {
 
@@ -148,6 +148,7 @@ if (isset($_POST['nombre-us']) && isset($_POST['password'])) {
 
 //se inicializa la variable idventa
 $_SESSION['idven'] = null;
+$_SESSION['mensaje'] === null;
 
 if (isset($_GET['cerrar_sesion'])) {
   session_unset();
@@ -171,10 +172,10 @@ if (isset($_GET['cerrar_sesion'])) {
 
 <body id="menu_back">
   <div class="container text-center">
-    
+
     <div id="index_logo" class="row d-block">
       <img src="img/logo/2.png" alt="" id="logo" class="img-fluid">
-    <div>  
+    <div>
 
       <div id="index_form" class="card card-body row d-block col-md-4">
         <legend>Ingrese su usuario y contraseña:</legend>
