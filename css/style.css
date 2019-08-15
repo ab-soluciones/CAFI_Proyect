@@ -33,3 +33,55 @@ body {
 #op_card_body {
     background-color: lightgrey;
 }
+
+
+/*TABLAS*/
+
+#tabla{
+    background-color: white;
+}
+
+.encabezados{
+    text-align: center;
+    cursor: pointer;
+}
+.encabezados th{
+    padding: 10px 25px;
+}
+.selectedTh{
+    background-color: blue;
+}
+.selectedTds{
+    background-color: red;
+}
+#tabla tr{
+    height: 100%;
+}
+
+/*xs*/
+/*En esta medida toma lo que esta en el css por default*/
+/*sm*/
+@media (min-width: 576px) {
+
+}
+/*md*/  
+@media (min-width: 768px) {
+    
+}
+/*lg*/
+@media (min-width: 992px) {
+    #tabla thead{
+        position: absolute;
+        top: 40px;
+    }
+    .contenedorTabla{
+        margin-top: 50px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 470px;
+    }
+}
+/*xl*/
+@media (min-width: 1200px) {
+    
+}

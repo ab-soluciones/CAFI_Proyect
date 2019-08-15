@@ -48,7 +48,11 @@ if (
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Administracion Gastos</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
         var parametro;
 
@@ -64,105 +68,128 @@ if (
 </head>
 
 <body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Gastos</a>
-        </div>
+    <nav class="container-fluid navbar navbar-dark bg-dark">
+        <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Gastos</a>
     </nav>
-    <div class="row" style="margin-top: 5px; margin-left:5px;">
-        <div class="col-xs-4">
-            <div class=" card card-body">
+
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
                 <form class="form-group" action="#" method="post">
-                    <h5><label for="desc" class="badge badge-primary">Concepto:</label></h5>
-                    <select name="SConcepto" id="concepto" class="form form-control" required>
-                        <option>Renta</option>
-                        <option>Luz</option>
-                        <option>Agua</option>
-                        <option>Teléfono</option>
-                        <option>Internet</option>
-                        <option>Transporte</option>
-                        <option>Sueldo</option>
-                        <option>Articulos de Venta</option>
-                        <option>Pago de Prestamo</option>
-                        <option>Otro</option>
-                    </select> <br>
-
-                    <h5><label for="pago" class="badge badge-primary">Forma de pago:</label></h5>
-                    <select name="SPago" id="pago" class="form form-control" required>
-                        <option>Efectivo</option>
-                        <option>Transferencia</option>
-                        <option>Tarjeta</option>
-                    </select> <br>
-                    <script>
-                        document.getElementById('concepto').value = '';
-                        document.getElementById('pago').value = '';
-                    </script>
-
-                    <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
-                    <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea><br>
-                    <h5><label for="monto" class="badge badge-primary">Monto $:</label></h5>
-                    <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" required><br>
-                    <div>
-                        <h5><label for="fecha" class="badge badge-primary">Fecha:</label></h5>
-                        <input class="form-control" id="fecha" type="date" name="DFecha" required>
-                    </div><br>
-                    <input type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
-
+                    <div class="container">
+                        <div class="row">
+                            <div class="d-block col-lg-6">
+                                <h5><label for="desc" class="badge badge-primary">Concepto:</label></h5>
+                                <select name="SConcepto" id="concepto" class="form form-control" required>
+                                    <option></option>
+                                    <option>Renta</option>
+                                    <option>Luz</option>
+                                    <option>Agua</option>
+                                    <option>Teléfono</option>
+                                    <option>Internet</option>
+                                    <option>Transporte</option>
+                                    <option>Sueldo</option>
+                                    <option>Articulos de Venta</option>
+                                    <option>Pago de Prestamo</option>
+                                    <option>Otro</option>
+                                </select>
+                            </div>
+                            <div class="d-block col-lg-6">
+                                <h5><label for="pago" class="badge badge-primary">Forma de pago:</label></h5>
+                                <select name="SPago" id="pago" class="form form-control" required>
+                                    <option></option>
+                                    <option>Efectivo</option>
+                                    <option>Transferencia</option>
+                                    <option>Tarjeta</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="d-block col-lg-12">
+                                <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
+                                <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="d-block col-lg-6">
+                                <h5><label for="monto" class="badge badge-primary">Monto $:</label></h5>
+                                <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" required>
+                            </div>
+                            <div class="d-block col-lg-6">
+                                <h5><label for="fecha" class="badge badge-primary">Fecha:</label></h5>
+                                <input class="form-control" id="fecha" type="date" name="DFecha" required>
+                            </div>
+                        </div>
+                        <div class="row mt-3 justify-content-around">
+                            <input id="formButton_guardar" type="submit" class="col-4 col-lg-4 btn btn-lg btn-primary" name="" value="Guardar">
+                            <button id="formButton_cancelar" class="col-4 d-lg-none btn btn-lg btn-danger" name="">Cancelar</button>     
+                        </div>
+                    </div>
                 </form>
-            </div>
+            </div><!--col-5-->
+            <button id="formButton_nuevo" class="d-lg-none col-12 btn btn-lg btn-primary" name="">Nuevo Gasto</button>
+            <div id="tableContainer" class="d-block col-lg-8">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                </div>
+                <div class="contenedorTabla">
+                    <table id="tabla" class="table table-bordered table-hover fixed_headers table-responsive">
+                        <thead class="thead-dark">
+                            <tr class="encabezados">
+                                <th onclick="sortTable(0)">Concepto</th>
+                                <th onclick="sortTable(1)">Pago</th>
+                                <th onclick="sortTable(2)">Descripcion</th>
+                                <th onclick="sortTable(3)">Monto</th>
+                                <th onclick="sortTable(4)">Estado</th>
+                                <th onclick="sortTable(5)">Fecha</th>
+                                <th onclick="sortTable(6)">Registró</th>
+                                <th onclick="sortTable(7)">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $negocio = $_SESSION['idnegocio'];
+                            $con = new Models\Conexion();
+                            $query = "SELECT idgastos,concepto,pago,descripcion,monto,gastos.estado,fecha,nombre,apaterno FROM gastos
+                            INNER JOIN trabajador ON trabajador_idtrabajador = idtrabajador
+                            WHERE gastos.negocios_idnegocios ='$negocio' ORDER BY idgastos DESC";
+                            $row = $con->consultaListar($query);
 
-        </div>
-        <div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
-            <h5 style="margin: 0 auto;"><label class="badge badge-info">
-                    <a style="color: white;" href="VConsultasGastos.php">BUSCAR--></a>
-                </label></h5>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Concepto</th>
-                        <th>Pago</th>
-                        <th>Descripcion</th>
-                        <th>Monto</th>
-                        <th>Estado</th>
-                        <th>Fecha</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $negocio = $_SESSION['idnegocio'];
-                    $con = new Models\Conexion();
-                    $query = "SELECT * FROM gastos WHERE negocios_idnegocios ='$negocio' AND fecha='$fecha' ORDER BY idgastos DESC";
-                    $row = $con->consultaListar($query);
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $renglon['concepto']; ?></td>
+                                    <td><?php echo $renglon['pago']; ?></td>
+                                    <td><?php if (strlen($renglon['descripcion']) === 0) {
+                                            echo "Sin descripción";
+                                        } else {
+                                            echo $renglon['descripcion'];
+                                        }  ?></td>
+                                    <td>$<?php echo $renglon['monto']; ?></td>
+                                    <td><?php echo $renglon['estado']; ?></td>
+                                    <td><?php echo $renglon['fecha']; ?></td>
+                                    <td><?php echo $renglon['nombre']." ".$renglon['apaterno']; ?></td>
+                                    <td style="width:100px;">
+                                        <div class="row">
+                                            <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVGastos.php?id=<?php echo $renglon['idgastos']; ?>">
+                                                <img src="img/edit.png">
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php
+                            } ?>
+                        </tbody>
+                    </table>
+                </div><!--Tabla contenedor-->
+            </div><!--col-7-->
+        </div><!--row-->
+    </div><!--container-->
 
-                    while ($renglon = mysqli_fetch_array($row)) {
-                        ?>
-                        <tr>
-                            <td><?php echo $renglon['concepto']; ?></td>
-                            <td><?php echo $renglon['pago']; ?></td>
-                            <td><?php if (strlen($renglon['descripcion']) === 0) {
-                                    echo "Sin descripción";
-                                } else {
-                                    echo $renglon['descripcion'];
-                                }  ?></td>
-                            <td>$ <?php echo $renglon['monto']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td><?php echo $renglon['fecha']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVGastos.php?id=<?php echo $renglon['idgastos']; ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php
-                    } ?>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
+    <script src="js/jquery_1.js"></script>
 </body>
 
 </html>
