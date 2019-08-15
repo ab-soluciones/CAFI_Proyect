@@ -7,23 +7,6 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 }
-
-if (isset($_POST['nuevaventa'])) {
-    /*se crea una nueva venta para poder hacer uso de la tabla detalle venta(describe el concepto de la venta)
-     ya que tiene relacion de muchos a muchos con la tabla productos y la tabla venta */
-    $venta = new Models\Venta();
-    $id = $venta->guardar();
-    $_SESSION['idven'] = $id['id'];
-    header('location: VVentas.php');
-}
-if (!is_null($_SESSION['idven'])) {
-   ?>
-<script>
-alert("Termine la venta actual");
-window.location.href = 'VVentas.php';
-</script>
-
-<?php } ?>
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -74,10 +57,8 @@ window.location.href = 'VVentas.php';
                     ?>
                     <div class="row mt-3 justify-content-around">
                         <div class="col-4">
-                            <form action="#" method="post">
-                            <button type="submit" class="btn btn-dark btn-lg btn-block" name="nuevaventa">
+                            <button onclick="window.location.href='VVentas.php'" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge badge-dark" style="color: #0066ff;">Vender</label><br><img src="img/cash_register.png"></button>
-                            </form>
                         </div>
                         <div class="col-4">
                             <button onclick="window.open('VAbonos.php')" type="button" class="btn btn-dark btn-lg btn-block">

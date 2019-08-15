@@ -42,7 +42,7 @@ if (isset($_GET['total']) && !isset($_GET['pago'])) {
     if ($result['impresora'] === "A") {
         header("location: ticket.php?idventa=$idventa");
     } else if ($result['impresora'] === "I") {
-        header("location: OPCAFI.php");
+        header("location: VVentas.php");
     }
    
     //se emprime el ticket
@@ -80,7 +80,7 @@ if (
     if ($result['impresora'] === "A") {
         header("location: ticket.php?idventa=$idventa");
     } else if ($result['impresora'] === "I") {
-        header("location: OPCAFI.php");
+        header("location: VVentas.php");
     }
 }
 if (
@@ -127,6 +127,6 @@ if (
     if ($result['impresora'] === "A") {
         header("location: ticket.php?idventa=$idventa");
     } else if ($result['impresora'] === "I") {
-        header("location: OPCAFI.php");
+        header("location: VVentas.php");
     }
 }

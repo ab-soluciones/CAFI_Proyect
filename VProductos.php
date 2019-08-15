@@ -86,8 +86,18 @@ if (
             //si la imagen es menor a 1 mega se comprueba la extencion, si la extencion es igual a alguna de la condiconal se registra la imagen
             if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png'  || $tipo_imagen == 'image/gif') {
                 registrar($imagen, $negocio);
-            } else echo "<script> alert('Seleccione una imagen de tipo jpg , gif, jpeg o png');</script>";
-        } else echo "<script> alert('Seleccione una imagen mas pequeña');</script>";
+            } else {
+                ?>
+<script>
+    alert('Seleccione una imagen de tipo jpg , gif, jpeg o png');
+</script>
+<?php }
+        } else {
+            ?>
+<script>
+    alert('Seleccione una imagen mas pequeña');
+</script>
+<?php  }
     } else {
         //si el usuario no cargo una imagen se manda un valor nulo a la columna imagen de la base de datos
         registrar(null, $negocio);
