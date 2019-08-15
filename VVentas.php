@@ -44,9 +44,9 @@ if (
     $sql = "SELECT iddetalle_venta FROM detalle_venta WHERE producto_codigo_barras ='$idproducto' AND idventa='$idventa'";
     $result = $con->consultaRetorno($sql);
     if (isset($result)) {
-        ?> 
-    <script>alert('EL PRODUCTO YA EXISTE EN LA LISTA,MODIFIQUE LA CANTIDAD SI DESEA AGREGAR MAS PRODUCTOS DE ESTE TIPO');</script>
-      
+        ?>
+    <script>swal({title:'Exito',text:'EL PRODUCTO YA EXISTE EN LA LISTA,MODIFIQUE LA CANTIDAD SI DESEA AGREGAR MAS PRODUCTOS DE ESTE TIPO',type:'success'});</script>
+
   <?php  } else {
         $dv->guardar();
     }
@@ -60,6 +60,12 @@ if (
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Ventas</title>
     <script type="text/javascript">
         var parametro;
@@ -95,8 +101,8 @@ if (
                             <?php
                             $negocios = $_SESSION['idnegocio'];
                             $datos = false;
-                            $query = "SELECT codigo_barras FROM producto 
-                            INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras 
+                            $query = "SELECT codigo_barras FROM producto
+                            INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras
                             WHERE negocios_idnegocios ='$negocios' AND pestado = 'A' ORDER BY codigo_barras ASC";
                             $row = $con->consultaListar($query);
 
@@ -121,7 +127,7 @@ if (
                             <?php
                             $negocios = $_SESSION['idnegocio'];
                             $datos = false;
-                            $query = "SELECT nombre,color,marca,talla_numero FROM producto INNER JOIN 
+                            $query = "SELECT nombre,color,marca,talla_numero FROM producto INNER JOIN
                             inventario ON producto.codigo_barras = inventario.producto_codigo_barras
                             WHERE negocios_idnegocios = '$negocios' AND pestado = 'A'";
                             $row = $con->consultaListar($query);
@@ -146,8 +152,8 @@ if (
                             <?php
                             $negocios = $_SESSION['idnegocio'];
                             $datos = false;
-                            $query = "SELECT descripcion FROM producto 
-                            INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras 
+                            $query = "SELECT descripcion FROM producto
+                            INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras
                             WHERE negocios_idnegocios ='$negocios' AND pestado = 'A' ORDER BY descripcion ASC";
                             $row = $con->consultaListar($query);
 
@@ -210,7 +216,7 @@ if (
                         //se muestran en la tabla los productos agregados al concepto de la venta
                         $idventa = (int) $_SESSION['idven'];
                         $query = "SELECT nombre,imagen,color,marca,unidad_medida,talla_numero,descripcion,precio_venta,cantidad,
-                        cantidad_producto,iddetalle_venta,subtotal FROM producto 
+                        cantidad_producto,iddetalle_venta,subtotal FROM producto
                         INNER JOIN detalle_venta ON producto.codigo_barras = detalle_venta.producto_codigo_barras
                         INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras
                         WHERE detalle_venta.idventa='$idventa'";

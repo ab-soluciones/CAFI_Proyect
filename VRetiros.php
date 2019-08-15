@@ -24,7 +24,7 @@ if (!isset($_SESSION['acceso'])) {
 $con = new Models\Conexion();
 $negocio = $_SESSION['idnegocio'];
 
-$query = "SELECT forma_pago, SUM(total) AS totalventas FROM venta 
+$query = "SELECT forma_pago, SUM(total) AS totalventas FROM venta
 WHERE estado_venta='R' AND idnegocios ='$negocio' GROUP BY forma_pago";
 $result = $con->consultaListar($query);
 
@@ -80,7 +80,7 @@ while ($renglon = mysqli_fetch_array($result)) {
 }
 $gastos_banco = $gastos_tarjeta + $gastos_transferencia;
 
-$query = "SELECT forma_ingreso, SUM(cantidad) AS oingresos  FROM otros_ingresos WHERE forma_ingreso ='Efectivo' 
+$query = "SELECT forma_ingreso, SUM(cantidad) AS oingresos  FROM otros_ingresos WHERE forma_ingreso ='Efectivo'
 AND estado='A' AND negocios_idnegocios ='$negocio' GROUP BY forma_ingreso";
 $result = $con->consultaListar($query);
 
@@ -95,7 +95,7 @@ while ($renglon = mysqli_fetch_array($result)) {
     }
 }
 
-$query = "SELECT tipo, SUM(cantidad) AS retiro FROM retiros WHERE 
+$query = "SELECT tipo, SUM(cantidad) AS retiro FROM retiros WHERE
 negocios_idnegocios ='$negocio' AND estado='R' GROUP BY tipo";
 $result = $con->consultaListar($query);
 
@@ -130,13 +130,13 @@ function retirar($concepto, $tipo, $cantidad, $descripcion)
     if ($result === 1) {
         ?>
 <script>
-    alert('Producto Registrado Exitosamente');
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
 </script>
 
 <?php } else {
         ?>
 <script>
-    alert('Producto no registrado compruebe los campos unicos');
+    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
 </script>
 <?php }
 }
@@ -147,21 +147,21 @@ if (isset($_POST['SConcepto']) && isset($_POST['STipo']) && isset($_POST['TCanti
     $tipo = $_POST['STipo'];
     $descripcion = $_POST['TADescription'];
 
-    //se condiciona que sea imposible que el usuario quiera realizar un corte de caja de banco 
+    //se condiciona que sea imposible que el usuario quiera realizar un corte de caja de banco
     if ($concepto === "Corte de caja" && $tipo === "Banco") {
-        echo "<script>alert('No es posible realizar un corte de caja de banco');</script>";
+        echo "<script>swal({title:'Error',text:'No es posible realizar un corte de caja de banco',type:'error'});</script>";
     } else {
         //se compara que la cantidad a retirar en efectivo no sea superior a la cantidad en en efectivo que hay en caja
         if ($tipo === "Caja" && $cantidad <= $efectivo) {
             retirar($concepto, $tipo, $cantidad, $descripcion);
             header('location: VRetiros.php');
         } else if ($tipo === "Caja" && $cantidad > $efectivo) {
-            echo "<script>alert('SALDO INSUFICIENTE EN CAJA');</script>";
+            echo "<script>swal({title:'Error',text:'Saldo insuficiente en caja',type:'error'});</script>";
         } else if ($tipo === "Banco" && $cantidad <= $banco) {
             //se compara que la cantidad a retirar en banco no sea superior a la cantidad que hay en banco
             header('location: VRetiros.php');
         } else if ($tipo === "Banco" && $cantidad > $banco) {
-            echo "<script>alert('SALDO INSUFICIENTE EN BANCO');</script>";
+            echo "<script>swal({title:'Error',text:'Saldo insuficiente en banco',type:'error'});</script>";
         }
     }
 }
@@ -173,6 +173,12 @@ if (isset($_POST['SConcepto']) && isset($_POST['STipo']) && isset($_POST['TCanti
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Retiros</title>
 
 </head>

@@ -90,7 +90,7 @@ window.location.href = 'VVentas.php';
                     </div>
 
                     <div class="row mt-3 justify-content-around">
-                        <div class="col-4">  
+                        <div class="col-4">
                             <button onclick="window.open('VGastos.php')" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge badge-dark">Gastos</label><br><img src="img/gastos.png"></button></button>
                         </div>
@@ -100,27 +100,27 @@ window.location.href = 'VVentas.php';
                         </div>
                         <div class="col-4">
                             <button onclick="window.open('VOtrosIngresos.php')" type="button" class="btn btn-dark btn-lg btn-block">
-                            <label class="badge badge-dark">Otros Ingresos</label><br><img src="img/otrosingresos.png"></button></button>    
+                            <label class="badge badge-dark">Otros Ingresos</label><br><img src="img/otrosingresos.png"></button></button>
                         </div>
                     </div>
-                    
-                    <div class="row mt-3 justify-content-around">                             
+
+                    <div class="row mt-3 justify-content-around">
                         <div class="col-4">
                         <button onclick="window.open('VClientes.php')" type="button" class="btn btn-dark btn-lg btn-block">
                                 <label class="badge badge-dark">Clientes</label><br><img src="img/clientes.png"></button></button>
-                        
-                       
+
+
                         </div>
                         <div class="col-4">
                         <button onclick="window.open('VInventario.php')" type="button" class="btn btn-dark btn-lg btn-block">
                                 <label class="badge badge-dark">Inventario</label><br><img src="img/Inventory.png"> </button>
-                       
-                             
+
+
                         </div>
                         <div class="col-4">
                         <button onclick="window.open('VProductos.php')" type="button" class="btn btn-dark btn-lg btn-block">
                                 <label class="badge badge-dark">Productos</label><br><img src="img/productos.png"> </button>
-                        
+
                         </div>
                     </div>
 

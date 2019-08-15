@@ -26,6 +26,12 @@ if (!isset($_SESSION['acceso'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title> Edicion Usuario AB</title>
 </head>
 
@@ -154,17 +160,17 @@ if (!isset($_SESSION['acceso'])) {
         if ($result === 1) {
             ?>
 <script>
-    alert('editado Exitosamente');
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
 </script>
 <?php } else if ($result === 0) {
             ?>
 <script>
-    alert('No se a realizado ningún cambio');
+    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
 </script>
 <?php } else if ($result === -1) {
             ?>
 <script>
-    alert('no editado compruebe los campos unicos');
+    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
 </script>
 <?php }
     }

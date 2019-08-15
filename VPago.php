@@ -61,7 +61,7 @@ if (isset($_GET['v3nd3rpr0']) && $_GET['v3nd3rpr0'] == "v3nd3r" && isset($_GET['
             <h1>Monto total de la venta $ <?php echo $total; ?></h1>
             <p>
                 <h5><?php if ($_SESSION['forma_pago'] === "Tarjeta") {
-                        //se muestra un mensaje diferente si la venta será pagada por tarjeta o con efectivo 
+                        //se muestra un mensaje diferente si la venta será pagada por tarjeta o con efectivo
                         echo "Ingrese la tarjeta en la terminál y cobre el total";
                     } else echo " Ingrese a continuacion la cantidad de dinero recibida:" ?> </h5>
             </p>
@@ -125,7 +125,7 @@ if (isset($_POST['TPago']) && !isset($_POST['TAbono'])) {
         $cambio = $pago - $total;
         echo "<script>if(confirm('SU CAMBIO ES DE $ $cambio CONFIRME LA VENTA:')){window.location.href='finalizarPago.php?total=$total&pago=$pago&cambio=$cambio'}else{window.location.href='VVentas.php'}</script>";
     } else {
-        echo "<script> alert('Ingrese una cantidad de $ valida');</script>";
+        echo "<script> swal({title:'Error',text:'Ingrese una cantidad de $ valida',type:'error'});</script>";
     }
     //si la venta es al contado se comprueba que el pago sea mayor que el total de la venta, siendo asi se da un msj de alerta con el cambio , si no es asi se da un msj diciendo que la cantidad ingresada no es válida
 }

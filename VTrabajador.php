@@ -25,7 +25,7 @@ if (
     && isset($_POST['REstado'])
     //se comprueba que existan todos los datos del formulario
 ) {
-    $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador 
+    $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
     $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
     $trabajador->setApaterno($_POST['TApellidoP']);
     $trabajador->setAmaterno($_POST['TApellidoM']);
@@ -46,13 +46,13 @@ if (
     if ($result === 1) {
         ?>
 <script>
-    alert('Producto Registrado Exitosamente');
+swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
 </script>
 
 <?php } else {
         ?>
 <script>
-    alert('Producto no registrado compruebe los campos unicos');
+  swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
 </script>
 <?php }
 }
@@ -64,6 +64,12 @@ if (
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Administracion Trabajadores</title>
     <script>
         //con la funcion mostrar y agregar se hace el dinamismo de la aplicacion: ocultando la tabla cada que se va agregar un trabajador y mostrandola cada que el usuario quiera

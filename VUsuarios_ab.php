@@ -27,13 +27,13 @@ if (
     if ($result === 1) {
         ?>
 <script>
-    alert('Producto Registrado Exitosamente');
+  swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
 </script>
 
 <?php } else {
         ?>
 <script>
-    alert('Producto no registrado compruebe los campos unicos');
+    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
 </script>
 <?php }
 }
@@ -45,6 +45,12 @@ if (
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Administraci&oacute;n Usuarios AB</title>
     <script>
         function cerrar() {

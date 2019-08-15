@@ -53,11 +53,18 @@ function registrar($imagen, $negocio)
     $con->cerrarConexion();
     $clienteab = $result['clientesab_idclienteab'];
     $result = $producto->guardar($clienteab, $_SESSION['id']);
-    if($result === 1){
-        echo "<script>swal({title:'Exito',text:'Se han registrado los datos',type:'success'})</script>";
-    }else{
-        echo "<script>swal({title:'Error',text:'Se han registrado los datos',type:'error'})</script>";
-    }
+    if ($result === 1) {
+        ?>
+<script>
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+
+<?php } else {
+        ?>
+<script>
+    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
+</script>
+<?php }
 }
 
 if (
