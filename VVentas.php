@@ -148,34 +148,6 @@ if (
 
                         </datalist><br>
                     </div>
-<<<<<<< HEAD
-                    <div id="desc">
-                        <h5><label class="badge badge-danger">Descripción:</label></h5>
-                        <input id="indescripcion" class="form form-control" list="descripcionp" name="DlDescripciones" autocomplete="off">
-                        <datalist id="descripcionp">
-                            <?php
-                            $negocios = $_SESSION['idnegocio'];
-                            $datos = false;
-                            $query = "SELECT descripcion FROM producto
-                            INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras
-                            WHERE negocios_idnegocios ='$negocios' AND pestado = 'A' ORDER BY descripcion ASC";
-                            $row = $con->consultaListar($query);
-
-                            while ($result = mysqli_fetch_array($row)) {
-                                ?>
-
-                                <?php $datos = true;
-                                echo "<option value='" . $result['descripcion'] . "'> "; ?>
-                            <?php
-                            }
-                            if ($datos == false) {
-                                echo "<script>document.getElementById('indescripcion').disabled = true;</script>";
-                            } ?>
-
-                        </datalist><br>
-                    </div>
-=======
->>>>>>> backend
                     <h4><label for="cant" class="badge badge-pill badge-success">Cantidad:</label></h4>
                     <input id="cant" class="form form-control" type="number" name="SCantidad" min="0" max="" value="1"><br>
                     <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="nuevaventa" value="Agregar">
