@@ -165,6 +165,5 @@ if (isset($_GET['idventa'])) {
 */
 	$printer->close();
 
-
-	header('location: OPCAFI.php');
+    header("location: VVentas.php");
 }
