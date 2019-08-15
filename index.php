@@ -71,6 +71,7 @@ if (isset($_POST['nombre-us']) && isset($_POST['password'])) {
 
   $comprobar = new Models\Comprobar();
   $comprobar->comprobarFv();
+  $comprobar->eliminarVentasNull();
 
   /*Ejecucion de la funcion comprobar de la clase Comprobar.. su tarea es cambiar a estado inactivo
    la cuenta del dueño del negocio y las cuentas de todos los trabajadores pertenecientes a dicho negocio
