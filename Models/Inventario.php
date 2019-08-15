@@ -31,7 +31,21 @@ class Inventario
     {
         $this->trabajador = $trabajador;
     }
-   
+
+    public function guardar()
+    {
+        $query = "INSERT INTO inventario (cantidad,producto_codigo_barras,negocios_idnegocios,trabajador_idtrabajador) 
+    VALUES ('{$this->cantidad}','{$this->codigob}','{$this->negocio}','{$this->trabajador}')";
+
+        return $this->con->consultaSimple($query);
+    }
+
+    public function editar()
+    {
+        $query = "UPDATE invetario SET cantidad = '{$this->cantidad}', producto_codigo_barras = '{$this->codigob}', trabajador_idtrabajador = '{$this->trabajador}' WHERE producto_codigo_barras = '{$this->trabajador}'";
+        
+        return $this->con->consultaSimple($query);
+    }
 
     public function actualizarStock($idventa,$negocio)
     {

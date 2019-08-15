@@ -13,12 +13,12 @@ if (!isset($_SESSION['acceso'])) {
     if (isset($_GET['id'])) {
         ?>
 <?php
-$id = $_GET['id'];
-$con = new Models\Conexion();
-$query =  $sql = "SELECT * FROM usuariosab where idusuariosab = '$id'";
-$result = mysqli_fetch_assoc($con->consultaListar($query));
-if (isset($result)) {
-    ?>
+        $id = $_GET['id'];
+        $con = new Models\Conexion();
+        $query =  $sql = "SELECT * FROM usuariosab where idusuariosab = '$id'";
+        $result = mysqli_fetch_assoc($con->consultaListar($query));
+        if (isset($result)) {
+            ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -26,6 +26,12 @@ if (isset($result)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title> Edicion Usuario AB</title>
 </head>
 
@@ -51,7 +57,7 @@ if (isset($result)) {
 
 
                     <?php if ($result['acceso'] == "CEOAB") {
-                        ?>
+                                    ?>
                     <div class="row" style="margin: 0 auto;">
                         <div class="form-check-inline">
                             <label class="form-check-label">
@@ -66,8 +72,8 @@ if (isset($result)) {
                     </div><br>
                     <?php
 
-                } else {
-                    ?>
+                                } else {
+                                    ?>
                     <div class="row" style="margin: 0 auto;">
                         <div class="form-check-inline">
                             <label class="form-check-label">
@@ -82,7 +88,7 @@ if (isset($result)) {
                     </div> <br>
                     <?php
 
-                } ?>
+                                } ?>
 
 
                     <h5><label for="login" class="badge badge-primary">Nombre de usuario:</label></h5>
@@ -91,7 +97,7 @@ if (isset($result)) {
                     <input value="<?php echo $result['password'] ?>" id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" autocomplete="on" required><br>
                     <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
                     <?php if ($result['estado'] == "A") {
-                        ?>
+                                    ?>
                     <div class="row" style="margin: 0 auto;">
                         <div class="form-check-inline">
                             <label class="form-check-label">
@@ -106,8 +112,8 @@ if (isset($result)) {
                     </div><br>
                     <?php
 
-                } else {
-                    ?>
+                                } else {
+                                    ?>
                     <div class="row" style="margin: 0 auto;">
                         <div class="form-check-inline">
                             <label class="form-check-label">
@@ -122,7 +128,7 @@ if (isset($result)) {
                     </div><br>
                     <?php
 
-                } ?>
+                                } ?>
 
                     <input style="margin-top:15px;" type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Editar">
                 </form>
@@ -133,25 +139,40 @@ if (isset($result)) {
 </html>
 <?php
 
-} ?>
+        } ?>
 <?php
 
+    }
+    if (
+        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
+        && isset($_POST['TApellidoM']) && isset($_POST['RAcceso']) &&
+        isset($_POST['TLogin']) && isset($_POST['TPContraseña']) && isset($_POST['REstado'])
+    ) {
+        $usab = new Models\Usuarioab();
+        $usab->setNombre($_POST['TNombre']);
+        $usab->setApaterno($_POST['TApellidoP']);
+        $usab->setAmaterno($_POST['TApellidoM']);
+        $usab->setAcceso($_POST['RAcceso']);
+        $usab->setLogin($_POST['TLogin']);
+        $usab->setPassword($_POST['TPContraseña']);
+        $usab->setEstado($_POST['REstado']);
+        $result = $usab->editar($id);
+        if ($result === 1) {
+            ?>
+<script>
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+<?php } else if ($result === 0) {
+            ?>
+<script>
+    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
+</script>
+<?php } else if ($result === -1) {
+            ?>
+<script>
+    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
+</script>
+<?php }
+    }
 }
-if (
-    isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-    && isset($_POST['TApellidoM']) && isset($_POST['RAcceso']) &&
-    isset($_POST['TLogin']) && isset($_POST['TPContraseña']) && isset($_POST['REstado'])
-) {
-    $usab = new Models\Usuarioab();
-    $usab->setNombre($_POST['TNombre']);
-    $usab->setApaterno($_POST['TApellidoP']);
-    $usab->setAmaterno($_POST['TApellidoM']);
-    $usab->setAcceso($_POST['RAcceso']);
-    $usab->setLogin($_POST['TLogin']);
-    $usab->setPassword($_POST['TPContraseña']);
-    $usab->setEstado($_POST['REstado']);
-    $usab->editar($id);
-    header('location: Vusuarios_ab.php');
-}
-}
-?> 
+?>

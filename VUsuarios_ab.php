@@ -23,12 +23,21 @@ if (
     $usab->setLogin($_POST['TLogin']);
     $usab->setPassword($_POST['TPContraseña']);
     $usab->setEstado($_POST['REstado']);
-    $usab->guardar();
+    $result = $usab->guardar();
+    if ($result === 1) {
+        ?>
+<script>
+  swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+
+<?php } else {
+        ?>
+<script>
+    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
+</script>
+<?php }
 }
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -36,6 +45,12 @@ if (
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Administraci&oacute;n Usuarios AB</title>
     <script>
         function cerrar() {

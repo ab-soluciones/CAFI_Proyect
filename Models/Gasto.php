@@ -50,7 +50,7 @@ class Gasto
     {
         $sql = "INSERT INTO gastos(idgastos,concepto, pago , descripcion, monto, estado, fecha,  negocios_idnegocios, trabajador_idtrabajador) 
         VALUES('{$this->id}', '{$this->concepto}', '{$this->pago}', '{$this->descripcion}', '{$this->monto}' , '{$this->estado}' ,'{$this->fecha}','$negocio', '$trabajador')";
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function eliminar($id)
@@ -64,7 +64,7 @@ class Gasto
         $sql = "UPDATE gastos SET concepto = '{$this->concepto}', pago = '{$this->pago}', descripcion = '{$this->descripcion}', 
         monto ='{$this->monto}', estado ='{$this->estado}', fecha ='{$this->fecha}' , trabajador_idtrabajador = '{$trabajador}'
         WHERE idgastos ='$id'";
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function __destruct()

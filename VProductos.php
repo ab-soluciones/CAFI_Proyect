@@ -13,6 +13,7 @@ if (!isset($_SESSION['acceso'])) {
     header('location: OPCAFI.php');
 }
 $negocio = $_SESSION['idnegocio'];
+
 function registrar($imagen, $negocio)
 {
     $producto = new Models\Producto();
@@ -24,9 +25,9 @@ function registrar($imagen, $negocio)
         $codigob  = $_POST['TCodigoB'];
     }
 
-   $descripcion = $_POST['TADescription'];
+    $descripcion = $_POST['TADescription'];
 
-    if (strlen($descripcion) === 0 ) {
+    if (strlen($descripcion) === 0) {
         $descripcion = null;
     }
 
@@ -51,8 +52,21 @@ function registrar($imagen, $negocio)
     $result = $con->consultaRetorno($query);
     $con->cerrarConexion();
     $clienteab = $result['clientesab_idclienteab'];
-    $producto->guardar($clienteab, $_SESSION['id']);
+    $result = $producto->guardar($clienteab, $_SESSION['id']);
+    if ($result === 1) {
+        ?>
+<script>
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+
+<?php } else {
+        ?>
+<script>
+    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
+</script>
+<?php }
 }
+
 if (
     isset($_POST['TNombre'])  && isset($_POST['TColor'])
     && isset($_POST['TMarca']) && isset($_POST['TADescription'])
@@ -88,9 +102,19 @@ if (
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Administracion Productos</title>
     <script type="text/javascript">
         var parametro;
+
+  funcion mensaje(){
+    alert('hola');
+  }
 
         function ini() {
             parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 15 min
@@ -298,47 +322,47 @@ if (
                     <?php
                     $con = new Models\Conexion();
                     $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
-                    FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras 
+                    FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
                     WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
                     $row = $con->consultaListar($query);
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['codigo_barras']; ?></td>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
-                            <td><?php echo $renglon['color']; ?></td>
-                            <td><?php echo $renglon['marca']; ?></td>
-                            <td><?php
+                    <tr>
+                        <td><?php echo $renglon['codigo_barras']; ?></td>
+                        <td><?php echo $renglon['nombre']; ?></td>
+                        <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
+                        <td><?php echo $renglon['color']; ?></td>
+                        <td><?php echo $renglon['marca']; ?></td>
+                        <td><?php
                                 if (strlen($renglon['descripcion']) === 0) {
                                     echo "Sin descripcion";
                                 } else {
                                     echo $renglon['descripcion'];
                                 }
                                 ?></td>
-                            <td><?php echo $renglon['cantidad']; ?></td>
-                            <td><?php echo $renglon['unidad_medida']; ?></td>
-                            <td><?php
+                        <td><?php echo $renglon['cantidad']; ?></td>
+                        <td><?php echo $renglon['unidad_medida']; ?></td>
+                        <td><?php
                                 if (strlen($renglon['talla_numero']) === 0) {
                                     echo "N.A";
                                 } else {
                                     echo  $renglon['talla_numero'];
                                 }
                                 ?></td>
-                            <td>$<?php echo $renglon['precio_compra']; ?></td>
-                            <td>$<?php echo $renglon['precio_venta']; ?></td>
-                            <td><?php echo $renglon['pestado']; ?></td>
-                            <td>
-                                <div class="row" style="position: absolute;">
-                                    <div class="container" style="margin: 0 auto;">
-                                        <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
-                                            <img src="img/edit.png">
-                                        </a>
-                                    </div>
+                        <td>$<?php echo $renglon['precio_compra']; ?></td>
+                        <td>$<?php echo $renglon['precio_venta']; ?></td>
+                        <td><?php echo $renglon['pestado']; ?></td>
+                        <td>
+                            <div class="row" style="position: absolute;">
+                                <div class="container" style="margin: 0 auto;">
+                                    <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
+                                        <img src="img/edit.png">
+                                    </a>
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>

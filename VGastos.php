@@ -38,7 +38,19 @@ if (
     $gasto->setMonto($monto);
     $gasto->setEstado("A");
     $gasto->setFecha($_POST['DFecha']);
-    $gasto->guardar($_SESSION['idnegocio'], $_SESSION['id']);
+    $result = $gasto->guardar($_SESSION['idnegocio'], $_SESSION['id']);
+    if ($result === 1) {
+        ?>
+<script>
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+
+<?php } else {
+        ?>
+<script>
+    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
+</script>
+<?php }
 }
 ?>
 <!DOCTYPE html>
@@ -50,6 +62,11 @@ if (
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
 
     <title>Administracion Gastos</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

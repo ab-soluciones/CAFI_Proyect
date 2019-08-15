@@ -1,5 +1,4 @@
 <?php namespace Models;
-
 class Producto
 {
     private $codigo_barras;
@@ -77,12 +76,13 @@ class Producto
     public function guardar($negocio, $trabajador)
     {
         $sql = "INSERT INTO producto (codigo_barras, nombre, imagen,color,marca ,descripcion, unidad_medida, talla_numero,
-        tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab) 
+        tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab)
+        tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab)
         VALUES('{$this->codigo_barras}', '{$this->nombre}', '{$this->imagen}','{$this->color}','{$this->marca}','{$this->descripcion}',
         '{$this->unidad_medida}','{$this->talla_numero}', '{$this->tipo}','{$this->precio_compra}'
         ,'{$this->precio_venta}','{$this->pestado}','$trabajador','$negocio')";
 
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function editar($id, $trabajador)
@@ -91,15 +91,17 @@ class Producto
         ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
          precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', codigo_barras = '{$this->codigo_barras}', pestado = '{$this->pestado}'
          ,trabajador_idtrabajador = '{$trabajador}' WHERE idproducto ='$id'";
-        $this->con->consultaSimple($sql);
+
+        return $this->con->consultaSimple($sql);
     }
+    
     public function editarSinImagen($id, $trabajador)
     {
         $sql = "UPDATE producto SET nombre = '{$this->nombre}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
         ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
          precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', codigo_barras = '{$this->codigo_barras}', pestado = '{$this->pestado}'
          ,trabajador_idtrabajador = '{$trabajador}' WHERE idproducto ='$id'";
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function __destruct()

@@ -18,6 +18,11 @@ body {
     background-color: lightgrey;
 }
 
+#alert{
+  height: 200px;
+  width: 100px;
+}
+
 #index_button {
     background-color: #2a727a;
 }

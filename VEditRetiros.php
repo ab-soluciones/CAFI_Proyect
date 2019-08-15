@@ -21,49 +21,70 @@ if (isset($_GET['id']) && isset($_GET['estado'])) {
         $retiro = new Models\Retiro();
         $retiro->setEstado($_POST['DlEstado']);
         $retiro->setTrabajador($trabajador);
-        $retiro->editar($id);
-        header("location: VRetiros.php?idedit=$id");
+        $result = $retiro->editar($id);
+        if ($result === 1) {
+            ?>
+<script>
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+<?php } else if ($result === 0) {
+            ?>
+<script>
+    swal({title:'Error',text:'No se ha realizado ningun cambio',type:'error'});
+</script>
+<?php } else if ($result === -1) {
+            ?>
+<script>
+    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
+</script>
+<?php }
     }
     ?>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <title>Edicion del Estado</title>
-        <script type="text/javascript">
-            var parametro;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
 
-            function ini() {
-                parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-            }
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
 
-            function parar() {
-                clearTimeout(parametro);
-                parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-            }
-        </script>
-    </head>
+    <title>Edicion del Estado</title>
+    <script type="text/javascript">
+        var parametro;
 
-    <body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #e6e6e6">
-        <div class="row">
-            <div class="col-xl-3" style="margin: 0 auto;  margin-top:12%;">
-                <div class="card card-body">
-                    <form class="form-group" action="#" method="post">
-                        <input onclick="value=''" value="<?php echo $estado ?>" id="inestado" class="form form-control" list="estadov" name="DlEstado" autocomplete="off">
-                        <datalist id="estadov">
-                            <option value="R">
-                            <option value="C">
-                        </datalist> <br>
-                        <input type="submit" class="btn  btn-block btn-dark" value="Editar">
-                    </form>
-                </div>
+        function ini() {
+            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
+        }
+
+        function parar() {
+            clearTimeout(parametro);
+            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
+        }
+    </script>
+</head>
+
+<body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #e6e6e6">
+    <div class="row">
+        <div class="col-xl-3" style="margin: 0 auto;  margin-top:12%;">
+            <div class="card card-body">
+                <form class="form-group" action="#" method="post">
+                    <input onclick="value=''" value="<?php echo $estado ?>" id="inestado" class="form form-control" list="estadov" name="DlEstado" autocomplete="off">
+                    <datalist id="estadov">
+                        <option value="R">
+                        <option value="C">
+                    </datalist> <br>
+                    <input type="submit" class="btn  btn-block btn-dark" value="Editar">
+                </form>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
-    </html>
+</html>
 <?php
 } ?>

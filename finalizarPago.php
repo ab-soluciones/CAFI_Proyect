@@ -19,6 +19,10 @@ if (isset($_GET['total']) && !isset($_GET['pago'])) {
     $total = $_GET['total'];
     $inventario = new Models\Inventario();
     $venta = new Models\Venta();
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+    $result = $con->consultaRetorno($query);
+    $con->cerrarConexion();
     $idventa = (int) $_SESSION['idven'];
     $inventario->actualizarStock($idventa, $_SESSION['idnegocio']); //se actualiza el stock
     $venta->setDescuento($_SESSION['descuento']);
@@ -35,7 +39,12 @@ if (isset($_GET['total']) && !isset($_GET['pago'])) {
     $_SESSION['idven'] = null;
     $_SESSION['forma_pago'] = null;
     $_SESSION['clienteid'] = null;
-    header("location: ticket.php?idventa=$idventa");
+    if ($result['impresora'] === "A") {
+        header("location: ticket.php?idventa=$idventa");
+    } else if ($result['impresora'] === "I") {
+        header("location: OPCAFI.php");
+    }
+   
     //se emprime el ticket
 }
 if (
@@ -48,6 +57,10 @@ if (
     $cambio = $_GET['cambio'];
     $inventario = new Models\Inventario();
     $venta = new Models\Venta();
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+    $result = $con->consultaRetorno($query);
+    $con->cerrarConexion();
     $idventa = (int) $_SESSION['idven'];
     $inventario->actualizarStock($idventa, $_SESSION['idnegocio']); //se actualiza el stock
     $venta->setDescuento($_SESSION['descuento']);
@@ -64,7 +77,11 @@ if (
     $_SESSION['idven'] = null;
     $_SESSION['forma_pago'] = null;
     $_SESSION['clienteid'] = null;
-    header("location: ticket.php?idventa=$idventa");
+    if ($result['impresora'] === "A") {
+        header("location: ticket.php?idventa=$idventa");
+    } else if ($result['impresora'] === "I") {
+        header("location: OPCAFI.php");
+    }
 }
 if (
     isset($_GET['total']) && isset($_GET['pago']) && isset($_GET['cambio'])
@@ -79,6 +96,10 @@ if (
     $abono = $_GET['abono'];
     $inventario = new Models\Inventario();
     $venta = new Models\Venta();
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+    $result = $con->consultaRetorno($query);
+    $con->cerrarConexion();
     $idventa = (int) $_SESSION['idven'];
     $inventario->actualizarStock($idventa, $_SESSION['idnegocio']); //se actualiza el stock
     $venta->setDescuento($_SESSION['descuento']);
@@ -103,5 +124,9 @@ if (
     $_SESSION['clienteid'] = null;
     $_SESSION['idven'] = null;
     $_SESSION['forma_pago'] = null;
-    header("location: ticket.php?idventa=$idventa");
+    if ($result['impresora'] === "A") {
+        header("location: ticket.php?idventa=$idventa");
+    } else if ($result['impresora'] === "I") {
+        header("location: OPCAFI.php");
+    }
 }

@@ -35,8 +35,17 @@ if (isset($_GET['id'])) {
         $gasto->setMonto($monto);
         $gasto->setEstado($_POST['REstado']);
         $gasto->setFecha($_POST['DFecha']);
-        $gasto->editar($id, $trabajador);
-        header('location: VGastos.php');
+        $result = $gasto->editar($id, $trabajador);
+        if ($result === 1) {
+          ?>
+            <script>swal({title:'Exito',text:'Editado exitosamente!',type:'success'});</script>
+       <?php } else if ($result === 0) {
+           ?>
+         <script>swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});</script>
+       <?php } else if ($result === -1) {
+           ?>
+  <script>swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});</script>
+       <?php }
     }
     if (isset($result)) {
 
@@ -48,6 +57,12 @@ if (isset($_GET['id'])) {
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <link rel="stylesheet" href="css/bootstrap.css">
+            <link rel="stylesheet" href="css/sweetalert.css">
+
+            <script src="js/sweetalert.js"></script>
+            <script src="js/sweetalert.min.js"></script>
+            <script src="js/jquery.js"></script>
+
             <title> Edicion Gastos</title>
             <script type="text/javascript">
                 var parametro;

@@ -17,6 +17,10 @@ if (
     && isset($_GET['cam'])  && isset($_GET['tt'])
     && isset($_GET['frm_pg'])
 ) {
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+    $result = $con->consultaRetorno($query);
+    $con->cerrarConexion();
     $cantidad = $_GET['cant'];
     $pago = $_GET['pg'];
     $adeudo = (int) $_GET['ad'];
@@ -33,8 +37,24 @@ if (
     $abono->setHora();
     $abono->setNegocio($_SESSION['idnegocio']);
     $abono->setTrabajador($_SESSION['id']);
-    $abono->guardar($adeudo, $total);
-    header("location: ticketabono.php?ad=$adeudo");
+    $result = $abono->guardar($adeudo, $total);
+    if ($result === 1) {
+        ?>
+<script>
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+
+<?php } else {
+        ?>
+<script>
+    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
+</script>
+<?php }
+    if ($result['impresora'] === "A") {
+        header("location: ticketabono.php?ad=$adeudo");
+    } else if ($result['impresora'] === "I") {
+        header('location: VConsultasAdeudos.php');
+    }
 }
 if (isset($_GET['tt']) && isset($_GET['ad']) && isset($_GET['edoda']) && isset($_GET['frm_pg'])) {
     $total = $_GET['tt'];
@@ -65,55 +85,61 @@ if (isset($_GET['tt']) && isset($_GET['ad']) && isset($_GET['edoda']) && isset($
         }
     }
     ?>
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="css/bootstrap.css">
-        <title>Abono</title>
-        <script>
-            var parametro;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
 
-            function ini() {
-                parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-            }
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
 
-            function parar() {
-                clearTimeout(parametro);
-                parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-            }
-        </script>
-    </head>
+    <title>Abono</title>
+    <script>
+        var parametro;
 
-    <body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #e6e6e6">
-        <div class="row">
-            <div class="col-xl-3" style="margin: 0 auto;  margin-top:12%;">
-                <div class="card card-body">
-                    <form class="form-group" action="#" method="post">
-                        <?php
+        function ini() {
+            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
+        }
+
+        function parar() {
+            clearTimeout(parametro);
+            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
+        }
+    </script>
+</head>
+
+<body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #e6e6e6">
+    <div class="row">
+        <div class="col-xl-3" style="margin: 0 auto;  margin-top:12%;">
+            <div class="card card-body">
+                <form class="form-group" action="#" method="post">
+                    <?php
                         if ($forma_pago === "Tarjeta") {
                             ?>
-                            <h5><label for="cant" class="badge badge-success">Abono:</label></h5>
-                            <input id="cant" class="form form-control" type="text" name="TCantidad" placeholder="Ingrese la cantidad cargada a la tarjeta"><br>
-                        <?php } else if ($forma_pago === "Efectivo") {
+                    <h5><label for="cant" class="badge badge-success">Abono:</label></h5>
+                    <input id="cant" class="form form-control" type="text" name="TCantidad" placeholder="Ingrese la cantidad cargada a la tarjeta"><br>
+                    <?php } else if ($forma_pago === "Efectivo") {
                             ?>
-                            <h5><label for="cant" class="badge badge-success">Abono:</label></h5>
-                            <input id="cant" class="form form-control" type="text" name="TCantidad" placeholder="Ingrese la cantidad $"><br>
-                            <h5><label for="pago" class="badge badge-success">Pago:</label></h5>
-                            <input id="pago" class="form form-control" type="text" name="TPago" placeholder="Ingrese la cantidad $"><br>
+                    <h5><label for="cant" class="badge badge-success">Abono:</label></h5>
+                    <input id="cant" class="form form-control" type="text" name="TCantidad" placeholder="Ingrese la cantidad $"><br>
+                    <h5><label for="pago" class="badge badge-success">Pago:</label></h5>
+                    <input id="pago" class="form form-control" type="text" name="TPago" placeholder="Ingrese la cantidad $"><br>
 
-                        <?php }
+                    <?php }
                         ?>
-                        <input type="submit" class="btn  btn-block btn-dark" value="Agregar">
-                    </form>
-                </div>
+                    <input type="submit" class="btn  btn-block btn-dark" value="Agregar">
+                </form>
             </div>
         </div>
-    </body>
+    </div>
+</body>
 
-    </html>
+</html>
 <?php }
 
 ?>

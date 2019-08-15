@@ -31,7 +31,19 @@ if (
     $otro_ingreso->setFormaIngreso($_POST['SFIngreso']);
     $otro_ingreso->setFecha($_POST['DFecha']);
     $otro_ingreso->setEstado("A");
-    $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
+    $result = $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
+    if ($result === 1) {
+        ?>
+<script>
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+
+<?php } else {
+        ?>
+<script>
+    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
+</script>
+<?php }
 }
 ?>
 <!DOCTYPE html>
@@ -41,6 +53,12 @@ if (
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Administracion Gastos</title>
     <script type="text/javascript">
         var parametro;

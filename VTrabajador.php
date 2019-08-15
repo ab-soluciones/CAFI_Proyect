@@ -25,7 +25,7 @@ if (
     && isset($_POST['REstado'])
     //se comprueba que existan todos los datos del formulario
 ) {
-    $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador 
+    $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
     $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
     $trabajador->setApaterno($_POST['TApellidoP']);
     $trabajador->setAmaterno($_POST['TApellidoM']);
@@ -42,14 +42,21 @@ if (
     $trabajador->setSueldo($sueldo);
     $negocio = $_SESSION['idnegocio'];
     $trabajador->setEstado($_POST['REstado']);
-    $trabajador->guardar($_SESSION['idnegocio']);
+    $result = $trabajador->guardar($_SESSION['idnegocio']);
+    if ($result === 1) {
+        ?>
+<script>
+swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
 
-    //se guarda el trabajador
+<?php } else {
+        ?>
+<script>
+  swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
+</script>
+<?php }
 }
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -57,6 +64,12 @@ if (
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Administracion Trabajadores</title>
     <script>
         //con la funcion mostrar y agregar se hace el dinamismo de la aplicacion: ocultando la tabla cada que se va agregar un trabajador y mostrandola cada que el usuario quiera
@@ -227,30 +240,30 @@ if (
                     //a continuacion se mustra en la tabla el resultado de la consulta
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td><?php echo $renglon['apaterno']; ?></td>
-                            <td><?php echo $renglon['amaterno']; ?></td>
-                            <td><?php echo $renglon['tipo_documento']; ?></td>
-                            <td><?php echo $renglon['numero_documento']; ?></td>
-                            <td><?php echo $renglon['direccion']; ?></td>
-                            <td><?php echo $renglon['telefono']; ?></td>
-                            <td><?php echo $renglon['correo']; ?></td>
-                            <td><?php echo $renglon['acceso']; ?></td>
-                            <td><?php echo $renglon['login']; ?></td>
-                            <td><?php echo $renglon['password']; ?></td>
-                            <td><?php echo $renglon['sueldo']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVTrabajador.php?id=<?php echo $renglon['idtrabajador'];
+                    <tr>
+                        <td><?php echo $renglon['nombre']; ?></td>
+                        <td><?php echo $renglon['apaterno']; ?></td>
+                        <td><?php echo $renglon['amaterno']; ?></td>
+                        <td><?php echo $renglon['tipo_documento']; ?></td>
+                        <td><?php echo $renglon['numero_documento']; ?></td>
+                        <td><?php echo $renglon['direccion']; ?></td>
+                        <td><?php echo $renglon['telefono']; ?></td>
+                        <td><?php echo $renglon['correo']; ?></td>
+                        <td><?php echo $renglon['acceso']; ?></td>
+                        <td><?php echo $renglon['login']; ?></td>
+                        <td><?php echo $renglon['password']; ?></td>
+                        <td><?php echo $renglon['sueldo']; ?></td>
+                        <td><?php echo $renglon['estado']; ?></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVTrabajador.php?id=<?php echo $renglon['idtrabajador'];
                                                                                                                         //se envia el id del registro para ser editado
                                                                                                                         ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>
