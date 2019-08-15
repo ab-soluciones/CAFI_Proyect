@@ -15,7 +15,7 @@ if (!isset($_SESSION['acceso'])) {
 
 if (
     isset($_POST['TNombre']) && isset($_POST['TDomicilio']) &&
-    isset($_POST['TCiudad']) && isset($_POST['DlCliente']) && 
+    isset($_POST['TCiudad']) && isset($_POST['DlCliente']) &&
     isset($_POST['TTelefono']) && isset($_POST['RImpresora'])
 ) {
 
@@ -33,7 +33,19 @@ if (
     $con->cerrarConexion();
     $id = (int) $id['id_clienteab'];
     $negocio->setIdCliente($id);
-    $negocio->guardar($idusuario);
+    $result = $negocio->guardar($idusuario);
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
+
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
 ?>
 
@@ -95,7 +107,7 @@ if (
                             while ($result = mysqli_fetch_array($row)) {
                                 ?>
 
-                                <?php $datos = true;
+                            <?php $datos = true;
                                 echo "<option value='" . $result['nombre'] . " " . $result['apaterno'] . " " . $result['amaterno'] . "'> "; ?>
                             <?php
                             }
@@ -137,22 +149,22 @@ if (
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['idnegocios']; ?></td>
-                            <td><?php echo $renglon['nombre_negocio']; ?></td>
-                            <td><?php echo $renglon['domicilio']; ?></td>
-                            <td><?php echo $renglon['ciudad']; ?></td>
-                            <td><?php echo $renglon['telefono_negocio']; ?></td>
-                            <td><?php echo $renglon['impresora']; ?></td>
-                            <td><a href="VConsultasC.php?id= <?php echo $renglon['clientesab_idclienteab']; ?>"># <?php echo $renglon['clientesab_idclienteab']; ?></a></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVNegocio.php?id=<?php echo $renglon['idnegocios'] ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><?php echo $renglon['idnegocios']; ?></td>
+                        <td><?php echo $renglon['nombre_negocio']; ?></td>
+                        <td><?php echo $renglon['domicilio']; ?></td>
+                        <td><?php echo $renglon['ciudad']; ?></td>
+                        <td><?php echo $renglon['telefono_negocio']; ?></td>
+                        <td><?php echo $renglon['impresora']; ?></td>
+                        <td><a href="VConsultasC.php?id= <?php echo $renglon['clientesab_idclienteab']; ?>"># <?php echo $renglon['clientesab_idclienteab']; ?></a></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVNegocio.php?id=<?php echo $renglon['idnegocios'] ?>">
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>

@@ -48,7 +48,7 @@ class OtrosIngresos
         $sql = "INSERT INTO otros_ingresos (id_otros_ingresos,cantidad,tipo,forma_ingreso,fecha,estado,
         trabajador_idpersona,negocios_idnegocios) VALUES('{$this->id_otros_ingresos}','{$this->cantidad}',
         '{$this->tipo}','{$this->forma_ingreso}','{$this->fecha}','{$this->estado}','$id','$negocio')";
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
 
@@ -56,7 +56,7 @@ class OtrosIngresos
     {
         $sql = "UPDATE otros_ingresos SET cantidad='{$this->cantidad}',tipo='{$this->tipo}',forma_ingreso='{$this->forma_ingreso}',
         fecha='{$this->fecha}',estado='{$this->estado}',trabajador_idpersona='$trabajador' WHERE id_otros_ingresos='{$this->id_otros_ingresos}'";
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function __destruct()

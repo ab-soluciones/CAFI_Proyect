@@ -51,7 +51,7 @@ class Negocio
         $sql = "INSERT INTO negocios(idnegocios,nombre_negocio,domicilio,ciudad,telefono_negocio,impresora,clientesab_idclienteab,usuariosab_idusuariosab) VALUES('null', 
         '{$this->nombre}','{$this->domicilio}','{$this->ciudad}','{$this->telefono}','{$this->impresora}','{$this->idcliente}','$idusuario')";
 
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function eliminar($id)
@@ -65,7 +65,8 @@ class Negocio
         $sql = "UPDATE negocios SET nombre_negocio = '{$this->nombre}', domicilio = '{$this->domicilio}'
         ,ciudad ='{$this->ciudad}',telefono_negocio = '{$this->telefono}',impresora = '{$this->impresora}', clientesab_idclienteab ='{$this->idcliente}'
         , usuariosab_idusuariosab = '$idusuario' WHERE idnegocios ='$id'";
-        $this->con->consultaSimple($sql);
+        
+        return $this->con->consultaSimple($sql);
     }
 
     public function __destruct()

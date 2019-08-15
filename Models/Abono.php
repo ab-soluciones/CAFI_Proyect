@@ -68,7 +68,7 @@ class Abono
         $sql = "INSERT INTO abono (idabono, estado, cantidad, pago,forma_pago, cambio, fecha, hora, negocios_idnegocios, trabajador_idtrabajador, adeudos_id) 
         VALUES ('$this->id', 'R','$this->cantidad', '$this->pago', '$this->forma_pago', '$this->cambio', '$this->fecha', '$this->hora', '$this->negocio', '$this->trabajador', '$adeudo')";
 
-        $this->con->consultaSimple($sql);
+        $result = $this->con->consultaSimple($sql);
 
         $sql = "UPDATE adeudos SET total_deuda='$total' WHERE idadeudos='$adeudo'";
 
@@ -77,6 +77,8 @@ class Abono
         $sql = "UPDATE adeudos SET estado_deuda = 'L' WHERE total_deuda= '0.00' ";
 
         $this->con->consultaSimple($sql);
+
+        return $result;
     }
 
     public function __destruct()

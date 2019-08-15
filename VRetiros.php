@@ -126,7 +126,19 @@ function retirar($concepto, $tipo, $cantidad, $descripcion)
     $retiro->setEstado("R");
     $retiro->setNegocio($_SESSION['idnegocio']);
     $retiro->setTrabajador($_SESSION['id']);
-    $retiro->guardar();
+    $result = $retiro->guardar();
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
+
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
 if (isset($_POST['SConcepto']) && isset($_POST['STipo']) && isset($_POST['TCantidad'])) {
     //se optiene los datos ingresados por el usuario
@@ -247,27 +259,27 @@ if (isset($_POST['SConcepto']) && isset($_POST['STipo']) && isset($_POST['TCanti
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['concepto']; ?></td>
-                            <td><?php echo $renglon['tipo']; ?></td>
-                            <td><?php echo $renglon['cantidad']; ?></td>
-                            <td><?php if (strlen($renglon['descripcion']) == 0) {
+                    <tr>
+                        <td><?php echo $renglon['concepto']; ?></td>
+                        <td><?php echo $renglon['tipo']; ?></td>
+                        <td><?php echo $renglon['cantidad']; ?></td>
+                        <td><?php if (strlen($renglon['descripcion']) == 0) {
                                     echo "Sin descripcion";
                                 } else {
                                     echo $renglon['descripcion'];
                                 } ?></td>
-                            <td><?php echo $renglon['fecha']; ?></td>
-                            <td><?php echo $renglon['hora']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="VEditRetiros.php?id=<?php echo $renglon['idretiro']; ?>&estado=<?php echo $renglon['estado']; ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        <td><?php echo $renglon['fecha']; ?></td>
+                        <td><?php echo $renglon['hora']; ?></td>
+                        <td><?php echo $renglon['estado']; ?></td>
+                        <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a style="margin: 0 auto;" class="btn btn-secondary" href="VEditRetiros.php?id=<?php echo $renglon['idretiro']; ?>&estado=<?php echo $renglon['estado']; ?>">
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>

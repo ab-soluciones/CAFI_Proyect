@@ -35,8 +35,17 @@ if (isset($_GET['id'])) {
         $gasto->setMonto($monto);
         $gasto->setEstado($_POST['REstado']);
         $gasto->setFecha($_POST['DFecha']);
-        $gasto->editar($id, $trabajador);
-        header('location: VGastos.php');
+        $result = $gasto->editar($id, $trabajador);
+        if ($result === 1) {
+          ?>
+            <script>alert('editado Exitosamente');</script>
+       <?php } else if ($result === 0) {
+           ?>
+         <script>alert('No se a realizado ningún cambio');</script>
+       <?php } else if ($result === -1) {
+           ?>
+  <script>alert('no editado compruebe los campos unicos');</script>
+       <?php }
     }
     if (isset($result)) {
 
