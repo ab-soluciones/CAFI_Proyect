@@ -89,7 +89,8 @@ class Usuarioab
    VALUES  ('{$this->id}', '{$this->nombre}', '{$this->apaterno}',
   '{$this->amaterno}','{$this->acceso}','{$this->login}','{$this->password}','{$this->estado}')";
 
-        $this->con->consultaSimple($sql);
+    return $this->con->consultaSimple($sql);
+    
     }
 
     public function eliminar($id)
@@ -103,7 +104,8 @@ class Usuarioab
         $sql = "UPDATE usuariosab SET nombre = '{$this->nombre}',apaterno = '{$this->apaterno}'
         ,amaterno ='{$this->amaterno}', acceso = '{$this->acceso}',login = '{$this->login}'
         ,password =  '{$this->password}' ,estado ='{$this->estado}' WHERE idusuariosab = '$id'";
-        $this->con->consultaSimple($sql);
+
+        return $this->con->consultaSimple($sql);
     }
 
     public function __destruct()

@@ -38,7 +38,19 @@ if (
     $gasto->setMonto($monto);
     $gasto->setEstado("A");
     $gasto->setFecha($_POST['DFecha']);
-    $gasto->guardar($_SESSION['idnegocio'], $_SESSION['id']);
+    $result = $gasto->guardar($_SESSION['idnegocio'], $_SESSION['id']);
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
+
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
 ?>
 <!DOCTYPE html>
@@ -137,25 +149,25 @@ if (
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['concepto']; ?></td>
-                            <td><?php echo $renglon['pago']; ?></td>
-                            <td><?php if (strlen($renglon['descripcion']) === 0) {
+                    <tr>
+                        <td><?php echo $renglon['concepto']; ?></td>
+                        <td><?php echo $renglon['pago']; ?></td>
+                        <td><?php if (strlen($renglon['descripcion']) === 0) {
                                     echo "Sin descripción";
                                 } else {
                                     echo $renglon['descripcion'];
                                 }  ?></td>
-                            <td>$ <?php echo $renglon['monto']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td><?php echo $renglon['fecha']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVGastos.php?id=<?php echo $renglon['idgastos']; ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        <td>$ <?php echo $renglon['monto']; ?></td>
+                        <td><?php echo $renglon['estado']; ?></td>
+                        <td><?php echo $renglon['fecha']; ?></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVGastos.php?id=<?php echo $renglon['idgastos']; ?>">
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>

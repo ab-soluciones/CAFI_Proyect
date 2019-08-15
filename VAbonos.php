@@ -245,10 +245,7 @@ if (!isset($_SESSION['acceso'])) {
                         <td><?php echo $renglon['nombre_cliente'] . " " . $renglon['ap_cliente'] . " " . $renglon['am_cliente']; ?></td>
                         <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
                         <td><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>"># <?php echo $renglon['adeudos_id']; ?></a></td>
-
-
-
-                    </tr>
+ </tr>
                 <?php
                 } ?>
                 </tbody>

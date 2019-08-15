@@ -25,7 +25,8 @@ if (
 
     /*se hace el registro del producto en el concepto de la venta, en la funcion setIdP
  se optiene el id del producto para poderlo registrar en el concepto de la venta */
-    $producto = $_POST['DlProductos'];
+ $producto = $_POST['DlProductos'];
+ $con = new Models\Conexion();
     $codigo = $_POST['DlCodigosP'];
     $descripcion = $_POST['DlDescripciones'];
     $cantidad = $_POST['SCantidad'];
@@ -38,11 +39,18 @@ if (
     $dv->setIdVenta($idventa);
     $dv->setIdP($producto, $codigo, $descripcion, $negocio);
     $dv->setCantidad($cantidad);
+    $idproducto=$dv->getIdProducto();
     $dv->setSuptotal($cantidad);
-    $dv->guardar();
+    $sql = "SELECT iddetalle_venta FROM detalle_venta WHERE producto_codigo_barras ='$idproducto' AND idventa='$idventa'";
+    $result = $con->consultaRetorno($sql);
+    if (isset($result)) {
+        ?> 
+    <script>alert('EL PRODUCTO YA EXISTE EN LA LISTA,MODIFIQUE LA CANTIDAD SI DESEA AGREGAR MAS PRODUCTOS DE ESTE TIPO');</script>
+      
+  <?php  } else {
+        $dv->guardar();
+    }
 }
-
-
 ?>
 
 <!DOCTYPE html>

@@ -71,13 +71,13 @@ class Retiro
     {
         $sql = "INSERT INTO retiros (idretiro, concepto, tipo, cantidad, descripcion, fecha, hora,estado, negocios_idnegocios, trabajador_idtrabajador) 
         VALUES ('$this->id', '$this->concepto','$this->tipo','$this->cantidad', '$this->descripcion', '$this->fecha','$this->hora','$this->estado', '$this->negocio', '$this->trabajador')";
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function editar($id)
     {
         $sql = "UPDATE retiros SET estado = '$this->estado', trabajador_idtrabajador='$this->trabajador' WHERE idretiro='$id'";
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function __destruct()

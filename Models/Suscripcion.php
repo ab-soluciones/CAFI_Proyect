@@ -68,7 +68,7 @@ class Suscripcion
                 VALUES  ('{$this->id}', '{$this->activacion}', '{$this->vencimiento}','{$this->estado}',
                 '{$this->monto}','{$this->id_negocio}','$idusuario')";
 
-        $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function eliminar($id)
@@ -88,15 +88,16 @@ class Suscripcion
         clientesab.estado ='{$this->estado}', trabajador.estado='{$this->estado}'
         WHERE suscripcion.idsuscripcion='$id'";
 
-        $renglones = $this->con->consultaSimple($sql);
+        $result = $this->con->consultaSimple($sql);
 
-        if ($renglones === 0) {
+        if ($result === 0) {
             $sql = "UPDATE suscripcion SET fecha_activacion = '{$this->activacion}'
             ,fecha_vencimiento = '{$this->vencimiento}' , estado ='{$this->estado}'
             ,monto ='{$this->monto}',usuariosab_idusuariosab = '$idusuario'
             WHERE idsuscripcion = '$id'";
-            $this->con->consultaSimple($sql);
+            $result = $this->con->consultaSimple($sql);
         }
+        return $result;
     }
 
     public function __destruct()

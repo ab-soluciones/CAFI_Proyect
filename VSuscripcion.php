@@ -29,7 +29,19 @@ if (
     $con->cerrarConexion();
     $id = (int) $id['idnegocios'];
     $sus->setIdNegocio($id);
-    $sus->guardar($_SESSION['id']);
+    $result = $sus->guardar($_SESSION['id']);
+    if ($result === 1) {
+        ?>
+<script>
+    alert('Producto Registrado Exitosamente');
+</script>
+
+<?php } else {
+        ?>
+<script>
+    alert('Producto no registrado compruebe los campos unicos');
+</script>
+<?php }
 }
 
 ?>

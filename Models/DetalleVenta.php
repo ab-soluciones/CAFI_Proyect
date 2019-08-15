@@ -1,4 +1,6 @@
-<?php namespace Models;
+<?php
+
+namespace Models;
 
 class DetalleVenta
 {
@@ -33,20 +35,26 @@ class DetalleVenta
             $color = $producto[3];
             $talla = $producto[5];
         }
+
         $query = "SELECT codigo_barras , precio_venta FROM producto
         INNER JOIN inventario ON codigo_barras = producto_codigo_barras 
         WHERE nombre = '$nombre'AND color = '$color' AND marca = '$marca' 
         AND talla_numero = '$talla' AND negocios_idnegocios ='$negocio'
         OR codigo_barras = '$codigo' AND negocios_idnegocios ='$negocio' 
         OR descripcion = '$descripcion' AND negocios_idnegocios ='$negocio'";
+
         $res = $this->con->consultaRetorno($query);
         $this->idproducto = $res['codigo_barras'];
         $this->precio = $res['precio_venta'];
-        if (!$res) {
-            echo "<script> alert('El producto no existe');</script>";
-        }
+
+        return $res;
+        //agregar alerta el producto no existe en vventas si no se agrega el producto
     }
 
+    public function getIdProducto()
+    {
+        return $this->idproducto;
+    }
     public function setPrecio($precio)
     {
         $this->precio = $precio;
@@ -67,16 +75,10 @@ class DetalleVenta
     }
     public function guardar()
     {
-        $sql = "SELECT iddetalle_venta FROM detalle_venta WHERE producto_codigo_barras ='$this->idproducto' AND idventa='$this->idventa'";
-        $result = $this->con->consultaRetorno($sql);
-        if (isset($result)) {
-            echo "<script> alert('EL PRODUCTO YA EXISTE EN LA LISTA,MODIFIQUE LA CANTIDAD SI DESEA AGREGAR MAS PRODUCTOS DE ESTE TIPO');</script>";
-        } else {
-            $sql = "INSERT INTO detalle_venta (iddetalle_venta,  producto_codigo_barras , idventa, cantidad_producto, subtotal) 
+        $sql = "INSERT INTO detalle_venta (iddetalle_venta,  producto_codigo_barras , idventa, cantidad_producto, subtotal) 
             VALUES('{$this->iddetalle_venta}', '{$this->idproducto}', '{$this->idventa}',
             '{$this->cantidad}', '{$this->subtotal}')";
-            $this->con->consultaSimple($sql);
-        }
+        $this->con->consultaSimple($sql);
     }
 
     public function eliminar($id)
