@@ -8,9 +8,7 @@ $_SESSION['descuento'] = null;
 $_SESSION['clienteid'] = null;
 if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');
-} else if (is_null($_SESSION['idven'])) {
-    header('location: VVender.php');
-} elseif ($_SESSION['estado'] == "I") {
+} else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
     $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] == "Employes"
@@ -18,9 +16,18 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 ) {
     header('location: OPCAFI.php');
 }
+
+if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
+    /*se crea una nueva venta para poder hacer uso de la tabla detalle venta(describe el concepto de la venta)
+     ya que tiene relacion de muchos a muchos con la tabla productos y la tabla venta */
+    $venta = new Models\Venta();
+    $id = $venta->guardar();
+    $_SESSION['idven'] = $id['id'];
+}
+
 if (
     isset($_POST['DlProductos']) || isset($_POST['DlCodigosP'])
-    || isset($_POST['DlDescripciones']) && isset($_POST['SCantidad'])
+    && isset($_POST['SCantidad'])
 ) {
 
     /*se hace el registro del producto en el concepto de la venta, en la funcion setIdP
@@ -28,16 +35,12 @@ if (
  $producto = $_POST['DlProductos'];
  $con = new Models\Conexion();
     $codigo = $_POST['DlCodigosP'];
-    $descripcion = $_POST['DlDescripciones'];
     $cantidad = $_POST['SCantidad'];
     $negocio = $_SESSION['idnegocio'];
     $dv = new Models\DetalleVenta();
     $idventa = (int) $_SESSION['idven'];
-    if (strlen($descripcion) === 0) {
-        $descripcion = null;
-    }
     $dv->setIdVenta($idventa);
-    $dv->setIdP($producto, $codigo, $descripcion, $negocio);
+    $dv->setIdP($producto, $codigo, $negocio);
     $dv->setCantidad($cantidad);
     $idproducto=$dv->getIdProducto();
     $dv->setSuptotal($cantidad);
@@ -145,6 +148,7 @@ if (
 
                         </datalist><br>
                     </div>
+<<<<<<< HEAD
                     <div id="desc">
                         <h5><label class="badge badge-danger">Descripción:</label></h5>
                         <input id="indescripcion" class="form form-control" list="descripcionp" name="DlDescripciones" autocomplete="off">
@@ -170,9 +174,11 @@ if (
 
                         </datalist><br>
                     </div>
+=======
+>>>>>>> backend
                     <h4><label for="cant" class="badge badge-pill badge-success">Cantidad:</label></h4>
                     <input id="cant" class="form form-control" type="number" name="SCantidad" min="0" max="" value="1"><br>
-                    <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Agregar">
+                    <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="nuevaventa" value="Agregar">
                 </form>
 
             </div>
