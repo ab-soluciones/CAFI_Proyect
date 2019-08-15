@@ -54,12 +54,12 @@ function registrar($imagen, $negocio)
     $clienteab = $result['clientesab_idclienteab'];
     $result = $producto->guardar($clienteab, $_SESSION['id']);
     if($result === 1){
-        echo "<script>alert('Producto Registrado Exitosamente');</script>";
+        echo "<script>swal({title:'Exito',text:'Se han registrado los datos',type:'success'})</script>";
     }else{
-        echo "<script>alert('Producto no registrado compruebe los campos unicos');</script>";
+        echo "<script>swal({title:'Error',text:'Se han registrado los datos',type:'error'})</script>";
     }
-
 }
+
 if (
     isset($_POST['TNombre'])  && isset($_POST['TColor'])
     && isset($_POST['TMarca']) && isset($_POST['TADescription'])
@@ -95,6 +95,12 @@ if (
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
+
     <title>Administracion Productos</title>
     <script type="text/javascript">
         var parametro;

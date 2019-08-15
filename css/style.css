@@ -18,8 +18,9 @@ body {
     background-color: lightgrey;
 }
 
-.alert{
-  height: 5rem;
+#alert{
+  height: 200px;
+  width: 100px;
 }
 
 #index_button {
