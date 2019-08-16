@@ -62,11 +62,11 @@ if (!isset($_SESSION['acceso'])) {
             <div class="card card-body">
                 <form class="form-group" action="#" method="post">
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                    <input value="<?php echo $result['apaterno'] ?>" id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="on" required><br>
+                    <input value="<?php echo $result['apaterno'] ?>" id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required><br>
                     <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                    <input value="<?php echo $result['amaterno'] ?>" id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="on" required><br>
+                    <input value="<?php echo $result['amaterno'] ?>" id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required><br>
                     <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
 
                     <?php if ($result['tipo_documento'] == "INE") {
@@ -135,7 +135,7 @@ if (!isset($_SESSION['acceso'])) {
                                 } ?>
 
                     <h5><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
-                    <input value="<?php echo $result['numero_documento'] ?>" id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="on" required><br>
+                    <input value="<?php echo $result['numero_documento'] ?>" id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required><br>
                     <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
                     <input value="<?php echo $result['direccion'] ?>" id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required><br>
                     <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
@@ -180,11 +180,11 @@ if (!isset($_SESSION['acceso'])) {
                                 } ?>
 
                     <h5><label for="login" class="badge badge-primary">Nombre de Usuario:</label></h5>
-                    <input value="<?php echo $result['login'] ?>" id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="on" required><br>
+                    <input value="<?php echo $result['login'] ?>" id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                     <h5><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
                     <input value="<?php echo $result['password'] ?>" id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required><br>
                     <h5><label for="sueldo" class="badge badge-primary">Sueldo:</label></h5>
-                    <input value="<?php echo $result['sueldo'] ?>" id="sueldo" class="form form-control" type="text" name="TSueldo" placeholder="$" autocomplete="on"><br>
+                    <input value="<?php echo $result['sueldo'] ?>" id="sueldo" class="form form-control" type="text" name="TSueldo" placeholder="$" autocomplete="off"><br>
                     <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
 
                     <?php if ($result['estado'] == "A") {

@@ -79,9 +79,9 @@ if (
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
                     <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="dom" class="badge badge-primary">Domicilio:</label></h5>
-                    <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="on" required><br>
+                    <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" required><br>
                     <h5><label for="cd" class="badge badge-primary">Ciudad:</label></h5>
-                    <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="on" required><br>
+                    <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" required><br>
                     <h5><label for="tel" class="badge badge-primary">Teléfono:</label></h5>
                     <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Teléfono" autocomplete="off" required><br>
                     <h5><label for="impresora" class="badge badge-primary">Configuracion de impresora:</label></h5>

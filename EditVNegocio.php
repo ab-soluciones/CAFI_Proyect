@@ -51,11 +51,11 @@ if (!isset($_SESSION['acceso'])) {
                 <form class="form-group" action="#" method="post">
 
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input value="<?php echo $result['nombre_negocio'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input value="<?php echo $result['nombre_negocio'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="dom" class="badge badge-primary">Domicilio:</label></h5>
-                    <input value="<?php echo $result['domicilio'] ?>" id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="on" required><br>
+                    <input value="<?php echo $result['domicilio'] ?>" id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" required><br>
                     <h5><label for="cd" class="badge badge-primary">Ciudad:</label></h5>
-                    <input value="<?php echo $result['ciudad'] ?>" id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="on" required><br>
+                    <input value="<?php echo $result['ciudad'] ?>" id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" required><br>
                     <h5><label for="tel" class="badge badge-primary">Teléfono:</label></h5>
                     <input id="tel" value="<?php echo $result['telefono_negocio'] ?>" class="form form-control" type="text" name="TTelefono" placeholder="Teléfono" autocomplete="off" required><br>
                     <h5><label for="impresora" class="badge badge-primary">Configuracion de impresora:</label></h5>

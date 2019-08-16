@@ -85,11 +85,11 @@ if (
             <div class=" card card-body">
                 <form class="form-group" action="#" method="post">
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="on" required><br>
+                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required><br>
                     <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="on" required><br>
+                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required><br>
                     <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
 
                     <div class="row" style="margin: 0 auto;">
@@ -111,7 +111,7 @@ if (
                     </div><br>
 
                     <h5><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
-                    <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="on" required><br>
+                    <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required><br>
                     <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
                     <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required><br>
                     <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>

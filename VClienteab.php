@@ -103,11 +103,11 @@ if (
             <div class=" card card-body">
                 <form class="form-group" action="#" method="post">
                     <h5 class="etiquetas"><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5 class="etiquetas"><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="on" required><br>
+                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required><br>
                     <h5 class="etiquetas"><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="on" required><br>
+                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required><br>
                     <h5 class="etiquetas"><label for="doc" class="badge badge-primary">Documento:</label></h5>
 
                     <div class="row" style="margin: 0 auto;">
@@ -129,7 +129,7 @@ if (
                     </div><br>
 
                     <h5 class="etiquetas"><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
-                    <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="on" required><br>
+                    <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required><br>
                     <h5 class="etiquetas"><label for="dir" class="badge badge-primary">Direccion:</label></h5>
                     <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required><br>
                     <h5 class="etiquetas"><label for="tel" class="badge badge-primary">Telefono:</label></h5>
@@ -137,7 +137,7 @@ if (
                     <h5 class="etiquetas"><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
                     <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com"><br>
                     <h5 class="etiquetas"><label for="login" class="badge badge-primary">Usuario:</label></h5>
-                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="on" required><br>
+                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                     <h5 class="etiquetas"><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
                     <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required><br>
                     <input onclick="location.reload()" type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">

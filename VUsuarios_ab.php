@@ -78,11 +78,11 @@ if (
                 <form class="form-group" action="#" method="post">
 
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="on" required><br>
+                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required><br>
                     <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="on" required><br>
+                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required><br>
                     <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
 
                     <div class="row" style="margin: 0 auto;">
@@ -100,7 +100,7 @@ if (
 
 
                     <h5><label for="login" class="badge badge-primary">Usuario:</label></h5>
-                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="on" required><br>
+                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                     <h5><label for="pass" class="badge badge-primary">Contrase&ntilde;a:</label></h5>
                     <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a" required><br>
                     <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
