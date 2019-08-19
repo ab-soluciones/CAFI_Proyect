@@ -182,7 +182,7 @@ if (isset($_GET['cerrar_sesion'])) {
       <div id="index_form" class="card card-body row d-block col-md-4">
         <legend>Ingrese su usuario y contraseña:</legend>
         <form class="form-group" action="index.php" method="post">
-          <input class="index_input form-control" type="text" name="nombre-us" placeholder="Usuario" autocomplete="on" required><br>
+          <input class="index_input form-control" type="text" name="nombre-us" placeholder="Usuario" autocomplete="off" required><br>
           <input class="index_input form-control" type="password" name="password" value="" placeholder="Contraseña" required><br>
           <input id="index_button" type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="Login" value="Continuar">
         </form>

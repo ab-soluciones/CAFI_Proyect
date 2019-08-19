@@ -125,7 +125,7 @@ if (!isset($_SESSION['acceso'])) {
                 <form class="form-group" action="#" method="post" enctype="multipart/form-data">
 
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
 
                     <div class="row">
@@ -136,9 +136,9 @@ if (!isset($_SESSION['acceso'])) {
                     </div><br>
 
                     <h5><label for="color" class="badge badge-primary">Color:</label></h5>
-                    <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" value="<?php echo $result['color'];  ?>" autocomplete="on" required><br>
+                    <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" value="<?php echo $result['color'];  ?>" autocomplete="off" required><br>
                     <h5><label for=" marca" class="badge badge-primary">Marca:</label></h5>
-                    <input value="<?php echo $result['marca']; ?>" id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="on" required><br>
+                    <input value="<?php echo $result['marca']; ?>" id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="off" required><br>
 
                     <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
                     <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"><?php echo $result['descripcion'] ?></textarea><br>

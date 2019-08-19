@@ -147,9 +147,9 @@ $negocio = $_SESSION['idnegocio'];
                         <input onclick="ejecutar();" style="margin-left: 10px; margin-top: 10px;" id="imagen" style="margin-left: 4px;" type="file" name="FImagen" />
                     </div><br>
                     <h5><label for="color" class="badge badge-primary">Color:</label></h5>
-                    <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" autocomplete="on" required><br>
+                    <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" autocomplete="off" required><br>
                     <h5><label for=" marca" class="badge badge-primary">Marca:</label></h5>
-                    <input id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="on" required><br>
+                    <input id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="off" required><br>
                     <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
                     <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea><br>
                     <h5><label for="um" class="badge badge-primary">Unidad de Medida:</label></h5>
