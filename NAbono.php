@@ -12,50 +12,6 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 ) {
     header('location: OPCAFI.php');
 }
-if (
-    isset($_GET['cant']) && isset($_GET['pg']) && isset($_GET['ad'])
-    && isset($_GET['cam'])  && isset($_GET['tt'])
-    && isset($_GET['frm_pg'])
-) {
-    $con = new Models\Conexion();
-    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
-    $result = $con->consultaRetorno($query);
-    $con->cerrarConexion();
-    $cantidad = $_GET['cant'];
-    $pago = $_GET['pg'];
-    $adeudo = (int) $_GET['ad'];
-    $cambio = $_GET['cam'];
-    $total = $_GET['tt'];
-    $forma_pago = $_GET['frm_pg'];
-    $total = $total - $cantidad;
-    $abono = new Models\Abono();
-    $abono->setCantidad($cantidad);
-    $abono->setPago($pago);
-    $abono->setFormaPago($forma_pago);
-    $abono->setCambio($cambio);
-    $abono->setFecha();
-    $abono->setHora();
-    $abono->setNegocio($_SESSION['idnegocio']);
-    $abono->setTrabajador($_SESSION['id']);
-    $result = $abono->guardar($adeudo, $total);
-    if ($result === 1) {
-        ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-    if ($result['impresora'] === "A") {
-        header("location: ticketabono.php?ad=$adeudo");
-    } else if ($result['impresora'] === "I") {
-        header('location: VConsultasAdeudos.php');
-    }
-}
 if (isset($_GET['tt']) && isset($_GET['ad']) && isset($_GET['edoda']) && isset($_GET['frm_pg'])) {
     $total = $_GET['tt'];
     $adeudo = $_GET['ad'];
@@ -137,6 +93,61 @@ if (isset($_GET['tt']) && isset($_GET['ad']) && isset($_GET['edoda']) && isset($
             </div>
         </div>
     </div>
+    <?php
+        if (
+            isset($_GET['cant']) && isset($_GET['pg']) && isset($_GET['ad'])
+            && isset($_GET['cam'])  && isset($_GET['tt'])
+            && isset($_GET['frm_pg'])
+        ) {
+            $con = new Models\Conexion();
+            $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+            $result = $con->consultaRetorno($query);
+            $con->cerrarConexion();
+            $cantidad = $_GET['cant'];
+            $pago = $_GET['pg'];
+            $adeudo = (int) $_GET['ad'];
+            $cambio = $_GET['cam'];
+            $total = $_GET['tt'];
+            $forma_pago = $_GET['frm_pg'];
+            $total = $total - $cantidad;
+            $abono = new Models\Abono();
+            $abono->setCantidad($cantidad);
+            $abono->setPago($pago);
+            $abono->setFormaPago($forma_pago);
+            $abono->setCambio($cambio);
+            $abono->setFecha();
+            $abono->setHora();
+            $abono->setNegocio($_SESSION['idnegocio']);
+            $abono->setTrabajador($_SESSION['id']);
+            $result = $abono->guardar($adeudo, $total);
+            if ($result === 1) {
+                ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Se han guardado los datos exitosamente',
+            type: 'success'
+        });
+    </script>
+
+    <?php } else {
+                ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se han guardado los datos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+            if ($result['impresora'] === "A") {
+                header("location: ticketabono.php?ad=$adeudo");
+            } else if ($result['impresora'] === "I") {
+                header('location: VConsultasAdeudos.php');
+            }
+        }
+
+        ?>
 </body>
 
 </html>

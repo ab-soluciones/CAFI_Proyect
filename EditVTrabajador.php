@@ -244,7 +244,6 @@ if (!isset($_SESSION['acceso'])) {
         && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
         && isset($_POST['REstado'])
     ) {
-        echo "<script> window.location.href='VTrabajador.php';</script>";
         $trabajador = new Models\Trabajador();
         $trabajador->setNombre($_POST['TNombre']);
         $trabajador->setApaterno($_POST['TApellidoP']);

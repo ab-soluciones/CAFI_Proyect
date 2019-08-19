@@ -14,37 +14,6 @@ if (!isset($_SESSION['acceso'])) {
     header('location: OPCAFI.php');
 }
 
-date_default_timezone_set("America/Mexico_City");
-$año = date("Y");
-$mes = date("m");
-$dia = date("d");
-$fecha = $año . "-" . $mes . "-" . $dia;
-
-if (
-    isset($_POST['TCantidad']) && isset($_POST['STipo'])
-    && isset($_POST['SFIngreso']) && isset($_POST['DFecha'])
-) {
-    $otro_ingreso = new Models\OtrosIngresos();
-    $otro_ingreso->setIdOtrosIngresos(null);
-    $otro_ingreso->setCantidad($_POST['TCantidad']);
-    $otro_ingreso->setTipo($_POST['STipo']);
-    $otro_ingreso->setFormaIngreso($_POST['SFIngreso']);
-    $otro_ingreso->setFecha($_POST['DFecha']);
-    $otro_ingreso->setEstado("A");
-    $result = $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
-    if ($result === 1) {
-        ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -130,25 +99,25 @@ if (
                     <?php
                     $negocio = $_SESSION['idnegocio'];
                     $con = new Models\Conexion();
-                    $query = "SELECT * FROM otros_ingresos WHERE negocios_idnegocios ='$negocio' AND fecha='$fecha' ORDER BY id_otros_ingresos DESC";
+                    $query = "SELECT * FROM otros_ingresos WHERE negocios_idnegocios ='$negocio' ORDER BY id_otros_ingresos DESC";
                     $row = $con->consultaListar($query);
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['cantidad']; ?></td>
-                            <td><?php echo $renglon['tipo']; ?></td>
-                            <td><?php echo $renglon['forma_ingreso']; ?></td>
-                            <td><?php echo $renglon['fecha']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVOtrosIngresos.php?id=<?php echo $renglon['id_otros_ingresos']; ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><?php echo $renglon['cantidad']; ?></td>
+                        <td><?php echo $renglon['tipo']; ?></td>
+                        <td><?php echo $renglon['forma_ingreso']; ?></td>
+                        <td><?php echo $renglon['fecha']; ?></td>
+                        <td><?php echo $renglon['estado']; ?></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVOtrosIngresos.php?id=<?php echo $renglon['id_otros_ingresos']; ?>">
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>
@@ -156,6 +125,42 @@ if (
         </div>
 
     </div>
+
+    <?php
+    if (
+        isset($_POST['TCantidad']) && isset($_POST['STipo'])
+        && isset($_POST['SFIngreso']) && isset($_POST['DFecha'])
+    ) {
+        $otro_ingreso = new Models\OtrosIngresos();
+        $otro_ingreso->setIdOtrosIngresos(null);
+        $otro_ingreso->setCantidad($_POST['TCantidad']);
+        $otro_ingreso->setTipo($_POST['STipo']);
+        $otro_ingreso->setFormaIngreso($_POST['SFIngreso']);
+        $otro_ingreso->setFecha($_POST['DFecha']);
+        $otro_ingreso->setEstado("A");
+        $result = $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Se han registrado los datos exitosamente!',
+            type: 'success'
+        });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se han guardado los datos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+    }
+    ?>
 </body>
 
 </html>

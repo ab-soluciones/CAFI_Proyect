@@ -21,43 +21,6 @@ if (!isset($_SESSION['acceso'])) {
         $con = new Models\Conexion();
         $query =  $sql = "SELECT * FROM cliente where idcliente = '$id'";
         $result = mysqli_fetch_assoc($con->consultaListar($query));
-        if (
-            isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-            && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-            && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-            && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-            && isset($_POST['REstado'])
-        ) {
-            $cliente = new Models\Cliente();
-            $trabajador = $_SESSION['id'];
-            $cliente->setNombre($_POST['TNombre']);
-            $cliente->setApaterno($_POST['TApellidoP']);
-            $cliente->setAmaterno($_POST['TApellidoM']);
-            $cliente->setDocumento($_POST['RDoc']);
-            $cliente->setNumDoc($_POST['TNumDoc']);
-            $cliente->setDireccion($_POST['TDireccion']);
-            $cliente->setTelefono($_POST['TTelefono']);
-            $cliente->setCorreo($_POST['TCorreo']);
-            $cliente->setEstado($_POST['REstado']);
-            $result = $cliente->editar($id, $trabajador);
-
-            if ($result === 1) {
-                ?>
-<script>
-    swal({title:'Exito',text:'Editado exitosamente!',type:'success'});
-</script>
-<?php } else if ($result === 0) {
-                ?>
-<script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
-</script>
-<?php } else if ($result === -1) {
-                ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-        }
         if (isset($result)) {
 
             ?>
@@ -220,16 +183,63 @@ if (!isset($_SESSION['acceso'])) {
                                 } ?>
                     <input type="submit" class="btn btn-lg btn-block btn-dark" name="" value="Editar">
                 </form>
-
             </div>
+            <?php
+                        if (
+                            isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
+                            && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
+                            && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
+                            && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
+                            && isset($_POST['REstado'])
+                        ) {
+                            $cliente = new Models\Cliente();
+                            $trabajador = $_SESSION['id'];
+                            $cliente->setNombre($_POST['TNombre']);
+                            $cliente->setApaterno($_POST['TApellidoP']);
+                            $cliente->setAmaterno($_POST['TApellidoM']);
+                            $cliente->setDocumento($_POST['RDoc']);
+                            $cliente->setNumDoc($_POST['TNumDoc']);
+                            $cliente->setDireccion($_POST['TDireccion']);
+                            $cliente->setTelefono($_POST['TTelefono']);
+                            $cliente->setCorreo($_POST['TCorreo']);
+                            $cliente->setEstado($_POST['REstado']);
+                            $result = $cliente->editar($id, $trabajador);
+
+                            if ($result === 1) {
+                                ?>
+            <script>
+                swal({
+                    title: 'Exito',
+                    text: 'Editado exitosamente!',
+                    type: 'success'
+                });
+            </script>
+            <?php } else if ($result === 0) {
+                                ?>
+            <script>
+                swal({
+                    title: 'Error',
+                    text: 'No se ha realizado ningun cambio!',
+                    type: 'error'
+                });
+            </script>
+            <?php } else if ($result === -1) {
+                                ?>
+            <script>
+                swal({
+                    title: 'Error',
+                    text: 'No editado compruebe los campos unicos',
+                    type: 'error'
+                });
+            </script>
+            <?php }
+                        } ?>
 </body>
 
 </html>
 <?php
-
         } ?>
 <?php
-
     }
 }
 ?>

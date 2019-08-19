@@ -15,47 +15,6 @@ if (!isset($_SESSION['acceso'])) {
 
 require_once "Config/Autoload.php";
 Config\Autoload::run();
-if (
-    isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-    && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-    && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-    && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-    && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
-    && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
-    && isset($_POST['REstado'])
-    //se comprueba que existan todos los datos del formulario
-) {
-    $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
-    $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
-    $trabajador->setApaterno($_POST['TApellidoP']);
-    $trabajador->setAmaterno($_POST['TApellidoM']);
-    $trabajador->setDocumento($_POST['RDoc']);
-    $trabajador->setNumDoc($_POST['TNumDoc']);
-    $trabajador->setDireccion($_POST['TDireccion']);
-    $trabajador->setTelefono($_POST['TTelefono']);
-    $trabajador->setCorreo($_POST['TCorreo']);
-    $trabajador->setAcceso($_POST['RAcceso']);
-    $trabajador->setLogin($_POST['TLogin']);
-    $trabajador->setPassword($_POST['TPContraseña']);
-    $sueldo = $_POST['TSueldo'];
-    $sueldo = floatval($sueldo);
-    $trabajador->setSueldo($sueldo);
-    $negocio = $_SESSION['idnegocio'];
-    $trabajador->setEstado($_POST['REstado']);
-    $result = $trabajador->guardar($_SESSION['idnegocio']);
-    if ($result === 1) {
-        ?>
-<script>
-swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-  swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -271,6 +230,67 @@ swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'succe
         </div>
 
     </div>
+    <?php
+    if (
+        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
+        && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
+        && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
+        && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
+        && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
+        && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
+        && isset($_POST['REstado'])
+        //se comprueba que existan todos los datos del formulario
+    ) {
+        $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
+        $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
+        $trabajador->setApaterno($_POST['TApellidoP']);
+        $trabajador->setAmaterno($_POST['TApellidoM']);
+        $trabajador->setDocumento($_POST['RDoc']);
+        $trabajador->setNumDoc($_POST['TNumDoc']);
+        $trabajador->setDireccion($_POST['TDireccion']);
+        $trabajador->setTelefono($_POST['TTelefono']);
+        $trabajador->setCorreo($_POST['TCorreo']);
+        $trabajador->setAcceso($_POST['RAcceso']);
+        $trabajador->setLogin($_POST['TLogin']);
+        $trabajador->setPassword($_POST['TPContraseña']);
+        $sueldo = $_POST['TSueldo'];
+        $sueldo = floatval($sueldo);
+        $trabajador->setSueldo($sueldo);
+        $negocio = $_SESSION['idnegocio'];
+        $trabajador->setEstado($_POST['REstado']);
+        $result = $trabajador->guardar($_SESSION['idnegocio']);
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+                title: 'Exito',
+                text: 'Se han registrado los datos exitosamente!',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VTrabajador.php";
+                }
+            });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+                title: 'Error',
+                text: 'No se han guardado los datos compruebe los campos unicos',
+                type: 'error'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VTrabajador.php";
+                }
+            });
+    </script>
+    <?php }
+    }
+    ?>
 </body>
 
 </html>

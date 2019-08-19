@@ -7,103 +7,11 @@ if (!isset($_SESSION['acceso'])) {
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] == "CEOAB" || $_SESSION['acceso'] == "ManagerAB"
-    || $_SESSION['acceso'] == "CEO"  || $_SESSION['acceso'] == "Employes"
+    ! $_SESSION['acceso'] == "Manager" 
 ) {
     header('location: OPCAFI.php');
 }
 $negocio = $_SESSION['idnegocio'];
-
-function registrar($imagen, $negocio)
-{
-    $producto = new Models\Producto();
-    if (strlen($_POST['TCodigoB']) === 0) {
-        $numRand = rand(1000000, 9999999);
-        $numRand2 = rand(100000, 999999);
-        $codigob = $numRand . $numRand2;
-    } else {
-        $codigob  = $_POST['TCodigoB'];
-    }
-
-    $descripcion = $_POST['TADescription'];
-
-    if (strlen($descripcion) === 0) {
-        $descripcion = null;
-    }
-
-    $producto->setCodigoBarras($codigob);
-    $producto->setNombre($_POST['TNombre']);
-    $producto->setImagen($imagen);
-    $producto->setColor($_POST['TColor']);
-    $producto->setMarca($_POST['TMarca']);
-    $producto->setDescripcion($descripcion);
-    $producto->setUnidad_Medida($_POST['DLUnidad']);
-    if ($_POST['TTipoP'] === "Calzado") {
-        $producto->setTalla_numero($_POST['SlcMedida']);
-    } else if ($_POST['TTipoP'] === "Ropa") {
-        $producto->setTalla_numero($_POST['SlcTalla']);
-    }
-    $producto->setTipo($_POST['TTipoP']);
-    $producto->setPrecioCompra($_POST['TPrecioC']);
-    $producto->setPrecioVenta($_POST['TPrecioVen']);
-    $producto->setPestado("A");
-    $query = "SELECT clientesab_idclienteab FROM negocios WHERE idnegocios = '$negocio'";
-    $con = new Models\Conexion();
-    $result = $con->consultaRetorno($query);
-    $con->cerrarConexion();
-    $clienteab = $result['clientesab_idclienteab'];
-    $result = $producto->guardar($clienteab, $_SESSION['id']);
-    if ($result === 1) {
-        ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
-
-if (
-    isset($_POST['TNombre'])  && isset($_POST['TColor'])
-    && isset($_POST['TMarca']) && isset($_POST['TADescription'])
-    && isset($_POST['DLUnidad']) && isset($_POST['SlcMedida'])
-    || isset($_POST['SlcTalla'])  && isset($_POST['TTipoP'])
-    && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen'])
-    && isset($_POST['TCodigoB'])
-) {
-    if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
-        //si el usuario cargó un archivo
-        $imagen = addslashes(file_get_contents($_FILES['FImagen']['tmp_name']));
-        //se optiene la ruta
-        $tipo_imagen = $_FILES['FImagen']['type'];
-        //se optine la extencion de la imagen
-        $bytes = $_FILES['FImagen']['size'];
-        //se optiene el tamaño de la imagen
-        if ($bytes <= 1000000) {
-            //si la imagen es menor a 1 mega se comprueba la extencion, si la extencion es igual a alguna de la condiconal se registra la imagen
-            if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png'  || $tipo_imagen == 'image/gif') {
-                registrar($imagen, $negocio);
-            } else {
-                ?>
-<script>
-    alert('Seleccione una imagen de tipo jpg , gif, jpeg o png');
-</script>
-<?php }
-        } else {
-            ?>
-<script>
-    alert('Seleccione una imagen mas pequeña');
-</script>
-<?php  }
-    } else {
-        //si el usuario no cargo una imagen se manda un valor nulo a la columna imagen de la base de datos
-        registrar(null, $negocio);
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -121,10 +29,6 @@ if (
     <title>Administracion Productos</title>
     <script type="text/javascript">
         var parametro;
-
-  funcion mensaje(){
-    alert('hola');
-  }
 
         function ini() {
             parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 15 min
@@ -380,6 +284,113 @@ if (
         </div>
 
     </div>
+    <?php
+    if (
+        isset($_POST['TNombre'])  && isset($_POST['TColor'])
+        && isset($_POST['TMarca']) && isset($_POST['TADescription'])
+        && isset($_POST['DLUnidad']) && isset($_POST['SlcMedida'])
+        || isset($_POST['SlcTalla'])  && isset($_POST['TTipoP'])
+        && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen'])
+        && isset($_POST['TCodigoB'])
+    ) {
+        if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
+            //si el usuario cargó un archivo
+            $imagen = addslashes(file_get_contents($_FILES['FImagen']['tmp_name']));
+            //se optiene la ruta
+            $tipo_imagen = $_FILES['FImagen']['type'];
+            //se optine la extencion de la imagen
+            $bytes = $_FILES['FImagen']['size'];
+            //se optiene el tamaño de la imagen
+            if ($bytes <= 10000) {
+                //si la imagen es menor a 1 mega se comprueba la extencion, si la extencion es igual a alguna de la condiconal se registra la imagen
+                if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png') {
+                    registrar($imagen, $negocio);
+                } else {
+                    ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'Seleccione una imagen de tipo jpg, jpeg o png',
+            type: 'error'
+        });
+    </script>
+    <?php }
+            } else {
+                ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'Seleccione una imagen mas pequeña',
+            type: 'error'
+        });
+    </script>
+    <?php  }
+        } else {
+            //si el usuario no cargo una imagen se manda un valor nulo a la columna imagen de la base de datos
+            registrar(null, $negocio);
+        }
+    }
+    function registrar($imagen, $negocio)
+    {
+        $producto = new Models\Producto();
+        if (strlen($_POST['TCodigoB']) === 0) {
+            $numRand = rand(1000000, 9999999);
+            $numRand2 = rand(100000, 999999);
+            $codigob = $numRand . $numRand2;
+        } else {
+            $codigob  = $_POST['TCodigoB'];
+        }
+
+        $descripcion = $_POST['TADescription'];
+
+        if (strlen($descripcion) === 0) {
+            $descripcion = null;
+        }
+
+        $producto->setCodigoBarras($codigob);
+        $producto->setNombre($_POST['TNombre']);
+        $producto->setImagen($imagen);
+        $producto->setColor($_POST['TColor']);
+        $producto->setMarca($_POST['TMarca']);
+        $producto->setDescripcion($descripcion);
+        $producto->setUnidad_Medida($_POST['DLUnidad']);
+        if ($_POST['TTipoP'] === "Calzado") {
+            $producto->setTalla_numero($_POST['SlcMedida']);
+        } else if ($_POST['TTipoP'] === "Ropa") {
+            $producto->setTalla_numero($_POST['SlcTalla']);
+        }
+        $producto->setTipo($_POST['TTipoP']);
+        $producto->setPrecioCompra($_POST['TPrecioC']);
+        $producto->setPrecioVenta($_POST['TPrecioVen']);
+        $producto->setPestado("A");
+        $query = "SELECT clientesab_idclienteab FROM negocios WHERE idnegocios = '$negocio'";
+        $con = new Models\Conexion();
+        $result = $con->consultaRetorno($query);
+        $con->cerrarConexion();
+        $clienteab = $result['clientesab_idclienteab'];
+        $result = $producto->guardar($clienteab, $_SESSION['id']);
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Se han registrado los datos exitosamente!',
+            type: 'success'
+        });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se han guardado los datos compruebe los campos unicos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+    }
+    ?>
 </body>
 
 </html>

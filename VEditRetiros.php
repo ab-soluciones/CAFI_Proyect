@@ -13,33 +13,7 @@ if (!isset($_SESSION['acceso'])) {
 ) {
     header('location: OPCAFI.php');
 }
-if (isset($_GET['id']) && isset($_GET['estado'])) {
-    $id = $_GET['id'];
-    $estado = $_GET['estado'];
-    if (isset($_POST['DlEstado'])) {
-        $trabajador = $_SESSION['id'];
-        $retiro = new Models\Retiro();
-        $retiro->setEstado($_POST['DlEstado']);
-        $retiro->setTrabajador($trabajador);
-        $result = $retiro->editar($id);
-        if ($result === 1) {
-            ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-<?php } else if ($result === 0) {
-            ?>
-<script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio',type:'error'});
-</script>
-<?php } else if ($result === -1) {
-            ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-    }
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,6 +57,47 @@ if (isset($_GET['id']) && isset($_GET['estado'])) {
             </div>
         </div>
     </div>
+    <?php
+
+    if (isset($_GET['id']) && isset($_GET['estado'])) {
+        $id = $_GET['id'];
+        $estado = $_GET['estado'];
+        if (isset($_POST['DlEstado'])) {
+            $trabajador = $_SESSION['id'];
+            $retiro = new Models\Retiro();
+            $retiro->setEstado($_POST['DlEstado']);
+            $retiro->setTrabajador($trabajador);
+            $result = $retiro->editar($id);
+            if ($result === 1) {
+                ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Se han registrado los datos exitosamente!',
+            type: 'success'
+        });
+    </script>
+    <?php } else if ($result === 0) {
+                ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se ha realizado ningun cambio',
+            type: 'error'
+        });
+    </script>
+    <?php } else if ($result === -1) {
+                ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No editado compruebe los campos unicos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+        }
+        ?>
 </body>
 
 </html>

@@ -14,65 +14,7 @@ if (!isset($_SESSION['acceso'])) {
 } else if (
     $_SESSION['acceso'] == "Manager"
 ) {
-    function registrar($imagen, $id)
-    {
-        $producto = new Models\Producto();
-        $producto->setNombre($_POST['TNombre']);
-        $producto->setImagen($imagen);
-        $producto->setColor($_POST['TColor']);
-        $producto->setMarca($_POST['TMarca']);
-        $producto->setDescripcion($_POST['TADescription']);
-        $producto->setCantidad($_POST['SCantidad']);
-        $producto->setUnidad_Medida($_POST['DLUnidad']);
-        if ($_POST['TTipoP'] === "Calzado") {
-            $producto->setTalla_numero($_POST['SlcMedida']);
-        } else if ($_POST['TTipoP'] === "Ropa") {
-            $producto->setTalla_numero($_POST['SlcTalla']);
-        }
-        $producto->setTipo($_POST['TTipoP']);
-        $producto->setPrecioCompra($_POST['TPrecioC']);
-        $producto->setPrecioVenta($_POST['TPrecioVen']);
-        $producto->setCodigoBarras($_POST['TCodigoB']);
-        $producto->setPestado($_POST['REstado']);
-        if (!is_null($imagen)) {
-            $result = $producto->editar($id, $_SESSION['id']);
-            if ($result === 1) {
-                ?>
-<script>
-    swal({title:'Exito',text:'Editado exitosamente!',type:'success'});
-</script>
-<?php } else if ($result === 0) {
-                ?>
-<script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
-</script>
-<?php } else if ($result === -1) {
-                ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-        } else {
-            $result = $producto->editarSinImagen($id, $_SESSION['id']);
-            if ($result === 1) {
-                ?>
-<script>
-    swal({title:'Exito',text:'Editado exitosamente!',type:'success'});
-</script>
-<?php } else if ($result === 0) {
-                ?>
-<script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
-</script>
-<?php } else if ($result === -1) {
-                ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-        }
-        header('location: VProductos.php');
-    }
+
     if (isset($_GET['id'])) {
         ?>
 <?php
@@ -80,32 +22,7 @@ if (!isset($_SESSION['acceso'])) {
         $con = new Models\Conexion();
         $query =  $sql = "SELECT * FROM producto where idproducto = '$id'";
         $result = mysqli_fetch_assoc($con->consultaListar($query));
-        if (
-            isset($_POST['TNombre'])  && isset($_POST['TColor'])
-            && isset($_POST['TMarca']) && isset($_POST['TADescription'])
-            && isset($_POST['SCantidad']) && isset($_POST['DLUnidad'])
-            && isset($_POST['SlcMedida']) || isset($_POST['SlcTalla'])
-            && isset($_POST['TTipoP']) && isset($_POST['TPrecioC'])
-            && isset($_POST['TPrecioVen']) && isset($_POST['TCodigoB'])
-            && isset($_POST['REstado'])
-        ) {
-            if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
-                $imagen = addslashes(file_get_contents($_FILES['FImagen']['tmp_name']));
-                $tipo_imagen = $_FILES['FImagen']['type'];
-                $bytes = $_FILES['FImagen']['size'];
-                if ($bytes <= 1000000) {
-
-                    if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png'  || $tipo_imagen == 'image/gif') {
-                        registrar($imagen, $id);
-                    } else echo "<script> alert('Seleccione una imagen de tipo jpg , gif, jpeg o png');</script>";
-                } else echo "<script> alert('Seleccione una imagen mas pequeña');</script>";
-            } else {
-                registrar(null, $id);
-            }
-        }
-
         if (isset($result)) {
-
             ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -348,14 +265,120 @@ if (!isset($_SESSION['acceso'])) {
             </div>
         </div>
     </div>
+    <?php
+                function registrar($imagen, $id)
+                {
+                    $producto = new Models\Producto();
+                    $producto->setNombre($_POST['TNombre']);
+                    $producto->setImagen($imagen);
+                    $producto->setColor($_POST['TColor']);
+                    $producto->setMarca($_POST['TMarca']);
+                    $producto->setDescripcion($_POST['TADescription']);
+                    $producto->setCantidad($_POST['SCantidad']);
+                    $producto->setUnidad_Medida($_POST['DLUnidad']);
+                    if ($_POST['TTipoP'] === "Calzado") {
+                        $producto->setTalla_numero($_POST['SlcMedida']);
+                    } else if ($_POST['TTipoP'] === "Ropa") {
+                        $producto->setTalla_numero($_POST['SlcTalla']);
+                    }
+                    $producto->setTipo($_POST['TTipoP']);
+                    $producto->setPrecioCompra($_POST['TPrecioC']);
+                    $producto->setPrecioVenta($_POST['TPrecioVen']);
+                    $producto->setCodigoBarras($_POST['TCodigoB']);
+                    $producto->setPestado($_POST['REstado']);
+                    if (!is_null($imagen)) {
+                        $result = $producto->editar($id, $_SESSION['id']);
+                        if ($result === 1) {
+                            ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Editado exitosamente!',
+            type: 'success'
+        });
+    </script>
+    <?php } else if ($result === 0) {
+                            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se ha realizado ningun cambio!',
+            type: 'error'
+        });
+    </script>
+    <?php } else if ($result === -1) {
+                            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No editado compruebe los campos unicos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+                    } else {
+                        $result = $producto->editarSinImagen($id, $_SESSION['id']);
+                        if ($result === 1) {
+                            ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Editado exitosamente!',
+            type: 'success'
+        });
+    </script>
+    <?php } else if ($result === 0) {
+                            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se ha realizado ningun cambio!',
+            type: 'error'
+        });
+    </script>
+    <?php } else if ($result === -1) {
+                            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No editado compruebe los campos unicos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+                    }
+                    header('location: VProductos.php');
+                }
+                if (
+                    isset($_POST['TNombre'])  && isset($_POST['TColor'])
+                    && isset($_POST['TMarca']) && isset($_POST['TADescription'])
+                    && isset($_POST['SCantidad']) && isset($_POST['DLUnidad'])
+                    && isset($_POST['SlcMedida']) || isset($_POST['SlcTalla'])
+                    && isset($_POST['TTipoP']) && isset($_POST['TPrecioC'])
+                    && isset($_POST['TPrecioVen']) && isset($_POST['TCodigoB'])
+                    && isset($_POST['REstado'])
+                ) {
+                    if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
+                        $imagen = addslashes(file_get_contents($_FILES['FImagen']['tmp_name']));
+                        $tipo_imagen = $_FILES['FImagen']['type'];
+                        $bytes = $_FILES['FImagen']['size'];
+                        if ($bytes <= 1000000) {
+
+                            if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png'  || $tipo_imagen == 'image/gif') {
+                                registrar($imagen, $id);
+                            } else echo "<script> alert('Seleccione una imagen de tipo jpg , gif, jpeg o png');</script>";
+                        } else echo "<script> alert('Seleccione una imagen mas pequeña');</script>";
+                    } else {
+                        registrar(null, $id);
+                    }
+                }
+                ?>
 </body>
 
 </html>
 <?php
-
         } ?>
 <?php
-
     }
 }
 ?>

@@ -160,17 +160,29 @@ if (!isset($_SESSION['acceso'])) {
         if ($result === 1) {
             ?>
 <script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+    swal({
+        title: 'Exito',
+        text: 'Se han registrado los datos exitosamente!',
+        type: 'success'
+    });
 </script>
 <?php } else if ($result === 0) {
             ?>
 <script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
+    swal({
+        title: 'Error',
+        text: 'No se ha realizado ningun cambio!',
+        type: 'error'
+    });
 </script>
 <?php } else if ($result === -1) {
             ?>
 <script>
-    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
+    swal({
+        title: 'Error',
+        text: 'No se han realizado los cambios compruebe los campos unicos',
+        type: 'error'
+    });
 </script>
 <?php }
     }
