@@ -71,6 +71,7 @@ if (isset($_POST['nombre-us']) && isset($_POST['password'])) {
 
   $comprobar = new Models\Comprobar();
   $comprobar->comprobarFv();
+  $comprobar->eliminarVentasNull();
 
   /*Ejecucion de la funcion comprobar de la clase Comprobar.. su tarea es cambiar a estado inactivo
    la cuenta del dueño del negocio y las cuentas de todos los trabajadores pertenecientes a dicho negocio
@@ -181,7 +182,7 @@ if (isset($_GET['cerrar_sesion'])) {
       <div id="index_form" class="card card-body row d-block col-md-4">
         <legend>Ingrese su usuario y contraseña:</legend>
         <form class="form-group" action="index.php" method="post">
-          <input class="index_input form-control" type="text" name="nombre-us" placeholder="Usuario" autocomplete="on" required><br>
+          <input class="index_input form-control" type="text" name="nombre-us" placeholder="Usuario" autocomplete="off" required><br>
           <input class="index_input form-control" type="password" name="password" value="" placeholder="Contraseña" required><br>
           <input id="index_button" type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="Login" value="Continuar">
         </form>

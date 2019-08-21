@@ -12,41 +12,7 @@ if (!isset($_SESSION['acceso'])) {
 ) {
     header('location: OPCAFI.php');
 }
-
-if (
-    isset($_POST['DFecha']) && isset($_POST['DFecha2'])
-    && isset($_POST['DlNegocios']) && isset($_POST['TMonto'])
-) {
-    $sus = new Models\Suscripcion();
-    $con = new Models\Conexion();
-    $sus->setActivacion($_POST['DFecha']);
-    $sus->setVencimiento($_POST['DFecha2']);
-    $sus->setEstado("A");
-    $sus->setMonto($_POST['TMonto']);
-    $negocio = $_POST['DlNegocios'];
-    $query = "SELECT idnegocios FROM negocios WHERE (SELECT CONCAT(nombre_negocio,' ',domicilio,' ' ,ciudad))='$negocio'";
-    $id = $con->consultaRetorno($query);
-    $con->cerrarConexion();
-    $id = (int) $id['idnegocios'];
-    $sus->setIdNegocio($id);
-    $result = $sus->guardar($_SESSION['id']);
-    if ($result === 1) {
-        ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -98,7 +64,7 @@ if (
                             while ($result = mysqli_fetch_array($row)) {
                                 ?>
 
-                                <?php $datos = true;
+                            <?php $datos = true;
                                 echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
                             <?php
                             }
@@ -138,21 +104,21 @@ if (
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['idsuscripcion']; ?></td>
-                            <td><?php echo $renglon['fecha_activacion']; ?></td>
-                            <td><?php echo $renglon['fecha_vencimiento']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td><a href="VConsultasN.php?id=<?php echo $renglon['negocio_id']; ?>"># <?php echo $renglon['negocio_id']; ?></a></td>
-                            <td>$ <?php echo $renglon['monto']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVSuscripcion.php?id=<?php echo $renglon['idsuscripcion'] ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><?php echo $renglon['idsuscripcion']; ?></td>
+                        <td><?php echo $renglon['fecha_activacion']; ?></td>
+                        <td><?php echo $renglon['fecha_vencimiento']; ?></td>
+                        <td><?php echo $renglon['estado']; ?></td>
+                        <td><a href="VConsultasN.php?id=<?php echo $renglon['negocio_id']; ?>"># <?php echo $renglon['negocio_id']; ?></a></td>
+                        <td>$ <?php echo $renglon['monto']; ?></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVSuscripcion.php?id=<?php echo $renglon['idsuscripcion'] ?>">
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>
@@ -160,6 +126,46 @@ if (
         </div>
 
     </div>
+    <?php
+    if (
+        isset($_POST['DFecha']) && isset($_POST['DFecha2'])
+        && isset($_POST['DlNegocios']) && isset($_POST['TMonto'])
+    ) {
+        $sus = new Models\Suscripcion();
+        $con = new Models\Conexion();
+        $sus->setActivacion($_POST['DFecha']);
+        $sus->setVencimiento($_POST['DFecha2']);
+        $sus->setEstado("A");
+        $sus->setMonto($_POST['TMonto']);
+        $negocio = $_POST['DlNegocios'];
+        $query = "SELECT idnegocios FROM negocios WHERE (SELECT CONCAT(nombre_negocio,' ',domicilio,' ' ,ciudad))='$negocio'";
+        $id = $con->consultaRetorno($query);
+        $con->cerrarConexion();
+        $id = (int) $id['idnegocios'];
+        $sus->setIdNegocio($id);
+        $result = $sus->guardar($_SESSION['id']);
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Se han registrado los datos exitosamente!',
+            type: 'success'
+        });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se han guardado los datos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+    }
+    ?>
 </body>
 
 </html>

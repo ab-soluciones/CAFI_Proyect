@@ -19,9 +19,17 @@ class Inventario
         $this->cantidad = $cantidad;
     }
 
-    public function setCodigoB($codigob)
+    public function setCodigoB($producto)
     {
-        $this->codigob = $codigob;
+        $query = "SELECT codigo_barras FROM producto WHERE (SELECT CONCAT(nombre,' ',marca,' color ' ,color,' talla ', talla_numero))='$producto'";
+        $result = $this->con->consultaRetorno($query);
+
+        $this->codigob = $result['codigo_barras'];
+    }
+    public function getCodigoBarras()
+    {
+        $codigob =  $this->codigob;
+        return $codigob;
     }
     public function setNegocio($negocio)
     {
@@ -36,18 +44,17 @@ class Inventario
     {
         $query = "INSERT INTO inventario (cantidad,producto_codigo_barras,negocios_idnegocios,trabajador_idtrabajador) 
     VALUES ('{$this->cantidad}','{$this->codigob}','{$this->negocio}','{$this->trabajador}')";
-
         return $this->con->consultaSimple($query);
     }
 
     public function editar()
     {
         $query = "UPDATE invetario SET cantidad = '{$this->cantidad}', producto_codigo_barras = '{$this->codigob}', trabajador_idtrabajador = '{$this->trabajador}' WHERE producto_codigo_barras = '{$this->trabajador}'";
-        
+
         return $this->con->consultaSimple($query);
     }
 
-    public function actualizarStock($idventa,$negocio)
+    public function actualizarStock($idventa, $negocio)
     {
         $query = "SELECT inventario.producto_codigo_barras ,(cantidad - cantidad_producto) AS stock FROM
         inventario INNER JOIN detalle_venta ON inventario.producto_codigo_barras = detalle_venta.producto_codigo_barras
@@ -59,7 +66,7 @@ class Inventario
         }
     }
 
-    public function actualizarStock2($idventa,$negocio)
+    public function actualizarStock2($idventa, $negocio)
     {
         $query = "SELECT inventario.producto_codigo_barras ,(cantidad + cantidad_producto) AS stock FROM
         inventario INNER JOIN detalle_venta ON inventario.producto_codigo_barras = detalle_venta.producto_codigo_barras

@@ -10,33 +10,7 @@ if (!isset($_SESSION['acceso'])) {
     header('location: VABOptions.php');
 }
 
-if (
-    isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-    && isset($_POST['TApellidoM']) && isset($_POST['RAcceso']) &&
-    isset($_POST['TLogin']) && isset($_POST['TPContraseña']) && isset($_POST['REstado'])
-) {
-    $usab = new Models\Usuarioab();
-    $usab->setNombre($_POST['TNombre']);
-    $usab->setApaterno($_POST['TApellidoP']);
-    $usab->setAmaterno($_POST['TApellidoM']);
-    $usab->setAcceso($_POST['RAcceso']);
-    $usab->setLogin($_POST['TLogin']);
-    $usab->setPassword($_POST['TPContraseña']);
-    $usab->setEstado($_POST['REstado']);
-    $result = $usab->guardar();
-    if ($result === 1) {
-        ?>
-<script>
-  swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
 
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -78,11 +52,11 @@ if (
                 <form class="form-group" action="#" method="post">
 
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="on" required><br>
+                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required><br>
                     <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="on" required><br>
+                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required><br>
                     <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
 
                     <div class="row" style="margin: 0 auto;">
@@ -100,7 +74,7 @@ if (
 
 
                     <h5><label for="login" class="badge badge-primary">Usuario:</label></h5>
-                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="on" required><br>
+                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                     <h5><label for="pass" class="badge badge-primary">Contrase&ntilde;a:</label></h5>
                     <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a" required><br>
                     <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
@@ -151,26 +125,26 @@ if (
 
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
-                        <tr>
-                            <td><?php echo $renglon['idusuariosab']; ?></td>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td><?php echo $renglon['apaterno']; ?></td>
-                            <td><?php echo $renglon['amaterno']; ?></td>
-                            <td><?php echo $renglon['acceso']; ?></td>
-                            <td><?php echo $renglon['login']; ?></td>
-                            <td><?php echo $renglon['password']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a onclick="if(confirm('SE ELIMINARÁ EL REGISTRO #<?php echo $renglon['idusuariosab']; ?>!'))
-                                                                                                                                                                                                                                                                                                                                                                {href= 'deleteVUAB.php?id=<?php echo $renglon['idusuariosab']; ?>'} " class="btn btn-warning"><img src="img/eliminarf.png">
-                                    </a>
-                                    <a style="margin-left:2px;" class="btn btn-secondary" href="EditVUAB.php?id=<?php echo $renglon['idusuariosab'] ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td><?php echo $renglon['idusuariosab']; ?></td>
+                        <td><?php echo $renglon['nombre']; ?></td>
+                        <td><?php echo $renglon['apaterno']; ?></td>
+                        <td><?php echo $renglon['amaterno']; ?></td>
+                        <td><?php echo $renglon['acceso']; ?></td>
+                        <td><?php echo $renglon['login']; ?></td>
+                        <td><?php echo $renglon['password']; ?></td>
+                        <td><?php echo $renglon['estado']; ?></td>
+                        <td style="width:100px;">
+                            <div class="row">
+                                <a onclick="if(confirm('SE ELIMINARÁ EL REGISTRO #<?php echo $renglon['idusuariosab']; ?>!'))
+                              {href= 'deleteVUAB.php?id=<?php echo $renglon['idusuariosab']; ?>'} " class="btn btn-warning"><img src="img/eliminarf.png">
+                                </a>
+                                <a style="margin-left:2px;" class="btn btn-secondary" href="EditVUAB.php?id=<?php echo $renglon['idusuariosab'] ?>">
+                                    <img src="img/edit.png">
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                     <?php
                     } ?>
                 </tbody>
@@ -178,6 +152,43 @@ if (
         </div>
 
     </div>
+    <?php
+    if (
+        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
+        && isset($_POST['TApellidoM']) && isset($_POST['RAcceso']) &&
+        isset($_POST['TLogin']) && isset($_POST['TPContraseña']) && isset($_POST['REstado'])
+    ) {
+        $usab = new Models\Usuarioab();
+        $usab->setNombre($_POST['TNombre']);
+        $usab->setApaterno($_POST['TApellidoP']);
+        $usab->setAmaterno($_POST['TApellidoM']);
+        $usab->setAcceso($_POST['RAcceso']);
+        $usab->setLogin($_POST['TLogin']);
+        $usab->setPassword($_POST['TPContraseña']);
+        $usab->setEstado($_POST['REstado']);
+        $result = $usab->guardar();
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Se han registrado los datos exitosamente!',
+            type: 'success'
+        });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se han guardado los datos compruebe los campos unicos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+    }
+    ?>
 </body>
 
 </html>

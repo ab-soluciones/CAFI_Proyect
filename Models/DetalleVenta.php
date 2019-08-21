@@ -21,7 +21,7 @@ class DetalleVenta
         $this->iddetalle_venta = $iddetalle_venta;
     }
 
-    public function setIdP($producto, $codigo, $descripcion, $negocio)
+    public function setIdP($producto, $codigo, $negocio)
     {
         $nombre = "";
         $marca = "";
@@ -40,8 +40,7 @@ class DetalleVenta
         INNER JOIN inventario ON codigo_barras = producto_codigo_barras 
         WHERE nombre = '$nombre'AND color = '$color' AND marca = '$marca' 
         AND talla_numero = '$talla' AND negocios_idnegocios ='$negocio'
-        OR codigo_barras = '$codigo' AND negocios_idnegocios ='$negocio' 
-        OR descripcion = '$descripcion' AND negocios_idnegocios ='$negocio'";
+        OR codigo_barras = '$codigo' AND negocios_idnegocios ='$negocio'";
 
         $res = $this->con->consultaRetorno($query);
         $this->idproducto = $res['codigo_barras'];

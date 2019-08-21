@@ -14,98 +14,16 @@ if (!isset($_SESSION['acceso'])) {
 } else if (
     $_SESSION['acceso'] == "Manager"
 ) {
-    function registrar($imagen, $id)
-    {
-        $producto = new Models\Producto();
-        $producto->setNombre($_POST['TNombre']);
-        $producto->setImagen($imagen);
-        $producto->setColor($_POST['TColor']);
-        $producto->setMarca($_POST['TMarca']);
-        $producto->setDescripcion($_POST['TADescription']);
-        $producto->setCantidad($_POST['SCantidad']);
-        $producto->setUnidad_Medida($_POST['DLUnidad']);
-        if ($_POST['TTipoP'] === "Calzado") {
-            $producto->setTalla_numero($_POST['SlcMedida']);
-        } else if ($_POST['TTipoP'] === "Ropa") {
-            $producto->setTalla_numero($_POST['SlcTalla']);
-        }
-        $producto->setTipo($_POST['TTipoP']);
-        $producto->setPrecioCompra($_POST['TPrecioC']);
-        $producto->setPrecioVenta($_POST['TPrecioVen']);
-        $producto->setCodigoBarras($_POST['TCodigoB']);
-        $producto->setPestado($_POST['REstado']);
-        if (!is_null($imagen)) {
-            $result = $producto->editar($id, $_SESSION['id']);
-            if ($result === 1) {
-                ?>
-<script>
-    swal({title:'Exito',text:'Editado exitosamente!',type:'success'});
-</script>
-<?php } else if ($result === 0) {
-                ?>
-<script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
-</script>
-<?php } else if ($result === -1) {
-                ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-        } else {
-            $result = $producto->editarSinImagen($id, $_SESSION['id']);
-            if ($result === 1) {
-                ?>
-<script>
-    swal({title:'Exito',text:'Editado exitosamente!',type:'success'});
-</script>
-<?php } else if ($result === 0) {
-                ?>
-<script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
-</script>
-<?php } else if ($result === -1) {
-                ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-        }
-        header('location: VProductos.php');
-    }
+
     if (isset($_GET['id'])) {
         ?>
 <?php
         $id = $_GET['id'];
         $con = new Models\Conexion();
-        $query =  $sql = "SELECT * FROM producto where idproducto = '$id'";
+        $query =  $sql = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta, pestado,cantidad FROM producto
+        INNER JOIN inventario ON codigo_barras = producto_codigo_barras WHERE codigo_barras = '$id'";
         $result = mysqli_fetch_assoc($con->consultaListar($query));
-        if (
-            isset($_POST['TNombre'])  && isset($_POST['TColor'])
-            && isset($_POST['TMarca']) && isset($_POST['TADescription'])
-            && isset($_POST['SCantidad']) && isset($_POST['DLUnidad'])
-            && isset($_POST['SlcMedida']) || isset($_POST['SlcTalla'])
-            && isset($_POST['TTipoP']) && isset($_POST['TPrecioC'])
-            && isset($_POST['TPrecioVen']) && isset($_POST['TCodigoB'])
-            && isset($_POST['REstado'])
-        ) {
-            if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
-                $imagen = addslashes(file_get_contents($_FILES['FImagen']['tmp_name']));
-                $tipo_imagen = $_FILES['FImagen']['type'];
-                $bytes = $_FILES['FImagen']['size'];
-                if ($bytes <= 1000000) {
-
-                    if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png'  || $tipo_imagen == 'image/gif') {
-                        registrar($imagen, $id);
-                    } else echo "<script> alert('Seleccione una imagen de tipo jpg , gif, jpeg o png');</script>";
-                } else echo "<script> alert('Seleccione una imagen mas pequeña');</script>";
-            } else {
-                registrar(null, $id);
-            }
-        }
-
         if (isset($result)) {
-
             ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -206,9 +124,10 @@ if (!isset($_SESSION['acceso'])) {
         <div class="col-md-3" style="  margin: 0 auto; margin-top:5px;">
             <div class=" card card-body">
                 <form class="form-group" action="#" method="post" enctype="multipart/form-data">
-
+                    <h5><label for="cb" class="badge badge-primary">Codigo de Barras:</label></h5>
+                    <input value="<?php echo $result['codigo_barras'] ?>" id="cb" class="form form-control" type="text" name="TCodigoB" placeholder="0000000000000" required><br>
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
 
                     <div class="row">
@@ -219,9 +138,9 @@ if (!isset($_SESSION['acceso'])) {
                     </div><br>
 
                     <h5><label for="color" class="badge badge-primary">Color:</label></h5>
-                    <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" value="<?php echo $result['color'];  ?>" autocomplete="on" required><br>
+                    <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" value="<?php echo $result['color'];  ?>" autocomplete="off" required><br>
                     <h5><label for=" marca" class="badge badge-primary">Marca:</label></h5>
-                    <input value="<?php echo $result['marca']; ?>" id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="on" required><br>
+                    <input value="<?php echo $result['marca']; ?>" id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="off" required><br>
 
                     <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
                     <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"><?php echo $result['descripcion'] ?></textarea><br>
@@ -305,8 +224,6 @@ if (!isset($_SESSION['acceso'])) {
                     <input value="<?php echo $result['precio_compra'] ?>" id="precioc" class="form form-control" type="text" name="TPrecioC" placeholder="$" autocomplete="off" required><br>
                     <h5><label for="preciov" class="badge badge-primary">Precio de Venta $:</label></h5>
                     <input value="<?php echo $result['precio_venta'] ?>" id="preciov" class="form form-control" type="text" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
-                    <h5><label for="cb" class="badge badge-primary">Codigo de Barras:</label></h5>
-                    <input value="<?php echo $result['codigo_barras'] ?>" id="cb" class="form form-control" type="text" name="TCodigoB" placeholder="0000000000000" required><br>
                     <h5><label for="fecha2" class="badge badge-primary">Estado:</label></h5>
 
                     <?php if ($result['pestado'] == "A") {
@@ -348,14 +265,150 @@ if (!isset($_SESSION['acceso'])) {
             </div>
         </div>
     </div>
+    <?php
+                function registrar($imagen, $id)
+                {
+                    $producto = new Models\Producto();
+                    $producto->setNombre($_POST['TNombre']);
+                    $producto->setImagen($imagen);
+                    $producto->setColor($_POST['TColor']);
+                    $producto->setMarca($_POST['TMarca']);
+                    $producto->setDescripcion($_POST['TADescription']);
+                    $producto->setCantidad($_POST['SCantidad']);
+                    $producto->setUnidad_Medida($_POST['DLUnidad']);
+                    if ($_POST['TTipoP'] === "Calzado") {
+                        $producto->setTalla_numero($_POST['SlcMedida']);
+                    } else if ($_POST['TTipoP'] === "Ropa") {
+                        $producto->setTalla_numero($_POST['SlcTalla']);
+                    }
+                    $producto->setTipo($_POST['TTipoP']);
+                    $producto->setPrecioCompra($_POST['TPrecioC']);
+                    $producto->setPrecioVenta($_POST['TPrecioVen']);
+                    $producto->setCodigoBarras($_POST['TCodigoB']);
+                    $producto->setPestado($_POST['REstado']);
+                    if (!is_null($imagen)) {
+                        $result = $producto->editar($id, $_SESSION['id']);
+                        var_dump($result);
+                        if ($result === 1) {
+                            ?>
+    <script>
+        swal({
+                title: 'Exito',
+                text: 'Editado exitosamente!',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
+    </script>
+    <?php } else if ($result === 0) {
+                            ?>
+    <script>
+        swal({
+                title: 'Alerta',
+                text: 'No se ha realizado ningun cambio!',
+                type: 'warning'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
+    </script>
+    <?php } else if ($result === -1) {
+                            ?>
+    <script>
+        swal({
+                title: 'Alerta',
+                text: 'No editado compruebe los campos unicos',
+                type: 'warning'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
+    </script>
+    <?php }
+                    } else {
+                        $result2 = $producto->editarSinImagen($id, $_SESSION['id']);
+                        if ($result2 === 1) {
+                            ?>
+    <script>
+        swal({
+                title: 'Exito',
+                text: 'Editado exitosamente!',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
+    </script>
+    <?php } else if ($result2 === 0) {
+                            ?>
+    <script>
+        swal({
+                title: 'Alerta',
+                text: 'No se ha realizado ningun cambio!',
+                type: 'warning'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
+    </script>
+    <?php } else if ($result2 === -1) {
+                            ?>
+    <script>
+        swal({
+                title: 'Alerta',
+                text: 'No editado compruebe los campos unicos',
+                type: 'warning'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
+    </script>
+    <?php }
+                    }
+                }
+                if (
+                    isset($_POST['TNombre'])  && isset($_POST['TColor'])
+                    && isset($_POST['TMarca']) && isset($_POST['TADescription'])
+                    && isset($_POST['SCantidad']) && isset($_POST['DLUnidad'])
+                    && isset($_POST['SlcMedida']) || isset($_POST['SlcTalla'])
+                    && isset($_POST['TTipoP']) && isset($_POST['TPrecioC'])
+                    && isset($_POST['TPrecioVen']) && isset($_POST['TCodigoB'])
+                    && isset($_POST['REstado'])
+                ) {
+                    if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
+                        $imagen = addslashes(file_get_contents($_FILES['FImagen']['tmp_name']));
+                        $tipo_imagen = $_FILES['FImagen']['type'];
+                        $bytes = $_FILES['FImagen']['size'];
+                        if ($bytes <= 1000000) {
+
+                            if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png'  || $tipo_imagen == 'image/gif') {
+                                registrar($imagen, $id);
+                            } else echo "<script> alert('Seleccione una imagen de tipo jpg , gif, jpeg o png');</script>";
+                        } else echo "<script> alert('Seleccione una imagen mas pequeña');</script>";
+                    } else {
+                        registrar(null, $id);
+                    }
+                }
+                ?>
 </body>
 
 </html>
 <?php
-
         } ?>
 <?php
-
     }
 }
 ?>

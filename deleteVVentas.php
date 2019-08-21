@@ -6,7 +6,7 @@ if (!isset($_SESSION['acceso'])) {
   header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
   header('location: index.php');
-} else if ($_SESSION['acceso'] == "Manager"
+} else if ($_SESSION['acceso'] == "Manager" ||  $_SESSION['acceso'] == "Employes"
 ) {
   if (isset($_GET['id'])) {
     $id = $_GET['id'];

@@ -14,37 +14,6 @@ require_once "Config/Autoload.php";
 Config\Autoload::run();
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    if (
-        isset($_POST['TCantidad']) && isset($_POST['STipo'])
-        && isset($_POST['SFIngreso']) && isset($_POST['DFecha'])
-        && isset($_POST['REstado'])
-    ) {
-        $otro_ingreso = new Models\OtrosIngresos();
-        $otro_ingreso->setIdOtrosIngresos($id);
-        $otro_ingreso->setCantidad($_POST['TCantidad']);
-        $otro_ingreso->setTipo($_POST['STipo']);
-        $otro_ingreso->setFormaIngreso($_POST['SFIngreso']);
-        $otro_ingreso->setFecha($_POST['DFecha']);
-        $otro_ingreso->setEstado($_POST['REstado']);
-        $trabajador = $_SESSION['id'];
-        $result = $otro_ingreso->editar($trabajador);
-        if ($result === 1) {
-            ?>
-<script>
-    swal({title:'Exito',text:'Editado exitosamente!',type:'success'});
-</script>
-<?php } else if ($result === 0) {
-            ?>
-<script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
-</script>
-<?php } else if ($result === -1) {
-            ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-    }
     $query = "SELECT * FROM otros_ingresos WHERE id_otros_ingresos='$id'";
     $con = new Models\Conexion();
     $result = $con->consultaRetorno($query);
@@ -153,8 +122,52 @@ if (isset($_GET['id'])) {
             </div>
         </div>
     </div>
-
     </div>
+    <?php
+        if (
+            isset($_POST['TCantidad']) && isset($_POST['STipo'])
+            && isset($_POST['SFIngreso']) && isset($_POST['DFecha'])
+            && isset($_POST['REstado'])
+        ) {
+            $otro_ingreso = new Models\OtrosIngresos();
+            $otro_ingreso->setIdOtrosIngresos($id);
+            $otro_ingreso->setCantidad($_POST['TCantidad']);
+            $otro_ingreso->setTipo($_POST['STipo']);
+            $otro_ingreso->setFormaIngreso($_POST['SFIngreso']);
+            $otro_ingreso->setFecha($_POST['DFecha']);
+            $otro_ingreso->setEstado($_POST['REstado']);
+            $trabajador = $_SESSION['id'];
+            $result = $otro_ingreso->editar($trabajador);
+            if ($result === 1) {
+                ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Editado exitosamente!',
+            type: 'success'
+        });
+    </script>
+    <?php } else if ($result === 0) {
+                ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se ha realizado ningun cambio!',
+            type: 'error'
+        });
+    </script>
+    <?php } else if ($result === -1) {
+                ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No editado compruebe los campos unicos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+        }
+        ?>
 </body>
 
 </html>

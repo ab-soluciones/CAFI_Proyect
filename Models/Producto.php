@@ -77,7 +77,6 @@ class Producto
     {
         $sql = "INSERT INTO producto (codigo_barras, nombre, imagen,color,marca ,descripcion, unidad_medida, talla_numero,
         tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab)
-        tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab)
         VALUES('{$this->codigo_barras}', '{$this->nombre}', '{$this->imagen}','{$this->color}','{$this->marca}','{$this->descripcion}',
         '{$this->unidad_medida}','{$this->talla_numero}', '{$this->tipo}','{$this->precio_compra}'
         ,'{$this->precio_venta}','{$this->pestado}','$trabajador','$negocio')";
@@ -87,20 +86,23 @@ class Producto
 
     public function editar($id, $trabajador)
     {
-        $sql = "UPDATE producto SET nombre = '{$this->nombre}', imagen = '{$this->imagen}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
-        ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
-         precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', codigo_barras = '{$this->codigo_barras}', pestado = '{$this->pestado}'
-         ,trabajador_idtrabajador = '{$trabajador}' WHERE idproducto ='$id'";
+        $sql = "UPDATE producto INNER JOIN inventario ON codigo_barras = producto_codigo_barras
+        SET  codigo_barras = '{$this->codigo_barras}', nombre = '{$this->nombre}', imagen = '{$this->imagen}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
+                ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
+                 precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', pestado = '{$this->pestado}'
+                 ,producto.trabajador_idtrabajador = '{$trabajador}',cantidad ='{$this->cantidad}',producto_codigo_barras = '{$this->codigo_barras}' WHERE codigo_barras ='$id'";
 
         return $this->con->consultaSimple($sql);
     }
     
     public function editarSinImagen($id, $trabajador)
     {
-        $sql = "UPDATE producto SET nombre = '{$this->nombre}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
-        ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
-         precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', codigo_barras = '{$this->codigo_barras}', pestado = '{$this->pestado}'
-         ,trabajador_idtrabajador = '{$trabajador}' WHERE idproducto ='$id'";
+        $sql = "UPDATE producto INNER JOIN inventario ON codigo_barras = producto_codigo_barras
+        SET  codigo_barras = '{$this->codigo_barras}', nombre = '{$this->nombre}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
+                ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
+                 precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', pestado = '{$this->pestado}'
+                 ,producto.trabajador_idtrabajador = '{$trabajador}',cantidad ='{$this->cantidad}',producto_codigo_barras = '{$this->codigo_barras}' WHERE codigo_barras ='$id'";
+
         return $this->con->consultaSimple($sql);
     }
 

@@ -8,9 +8,7 @@ $_SESSION['descuento'] = null;
 $_SESSION['clienteid'] = null;
 if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');
-} else if (is_null($_SESSION['idven'])) {
-    header('location: VVender.php');
-} elseif ($_SESSION['estado'] == "I") {
+} else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
     $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] == "Employes"
@@ -18,41 +16,15 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 ) {
     header('location: OPCAFI.php');
 }
-if (
-    isset($_POST['DlProductos']) || isset($_POST['DlCodigosP'])
-    || isset($_POST['DlDescripciones']) && isset($_POST['SCantidad'])
-) {
 
-    /*se hace el registro del producto en el concepto de la venta, en la funcion setIdP
- se optiene el id del producto para poderlo registrar en el concepto de la venta */
- $producto = $_POST['DlProductos'];
- $con = new Models\Conexion();
-    $codigo = $_POST['DlCodigosP'];
-    $descripcion = $_POST['DlDescripciones'];
-    $cantidad = $_POST['SCantidad'];
-    $negocio = $_SESSION['idnegocio'];
-    $dv = new Models\DetalleVenta();
-    $idventa = (int) $_SESSION['idven'];
-    if (strlen($descripcion) === 0) {
-        $descripcion = null;
-    }
-    $dv->setIdVenta($idventa);
-    $dv->setIdP($producto, $codigo, $descripcion, $negocio);
-    $dv->setCantidad($cantidad);
-    $idproducto=$dv->getIdProducto();
-    $dv->setSuptotal($cantidad);
-    $sql = "SELECT iddetalle_venta FROM detalle_venta WHERE producto_codigo_barras ='$idproducto' AND idventa='$idventa'";
-    $result = $con->consultaRetorno($sql);
-    if (isset($result)) {
-        ?>
-    <script>swal({title:'Exito',text:'EL PRODUCTO YA EXISTE EN LA LISTA,MODIFIQUE LA CANTIDAD SI DESEA AGREGAR MAS PRODUCTOS DE ESTE TIPO',type:'success'});</script>
-
-  <?php  } else {
-        $dv->guardar();
-    }
+if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
+    /*se crea una nueva venta para poder hacer uso de la tabla detalle venta(describe el concepto de la venta)
+     ya que tiene relacion de muchos a muchos con la tabla productos y la tabla venta */
+    $venta = new Models\Venta();
+    $id = $venta->guardar();
+    $_SESSION['idven'] = $id['id'];
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +54,6 @@ if (
 
 </head>
 
-
 <body onload="ini(); " onkeypress="parar();" onclick="parar();">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
@@ -94,7 +65,7 @@ if (
             <div class=" card card-body">
                 <form class="form-group" action="#" method="post">
                     <div id="codigos">
-                    <h4><label class="badge badge-pill badge-primary">Agregar producto a la lista:</label></h4>
+                        <h4><label class="badge badge-pill badge-primary">Agregar producto a la lista:</label></h4>
                         <h5><label class="badge badge-danger">Código:</label></h5>
                         <input id="incodigo" class="form form-control" list="codigosp" name="DlCodigosP" autocomplete="off">
                         <datalist id="codigosp">
@@ -109,7 +80,7 @@ if (
                             while ($result = mysqli_fetch_array($row)) {
                                 ?>
 
-                                <?php $datos = true;
+                            <?php $datos = true;
                                 echo "<option value='" . $result['codigo_barras'] . "'> "; ?>
                             <?php
                             }
@@ -135,7 +106,7 @@ if (
                             while ($result = mysqli_fetch_array($row)) {
                                 ?>
 
-                                <?php $datos = true;
+                            <?php $datos = true;
                                 echo "<option value='" . $result['nombre'] . " " . $result['marca'] . " color " . $result['color'] . " talla " . $result['talla_numero'] . "'> "; ?>
                             <?php
                             }
@@ -145,40 +116,61 @@ if (
 
                         </datalist><br>
                     </div>
-                    <div id="desc">
-                        <h5><label class="badge badge-danger">Descripción:</label></h5>
-                        <input id="indescripcion" class="form form-control" list="descripcionp" name="DlDescripciones" autocomplete="off">
-                        <datalist id="descripcionp">
-                            <?php
-                            $negocios = $_SESSION['idnegocio'];
-                            $datos = false;
-                            $query = "SELECT descripcion FROM producto
-                            INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras
-                            WHERE negocios_idnegocios ='$negocios' AND pestado = 'A' ORDER BY descripcion ASC";
-                            $row = $con->consultaListar($query);
-
-                            while ($result = mysqli_fetch_array($row)) {
-                                ?>
-
-                                <?php $datos = true;
-                                echo "<option value='" . $result['descripcion'] . "'> "; ?>
-                            <?php
-                            }
-                            if ($datos == false) {
-                                echo "<script>document.getElementById('indescripcion').disabled = true;</script>";
-                            } ?>
-
-                        </datalist><br>
-                    </div>
                     <h4><label for="cant" class="badge badge-pill badge-success">Cantidad:</label></h4>
                     <input id="cant" class="form form-control" type="number" name="SCantidad" min="0" max="" value="1"><br>
-                    <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Agregar">
+                    <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="nuevaventa" value="Agregar">
                 </form>
 
             </div>
         </div>
 
-        <div class="col-md-8" style=" margin: 0 auto; margin-top:15px;">
+  
+    <?php
+    if (
+        isset($_POST['DlProductos']) || isset($_POST['DlCodigosP'])
+        && isset($_POST['SCantidad'])
+    ) {
+
+        /*se hace el registro del producto en el concepto de la venta, en la funcion setIdP
+ se optiene el id del producto para poderlo registrar en el concepto de la venta */
+        $producto = $_POST['DlProductos'];
+        $con = new Models\Conexion();
+        $codigo = $_POST['DlCodigosP'];
+        $cantidad = $_POST['SCantidad'];
+        $negocio = $_SESSION['idnegocio'];
+        $dv = new Models\DetalleVenta();
+        $idventa = (int) $_SESSION['idven'];
+        $dv->setIdVenta($idventa);
+        $dv->setIdP($producto, $codigo, $negocio);
+        $dv->setCantidad($cantidad);
+        $idproducto = $dv->getIdProducto();
+        $dv->setSuptotal($cantidad);
+        $sql = "SELECT iddetalle_venta FROM detalle_venta WHERE producto_codigo_barras ='$idproducto' AND idventa='$idventa'";
+        $result = $con->consultaRetorno($sql);
+        if (isset($result)) {
+            ?>
+    <script>
+        swal({
+            title: 'Atención',
+            text: 'El producto ya existe en la lista , modifique la cantidad para agregar mas',
+            type: 'warning'
+        });
+    </script>
+
+    <?php  } else {
+            $dv->guardar();
+            ?>
+    <script>
+         swal({
+                title: 'Exito',
+                text: 'Se han registrado los datos exitosamente!',
+                type: 'success'
+            });
+    </script>
+    <?php }
+    }
+    ?>
+            <div class="col-md-8" style=" margin: 0 auto; margin-top:15px;">
             <table class="table table-bordered table-responsive-md">
                 <form action="#" method="post">
                     <div class="row" style="margin: 0 auto;">
@@ -221,41 +213,49 @@ if (
                         INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras
                         WHERE detalle_venta.idventa='$idventa'";
                         $row = $con->consultaListar($query);
-                        $datos = false;
+                        $datos = "none";
                         while ($renglon = mysqli_fetch_array($row)) {
-                            $datos = true;
+                            $datos = "display";
                             $imprimir_existencia = false;
                             $existencia = $renglon['cantidad'] - $renglon['cantidad_producto'];
                             if ($existencia < 0) {
                                 //se comprueba el stock si no hay suficiente producto se elimina de la lista
-                                echo "<script>alert('No es posible agregar $renglon[cantidad_producto] $renglon[nombre] $renglon[marca] color $renglon[color] talla $renglon[talla_numero] solo hay $renglon[cantidad] en existencia');
-                                window.location.href='deleteVVentas.php?id=$renglon[iddetalle_venta]';</script>";
-                            } else {
+                                 echo "<script>swal({
+                                    title: 'Atención',
+                                    text: 'No es posible agregar $renglon[cantidad_producto] productos solo existen $renglon[cantidad] en inventario',
+                                    type: 'warning'
+                                },
+                                function(isConfirm) {
+                                    if (isConfirm) {
+                                        window.location.href = 'deleteVVentas.php?id=$renglon[iddetalle_venta]';
+                                    }
+                                });</script>";
+                               } else {
                                 $imprimir_existencia = true;
                             }
                             ?>
-                            <tr>
-                                <td style="width: 30px;">
-                                    <div class="row" style="margin: 0 auto;">
-                                        <a onclick="if(confirm('SE ELIMINARÁ DE LA LISTA! :<?php echo ' ' . $renglon['cantidad_producto'] . ' ' . $renglon['nombre'] . '(s) ' . $renglon['descripcion'] ?>'))
+                        <tr>
+                            <td style="width: 30px;">
+                                <div class="row" style="margin: 0 auto;">
+                                    <a onclick="if(confirm('SE ELIMINARÁ DE LA LISTA! :<?php echo ' ' . $renglon['cantidad_producto'] . ' ' . $renglon['nombre'] . '(s) ' . $renglon['descripcion'] ?>'))
                                         {href= 'deleteVVentas.php?id=<?php echo $renglon['iddetalle_venta']; ?>'} " class="btn btn-warning"><img src="img/eliminarf.png">
-                                        </a>
-                                        <a style="margin-top: 5px;" class="btn btn-secondary" href="EditVVentas.php?id=<?php echo $renglon['iddetalle_venta'] . "&can=" . $renglon['cantidad_producto'] . "&precio=" . $renglon['precio_venta'] . "&stock=" . $renglon['cantidad'] ?>">
-                                            <img src="img/edit.png">
-                                        </a>
-                                    </div>
-                                </td>
-                                <td><img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="90" width="90"></td>
-                                <td><?php echo $renglon['nombre'] . " " . $renglon['marca'] . " color " . $renglon['color'] . " talla " . $renglon['talla_numero']; ?></td>
-                                <td><?php echo $renglon['descripcion']; ?></td>
-                                <td><?php if ($imprimir_existencia === true) {
+                                    </a>
+                                    <a style="margin-top: 5px;" class="btn btn-secondary" href="EditVVentas.php?id=<?php echo $renglon['iddetalle_venta'] . "&can=" . $renglon['cantidad_producto'] . "&precio=" . $renglon['precio_venta'] . "&stock=" . $renglon['cantidad'] ?>">
+                                        <img src="img/edit.png">
+                                    </a>
+                                </div>
+                            </td>
+                            <td><img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="90" width="90"></td>
+                            <td><?php echo $renglon['nombre'] . " " . $renglon['marca'] . " color " . $renglon['color'] . " talla " . $renglon['talla_numero']; ?></td>
+                            <td><?php echo $renglon['descripcion']; ?></td>
+                            <td><?php if ($imprimir_existencia === true) {
                                         echo $existencia;
                                     } ?></td>
-                                <td>$<?php echo $renglon['precio_venta']; ?></td>
-                                <td><?php echo $renglon['cantidad_producto']; ?></td>
-                                <td>$<?php echo $renglon['subtotal']; ?></td>
+                            <td>$<?php echo $renglon['precio_venta']; ?></td>
+                            <td><?php echo $renglon['cantidad_producto']; ?></td>
+                            <td>$<?php echo $renglon['subtotal']; ?></td>
 
-                            </tr>
+                        </tr>
                         <?php
                         }  ?>
                         <tr style="background:  #3366ff;">
@@ -266,17 +266,15 @@ if (
                             $result = $con->consultaRetorno($query_total);
                             if (!is_null($result['total'])) {
                                 ?>
-                                <td colspan="8">
-                                    <h5 style="color: white; text-align: right;">Total = $ <?php echo $result['total']; ?></h5>
-                                </td>
+                            <td colspan="8">
+                                <h5 style="color: white; text-align: right;">Total = $ <?php echo $result['total']; ?></h5>
+                            </td>
                             <?php } ?>
                         </tr>
                     </tbody>
             </table>
-            <input id="bvender" class="btn btn-dark btn-lg btn-block" style="margin-top:-10px;" type="submit" value="Realizar Venta">
-            <?php if ($datos == false) {
-                echo "<script> document.getElementById('bvender').style.display = 'none';</script> ";
-            }
+            <input id="bvender" style="display: <?php echo $datos;?>" class="btn btn-dark btn-lg btn-block" style="margin-top:-10px;" type="submit" value="Realizar Venta">
+            <?php 
             if (isset($_POST['RTv'])) {
                 //se envia al usuario a la pagina correspondiente dependiendo el tipo de venta
                 if ($_POST['RTv'] == "Efectivo") {
@@ -292,7 +290,7 @@ if (
             } ?>
             </form>
         </div>
-    </div>
+        </div>
 </body>
 
 </html>

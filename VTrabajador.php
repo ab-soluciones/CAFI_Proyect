@@ -15,47 +15,6 @@ if (!isset($_SESSION['acceso'])) {
 
 require_once "Config/Autoload.php";
 Config\Autoload::run();
-if (
-    isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-    && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-    && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-    && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-    && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
-    && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
-    && isset($_POST['REstado'])
-    //se comprueba que existan todos los datos del formulario
-) {
-    $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
-    $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
-    $trabajador->setApaterno($_POST['TApellidoP']);
-    $trabajador->setAmaterno($_POST['TApellidoM']);
-    $trabajador->setDocumento($_POST['RDoc']);
-    $trabajador->setNumDoc($_POST['TNumDoc']);
-    $trabajador->setDireccion($_POST['TDireccion']);
-    $trabajador->setTelefono($_POST['TTelefono']);
-    $trabajador->setCorreo($_POST['TCorreo']);
-    $trabajador->setAcceso($_POST['RAcceso']);
-    $trabajador->setLogin($_POST['TLogin']);
-    $trabajador->setPassword($_POST['TPContraseña']);
-    $sueldo = $_POST['TSueldo'];
-    $sueldo = floatval($sueldo);
-    $trabajador->setSueldo($sueldo);
-    $negocio = $_SESSION['idnegocio'];
-    $trabajador->setEstado($_POST['REstado']);
-    $result = $trabajador->guardar($_SESSION['idnegocio']);
-    if ($result === 1) {
-        ?>
-<script>
-swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-  swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -129,11 +88,11 @@ swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'succe
             <div class="card card-body">
                 <form class="form-group" action="#" method="post">
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="on" required><br>
+                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required><br>
                     <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="on" required><br>
+                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required><br>
                     <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
 
                     <div class="row" style="margin: 0 auto;">
@@ -155,7 +114,7 @@ swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'succe
                     </div><br>
 
                     <h5><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
-                    <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="on" required><br>
+                    <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required><br>
                     <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
                     <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required><br>
                     <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
@@ -179,11 +138,11 @@ swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'succe
                     </div><br>
 
                     <h5><label for="login" class="badge badge-primary">Nombre de Usuario:</label></h5>
-                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="on" required><br>
+                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                     <h5><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
                     <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required><br>
                     <h5><label for="sueldo" class="badge badge-primary">Sueldo:</label></h5>
-                    <input id="sueldo" class="form form-control" type="text" name="TSueldo" placeholder="$" autocomplete="on"><br>
+                    <input id="sueldo" class="form form-control" type="text" name="TSueldo" placeholder="$" autocomplete="off"><br>
                     <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
 
                     <div class="row" style="margin-left: 5px;">
@@ -271,6 +230,67 @@ swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'succe
         </div>
 
     </div>
+    <?php
+    if (
+        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
+        && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
+        && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
+        && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
+        && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
+        && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
+        && isset($_POST['REstado'])
+        //se comprueba que existan todos los datos del formulario
+    ) {
+        $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
+        $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
+        $trabajador->setApaterno($_POST['TApellidoP']);
+        $trabajador->setAmaterno($_POST['TApellidoM']);
+        $trabajador->setDocumento($_POST['RDoc']);
+        $trabajador->setNumDoc($_POST['TNumDoc']);
+        $trabajador->setDireccion($_POST['TDireccion']);
+        $trabajador->setTelefono($_POST['TTelefono']);
+        $trabajador->setCorreo($_POST['TCorreo']);
+        $trabajador->setAcceso($_POST['RAcceso']);
+        $trabajador->setLogin($_POST['TLogin']);
+        $trabajador->setPassword($_POST['TPContraseña']);
+        $sueldo = $_POST['TSueldo'];
+        $sueldo = floatval($sueldo);
+        $trabajador->setSueldo($sueldo);
+        $negocio = $_SESSION['idnegocio'];
+        $trabajador->setEstado($_POST['REstado']);
+        $result = $trabajador->guardar($_SESSION['idnegocio']);
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+                title: 'Exito',
+                text: 'Se han registrado los datos exitosamente!',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VTrabajador.php";
+                }
+            });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+                title: 'Error',
+                text: 'No se han guardado los datos compruebe los campos unicos',
+                type: 'error'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VTrabajador.php";
+                }
+            });
+    </script>
+    <?php }
+    }
+    ?>
 </body>
 
 </html>

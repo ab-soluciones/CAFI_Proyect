@@ -118,7 +118,6 @@ if (!isset($_SESSION['acceso'])) {
 
         } ?>
 <?php
-
     }
     if (
         isset($_POST['DFecha']) && isset($_POST['DFecha2'])
@@ -134,17 +133,29 @@ if (!isset($_SESSION['acceso'])) {
         if ($result === 1) {
             ?>
 <script>
-    swal({title:'Exito',text:'Editado exitosamente!',type:'success'});
+    swal({
+        title: 'Exito',
+        text: 'Editado exitosamente!',
+        type: 'success'
+    });
 </script>
 <?php } else if ($result === 0) {
             ?>
 <script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
+    swal({
+        title: 'Error',
+        text: 'No se ha realizado ningun cambio',
+        type: 'error'
+    });
 </script>
 <?php } else if ($result === -1) {
             ?>
 <script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
+    swal({
+        title: 'Error',
+        text: 'No editado compruebe los campos unicos',
+        type: 'error'
+    });
 </script>
 <?php }
     }

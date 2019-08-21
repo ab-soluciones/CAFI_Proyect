@@ -47,11 +47,11 @@ if (!isset($_SESSION['acceso'])) {
             <div class=" card card-body">
                 <form class="form-group" action="#" method="post">
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="on" required><br>
+                    <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                    <input value="<?php echo $result['apaterno'] ?>" id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="on" required><br>
+                    <input value="<?php echo $result['apaterno'] ?>" id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required><br>
                     <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                    <input value="<?php echo $result['amaterno'] ?>" id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="on" required><br>
+                    <input value="<?php echo $result['amaterno'] ?>" id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required><br>
 
                     <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
 
@@ -92,9 +92,9 @@ if (!isset($_SESSION['acceso'])) {
 
 
                     <h5><label for="login" class="badge badge-primary">Nombre de usuario:</label></h5>
-                    <input value="<?php echo $result['login'] ?>" id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="on" required><br>
+                    <input value="<?php echo $result['login'] ?>" id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                     <h5><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
-                    <input value="<?php echo $result['password'] ?>" id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" autocomplete="on" required><br>
+                    <input value="<?php echo $result['password'] ?>" id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" autocomplete="off" required><br>
                     <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
                     <?php if ($result['estado'] == "A") {
                                     ?>
@@ -160,17 +160,29 @@ if (!isset($_SESSION['acceso'])) {
         if ($result === 1) {
             ?>
 <script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+    swal({
+        title: 'Exito',
+        text: 'Se han registrado los datos exitosamente!',
+        type: 'success'
+    });
 </script>
 <?php } else if ($result === 0) {
             ?>
 <script>
-    swal({title:'Error',text:'No se ha realizado ningun cambio!',type:'error'});
+    swal({
+        title: 'Error',
+        text: 'No se ha realizado ningun cambio!',
+        type: 'error'
+    });
 </script>
 <?php } else if ($result === -1) {
             ?>
 <script>
-    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
+    swal({
+        title: 'Error',
+        text: 'No se han realizado los cambios compruebe los campos unicos',
+        type: 'error'
+    });
 </script>
 <?php }
     }

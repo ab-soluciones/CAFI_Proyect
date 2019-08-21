@@ -114,57 +114,6 @@ $efectivo = $otros_ingresos_efectivo + $ventas_efectivo - $gastos_efectivo - $re
 $banco = $otros_ingresos_banco + $ventas_banco - $gastos_banco - $retiros_banco;
 $con->cerrarConexion();
 
-function retirar($concepto, $tipo, $cantidad, $descripcion)
-{
-    $retiro = new Models\Retiro();
-    $retiro->setConcepto($concepto);
-    $retiro->setTipo($tipo);
-    $retiro->setCantidad($cantidad);
-    $retiro->setDescripcion($descripcion);
-    $retiro->setFecha();
-    $retiro->setHora();
-    $retiro->setEstado("R");
-    $retiro->setNegocio($_SESSION['idnegocio']);
-    $retiro->setTrabajador($_SESSION['id']);
-    $result = $retiro->guardar();
-    if ($result === 1) {
-        ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No se han realizado los cambios compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
-if (isset($_POST['SConcepto']) && isset($_POST['STipo']) && isset($_POST['TCantidad'])) {
-    //se optiene los datos ingresados por el usuario
-    $cantidad = $_POST['TCantidad'];
-    $concepto = $_POST['SConcepto'];
-    $tipo = $_POST['STipo'];
-    $descripcion = $_POST['TADescription'];
-
-    //se condiciona que sea imposible que el usuario quiera realizar un corte de caja de banco
-    if ($concepto === "Corte de caja" && $tipo === "Banco") {
-        echo "<script>swal({title:'Error',text:'No es posible realizar un corte de caja de banco',type:'error'});</script>";
-    } else {
-        //se compara que la cantidad a retirar en efectivo no sea superior a la cantidad en en efectivo que hay en caja
-        if ($tipo === "Caja" && $cantidad <= $efectivo) {
-            retirar($concepto, $tipo, $cantidad, $descripcion);
-            header('location: VRetiros.php');
-        } else if ($tipo === "Caja" && $cantidad > $efectivo) {
-            echo "<script>swal({title:'Error',text:'Saldo insuficiente en caja',type:'error'});</script>";
-        } else if ($tipo === "Banco" && $cantidad <= $banco) {
-            //se compara que la cantidad a retirar en banco no sea superior a la cantidad que hay en banco
-            header('location: VRetiros.php');
-        } else if ($tipo === "Banco" && $cantidad > $banco) {
-            echo "<script>swal({title:'Error',text:'Saldo insuficiente en banco',type:'error'});</script>";
-        }
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -292,6 +241,97 @@ if (isset($_POST['SConcepto']) && isset($_POST['STipo']) && isset($_POST['TCanti
             </table>
         </div>
     </div>
+    <?php
+    function retirar($concepto, $tipo, $cantidad, $descripcion)
+    {
+        $retiro = new Models\Retiro();
+        $retiro->setConcepto($concepto);
+        $retiro->setTipo($tipo);
+        $retiro->setCantidad($cantidad);
+        $retiro->setDescripcion($descripcion);
+        $retiro->setFecha();
+        $retiro->setHora();
+        $retiro->setEstado("R");
+        $retiro->setNegocio($_SESSION['idnegocio']);
+        $retiro->setTrabajador($_SESSION['id']);
+        $result = $retiro->guardar();
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+                title: 'Exito',
+                text: 'Se han registrado los datos exitosamente!',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VRetiros.php";
+                }
+            });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+                title: 'Error',
+                text: 'No se han guardado los datos',
+                type: 'error'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VRetiros.php";
+                }
+            });
+    </script>
+    <?php }
+    }
+    if (isset($_POST['SConcepto']) && isset($_POST['STipo']) && isset($_POST['TCantidad'])) {
+        //se optiene los datos ingresados por el usuario
+        $cantidad = $_POST['TCantidad'];
+        $concepto = $_POST['SConcepto'];
+        $tipo = $_POST['STipo'];
+        $descripcion = $_POST['TADescription'];
+
+        //se condiciona que sea imposible que el usuario quiera realizar un corte de caja de banco
+        if ($concepto === "Corte de caja" && $tipo === "Banco") {
+            //se compara que la cantidad a retirar en efectivo no sea superior a la cantidad en en efectivo que hay en caja
+            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No es posible realizar un corte de caja de banco',
+            type: 'error'
+        });
+    </script>
+    <?php } else {
+            if ($tipo === "Caja" && $cantidad <= $efectivo) {
+                retirar($concepto, $tipo, $cantidad, $descripcion);
+            } else if ($tipo === "Caja" && $cantidad > $efectivo) {
+                ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'Saldo insuficiente en caja',
+            type: 'error'
+        });
+    </script>
+    <?php   } else if ($tipo === "Banco" && $cantidad <= $banco) {
+                //se compara que la cantidad a retirar en banco no sea superior a la cantidad que hay en banco
+                retirar($concepto, $tipo, $cantidad, $descripcion);
+            } else if ($tipo === "Banco" && $cantidad > $banco) {
+                ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'Saldo insuficiente en banco',
+            type: 'error'
+        });
+    </script>
+    <?php }
+        }
+    }
+    ?>
 </body>
 
 </html>

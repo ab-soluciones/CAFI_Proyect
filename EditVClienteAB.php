@@ -144,7 +144,6 @@ if (!isset($_SESSION['acceso'])) {
         && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
         && isset($_POST['TLogin']) && isset($_POST['TPContraseña'])
     ) {
-        echo "<script> window.location.href='VClienteab.php';</script>";
         $idusuario = $_SESSION['id'];
         $cliente = new Models\Clienteab();
         $cliente->setNombre($_POST['TNombre']);

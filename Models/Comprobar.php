@@ -1,4 +1,8 @@
-<?php namespace Models;
+<?php
+
+namespace Models;
+
+use mysqli;
 
 class Comprobar
 {
@@ -28,6 +32,20 @@ class Comprobar
                 $this->con->consultaSimple($query2);
             }
         }
+    }
+    public function eliminarVentasNull()
+    {
+
+        $query = "DELETE tventa, tdventa FROM venta tventa , detalle_venta tdventa
+    WHERE tventa.total IS NULL AND tventa.idventas = tdventa.idventa";
+       $result = $this->con->consultaSimple($query);
+
+       $query = "DELETE FROM venta WHERE total IS NULL";
+          $result = $this->con->consultaSimple($query);
+     
+    }
+    public function __destruct()
+    {
         $this->con->cerrarConexion();
     }
 }

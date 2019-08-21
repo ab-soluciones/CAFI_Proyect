@@ -5,7 +5,7 @@ Config\Autoload::run();
 
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
-} elseif ($_SESSION['estado'] == "I") {
+} else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
     $_SESSION['acceso'] == "CEOAB" || $_SESSION['acceso'] == "ManagerAB"
@@ -14,44 +14,6 @@ if (!isset($_SESSION['acceso'])) {
     header('location: OPCAFI.php');
 }
 
-date_default_timezone_set("America/Mexico_City");
-$año = date("Y");
-$mes = date("m");
-$dia = date("d");
-$fecha = $año . "-" . $mes . "-" . $dia;
-
-if (
-    isset($_POST['SConcepto']) && isset($_POST['SPago'])
-    && isset($_POST['TADescription'])
-    && isset($_POST['TMonto']) && isset($_POST['DFecha'])
-) {
-    $descripcion = $_POST['TADescription'];
-    if (strlen($descripcion) === 0) {
-        $descripcion = null;
-    }
-    $gasto = new Models\Gasto();
-    $gasto->setConcepto($_POST['SConcepto']);
-    $gasto->setPago($_POST['SPago']);
-    $gasto->setDescripcion($descripcion);
-    $monto = $_POST['TMonto'];
-    $monto = floatval($monto);
-    $gasto->setMonto($monto);
-    $gasto->setEstado("A");
-    $gasto->setFecha($_POST['DFecha']);
-    $result = $gasto->guardar($_SESSION['idnegocio'], $_SESSION['id']);
-    if ($result === 1) {
-        ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -88,8 +50,6 @@ if (
     <nav class="container-fluid navbar navbar-dark bg-dark">
         <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Gastos</a>
     </nav>
-
-    
 
     <div class="container-fluid">
         <div class="row align-items-start">
@@ -208,6 +168,48 @@ if (
         </div><!--row-->
     </div><!--container-->
 
+    <?php
+    if (
+        isset($_POST['SConcepto']) && isset($_POST['SPago'])
+        && isset($_POST['TADescription'])
+        && isset($_POST['TMonto']) && isset($_POST['DFecha'])
+    ) {
+        $descripcion = $_POST['TADescription'];
+        if (strlen($descripcion) === 0) {
+            $descripcion = null;
+        }
+        $gasto = new Models\Gasto();
+        $gasto->setConcepto($_POST['SConcepto']);
+        $gasto->setPago($_POST['SPago']);
+        $gasto->setDescripcion($descripcion);
+        $monto = $_POST['TMonto'];
+        $monto = floatval($monto);
+        $gasto->setMonto($monto);
+        $gasto->setEstado("A");
+        $gasto->setFecha($_POST['DFecha']);
+        $result = $gasto->guardar($_SESSION['idnegocio'], $_SESSION['id']);
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Se han registrado los datos exitosamente!',
+            type: 'success'
+        });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se han guardado los datos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+    }
+    ?>
     <script src="js/user_jquery.js"></script>
 </body>
 

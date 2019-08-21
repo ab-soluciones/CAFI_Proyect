@@ -13,42 +13,8 @@ if (!isset($_SESSION['acceso'])) {
     header('location: OPCAFI.php');
 }
 
-if (
-    isset($_POST['TNombre']) && isset($_POST['TDomicilio']) &&
-    isset($_POST['TCiudad']) && isset($_POST['DlCliente']) &&
-    isset($_POST['TTelefono']) && isset($_POST['RImpresora'])
-) {
 
-    $negocio = new Models\Negocio();
-    $con = new Models\Conexion();
-    $idusuario = $_SESSION['id'];
-    $negocio->setNombre($_POST['TNombre']);
-    $negocio->setDomicilio($_POST['TDomicilio']);
-    $negocio->setCiudad($_POST['TCiudad']);
-    $negocio->setTelefono($_POST['TTelefono']);
-    $nombre = $_POST['DlCliente'];
-    $negocio->setImpresora($_POST['RImpresora']);
-    $query = "SELECT id_clienteab FROM clientesab WHERE(SELECT CONCAT(clientesab.nombre,' ', clientesab.apaterno,' ' ,clientesab.amaterno))='$nombre'";
-    $id = $con->consultaRetorno($query);
-    $con->cerrarConexion();
-    $id = (int) $id['id_clienteab'];
-    $negocio->setIdCliente($id);
-    $result = $negocio->guardar($idusuario);
-    if ($result === 1) {
-        ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
-
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No editado compruebe los campos unicos',type:'error'});
-</script>
-<?php }
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,9 +45,9 @@ if (
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
                     <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="dom" class="badge badge-primary">Domicilio:</label></h5>
-                    <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="on" required><br>
+                    <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" required><br>
                     <h5><label for="cd" class="badge badge-primary">Ciudad:</label></h5>
-                    <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="on" required><br>
+                    <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" required><br>
                     <h5><label for="tel" class="badge badge-primary">Teléfono:</label></h5>
                     <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Teléfono" autocomplete="off" required><br>
                     <h5><label for="impresora" class="badge badge-primary">Configuracion de impresora:</label></h5>
@@ -177,6 +143,50 @@ if (
             </table>
         </div>
     </div>
+    <?php
+    if (
+        isset($_POST['TNombre']) && isset($_POST['TDomicilio']) &&
+        isset($_POST['TCiudad']) && isset($_POST['DlCliente']) &&
+        isset($_POST['TTelefono']) && isset($_POST['RImpresora'])
+    ) {
+
+        $negocio = new Models\Negocio();
+        $con = new Models\Conexion();
+        $idusuario = $_SESSION['id'];
+        $negocio->setNombre($_POST['TNombre']);
+        $negocio->setDomicilio($_POST['TDomicilio']);
+        $negocio->setCiudad($_POST['TCiudad']);
+        $negocio->setTelefono($_POST['TTelefono']);
+        $nombre = $_POST['DlCliente'];
+        $negocio->setImpresora($_POST['RImpresora']);
+        $query = "SELECT id_clienteab FROM clientesab WHERE(SELECT CONCAT(clientesab.nombre,' ', clientesab.apaterno,' ' ,clientesab.amaterno))='$nombre'";
+        $id = $con->consultaRetorno($query);
+        $con->cerrarConexion();
+        $id = (int) $id['id_clienteab'];
+        $negocio->setIdCliente($id);
+        $result = $negocio->guardar($idusuario);
+        if ($result === 1) {
+            ?>
+    <script>
+        swal({
+            title: 'Exito',
+            text: 'Se han registrado los datos exitosamente!',
+            type: 'success'
+        });
+    </script>
+
+    <?php } else {
+            ?>
+    <script>
+        swal({
+            title: 'Error',
+            text: 'No se han guardado los datos',
+            type: 'error'
+        });
+    </script>
+    <?php }
+    }
+    ?>
 </body>
 
 </html>
