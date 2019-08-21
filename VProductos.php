@@ -7,7 +7,7 @@ if (!isset($_SESSION['acceso'])) {
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    ! $_SESSION['acceso'] == "Manager" 
+    !$_SESSION['acceso'] == "Manager"
 ) {
     header('location: OPCAFI.php');
 }
@@ -25,6 +25,7 @@ $negocio = $_SESSION['idnegocio'];
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
 
     <title>Administracion Productos</title>
     <script type="text/javascript">
@@ -37,21 +38,6 @@ $negocio = $_SESSION['idnegocio'];
         function parar() {
             clearTimeout(parametro);
             parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 15 min
-        }
-
-        function agregar() {
-            document.getElementById("formulario").style.display = "block";
-            document.getElementById("tabla").style.display = "none";
-            document.getElementById("bagregar").style.display = "none";
-            document.getElementById("bmostrar").style.display = "block";
-        }
-
-        function mostrar() {
-            document.getElementById("bagregar").style.display = "block";
-            document.getElementById("bmostrar").style.display = "none";
-            document.getElementById("formulario").style.display = "none";
-            document.getElementById("tabla").style.display = "block";
-
         }
         //funcion para la vista previa de la imagen
         function ejecutar() {
@@ -121,168 +107,103 @@ $negocio = $_SESSION['idnegocio'];
             <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Productos</a>
         </div>
     </nav>
-    <div class="row" style="margin-top: 5px;">
-        <div class="col-md-3" style="margin: 0 auto;">
-            <div class="card card-body">
-                <button id="bagregar" onclick="agregar();" class="btn btn-lg btn-block btn-primary">Agregar</button>
-                <button id="bmostrar" onclick="mostrar();" class="btn btn-lg btn-block btn-info">Mostrar</button>
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="Producto" role="tabpanel" aria-labelledby="Producto-tab">
+                    <div class="col-12">
+                        <?php include("Producto-Frontend/formularioproducto.php"); ?>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="Inventario" role="tabpanel" aria-labelledby="Inventario-tab">
+                    <div class="col-12">
+                        <?php include("Producto-Frontend/formularioinventario.php"); ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div style="margin: 0 auto; display: none;" id="formulario" class="col-xs-4">
-            <div class=" card card-body">
-                <form class="form-group" action="#" method="post" enctype="multipart/form-data">
-                    <h5><label for="cb" class="badge badge-primary">Codigo de Barras:</label></h5>
-                    <input id="cb" class="form form-control" type="text" name="TCodigoB" placeholder="0000000000000"><br>
-                    <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
-                    <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
-                    <div class="row">
-                        <div style="margin-left: 15px;" id="preview" class="card">
-                            <img src="" width="100" height="100" />
-                        </div><br>
-                    </div>
-                    <div class="row">
-                        <input onclick="ejecutar();" style="margin-left: 10px; margin-top: 10px;" id="imagen" style="margin-left: 4px;" type="file" name="FImagen" />
-                    </div><br>
-                    <h5><label for="color" class="badge badge-primary">Color:</label></h5>
-                    <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" autocomplete="off" required><br>
-                    <h5><label for=" marca" class="badge badge-primary">Marca:</label></h5>
-                    <input id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="off" required><br>
-                    <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
-                    <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea><br>
-                    <h5><label for="um" class="badge badge-primary">Unidad de Medida:</label></h5>
 
-                    <select id="um" class="form form-control" type="text" name="DLUnidad">
-                        <option value="Pieza">Pieza</option>
-                        <option value="Par">Par</option>
-                        <option value="Paquete">Paquete</option>
-                    </select> <br>
-
-                    <h5><label for="tpr" class="badge badge-primary">Tipo de producto:</label></h5>
-                    <div class="row" style="margin: 0 auto;">
-                        <div>
-                            <button onclick="activarDivTalla();" id="tpr" type="button" class="btn btn-danger">Ropa</button>
-                            <button onclick="activarDivMedida();" id="tpc" type="button" class="btn btn-success">Calzado</button>
-                            <button onclick="activarDivOtro();" id="tpo" type="button" class="btn btn-warning">Otro</button><br>
-                            <input style="display: none" id="tipo_produc" type="text" required name="TTipoP">
-                        </div>
-                    </div><br>
-
-                    <div style="display: none;" id="divtalla">
-                        <h5><label for="ta" class="badge badge-danger">Tallas de ropa:</label></h5>
-                        <select id="ta" class="form form-control" name="SlcTalla" placeholder="Ingrese la talla" value="">
-                            <option>XS</option>
-                            <option>S</option>
-                            <option>M</option>
-                            <option>L</option>
-                            <option>XL</option>
-                            <option>XXL</option>
-                        </select> <br>
-
-                    </div>
-                    <div style="display: none;" id="divmedida">
-                        <h5><label for="med" class="badge badge-success">Medidas de calzado:</label></h5>
-                        <select id="med" class="form form-control" name="SlcMedida" placeholder="Ingrese la Medida" value="">
-                            <?php
-                            for ($i = 1; $i < 34; $i++) {
-                                for ($j = 0; $j < 2; $j++) {
-                                    if ($j === 0) {
-                                        echo "<option>$i </option>";
-                                    } else if ($j > 0) {
-                                        $media = $i + 0.5;
-                                        echo "<option>$media</option>";
-                                    }
-                                }
-                            }
-                            ?>
-
-
-                        </select> <br>
-                    </div>
-                    <h5><label for="precioc" class="badge badge-primary">Precio de Compra $:</label></h5>
-                    <input id="precioc" class="form form-control" type="text" name="TPrecioC" placeholder="$" autocomplete="off" required><br>
-                    <h5><label for="preciov" class="badge badge-primary">Precio de Venta $:</label></h5>
-                    <input id="preciov" class="form form-control" type="text" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
-                    <input type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
-                </form>
-            </div>
-
-        </div>
-        <div id="tabla" class="col-md-12" style="margin: 0 auto; display: none;">
-            <h5 style="margin: 0 auto;"><label class="badge badge-info">
-                    <a style="color: white;" href="VOpBusqueda.php">BUSCAR--></a>
-                </label></h5>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>C_Barras</th>
-                        <th>Nombre</th>
-                        <th>Imagen</th>
-                        <th>Color</th>
-                        <th>Marca</th>
-                        <th>Descripcion</th>
-                        <th>Cant</th>
-                        <th>UM</th>
-                        <th>Talla</th>
-                        <th>Compra</th>
-                        <th>Venta</th>
-                        <th>Estado</th>
-                        <th>Tarea</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $con = new Models\Conexion();
-                    $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
+    <div id="tabla" class="col-md-12" style="margin: 0 auto;">
+        <h5 style="margin: 0 auto;"><label class="badge badge-info">
+                <a style="color: white;" href="VOpBusqueda.php">BUSCAR--></a>
+            </label></h5>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>C_Barras</th>
+                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Color</th>
+                    <th>Marca</th>
+                    <th>Descripcion</th>
+                    <th>Cant</th>
+                    <th>UM</th>
+                    <th>Talla</th>
+                    <th>Compra</th>
+                    <th>Venta</th>
+                    <th>Estado</th>
+                    <th>Tarea</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $con = new Models\Conexion();
+                $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
                     FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
                     WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
-                    $row = $con->consultaListar($query);
+                $row = $con->consultaListar($query);
 
-                    while ($renglon = mysqli_fetch_array($row)) {
-                        ?>
-                    <tr>
-                        <td><?php echo $renglon['codigo_barras']; ?></td>
-                        <td><?php echo $renglon['nombre']; ?></td>
-                        <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
-                        <td><?php echo $renglon['color']; ?></td>
-                        <td><?php echo $renglon['marca']; ?></td>
-                        <td><?php
-                                if (strlen($renglon['descripcion']) === 0) {
-                                    echo "Sin descripcion";
-                                } else {
-                                    echo $renglon['descripcion'];
-                                }
-                                ?></td>
-                        <td><?php echo $renglon['cantidad']; ?></td>
-                        <td><?php echo $renglon['unidad_medida']; ?></td>
-                        <td><?php
-                                if (strlen($renglon['talla_numero']) === 0) {
-                                    echo "N.A";
-                                } else {
-                                    echo  $renglon['talla_numero'];
-                                }
-                                ?></td>
-                        <td>$<?php echo $renglon['precio_compra']; ?></td>
-                        <td>$<?php echo $renglon['precio_venta']; ?></td>
-                        <td><?php echo $renglon['pestado']; ?></td>
-                        <td>
-                            <div class="row" style="position: absolute;">
-                                <div class="container" style="margin: 0 auto;">
-                                    <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
+                while ($renglon = mysqli_fetch_array($row)) {
+                    ?>
+                <tr>
+                    <td><?php echo $renglon['codigo_barras']; ?></td>
+                    <td><?php echo $renglon['nombre']; ?></td>
+                    <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
+                    <td><?php echo $renglon['color']; ?></td>
+                    <td><?php echo $renglon['marca']; ?></td>
+                    <td><?php
+                            if (strlen($renglon['descripcion']) === 0) {
+                                echo "Sin descripcion";
+                            } else {
+                                echo $renglon['descripcion'];
+                            }
+                            ?></td>
+                    <td><?php echo $renglon['cantidad']; ?></td>
+                    <td><?php echo $renglon['unidad_medida']; ?></td>
+                    <td><?php
+                            if (strlen($renglon['talla_numero']) === 0) {
+                                echo "N.A";
+                            } else {
+                                echo  $renglon['talla_numero'];
+                            }
+                            ?></td>
+                    <td>$<?php echo $renglon['precio_compra']; ?></td>
+                    <td>$<?php echo $renglon['precio_venta']; ?></td>
+                    <td><?php echo $renglon['pestado']; ?></td>
+                    <td>
+                        <div class="row" style="position: absolute;">
+                            <div class="container" style="margin: 0 auto;">
+                                <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
+                                    <img src="img/edit.png">
+                                </a>
                             </div>
-                        </td>
-                    </tr>
-                    <?php
-                    } ?>
-                </tbody>
-            </table>
-        </div>
-
+                        </div>
+                    </td>
+                </tr>
+                <?php
+                } ?>
+            </tbody>
+        </table>
     </div>
     <?php
     if (
@@ -373,10 +294,15 @@ $negocio = $_SESSION['idnegocio'];
             ?>
     <script>
         swal({
-            title: 'Exito',
-            text: 'Se han registrado los datos exitosamente!',
-            type: 'success'
-        });
+                title: 'Exito',
+                text: 'Se han registrado los datos exitosamente!',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
     </script>
 
     <?php } else {
@@ -389,6 +315,57 @@ $negocio = $_SESSION['idnegocio'];
         });
     </script>
     <?php }
+    }
+    ?>
+    <?php
+    if (isset($_POST['SCantidad']) && isset($_POST['DlProductos'])) {
+        $inventario = new Models\Inventario();
+        $con = new Models\Conexion();
+        $inventario->setCantidad($_POST['SCantidad']);
+        $inventario->setCodigoB($_POST['DlProductos']);
+        $codigob = $inventario->getCodigoBarras();
+        $inventario->setNegocio($_SESSION['idnegocio']);
+        $inventario->setTrabajador($_SESSION['id']);
+        $query = "SELECT producto_codigo_barras FROM inventario WHERE producto_codigo_barras = '$codigob' AND negocios_idnegocios = '$_SESSION[idnegocio]'";
+        $datos = $con->consultaRetorno($query);
+        if (isset($datos)) {
+            ?>
+    <script>
+        swal({
+            title: 'Alerta',
+            text: 'El producto no se ha agregado al inventario, compruebe que el producto que intenta agregar no exista en el inventario',
+            type: 'warning'
+        });
+    </script>
+    <?php
+        } else {
+            $result = $inventario->guardar();
+            if ($result === 1) {
+                ?>
+    <script>
+        swal({
+                title: 'Exito',
+                text: 'El producto se ha agregado correctamente al inventario',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
+    </script>
+
+    <?php } else {
+                ?>
+    <script>
+        swal({
+            title: 'Alerta',
+            text: 'Producto no agregado consulte a soporte tecnico',
+            type: 'warning'
+        });
+    </script>
+    <?php }
+        }
     }
     ?>
 </body>

@@ -20,7 +20,8 @@ if (!isset($_SESSION['acceso'])) {
 <?php
         $id = $_GET['id'];
         $con = new Models\Conexion();
-        $query =  $sql = "SELECT * FROM producto where idproducto = '$id'";
+        $query =  $sql = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta, pestado,cantidad FROM producto
+        INNER JOIN inventario ON codigo_barras = producto_codigo_barras WHERE codigo_barras = '$id'";
         $result = mysqli_fetch_assoc($con->consultaListar($query));
         if (isset($result)) {
             ?>
@@ -123,7 +124,8 @@ if (!isset($_SESSION['acceso'])) {
         <div class="col-md-3" style="  margin: 0 auto; margin-top:5px;">
             <div class=" card card-body">
                 <form class="form-group" action="#" method="post" enctype="multipart/form-data">
-
+                    <h5><label for="cb" class="badge badge-primary">Codigo de Barras:</label></h5>
+                    <input value="<?php echo $result['codigo_barras'] ?>" id="cb" class="form form-control" type="text" name="TCodigoB" placeholder="0000000000000" required><br>
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
                     <input value="<?php echo $result['nombre'] ?>" id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
                     <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
@@ -222,8 +224,6 @@ if (!isset($_SESSION['acceso'])) {
                     <input value="<?php echo $result['precio_compra'] ?>" id="precioc" class="form form-control" type="text" name="TPrecioC" placeholder="$" autocomplete="off" required><br>
                     <h5><label for="preciov" class="badge badge-primary">Precio de Venta $:</label></h5>
                     <input value="<?php echo $result['precio_venta'] ?>" id="preciov" class="form form-control" type="text" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
-                    <h5><label for="cb" class="badge badge-primary">Codigo de Barras:</label></h5>
-                    <input value="<?php echo $result['codigo_barras'] ?>" id="cb" class="form form-control" type="text" name="TCodigoB" placeholder="0000000000000" required><br>
                     <h5><label for="fecha2" class="badge badge-primary">Estado:</label></h5>
 
                     <?php if ($result['pestado'] == "A") {
@@ -288,66 +288,96 @@ if (!isset($_SESSION['acceso'])) {
                     $producto->setPestado($_POST['REstado']);
                     if (!is_null($imagen)) {
                         $result = $producto->editar($id, $_SESSION['id']);
+                        var_dump($result);
                         if ($result === 1) {
                             ?>
     <script>
         swal({
-            title: 'Exito',
-            text: 'Editado exitosamente!',
-            type: 'success'
-        });
+                title: 'Exito',
+                text: 'Editado exitosamente!',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
     </script>
     <?php } else if ($result === 0) {
                             ?>
     <script>
         swal({
-            title: 'Error',
-            text: 'No se ha realizado ningun cambio!',
-            type: 'error'
-        });
+                title: 'Alerta',
+                text: 'No se ha realizado ningun cambio!',
+                type: 'warning'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
     </script>
     <?php } else if ($result === -1) {
                             ?>
     <script>
         swal({
-            title: 'Error',
-            text: 'No editado compruebe los campos unicos',
-            type: 'error'
-        });
+                title: 'Alerta',
+                text: 'No editado compruebe los campos unicos',
+                type: 'warning'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
     </script>
     <?php }
                     } else {
-                        $result = $producto->editarSinImagen($id, $_SESSION['id']);
-                        if ($result === 1) {
+                        $result2 = $producto->editarSinImagen($id, $_SESSION['id']);
+                        if ($result2 === 1) {
                             ?>
     <script>
         swal({
-            title: 'Exito',
-            text: 'Editado exitosamente!',
-            type: 'success'
-        });
+                title: 'Exito',
+                text: 'Editado exitosamente!',
+                type: 'success'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
     </script>
-    <?php } else if ($result === 0) {
+    <?php } else if ($result2 === 0) {
                             ?>
     <script>
         swal({
-            title: 'Error',
-            text: 'No se ha realizado ningun cambio!',
-            type: 'error'
-        });
+                title: 'Alerta',
+                text: 'No se ha realizado ningun cambio!',
+                type: 'warning'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
     </script>
-    <?php } else if ($result === -1) {
+    <?php } else if ($result2 === -1) {
                             ?>
     <script>
         swal({
-            title: 'Error',
-            text: 'No editado compruebe los campos unicos',
-            type: 'error'
-        });
+                title: 'Alerta',
+                text: 'No editado compruebe los campos unicos',
+                type: 'warning'
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    window.location.href = "VProductos.php";
+                }
+            });
     </script>
     <?php }
                     }
-                    header('location: VProductos.php');
                 }
                 if (
                     isset($_POST['TNombre'])  && isset($_POST['TColor'])
