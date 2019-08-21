@@ -13,37 +13,7 @@ if (!isset($_SESSION['acceso'])) {
 
 require_once "Config/Autoload.php";
 Config\Autoload::run();
-if (
-    isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-    && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-    && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-    && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-    && isset($_POST['REstado'])
-) {
-    $cliente = new Models\Cliente();
-    $cliente->setNombre($_POST['TNombre']);
-    $cliente->setApaterno($_POST['TApellidoP']);
-    $cliente->setAmaterno($_POST['TApellidoM']);
-    $cliente->setDocumento($_POST['RDoc']);
-    $cliente->setNumDoc($_POST['TNumDoc']);
-    $cliente->setDireccion($_POST['TDireccion']);
-    $cliente->setTelefono($_POST['TTelefono']);
-    $cliente->setCorreo($_POST['TCorreo']);
-    $cliente->setEstado($_POST['REstado']);
-    $result = $cliente->guardar($_SESSION['idnegocio'], $_SESSION['id']);
-    if ($result === 1) {
-        ?>
-<script>
-    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
-</script>
 
-<?php } else {
-        ?>
-<script>
-    swal({title:'Error',text:'No registrado compruebe los campos unicos!',type:'error'});
-</script>
-<?php }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -190,6 +160,39 @@ if (
         </div>
 
     </div>
+    <?php
+    if (
+    isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
+    && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
+    && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
+    && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
+    && isset($_POST['REstado'])
+) {
+    $cliente = new Models\Cliente();
+    $cliente->setNombre($_POST['TNombre']);
+    $cliente->setApaterno($_POST['TApellidoP']);
+    $cliente->setAmaterno($_POST['TApellidoM']);
+    $cliente->setDocumento($_POST['RDoc']);
+    $cliente->setNumDoc($_POST['TNumDoc']);
+    $cliente->setDireccion($_POST['TDireccion']);
+    $cliente->setTelefono($_POST['TTelefono']);
+    $cliente->setCorreo($_POST['TCorreo']);
+    $cliente->setEstado($_POST['REstado']);
+    $result = $cliente->guardar($_SESSION['idnegocio'], $_SESSION['id']);
+    if ($result === 1) {
+        ?>
+<script>
+    swal({title:'Exito',text:'Se han registrado los datos exitosamente!',type:'success'});
+</script>
+
+<?php } else {
+        ?>
+<script>
+    swal({title:'Error',text:'No registrado compruebe los campos unicos!',type:'error'});
+</script>
+<?php }
+}
+?>
 </body>
 
 </html>

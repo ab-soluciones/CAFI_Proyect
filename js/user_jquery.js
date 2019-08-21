@@ -3,7 +3,7 @@ $(document).ready(function () {
     $('#busqueda').on('keyup', function () {
         var value = $(this).val();
         var patt = new RegExp(value, "i");
-        $('#tabla').find('tr').each(function () {
+        $('.table').find('tr').each(function () {
             if (!($(this).find('td').text().search(patt) >= 0)) {
                 $(this).not('.encabezados').hide();
             }
@@ -18,7 +18,7 @@ $(document).ready(function () {
 /*Ordenar tabla por encabezado*/
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("tabla");
+    table = document.getElementById(".table");
     switching = true;
     //Set the sorting direction to ascending:
     dir = "asc"; 
@@ -72,7 +72,7 @@ function sortTable(n) {
   }
 
 /*Resaltar columna*/
-$('#tabla th').on('click', function() {
+$('.table th').on('click', function() {
     var $currentTable = $(this).closest('table');
     var index = $(this).index();
     $currentTable.find('th').removeClass('selectedTh');

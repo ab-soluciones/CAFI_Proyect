@@ -89,6 +89,8 @@ if (
         <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Gastos</a>
     </nav>
 
+    
+
     <div class="container-fluid">
         <div class="row align-items-start">
             <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
@@ -153,7 +155,7 @@ if (
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                 </div>
                 <div class="contenedorTabla">
-                    <table id="tabla" class="table table-bordered table-hover fixed_headers table-responsive">
+                    <table class="table table-bordered table-hover fixed_headers table-responsive">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th onclick="sortTable(0)">Concepto</th>
@@ -206,7 +208,7 @@ if (
         </div><!--row-->
     </div><!--container-->
 
-    <script src="js/jquery_1.js"></script>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

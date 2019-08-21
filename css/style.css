@@ -42,7 +42,7 @@ body {
 
 /*TABLAS*/
 
-#tabla{
+.table{
     background-color: white;
 }
 
@@ -59,7 +59,7 @@ body {
 .selectedTds{
     background-color: red;
 }
-#tabla tr{
+.table tr{
     height: 100%;
 }
 
@@ -75,7 +75,7 @@ body {
 }
 /*lg*/
 @media (min-width: 992px) {
-    #tabla thead{
+    .table thead{
         position: absolute;
         top: 40px;
     }
