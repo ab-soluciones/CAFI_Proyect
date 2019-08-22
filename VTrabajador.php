@@ -20,9 +20,11 @@ Config\Autoload::run();
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
 
     <script src="js/sweetalert.js"></script>
@@ -31,23 +33,6 @@ Config\Autoload::run();
 
     <title>Administracion Trabajadores</title>
     <script>
-        //con la funcion mostrar y agregar se hace el dinamismo de la aplicacion: ocultando la tabla cada que se va agregar un trabajador y mostrandola cada que el usuario quiera
-
-        function agregar() {
-            document.getElementById("formulario").style.display = "block";
-            document.getElementById("tabla").style.display = "none";
-            document.getElementById("bagregar").style.display = "none";
-            document.getElementById("bmostrar").style.display = "block";
-        }
-
-        function mostrar() {
-            document.getElementById("bagregar").style.display = "block";
-            document.getElementById("bmostrar").style.display = "none";
-            document.getElementById("formulario").style.display = "none";
-            document.getElementById("tabla").style.display = "block";
-
-        }
-
         // con este script se destruye la sesion despues de 25 min de inactividad
 
         var parametro;
@@ -72,20 +57,9 @@ Config\Autoload::run();
         </div>
     </nav>
 
-    <div class="row" style="margin-top: 5px;">
-        <div class="col-md-3" style="margin: 0 auto;">
-            <div class="card card-body">
-                <button id="bagregar" onclick="agregar();" class="btn btn-lg btn-block btn-primary">Agregar</button>
-                <button id="bmostrar" onclick="mostrar();" class="btn btn-lg btn-block btn-info">Mostrar</button>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="">
-        <div class="col-md-3" style="margin: 0 auto;" id="formulario">
-            <script>
-                document.getElementById('formulario').style.display = 'none';
-            </script>
-            <div class="card card-body">
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
                 <form class="form-group" action="#" method="post">
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
                     <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
@@ -157,140 +131,140 @@ Config\Autoload::run();
                             </label>
                         </div>
                     </div><br>
-                    <input onclick="location.reload()" type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                    <input type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
                 </form>
             </div>
+            <div id="tableContainer" class="d-block col-lg-8">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                </div>
+                <div class="contenedorTabla">
+                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                        <thead class="thead-dark">
+                            <tr class="encabezados">
+                                <th onclick="sortTable(0)">Nombre</th>
+                                <th onclick="sortTable(1)">Ap-P</th>
+                                <th onclick="sortTable(2)">Ap-M</th>
+                                <th onclick="sortTable(3)">Doc</th>
+                                <th onclick="sortTable(4)">#Doc</th>
+                                <th onclick="sortTable(5)">Direccion</th>
+                                <th onclick="sortTable(6)">Telefono</th>
+                                <th onclick="sortTable(7)">Email</th>
+                                <th onclick="sortTable(8)">Acceso</th>
+                                <th onclick="sortTable(9)">Usuario</th>
+                                <th onclick="sortTable(10)">Contraseña</th>
+                                <th onclick="sortTable(11)">Sueldo</th>
+                                <th onclick="sortTable(12)">Estado</th>
+                                <th onclick="sortTable(13)">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $idnegocio = $_SESSION['idnegocio'];
+                            //se optiene el id del negocio para hacer la consulta ..se escoge el id por que puede haber muchos negocios con el mismo nombre pertenecientes a otro dueño
+                            $con = new Models\Conexion();
+                            $query = "SELECT * FROM trabajador WHERE negocios_idnegocios = '$idnegocio' ORDER BY idtrabajador DESC";
+                            $row = $con->consultaListar($query);
+
+                            //a continuacion se mustra en la tabla el resultado de la consulta
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                ?>
+                            <tr>
+                                <td><?php echo $renglon['nombre']; ?></td>
+                                <td><?php echo $renglon['apaterno']; ?></td>
+                                <td><?php echo $renglon['amaterno']; ?></td>
+                                <td><?php echo $renglon['tipo_documento']; ?></td>
+                                <td><?php echo $renglon['numero_documento']; ?></td>
+                                <td><?php echo $renglon['direccion']; ?></td>
+                                <td><?php echo $renglon['telefono']; ?></td>
+                                <td><?php echo $renglon['correo']; ?></td>
+                                <td><?php echo $renglon['acceso']; ?></td>
+                                <td><?php echo $renglon['login']; ?></td>
+                                <td><?php echo $renglon['password']; ?></td>
+                                <td><?php echo $renglon['sueldo']; ?></td>
+                                <td><?php echo $renglon['estado']; ?></td>
+                                <td style="width:100px;">
+                                    <div class="row">
+                                        <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVTrabajador.php?id=<?php echo $renglon['idtrabajador'];
+                                                                                                                                //se envia el id del registro para ser editado
+                                                                                                                                ?>">
+                                            <img src="img/edit.png">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+        <?php
+        if (
+            isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
+            && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
+            && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
+            && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
+            && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
+            && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
+            && isset($_POST['REstado'])
+            //se comprueba que existan todos los datos del formulario
+        ) {
+            $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
+            $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
+            $trabajador->setApaterno($_POST['TApellidoP']);
+            $trabajador->setAmaterno($_POST['TApellidoM']);
+            $trabajador->setDocumento($_POST['RDoc']);
+            $trabajador->setNumDoc($_POST['TNumDoc']);
+            $trabajador->setDireccion($_POST['TDireccion']);
+            $trabajador->setTelefono($_POST['TTelefono']);
+            $trabajador->setCorreo($_POST['TCorreo']);
+            $trabajador->setAcceso($_POST['RAcceso']);
+            $trabajador->setLogin($_POST['TLogin']);
+            $trabajador->setPassword($_POST['TPContraseña']);
+            $sueldo = $_POST['TSueldo'];
+            $sueldo = floatval($sueldo);
+            $trabajador->setSueldo($sueldo);
+            $negocio = $_SESSION['idnegocio'];
+            $trabajador->setEstado($_POST['REstado']);
+            $result = $trabajador->guardar($_SESSION['idnegocio']);
+            if ($result === 1) {
+                ?>
+        <script>
+            swal({
+                    title: 'Exito',
+                    text: 'Se han registrado los datos exitosamente!',
+                    type: 'success'
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        window.location.href = "VTrabajador.php";
+                    }
+                });
+        </script>
 
-        <div id="tabla" class="col-lg-12" style="margin-top: 10px;">
-            <script>
-                document.getElementById('tabla').style.display = 'none';
-            </script>
-            <h5 style="margin: 0 auto;"><label class="badge badge-info">
-                    <a style="color: white;" href="VConsultasT.php">BUSCAR--></a>
-                </label></h5>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Ap-P</th>
-                        <th>Ap-M</th>
-                        <th>Doc</th>
-                        <th>#Doc</th>
-                        <th>Direccion</th>
-                        <th>Telefono</th>
-                        <th>Email</th>
-                        <th>Acceso</th>
-                        <th>Usuario</th>
-                        <th>Contraseña</th>
-                        <th>Sueldo</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $idnegocio = $_SESSION['idnegocio'];
-                    //se optiene el id del negocio para hacer la consulta ..se escoge el id por que puede haber muchos negocios con el mismo nombre pertenecientes a otro dueño
-                    $con = new Models\Conexion();
-                    $query = "SELECT * FROM trabajador WHERE negocios_idnegocios = '$idnegocio' ORDER BY idtrabajador DESC";
-                    $row = $con->consultaListar($query);
-
-                    //a continuacion se mustra en la tabla el resultado de la consulta
-                    while ($renglon = mysqli_fetch_array($row)) {
-                        ?>
-                    <tr>
-                        <td><?php echo $renglon['nombre']; ?></td>
-                        <td><?php echo $renglon['apaterno']; ?></td>
-                        <td><?php echo $renglon['amaterno']; ?></td>
-                        <td><?php echo $renglon['tipo_documento']; ?></td>
-                        <td><?php echo $renglon['numero_documento']; ?></td>
-                        <td><?php echo $renglon['direccion']; ?></td>
-                        <td><?php echo $renglon['telefono']; ?></td>
-                        <td><?php echo $renglon['correo']; ?></td>
-                        <td><?php echo $renglon['acceso']; ?></td>
-                        <td><?php echo $renglon['login']; ?></td>
-                        <td><?php echo $renglon['password']; ?></td>
-                        <td><?php echo $renglon['sueldo']; ?></td>
-                        <td><?php echo $renglon['estado']; ?></td>
-                        <td style="width:100px;">
-                            <div class="row">
-                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVTrabajador.php?id=<?php echo $renglon['idtrabajador'];
-                                                                                                                        //se envia el id del registro para ser editado
-                                                                                                                        ?>">
-                                    <img src="img/edit.png">
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php
-                    } ?>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-    <?php
-    if (
-        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-        && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-        && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-        && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-        && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
-        && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
-        && isset($_POST['REstado'])
-        //se comprueba que existan todos los datos del formulario
-    ) {
-        $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
-        $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
-        $trabajador->setApaterno($_POST['TApellidoP']);
-        $trabajador->setAmaterno($_POST['TApellidoM']);
-        $trabajador->setDocumento($_POST['RDoc']);
-        $trabajador->setNumDoc($_POST['TNumDoc']);
-        $trabajador->setDireccion($_POST['TDireccion']);
-        $trabajador->setTelefono($_POST['TTelefono']);
-        $trabajador->setCorreo($_POST['TCorreo']);
-        $trabajador->setAcceso($_POST['RAcceso']);
-        $trabajador->setLogin($_POST['TLogin']);
-        $trabajador->setPassword($_POST['TPContraseña']);
-        $sueldo = $_POST['TSueldo'];
-        $sueldo = floatval($sueldo);
-        $trabajador->setSueldo($sueldo);
-        $negocio = $_SESSION['idnegocio'];
-        $trabajador->setEstado($_POST['REstado']);
-        $result = $trabajador->guardar($_SESSION['idnegocio']);
-        if ($result === 1) {
-            ?>
-    <script>
-        swal({
-                title: 'Exito',
-                text: 'Se han registrado los datos exitosamente!',
-                type: 'success'
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    window.location.href = "VTrabajador.php";
-                }
-            });
-    </script>
-
-    <?php } else {
-            ?>
-    <script>
-        swal({
-                title: 'Error',
-                text: 'No se han guardado los datos compruebe los campos unicos',
-                type: 'error'
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    window.location.href = "VTrabajador.php";
-                }
-            });
-    </script>
-    <?php }
-    }
-    ?>
+        <?php } else {
+                ?>
+        <script>
+            swal({
+                    title: 'Error',
+                    text: 'No se han guardado los datos compruebe los campos unicos',
+                    type: 'error'
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        window.location.href = "VTrabajador.php";
+                    }
+                });
+        </script>
+        <?php }
+        }
+        ?>
+        <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 body {
-    background-color: gray;
+    background-color: white;
 }
 
 #logo {
@@ -40,7 +40,6 @@ body {
 .table{
     background-color: white;
 }
-
 .encabezados{
     text-align: center;
     cursor: pointer;
