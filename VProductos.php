@@ -17,11 +17,12 @@ $negocio = $_SESSION['idnegocio'];
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -108,103 +109,117 @@ $negocio = $_SESSION['idnegocio'];
         </div>
     </nav>
 
-    <div class="row justify-content-center">
-        <div class="col-12">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="Producto" role="tabpanel" aria-labelledby="Producto-tab">
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
+                <div class="row justify-content-center">
                     <div class="col-12">
-                        <?php include("Producto-Frontend/formularioproducto.php"); ?>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="Inventario" role="tabpanel" aria-labelledby="Inventario-tab">
-                    <div class="col-12">
-                        <?php include("Producto-Frontend/formularioinventario.php"); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="tabla" class="col-md-12" style="margin: 0 auto;">
-        <h5 style="margin: 0 auto;"><label class="badge badge-info">
-                <a style="color: white;" href="VOpBusqueda.php">BUSCAR--></a>
-            </label></h5>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>C_Barras</th>
-                    <th>Nombre</th>
-                    <th>Imagen</th>
-                    <th>Color</th>
-                    <th>Marca</th>
-                    <th>Descripcion</th>
-                    <th>Cant</th>
-                    <th>UM</th>
-                    <th>Talla</th>
-                    <th>Compra</th>
-                    <th>Venta</th>
-                    <th>Estado</th>
-                    <th>Tarea</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $con = new Models\Conexion();
-                $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
-                    FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
-                    WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
-                $row = $con->consultaListar($query);
-
-                while ($renglon = mysqli_fetch_array($row)) {
-                    ?>
-                <tr>
-                    <td><?php echo $renglon['codigo_barras']; ?></td>
-                    <td><?php echo $renglon['nombre']; ?></td>
-                    <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
-                    <td><?php echo $renglon['color']; ?></td>
-                    <td><?php echo $renglon['marca']; ?></td>
-                    <td><?php
-                            if (strlen($renglon['descripcion']) === 0) {
-                                echo "Sin descripcion";
-                            } else {
-                                echo $renglon['descripcion'];
-                            }
-                            ?></td>
-                    <td><?php echo $renglon['cantidad']; ?></td>
-                    <td><?php echo $renglon['unidad_medida']; ?></td>
-                    <td><?php
-                            if (strlen($renglon['talla_numero']) === 0) {
-                                echo "N.A";
-                            } else {
-                                echo  $renglon['talla_numero'];
-                            }
-                            ?></td>
-                    <td>$<?php echo $renglon['precio_compra']; ?></td>
-                    <td>$<?php echo $renglon['precio_venta']; ?></td>
-                    <td><?php echo $renglon['pestado']; ?></td>
-                    <td>
-                        <div class="row" style="position: absolute;">
-                            <div class="container" style="margin: 0 auto;">
-                                <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
-                                    <img src="img/edit.png">
-                                </a>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="Producto" role="tabpanel" aria-labelledby="Producto-tab">
+                                <div class="col-12">
+                                    <?php include("Producto-Frontend/formularioproducto.php"); ?>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="Inventario" role="tabpanel" aria-labelledby="Inventario-tab">
+                                <div class="col-12">
+                                    <?php include("Producto-Frontend/formularioinventario.php"); ?>
+                                </div>
                             </div>
                         </div>
-                    </td>
-                </tr>
-                <?php
-                } ?>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+ </div>
+            <div id="tableContainer" class="d-block col-lg-8">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                </div>
+                <div class="contenedorTabla">
+                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                        <thead class="thead-dark">
+                            <tr class="encabezados">
+                                <th onclick="sortTable(0)">C_Barras</th>
+                                <th onclick="sortTable(1)">Nombre</th>
+                                <th onclick="sortTable(2)">Imagen</th>
+                                <th onclick="sortTable(3)">Color</th>
+                                <th onclick="sortTable(4)">Marca</th>
+                                <th onclick="sortTable(5)">Descripcion</th>
+                                <th onclick="sortTable(6)">Cant</th>
+                                <th onclick="sortTable(7)">UM</th>
+                                <th onclick="sortTable(8)">Talla</th>
+                                <th onclick="sortTable(9)">Compra</th>
+                                <th onclick="sortTable(10)">Venta</th>
+                                <th onclick="sortTable(11)">Estado</th>
+                                <th onclick="sortTable(12)">Tarea</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $con = new Models\Conexion();
+                            $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
+                            FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
+                            WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
+                            $row = $con->consultaListar($query);
+
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                ?>
+                            <tr>
+                                <td><?php echo $renglon['codigo_barras']; ?></td>
+                                <td><?php echo $renglon['nombre']; ?></td>
+                                <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
+                                <td><?php echo $renglon['color']; ?></td>
+                                <td><?php echo $renglon['marca']; ?></td>
+                                <td><?php
+                                        if (strlen($renglon['descripcion']) === 0) {
+                                            echo "Sin descripcion";
+                                        } else {
+                                            echo $renglon['descripcion'];
+                                        }
+                                        ?></td>
+                                <td><?php echo $renglon['cantidad']; ?></td>
+                                <td><?php echo $renglon['unidad_medida']; ?></td>
+                                <td><?php
+                                        if (strlen($renglon['talla_numero']) === 0) {
+                                            echo "N.A";
+                                        } else {
+                                            echo  $renglon['talla_numero'];
+                                        }
+                                        ?></td>
+                                <td>$<?php echo $renglon['precio_compra']; ?></td>
+                                <td>$<?php echo $renglon['precio_venta']; ?></td>
+                                <td><?php echo $renglon['pestado']; ?></td>
+                                <td>
+                                    <div class="row" style="position: absolute;">
+                                        <div class="container" style="margin: 0 auto;">
+                                            <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
+                                                <img src="img/edit.png">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!--Tabla contenedor-->
+            </div>
+            <!--col-7-->
+        </div>
+        <!--row-->
     </div>
+    <!--container-->
     <?php
     if (
         isset($_POST['TNombre'])  && isset($_POST['TColor'])
@@ -368,6 +383,7 @@ $negocio = $_SESSION['idnegocio'];
         }
     }
     ?>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>
