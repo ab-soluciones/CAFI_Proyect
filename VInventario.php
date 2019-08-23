@@ -21,23 +21,15 @@ if (!isset($_SESSION['acceso'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inventario</title>
-    <script>
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-    </script>
 </head>
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();">
+<body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+    <?php include("Navbar.php") ?>
+
     <div class="row">
         <div style="margin: 0 auto; margin-top: 15px;" class="col-md-3">
             <nav class="navbar navbar-dark bg-dark">
@@ -242,7 +234,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
         </div>
-
+        <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

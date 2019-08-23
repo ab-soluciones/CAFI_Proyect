@@ -23,70 +23,14 @@ if (!isset($_SESSION['acceso'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <title>Busquedas Ventas</title>
-    <script>
-        var datos = false;
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function comprobarRows() {
-            if (datos == true) {
-                var rengolnes;
-                renglones = document.getElementById("renglones");
-                renglones.innerHTML = "";
-            }
-
-        }
-
-        function activarListaE() {
-            comprobarRows();
-            document.getElementById('busqueda').style.display = 'block';
-            document.getElementById("estado").style.display = "block";
-            document.getElementById("fechas").style.display = "none";
-            document.getElementById("botones").style.display = "none";
-            document.getElementById("mes").style.display = "none";
-
-        }
-
-
-        function activarListaF() {
-            comprobarRows();
-            document.getElementById('busqueda').style.display = 'block';
-            document.getElementById("estado").style.display = "none";
-            document.getElementById("fechas").style.display = "block";
-            document.getElementById("botones").style.display = "none";
-            document.getElementById("mes").style.display = "none";
-        }
-
-        function activarListaM() {
-            comprobarRows();
-            document.getElementById('busqueda').style.display = 'block';
-            document.getElementById("estado").style.display = "none";
-            document.getElementById("fechas").style.display = "none";
-            document.getElementById("botones").style.display = "none";
-            document.getElementById("mes").style.display = "block";
-
-        }
-
-        function activarM() {
-            comprobarRows();
-            document.getElementById("busqueda").style.display = "none";
-            document.getElementById("botones").style.display = "block";
-
-        }
-    </script>
+    <link rel="stylesheet" href="css/style.css">
+    
+    <title>Ventas</title>
 </head>
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();">
-
+<body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+    <?php include("Navbar.php") ?>
+    
     <div id="botones" class="row" style="margin-top: 5px;">
         <div class="col-md-3" style="margin: 0 auto; margin-top:10px;">
             <nav class="navbar navbar-dark bg-dark">
@@ -218,6 +162,7 @@ if (!isset($_SESSION['acceso'])) {
             <?php
             } ?>
         </div>
+        <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

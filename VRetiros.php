@@ -123,6 +123,7 @@ $con->cerrarConexion();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
@@ -132,14 +133,8 @@ $con->cerrarConexion();
 
 </head>
 
-<body>
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card card-body" style="background: #000000;">
-                <h5 style="margin: 0 auto; color: #0066ff;">Retiros</h5>
-            </div>
-        </div>
+<body onload="inicio();">
+    <?php include("Navbar.php") ?>
 
         <div class="col-md-3">
             <div class="card card-body" style="margin-top: 10px;">
@@ -332,6 +327,7 @@ $con->cerrarConexion();
         }
     }
     ?>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

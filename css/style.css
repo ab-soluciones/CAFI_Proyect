@@ -1,5 +1,5 @@
 body {
-    background-color: gray;
+    background-color: white;
 }
 
 #logo {
@@ -32,6 +32,34 @@ body {
 
 #op_card_body {
     background-color: lightgrey;
+}
+
+/*NAVBAR*/
+.navbar-brand{
+    cursor: pointer;
+}
+#nav-title{
+    color: white;
+    background-color: #2a727a;
+    padding: 0rem 1rem;
+    border-radius: 3px;
+}
+.nav-link{
+    cursor: pointer;
+}
+.nav-link:hover{
+    border-radius: 10px;
+    box-shadow: 1px 5px 10px lightgray;
+}
+.nav-link label{
+    cursor: pointer;
+    background-color: #2a727a;
+}
+#orange{
+    color: orangered;
+}
+#nav-salir{
+    color: red;
 }
 
 

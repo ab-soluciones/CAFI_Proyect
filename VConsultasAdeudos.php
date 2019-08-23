@@ -23,63 +23,12 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Busquedas Adeudos</title>
-    <script>
-        var datos = false;
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function comprobarRows() {
-            if (datos == true) {
-                var rengolnes;
-                renglones = document.getElementById("renglones");
-                renglones.innerHTML = "";
-            }
-
-        }
-
-        function activarListaC() {
-            comprobarRows();
-            document.getElementById('busqueda').style.display = 'block';
-            document.getElementById("clientes").style.display = "block";
-            document.getElementById("fechas").style.display = "none";
-            document.getElementById("botones").style.display = "none";
-
-        }
-
-        function activarListaF() {
-            comprobarRows();
-            document.getElementById('busqueda').style.display = 'block';
-            document.getElementById("clientes").style.display = "none";
-            document.getElementById("fechas").style.display = "block";
-            document.getElementById("botones").style.display = "none";
-
-
-        }
-
-        function activarM() {
-            comprobarRows();
-            document.getElementById("busqueda").style.display = "none";
-            document.getElementById("botones").style.display = "block";
-
-        }
-    </script>
+    <title>Adeudos</title>
 </head>
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand">Busquedas Adeudos</a>
-        </div>
-    </nav>
+<body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+    <?php include("Navbar.php") ?>
+    
     <div id="botones" class="row" style="margin-top: 5px;">
         <div class="col-md-3" style="margin: 0 auto;">
             <div class="card card-body">
@@ -278,6 +227,7 @@ if (!isset($_SESSION['acceso'])) {
             <?php } ?>
         </div>
     </div>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

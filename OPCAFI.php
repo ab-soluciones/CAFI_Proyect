@@ -61,45 +61,45 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <label class="badge badge-dark" style="color: #0066ff;">Vender</label><br><img src="img/cash_register.png"></button>
                         </div>
                         <div class="col-4">
-                            <button onclick="window.open('VAbonos.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                            <button onclick="window.location.href='VAbonos.php'" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge" style="color: white;">Abonos</label><br><img src="img/abonos.png"></button></button>
                         </div>
                         <div class="col-4">
-                            <button onclick="window.open('VConsultasAdeudos.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                            <button onclick="window.location.href='VConsultasAdeudos.php')" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge">Adeudos</label><br><img src="img/adeudos.png"></button></button>
                         </div>
                     </div>
 
                     <div class="row mt-3 justify-content-around">
                         <div class="col-4">
-                            <button onclick="window.open('VGastos.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                            <button onclick="window.location.href='VGastos.php')" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge badge-dark">Gastos</label><br><img src="img/gastos.png"></button></button>
                         </div>
                         <div class="col-4">
-                            <button onclick="window.open('VRetiros.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                            <button onclick="window.location.href='VRetiros.php')" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge badge-dark">Retiros</label><br><img src="img/retiro.png"> </button>
                         </div>
                         <div class="col-4">
-                            <button onclick="window.open('VOtrosIngresos.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                            <button onclick="window.location.href='VOtrosIngresos.php')" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge badge-dark">Otros Ingresos</label><br><img src="img/otrosingresos.png"></button></button>
                         </div>
                     </div>
 
                     <div class="row mt-3 justify-content-around">
                         <div class="col-4">
-                        <button onclick="window.open('VClientes.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                        <button onclick="window.location.href='VClientes.php')" type="button" class="btn btn-dark btn-lg btn-block">
                                 <label class="badge badge-dark">Clientes</label><br><img src="img/clientes.png"></button></button>
 
 
                         </div>
                         <div class="col-4">
-                        <button onclick="window.open('VInventario.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                        <button onclick="window.location.href='VInventario.php')" type="button" class="btn btn-dark btn-lg btn-block">
                                 <label class="badge badge-dark">Inventario</label><br><img src="img/Inventory.png"> </button>
 
 
                         </div>
                         <div class="col-4">
-                        <button onclick="window.open('VProductos.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                        <button onclick="window.location.href='VProductos.php')" type="button" class="btn btn-dark btn-lg btn-block">
                                 <label class="badge badge-dark">Productos</label><br><img src="img/productos.png"> </button>
 
                         </div>
@@ -107,7 +107,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 
                     <div class="row mt-3 justify-content-center">
                         <div class="col-4">
-                        <button onclick="window.open('VConsultasVentas.php')" type="button" class="btn btn-dark btn-lg btn-block">
+                        <button onclick="window.location.href='VConsultasVentas.php')" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge badge-dark">Ventas</label><br><img src="img/venta.png"> </button>
                         </div>
                         <div class="col-4">

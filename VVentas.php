@@ -33,33 +33,18 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
 
     <title>Ventas</title>
-    <script type="text/javascript">
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-    </script>
-
 </head>
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand">Ventas</a>
-        </div>
-    </nav>
+<body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+    <?php include("Navbar.php") ?>
     <div class="row" style=" margin-top: 15px;">
         <div id="busqueda" class="col-xs-4" style="margin: 0 auto;">
             <div class=" card card-body">
@@ -291,6 +276,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
             </form>
         </div>
         </div>
+        <script src="js/user_jquery.js"></script>
 </body>
 
 </html>
