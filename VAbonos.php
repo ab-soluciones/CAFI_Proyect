@@ -96,7 +96,7 @@ if (!isset($_SESSION['acceso'])) {
                             <td><?php echo $renglon['hora']; ?></td>
                             <td><?php echo $renglon['nombre_cliente'] . " " . $renglon['ap_cliente'] . " " . $renglon['am_cliente']; ?></td>
                             <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-                            <td><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>"># <?php echo $renglon['adeudos_id']; ?></a></td>
+                            <td><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>">mostrar</td>
                         </tr>
                         <?php
                         } ?>
@@ -109,10 +109,6 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!--row-->
     </div>
-<<<<<<< HEAD
-=======
-    <!--container-->
->>>>>>> backend
     <script src="js/user_jquery.js"></script>
 </body>
 

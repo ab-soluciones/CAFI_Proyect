@@ -18,7 +18,7 @@ if (!isset($_SESSION['acceso'])) {
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -60,10 +60,19 @@ if (!isset($_SESSION['acceso'])) {
                         <?php
                         $con = new Models\Conexion();
                         $negocios = $_SESSION['idnegocio'];
-                        $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
-                        FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
-                        WHERE adeudos.negocios_idnegocios='$negocios' ORDER BY ventas_idventas DESC";
-                        $row = $con->consultaListar($query);
+                        if (isset($_GET['ad'])) {
+                            $adeudo = $_GET['ad'];
+                            $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
+                            FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
+                            WHERE adeudos.negocios_idnegocios='$negocios' AND idadeudos='$adeudo' ORDER BY ventas_idventas DESC";
+                            $row = $con->consultaListar($query);
+                        } else {
+                            $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
+                            FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
+                            WHERE adeudos.negocios_idnegocios='$negocios' ORDER BY ventas_idventas DESC";
+                            $row = $con->consultaListar($query);
+                        }
+
                         $con->cerrarConexion();
 
                         while ($renglon = mysqli_fetch_array($row)) {
@@ -73,7 +82,7 @@ if (!isset($_SESSION['acceso'])) {
                             <td>$ <?php echo $renglon['pago_minimo']; ?></td>
                             <td><?php echo $renglon['estado_deuda']; ?></td>
                             <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
-                            <td><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>">?></a></td>
+                            <td><a href="VConsultasVentas.php?venta=<?php echo $renglon['ventas_idventas']; ?>">mostrar</a></td>
                             <td>
                                 <?php if ($renglon['estado_deuda'] == "L") {
                                         ?>
@@ -102,15 +111,8 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!--row-->
     </div>
-<<<<<<< HEAD
-    <script src="js/user_jquery.js"></script>
-=======
     <!--container-->
-    <?php if (isset($_GET['ad'])) {
-        $adeudo = $_GET['ad'];
-    } ?>
-<script src="js/user_jquery.js"></script>
->>>>>>> backend
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

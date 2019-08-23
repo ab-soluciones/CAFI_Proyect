@@ -135,8 +135,6 @@ $con->cerrarConexion();
 
 <body onload="inicio();">
     <?php include("Navbar.php") ?>
-    
-    <div class="row">
         <div class="col-lg-12">
             <div class="card card-body" style="background: #000000;">
                 <h5 style="margin: 0 auto; color: #0066ff;">Retiros</h5>
@@ -157,6 +155,7 @@ $con->cerrarConexion();
                         <td>$<?php echo $banco; ?></td>
                     </tbody>
                 </table>
+                </div>
                     <div class="row align-items-start">
                         <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
                           <div id="tableContainer" class="d-block col-lg-8">
@@ -194,9 +193,6 @@ $con->cerrarConexion();
         </div>
       </div>
         <div class="col-md-8" style="margin-top: 15px;">
-            <h5 style="margin: 0 auto;"><label class="badge badge-ligh">
-                    <a href="VConsultasRetiros.php">BUSCAR--></a>
-                </label></h5>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">
                         <thead class="thead-dark">
@@ -254,10 +250,9 @@ $con->cerrarConexion();
             </table>
         </div>
     </div>
-  </div>
 </div>
 </div>
-</div>
+
     <?php
     function retirar($concepto, $tipo, $cantidad, $descripcion)
     {
