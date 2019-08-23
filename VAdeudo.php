@@ -31,23 +31,13 @@ if (isset($_GET['t0t41v34'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="css/bootstrap.css">
-        <title>Agregar Cliente</title>
-        <script type="text/javascript">
-            var parametro;
-
-            function ini() {
-                parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-            }
-
-            function parar() {
-                clearTimeout(parametro);
-                parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-            }
-        </script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        
+        <title>Adeudos</title>
     </head>
 
 
-    <body onload="ini(); " onkeypress="parar();" onclick="parar();">
+    <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
         <div class="jumbotron" style="background: #3366ff; color:white; text-align: center;">
             <h1>Agregue un cliente para completar la venta a crédito</h1>
         </div>
@@ -164,6 +154,7 @@ if (isset($_GET['t0t41v34'])) {
                 } ?>
             </div>
         </div>
+        <script src="js/user_jquery.js"></script>
     </body>
 
     </html>

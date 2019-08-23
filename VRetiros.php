@@ -133,7 +133,9 @@ $con->cerrarConexion();
 
 </head>
 
-<body>
+  <body onload="inicio();">
+      <?php include("Navbar.php") ?>
+
 
                 <div class="container-fluid">
                     <div class="row align-items-start">

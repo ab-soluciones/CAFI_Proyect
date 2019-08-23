@@ -28,28 +28,12 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
-    <title>Busquedas Ventas</title>
-    <script>
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-    </script>
+    <title>Ventas</title>
 </head>
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();">
-
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand">Busquedas Ventas</a>
-        </div>
-    </nav>
+<body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+    <?php include("Navbar.php") ?>
+    
     <div class="container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
@@ -120,12 +104,16 @@ if (!isset($_SESSION['acceso'])) {
             </div>
             <!--Tabla contenedor-->
         </div>
+<<<<<<< HEAD
+        <script src="js/user_jquery.js"></script>
+=======
         <!--col-7-->
     </div>
     <!--row-->
     </div>
     <!--container-->
     <script src="js/user_jquery.js"></script>
+>>>>>>> backend
 </body>
 
 </html>

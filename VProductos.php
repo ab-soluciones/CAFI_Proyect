@@ -23,12 +23,13 @@ $negocio = $_SESSION['idnegocio'];
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
+
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
 
-    <title>Administracion Productos</title>
+    <title>Productos</title>
     <script type="text/javascript">
         var parametro;
 
@@ -102,12 +103,8 @@ $negocio = $_SESSION['idnegocio'];
 </head>
 
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Productos</a>
-        </div>
-    </nav>
+<body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+    <?php include("Navbar.php") ?>
 
     <div class="container-fluid">
         <div class="row align-items-start">

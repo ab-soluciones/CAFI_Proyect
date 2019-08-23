@@ -30,26 +30,12 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
 
-    <title>Administracion Gastos</title>
+    <title>Gastos</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-    </script>
 </head>
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <nav class="container-fluid navbar navbar-dark bg-dark">
-        <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Gastos</a>
-    </nav>
+<body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+    <?php include("Navbar.php") ?>
 
     <div class="container-fluid">
         <div class="row align-items-start">

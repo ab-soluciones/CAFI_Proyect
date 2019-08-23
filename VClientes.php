@@ -11,8 +11,8 @@ if (!isset($_SESSION['acceso'])) {
 ) {
     header('location: OPCAFI.php');
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -21,29 +21,18 @@ if (!isset($_SESSION['acceso'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
 
-    <title>Administracion Clientes</title>
-    <script type="text/javascript">
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-    </script>
+    <title>Clientes</title>
 </head>
 
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+<body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+    <?php include("Navbar.php") ?>
 
     <div class="container-fluid">
         <div class="row align-items-start">
@@ -161,6 +150,7 @@ if (!isset($_SESSION['acceso'])) {
         </div>
       </div>
           </div>
+
 </div>
     <?php
     if (
