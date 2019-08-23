@@ -113,3 +113,11 @@ function parar() {
   clearTimeout(parametro);
   parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
 }
+
+/*Enviar Formulario con select*/
+$(document).ready(function() {
+  $('#sucursal').on('change', function() {
+    var $form = $(this).closest('form');
+    $form.find('input[type=submit]').click();
+  });
+});

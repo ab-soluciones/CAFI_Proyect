@@ -11,7 +11,6 @@ if (!isset($_SESSION['acceso'])) {
 ) {
     header('location: OPCAFI.php');
 }
-$negocio = $_SESSION['idnegocio'];
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -133,13 +132,34 @@ $negocio = $_SESSION['idnegocio'];
                         </div>
                     </div>
                 </div>
- </div>
+             </div>
             <div id="tableContainer" class="d-block col-lg-8">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <p>Sucursal:</p>
+                    <form action="#" method="POST">
+                        <select id="sucursal" class="form form-control" name="SNegocio" placeholder="Ingrese la talla" value="">
+                        <?php 
+                      $negocio = $_SESSION['idnegocio'];
+                      $con = new Models\Conexion();
+                      $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                      WHERE clientesab_idclienteab = (SELECT clientesab_idclienteab AS dueno FROM negocios WHERE negocios.idnegocios='$negocio')";
+                      $row = $con->consultaListar($query);
+                      $con->cerrarConexion();
+                      $cont=0;
+                      while($renglon = mysqli_fetch_array($row)){
+                       $nombre[$cont] = $renglon['nombre_negocio'];
+                       $id[$cont] = $renglon['id'];
+                       $cont++;
+                       echo "<option>".$renglon['nombre_negocio']."</option>"; 
+                      }
+                    ?>
+                        </select>
+                        <input type="submit" style="display: none;">
+                    </form>
                 </div>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">
@@ -162,11 +182,21 @@ $negocio = $_SESSION['idnegocio'];
                         </thead>
                         <tbody>
                             <?php
+                                    if(isset($_POST['SNegocio'])){
+                                        for ($i=0; $i < sizeof($id); $i++) { 
+                                          if(strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0){
+                                              $negocio=$id[$i];
+                                          }
+                                        }
+                                       echo"<script>alert('$nombre[0]');</script>";
+                                    } else{   $negocio = $_SESSION['idnegocio'];}
+                         
                             $con = new Models\Conexion();
                             $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
                             FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
                             WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
                             $row = $con->consultaListar($query);
+                            $con->cerrarConexion();
 
                             while ($renglon = mysqli_fetch_array($row)) {
                                 ?>
