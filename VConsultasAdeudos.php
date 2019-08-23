@@ -18,216 +18,99 @@ if (!isset($_SESSION['acceso'])) {
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/sweetalert.css">
+
+    <script src="js/sweetalert.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/jquery.js"></script>
 
     <title>Adeudos</title>
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
     <?php include("Navbar.php") ?>
-    
-    <div id="botones" class="row" style="margin-top: 5px;">
-        <div class="col-md-3" style="margin: 0 auto;">
-            <div class="card card-body">
-                <h5 style="margin: 0 auto;"><label class="badge badge-warning">BUSQUEDA POR:</label></h5><br>
-                <button onclick="activarListaC();" class="btn btn-lg btn-block btn-info">Cliente</button>
-                <button onclick="activarListaF();" class="btn btn-lg btn-block btn-info">Fecha</button>
-            </div>
-        </div>
-    </div>
-    <div class="row" style=" margin-top: 15px;">
-        <div id="busqueda" class="col-xs-4" style="margin: 0 auto;">
-            <script>
-                document.getElementById('busqueda').style.display = 'none';
-            </script>
-            <div class=" card card-body">
-                <div><button onclick="activarM();" class="btn btn-danger">x</button></div><br>
 
-                <div id="clientes">
-                    <form class="form-group" action="VConsultasAdeudos.php" method="post">
-                        <input id="inclientes" class="form form-control" list="clientesv" name="DlClientes" required autocomplete="off">
-                        <datalist id="clientesv">
-                            <?php
-                            $con = new Models\Conexion();
-                            $negocios = $_SESSION['idnegocio'];
-                            $datos = false;
-                            $query = "SELECT nombre,apaterno,amaterno FROM cliente WHERE negocios_idnegocios ='$negocios' ORDER BY apaterno ASC";
-                            $row = $con->consultaListar($query);
-                            $con->cerrarConexion();
-
-                            while ($result = mysqli_fetch_array($row)) {
-                                ?>
-
-                                <?php $datos = true;
-                                echo "<option value='" . $result['nombre'] . " " . $result['apaterno'] . " " . $result['amaterno'] . "'> "; ?>
-                            <?php
-                            }
-                            if ($datos == false) {
-                                echo "<script>document.getElementById('inclientes').disabled = true;</script>";
-                            } ?>
-
-                        </datalist><br>
-                        <input class="btn btn-block btn-dark" type="submit" value="Buscar">
-                    </form>
+    <div class="container-fluid">
+        <div id="tableContainer" class="d-block col-lg-12">
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-search"></i></div>
                 </div>
-
-                <div id="fechas">
-                    <form class="form-group" action="#" method="post">
-                        <input class="form-control" type="date" name="DFecha" required><br>
-                        <input class="btn btn-block btn-dark" type="submit" value="Buscar">
-                    </form>
-                </div><br>
+                <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
-        </div>
+            <div class="contenedorTabla">
+                <table class="table table-bordered table-hover fixed_headers table-responsive">
+                    <thead class="thead-dark">
+                        <tr class="encabezados">
 
-        <div class="col-md-8" style=" margin: 0 auto; margin-top:15px;">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-
-                        <th>Deuda</th>
-                        <th>Pago minimo</th>
-                        <th>Estado</th>
-                        <th>Cliente</th>
-                        <th>Venta</th>
-                        <th>Abonar</th>
-                    </tr>
-                </thead>
-                <tbody id="renglones">
-                    <?php
-                    if (
-                        isset($_POST['DlClientes'])
-                    ) {
+                            <th onclick="sortTable(0)">Deuda</th>
+                            <th onclick="sortTable(1)">Pago minimo</th>
+                            <th onclick="sortTable(2)">Estado</th>
+                            <th onclick="sortTable(3)">Cliente</th>
+                            <th onclick="sortTable(4)">Venta</th>
+                            <th onclick="sortTable(5)">Abonar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
                         $con = new Models\Conexion();
-                        $nombre = $_POST['DlClientes'];
                         $negocios = $_SESSION['idnegocio'];
-                        $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas FROM adeudos 
-                        INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
-                        WHERE  (SELECT CONCAT(cliente.nombre,' ', cliente.apaterno,' ' ,cliente.amaterno))='$nombre'
-                        AND adeudos.negocios_idnegocios='$negocios' ORDER BY ventas_idventas DESC";
+                        $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
+                        FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
+                        WHERE adeudos.negocios_idnegocios='$negocios' ORDER BY ventas_idventas DESC";
                         $row = $con->consultaListar($query);
                         $con->cerrarConexion();
 
                         while ($renglon = mysqli_fetch_array($row)) {
-                            echo "<script>datos = true;</script>";
                             ?>
-                            <tr>
-                                <td>$ <?php echo $renglon['total_deuda']; ?></td>
-                                <td>$ <?php echo $renglon['pago_minimo']; ?></td>
-                                <td><?php echo $renglon['estado_deuda']; ?></td>
-                                <td><?php echo $nombre; ?></td>
-                                <td><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>"># <?php echo $renglon['ventas_idventas']; ?></a></td>
-                                <td>
-                                    <?php if ($renglon['estado_deuda'] == "L") {
+                        <tr>
+                            <td>$ <?php echo $renglon['total_deuda']; ?></td>
+                            <td>$ <?php echo $renglon['pago_minimo']; ?></td>
+                            <td><?php echo $renglon['estado_deuda']; ?></td>
+                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
+                            <td><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>">?></a></td>
+                            <td>
+                                <?php if ($renglon['estado_deuda'] == "L") {
                                         ?>
-                                        <button class="btn btn-success" disabled><img src="img/abonos.png"></a></button>
-                                        <button class="btn btn-success" disabled><img src="img/tarjeta.png"></a></button>
-                                    <?php  } else {
+                                <button class="btn btn-success" disabled><img src="img/abonos.png"></a></button>
+                                <button class="btn btn-success" disabled><img src="img/tarjeta.png"></a></button>
+                                <?php  } else {
                                         ?>
-                                        <div class="container">
-                                            <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo">
-                                                <img src="img/abonos.png"></a>
-                                            <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta">
-                                                <img src="img/tarjeta.png"></a>
-                                        </div>
-                                    <?php } ?>
-                                </td>
-                            </tr>
+                                <div class="container">
+                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo">
+                                        <img src="img/abonos.png"></a>
+                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta">
+                                        <img src="img/tarjeta.png"></a>
+                                </div>
+                                <?php } ?>
+                            </td>
+                        </tr>
                         <?php
                         } ?>
 
                     </tbody>
                 </table>
-
-            <?php
-            } ?>
-            <?php
-            $con = new Models\Conexion();
-            if (isset($_POST['DFecha'])) {
-                $fecha = $_POST['DFecha'];
-                $query = "SELECT idadeudos ,total_deuda , pago_minimo, estado_deuda , ventas_idventas,nombre,apaterno,amaterno FROM adeudos 
-                      INNER JOIN venta ON adeudos.ventas_idventas = venta.idventas 
-                      INNER JOIN cliente ON adeudos.cliente_idcliente = cliente.idcliente WHERE venta.fecha='$fecha'";
-                $row = $con->consultaListar($query);
-                $con->cerrarConexion();
-                while ($renglon = mysqli_fetch_array($row)) {
-                    echo "<script>datos = true;</script>";
-                    ?>
-                    <tr>
-                        <td>$ <?php echo $renglon['total_deuda']; ?></td>
-                        <td>$ <?php echo $renglon['pago_minimo']; ?></td>
-                        <td><?php echo $renglon['estado_deuda']; ?></td>
-                        <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
-                        <td><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>"># <?php echo $renglon['ventas_idventas']; ?></a></td>
-                        <td>
-                            <?php if ($renglon['estado_deuda'] == "L") {
-                                ?>
-                                <button class="btn btn-success" disabled><img src="img/abonos.png"></a></button>
-                                <button class="btn btn-success" disabled><img src="img/tarjeta.png"></a></button>
-                            <?php  } else {
-                                ?>
-                                <div class="container">
-                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo">
-                                        <img src="img/abonos.png"></a>
-                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta">
-                                        <img src="img/tarjeta.png"></a>
-                                </div>
-                            <?php } ?>
-                        </td>
-                    </tr>
-                <?php
-                } ?>
-                </tbody>
-                </table>
-            <?php } ?>
-            <?php if (isset($_GET['ad'])) {
-                $con = new Models\Conexion();
-                $adeudo = $_GET['ad'];
-                $negocios = $_SESSION['idnegocio'];
-                $query = "SELECT idadeudos , total_deuda ,pago_minimo,
-                estado_deuda, ventas_idventas,nombre,apaterno,amaterno FROM adeudos 
-                        INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
-                        WHERE idadeudos='$adeudo' AND adeudos.negocios_idnegocios='$negocios'";
-                $row = $con->consultaListar($query);
-                $con->cerrarConexion();
-
-                while ($renglon = mysqli_fetch_array($row)) {
-                    echo "<script>datos = true;</script>";
-                    ?>
-                    <tr>
-                        <td>$ <?php echo $renglon['total_deuda']; ?></td>
-                        <td>$ <?php echo $renglon['pago_minimo']; ?></td>
-                        <td><?php echo $renglon['estado_deuda']; ?></td>
-                        <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
-                        <td><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>"># <?php echo $renglon['ventas_idventas']; ?></a></td>
-                        <td>
-                            <?php if ($renglon['estado_deuda'] == "L") {
-                                ?>
-                                <button class="btn btn-success" disabled><img src="img/abonos.png"></a></button>
-                                <button class="btn btn-success" disabled><img src="img/tarjeta.png"></a></button>
-                            <?php  } else {
-                                ?>
-                                <div class="container">
-                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo">
-                                        <img src="img/abonos.png"></a>
-                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta">
-                                        <img src="img/tarjeta.png"></a>
-                                </div>
-                            <?php } ?>
-                        </td>
-
-                    </tr>
-                <?php
-                } ?> </tbody>
-                </table>
-
-            <?php } ?>
+            </div>
+            <!--Tabla contenedor-->
         </div>
+        <!--col-7-->
     </div>
+    <!--row-->
+    </div>
+<<<<<<< HEAD
     <script src="js/user_jquery.js"></script>
+=======
+    <!--container-->
+    <?php if (isset($_GET['ad'])) {
+        $adeudo = $_GET['ad'];
+    } ?>
+<script src="js/user_jquery.js"></script>
+>>>>>>> backend
 </body>
 
 </html>

@@ -17,32 +17,18 @@ if (!isset($_SESSION['acceso'])) {
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
 
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
-
     <title>Administracion Clientes AB</title>
-    <script>
-        function agregar() {
-            document.getElementById("formulario").style.display = "block";
-            document.getElementById("tabla").style.display = "none";
-            document.getElementById("bagregar").style.display = "none";
-            document.getElementById("bmostrar").style.display = "block";
-        }
 
-        function mostrar() {
-            document.getElementById("bagregar").style.display = "block";
-            document.getElementById("bmostrar").style.display = "none";
-            document.getElementById("formulario").style.display = "none";
-            document.getElementById("tabla").style.display = "block";
-
-        }
-    </script>
 </head>
 
 <body style="background: #f2f2f2;">
@@ -51,17 +37,10 @@ if (!isset($_SESSION['acceso'])) {
             <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Clientes</a>
         </div>
     </nav>
-    <div class="row" style="margin-top: 5px;">
-        <div class="col-md-3" style="margin: 0 auto;">
-            <div class="card card-body">
-                <button id="bagregar" onclick="agregar();" class="btn btn-lg btn-block btn-primary">Agregar</button>
-                <button id="bmostrar" onclick="mostrar();" class="btn btn-lg btn-block btn-info">Mostrar</button>
-            </div>
-        </div>
     </div>
-    <div class="row" style="margin-top: 5px;">
-        <div id="formulario" class="col-md-3" style="margin:0 auto; display: none;">
-            <div class=" card card-body">
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
                 <form class="form-group" action="#" method="post">
                     <h5 class="etiquetas"><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
                     <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
@@ -101,68 +80,69 @@ if (!isset($_SESSION['acceso'])) {
                     <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                     <h5 class="etiquetas"><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
                     <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required><br>
-                    <input onclick="location.reload()" type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                    <input type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
                 </form>
 
             </div>
+            <div id="tableContainer" class="d-block col-lg-8">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                </div>
+                <table class="table table-bordered table-hover fixed_headers table-responsive">
+                    <thead class="thead-dark">
+                        <tr class="encabezados">
+                            <th onclick="sortTable(0)">Nombre</th>
+                            <th onclick="sortTable(1)">Ap-P</th>
+                            <th onclick="sortTable(2)">Ap-M</th>
+                            <th onclick="sortTable(3)">Doc</th>
+                            <th onclick="sortTable(4)">#Doc</th>
+                            <th onclick="sortTable(5)">Direcci&oacute;n</th>
+                            <th onclick="sortTable(6)">Tel&eacute;fono</th>
+                            <th onclick="sortTable(7)">Email</th>
+                            <th onclick="sortTable(8)">Usuario</th>
+                            <th onclick="sortTable(9)">Contraseña</th>
+                            <th onclick="sortTable(10)">Estado</th>
+                            <th onclick="sortTable(11)">Tarea</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $con = new Models\Conexion();
+                        $query = "SELECT * FROM clientesab ORDER BY id_clienteab DESC";
+                        $row = $con->consultaListar($query);
+                        $con->cerrarConexion();
 
+                        while ($renglon = mysqli_fetch_array($row)) {
+                            ?>
+                        <tr>
+                            <td><?php echo $renglon['nombre']; ?></td>
+                            <td><?php echo $renglon['apaterno']; ?></td>
+                            <td><?php echo $renglon['amaterno']; ?></td>
+                            <td><?php echo $renglon['tipo_documento']; ?></td>
+                            <td><?php echo $renglon['numero_documento']; ?></td>
+                            <td><?php echo $renglon['direccion']; ?></td>
+                            <td><?php echo $renglon['telefono']; ?></td>
+                            <td><?php echo $renglon['correo']; ?></td>
+                            <td><?php echo $renglon['login']; ?></td>
+                            <td><?php echo $renglon['password']; ?></td>
+                            <td><?php echo $renglon['estado']; ?></td>
+                            <td style="width:100px;">
+                                <div class="row">
+                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVClienteAB.php?id=<?php echo $renglon['id_clienteab'] ?>">
+                                        <img src="img/edit.png">
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php
+                        } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div id="tabla" class="col-lg-12" style="margin-left: 10px; margin-top: 10px;">
-            <h5 style="margin: 0 auto;"><label class="badge badge-info">
-                    <a style="color: white;" href="VConsultasC.php">BUSCAR--></a>
-                </label></h5>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Ap-P</th>
-                        <th>Ap-M</th>
-                        <th>Doc</th>
-                        <th>#Doc</th>
-                        <th>Direcci&oacute;n</th>
-                        <th>Tel&eacute;fono</th>
-                        <th>Email</th>
-                        <th>Usuario</th>
-                        <th>Contraseña</th>
-                        <th>Estado</th>
-                        <th>Tarea</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $con = new Models\Conexion();
-                    $query = "SELECT * FROM clientesab ORDER BY id_clienteab DESC";
-                    $row = $con->consultaListar($query);
-                    $con->cerrarConexion();
-
-                    while ($renglon = mysqli_fetch_array($row)) {
-                        ?>
-                    <tr>
-                        <td><?php echo $renglon['nombre']; ?></td>
-                        <td><?php echo $renglon['apaterno']; ?></td>
-                        <td><?php echo $renglon['amaterno']; ?></td>
-                        <td><?php echo $renglon['tipo_documento']; ?></td>
-                        <td><?php echo $renglon['numero_documento']; ?></td>
-                        <td><?php echo $renglon['direccion']; ?></td>
-                        <td><?php echo $renglon['telefono']; ?></td>
-                        <td><?php echo $renglon['correo']; ?></td>
-                        <td><?php echo $renglon['login']; ?></td>
-                        <td><?php echo $renglon['password']; ?></td>
-                        <td><?php echo $renglon['estado']; ?></td>
-                        <td style="width:100px;">
-                            <div class="row">
-                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVClienteAB.php?id=<?php echo $renglon['id_clienteab'] ?>">
-                                    <img src="img/edit.png">
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php
-                    } ?>
-                </tbody>
-            </table>
-        </div>
-
     </div>
     <?php
     if (
@@ -208,5 +188,6 @@ if (!isset($_SESSION['acceso'])) {
     <?php }
     }
     ?>
+    <script src="js/user_jquery.js"></script>
 </body>
 </html>
