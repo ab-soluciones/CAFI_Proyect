@@ -140,7 +140,7 @@ $con->cerrarConexion();
                 <h5 style="margin: 0 auto; color: #0066ff;">Retiros</h5>
             </div>
         </div>
-
+        <div class="container-fluid">
         <div class="col-md-3">
             <div class="card card-body" style="margin-top: 10px;">
                 <table class="table table-bordered">
@@ -155,7 +155,17 @@ $con->cerrarConexion();
                         <td>$<?php echo $banco; ?></td>
                     </tbody>
                 </table>
+                    <div class="row align-items-start">
+                        <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
+                          <div id="tableContainer" class="d-block col-lg-8">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-search"></i></div>
+                                </div>
+                                <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                            </div>
                 <form class="form-group" action="#" method="post">
+                  <div class="container">
                     <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
                     <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad" required><br>
                     <h5><label for="de" class="badge badge-ligh">De:</label></h5>
@@ -180,24 +190,25 @@ $con->cerrarConexion();
                 </form>
             </div>
         </div>
+      </div>
         <div class="col-md-8" style="margin-top: 15px;">
             <h5 style="margin: 0 auto;"><label class="badge badge-ligh">
                     <a href="VConsultasRetiros.php">BUSCAR--></a>
                 </label></h5>
-            <table class="table table-bordered table-responsive-md">
-                <thead>
-                    <tr>
-                        <th>Concepto</th>
-                        <th>De</th>
-                        <th>Cantidad</th>
-                        <th>Descripcion</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Estado</th>
-                        <th>Retiró</th>
-                        <th>Tarea</th>
-                    </tr>
-                </thead>
+                <div class="contenedorTabla">
+                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                        <thead class="thead-dark">
+                            <tr class="encabezados">
+                              <th onclick="sortTable(0)">Concepto</th>
+                              <th onclick="sortTable(1)">De</th>
+                              <th onclick="sortTable(2)">Cantidad</th>
+                              <th onclick="sortTable(3)">Descripcion</th>
+                              <th onclick="sortTable(4)">Fecha</th>
+                              <th onclick="sortTable(5)">Hora</th>
+                              <th onclick="sortTable(6)">Estado</th>
+                              <th onclick="sortTable(7)">Retiró</th>
+                              <th onclick="sortTable(8)">Tarea</th>
+                          </tr>
                 <tbody>
                     <?php
                     if (isset($_GET['idedit'])) {
@@ -241,6 +252,10 @@ $con->cerrarConexion();
             </table>
         </div>
     </div>
+  </div>
+</div>
+</div>
+</div>
     <?php
     function retirar($concepto, $tipo, $cantidad, $descripcion)
     {
@@ -332,6 +347,7 @@ $con->cerrarConexion();
         }
     }
     ?>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

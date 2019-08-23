@@ -35,6 +35,17 @@ if (!isset($_SESSION['acceso'])) {
             <a style="margin: 0 auto;" href="#" class="navbar-brand">Administración de Suscripciones</a>
         </div>
     </nav>
+
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
+              <div id="tableContainer" class="d-block col-lg-8">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                </div>
     <div class="row" style="margin-left: -6px; margin-top: 5px;">
         <div class="col-md-3">
             <div class=" card card-body">
@@ -76,26 +87,29 @@ if (!isset($_SESSION['acceso'])) {
                     </div><br>
                     <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Guardar">
                 </form>
-
+              </div>
             </div>
-
+          </div>
         </div>
         <div class="col-md-8">
             <h5 style="margin: 0 auto;"><label class="badge badge-info">
                     <a style="color: white;" href="VConsultasSuscripcion.php">BUSCAR--></a>
                 </label></h5>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Activacion</th>
-                        <th>Vencimiento</th>
-                        <th>Estado</th>
-                        <th>Negocio</th>
-                        <th>Monto</th>
-                        <th>Tarea</th>
-                    </tr>
-                </thead>
+
+                <div class="contenedorTabla">
+                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                        <thead class="thead-dark">
+                            <tr class="encabezados">
+                                <th onclick="sortTable(0)">ID</th>
+                                <th onclick="sortTable(1)">Activacion</th>
+                                <th onclick="sortTable(2)">Vencimiento</th>
+                                <th onclick="sortTable(3)">Estado</th>
+                                <th onclick="sortTable(4)">Negocio</th>
+                                <th onclick="sortTable(5)">Monto</th>
+                                <th onclick="sortTable(6)">Tarea</th>
+                            </tr>
+                        </thead>
+
                 <tbody>
                     <?php
                     $con = new Models\Conexion();
@@ -124,8 +138,10 @@ if (!isset($_SESSION['acceso'])) {
                 </tbody>
             </table>
         </div>
-
+      </div>
     </div>
+  </div>
+</div>
     <?php
     if (
         isset($_POST['DFecha']) && isset($_POST['DFecha2'])
@@ -166,6 +182,7 @@ if (!isset($_SESSION['acceso'])) {
     <?php }
     }
     ?>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>
