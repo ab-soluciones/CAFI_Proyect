@@ -123,6 +123,7 @@ $con->cerrarConexion();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
@@ -134,38 +135,22 @@ $con->cerrarConexion();
 
 <body>
 
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card card-body" style="background: #000000;">
-                <h5 style="margin: 0 auto; color: #0066ff;">Retiros</h5>
-            </div>
-        </div>
-        <div class="container-fluid">
-        <div class="col-md-3">
-            <div class="card card-body" style="margin-top: 10px;">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Saldo en caja</th>
-                            <th>Saldo en banco</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td>$<?php echo $efectivo; ?></td>
-                        <td>$<?php echo $banco; ?></td>
-                    </tbody>
-                </table>
+                <div class="container-fluid">
                     <div class="row align-items-start">
                         <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
-                          <div id="tableContainer" class="d-block col-lg-8">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-search"></i></div>
-                                </div>
-                                <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                            </div>
+                          <table>
+                          <thead>
+                              <tr>
+                                  <th>Saldo en caja</th>
+                                  <th>Saldo en banco</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <td>$<?php echo $efectivo; ?></td>
+                              <td>$<?php echo $banco; ?></td>
+                          </tbody>
+                      </table>
                 <form class="form-group" action="#" method="post">
-                  <div class="container">
                     <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
                     <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad" required><br>
                     <h5><label for="de" class="badge badge-ligh">De:</label></h5>
@@ -187,75 +172,79 @@ $con->cerrarConexion();
                     <button type="submit" style="color: #005ce6;" class="btn btn-dark btn-lg btn-block">
                         <h6>Retirar</h6><img src="img/retiro.png">
                     </button>
+
                 </form>
+            </div>
+            <div class="col-md-8">
+              <div id="tableContainer" class="d-block col-lg-8">
+                  <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                      <div class="input-group-text"><i class="fa fa-search"></i></div>
+                      </div>
+                      <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name">
+                  </div>
+                    <div class="contenedorTabla">
+                        <table class="table table-bordered table-hover fixed_headers table-responsive">
+                            <thead class="thead-dark">
+                                <tr class="encabezados">
+                                  <th onclick="sortTable(0)">Concepto</th>
+                                  <th onclick="sortTable(1)">De</th>
+                                  <th onclick="sortTable(2)">Cantidad</th>
+                                  <th onclick="sortTable(3)">Descripcion</th>
+                                  <th onclick="sortTable(4)">Fecha</th>
+                                  <th onclick="sortTable(5)">Hora</th>
+                                  <th onclick="sortTable(6)">Estado</th>
+                                  <th onclick="sortTable(7)">Retiró</th>
+                                  <th onclick="sortTable(8)">Tarea</th>
+                              </tr>
+                    <tbody>
+                        <?php
+                        if (isset($_GET['idedit'])) {
+                            $id = $_GET['idedit'];
+                            $negocio = "";
+                        } else {
+                            $id = "";
+                        }
+                        $con = new Models\Conexion();
+                        $query = "SELECT idretiro,concepto,tipo,cantidad,descripcion,fecha,hora,retiros.estado,nombre,apaterno FROM retiros INNER JOIN trabajador ON retiros.trabajador_idtrabajador=trabajador.idtrabajador
+                        WHERE retiros.negocios_idnegocios ='$negocio' AND retiros.fecha='$fecha' OR idretiro = '$id' ORDER BY idretiro DESC";
+                        $row = $con->consultaListar($query);
+                        $con->cerrarConexion();
+
+                        while ($renglon = mysqli_fetch_array($row)) {
+                            ?>
+                        <tr>
+                            <td><?php echo $renglon['concepto']; ?></td>
+                            <td><?php echo $renglon['tipo']; ?></td>
+                            <td><?php echo $renglon['cantidad']; ?></td>
+                            <td><?php if (strlen($renglon['descripcion']) == 0) {
+                                        echo "Sin descripcion";
+                                    } else {
+                                        echo $renglon['descripcion'];
+                                    } ?></td>
+                            <td><?php echo $renglon['fecha']; ?></td>
+                            <td><?php echo $renglon['hora']; ?></td>
+                            <td><?php echo $renglon['estado']; ?></td>
+                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
+                            <td style="width:100px;">
+                                <div class="row">
+                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="VEditRetiros.php?id=<?php echo $renglon['idretiro']; ?>&estado=<?php echo $renglon['estado']; ?>">
+                                        <img src="img/edit.png">
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php
+                        } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
       </div>
-        <div class="col-md-8" style="margin-top: 15px;">
-            <h5 style="margin: 0 auto;"><label class="badge badge-ligh">
-                    <a href="VConsultasRetiros.php">BUSCAR--></a>
-                </label></h5>
-                <div class="contenedorTabla">
-                    <table class="table table-bordered table-hover fixed_headers table-responsive">
-                        <thead class="thead-dark">
-                            <tr class="encabezados">
-                              <th onclick="sortTable(0)">Concepto</th>
-                              <th onclick="sortTable(1)">De</th>
-                              <th onclick="sortTable(2)">Cantidad</th>
-                              <th onclick="sortTable(3)">Descripcion</th>
-                              <th onclick="sortTable(4)">Fecha</th>
-                              <th onclick="sortTable(5)">Hora</th>
-                              <th onclick="sortTable(6)">Estado</th>
-                              <th onclick="sortTable(7)">Retiró</th>
-                              <th onclick="sortTable(8)">Tarea</th>
-                          </tr>
-                <tbody>
-                    <?php
-                    if (isset($_GET['idedit'])) {
-                        $id = $_GET['idedit'];
-                        $negocio = "";
-                    } else {
-                        $id = "";
-                    }
-                    $con = new Models\Conexion();
-                    $query = "SELECT idretiro,concepto,tipo,cantidad,descripcion,fecha,hora,retiros.estado,nombre,apaterno FROM retiros INNER JOIN trabajador ON retiros.trabajador_idtrabajador=trabajador.idtrabajador
-                    WHERE retiros.negocios_idnegocios ='$negocio' AND retiros.fecha='$fecha' OR idretiro = '$id' ORDER BY idretiro DESC";
-                    $row = $con->consultaListar($query);
-                    $con->cerrarConexion();
-
-                    while ($renglon = mysqli_fetch_array($row)) {
-                        ?>
-                    <tr>
-                        <td><?php echo $renglon['concepto']; ?></td>
-                        <td><?php echo $renglon['tipo']; ?></td>
-                        <td><?php echo $renglon['cantidad']; ?></td>
-                        <td><?php if (strlen($renglon['descripcion']) == 0) {
-                                    echo "Sin descripcion";
-                                } else {
-                                    echo $renglon['descripcion'];
-                                } ?></td>
-                        <td><?php echo $renglon['fecha']; ?></td>
-                        <td><?php echo $renglon['hora']; ?></td>
-                        <td><?php echo $renglon['estado']; ?></td>
-                        <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-                        <td style="width:100px;">
-                            <div class="row">
-                                <a style="margin: 0 auto;" class="btn btn-secondary" href="VEditRetiros.php?id=<?php echo $renglon['idretiro']; ?>&estado=<?php echo $renglon['estado']; ?>">
-                                    <img src="img/edit.png">
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php
-                    } ?>
-                </tbody>
-            </table>
         </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
+
+      </div>
+
     <?php
     function retirar($concepto, $tipo, $cantidad, $descripcion)
     {

@@ -23,6 +23,7 @@ if (!isset($_SESSION['acceso'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
@@ -32,25 +33,10 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body style="background: #f2f2f2;">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administración de Negocios</a>
-        </div>
-    </nav>
 
     <div class="container-fluid">
         <div class="row align-items-start">
             <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
-              <div id="tableContainer" class="d-block col-lg-8">
-                <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="fa fa-search"></i></div>
-                    </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                </div>
-    <div class="row" style="margin-left: -6px; margin-top: 5px;">
-        <div class="col-md-3">
-            <div class=" card card-body">
                 <form class="form-group" action="#" method="post">
 
                     <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
@@ -104,62 +90,63 @@ if (!isset($_SESSION['acceso'])) {
                     <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Guardar">
                 </form>
             </div>
+            <div class="col-md-8">
+              <div id="tableContainer" class="d-block col-lg-8">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-search"></i></div>
+                        </div>
+                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    </div>
+                  <div class="contenedorTabla">
+                  <table class="table table-bordered table-hover fixed_headers table-responsive">
+                      <thead class="thead-dark">
+                          <tr class="encabezados">
+                              <th onclick="sortTable(0)">ID Usuarios AB</th>
+                              <th onclick="sortTable(1)">Nombre</th>
+                              <th onclick="sortTable(2)">Domicilio</th>
+                              <th onclick="sortTable(3)">Ciudad</th>
+                              <th onclick="sortTable(4)">Telefono</th>
+                              <th onclick="sortTable(5)">Impresora</th>
+                              <th onclick="sortTable(6)">Cliente</th>
+                              <th onclick="sortTable(7)">Tarea</th>
+                          </tr>
+                      </thead>
+
+                    <tbody>
+                        <?php
+                        $con = new Models\Conexion();
+                        $query = "SELECT * FROM negocios ORDER BY idnegocios DESC";
+                        $row = $con->consultaListar($query);
+                        $con->cerrarConexion();
+
+                        while ($renglon = mysqli_fetch_array($row)) {
+                            ?>
+                        <tr>
+                            <td><?php echo $renglon['idnegocios']; ?></td>
+                            <td><?php echo $renglon['nombre_negocio']; ?></td>
+                            <td><?php echo $renglon['domicilio']; ?></td>
+                            <td><?php echo $renglon['ciudad']; ?></td>
+                            <td><?php echo $renglon['telefono_negocio']; ?></td>
+                            <td><?php echo $renglon['impresora']; ?></td>
+                            <td><a href="VConsultasC.php?id= <?php echo $renglon['clientesab_idclienteab']; ?>"># <?php echo $renglon['clientesab_idclienteab']; ?></a></td>
+                            <td style="width:100px;">
+                                <div class="row">
+                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVNegocio.php?id=<?php echo $renglon['idnegocios'] ?>">
+                                        <img src="img/edit.png">
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php
+                        } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
       </div>
-    </div>
-  </div>
-        <div class="col-md-8">
-            <h5 style="margin: 0 auto;"><label class="badge badge-info">
-                    <a style="color: white;" href="VConsultasN.php">BUSCAR--></a>
-                </label></h5>
-
-              <div class="contenedorTabla">
-              <table class="table table-bordered table-hover fixed_headers table-responsive">
-                  <thead class="thead-dark">
-                      <tr class="encabezados">
-                          <th onclick="sortTable(0)">ID Usuarios AB</th>
-                          <th onclick="sortTable(1)">Nombre</th>
-                          <th onclick="sortTable(2)">Domicilio</th>
-                          <th onclick="sortTable(3)">Ciudad</th>
-                          <th onclick="sortTable(4)">Telefono</th>
-                          <th onclick="sortTable(5)">Impresora</th>
-                          <th onclick="sortTable(6)">Cliente</th>
-                          <th onclick="sortTable(7)">Tarea</th>
-                      </tr>
-                  </thead>
-
-                <tbody>
-                    <?php
-                    $con = new Models\Conexion();
-                    $query = "SELECT * FROM negocios ORDER BY idnegocios DESC";
-                    $row = $con->consultaListar($query);
-                    $con->cerrarConexion();
-
-                    while ($renglon = mysqli_fetch_array($row)) {
-                        ?>
-                    <tr>
-                        <td><?php echo $renglon['idnegocios']; ?></td>
-                        <td><?php echo $renglon['nombre_negocio']; ?></td>
-                        <td><?php echo $renglon['domicilio']; ?></td>
-                        <td><?php echo $renglon['ciudad']; ?></td>
-                        <td><?php echo $renglon['telefono_negocio']; ?></td>
-                        <td><?php echo $renglon['impresora']; ?></td>
-                        <td><a href="VConsultasC.php?id= <?php echo $renglon['clientesab_idclienteab']; ?>"># <?php echo $renglon['clientesab_idclienteab']; ?></a></td>
-                        <td style="width:100px;">
-                            <div class="row">
-                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVNegocio.php?id=<?php echo $renglon['idnegocios'] ?>">
-                                    <img src="img/edit.png">
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php
-                    } ?>
-                </tbody>
-            </table>
         </div>
-    </div>
-  </div>
+
 </div>
     <?php
     if (
