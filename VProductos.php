@@ -132,7 +132,7 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
             <div id="tableContainer" class="d-block col-lg-8">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
@@ -141,22 +141,23 @@ if (!isset($_SESSION['acceso'])) {
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <p>Sucursal:</p>
                     <form action="#" method="POST">
-                        <select id="sucursal" class="form form-control" name="SNegocio" placeholder="Ingrese la talla" value="">
-                        <?php 
-                      $negocio = $_SESSION['idnegocio'];
-                      $con = new Models\Conexion();
-                      $query = "SELECT nombre_negocio, idnegocios FROM negocios 
-                      WHERE clientesab_idclienteab = (SELECT clientesab_idclienteab AS dueno FROM negocios WHERE negocios.idnegocios='$negocio')";
-                      $row = $con->consultaListar($query);
-                      $con->cerrarConexion();
-                      $cont=0;
-                      while($renglon = mysqli_fetch_array($row)){
-                       $nombre[$cont] = $renglon['nombre_negocio'];
-                       $id[$cont] = $renglon['id'];
-                       $cont++;
-                       echo "<option>".$renglon['nombre_negocio']."</option>"; 
-                      }
-                    ?>
+                        <select id="sucursal" class="form form-control" name="SNegocio">
+                            <option></option>
+                            <?php
+                            $negocio = $_SESSION['idnegocio'];
+                            $con = new Models\Conexion();
+                            $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                            WHERE clientesab_idclienteab = (SELECT clientesab_idclienteab AS dueno FROM negocios WHERE negocios.idnegocios='$negocio')";
+                            $row = $con->consultaListar($query);
+                            $con->cerrarConexion();
+                            $cont = 0;
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                $nombre[$cont] = $renglon['nombre_negocio'];
+                                $id[$cont] = $renglon['idnegocios'];
+                                $cont++;
+                                echo "<option>" . $renglon['nombre_negocio'] . "</option>";
+                            }
+                            ?>
                         </select>
                         <input type="submit" style="display: none;">
                     </form>
@@ -182,15 +183,16 @@ if (!isset($_SESSION['acceso'])) {
                         </thead>
                         <tbody>
                             <?php
-                                    if(isset($_POST['SNegocio'])){
-                                        for ($i=0; $i < sizeof($id); $i++) { 
-                                          if(strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0){
-                                              $negocio=$id[$i];
-                                          }
-                                        }
-                                       echo"<script>alert('$nombre[0]');</script>";
-                                    } else{   $negocio = $_SESSION['idnegocio'];}
-                         
+                            if (isset($_POST['SNegocio'])) {
+                                for ($i = 0; $i < sizeof($id); $i++) {
+                                    if (strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0) {
+                                        $negocio = $id[$i];
+                                    }
+                                }
+                            } else {
+                                $negocio = $_SESSION['idnegocio'];
+                            }
+
                             $con = new Models\Conexion();
                             $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
                             FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
@@ -228,9 +230,7 @@ if (!isset($_SESSION['acceso'])) {
                                 <td>
                                     <div class="row" style="position: absolute;">
                                         <div class="container" style="margin: 0 auto;">
-                                            <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
-                                                <img src="img/edit.png">
-                                            </a>
+                                        <button onclick="window.location.href='EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>'" class="btn btn-secondary" <?php if($negocio != $_SESSION['idnegocio']) echo"disabled";?>><img src="img/edit.png"></button>
                                         </div>
                                     </div>
                                 </td>

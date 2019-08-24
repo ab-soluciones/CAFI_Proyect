@@ -21,6 +21,9 @@ if (!isset($_SESSION['acceso'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    
     <title>Flujo de efectivo</title>
     <script type="text/javascript">
         var parametro;
@@ -42,12 +45,33 @@ if (!isset($_SESSION['acceso'])) {
             <a style="margin: 0 auto;" href="#" class="navbar-brand"><?php echo $_SESSION['nombrenegocio']; ?> flujo de efectivo cotidiano</a>
         </div>
     </nav>
+    <p>Sucursal:</p>
+                <form action="#" method="POST">
+                        <select id="sucursal" class="form form-control" name="SNegocio">
+                            <option></option>
+                            <?php
+                            $con = new Models\Conexion();
+                            $dueño = $_SESSION['id'];
+                            $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                            WHERE clientesab_idclienteab = '$dueño'";
+                            $row = $con->consultaListar($query);
+                            $con->cerrarConexion();
+                            $cont = 0;
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                $nombre[$cont] = $renglon['nombre_negocio'];
+                                $id[$cont] = $renglon['idnegocios'];
+                                $cont++;
+                                echo "<option>" . $renglon['nombre_negocio'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <input type="submit" style="display: none;">
+                    </form>
     <div style="margin: 0 auto; margin-top:10px;" class="col-md-8">
         <h5 style="margin: 0 auto;"><label class="badge badge-info">
                 <a style="color: white;" href="VConsultasFlujoEfectivo.php">Consultar otras fechas --></a>
             </label></h5>
         <table class="table table-bordered table-responsive-md">
-
             <thead>
                 <tr>
                     <th>Ventas</th>
@@ -59,7 +83,23 @@ if (!isset($_SESSION['acceso'])) {
             </thead>
             <tbody>
                 <?php
-                $negocio = $_SESSION['idnegocio'];
+                $negocio="";
+                $ventas=null;
+                $otros_ingresos=null;
+                $gastos=null;
+                $retiros=null;
+                $efectivo=null;
+                $ingresos_efectivo= null;
+                $ingresos_banco=null;
+                $ingresos_credito=null;
+                $otros_ingresos_efectivo=null;
+                $otros_ingresos_banco=null;
+                if (isset($_POST['SNegocio'])) {
+                    for ($i = 0; $i < sizeof($id); $i++) {
+                        if (strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0) {
+                           $negocio = $id[$i];
+                        }
+                    }
                 $con = new Models\Conexion();
 
                 //consultas para optener el flujo de fectivo al dia
@@ -147,7 +187,7 @@ if (!isset($_SESSION['acceso'])) {
                 }
 
                 $con->cerrarConexion();
-
+            }
                 if (isset($_POST['BSucursales'])) {
                     $dueño = $_SESSION['id'];
                     $con = new Models\Conexion();
@@ -341,6 +381,7 @@ if (!isset($_SESSION['acceso'])) {
         </form>
     </div>
     </div>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

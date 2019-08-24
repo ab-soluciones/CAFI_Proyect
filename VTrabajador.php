@@ -139,7 +139,30 @@ Config\Autoload::run();
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
+                    <p>Sucursal:</p>
+                    <form action="#" method="POST">
+                        <select id="sucursal" class="form form-control" name="SNegocio">
+                            <option></option>
+                            <?php
+                            $negocio = $_SESSION['idnegocio'];
+                            $con = new Models\Conexion();
+                            $dueño = $_SESSION['id'];
+                            $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                            WHERE clientesab_idclienteab = '$dueño'";
+                            $row = $con->consultaListar($query);
+                            $con->cerrarConexion();
+                            $cont = 0;
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                $nombre[$cont] = $renglon['nombre_negocio'];
+                                $id[$cont] = $renglon['idnegocios'];
+                                $cont++;
+                                echo "<option>" . $renglon['nombre_negocio'] . "</option>";
+                            }
+                            ?>
+                        </select>
+                        <input type="submit" style="display: none;">
+                    </form>
                 </div>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">
@@ -163,7 +186,16 @@ Config\Autoload::run();
                         </thead>
                         <tbody>
                             <?php
-                            $idnegocio = $_SESSION['idnegocio'];
+                             if (isset($_POST['SNegocio'])) {
+                                for ($i = 0; $i < sizeof($id); $i++) {
+                                    if (strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0) {
+                                        $_SESSION['idnegocio'] =  $idnegocio = $id[$i];
+                                    }
+                                }
+                            } else {
+                                $idnegocio =  $_SESSION['idnegocio'];
+                            }
+                        
                             //se optiene el id del negocio para hacer la consulta ..se escoge el id por que puede haber muchos negocios con el mismo nombre pertenecientes a otro dueño
                             $con = new Models\Conexion();
                             $query = "SELECT * FROM trabajador WHERE negocios_idnegocios = '$idnegocio' ORDER BY idtrabajador DESC";

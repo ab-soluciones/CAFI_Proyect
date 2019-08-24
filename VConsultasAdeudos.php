@@ -84,19 +84,10 @@ if (!isset($_SESSION['acceso'])) {
                             <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
                             <td><a href="VConsultasVentas.php?venta=<?php echo $renglon['ventas_idventas']; ?>">mostrar</a></td>
                             <td>
-                                <?php if ($renglon['estado_deuda'] == "L") {
-                                        ?>
-                                <button class="btn btn-success" disabled><img src="img/abonos.png"></a></button>
-                                <button class="btn btn-success" disabled><img src="img/tarjeta.png"></a></button>
-                                <?php  } else {
-                                        ?>
                                 <div class="container">
-                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo">
-                                        <img src="img/abonos.png"></a>
-                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta">
-                                        <img src="img/tarjeta.png"></a>
+                                    <button onclick="window.location.href='NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo'" class="btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/abonos.png"></button>
+                                    <button onclick="window.location.href='NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta'" class="btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/tarjeta.png"></button>
                                 </div>
-                                <?php } ?>
                             </td>
                         </tr>
                         <?php
