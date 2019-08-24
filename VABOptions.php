@@ -33,23 +33,32 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
             </nav>
             <div class="card card-body" style="background: #e6e6e6; ">
-
-
-                <button onclick="window.open('VUsuarios_ab.php');" type="button" class="btn btn-primary btn-lg btn-block">
-                    <label class="badge badge-primary">Usuarios</label><br><img src="img/usuarios.png"> </button>
-                <button onclick="window.open('VClienteab.php');" type="button" class="btn btn-primary btn-lg btn-block">
-                    <label class="badge badge-primary">Clientes</label><br><img src="img/clientes.png"></button></button>
-                <button onclick="window.open('VNegociosab.php');" type="button" class="btn btn-primary btn-lg btn-block">
-                    <label class="badge badge-primary">Negocios</label><br><img src="img/negocios.png"> </button>
-                <button onclick="window.open('VSuscripcion.php');" type="button" class="btn btn-primary btn-lg btn-block">
-                    <label class="badge badge-primary">Suscripciones</label><br><img src="img/agenda.png"> </button>
-                <button onclick="window.open('VABConsultasVentas.php');" type="button" class="btn btn-primary btn-lg btn-block">
-                    <label class=" badge badge-primary">Ventas historial</label><br><img src="img/venta.png"> </button>
-                <a class="btn btn-danger btn-lg btn-block" href="index.php?cerrar_sesion">
+                <div class="row mt-3 justify-content-around">
+                    <div class="col-6">
+                        <button onclick="window.location.href='VUsuarios_ab.php'" type="button" class="btn btn-primary btn-lg btn-block">
+                        <label class="badge badge-primary">Usuarios</label><br><img src="img/usuarios.png"> </button>
+                    </div>
+                    <div class="col-6">
+                        <button onclick="window.location.href='VClienteab.php'" type="button" class="btn btn-primary btn-lg btn-block">
+                        <label class="badge badge-primary">Clientes</label><br><img src="img/clientes.png"></button></button>
+                    </div>
+                </div>
+                <div class="row mt-3 justify-content-around">
+                    <div class="col-6">
+                        <button onclick="window.location.href='VNegociosab.php'" type="button" class="btn btn-primary btn-lg btn-block">
+                        <label class="badge badge-primary">Negocios</label><br><img src="img/negocios.png"> </button>
+                    </div>
+                    <div class="col-6">
+                        <button onclick="window.location.href='VSuscripcion.php'" type="button" class="btn btn-primary btn-lg btn-block">
+                        <label class="badge badge-primary">Suscripciones</label><br><img src="img/agenda.png"> </button>
+                    </div>
+                </div>
+                <a class="mt-3 btn btn-danger btn-lg btn-block" href="index.php?cerrar_sesion">
                     <label class="badge badge-danger">Salir</label><br><img src="img/salir.png"> </a>
             </div>
         </div>
     </div>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

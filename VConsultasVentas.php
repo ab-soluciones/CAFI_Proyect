@@ -33,7 +33,6 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
     <?php include("Navbar.php") ?>
-    
     <div class="container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
@@ -104,16 +103,8 @@ if (!isset($_SESSION['acceso'])) {
             </div>
             <!--Tabla contenedor-->
         </div>
-<<<<<<< HEAD
-        <script src="js/user_jquery.js"></script>
-=======
-        <!--col-7-->
-    </div>
-    <!--row-->
-    </div>
-    <!--container-->
+        <!--container-->
     <script src="js/user_jquery.js"></script>
->>>>>>> backend
 </body>
 
 </html>

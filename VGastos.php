@@ -36,69 +36,90 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
     <?php include("Navbar.php") ?>
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p class="statusMsg"></p>
+                    <form class="form-group" action="#" method="post">
+                        <div class="container">
+                            <div class="row">
+                                <div class="d-block col-lg-6">
+                                    <h5><label for="desc" class="badge badge-primary">Concepto:</label></h5>
+                                    <select name="SConcepto" id="concepto" class="form form-control" required>
+                                        <option></option>
+                                        <option>Renta</option>
+                                        <option>Luz</option>
+                                        <option>Agua</option>
+                                        <option>Teléfono</option>
+                                        <option>Internet</option>
+                                        <option>Transporte</option>
+                                        <option>Sueldo</option>
+                                        <option>Articulos de Venta</option>
+                                        <option>Pago de Prestamo</option>
+                                        <option>Otro</option>
+                                    </select>
+                                </div>
+                                <div class="d-block col-lg-6">
+                                    <h5><label for="pago" class="badge badge-primary">Forma de pago:</label></h5>
+                                    <select name="SPago" id="pago" class="form form-control" required>
+                                        <option></option>
+                                        <option>Efectivo</option>
+                                        <option>Transferencia</option>
+                                        <option>Tarjeta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="d-block col-lg-12">
+                                    <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
+                                    <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="d-block col-lg-6">
+                                    <h5><label for="monto" class="badge badge-primary">Monto $:</label></h5>
+                                    <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" required>
+                                </div>
+                                <div class="d-block col-lg-6">
+                                    <h5><label for="fecha" class="badge badge-primary">Fecha:</label></h5>
+                                    <input class="form-control" id="fecha" type="date" name="DFecha" required>
+                                </div>
+                            </div>
+                            <div class="row mt-3 justify-content-around">
+                                <input id="formButton_guardar" type="submit" class="col-4 col-lg-4 btn btn-lg btn-primary" name="" value="Guardar">
+                                <button id="formButton_cancelar" class="col-4 d-lg-none btn btn-lg btn-danger" name="">Cancelar</button>     
+                            </div>
+                        </div>
+                    </form>
+                    <div id="tableHolder">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
 
     <div class="container-fluid">
         <div class="row align-items-start">
-            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
-                <form class="form-group" action="#" method="post">
-                    <div class="container">
-                        <div class="row">
-                            <div class="d-block col-lg-6">
-                                <h5><label for="desc" class="badge badge-primary">Concepto:</label></h5>
-                                <select name="SConcepto" id="concepto" class="form form-control" required>
-                                    <option></option>
-                                    <option>Renta</option>
-                                    <option>Luz</option>
-                                    <option>Agua</option>
-                                    <option>Teléfono</option>
-                                    <option>Internet</option>
-                                    <option>Transporte</option>
-                                    <option>Sueldo</option>
-                                    <option>Articulos de Venta</option>
-                                    <option>Pago de Prestamo</option>
-                                    <option>Otro</option>
-                                </select>
-                            </div>
-                            <div class="d-block col-lg-6">
-                                <h5><label for="pago" class="badge badge-primary">Forma de pago:</label></h5>
-                                <select name="SPago" id="pago" class="form form-control" required>
-                                    <option></option>
-                                    <option>Efectivo</option>
-                                    <option>Transferencia</option>
-                                    <option>Tarjeta</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="d-block col-lg-12">
-                                <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
-                                <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="d-block col-lg-6">
-                                <h5><label for="monto" class="badge badge-primary">Monto $:</label></h5>
-                                <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" required>
-                            </div>
-                            <div class="d-block col-lg-6">
-                                <h5><label for="fecha" class="badge badge-primary">Fecha:</label></h5>
-                                <input class="form-control" id="fecha" type="date" name="DFecha" required>
-                            </div>
-                        </div>
-                        <div class="row mt-3 justify-content-around">
-                            <input id="formButton_guardar" type="submit" class="col-4 col-lg-4 btn btn-lg btn-primary" name="" value="Guardar">
-                            <button id="formButton_cancelar" class="col-4 d-lg-none btn btn-lg btn-danger" name="">Cancelar</button>     
-                        </div>
-                    </div>
-                </form>
-            </div><!--col-5-->
             <button id="formButton_nuevo" class="d-lg-none col-12 btn btn-lg btn-primary" name="">Nuevo Gasto</button>
-            <div id="tableContainer" class="d-block col-lg-8">
+            <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">
@@ -197,6 +218,8 @@ if (!isset($_SESSION['acceso'])) {
     }
     ?>
     <script src="js/user_jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

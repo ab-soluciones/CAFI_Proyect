@@ -21,27 +21,13 @@ if (!isset($_SESSION['acceso'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Flujo de efectivo</title>
-    <script type="text/javascript">
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-    </script>
 </head>
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand"><?php echo $_SESSION['nombrenegocio']; ?> flujo de efectivo cotidiano</a>
-        </div>
-    </nav>
+<body onload="inicio();">
+<?php include("NavbarD.php") ?>
     <div style="margin: 0 auto; margin-top:10px;" class="col-md-8">
         <h5 style="margin: 0 auto;"><label class="badge badge-info">
                 <a style="color: white;" href="VConsultasFlujoEfectivo.php">Consultar otras fechas --></a>
@@ -341,6 +327,7 @@ if (!isset($_SESSION['acceso'])) {
         </form>
     </div>
     </div>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

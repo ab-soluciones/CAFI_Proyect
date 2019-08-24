@@ -102,15 +102,11 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!--row-->
     </div>
-<<<<<<< HEAD
-    <script src="js/user_jquery.js"></script>
-=======
     <!--container-->
     <?php if (isset($_GET['ad'])) {
         $adeudo = $_GET['ad'];
     } ?>
 <script src="js/user_jquery.js"></script>
->>>>>>> backend
 </body>
 
 </html>

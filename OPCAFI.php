@@ -43,13 +43,23 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
             <div id="op_card_body" class="container card card-body">
                 <?php if (strcasecmp($_SESSION['acceso'], "CEO") == 0) {
                     ?>
-                    <button onclick="window.open('VTrabajador.php')" type="button" class="btn btn-primary btn-lg btn-block">
-                        <label class="badge badge-primary">Trabajadores</label><br><img src="img/trabajadores.png"> </button>
-                    <button onclick="window.open('VEstadoResultados.php')" type="button" class="btn btn-primary btn-lg btn-block">
-                        <label class="badge badge-primary">Estado de Resultados</label><br><img src="img/estado_resultados.png"> </button>
-                    <button onclick="window.open('VFlujoEfectivo.php')" type="button" class="btn btn-primary btn-lg btn-block">
-                        <label class="badge badge-primary">Flujo de efectivo</label><br><img src="img/flujo_efectivo.png"> </button>
-                    <a class="btn btn-danger btn-lg btn-block" href="index.php?cerrar_sesion">
+                    <div class="row mt-3 justify-content-around">
+                        <div class="col-4">
+                            <button onclick="window.location.href='VTrabajador.php'" type="button" class="btn btn-primary btn-lg btn-block">
+                            <label class="badge badge-primary">Trabajadores</label><br><img src="img/trabajadores.png"> </button>
+                        </div>
+                        <div class="col-4">
+                            <button onclick="window.location.href='VEstadoResultados.php'" type="button" class="btn btn-primary btn-lg btn-block">
+                            <label class="badge badge-primary">Estado de Resultados</label><br><img src="img/estado_resultados.png"> </button>
+                        </div>
+                        <div class="col-4">
+                            <button onclick="window.location.href='VFlujoEfectivo.php'" type="button" class="btn btn-primary btn-lg btn-block">
+                            <label class="badge badge-primary">Flujo de efectivo</label><br><img src="img/flujo_efectivo.png"> </button>
+                        </div>
+                    </div>
+                    
+                    
+                    <a class="mt-3 btn btn-danger btn-lg btn-block" href="index.php?cerrar_sesion">
                         <label class="badge badge-danger">Salir</label><br><img src="img/salir.png"> </a>
                 <?php } else if (
                     strcasecmp($_SESSION['acceso'], "Manager") == 0 || strcasecmp($_SESSION['acceso'], "Employes") == 0
