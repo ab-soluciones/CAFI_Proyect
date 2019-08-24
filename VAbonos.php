@@ -109,6 +109,7 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!--row-->
     </div>
+    <!--container-->
     <script src="js/user_jquery.js"></script>
 </body>
 

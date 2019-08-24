@@ -123,6 +123,7 @@ $con->cerrarConexion();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/sweetalert.js"></script>
@@ -134,79 +135,103 @@ $con->cerrarConexion();
 </head>
 
 <body onload="inicio();">
-    <?php include("Navbar.php") ?>
-        <div class="col-lg-12">
-            <div class="card card-body" style="background: #000000;">
-                <h5 style="margin: 0 auto; color: #0066ff;">Retiros</h5>
+<?php include("Navbar.php") ?>
+<!-- Modal -->
+<div class="modal fade" id="modalForm" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
             </div>
-        </div>
-        <div class="container-fluid">
-        <div class="col-md-3">
-            <div class="card card-body" style="margin-top: 10px;">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Saldo en caja</th>
-                            <th>Saldo en banco</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td>$<?php echo $efectivo; ?></td>
-                        <td>$<?php echo $banco; ?></td>
-                    </tbody>
-                </table>
-                </div>
-                    <div class="row align-items-start">
-                        <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
-                          <div id="tableContainer" class="d-block col-lg-8">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                <div class="input-group-text"><i class="fa fa-search"></i></div>
-                                </div>
-                                <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
                 <form class="form-group" action="#" method="post">
-                  <div class="container">
-                    <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
-                    <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad" required><br>
-                    <h5><label for="de" class="badge badge-ligh">De:</label></h5>
-                    <select id="de" class="form form-control" name="STipo" required>
-                        <option></option>
-                        <option>Caja</option>
-                        <option>Banco</option>
-                    </select>
-                    <br>
-                    <h5><label for="concepto" class="badge badge-ligh">Concepto:</label></h5>
-                    <select id="concepto" class="form form-control" name="SConcepto" required>
-                        <option></option>
-                        <option>Retiro</option>
-                        <option>Corte de caja</option>
-                    </select>
-                    <br>
-                    <h5><label for="desc" class="badge badge-ligh">Descripcion:</label></h5>
-                    <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea><br>
-                    <button type="submit" style="color: #005ce6;" class="btn btn-dark btn-lg btn-block">
+                    <div class="row">
+                        <div class="col-6">
+                            <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
+                            <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad" required>
+                        </div>
+                        <div class="col-6">
+                            <h5><label for="de" class="badge badge-ligh">De:</label></h5>
+                            <select id="de" class="form form-control" name="STipo" required>
+                                <option></option>
+                                <option>Caja</option>
+                                <option>Banco</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <h5><label for="concepto" class="badge badge-ligh">Concepto:</label></h5>
+                            <select id="concepto" class="form form-control" name="SConcepto" required>
+                                <option></option>
+                                <option>Retiro</option>
+                                <option>Corte de caja</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <h5><label for="desc" class="badge badge-ligh">Descripcion:</label></h5>
+                            <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" style="color: #005ce6;" class="mt-3 btn btn-dark btn-lg btn-block">
                         <h6>Retirar</h6><img src="img/retiro.png">
                     </button>
                 </form>
+                <div id="tableHolder" class="row justify-content-center">
+                    <table class="col-12 table table-hover table-responsive">
+                        <thead class="thead-dark">
+                            <tr class="encabezados">
+                                <th>Saldo en caja</th>
+                                <th>Saldo en banco</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <td>$<?php echo $efectivo; ?></td>
+                            <td>$<?php echo $banco; ?></td>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-      </div>
-        <div class="col-md-8" style="margin-top: 15px;">
+    </div>
+</div>
+<!-- Modal -->
+
+<div class="container-fluid">
+    <div class="row align-items-start">
+        <!-- <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
+            
+        </div> -->
+        <div class="col-md-8">
+            <div id="tableContainer" class="d-block col-lg-12">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name">
+                    <button class="btn btn-danger ml-3" data-toggle="modal" data-target="#modalForm">Retirar</button>
+                </div>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                              <th onclick="sortTable(0)">Concepto</th>
-                              <th onclick="sortTable(1)">De</th>
-                              <th onclick="sortTable(2)">Cantidad</th>
-                              <th onclick="sortTable(3)">Descripcion</th>
-                              <th onclick="sortTable(4)">Fecha</th>
-                              <th onclick="sortTable(5)">Hora</th>
-                              <th onclick="sortTable(6)">Estado</th>
-                              <th onclick="sortTable(7)">Retiró</th>
-                              <th onclick="sortTable(8)">Tarea</th>
-                          </tr>
+                                <th onclick="sortTable(0)">Concepto</th>
+                                <th onclick="sortTable(1)">De</th>
+                                <th onclick="sortTable(2)">Cantidad</th>
+                                <th onclick="sortTable(3)">Descripcion</th>
+                                <th onclick="sortTable(4)">Fecha</th>
+                                <th onclick="sortTable(5)">Hora</th>
+                                <th onclick="sortTable(6)">Estado</th>
+                                <th onclick="sortTable(7)">Retiró</th>
+                                <th onclick="sortTable(8)">Tarea</th>
+                            </tr>
                 <tbody>
                     <?php
                     if (isset($_GET['idedit'])) {
@@ -250,7 +275,9 @@ $con->cerrarConexion();
             </table>
         </div>
     </div>
+    </div>
 </div>
+
 </div>
 
     <?php
@@ -345,6 +372,8 @@ $con->cerrarConexion();
     }
     ?>
     <script src="js/user_jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

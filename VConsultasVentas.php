@@ -33,7 +33,6 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
     <?php include("Navbar.php") ?>
-    
     <div class="container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">

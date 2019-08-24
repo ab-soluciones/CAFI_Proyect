@@ -104,36 +104,56 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
     <?php include("Navbar.php") ?>
-
-    <div class="container-fluid">
-        <div class="row align-items-start">
-            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="Producto" role="tabpanel" aria-labelledby="Producto-tab">
-                                <div class="col-12">
-                                    <?php include("Producto-Frontend/formularioproducto.php"); ?>
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p class="statusMsg"></p>
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="Producto" role="tabpanel" aria-labelledby="Producto-tab">
+                                    <div class="col-12">
+                                        <?php include("Producto-Frontend/formularioproducto.php"); ?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="Inventario" role="tabpanel" aria-labelledby="Inventario-tab">
-                                <div class="col-12">
-                                    <?php include("Producto-Frontend/formularioinventario.php"); ?>
+                                <div class="tab-pane fade" id="Inventario" role="tabpanel" aria-labelledby="Inventario-tab">
+                                    <div class="col-12">
+                                        <?php include("Producto-Frontend/formularioinventario.php"); ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div id="tableHolder" class="row justify-content-center">
+        
+                    </div>
                 </div>
             </div>
-            <div id="tableContainer" class="d-block col-lg-8">
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="container-fluid">
+        <div class="row align-items-start">
+            <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
@@ -161,6 +181,7 @@ if (!isset($_SESSION['acceso'])) {
                         </select>
                         <input type="submit" style="display: none;">
                     </form>
+                    <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">

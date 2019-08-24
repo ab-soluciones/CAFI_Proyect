@@ -72,7 +72,7 @@ function sortTable(n) {
   }
 
 /*Resaltar columna*/
-$('.table th').on('click', function() {
+ $('.table th').on('click', function() {
     var $currentTable = $(this).closest('table');
     var index = $(this).index();
     $currentTable.find('th').removeClass('selectedTh');

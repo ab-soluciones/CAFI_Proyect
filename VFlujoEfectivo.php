@@ -23,28 +23,14 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
-    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Flujo de efectivo</title>
-    <script type="text/javascript">
-        var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-        }
-    </script>
 </head>
 
-<body onload="ini(); " onkeypress="parar();" onclick="parar();">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand"><?php echo $_SESSION['nombrenegocio']; ?> flujo de efectivo cotidiano</a>
-        </div>
-    </nav>
+<body onload="inicio();">
+<?php include("NavbarD.php") ?>
+
     <p>Sucursal:</p>
                 <form action="#" method="POST">
                         <select id="sucursal" class="form form-control" name="SNegocio">

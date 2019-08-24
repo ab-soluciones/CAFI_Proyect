@@ -23,6 +23,7 @@ if (!isset($_SESSION['acceso'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/sweetalert.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/sweetalert.js"></script>
@@ -34,95 +35,117 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
     <?php include("Navbar.php") ?>
-    
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+                
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p class="statusMsg"></p>
+                    <form class="form-group" action="#" method="post">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5><label for="can" class="badge badge-primary">Cantidad $ :</label></h5>
+                                <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off" required>
+                            </div>
+                            <div class="col-6">
+                                <h5><label for="tipo" class="badge badge-primary">Tipo :</label></h5>
+                                <select id="tipo" name="STipo" id="concepto" class="form form-control" required>
+                                    <option></option>
+                                    <option>Dinero a caja</option>
+                                    <option>Capital Externo</option>
+                                    <option>Prestamo</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5><label for="fingreso" class="badge badge-primary">Forma de Ingreso :</label></h5>
+                                <select name="SFIngreso" id="fingreso" class="form form-control" required>
+                                    <option></option>
+                                    <option>Efectivo</option>
+                                    <option>Banco</option>
+                                </select> <br>
+                            </div>
+                            <div class="col-6">
+                                <h5><label for="fecha" class="badge badge-primary">Fecha :</label></h5>
+                                <input class="form-control" id="fecha" type="date" name="DFecha" required>
+                            </div>
+                        </div>
+                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                    </form>
+                    <div id="tableHolder">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
     <div class="container-fluid">
         <div class="row align-items-start">
-            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
-              <div id="tableContainer" class="d-block col-lg-8">
+              <div class="col-md-8">
+                <div id="tableContainer" class="d-block col-lg-8">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <button class="btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-              <div class="row" style="margin-top: 5px; margin-left:5px;">
-                <form class="form-group" action="#" method="post">
-                  <div class="container">
-                    <h5><label for="can" class="badge badge-primary">Cantidad $ :</label></h5>
-                    <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off" required><br>
+                      <div class="contenedorTabla">
+                          <table class="table table-bordered table-hover fixed_headers table-responsive">
+                              <thead class="thead-dark">
+                                  <tr class="encabezados">
+                                      <th onclick="sortTable(0)">Cantidad</th>
+                                      <th onclick="sortTable(1)">Tipo</th>
+                                      <th onclick="sortTable(2)">Forma de Ingreso</th>
+                                      <th onclick="sortTable(3)">Fecha</th>
+                                      <th onclick="sortTable(4)">Estado</th>
+                                      <th onclick="sortTable(5)">Tarea</th>
+                                  </tr>
+                              </thead>
+                      <tbody>
+                          <?php
+                          $negocio = $_SESSION['idnegocio'];
+                          $con = new Models\Conexion();
+                          $query = "SELECT * FROM otros_ingresos WHERE negocios_idnegocios ='$negocio' ORDER BY id_otros_ingresos DESC";
+                          $row = $con->consultaListar($query);
 
-                    <h5><label for="tipo" class="badge badge-primary">Tipo :</label></h5>
-                    <select id="tipo" name="STipo" id="concepto" class="form form-control" required>
-                        <option></option>
-                        <option>Dinero a caja</option>
-                        <option>Capital Externo</option>
-                        <option>Prestamo</option>
-                    </select> <br>
-
-                    <h5><label for="fingreso" class="badge badge-primary">Forma de Ingreso :</label></h5>
-                    <select name="SFIngreso" id="fingreso" class="form form-control" required>
-                        <option></option>
-                        <option>Efectivo</option>
-                        <option>Banco</option>
-                    </select> <br>
-                    <div>
-                        <h5><label for="fecha" class="badge badge-primary">Fecha :</label></h5>
-                        <input class="form-control" id="fecha" type="date" name="DFecha" required>
-                    </div><br>
-                    <input type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
-
-                </form>
+                          while ($renglon = mysqli_fetch_array($row)) {
+                              ?>
+                          <tr>
+                              <td><?php echo $renglon['cantidad']; ?></td>
+                              <td><?php echo $renglon['tipo']; ?></td>
+                              <td><?php echo $renglon['forma_ingreso']; ?></td>
+                              <td><?php echo $renglon['fecha']; ?></td>
+                              <td><?php echo $renglon['estado']; ?></td>
+                              <td style="width:100px;">
+                                  <div class="row">
+                                      <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVOtrosIngresos.php?id=<?php echo $renglon['id_otros_ingresos']; ?>">
+                                          <img src="img/edit.png">
+                                      </a>
+                                  </div>
+                              </td>
+                          </tr>
+                          <?php
+                          } ?>
+                      </tbody>
+                  </table>
               </div>
             </div>
+          </div>
+            </div>
         </div>
-        <div class="col-md-8" style="margin-top: 10px; margin-left: 10px;">
-            <h5 style="margin: 0 auto;"><label class="badge badge-info">
-                    <a style="color: white;" href="VConsultasOtrosIngresos.php">BUSCAR--></a>
-                </label></h5>
-                <div class="contenedorTabla">
-                    <table class="table table-bordered table-hover fixed_headers table-responsive">
-                        <thead class="thead-dark">
-                            <tr class="encabezados">
-                                <th onclick="sortTable(0)">Cantidad</th>
-                                <th onclick="sortTable(1)">Tipo</th>
-                                <th onclick="sortTable(2)">Forma de Ingreso</th>
-                                <th onclick="sortTable(3)">Fecha</th>
-                                <th onclick="sortTable(4)">Estado</th>
-                                <th onclick="sortTable(5)">Tarea</th>
-                            </tr>
-                        </thead>
-                <tbody>
-                    <?php
-                    $negocio = $_SESSION['idnegocio'];
-                    $con = new Models\Conexion();
-                    $query = "SELECT * FROM otros_ingresos WHERE negocios_idnegocios ='$negocio' ORDER BY id_otros_ingresos DESC";
-                    $row = $con->consultaListar($query);
-
-                    while ($renglon = mysqli_fetch_array($row)) {
-                        ?>
-                    <tr>
-                        <td><?php echo $renglon['cantidad']; ?></td>
-                        <td><?php echo $renglon['tipo']; ?></td>
-                        <td><?php echo $renglon['forma_ingreso']; ?></td>
-                        <td><?php echo $renglon['fecha']; ?></td>
-                        <td><?php echo $renglon['estado']; ?></td>
-                        <td style="width:100px;">
-                            <div class="row">
-                                <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVOtrosIngresos.php?id=<?php echo $renglon['id_otros_ingresos']; ?>">
-                                    <img src="img/edit.png">
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php
-                    } ?>
-                </tbody>
-            </table>
-        </div>
-      </div>
-    </div>
   </div>
-</div>
     <?php
     if (
         isset($_POST['TCantidad']) && isset($_POST['STipo'])
@@ -159,6 +182,8 @@ if (!isset($_SESSION['acceso'])) {
     }
     ?>
     <script src="js/user_jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

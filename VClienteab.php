@@ -27,69 +27,113 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
-    <title>Administracion Clientes AB</title>
+    <title>Clientes AB</title>
 
 </head>
 
-<body style="background: #f2f2f2;">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            <a style="margin: 0 auto;" href="#" class="navbar-brand"> Administracion Clientes</a>
+<body onload="inicio();">
+<?php include("NavbarAB.php") ?>
+<!-- Modal -->
+<div class="modal fade" id="modalForm" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                    <form class="form-group" action="#" method="post">
+                        <div class="row">
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
+                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
+                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
+                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="doc" class="badge badge-primary">Documento:</label></h5>
+
+                                <div class="row" style="margin: 0 auto;">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="INE" checked autofocus>INE
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="CURP">CURP
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="Otro">Otro
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
+                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="dir" class="badge badge-primary">Direccion:</label></h5>
+                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="etiquetas"><label for="tel" class="badge badge-primary">Telefono:</label></h5>
+                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="etiquetas"><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
+                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="etiquetas"><label for="login" class="badge badge-primary">Usuario:</label></h5>
+                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="etiquetas"><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
+                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required>
+                            </div>
+                        </div>
+                        
+                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                    </form>
+                    <div id="tableHolder" class="row justify-content-center">
+                    
+                    </div>
+            </div>
         </div>
-    </nav>
     </div>
+</div>
+<!-- Modal -->
     <div class="container-fluid">
         <div class="row align-items-start">
-            <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
-                <form class="form-group" action="#" method="post">
-                    <h5 class="etiquetas"><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                    <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required><br>
-                    <h5 class="etiquetas"><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                    <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required><br>
-                    <h5 class="etiquetas"><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                    <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required><br>
-                    <h5 class="etiquetas"><label for="doc" class="badge badge-primary">Documento:</label></h5>
-
-                    <div class="row" style="margin: 0 auto;">
-                        <div class="form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" id="doc" name="RDoc" value="INE" checked autofocus>INE
-                            </label>
-                        </div>
-                        <div class="form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" id="doc" name="RDoc" value="CURP">CURP
-                            </label>
-                        </div>
-                        <div class="form-check-inline">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="radio" id="doc" name="RDoc" value="Otro">Otro
-                            </label>
-                        </div>
-                    </div><br>
-
-                    <h5 class="etiquetas"><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
-                    <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required><br>
-                    <h5 class="etiquetas"><label for="dir" class="badge badge-primary">Direccion:</label></h5>
-                    <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required><br>
-                    <h5 class="etiquetas"><label for="tel" class="badge badge-primary">Telefono:</label></h5>
-                    <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required><br>
-                    <h5 class="etiquetas"><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
-                    <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com"><br>
-                    <h5 class="etiquetas"><label for="login" class="badge badge-primary">Usuario:</label></h5>
-                    <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
-                    <h5 class="etiquetas"><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
-                    <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required><br>
-                    <input type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
-                </form>
-
-            </div>
-            <div id="tableContainer" class="d-block col-lg-8">
+            <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <table class="table table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
@@ -189,5 +233,7 @@ if (!isset($_SESSION['acceso'])) {
     }
     ?>
     <script src="js/user_jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -65,7 +65,7 @@ body {
 
 /*TABLAS*/
 
-.table{
+/* .table{
     background-color: white;
 }
 .encabezados{
@@ -83,7 +83,7 @@ body {
 }
 .table tr{
     height: 100%;
-}
+} */
 
 /*xs*/
 /*En esta medida toma lo que esta en el css por default*/
@@ -97,7 +97,7 @@ body {
 }
 /*lg*/
 @media (min-width: 992px) {
-    .table thead{
+    /* .table thead{
         position: absolute;
         top: 40px;
     }
@@ -106,7 +106,7 @@ body {
         overflow-x: hidden;
         overflow-y: auto;
         height: 470px;
-    }
+    } */
 }
 /*xl*/
 @media (min-width: 1200px) {
