@@ -36,7 +36,7 @@ Config\Autoload::run();
 </head>
 
 <body onload="inicio();">
-<?php include("NavbarD.php") ?>
+    <?php include("NavbarD.php") ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">
@@ -48,7 +48,7 @@ Config\Autoload::run();
                         <span class="sr-only">Close</span>
                     </button>
                 </div>
-                
+
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
@@ -95,17 +95,17 @@ Config\Autoload::run();
                             </div>
                             <div class="col-4">
                                 <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
-                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
+                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required autocomplete="off">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
                                 <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
-                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
+                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required autocomplete="off">
                             </div>
                             <div class="col-4">
                                 <h5><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
-                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
+                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off">
                             </div>
                             <div class="col-4">
                                 <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
@@ -139,24 +139,30 @@ Config\Autoload::run();
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
-
-                                <div class="row" style="margin-left: 5px;">
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="estado" name="REstado" value="A" checked autofocus>Activo
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="REstado" value="I">Inactivo
-                                        </label>
-                                    </div>
-                                </div>
+                                <h5><label for="email" class="badge badge-primary">Agregarlo a:</label></h5>
+                                <select class="form form-control" name="SSucursal" required>
+                                    <option></option>
+                                    <?php
+                                    $con = new Models\Conexion();
+                                    $dueño = $_SESSION['id'];
+                                    $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                                                WHERE clientesab_idclienteab = '$dueño'";
+                                    $row = $con->consultaListar($query);
+                                    $con->cerrarConexion();
+                                    $cont = 0;
+                                    while ($renglon = mysqli_fetch_array($row)) {
+                                        $nombre[$cont] = $renglon['nombre_negocio'];
+                                        $id[$cont] = $renglon['idnegocios'];
+                                        $cont++;
+                                        echo "<option>" . $renglon['nombre_negocio'] . "</option>";
+                                    }
+                                    ?>
+                                </select> <br>
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col-12">
+                            <div class="col-12"><br>
                                 <input type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
                             </div>
                         </div>
@@ -176,14 +182,12 @@ Config\Autoload::run();
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-<<<<<<< HEAD
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
                     <p>Sucursal:</p>
                     <form action="#" method="POST">
                         <select id="sucursal" class="form form-control" name="SNegocio">
                             <option></option>
                             <?php
-                            $negocio = $_SESSION['idnegocio'];
                             $con = new Models\Conexion();
                             $dueño = $_SESSION['id'];
                             $query = "SELECT nombre_negocio, idnegocios FROM negocios 
@@ -201,10 +205,8 @@ Config\Autoload::run();
                         </select>
                         <input type="submit" style="display: none;">
                     </form>
-=======
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
->>>>>>> barras_de_busqueda
                 </div>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">
@@ -227,57 +229,58 @@ Config\Autoload::run();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                             if (isset($_POST['SNegocio'])) {
-                                for ($i = 0; $i < sizeof($id); $i++) {
-                                    if (strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0) {
-                                        $_SESSION['idnegocio'] =  $idnegocio = $id[$i];
+                            <form action="#" method="post">
+                                <?php
+                                if (isset($_POST['SNegocio'])) {
+                                    for ($i = 0; $i < sizeof($id); $i++) {
+                                        if (strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0) {
+                                            $_SESSION['idnegocio'] =  $idnegocio = $id[$i];
+                                        }
                                     }
+                                } else {
+                                    $idnegocio =  $_SESSION['idnegocio'];
                                 }
-                            } else {
-                                $idnegocio =  $_SESSION['idnegocio'];
-                            }
-                        
-                            //se optiene el id del negocio para hacer la consulta ..se escoge el id por que puede haber muchos negocios con el mismo nombre pertenecientes a otro dueño
-                            $con = new Models\Conexion();
-                            $query = "SELECT * FROM trabajador WHERE negocios_idnegocios = '$idnegocio' ORDER BY idtrabajador DESC";
-                            $row = $con->consultaListar($query);
 
-                            //a continuacion se mustra en la tabla el resultado de la consulta
-                            while ($renglon = mysqli_fetch_array($row)) {
-                                ?>
-                            <tr>
-                                <td><?php echo $renglon['nombre']; ?></td>
-                                <td><?php echo $renglon['apaterno']; ?></td>
-                                <td><?php echo $renglon['amaterno']; ?></td>
-                                <td><?php echo $renglon['tipo_documento']; ?></td>
-                                <td><?php echo $renglon['numero_documento']; ?></td>
-                                <td><?php echo $renglon['direccion']; ?></td>
-                                <td><?php echo $renglon['telefono']; ?></td>
-                                <td><?php echo $renglon['correo']; ?></td>
-                                <td><?php echo $renglon['acceso']; ?></td>
-                                <td><?php echo $renglon['login']; ?></td>
-                                <td><?php echo $renglon['password']; ?></td>
-                                <td><?php echo $renglon['sueldo']; ?></td>
-                                <td><?php echo $renglon['estado']; ?></td>
-                                <td style="width:100px;">
-                                    <div class="row">
-                                        <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVTrabajador.php?id=<?php echo $renglon['idtrabajador'];
-                                                                                                                                //se envia el id del registro para ser editado
-                                                                                                                                ?>">
-                                            <img src="img/edit.png">
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php
-                            } ?>
+                                //se optiene el id del negocio para hacer la consulta ..se escoge el id por que puede haber muchos negocios con el mismo nombre pertenecientes a otro dueño
+                                $con = new Models\Conexion();
+                                $query = "SELECT * FROM trabajador WHERE negocios_idnegocios = '$idnegocio' ORDER BY idtrabajador DESC";
+                                $row = $con->consultaListar($query);
+
+                                //a continuacion se mustra en la tabla el resultado de la consulta
+                                while ($renglon = mysqli_fetch_array($row)) {
+                                    ?>
+                                <tr>
+                                    <td><?php echo $renglon['nombre']; ?></td>
+                                    <td><?php echo $renglon['apaterno']; ?></td>
+                                    <td><?php echo $renglon['amaterno']; ?></td>
+                                    <td><?php echo $renglon['tipo_documento']; ?></td>
+                                    <td><?php echo $renglon['numero_documento']; ?></td>
+                                    <td><?php echo $renglon['direccion']; ?></td>
+                                    <td><?php echo $renglon['telefono']; ?></td>
+                                    <td><?php echo $renglon['correo']; ?></td>
+                                    <td><?php echo $renglon['acceso']; ?></td>
+                                    <td><?php echo $renglon['login']; ?></td>
+                                    <td><?php echo $renglon['password']; ?></td>
+                                    <td><?php echo $renglon['sueldo']; ?></td>
+                                    <td><?php echo $renglon['estado']; ?></td>
+                                    <td style="width:100px;">
+                                        <div class="row">
+                                            <button value="<?php echo $renglon['idtrabajador']; ?>" type="submit" name="BEdit" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm"><img src="img/edit.png"></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php
+                                } ?>
                         </tbody>
+                        </form>
                     </table>
                 </div>
             </div>
         </div>
         <?php
+        if(isset($_POST['BEdit'])){
+            echo$_POST['BEdit'];
+        }
         if (
             isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
             && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
@@ -285,9 +288,17 @@ Config\Autoload::run();
             && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
             && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
             && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
-            && isset($_POST['REstado'])
+            && isset($_POST['SSucursal'])
             //se comprueba que existan todos los datos del formulario
         ) {
+            $negocio = null;
+            if (isset($_POST['SSucursal'])) {
+                for ($i = 0; $i < sizeof($id); $i++) {
+                    if (strcasecmp($_POST['SSucursal'], $nombre[$i]) == 0) {
+                        $negocio = $id[$i];
+                    }
+                }
+            }
             $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
             $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
             $trabajador->setApaterno($_POST['TApellidoP']);
@@ -303,9 +314,8 @@ Config\Autoload::run();
             $sueldo = $_POST['TSueldo'];
             $sueldo = floatval($sueldo);
             $trabajador->setSueldo($sueldo);
-            $negocio = $_SESSION['idnegocio'];
-            $trabajador->setEstado($_POST['REstado']);
-            $result = $trabajador->guardar($_SESSION['idnegocio']);
+            $trabajador->setEstado("A");
+            $result = $trabajador->guardar($negocio);
             if ($result === 1) {
                 ?>
         <script>
