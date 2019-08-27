@@ -56,7 +56,7 @@ if (!isset($_SESSION['acceso'])) {
                             <th onclick="sortTable(5)">Cambio</th>
                             <th onclick="sortTable(6)">Fecha</th>
                             <th onclick="sortTable(7)">Hora</th>
-                            <th onclick="sortTable(8)">Es</th>
+                            <th onclick="sortTable(8)">Estado</th>
                             <th onclick="sortTable(9)">Trabajador</th>
                             <th onclick="sortTable(10)">Editar</th>
                         </tr>

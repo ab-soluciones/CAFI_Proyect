@@ -174,7 +174,7 @@ include("NavbarD.php")
     <p id="nav-title" class="font-weight-bold">
     
     </p>
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
