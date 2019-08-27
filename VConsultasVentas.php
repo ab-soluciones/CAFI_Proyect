@@ -65,11 +65,21 @@ if (!isset($_SESSION['acceso'])) {
                         <?php
                         $negocio = $_SESSION['idnegocio'];
                         $con = new Models\Conexion();
-                        $query = "SELECT idventas, descuento ,total , pago, forma_pago,
-                        cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta
-                        INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
-                        WHERE venta.idnegocios='$negocio' ORDER BY idventas DESC";
-                        $row = $con->consultaListar($query);
+                        if(isset($_GET['venta'])){
+                            $venta = $_GET['venta'];
+                            $query = "SELECT idventas, descuento ,total , pago, forma_pago, 
+                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta 
+                            INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
+                            WHERE venta.idnegocios='$negocio' AND idventas = '$venta' ORDER BY idventas DESC";
+                            $row = $con->consultaListar($query);
+                        }else{
+                            $query = "SELECT idventas, descuento ,total , pago, forma_pago, 
+                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta 
+                            INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
+                            WHERE venta.idnegocios='$negocio' ORDER BY idventas DESC";
+                            $row = $con->consultaListar($query);
+                        }
+                     
                         $con->cerrarConexion();
 
                         while ($renglon = mysqli_fetch_array($row)) {
@@ -106,7 +116,11 @@ if (!isset($_SESSION['acceso'])) {
             </div>
             <!--Tabla contenedor-->
         </div>
-        <!--container-->
+        <!--col-7-->
+    </div>
+    <!--row-->
+    </div>
+    <!--container-->
     <script src="js/user_jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
