@@ -32,7 +32,10 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio();">
-<?php include("NavbarAB.php") ?>
+<?php
+$sel = "clientes"; 
+include("NavbarAB.php") 
+?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
     <div class="modal-dialog">
@@ -50,21 +53,21 @@ if (!isset($_SESSION['acceso'])) {
                 <p class="statusMsg"></p>
                     <form class="form-group" action="#" method="post">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-lg-4">
                                 <h5 class="etiquetas"><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4">
                                 <h5 class="etiquetas"><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
                                 <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4">
                                 <h5 class="etiquetas"><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
                                 <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-lg-4">
                                 <h5 class="etiquetas"><label for="doc" class="badge badge-primary">Documento:</label></h5>
 
                                 <div class="row" style="margin: 0 auto;">
@@ -85,31 +88,31 @@ if (!isset($_SESSION['acceso'])) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4">
                                 <h5 class="etiquetas"><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
                                 <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4">
                                 <h5 class="etiquetas"><label for="dir" class="badge badge-primary">Direccion:</label></h5>
                                 <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <h5 class="etiquetas"><label for="tel" class="badge badge-primary">Telefono:</label></h5>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <h5 class="etiquetas"><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <h5 class="etiquetas"><label for="login" class="badge badge-primary">Usuario:</label></h5>
                                 <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <h5 class="etiquetas"><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
                                 <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required>
                             </div>
@@ -129,11 +132,12 @@ if (!isset($_SESSION['acceso'])) {
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
+                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                    <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <table class="table table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">

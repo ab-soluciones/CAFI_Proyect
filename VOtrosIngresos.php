@@ -34,7 +34,10 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <?php include("Navbar.php") ?>
+    <?php 
+    $sel = "ingresos";
+    include("Navbar.php") 
+    ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">
@@ -52,11 +55,11 @@ if (!isset($_SESSION['acceso'])) {
                     <p class="statusMsg"></p>
                     <form class="form-group" action="#" method="post">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <h5><label for="can" class="badge badge-primary">Cantidad $ :</label></h5>
                                 <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off" required>
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <h5><label for="tipo" class="badge badge-primary">Tipo :</label></h5>
                                 <select id="tipo" name="STipo" id="concepto" class="form form-control" required>
                                     <option></option>
@@ -67,7 +70,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <h5><label for="fingreso" class="badge badge-primary">Forma de Ingreso :</label></h5>
                                 <select name="SFIngreso" id="fingreso" class="form form-control" required>
                                     <option></option>
@@ -75,7 +78,7 @@ if (!isset($_SESSION['acceso'])) {
                                     <option>Banco</option>
                                 </select> <br>
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-6">
                                 <h5><label for="fecha" class="badge badge-primary">Fecha :</label></h5>
                                 <input class="form-control" id="fecha" type="date" name="DFecha" required>
                             </div>
@@ -92,14 +95,15 @@ if (!isset($_SESSION['acceso'])) {
 
     <div class="container-fluid">
         <div class="row align-items-start">
-              <div class="col-md-8">
-                <div id="tableContainer" class="d-block col-lg-8">
+              <div class="col-md-12">
+                <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
+                    <button class="d-lg-none btn btn-success col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                    <button class="btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                       <div class="contenedorTabla">
                           <table class="table table-bordered table-hover fixed_headers table-responsive">

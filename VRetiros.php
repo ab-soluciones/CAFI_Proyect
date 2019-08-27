@@ -135,7 +135,10 @@ $con->cerrarConexion();
 </head>
 
 <body onload="inicio();">
-<?php include("Navbar.php") ?>
+<?php
+$sel = "retiros"; 
+include("Navbar.php") 
+?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
     <div class="modal-dialog">
@@ -153,11 +156,11 @@ $con->cerrarConexion();
                 <p class="statusMsg"></p>
                 <form class="form-group" action="#" method="post">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
                             <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad" required>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <h5><label for="de" class="badge badge-ligh">De:</label></h5>
                             <select id="de" class="form form-control" name="STipo" required>
                                 <option></option>
@@ -167,7 +170,7 @@ $con->cerrarConexion();
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <h5><label for="concepto" class="badge badge-ligh">Concepto:</label></h5>
                             <select id="concepto" class="form form-control" name="SConcepto" required>
                                 <option></option>
@@ -175,7 +178,7 @@ $con->cerrarConexion();
                                 <option>Corte de caja</option>
                             </select>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                             <h5><label for="desc" class="badge badge-ligh">Descripcion:</label></h5>
                             <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
                         </div>
@@ -209,14 +212,15 @@ $con->cerrarConexion();
         <!-- <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
             
         </div> -->
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
+                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name">
-                    <button class="btn btn-danger ml-3" data-toggle="modal" data-target="#modalForm">Retirar</button>
+                    <button class="d-none d-lg-flex btn btn-danger ml-3" data-toggle="modal" data-target="#modalForm">Retirar</button>
                 </div>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">

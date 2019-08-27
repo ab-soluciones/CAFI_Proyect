@@ -51,6 +51,10 @@ body {
     border-radius: 10px;
     box-shadow: 1px 5px 10px lightgray;
 }
+.seleccionado{
+    border-radius: 10px;
+    box-shadow: 1px 5px 10px lightgray;
+}
 .nav-link label{
     cursor: pointer;
     background-color: #2a727a;

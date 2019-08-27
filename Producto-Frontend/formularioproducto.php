@@ -1,14 +1,14 @@
 <form class="form-group" action="#" method="post" enctype="multipart/form-data" id="producto">
     <div class="row mt-3">
-        <div class="col-4">
+        <div class="col-lg-4">
             <h5><label for="cb" class="badge badge-primary">Codigo de Barras:</label></h5>
             <input id="cb" class="form form-control" type="text" name="TCodigoB" placeholder="0000000000000">
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
             <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
             <div class="row">
                 <div style="margin-left: 15px;" id="preview" class="card">
@@ -23,22 +23,22 @@
     </div>
 
     <div class="row mt-3">
-        <div class="col-4">
+        <div class="col-lg-4">
             <h5><label for="color" class="badge badge-primary">Color:</label></h5>
             <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" autocomplete="off" required>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <h5><label for=" marca" class="badge badge-primary">Marca:</label></h5>
             <input id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="off" required>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
             <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
         </div>
     </div>
 
     <div class="row mt-3">
-        <div class="col-4">
+        <div class="col-lg-4">
             <h5><label for="um" class="badge badge-primary">Unidad de Medida:</label></h5>
             <select id="um" class="form form-control" type="text" name="DLUnidad">
                 <option value="Pieza">Pieza</option>
@@ -46,7 +46,7 @@
                 <option value="Paquete">Paquete</option>
             </select>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <h5><label for="tpr" class="badge badge-primary">Tipo de producto:</label></h5>
             <div class="row" style="margin: 0 auto;">
                 <div>
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <div style="display: none;" id="divtalla">
                 <h5><label for="ta" class="badge badge-danger">Tallas de ropa:</label></h5>
                 <select id="ta" class="form form-control" name="SlcTalla" placeholder="Ingrese la talla" value="">
@@ -90,11 +90,11 @@
     </div>
     
     <div class="row mt-3">
-        <div class="col-6">
+        <div class="col-lg-6">
             <h5><label for="precioc" class="badge badge-primary">Precio de Compra $:</label></h5>
             <input id="precioc" class="form form-control" type="text" name="TPrecioC" placeholder="$" autocomplete="off" required><br>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6">
             <h5><label for="preciov" class="badge badge-primary">Precio de Venta $:</label></h5>
             <input id="preciov" class="form form-control" type="text" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
         </div>

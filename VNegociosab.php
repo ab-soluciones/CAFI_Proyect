@@ -34,7 +34,10 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio();">
-<?php include("NavbarAB.php") ?>
+<?php
+$sel = "negocios"; 
+include("NavbarAB.php") 
+?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
     <div class="modal-dialog">
@@ -52,25 +55,25 @@ if (!isset($_SESSION['acceso'])) {
                 <p class="statusMsg"></p>
                 <form class="form-group" action="#" method="post">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4">
                             <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
                             <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4">
                             <h5><label for="dom" class="badge badge-primary">Domicilio:</label></h5>
                             <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" required>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4">
                             <h5><label for="cd" class="badge badge-primary">Ciudad:</label></h5>
                             <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4">
                             <h5><label for="tel" class="badge badge-primary">Teléfono:</label></h5>
                             <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Teléfono" autocomplete="off" required>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4">
                             <h5><label for="impresora" class="badge badge-primary">Configuracion de impresora:</label></h5>
                             <div class="row" style="margin: 0 auto;">
                                 <div class="form-check-inline">
@@ -85,7 +88,7 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4">
                             <h5><label class="badge badge-primary">Cliente:</label></h5>
                             <div>
                                 <input id="incliente" class="form form-control" list="clientes" name="DlCliente" required autocomplete="off">
@@ -127,11 +130,12 @@ if (!isset($_SESSION['acceso'])) {
             <div class="col-md-12">
               <div id="tableContainer" class="d-block col-lg-12">
                     <div class="input-group mb-2">
+                        <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                         <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
                         <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                        <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                        <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                   <div class="contenedorTabla">
                   <table class="table table-bordered table-hover fixed_headers table-responsive">

@@ -63,6 +63,7 @@ if (isset($_GET['id'])) {
         <div class="col-md-3" style="  margin: 0 auto; margin-top:5px;">
             <div class=" card card-body">
                 <form class="form-group" action="#" method="post">
+                <h5><label for="pago" class="badge badge-primary">Concepto:</label></h5>
                     <select name="SConcepto" id="concepto" class="form form-control" required>
                         <option>Renta</option>
                         <option>Luz</option>

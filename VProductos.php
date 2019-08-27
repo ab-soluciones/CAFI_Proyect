@@ -103,7 +103,10 @@ if (!isset($_SESSION['acceso'])) {
 
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <?php include("Navbar.php") ?>
+    <?php
+    $sel = "productos"; 
+    include("Navbar.php") 
+    ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">
@@ -155,6 +158,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
+                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
@@ -180,7 +184,7 @@ if (!isset($_SESSION['acceso'])) {
                         </select>
                         <input type="submit" style="display: none;">
                     </form>
-                    <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla">
                     <table class="table table-bordered table-hover fixed_headers table-responsive">
