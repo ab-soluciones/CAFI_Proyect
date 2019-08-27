@@ -45,7 +45,7 @@ if (!isset($_SESSION['acceso'])) {
                         <span class="sr-only">Close</span>
                     </button>
                 </div>
-                
+
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
@@ -132,9 +132,9 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!-- Modal -->
 
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div class="row align-items-start">
-            <div class="col-md-8">
+            <div class="col-md-12">
               <div id="tableContainer" class="d-block col-lg-12">
                     <div class="input-group mb-2">
                         <div class="input-group-prepend">
@@ -145,7 +145,7 @@ if (!isset($_SESSION['acceso'])) {
                     </div>
 
                     <div class="contenedorTabla">
-                        <table class="table table-bordered table-hover fixed_headers table-responsive">
+                        <table class="scroll table table-bordered table-hover fixed_headers table-responsive">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th onclick="sortTable(0)">Nombre</th>
@@ -157,7 +157,8 @@ if (!isset($_SESSION['acceso'])) {
                                     <th onclick="sortTable(6)">Telefono</th>
                                     <th onclick="sortTable(7)">Correo</th>
                                     <th onclick="sortTable(8)">Estado</th>
-                                    <th onclick="sortTable(9)">Acciones</tr>
+                                    <th onclick="sortTable(9)">Acciones<th>
+                                    </tr>
                             </thead>
 
                     <tbody>
@@ -195,7 +196,6 @@ if (!isset($_SESSION['acceso'])) {
         </div>
       </div>
           </div>
-
 </div>
     <?php
     if (

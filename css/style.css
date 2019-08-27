@@ -62,6 +62,23 @@ body {
     color: red;
 }
 
+table.scroll {
+    /*width: 100%; /* Optional */
+    /* border-collapse: collapse; */
+    border-spacing: 0;
+    border: 2px solid black;
+
+}
+
+nav.fixed{
+  position: fixed;
+}
+
+.contenedor{
+  position: relative;
+  top: 80px;
+}
+
 
 /*TABLAS*/
 
@@ -91,9 +108,9 @@ body {
 @media (min-width: 576px) {
 
 }
-/*md*/  
+/*md*/
 @media (min-width: 768px) {
-    
+
 }
 /*lg*/
 @media (min-width: 992px) {
@@ -110,5 +127,5 @@ body {
 }
 /*xl*/
 @media (min-width: 1200px) {
-    
+
 }

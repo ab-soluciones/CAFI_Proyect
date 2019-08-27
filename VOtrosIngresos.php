@@ -46,7 +46,7 @@ if (!isset($_SESSION['acceso'])) {
                         <span class="sr-only">Close</span>
                     </button>
                 </div>
-                
+
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
@@ -90,10 +90,10 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!-- Modal -->
 
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div class="row align-items-start">
-              <div class="col-md-8">
-                <div id="tableContainer" class="d-block col-lg-8">
+              <div class="col-md-12">
+                <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
                     <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
@@ -102,7 +102,7 @@ if (!isset($_SESSION['acceso'])) {
                     <button class="btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                       <div class="contenedorTabla">
-                          <table class="table table-bordered table-hover fixed_headers table-responsive">
+                          <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                               <thead class="thead-dark">
                                   <tr class="encabezados">
                                       <th onclick="sortTable(0)">Cantidad</th>

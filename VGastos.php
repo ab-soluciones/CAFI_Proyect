@@ -47,7 +47,7 @@ if (!isset($_SESSION['acceso'])) {
                         <span class="sr-only">Close</span>
                     </button>
                 </div>
-                
+
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
@@ -98,7 +98,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="row mt-3 justify-content-around">
                                 <input id="formButton_guardar" type="submit" class="col-4 col-lg-4 btn btn-lg btn-primary" name="" value="Guardar">
-                                <button id="formButton_cancelar" class="col-4 d-lg-none btn btn-lg btn-danger" name="">Cancelar</button>     
+                                <button id="formButton_cancelar" class="col-4 d-lg-none btn btn-lg btn-danger" name="">Cancelar</button>
                             </div>
                         </div>
                     </form>
@@ -110,7 +110,7 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!-- Modal -->
 
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <button id="formButton_nuevo" class="d-lg-none col-12 btn btn-lg btn-primary" name="">Nuevo Gasto</button>
             <div id="tableContainer" class="d-block col-lg-12">
@@ -122,7 +122,7 @@ if (!isset($_SESSION['acceso'])) {
                     <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla">
-                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                    <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th onclick="sortTable(0)">Concepto</th>

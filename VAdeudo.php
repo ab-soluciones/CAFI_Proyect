@@ -18,7 +18,7 @@ if (isset($_GET['t0t41v34'])) {
     $totalv =  $_GET['t0t41v34'];
     if (isset($_POST['TID'])) {
         $_SESSION['clienteid'] = $_POST['TID'];
-        //se guarda el id del cliente en la sesion 
+        //se guarda el id del cliente en la sesion
         header("location: VPago.php?v3nd3rpr0=v3nd3r&total=$totalv");
         //el total de la venta se manda de nuevo por la url
     }
@@ -32,7 +32,7 @@ if (isset($_GET['t0t41v34'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        
+
         <title>Adeudos</title>
     </head>
 
@@ -102,14 +102,14 @@ if (isset($_GET['t0t41v34'])) {
                             $nombre =  $_POST['DlClientes'];
                             //se optienen los datos del cliente para mostrarlos en la tabla para que el usuario compruebe si es el cliente
                             $query = "SELECT idcliente,nombre,apaterno,amaterno,tipo_documento,
-                            numero_documento,direccion,telefono,correo, estado FROM cliente 
+                            numero_documento,direccion,telefono,correo, estado FROM cliente
                             WHERE (SELECT CONCAT(nombre,' ',apaterno,' ' ,amaterno))='$nombre'
                             AND negocios_idnegocios= '$negocios' ";
                             $row = $con->consultaListar($query);
 
                             while ($renglon = mysqli_fetch_array($row)) {
                                 //se suman el total de adeudos sin liquidar para mostrarle al usuario cuantas cuentas sin pagar tiene antes de realizar la venta
-                                $query2 = "SELECT COUNT(idadeudos) AS total FROM adeudos 
+                                $query2 = "SELECT COUNT(idadeudos) AS total FROM adeudos
                                 WHERE cliente_idcliente='$renglon[idcliente]' AND estado_deuda='A'";
 
                                 $totaladeudos = $con->consultaRetorno($query2);

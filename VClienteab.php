@@ -44,7 +44,7 @@ if (!isset($_SESSION['acceso'])) {
                     <span class="sr-only">Close</span>
                 </button>
             </div>
-            
+
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
@@ -114,18 +114,18 @@ if (!isset($_SESSION['acceso'])) {
                                 <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required>
                             </div>
                         </div>
-                        
+
                         <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
-                    
+
                     </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Modal -->
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
@@ -135,7 +135,7 @@ if (!isset($_SESSION['acceso'])) {
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <table class="table table-bordered table-hover fixed_headers table-responsive">
+                <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th onclick="sortTable(0)">Nombre</th>
