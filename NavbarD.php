@@ -1,9 +1,9 @@
-<div class="container-fluid px-0 d-none d-lg-block">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-around p-0">
+<div class="container-fluid px-0 d-none d-lg-block fixed-top">
+    <nav class="navbar fixed navbar-expand-lg navbar-light bg-light justify-content-around p-0">
         <div class="col-2 d-flex justify-content-between align-items-center">
             <a class="navbar-brand" onclick="window.location.href='VABOptions.php'" title="Menu" data-toggle="tooltip"><img class="img-fluid" src="img/logo/nav1.png"></a>
             <p id="nav-title" class="font-weight-bold">
-    
+
             </p>
         </div>
         <div class="collapse navbar-collapse col-9 d-flex justify-content-center align-items-center" id="navbarNav">
@@ -17,11 +17,14 @@
                 <li class="nav-item mx-2 text-center">
                     <a class="<?php if($sel === 'fde'){ echo seleccionado; } ?> nav-link font-weight-bold" onclick="window.location.href='VFlujoEfectivo.php'" title="Flujo de Efectivo"><img src="img/negocios.png">Flujo de efectivo</a>
                 </li>
+
             </ul>
         </div>
-        <div class="col-1 d-flex justify-content-end align-items-center text-center">
+
+        <div class="col-1 d-flex justify-content-end align-items-center text-center text-uppercase">
             <a id="nav-salir" class="nav-link font-weight-bold" href="index.php?cerrar_sesion" title="Salir"><img src="img/salir.png">Salir</a>
         </div>
+
     </nav>
 </div>
 

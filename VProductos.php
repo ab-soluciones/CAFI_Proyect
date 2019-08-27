@@ -118,7 +118,7 @@ if (!isset($_SESSION['acceso'])) {
                         <span class="sr-only">Close</span>
                     </button>
                 </div>
-                
+
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
@@ -147,14 +147,14 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                     </div>
                     <div id="tableHolder" class="row justify-content-center">
-        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal -->
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
@@ -166,10 +166,10 @@ if (!isset($_SESSION['acceso'])) {
                     <p>Sucursal:</p>
                     <form action="#" method="POST">
                         <select id="sucursal" class="form form-control" name="SNegocio" placeholder="Ingrese la talla" value="">
-                        <?php 
+                        <?php
                       $negocio = $_SESSION['idnegocio'];
                       $con = new Models\Conexion();
-                      $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                      $query = "SELECT nombre_negocio, idnegocios FROM negocios
                       WHERE clientesab_idclienteab = (SELECT clientesab_idclienteab AS dueno FROM negocios WHERE negocios.idnegocios='$negocio')";
                       $row = $con->consultaListar($query);
                       $con->cerrarConexion();
@@ -178,7 +178,7 @@ if (!isset($_SESSION['acceso'])) {
                        $nombre[$cont] = $renglon['nombre_negocio'];
                        $id[$cont] = $renglon['id'];
                        $cont++;
-                       echo "<option>".$renglon['nombre_negocio']."</option>"; 
+                       echo "<option>".$renglon['nombre_negocio']."</option>";
                       }
                     ?>
                         </select>
@@ -186,8 +186,8 @@ if (!isset($_SESSION['acceso'])) {
                     </form>
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <div class="contenedorTabla">
-                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                <div data-spy="scroll" class="contenedorTabla">
+                    <table class="scroll table width="100%" table-hover fixed_headers table-responsive">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th onclick="sortTable(0)">C_Barras</th>
@@ -196,8 +196,8 @@ if (!isset($_SESSION['acceso'])) {
                                 <th onclick="sortTable(3)">Color</th>
                                 <th onclick="sortTable(4)">Marca</th>
                                 <th onclick="sortTable(5)">Descripcion</th>
-                                <th onclick="sortTable(6)">Cant</th>
-                                <th onclick="sortTable(7)">UM</th>
+                                <th onclick="sortTable(6)">Cantidad</th>
+                                <th onclick="sortTable(7)">Unidad de Medida</th>
                                 <th onclick="sortTable(8)">Talla</th>
                                 <th onclick="sortTable(9)">Compra</th>
                                 <th onclick="sortTable(10)">Venta</th>
@@ -208,14 +208,14 @@ if (!isset($_SESSION['acceso'])) {
                         <tbody>
                             <?php
                                     if(isset($_POST['SNegocio'])){
-                                        for ($i=0; $i < sizeof($id); $i++) { 
+                                        for ($i=0; $i < sizeof($id); $i++) {
                                           if(strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0){
                                               $negocio=$id[$i];
                                           }
                                         }
                                        echo"<script>alert('$nombre[0]');</script>";
                                     } else{   $negocio = $_SESSION['idnegocio'];}
-                         
+
                             $con = new Models\Conexion();
                             $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
                             FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras

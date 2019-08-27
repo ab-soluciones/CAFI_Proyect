@@ -47,7 +47,7 @@ include("NavbarAB.php")
                     <span class="sr-only">Close</span>
                 </button>
             </div>
-            
+
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
@@ -89,14 +89,14 @@ include("NavbarAB.php")
                         <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
-                    
+
                     </div>
             </div>
         </div>
     </div>
 </div>
 <!-- Modal -->
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div class="row align-items-start">
           <div class="col-md-12">
             <div id="tableContainer" class="d-block col-lg-12">
@@ -109,7 +109,7 @@ include("NavbarAB.php")
                       <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>  
                   </div>
                   <div class="contenedorTabla">
-                      <table class="table table-bordered table-hover fixed_headers table-responsive">
+                      <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
                           <thead class="thead-dark">
                               <tr class="encabezados">
                                   <th onclick="sortTable(0)">ID</th>

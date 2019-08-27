@@ -36,7 +36,7 @@ if (!isset($_SESSION['acceso'])) {
     $sel = "ventas";
     include("Navbar.php") 
     ?>
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -45,13 +45,13 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla">
-                <table class="table table-bordered table-hover fixed_headers table-responsive">
+                <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-                            <th onclick="sortTable(0)">Concepto</th>
+                            <th onclick="soExplore rtTable(0)">Concepto</th>
                             <th onclick="sortTable(1)">Descuento</th>
                             <th onclick="sortTable(2)">Total</th>
-                            <th onclick="sortTable(3)">Pagó</th>
+                            <th onclick="sortTable(3)">Pago</th>
                             <th onclick="sortTable(4)">Forma</th>
                             <th onclick="sortTable(5)">Cambio</th>
                             <th onclick="sortTable(6)">Fecha</th>
@@ -65,8 +65,8 @@ if (!isset($_SESSION['acceso'])) {
                         <?php
                         $negocio = $_SESSION['idnegocio'];
                         $con = new Models\Conexion();
-                        $query = "SELECT idventas, descuento ,total , pago, forma_pago, 
-                        cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta 
+                        $query = "SELECT idventas, descuento ,total , pago, forma_pago,
+                        cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta
                         INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
                         WHERE venta.idnegocios='$negocio' ORDER BY idventas DESC";
                         $row = $con->consultaListar($query);

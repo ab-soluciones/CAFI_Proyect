@@ -38,7 +38,7 @@ if (!isset($_SESSION['acceso'])) {
     include("Navbar.php") 
     ?>
 
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -47,7 +47,7 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla">
-                <table class="table table-bordered table-hover fixed_headers table-responsive">
+                <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
 
@@ -63,7 +63,7 @@ if (!isset($_SESSION['acceso'])) {
                         <?php
                         $con = new Models\Conexion();
                         $negocios = $_SESSION['idnegocio'];
-                        $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
+                        $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno
                         FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
                         WHERE adeudos.negocios_idnegocios='$negocios' ORDER BY ventas_idventas DESC";
                         $row = $con->consultaListar($query);

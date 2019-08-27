@@ -37,7 +37,7 @@ if (!isset($_SESSION['acceso'])) {
     include("Navbar.php") 
     ?>
 
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -46,7 +46,7 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla">
-                <table class="table table-bordered table-hover fixed_headers table-responsive">
+                <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th onclick="sortTable(0)">Edit estado</th>
@@ -67,7 +67,7 @@ if (!isset($_SESSION['acceso'])) {
                         $negocios = $_SESSION['idnegocio'];
                         $query = "SELECT idabono,abono.estado AS a_estado,cantidad,pago,cambio,fecha,hora,cliente.nombre AS nombre_cliente,
                                             cliente.apaterno AS ap_cliente, cliente.amaterno AS am_cliente,trabajador.nombre,
-                                            trabajador.apaterno, adeudos_id FROM abono 
+                                            trabajador.apaterno, adeudos_id FROM abono
                                             INNER JOIN adeudos ON abono.adeudos_id=adeudos.idadeudos
                                             INNER JOIN cliente ON adeudos.cliente_idcliente=cliente.idcliente
                                             INNER JOIN trabajador ON trabajador.idtrabajador=abono.trabajador_idtrabajador

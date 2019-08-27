@@ -150,7 +150,7 @@ include("Navbar.php")
                     <span class="sr-only">Close</span>
                 </button>
             </div>
-            
+
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
@@ -207,10 +207,10 @@ include("Navbar.php")
 </div>
 <!-- Modal -->
 
-<div class="container-fluid">
+<div class="contenedor container-fluid">
     <div class="row align-items-start">
         <!-- <div id="formulario" class="d-none d-lg-flex col-lg-4 card card-body">
-            
+
         </div> -->
         <div class="col-md-12">
             <div id="tableContainer" class="d-block col-lg-12">
@@ -223,7 +223,7 @@ include("Navbar.php")
                     <button class="d-none d-lg-flex btn btn-danger ml-3" data-toggle="modal" data-target="#modalForm">Retirar</button>
                 </div>
                 <div class="contenedorTabla">
-                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                    <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th onclick="sortTable(0)">Concepto</th>
