@@ -91,7 +91,6 @@ if (!isset($_SESSION['acceso'])) {
 
                                 </div>
                             </td>
-<<<<<<< HEAD
                             <td class="text-nowrap text-center"><?php echo $renglon['a_estado']; ?></td>
                             <td class="text-nowrap text-center">$ <?php echo $renglon['cantidad']; ?></td>
                             <td class="text-nowrap text-center">$ <?php echo $renglon['pago']; ?></td>
@@ -101,17 +100,6 @@ if (!isset($_SESSION['acceso'])) {
                             <td class="text-nowrap text-center"><?php echo $renglon['nombre_cliente'] . " " . $renglon['ap_cliente'] . " " . $renglon['am_cliente']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
                             <td class="text-nowrap text-center"><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>"># <?php echo $renglon['adeudos_id']; ?></a></td>
-=======
-                            <td><?php echo $renglon['a_estado']; ?></td>
-                            <td>$ <?php echo $renglon['cantidad']; ?></td>
-                            <td>$ <?php echo $renglon['pago']; ?></td>
-                            <td>$ <?php echo $renglon['cambio']; ?></td>
-                            <td><?php echo $renglon['fecha']; ?></td>
-                            <td><?php echo $renglon['hora']; ?></td>
-                            <td><?php echo $renglon['nombre_cliente'] . " " . $renglon['ap_cliente'] . " " . $renglon['am_cliente']; ?></td>
-                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-                            <td><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>">mostrar</td>
->>>>>>> barras_de_busqueda
                         </tr>
                         <?php
                         } ?>

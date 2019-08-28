@@ -48,7 +48,6 @@ if (!isset($_SESSION['acceso'])) {
                 <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-<<<<<<< HEAD
                             <th class="text-nowrap text-center" onclick="soExplore rtTable(0)">Concepto</th>
                             <th class="text-nowrap text-center" onclick="sortTable(1)">Descuento</th>
                             <th class="text-nowrap text-center" onclick="sortTable(2)">Total</th>
@@ -60,19 +59,6 @@ if (!isset($_SESSION['acceso'])) {
                             <th class="text-nowrap text-center" onclick="sortTable(8)">Es</th>
                             <th class="text-nowrap text-center" onclick="sortTable(9)">Trabajador</th>
                             <th class="text-nowrap text-center" onclick="sortTable(10)">Editar</th>
-=======
-                            <th onclick="soExplore rtTable(0)">Concepto</th>
-                            <th onclick="sortTable(1)">Descuento</th>
-                            <th onclick="sortTable(2)">Total</th>
-                            <th onclick="sortTable(3)">Pago</th>
-                            <th onclick="sortTable(4)">Forma</th>
-                            <th onclick="sortTable(5)">Cambio</th>
-                            <th onclick="sortTable(6)">Fecha</th>
-                            <th onclick="sortTable(7)">Hora</th>
-                            <th onclick="sortTable(8)">Estado</th>
-                            <th onclick="sortTable(9)">Trabajador</th>
-                            <th onclick="sortTable(10)">Editar</th>
->>>>>>> barras_de_busqueda
                         </tr>
                     </thead>
                     <tbody id="renglones">
@@ -81,19 +67,19 @@ if (!isset($_SESSION['acceso'])) {
                         $con = new Models\Conexion();
                         if(isset($_GET['venta'])){
                             $venta = $_GET['venta'];
-                            $query = "SELECT idventas, descuento ,total , pago, forma_pago, 
-                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta 
+                            $query = "SELECT idventas, descuento ,total , pago, forma_pago,
+                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta
                             INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
                             WHERE venta.idnegocios='$negocio' AND idventas = '$venta' ORDER BY idventas DESC";
                             $row = $con->consultaListar($query);
                         }else{
-                            $query = "SELECT idventas, descuento ,total , pago, forma_pago, 
-                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta 
+                            $query = "SELECT idventas, descuento ,total , pago, forma_pago,
+                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta
                             INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
                             WHERE venta.idnegocios='$negocio' ORDER BY idventas DESC";
                             $row = $con->consultaListar($query);
                         }
-                     
+
                         $con->cerrarConexion();
 
                         while ($renglon = mysqli_fetch_array($row)) {

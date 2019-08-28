@@ -65,12 +65,12 @@ if (!isset($_SESSION['acceso'])) {
                         $negocios = $_SESSION['idnegocio'];
                         if (isset($_GET['ad'])) {
                             $adeudo = $_GET['ad'];
-                            $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
+                            $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno
                             FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
                             WHERE adeudos.negocios_idnegocios='$negocios' AND idadeudos='$adeudo' ORDER BY ventas_idventas DESC";
                             $row = $con->consultaListar($query);
                         } else {
-                            $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
+                            $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno
                             FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
                             WHERE adeudos.negocios_idnegocios='$negocios' ORDER BY ventas_idventas DESC";
                             $row = $con->consultaListar($query);
@@ -81,7 +81,6 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-<<<<<<< HEAD
                             <td class="text-nowrap text-center">$ <?php echo $renglon['total_deuda']; ?></td>
                             <td class="text-nowrap text-center">$ <?php echo $renglon['pago_minimo']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['estado_deuda']; ?></td>
@@ -94,14 +93,6 @@ if (!isset($_SESSION['acceso'])) {
                                 <button class="btn btn-success" disabled><img src="img/tarjeta.png"></a></button>
                                 <?php  } else {
                                         ?>
-=======
-                            <td>$ <?php echo $renglon['total_deuda']; ?></td>
-                            <td>$ <?php echo $renglon['pago_minimo']; ?></td>
-                            <td><?php echo $renglon['estado_deuda']; ?></td>
-                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
-                            <td><a href="VConsultasVentas.php?venta=<?php echo $renglon['ventas_idventas']; ?>">mostrar</a></td>
-                            <td>
->>>>>>> barras_de_busqueda
                                 <div class="container">
                                     <button onclick="window.location.href='NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo'" class="btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/abonos.png"></button>
                                     <button onclick="window.location.href='NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta'" class="btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/tarjeta.png"></button>
