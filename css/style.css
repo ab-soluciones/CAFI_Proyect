@@ -78,33 +78,13 @@ nav.fixed{
   position: fixed;
 }
 
-.contenedor{
-  position: relative;
-  top: 80px;
-}
-
-
 /*TABLAS*/
 
-/* .table{
-    background-color: white;
+ /*.table{
+    font-size: 7px;
+
 }
-.encabezados{
-    text-align: center;
-    cursor: pointer;
-}
-.encabezados th{
-    padding: 10px 25px;
-}
-.selectedTh{
-    background-color: blue;
-}
-.selectedTds{
-    background-color: red;
-}
-.table tr{
-    height: 100%;
-} */
+
 
 /*xs*/
 /*En esta medida toma lo que esta en el css por default*/
@@ -128,7 +108,12 @@ nav.fixed{
         overflow-y: auto;
         height: 470px;
     } */
+    .contenedor{
+      position: relative;
+      top: 80px;
+    }
 }
+
 /*xl*/
 @media (min-width: 1200px) {
 

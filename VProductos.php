@@ -104,8 +104,8 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
     <?php
-    $sel = "productos"; 
-    include("Navbar.php") 
+    $sel = "productos";
+    include("Navbar.php")
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
@@ -186,23 +186,23 @@ if (!isset($_SESSION['acceso'])) {
                     </form>
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <div data-spy="scroll" class="contenedorTabla">
+                <div class="contenedorTabla">
                     <table class="scroll table width="100%" table-hover fixed_headers table-responsive">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th onclick="sortTable(0)">C_Barras</th>
-                                <th onclick="sortTable(1)">Nombre</th>
-                                <th onclick="sortTable(2)">Imagen</th>
-                                <th onclick="sortTable(3)">Color</th>
-                                <th onclick="sortTable(4)">Marca</th>
-                                <th onclick="sortTable(5)">Descripcion</th>
-                                <th onclick="sortTable(6)">Cantidad</th>
-                                <th onclick="sortTable(7)">Unidad de Medida</th>
-                                <th onclick="sortTable(8)">Talla</th>
-                                <th onclick="sortTable(9)">Compra</th>
-                                <th onclick="sortTable(10)">Venta</th>
-                                <th onclick="sortTable(11)">Estado</th>
-                                <th onclick="sortTable(12)">Tarea</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">Código de barras</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(2)">Imagen</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(3)">Color</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(4)">Marca</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(5)">Descripcion</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Cantidad</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Unidad de Medida</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(8)">Talla</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(9)">Compra</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(10)">Venta</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(11)">Estado</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(12)">Tarea</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -226,31 +226,31 @@ if (!isset($_SESSION['acceso'])) {
                             while ($renglon = mysqli_fetch_array($row)) {
                                 ?>
                             <tr>
-                                <td><?php echo $renglon['codigo_barras']; ?></td>
-                                <td><?php echo $renglon['nombre']; ?></td>
-                                <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
-                                <td><?php echo $renglon['color']; ?></td>
-                                <td><?php echo $renglon['marca']; ?></td>
-                                <td><?php
+                                <td class="text-nowrap text-center"><?php echo $renglon['codigo_barras']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
+                                <td class="text-nowrap text-center"> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['color']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['marca']; ?></td>
+                                <td class="text-nowrap text-center"><?php
                                         if (strlen($renglon['descripcion']) === 0) {
                                             echo "Sin descripcion";
                                         } else {
                                             echo $renglon['descripcion'];
                                         }
                                         ?></td>
-                                <td><?php echo $renglon['cantidad']; ?></td>
-                                <td><?php echo $renglon['unidad_medida']; ?></td>
-                                <td><?php
+                                <td class="text-nowrap text-center"><?php echo $renglon['cantidad']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['unidad_medida']; ?></td>
+                                <td class="text-nowrap text-center"><?php
                                         if (strlen($renglon['talla_numero']) === 0) {
                                             echo "N.A";
                                         } else {
                                             echo  $renglon['talla_numero'];
                                         }
                                         ?></td>
-                                <td>$<?php echo $renglon['precio_compra']; ?></td>
-                                <td>$<?php echo $renglon['precio_venta']; ?></td>
-                                <td><?php echo $renglon['pestado']; ?></td>
-                                <td>
+                                <td class="text-nowrap text-center">$<?php echo $renglon['precio_compra']; ?></td>
+                                <td class="text-nowrap text-center">$<?php echo $renglon['precio_venta']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['pestado']; ?></td>
+                                <td class="text-nowrap text-center">
                                     <div class="row" style="position: absolute;">
                                         <div class="container" style="margin: 0 auto;">
                                             <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">

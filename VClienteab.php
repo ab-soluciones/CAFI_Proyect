@@ -33,8 +33,8 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio();">
 <?php
-$sel = "clientes"; 
-include("NavbarAB.php") 
+$sel = "clientes";
+include("NavbarAB.php")
 ?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
@@ -142,18 +142,18 @@ include("NavbarAB.php")
                 <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-                            <th onclick="sortTable(0)">Nombre</th>
-                            <th onclick="sortTable(1)">Ap-P</th>
-                            <th onclick="sortTable(2)">Ap-M</th>
-                            <th onclick="sortTable(3)">Doc</th>
-                            <th onclick="sortTable(4)">#Doc</th>
-                            <th onclick="sortTable(5)">Direcci&oacute;n</th>
-                            <th onclick="sortTable(6)">Tel&eacute;fono</th>
-                            <th onclick="sortTable(7)">Email</th>
-                            <th onclick="sortTable(8)">Usuario</th>
-                            <th onclick="sortTable(9)">Contraseña</th>
-                            <th onclick="sortTable(10)">Estado</th>
-                            <th onclick="sortTable(11)">Tarea</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(0)">Nombre</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Ap-P</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Ap-M</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Doc</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(4)">#Doc</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Direcci&oacute;n</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(6)">Tel&eacute;fono</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(7)">Email</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(8)">Usuario</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(9)">Contraseña</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(10)">Estado</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(11)">Tarea</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -166,18 +166,18 @@ include("NavbarAB.php")
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td><?php echo $renglon['apaterno']; ?></td>
-                            <td><?php echo $renglon['amaterno']; ?></td>
-                            <td><?php echo $renglon['tipo_documento']; ?></td>
-                            <td><?php echo $renglon['numero_documento']; ?></td>
-                            <td><?php echo $renglon['direccion']; ?></td>
-                            <td><?php echo $renglon['telefono']; ?></td>
-                            <td><?php echo $renglon['correo']; ?></td>
-                            <td><?php echo $renglon['login']; ?></td>
-                            <td><?php echo $renglon['password']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['apaterno']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['amaterno']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['tipo_documento']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['numero_documento']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['direccion']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['telefono']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['correo']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['login']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['password']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                            <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
                                     <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVClienteAB.php?id=<?php echo $renglon['id_clienteab'] ?>">
                                         <img src="img/edit.png">

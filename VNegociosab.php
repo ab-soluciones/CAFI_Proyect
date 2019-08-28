@@ -35,8 +35,8 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio();">
 <?php
-$sel = "negocios"; 
-include("NavbarAB.php") 
+$sel = "negocios";
+include("NavbarAB.php")
 ?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
@@ -141,14 +141,14 @@ include("NavbarAB.php")
                   <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
                       <thead class="thead-dark">
                           <tr class="encabezados">
-                              <th onclick="sortTable(0)">ID Usuarios AB</th>
-                              <th onclick="sortTable(1)">Nombre</th>
-                              <th onclick="sortTable(2)">Domicilio</th>
-                              <th onclick="sortTable(3)">Ciudad</th>
-                              <th onclick="sortTable(4)">Telefono</th>
-                              <th onclick="sortTable(5)">Impresora</th>
-                              <th onclick="sortTable(6)">Cliente</th>
-                              <th onclick="sortTable(7)">Tarea</th>
+                              <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>
+                              <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
+                              <th class="text-nowrap text-center" onclick="sortTable(2)">Domicilio</th>
+                              <th class="text-nowrap text-center" onclick="sortTable(3)">Ciudad</th>
+                              <th class="text-nowrap text-center" onclick="sortTable(4)">Telefono</th>
+                              <th class="text-nowrap text-center" onclick="sortTable(5)">Impresora</th>
+                              <th class="text-nowrap text-center" onclick="sortTable(6)">Cliente</th>
+                              <th class="text-nowrap text-center" onclick="sortTable(7)">Tarea</th>
                           </tr>
                       </thead>
 
@@ -162,14 +162,14 @@ include("NavbarAB.php")
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td><?php echo $renglon['idnegocios']; ?></td>
-                            <td><?php echo $renglon['nombre_negocio']; ?></td>
-                            <td><?php echo $renglon['domicilio']; ?></td>
-                            <td><?php echo $renglon['ciudad']; ?></td>
-                            <td><?php echo $renglon['telefono_negocio']; ?></td>
-                            <td><?php echo $renglon['impresora']; ?></td>
-                            <td><a href="VConsultasC.php?id= <?php echo $renglon['clientesab_idclienteab']; ?>"># <?php echo $renglon['clientesab_idclienteab']; ?></a></td>
-                            <td style="width:100px;">
+                            <td class="text-nowrap text-center"><?php echo $renglon['idnegocios']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre_negocio']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['domicilio']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['ciudad']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['telefono_negocio']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['impresora']; ?></td>
+                            <td class="text-nowrap text-center"><a href="VConsultasC.php?id= <?php echo $renglon['clientesab_idclienteab']; ?>"># <?php echo $renglon['clientesab_idclienteab']; ?></a></td>
+                            <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
                                     <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVNegocio.php?id=<?php echo $renglon['idnegocios'] ?>">
                                         <img src="img/edit.png">

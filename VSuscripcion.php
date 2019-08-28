@@ -33,8 +33,8 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio();">
 <?php
-$sel = "suscripciones"; 
-include("NavbarAB.php") 
+$sel = "suscripciones";
+include("NavbarAB.php")
 ?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
@@ -106,19 +106,19 @@ include("NavbarAB.php")
                       <div class="input-group-text"><i class="fa fa-search"></i></div>
                       </div>
                       <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                      <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>  
+                      <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                   </div>
                   <div class="contenedorTabla">
                       <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
                           <thead class="thead-dark">
                               <tr class="encabezados">
-                                  <th onclick="sortTable(0)">ID</th>
-                                  <th onclick="sortTable(1)">Activacion</th>
-                                  <th onclick="sortTable(2)">Vencimiento</th>
-                                  <th onclick="sortTable(3)">Estado</th>
-                                  <th onclick="sortTable(4)">Negocio</th>
-                                  <th onclick="sortTable(5)">Monto</th>
-                                  <th onclick="sortTable(6)">Tarea</th>
+                                  <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>
+                                  <th class="text-nowrap text-center" onclick="sortTable(1)">Activacion</th>
+                                  <th class="text-nowrap text-center" onclick="sortTable(2)">Vencimiento</th>
+                                  <th class="text-nowrap text-center" onclick="sortTable(3)">Estado</th>
+                                  <th class="text-nowrap text-center" onclick="sortTable(4)">Negocio</th>
+                                  <th class="text-nowrap text-center" onclick="sortTable(5)">Monto</th>
+                                  <th class="text-nowrap text-center" onclick="sortTable(6)">Tarea</th>
                               </tr>
                           </thead>
 
@@ -131,13 +131,13 @@ include("NavbarAB.php")
                       while ($renglon = mysqli_fetch_array($row)) {
                           ?>
                       <tr>
-                          <td><?php echo $renglon['idsuscripcion']; ?></td>
-                          <td><?php echo $renglon['fecha_activacion']; ?></td>
-                          <td><?php echo $renglon['fecha_vencimiento']; ?></td>
-                          <td><?php echo $renglon['estado']; ?></td>
-                          <td><a href="VConsultasN.php?id=<?php echo $renglon['negocio_id']; ?>"># <?php echo $renglon['negocio_id']; ?></a></td>
-                          <td>$ <?php echo $renglon['monto']; ?></td>
-                          <td style="width:100px;">
+                          <td class="text-nowrap text-center"><?php echo $renglon['idsuscripcion']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['fecha_activacion']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['fecha_vencimiento']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                          <td class="text-nowrap text-center"><a href="VConsultasN.php?id=<?php echo $renglon['negocio_id']; ?>"># <?php echo $renglon['negocio_id']; ?></a></td>
+                          <td class="text-nowrap text-center">$ <?php echo $renglon['monto']; ?></td>
+                          <td class="text-nowrap text-center" style="width:100px;">
                               <div class="row">
                                   <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVSuscripcion.php?id=<?php echo $renglon['idsuscripcion'] ?>">
                                       <img src="img/edit.png">

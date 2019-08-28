@@ -33,9 +33,9 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
-    <?php 
+    <?php
     $sel = "adeudos";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
 
     <div class="contenedor container-fluid">
@@ -51,12 +51,12 @@ if (!isset($_SESSION['acceso'])) {
                     <thead class="thead-dark">
                         <tr class="encabezados">
 
-                            <th onclick="sortTable(0)">Deuda</th>
-                            <th onclick="sortTable(1)">Pago minimo</th>
-                            <th onclick="sortTable(2)">Estado</th>
-                            <th onclick="sortTable(3)">Cliente</th>
-                            <th onclick="sortTable(4)">Venta</th>
-                            <th onclick="sortTable(5)">Abonar</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(0)">Deuda</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Pago minimo</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Estado</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Cliente</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(4)">Venta</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Abonar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,12 +72,12 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td>$ <?php echo $renglon['total_deuda']; ?></td>
-                            <td>$ <?php echo $renglon['pago_minimo']; ?></td>
-                            <td><?php echo $renglon['estado_deuda']; ?></td>
-                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
-                            <td><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>">?></a></td>
-                            <td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['total_deuda']; ?></td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['pago_minimo']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['estado_deuda']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
+                            <td class="text-nowrap text-center"><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>">?></a></td>
+                            <td class="text-nowrap text-center">
                                 <?php if ($renglon['estado_deuda'] == "L") {
                                         ?>
                                 <button class="btn btn-success" disabled><img src="img/abonos.png"></a></button>

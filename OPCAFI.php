@@ -57,8 +57,8 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <label class="badge badge-primary">Flujo de efectivo</label><br><img src="img/flujo_efectivo.png"> </button>
                         </div>
                     </div>
-                    
-                    
+
+
                     <a class="mt-3 btn btn-danger btn-lg btn-block" href="index.php?cerrar_sesion">
                         <label class="badge badge-danger">Salir</label><br><img src="img/salir.png"> </a>
                 <?php } else if (
@@ -91,7 +91,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </div>
                         <div class="col-4">
                             <button onclick="window.location.href='VOtrosIngresos.php'" type="button" class="btn btn-dark btn-lg btn-block">
-                            <label class="badge badge-dark">Otros Ingresos</label><br><img src="img/otrosingresos.png"></button></button>
+                            <label class="badge badge-dark">Ingresos</label><br><img src="img/otrosingresos.png"></button></button>
                         </div>
                     </div>
 
@@ -100,25 +100,21 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         <button onclick="window.location.href='VClientes.php'" type="button" class="btn btn-dark btn-lg btn-block">
                                 <label class="badge badge-dark">Clientes</label><br><img src="img/clientes.png"></button></button>
 
-
                         </div>
                         <div class="col-4">
                         <button onclick="window.location.href='VInventario.php'" type="button" class="btn btn-dark btn-lg btn-block">
                                 <label class="badge badge-dark">Inventario</label><br><img src="img/Inventory.png"> </button>
-
-
                         </div>
                         <div class="col-4">
-                        <button onclick="window.location.href='VProductos.php'" type="button" class="btn btn-dark btn-lg btn-block">
-                                <label class="badge badge-dark">Productos</label><br><img src="img/productos.png"> </button>
-
+                                <button onclick="window.location.href='VConsultasVentas.php'" type="button" class="btn btn-dark btn-lg btn-block">
+                                    <label class="badge badge-dark">Ventas</label><br><img src="img/venta.png"> </button>
                         </div>
                     </div>
 
-                    <div class="row mt-3 justify-content-center">
+                    <div class="row mt-3 justify-content-around">
                         <div class="col-4">
-                        <button onclick="window.location.href='VConsultasVentas.php'" type="button" class="btn btn-dark btn-lg btn-block">
-                            <label class="badge badge-dark">Ventas</label><br><img src="img/venta.png"> </button>
+                          <button onclick="window.location.href='VProductos.php'" type="button" class="btn btn-dark btn-lg btn-block">
+                                  <label class="badge badge-dark">Productos</label><br><img src="img/productos.png"> </button>
                         </div>
                         <div class="col-4">
                             <a class="btn btn-danger btn-lg btn-block" href="index.php?cerrar_sesion">

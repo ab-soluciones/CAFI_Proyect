@@ -37,8 +37,8 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio();">
 <?php
-$sel = "usuarios"; 
-include("NavbarAB.php") 
+$sel = "usuarios";
+include("NavbarAB.php")
 ?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
@@ -141,15 +141,15 @@ include("NavbarAB.php")
                 <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-                            <th onclick="sortTable(0)">ID Usuarios AB</th>
-                            <th onclick="sortTable(1)">Nombre</th>
-                            <th onclick="sortTable(2)">Apellido Paterno</th>
-                            <th onclick="sortTable(3)">Apellido Materno</th>
-                            <th onclick="sortTable(4)">Acceso</th>
-                            <th onclick="sortTable(5)">Usuario</th>
-                            <th onclick="sortTable(6)">Contraseña</th>
-                            <th onclick="sortTable(7)">Estado</th>
-                            <th onclick="sortTable(8)">Acciones</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Paterno</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Apellido Materno</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(4)">Acceso</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Usuario</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(6)">Contraseña</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(7)">Estado</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(8)">Acciones</th>
                         </tr>
                     </thead>
 
@@ -162,15 +162,15 @@ include("NavbarAB.php")
                       while ($renglon = mysqli_fetch_array($row)) {
                           ?>
                       <tr>
-                          <td><?php echo $renglon['idusuariosab']; ?></td>
-                          <td><?php echo $renglon['nombre']; ?></td>
-                          <td><?php echo $renglon['apaterno']; ?></td>
-                          <td><?php echo $renglon['amaterno']; ?></td>
-                          <td><?php echo $renglon['acceso']; ?></td>
-                          <td><?php echo $renglon['login']; ?></td>
-                          <td><?php echo $renglon['password']; ?></td>
-                          <td><?php echo $renglon['estado']; ?></td>
-                          <td style="width:100px;">
+                          <td class="text-nowrap text-center"><?php echo $renglon['idusuariosab']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['apaterno']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['amaterno']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['acceso']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['login']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['password']; ?></td>
+                          <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                          <td class="text-nowrap text-center" style="width:100px;">
                               <div class="row">
                                   <a onclick="if(confirm('SE ELIMINARÁ EL REGISTRO #<?php echo $renglon['idusuariosab']; ?>!'))
                                 {href= 'deleteVUAB.php?id=<?php echo $renglon['idusuariosab']; ?>'} " class="btn btn-warning"><img src="img/eliminarf.png">

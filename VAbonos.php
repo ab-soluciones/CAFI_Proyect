@@ -32,9 +32,9 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
-    <?php 
+    <?php
     $sel = "abonos";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
 
     <div class="contenedor container-fluid">
@@ -49,16 +49,16 @@ if (!isset($_SESSION['acceso'])) {
                 <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-                            <th onclick="sortTable(0)">Edit estado</th>
-                            <th onclick="sortTable(1)">Estado</th>
-                            <th onclick="sortTable(2)">Cantidad</th>
-                            <th onclick="sortTable(3)">Pago</th>
-                            <th onclick="sortTable(4)">Cambio</th>
-                            <th onclick="sortTable(5)">Fecha</th>
-                            <th onclick="sortTable(6)">Hora</th>
-                            <th onclick="sortTable(7)">Cliente</th>
-                            <th onclick="sortTable(8)">Registró</th>
-                            <th onclick="sortTable(9)">Adeudo</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(0)">Editar estado</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Estado</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Cantidad</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Pago</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(4)">Cambio</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Fecha</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(6)">Hora</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(7)">Cliente</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(8)">Registro</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(9)">Adeudo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,7 +77,7 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td style="width:100px;">
+                            <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row" style="margin: 0 auto;">
                                     <?php if ($_SESSION['acceso'] == "Employes") {
                                             ?>
@@ -91,15 +91,15 @@ if (!isset($_SESSION['acceso'])) {
 
                                 </div>
                             </td>
-                            <td><?php echo $renglon['a_estado']; ?></td>
-                            <td>$ <?php echo $renglon['cantidad']; ?></td>
-                            <td>$ <?php echo $renglon['pago']; ?></td>
-                            <td>$ <?php echo $renglon['cambio']; ?></td>
-                            <td><?php echo $renglon['fecha']; ?></td>
-                            <td><?php echo $renglon['hora']; ?></td>
-                            <td><?php echo $renglon['nombre_cliente'] . " " . $renglon['ap_cliente'] . " " . $renglon['am_cliente']; ?></td>
-                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-                            <td><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>"># <?php echo $renglon['adeudos_id']; ?></a></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['a_estado']; ?></td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['cantidad']; ?></td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['pago']; ?></td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['cambio']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre_cliente'] . " " . $renglon['ap_cliente'] . " " . $renglon['am_cliente']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
+                            <td class="text-nowrap text-center"><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>"># <?php echo $renglon['adeudos_id']; ?></a></td>
                         </tr>
                         <?php
                         } ?>

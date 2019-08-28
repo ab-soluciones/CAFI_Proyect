@@ -35,7 +35,7 @@ if (!isset($_SESSION['acceso'])) {
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
     <?php
     $sel = "clientes";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
@@ -152,16 +152,16 @@ if (!isset($_SESSION['acceso'])) {
                         <table class="scroll table table-bordered table-hover fixed_headers table-responsive">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
-                                    <th onclick="sortTable(0)">Nombre</th>
-                                    <th onclick="sortTable(1)">Apellido Paterno</th>
-                                    <th onclick="sortTable(2)">Apellido Materno</th>
-                                    <th onclick="sortTable(3)">Tipo de Documento</th>
-                                    <th onclick="sortTable(4)">Numero Documento</th>
-                                    <th onclick="sortTable(5)">Direccion</th>
-                                    <th onclick="sortTable(6)">Telefono</th>
-                                    <th onclick="sortTable(7)">Correo</th>
-                                    <th onclick="sortTable(8)">Estado</th>
-                                    <th onclick="sortTable(9)">Acciones<th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(0)">Nombre</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(1)">Apellido Paterno</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Materno</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(3)">Tipo de Documento</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(4)">Numero Documento</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(5)">Direccion</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Telefono</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Correo</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(8)">Estado</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(9)">Acciones
                                     </tr>
                             </thead>
 
@@ -175,16 +175,16 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td><?php echo $renglon['apaterno']; ?></td>
-                            <td><?php echo $renglon['amaterno']; ?></td>
-                            <td><?php echo $renglon['tipo_documento']; ?></td>
-                            <td><?php echo $renglon['numero_documento']; ?></td>
-                            <td><?php echo $renglon['direccion']; ?></td>
-                            <td><?php echo $renglon['telefono']; ?></td>
-                            <td><?php echo $renglon['correo']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['apaterno']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['amaterno']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['tipo_documento']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['numero_documento']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['direccion']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['telefono']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['correo']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                            <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
                                     <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVCliente.php?id=<?php echo $renglon['idcliente'] ?>">
                                         <img src="img/edit.png">
