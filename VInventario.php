@@ -36,7 +36,7 @@ if (!isset($_SESSION['acceso'])) {
     $sel = "inventario";
     include("Navbar.php") 
     ?>
-
+<div class="contenedor container-fluid">
     <div class="row">
         <div style="margin: 0 auto; margin-top: 15px;" class="col-md-3">
             <nav class="navbar navbar-dark bg-dark">
@@ -240,6 +240,7 @@ if (!isset($_SESSION['acceso'])) {
 
                 </div>
 
+        </div>
         </div>
         <script src="js/user_jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
