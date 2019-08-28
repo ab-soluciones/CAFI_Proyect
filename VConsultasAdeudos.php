@@ -18,7 +18,7 @@ if (!isset($_SESSION['acceso'])) {
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -63,15 +63,25 @@ if (!isset($_SESSION['acceso'])) {
                         <?php
                         $con = new Models\Conexion();
                         $negocios = $_SESSION['idnegocio'];
-                        $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno
-                        FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
-                        WHERE adeudos.negocios_idnegocios='$negocios' ORDER BY ventas_idventas DESC";
-                        $row = $con->consultaListar($query);
+                        if (isset($_GET['ad'])) {
+                            $adeudo = $_GET['ad'];
+                            $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
+                            FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
+                            WHERE adeudos.negocios_idnegocios='$negocios' AND idadeudos='$adeudo' ORDER BY ventas_idventas DESC";
+                            $row = $con->consultaListar($query);
+                        } else {
+                            $query = "SELECT idadeudos , total_deuda ,pago_minimo,estado_deuda, ventas_idventas,nombre,apaterno,amaterno 
+                            FROM adeudos INNER JOIN cliente ON cliente.idcliente=adeudos.cliente_idcliente
+                            WHERE adeudos.negocios_idnegocios='$negocios' ORDER BY ventas_idventas DESC";
+                            $row = $con->consultaListar($query);
+                        }
+
                         $con->cerrarConexion();
 
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
+<<<<<<< HEAD
                             <td class="text-nowrap text-center">$ <?php echo $renglon['total_deuda']; ?></td>
                             <td class="text-nowrap text-center">$ <?php echo $renglon['pago_minimo']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['estado_deuda']; ?></td>
@@ -84,13 +94,18 @@ if (!isset($_SESSION['acceso'])) {
                                 <button class="btn btn-success" disabled><img src="img/tarjeta.png"></a></button>
                                 <?php  } else {
                                         ?>
+=======
+                            <td>$ <?php echo $renglon['total_deuda']; ?></td>
+                            <td>$ <?php echo $renglon['pago_minimo']; ?></td>
+                            <td><?php echo $renglon['estado_deuda']; ?></td>
+                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
+                            <td><a href="VConsultasVentas.php?venta=<?php echo $renglon['ventas_idventas']; ?>">mostrar</a></td>
+                            <td>
+>>>>>>> barras_de_busqueda
                                 <div class="container">
-                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo">
-                                        <img src="img/abonos.png"></a>
-                                    <a class="btn btn-success" href="NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta">
-                                        <img src="img/tarjeta.png"></a>
+                                    <button onclick="window.location.href='NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo'" class="btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/abonos.png"></button>
+                                    <button onclick="window.location.href='NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta'" class="btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/tarjeta.png"></button>
                                 </div>
-                                <?php } ?>
                             </td>
                         </tr>
                         <?php
@@ -106,12 +121,7 @@ if (!isset($_SESSION['acceso'])) {
     <!--row-->
     </div>
     <!--container-->
-    <?php if (isset($_GET['ad'])) {
-        $adeudo = $_GET['ad'];
-    } ?>
-<script src="js/user_jquery.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="js/user_jquery.js"></script>
 </body>
 
 </html>

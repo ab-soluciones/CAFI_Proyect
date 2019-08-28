@@ -1,5 +1,5 @@
 <div class="container-fluid px-0 d-none d-lg-block fixed-top">
-    <nav class="navbar fixed navbar-expand-lg navbar-light bg-light justify-content-around p-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-around p-0">
         <div class="col-2 d-flex justify-content-between align-items-center">
             <a class="navbar-brand" onclick="window.location.href='OPCAFI.php'" title="Menu" data-toggle="tooltip"><img class="img-fluid" src="img/logo/nav1.png"></a>
             <p id="nav-title" class="font-weight-bold">

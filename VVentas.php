@@ -48,7 +48,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     $sel = "venta";
     include("Navbar.php")
     ?>
-
+<div class="contenedor container-fluid">
     <div class="row" style=" margin-top: 15px;">
         <div id="busqueda" class="col-xs-4" style="margin: 0 auto;">
             <div class=" card card-body">
@@ -278,6 +278,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                 }
             } ?>
             </form>
+        </div>
         </div>
         </div>
         <script src="js/user_jquery.js"></script>

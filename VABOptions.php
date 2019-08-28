@@ -25,8 +25,8 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body style="background: #d9d9d9;">
-    <div class="row">
-        <div class="col-md-4" style="margin: 0 auto;">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
             <nav class="navbar navbar-dark bg-dark">
                 <div class="container">
                     <a style="margin: 0 auto;" href="VABOptions.php" class="navbar-brand">AB</a>
