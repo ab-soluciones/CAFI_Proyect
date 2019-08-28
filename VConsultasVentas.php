@@ -44,8 +44,8 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
-            <div class="contenedorTabla">
-                <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
+            <div class="contenedorTabla table-responsive">
+                <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center" onclick="soExplore rtTable(0)">Concepto</th>
@@ -90,7 +90,6 @@ if (!isset($_SESSION['acceso'])) {
                             <td class="text-nowrap text-center">$ <?php echo $renglon['total']; ?></td>
                             <td class="text-nowrap text-center">$ <?php echo $renglon['pago']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['forma_pago']; ?></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['cambio']; ?></td>
                             <td class="text-nowrap text-center">$ <?php echo $renglon['cambio']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>

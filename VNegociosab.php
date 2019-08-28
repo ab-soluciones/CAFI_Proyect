@@ -137,8 +137,8 @@ include("NavbarAB.php")
                         <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                         <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
-                  <div class="contenedorTabla">
-                  <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
+                  <div class="contenedorTabla table-responsive">
+                  <table class="table table-bordered table-hover">
                       <thead class="thead-dark">
                           <tr class="encabezados">
                               <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>

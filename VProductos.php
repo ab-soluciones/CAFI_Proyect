@@ -158,11 +158,6 @@ if (!isset($_SESSION['acceso'])) {
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
-                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
-                    <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="fa fa-search"></i></div>
-                    </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <p>Sucursal:</p>
                     <form action="#" method="POST">
                         <select id="sucursal" class="form form-control" name="SNegocio">
@@ -185,10 +180,15 @@ if (!isset($_SESSION['acceso'])) {
                         </select>
                         <input type="submit" style="display: none;">
                     </form>
+                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <div class="contenedorTabla">
-                    <table class="scroll table width="100%" table-hover fixed_headers table-responsive">
+                <div class="contenedorTabla table-responsive">
+                    <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center" onclick="sortTable(0)">Código de barras</th>

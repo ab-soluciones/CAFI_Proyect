@@ -148,8 +148,8 @@ if (!isset($_SESSION['acceso'])) {
                         <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
 
-                    <div class="contenedorTabla">
-                        <table class="scroll table table-bordered table-hover fixed_headers table-responsive">
+                    <div class="contenedorTabla table-responsive">
+                        <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th class="text-nowrap text-center" onclick="sortTable(0)">Nombre</th>
