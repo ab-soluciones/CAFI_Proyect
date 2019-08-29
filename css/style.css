@@ -66,6 +66,10 @@ body {
     color: red;
 }
 
+.importante{
+  color: orangered;
+}
+
 table.scroll {
     /*width: 100%; /* Optional */
     /* border-collapse: collapse; */

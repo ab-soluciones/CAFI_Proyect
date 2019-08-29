@@ -53,17 +53,17 @@ include("NavbarAB.php")
                 <p class="statusMsg"></p>
                 <form class="form-group" action="#" method="post">
                         <div>
-                            <h5><label for="fecha1" class="badge badge-primary">Fecha Activacion:</label></h5>
+                            <h5>Fecha Activacion:</h5>
                             <input class="form-control" id="fecha1" type="date" name="DFecha" required>
                         </div><br>
 
                         <div>
-                            <h5><label for="fecha2" class="badge badge-primary">Fecha Vencimiento:</label></h5>
+                            <h5>Fecha Vencimiento:</h5>
                             <input class="form-control" id="fecha2" type="date" name="DFecha2" required><br>
                         </div>
-                        <h5><label for="monto" class="badge badge-primary">Monto:</label></h5>
+                        <h5>Monto:</h5>
                         <input id="monto" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
-                        <h5><label for="innegocio" class="badge badge-primary">Negocio:</label></h5>
+                        <h5>Negocio:</h5>
                         <div>
                             <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" required autocomplete="off">
                             <datalist id="negocios">

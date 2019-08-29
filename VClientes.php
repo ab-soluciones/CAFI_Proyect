@@ -55,21 +55,21 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" action="#" method="post">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
+                                <h5>Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
+                                <h5>Apellido Paterno:</h5>
                                 <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
+                                <h5>Apellido Materno:</h5>
                                 <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
+                                <h5>Documento:</h5>
 
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
@@ -90,25 +90,25 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
+                                <h5># Documento:</h5>
                                 <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
+                                <h5>Direccion:</h5>
                                 <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
+                                <h5>Telefono:</h5>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
+                                <h5>Correo electrónico:</h5>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
+                                <h5>Estado:</h5>
 
                                 <div class="row" style="margin-left: 5px;">
                                     <div class="form-check-inline">

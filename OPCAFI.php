@@ -58,7 +58,10 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </div>
                     </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> alerts_2
                     <a class="mt-3 btn btn-danger btn-lg btn-block" href="index.php?cerrar_sesion">
                         <label class="badge badge-danger">Salir</label><br><img src="img/salir.png"> </a>
                 <?php } else if (
@@ -174,7 +177,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <button onclick="window.location.href='VProductos.php'" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge badge-dark">Productos</label><br><img src="img/productos.png"> </button>
                         </div>
-                        
+
                         <div class="col-6">
                             <button onclick="window.location.href='VConsultasVentas.php'" type="button" class="btn btn-dark btn-lg btn-block">
                             <label class="badge badge-dark">Ventas</label><br><img src="img/venta.png"> </button>

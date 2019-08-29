@@ -157,11 +157,11 @@ include("Navbar.php")
                 <form class="form-group" action="#" method="post">
                     <div class="row">
                         <div class="col-lg-6">
-                            <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
+                            <h5>Cantidad:</h5>
                             <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad" required>
                         </div>
                         <div class="col-lg-6">
-                            <h5><label for="de" class="badge badge-ligh">De:</label></h5>
+                            <h5>De:</h5>
                             <select id="de" class="form form-control" name="STipo" required>
                                 <option></option>
                                 <option>Caja</option>
@@ -171,7 +171,7 @@ include("Navbar.php")
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <h5><label for="concepto" class="badge badge-ligh">Concepto:</label></h5>
+                            <h5>Concepto:</h5>
                             <select id="concepto" class="form form-control" name="SConcepto" required>
                                 <option></option>
                                 <option>Retiro</option>
@@ -179,7 +179,7 @@ include("Navbar.php")
                             </select>
                         </div>
                         <div class="col-lg-6">
-                            <h5><label for="desc" class="badge badge-ligh">Descripcion:</label></h5>
+                            <h5>Descripcion:</h5>
                             <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
                         </div>
                     </div>
