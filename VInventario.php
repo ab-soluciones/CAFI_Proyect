@@ -61,8 +61,8 @@ if (!isset($_SESSION['acceso'])) {
         <?php if (isset($_POST['STipo']) && $_POST['STipo'] === "Ropa") {
             $tipo = $_POST['STipo'];
             ?>
-            <div class="col-md-8" style=" margin: 0 auto; margin-top:15px;">
-                <table class="table table-bordered table-responsive-md">
+            <div class="contenedorTabla table-responsive col-12">
+                <table class="table table-bordered table-hover">
                     <tr>
                         <th>Nombre</th>
                         <th>Imagen</th>
@@ -237,7 +237,7 @@ if (!isset($_SESSION['acceso'])) {
                         <?php  } ?>
 
                     </table>
-
+                            </div>
                 </div>
 
         </div>

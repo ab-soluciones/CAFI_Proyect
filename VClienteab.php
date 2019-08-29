@@ -139,56 +139,58 @@ include("NavbarAB.php")
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
-                    <thead class="thead-dark">
-                        <tr class="encabezados">
-                            <th class="text-nowrap text-center" onclick="sortTable(0)">Nombre</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">Ap-P</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">Ap-M</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">Doc</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(4)">#Doc</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(5)">Direcci&oacute;n</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(6)">Tel&eacute;fono</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(7)">Email</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(8)">Usuario</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(9)">Contraseña</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(10)">Estado</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(11)">Tarea</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $con = new Models\Conexion();
-                        $query = "SELECT * FROM clientesab ORDER BY id_clienteab DESC";
-                        $row = $con->consultaListar($query);
-                        $con->cerrarConexion();
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr class="encabezados">
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">Nombre</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(1)">Ap-P</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(2)">Ap-M</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(3)">Doc</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(4)">#Doc</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(5)">Direcci&oacute;n</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Tel&eacute;fono</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Email</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(8)">Usuario</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(9)">Contraseña</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(10)">Estado</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(11)">Tarea</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $con = new Models\Conexion();
+                            $query = "SELECT * FROM clientesab ORDER BY id_clienteab DESC";
+                            $row = $con->consultaListar($query);
+                            $con->cerrarConexion();
 
-                        while ($renglon = mysqli_fetch_array($row)) {
-                            ?>
-                        <tr>
-                            <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['apaterno']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['amaterno']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['tipo_documento']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['numero_documento']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['direccion']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['telefono']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['correo']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['login']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['password']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
-                            <td class="text-nowrap text-center" style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVClienteAB.php?id=<?php echo $renglon['id_clienteab'] ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php
-                        } ?>
-                    </tbody>
-                </table>
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                ?>
+                            <tr>
+                                <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['apaterno']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['amaterno']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['tipo_documento']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['numero_documento']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['direccion']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['telefono']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['correo']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['login']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['password']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                                <td class="text-nowrap text-center" style="width:100px;">
+                                    <div class="row">
+                                        <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVClienteAB.php?id=<?php echo $renglon['id_clienteab'] ?>">
+                                            <img src="img/edit.png">
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
+                            } ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

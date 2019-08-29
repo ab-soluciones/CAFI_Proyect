@@ -160,7 +160,8 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     }
     ?>
             <div class="col-md-8" style=" margin: 0 auto; margin-top:15px;">
-            <table class="scroll table width="100%" table-bordered table-responsive-md">
+            <div class="table-responsive">
+            <table class="scroll table table-hover table-bordered">
                 <form action="#" method="post">
                     <div class="row" style="margin: 0 auto;">
                         <div class="form-check-inline">
