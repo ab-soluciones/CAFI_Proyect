@@ -56,25 +56,25 @@ include("NavbarAB.php")
                 <form class="form-group" action="#" method="post">
                     <div class="row">
                         <div class="col-lg-4">
-                            <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
+                            <h5>Nombre:</h5>
                             <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                         </div>
                         <div class="col-lg-4">
-                            <h5><label for="dom" class="badge badge-primary">Domicilio:</label></h5>
+                            <h5>Domicilio:</h5>
                             <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" required>
                         </div>
                         <div class="col-lg-4">
-                            <h5><label for="cd" class="badge badge-primary">Ciudad:</label></h5>
+                            <h5>Ciudad:</h5>
                             <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
-                            <h5><label for="tel" class="badge badge-primary">Teléfono:</label></h5>
+                            <h5>Teléfono:</h5>
                             <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Teléfono" autocomplete="off" required>
                         </div>
                         <div class="col-lg-4">
-                            <h5><label for="impresora" class="badge badge-primary">Configuracion de impresora:</label></h5>
+                            <h5>Configuracion de impresora:</h5>
                             <div class="row" style="margin: 0 auto;">
                                 <div class="form-check-inline">
                                     <label class="form-check-label">
@@ -89,7 +89,7 @@ include("NavbarAB.php")
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <h5><label class="badge badge-primary">Cliente:</label></h5>
+                            <h5>Cliente:</h5>
                             <div>
                                 <input id="incliente" class="form form-control" list="clientes" name="DlCliente" required autocomplete="off">
                                 <datalist id="clientes">

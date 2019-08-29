@@ -58,7 +58,7 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="container">
                             <div class="row">
                                 <div class="d-block col-lg-6">
-                                    <h5><label for="desc" class="badge badge-primary">Concepto:</label></h5>
+                                    <h5>Concepto:</h5>
                                     <select name="SConcepto" id="concepto" class="form form-control" required>
                                         <option></option>
                                         <option>Renta</option>
@@ -74,7 +74,7 @@ if (!isset($_SESSION['acceso'])) {
                                     </select>
                                 </div>
                                 <div class="d-block col-lg-6">
-                                    <h5><label for="pago" class="badge badge-primary">Forma de pago:</label></h5>
+                                    <h5>Forma de pago:</h5>
                                     <select name="SPago" id="pago" class="form form-control" required>
                                         <option></option>
                                         <option>Efectivo</option>
@@ -85,17 +85,17 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="row mt-3">
                                 <div class="d-block col-lg-12">
-                                    <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
+                                    <h5>Descripcion:</h5>
                                     <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="d-block col-lg-6">
-                                    <h5><label for="monto" class="badge badge-primary">Monto $:</label></h5>
+                                    <h5>Monto $:</h5>
                                     <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" required>
                                 </div>
                                 <div class="d-block col-lg-6">
-                                    <h5><label for="fecha" class="badge badge-primary">Fecha:</label></h5>
+                                    <h5>Fecha:</h5>
                                     <input class="form-control" id="fecha" type="date" name="DFecha" required>
                                 </div>
                             </div>

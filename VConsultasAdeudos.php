@@ -100,7 +100,7 @@ if (!isset($_SESSION['acceso'])) {
                             </td>
                         </tr>
                         <?php
-                        } ?>
+                      }} ?>
 
                     </tbody>
                 </table>
