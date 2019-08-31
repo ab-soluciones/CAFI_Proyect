@@ -170,13 +170,14 @@ if (isset($_GET['cerrar_sesion'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
 </head>
 
 <body id="menu_back">
   <div class="container text-center">
 
     <div id="index_logo" class="row d-block">
-      <img src="img/logo/2.png" alt="" id="logo" class="img-fluid">
+      <img src="img/logo/1.png" alt="" id="logo" class="animaLogo">
     <div>
 
       <div id="index_form" class="card card-body row d-block col-md-4">
