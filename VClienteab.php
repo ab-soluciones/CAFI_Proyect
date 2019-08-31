@@ -41,7 +41,7 @@ include("NavbarAB.php")
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header administrador">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
@@ -49,26 +49,26 @@ include("NavbarAB.php")
             </div>
 
             <!-- Modal Body -->
-            <div class="modal-body">
+            <div class="modal-body administrador">
                 <p class="statusMsg"></p>
                     <form class="form-group" action="#" method="post">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5> Nombre:</h5>
+                                <h5 class="admin"> Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5>Apellido Paterno:</h5>
+                                <h5 class="admin">Apellido Paterno:</h5>
                                 <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5>Apellido Materno:</h5>
+                                <h5 class="admin">Apellido Materno:</h5>
                                 <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5>Documento:</h5>
+                                <h5 class="admin">Documento:</h5>
 
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
@@ -89,31 +89,31 @@ include("NavbarAB.php")
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <h5 >#Documento:</h5>
+                                <h5 class="admin">#Documento:</h5>
                                 <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5>Direccion:</h5>
+                                <h5 class="admin">Direccion:</h5>
                                 <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5>Telefono:</h5>
+                                <h5 class="admin">Telefono:</h5>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
                             </div>
                             <div class="col-lg-6">
-                                <h5>Correo electrónico:</h5>
+                                <h5 class="admin">Correo electrónico:</h5>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5>Usuario:</h5>
+                                <h5 class="admin">Usuario:</h5>
                                 <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
                             </div>
                             <div class="col-lg-6">
-                                <h5>Contraseña:</h5>
+                                <h5 class="admin">Contraseña:</h5>
                                 <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required>
                             </div>
                         </div>

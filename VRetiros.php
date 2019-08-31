@@ -157,11 +157,11 @@ include("Navbar.php")
                 <form class="form-group" action="#" method="post">
                     <div class="row">
                         <div class="col-lg-6">
-                            <h5>Cantidad:</h5>
+                            <h5 class="importante">Cantidad:</h5>
                             <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad" required>
                         </div>
                         <div class="col-lg-6">
-                            <h5>De:</h5>
+                            <h5 class="general">De:</h5>
                             <select id="de" class="form form-control" name="STipo" required>
                                 <option></option>
                                 <option>Caja</option>
@@ -171,7 +171,7 @@ include("Navbar.php")
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <h5>Concepto:</h5>
+                            <h5 class="general">Concepto:</h5>
                             <select id="concepto" class="form form-control" name="SConcepto" required>
                                 <option></option>
                                 <option>Retiro</option>
@@ -179,12 +179,12 @@ include("Navbar.php")
                             </select>
                         </div>
                         <div class="col-lg-6">
-                            <h5>Descripcion:</h5>
+                            <h5 class="general">Descripcion:</h5>
                             <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
                         </div>
                     </div>
                     <button type="submit" style="color: #005ce6;" class="mt-3 btn btn-dark btn-lg btn-block">
-                        <h6>Retirar</h6><img src="img/retiro.png">
+                        <h6 class="general">Retirar</h6><img src="img/retiro.png">
                     </button>
                 </form>
                 <div id="tableHolder" class="row justify-content-center">

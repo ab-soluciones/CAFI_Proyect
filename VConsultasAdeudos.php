@@ -100,13 +100,9 @@ if (!isset($_SESSION['acceso'])) {
                             </td>
                         </tr>
                         <?php
-<<<<<<< HEAD
-                      }} ?>
-=======
-                            } 
+                            }
                          }
                         ?>
->>>>>>> barras_de_busqueda
 
                     </tbody>
                 </table>

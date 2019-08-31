@@ -43,7 +43,7 @@ include("NavbarAB.php")
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header administrador">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
@@ -51,30 +51,30 @@ include("NavbarAB.php")
             </div>
 
             <!-- Modal Body -->
-            <div class="modal-body">
+            <div class="modal-body administrador">
                 <p class="statusMsg"></p>
                 <form class="form-group" action="#" method="post">
                     <div class="row">
                         <div class="col-lg-4">
-                            <h5>Nombre:</h5>
+                            <h5 class="admin">Nombre:</h5>
                             <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                         </div>
                         <div class="col-lg-4">
-                            <h5>Domicilio:</h5>
+                            <h5 class="admin">Domicilio:</h5>
                             <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" required>
                         </div>
                         <div class="col-lg-4">
-                            <h5>Ciudad:</h5>
+                            <h5 class="admin">Ciudad:</h5>
                             <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
-                            <h5>Teléfono:</h5>
+                            <h5 class="admin">Teléfono:</h5>
                             <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Teléfono" autocomplete="off" required>
                         </div>
                         <div class="col-lg-4">
-                            <h5>Configuracion de impresora:</h5>
+                            <h5 class="admin">Configuracion de impresora:</h5>
                             <div class="row" style="margin: 0 auto;">
                                 <div class="form-check-inline">
                                     <label class="form-check-label">
@@ -89,7 +89,7 @@ include("NavbarAB.php")
                             </div>
                         </div>
                         <div class="col-lg-4">
-                            <h5>Cliente:</h5>
+                            <h5 class="admin">Cliente:</h5>
                             <div>
                                 <input id="incliente" class="form form-control" list="clientes" name="DlCliente" required autocomplete="off">
                                 <datalist id="clientes">
@@ -115,7 +115,7 @@ include("NavbarAB.php")
                         </div>
                     </div>
 
-                    <input type="submit" class="mt-3 btn btn-secondary btn-lg btn-block btn-dark" name="" value="Guardar">
+                    <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
