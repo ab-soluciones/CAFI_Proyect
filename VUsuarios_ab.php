@@ -45,7 +45,7 @@ include("NavbarAB.php")
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header administrador">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
@@ -53,31 +53,31 @@ include("NavbarAB.php")
             </div>
 
             <!-- Modal Body -->
-            <div class="modal-body">
+            <div class="modal-body administrador">
                 <p class="statusMsg"></p>
                     <form class="form-group" action="#" method="post">
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-4">
-                                <h5>Nombre:</h5>
+                                <h5 class="admin">Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5>Apellido Paterno:</h5>
+                                <h5 class="admin">Apellido Paterno:</h5>
                                 <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5>Apellido Materno:</h5>
+                                <h5 class="admin">Apellido Materno:</h5>
                                 <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-4">
-                                <h5>Tipo de acceso:</h5>
+                                <h5 class="admin">Tipo de acceso:</h5>
 
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="acceso" name="RAcceso" value="CEOAB">CEOAB
+                                            <input class="form-check-input admin" type="radio" id="acceso" name="RAcceso" value="CEOAB">CEOAB
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
@@ -88,17 +88,17 @@ include("NavbarAB.php")
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <h5>Usuario:</h5>
+                                <h5 class="admin">Usuario:</h5>
                                 <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                             </div>
                             <div class="col-lg-4">
-                                <h5>Contrase&ntilde;a:</h5>
+                                <h5 class="admin">Contrase&ntilde;a:</h5>
                                 <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a" required><br>
                             </div>
                         </div>
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-12">
-                                <h5>Estado:</h5>
+                                <h5 class="admin">Estado:</h5>
 
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
@@ -115,7 +115,7 @@ include("NavbarAB.php")
                             </div>
                         </div>
 
-                        <input type="submit" class="mt-3 btn btn-secondary btn-lg btn-block btn-dark" name="" value="Guardar">
+                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 

@@ -68,6 +68,21 @@ body {
 
 .importante{
   color: orangered;
+  font-weight: bold;
+}
+
+.general{
+  color: #007BFF;
+  font-weight: bold;
+}
+
+.administrador{
+  background-color: #414247;
+}
+
+.admin{
+  color: white;
+  font-weight: bold;
 }
 
 table.scroll {
@@ -143,6 +158,6 @@ nav.fixed{
 }
 
 .table-responsive::-webkit-scrollbar-track {
-    border-radius: 10px;  
-    background-color: #ffffff; 
+    border-radius: 10px;
+    background-color: #ffffff;
 }

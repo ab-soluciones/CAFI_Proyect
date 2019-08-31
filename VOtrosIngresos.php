@@ -56,11 +56,11 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" action="#" method="post">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5>Cantidad $ :</h5>
+                                <h5 class="importante">Cantidad $ :</h5>
                                 <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off" required>
                             </div>
                             <div class="col-lg-6">
-                                <h5>Tipo :</h5>
+                                <h5 class="general">Tipo :</h5>
                                 <select id="tipo" name="STipo" id="concepto" class="form form-control" required>
                                     <option></option>
                                     <option>Dinero a caja</option>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5>Forma de Ingreso :</h5>
+                                <h5 class="general">Forma de Ingreso :</h5>
                                 <select name="SFIngreso" id="fingreso" class="form form-control" required>
                                     <option></option>
                                     <option>Efectivo</option>
@@ -79,7 +79,7 @@ if (!isset($_SESSION['acceso'])) {
                                 </select> <br>
                             </div>
                             <div class="col-lg-6">
-                                <h5>Fecha :</h5>
+                                <h5 class="general">Fecha :</h5>
                                 <input class="form-control" id="fecha" type="date" name="DFecha" required>
                             </div>
                         </div>

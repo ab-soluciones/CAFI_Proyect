@@ -57,11 +57,6 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <label class="badge badge-primary">Flujo de efectivo</label><br><img src="img/flujo_efectivo.png"> </button>
                         </div>
                     </div>
-
-<<<<<<< HEAD
-
-=======
->>>>>>> alerts_2
                     <a class="mt-3 btn btn-danger btn-lg btn-block" href="index.php?cerrar_sesion">
                         <label class="badge badge-danger">Salir</label><br><img src="img/salir.png"> </a>
                 <?php } else if (

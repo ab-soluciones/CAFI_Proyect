@@ -1,15 +1,15 @@
 <form class="form-group" action="#" method="post" enctype="multipart/form-data" id="producto">
     <div class="row mt-3">
         <div class="col-lg-4">
-            <h5>Codigo de Barras:</h5>
+            <h5 class="general">Codigo:</h5>
             <input id="cb" class="form form-control" type="text" name="TCodigoB" placeholder="0000000000000">
         </div>
         <div class="col-lg-4">
-            <h5>Nombre:</h5>
+            <h5 class="general">Nombre:</h5>
             <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
-            <h5>Imagen:</h5>
+            <h5 class="general">Imagen:</h5>
             <div class="row">
                 <div style="margin-left: 15px;" id="preview" class="card">
                     <img src="" width="100" height="100" />
@@ -24,22 +24,22 @@
 
     <div class="row mt-3">
         <div class="col-lg-4">
-            <h5>Color:</h5>
+            <h5 class="general">Color:</h5>
             <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
-            <h5>Marca:</h5>
+            <h5 class="general">Marca:</h5>
             <input id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
-            <h5>Descripcion:</h5>
+            <h5 class="general">Descripcion:</h5>
             <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
         </div>
     </div>
 
     <div class="row mt-3">
         <div class="col-lg-4">
-            <h5>Unidad de Medida:</h5>
+            <h5 class="general">Unidad de Medida:</h5>
             <select id="um" class="form form-control" type="text" name="DLUnidad">
                 <option value="Pieza">Pieza</option>
                 <option value="Par">Par</option>
@@ -47,7 +47,7 @@
             </select>
         </div>
         <div class="col-lg-4">
-            <h5>Tipo de producto:</h5>
+            <h5 class="general">Tipo de producto:</h5>
             <div class="row" style="margin: 0 auto;">
                 <div>
                     <button onclick="activarDivTalla();" id="tpr" type="button" class="btn btn-danger">Ropa</button>
@@ -59,7 +59,7 @@
         </div>
         <div class="col-lg-4">
             <div style="display: none;" id="divtalla">
-                <h5>Tallas de ropa:</h5>
+                <h5 class="general">Tallas de ropa:</h5>
                 <select id="ta" class="form form-control" name="SlcTalla" placeholder="Ingrese la talla" value="">
                     <option>XS</option>
                     <option>S</option>
@@ -70,7 +70,7 @@
                 </select> <br>
             </div>
             <div style="display: none;" id="divmedida">
-                <h5>Medidas de calzado:</h5>
+                <h5 class="general">Medidas de calzado:</h5>
                 <select id="med" class="form form-control" name="SlcMedida" placeholder="Ingrese la Medida" value="">
                     <?php
                     for ($i = 1; $i < 34; $i++) {
@@ -91,11 +91,11 @@
 
     <div class="row mt-3">
         <div class="col-lg-6">
-            <h5>Precio de Compra $:</h5>
+            <h5 class="general">Precio de Compra $:</h5>
             <input id="precioc" class="form form-control" type="text" name="TPrecioC" placeholder="$" autocomplete="off" required><br>
         </div>
         <div class="col-lg-6">
-            <h5>Precio de Venta $:</h5>
+            <h5 class="general">Precio de Venta $:</h5>
             <input id="preciov" class="form form-control" type="text" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
         </div>
     </div>
