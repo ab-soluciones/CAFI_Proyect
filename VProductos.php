@@ -103,7 +103,10 @@ if (!isset($_SESSION['acceso'])) {
 
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <?php include("Navbar.php") ?>
+    <?php
+    $sel = "productos"; 
+    include("Navbar.php") 
+    ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">
@@ -115,7 +118,7 @@ if (!isset($_SESSION['acceso'])) {
                         <span class="sr-only">Close</span>
                     </button>
                 </div>
-                
+
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
@@ -144,46 +147,48 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                     </div>
                     <div id="tableHolder" class="row justify-content-center">
-        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal -->
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
+                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <p>Sucursal:</p>
                     <form action="#" method="POST">
-                        <select id="sucursal" class="form form-control" name="SNegocio" placeholder="Ingrese la talla" value="">
-                        <?php 
-                      $negocio = $_SESSION['idnegocio'];
-                      $con = new Models\Conexion();
-                      $query = "SELECT nombre_negocio, idnegocios FROM negocios 
-                      WHERE clientesab_idclienteab = (SELECT clientesab_idclienteab AS dueno FROM negocios WHERE negocios.idnegocios='$negocio')";
-                      $row = $con->consultaListar($query);
-                      $con->cerrarConexion();
-                      $cont=0;
-                      while($renglon = mysqli_fetch_array($row)){
-                       $nombre[$cont] = $renglon['nombre_negocio'];
-                       $id[$cont] = $renglon['id'];
-                       $cont++;
-                       echo "<option>".$renglon['nombre_negocio']."</option>"; 
-                      }
-                    ?>
+                        <select id="sucursal" class="form form-control" name="SNegocio">
+                            <option></option>
+                            <?php
+                            $negocio = $_SESSION['idnegocio'];
+                            $con = new Models\Conexion();
+                            $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                            WHERE clientesab_idclienteab = (SELECT clientesab_idclienteab AS dueno FROM negocios WHERE negocios.idnegocios='$negocio')";
+                            $row = $con->consultaListar($query);
+                            $con->cerrarConexion();
+                            $cont = 0;
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                $nombre[$cont] = $renglon['nombre_negocio'];
+                                $id[$cont] = $renglon['idnegocios'];
+                                $cont++;
+                                echo "<option>" . $renglon['nombre_negocio'] . "</option>";
+                            }
+                            ?>
                         </select>
                         <input type="submit" style="display: none;">
                     </form>
-                    <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <div class="contenedorTabla">
-                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                <div data-spy="scroll" class="contenedorTabla">
+                    <table class="scroll table width="100%" table-hover fixed_headers table-responsive">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th onclick="sortTable(0)">C_Barras</th>
@@ -192,8 +197,8 @@ if (!isset($_SESSION['acceso'])) {
                                 <th onclick="sortTable(3)">Color</th>
                                 <th onclick="sortTable(4)">Marca</th>
                                 <th onclick="sortTable(5)">Descripcion</th>
-                                <th onclick="sortTable(6)">Cant</th>
-                                <th onclick="sortTable(7)">UM</th>
+                                <th onclick="sortTable(6)">Cantidad</th>
+                                <th onclick="sortTable(7)">Unidad de Medida</th>
                                 <th onclick="sortTable(8)">Talla</th>
                                 <th onclick="sortTable(9)">Compra</th>
                                 <th onclick="sortTable(10)">Venta</th>
@@ -203,15 +208,16 @@ if (!isset($_SESSION['acceso'])) {
                         </thead>
                         <tbody>
                             <?php
-                                    if(isset($_POST['SNegocio'])){
-                                        for ($i=0; $i < sizeof($id); $i++) { 
-                                          if(strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0){
-                                              $negocio=$id[$i];
-                                          }
-                                        }
-                                       echo"<script>alert('$nombre[0]');</script>";
-                                    } else{   $negocio = $_SESSION['idnegocio'];}
-                         
+                            if (isset($_POST['SNegocio'])) {
+                                for ($i = 0; $i < sizeof($id); $i++) {
+                                    if (strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0) {
+                                        $negocio = $id[$i];
+                                    }
+                                }
+                            } else {
+                                $negocio = $_SESSION['idnegocio'];
+                            }
+
                             $con = new Models\Conexion();
                             $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
                             FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
@@ -249,9 +255,7 @@ if (!isset($_SESSION['acceso'])) {
                                 <td>
                                     <div class="row" style="position: absolute;">
                                         <div class="container" style="margin: 0 auto;">
-                                            <a style="margin-top: 50%;" class="btn btn-secondary" href="EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>">
-                                                <img src="img/edit.png">
-                                            </a>
+                                        <button onclick="window.location.href='EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>'" class="btn btn-secondary" <?php if($negocio != $_SESSION['idnegocio']) echo"disabled";?>><img src="img/edit.png"></button>
                                         </div>
                                     </div>
                                 </td>

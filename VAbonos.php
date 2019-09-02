@@ -32,9 +32,12 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
-    <?php include("Navbar.php") ?>
+    <?php 
+    $sel = "abonos";
+    include("Navbar.php") 
+    ?>
 
-    <div class="container-fluid">
+    <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
                 <div class="input-group-prepend">
@@ -43,7 +46,7 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla">
-                <table class="table table-bordered table-hover fixed_headers table-responsive">
+                <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th onclick="sortTable(0)">Edit estado</th>
@@ -64,7 +67,7 @@ if (!isset($_SESSION['acceso'])) {
                         $negocios = $_SESSION['idnegocio'];
                         $query = "SELECT idabono,abono.estado AS a_estado,cantidad,pago,cambio,fecha,hora,cliente.nombre AS nombre_cliente,
                                             cliente.apaterno AS ap_cliente, cliente.amaterno AS am_cliente,trabajador.nombre,
-                                            trabajador.apaterno, adeudos_id FROM abono 
+                                            trabajador.apaterno, adeudos_id FROM abono
                                             INNER JOIN adeudos ON abono.adeudos_id=adeudos.idadeudos
                                             INNER JOIN cliente ON adeudos.cliente_idcliente=cliente.idcliente
                                             INNER JOIN trabajador ON trabajador.idtrabajador=abono.trabajador_idtrabajador
@@ -96,7 +99,7 @@ if (!isset($_SESSION['acceso'])) {
                             <td><?php echo $renglon['hora']; ?></td>
                             <td><?php echo $renglon['nombre_cliente'] . " " . $renglon['ap_cliente'] . " " . $renglon['am_cliente']; ?></td>
                             <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-                            <td><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>"># <?php echo $renglon['adeudos_id']; ?></a></td>
+                            <td><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>">mostrar</td>
                         </tr>
                         <?php
                         } ?>
@@ -111,6 +114,8 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!--container-->
     <script src="js/user_jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

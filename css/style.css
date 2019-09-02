@@ -51,6 +51,10 @@ body {
     border-radius: 10px;
     box-shadow: 1px 5px 10px lightgray;
 }
+.seleccionado{
+    border-radius: 10px;
+    box-shadow: 1px 5px 10px lightgray;
+}
 .nav-link label{
     cursor: pointer;
     background-color: #2a727a;
@@ -60,6 +64,23 @@ body {
 }
 #nav-salir{
     color: red;
+}
+
+table.scroll {
+    /*width: 100%; /* Optional */
+    /* border-collapse: collapse; */
+    border-spacing: 0;
+    border: 2px solid black;
+
+}
+
+nav.fixed{
+  position: fixed;
+}
+
+.contenedor{
+  position: relative;
+  top: 80px;
 }
 
 
@@ -91,9 +112,9 @@ body {
 @media (min-width: 576px) {
 
 }
-/*md*/  
+/*md*/
 @media (min-width: 768px) {
-    
+
 }
 /*lg*/
 @media (min-width: 992px) {
@@ -110,5 +131,5 @@ body {
 }
 /*xl*/
 @media (min-width: 1200px) {
-    
+
 }

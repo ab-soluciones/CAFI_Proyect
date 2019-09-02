@@ -44,7 +44,11 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
-    <?php include("Navbar.php") ?>
+    <?php
+    $sel = "venta"; 
+    include("Navbar.php") 
+    ?>
+
     <div class="row" style=" margin-top: 15px;">
         <div id="busqueda" class="col-xs-4" style="margin: 0 auto;">
             <div class=" card card-body">
@@ -109,7 +113,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
             </div>
         </div>
 
-  
+
     <?php
     if (
         isset($_POST['DlProductos']) || isset($_POST['DlCodigosP'])
@@ -156,7 +160,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     }
     ?>
             <div class="col-md-8" style=" margin: 0 auto; margin-top:15px;">
-            <table class="table table-bordered table-responsive-md">
+            <table class="scroll table width="100%" table-bordered table-responsive-md">
                 <form action="#" method="post">
                     <div class="row" style="margin: 0 auto;">
                         <div class="form-check-inline">
@@ -259,7 +263,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                     </tbody>
             </table>
             <input id="bvender" style="display: <?php echo $datos;?>" class="btn btn-dark btn-lg btn-block" style="margin-top:-10px;" type="submit" value="Realizar Venta">
-            <?php 
+            <?php
             if (isset($_POST['RTv'])) {
                 //se envia al usuario a la pagina correspondiente dependiendo el tipo de venta
                 if ($_POST['RTv'] == "Efectivo") {
@@ -277,6 +281,8 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
         </div>
         </div>
         <script src="js/user_jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
