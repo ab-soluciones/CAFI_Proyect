@@ -33,8 +33,9 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio();">
 <?php include("NavbarAB.php") ?>
+
 <!-- Modal -->
-<div class="modal fade" id="modalForm" role="dialog">
+<div class="modal fade unicModal" id="modalForm" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -48,21 +49,21 @@ if (!isset($_SESSION['acceso'])) {
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
-                <form class="form-group" action="#" method="post">
+                <form class="form-group" action="GuardarSuscripcion.php" method="post">
                         <div>
                             <h5><label for="fecha1" class="badge badge-primary">Fecha Activacion:</label></h5>
-                            <input class="form-control" id="fecha1" type="date" name="DFecha" required>
+                            <input class="form-control" id="vsfecha" type="date" name="DFecha" required>
                         </div><br>
 
                         <div>
                             <h5><label for="fecha2" class="badge badge-primary">Fecha Vencimiento:</label></h5>
-                            <input class="form-control" id="fecha2" type="date" name="DFecha2" required><br>
+                            <input class="form-control" id="vsfecha" type="date" name="DFecha2" required><br>
                         </div>
                         <h5><label for="monto" class="badge badge-primary">Monto:</label></h5>
-                        <input id="monto" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
+                        <input id="vsmont" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
                         <h5><label for="innegocio" class="badge badge-primary">Negocio:</label></h5>
                         <div>
-                            <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" required autocomplete="off">
+                            <input id="innegoci" class="form form-control" list="negocios" name="DlNegocios" required autocomplete="off">
                             <datalist id="negocios">
                                 <?php
                                 $datos = false;
@@ -93,6 +94,63 @@ if (!isset($_SESSION['acceso'])) {
     </div>
 </div>
 <!-- Modal -->
+
+<!-- Modal2 -->
+<div class="modal fade unicModal" id="modalForm2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                <form class="form-group" action="EditVSuscripcion.php" method="post">
+                    <input type="hidden" id="id_subs" name="id_subs">
+                        <div>
+                            <h5><label for="fecha1" class="badge badge-primary">Fecha Activacion:</label></h5>
+                            <input class="form-control" id="vsfecha1" type="date" name="DFecha" required>
+                        </div><br>
+
+                        <div>
+                            <h5><label for="fecha2" class="badge badge-primary">Fecha Vencimiento:</label></h5>
+                            <input class="form-control" id="vsfecha2" type="date" name="DFecha2" required><br>
+                        </div>
+                        <h5><label for="monto" class="badge badge-primary">Monto:</label></h5>
+                        <input id="vsmonto" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
+                        <h5><label for="innegocio" class="badge badge-primary">Negocio:</label></h5>
+                        <div>
+
+                        <div class="row" style="margin: 0 auto;">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input onchange="alertaA();" class="form-check-input" type="radio" id="vsestadoA" name="REstado" value="A" checked>Activa
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input onchange="alertaI();" class="form-check-input" type="radio" id="vsestadoI" name="REstado" value="I">Inactiva
+                            </label>
+                        </div>
+                    </div><br>
+
+                        </div><br>
+                        <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Editar">
+                    </form>
+                    <div id="tableHolder" class="row justify-content-center">
+                    
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal2 -->
+
     <div class="container-fluid">
         <div class="row align-items-start">
           <div class="col-md-12">
@@ -135,7 +193,7 @@ if (!isset($_SESSION['acceso'])) {
                           <td>$ <?php echo $renglon['monto']; ?></td>
                           <td style="width:100px;">
                               <div class="row">
-                                  <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVSuscripcion.php?id=<?php echo $renglon['idsuscripcion'] ?>">
+                                  <a style="margin: 0 auto;" data-toggle="modal" data-target="#modalForm2" class="btn btn-secondary vsEditmodal" product="<?php echo $renglon['idsuscripcion'] ?>" href="#">
                                       <img src="img/edit.png">
                                   </a>
                               </div>
@@ -150,46 +208,6 @@ if (!isset($_SESSION['acceso'])) {
       </div>
         </div>
   </div>
-    <?php
-    if (
-        isset($_POST['DFecha']) && isset($_POST['DFecha2'])
-        && isset($_POST['DlNegocios']) && isset($_POST['TMonto'])
-    ) {
-        $sus = new Models\Suscripcion();
-        $con = new Models\Conexion();
-        $sus->setActivacion($_POST['DFecha']);
-        $sus->setVencimiento($_POST['DFecha2']);
-        $sus->setEstado("A");
-        $sus->setMonto($_POST['TMonto']);
-        $negocio = $_POST['DlNegocios'];
-        $query = "SELECT idnegocios FROM negocios WHERE (SELECT CONCAT(nombre_negocio,' ',domicilio,' ' ,ciudad))='$negocio'";
-        $id = $con->consultaRetorno($query);
-        $con->cerrarConexion();
-        $id = (int) $id['idnegocios'];
-        $sus->setIdNegocio($id);
-        $result = $sus->guardar($_SESSION['id']);
-        if ($result === 1) {
-            ?>
-    <script>
-        swal({
-            title: 'Exito',
-            text: 'Se han registrado los datos exitosamente!',
-            type: 'success'
-        });
-    </script>
-
-    <?php } else {
-            ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'No se han guardado los datos',
-            type: 'error'
-        });
-    </script>
-    <?php }
-    }
-    ?>
     <script src="js/user_jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

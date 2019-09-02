@@ -48,7 +48,102 @@ if (!isset($_SESSION['acceso'])) {
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
-                    <form class="form-group" action="#" method="post">
+                    <form class="form-group" method="post" action="GuardarClienteab.php" >
+                        <div class="row">
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
+                                <input  class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
+                                <input  class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
+                                <input  class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="doc" class="badge badge-primary">Documento:</label></h5>
+
+                                <div class="row" style="margin: 0 auto;">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input ine" type="radio"  name="RDoc" value="INE" checked >INE
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input curp" type="radio"  name="RDoc" value="CURP">CURP
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input otro" type="radio"  name="RDoc" value="Otro">Otro
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
+                                <input  class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
+                            </div>
+                            <div class="col-4">
+                                <h5 class="etiquetas"><label for="dir" class="badge badge-primary">Direccion:</label></h5>
+                                <input  class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="etiquetas"><label for="tel" class="badge badge-primary">Telefono:</label></h5>
+                                <input  class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="etiquetas"><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
+                                <input  class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="etiquetas"><label for="login" class="badge badge-primary">Usuario:</label></h5>
+                                <input  class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
+                            </div>
+                            <div class="col-6">
+                                <h5 class="etiquetas"><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
+                                <input  class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required>
+                            </div>
+                        </div>
+                        
+                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary"  value="Guardar">
+                    </form>
+                    <div id="tableHolder" class="row justify-content-center">
+                    
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+<!-- Modal2-Editar -->
+<div class="modal fade" id="modalForm2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                    <form class="form-group" method = "post" action = "EditVCliente.php" >
+                    <input type="hidden" id="estado" name="REstado">
+                    <input type="hidden" id="id_clienteab" name="id_clienteab">
                         <div class="row">
                             <div class="col-4">
                                 <h5 class="etiquetas"><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
@@ -70,17 +165,17 @@ if (!isset($_SESSION['acceso'])) {
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="INE" checked autofocus>INE
+                                            <input class="form-check-input ine" type="radio" id="docine" name="RDoc" value="INE" >INE
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="CURP">CURP
+                                            <input class="form-check-input curp" type="radio" id="doccurp" name="RDoc" value="CURP">CURP
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="Otro">Otro
+                                            <input class="form-check-input otro" type="radio" id="docotro" name="RDoc" value="Otro">Otro
                                         </label>
                                     </div>
                                 </div>
@@ -115,7 +210,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                         </div>
                         
-                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                        <input type="submit"  class="mt-3 btn btn-lg btn-block btn-primary" value="Editar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
                     
@@ -124,7 +219,8 @@ if (!isset($_SESSION['acceso'])) {
         </div>
     </div>
 </div>
-<!-- Modal -->
+<!-- Modal2-Editar -->
+
     <div class="container-fluid">
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
@@ -133,7 +229,7 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                    <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="btn btn-primary ml-3 cam-nom clear" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <table class="table table-bordered table-hover fixed_headers table-responsive">
                     <thead class="thead-dark">
@@ -175,7 +271,7 @@ if (!isset($_SESSION['acceso'])) {
                             <td><?php echo $renglon['estado']; ?></td>
                             <td style="width:100px;">
                                 <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVClienteAB.php?id=<?php echo $renglon['id_clienteab'] ?>">
+                                    <a style="margin: 0 auto;" data-toggle="modal" data-target="#modalForm2" class="btn btn-secondary clickEditar" product="<?php echo $renglon['id_clienteab'] ?>" href="#">
                                         <img src="img/edit.png">
                                     </a>
                                 </div>
@@ -188,50 +284,6 @@ if (!isset($_SESSION['acceso'])) {
             </div>
         </div>
     </div>
-    <?php
-    if (
-        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-        && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-        && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-        && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-        && isset($_POST['TLogin']) && isset($_POST['TPContraseña'])
-    ) {
-        $cliente = new Models\Clienteab();
-        $cliente->setNombre($_POST['TNombre']);
-        $cliente->setApaterno($_POST['TApellidoP']);
-        $cliente->setAmaterno($_POST['TApellidoM']);
-        $cliente->setDocumento($_POST['RDoc']);
-        $cliente->setNumDoc($_POST['TNumDoc']);
-        $cliente->setDireccion($_POST['TDireccion']);
-        $cliente->setTelefono($_POST['TTelefono']);
-        $cliente->setCorreo($_POST['TCorreo']);
-        $cliente->setAcceso("CEO");
-        $cliente->setLogin($_POST['TLogin']);
-        $cliente->setPassword($_POST['TPContraseña']);
-        $cliente->setEstado("A");
-        $result = $cliente->guardar($_SESSION['id']);
-        if ($result === 1) {
-            ?>
-    <script>
-        swal({
-            title: 'Exito',
-            text: 'Se han registrado los datos exitosamente!',
-            type: 'success'
-        });
-    </script>
-
-    <?php } else {
-            ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'No registrado compruebe los campos unicos!',
-            type: 'error'
-        });
-    </script>
-    <?php }
-    }
-    ?>
     <script src="js/user_jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

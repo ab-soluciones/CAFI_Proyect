@@ -52,19 +52,19 @@ if (!isset($_SESSION['acceso'])) {
             <!-- Modal Body -->
             <div class="modal-body">
                 <p class="statusMsg"></p>
-                    <form class="form-group" action="#" method="post">
+                    <form class="form-group" action="GuardarUsuarioab.php" method="post">
                         <div class="row">
                             <div class="col-4">
                                 <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                                <input class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-4">
                                 <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                                <input class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-4">
                                 <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                                <input class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="row">
@@ -74,23 +74,23 @@ if (!isset($_SESSION['acceso'])) {
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="acceso" name="RAcceso" value="CEOAB">CEOAB
+                                            <input class="form-check-input" type="radio" name="RAcceso" value="CEOAB">CEOAB
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="acceso" name="RAcceso" value="ManagerAB" checked autofocus>Manager
+                                            <input class="form-check-input" type="radio" name="RAcceso" value="ManagerAB" checked autofocus>Manager
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <h5><label for="login" class="badge badge-primary">Usuario:</label></h5>
-                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
+                                <input class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
                             </div>
                             <div class="col-4">
                                 <h5><label for="pass" class="badge badge-primary">Contrase&ntilde;a:</label></h5>
-                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a" required><br>
+                                <input class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a" required><br>
                             </div>
                         </div>
                         <div class="row">
@@ -100,19 +100,19 @@ if (!isset($_SESSION['acceso'])) {
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="estado" name="REstado" value="A" checked autofocus>Activo
+                                            <input class="form-check-input" type="radio" name="REstado" value="A" checked autofocus>Activo
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="estado" name="REstado" value="I">Inactivo
+                                            <input class="form-check-input" type="radio" name="REstado" value="I">Inactivo
                                         </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <input type="submit" class="mt-3 btn btn-secondary btn-lg btn-block btn-dark" name="" value="Guardar">
+                        <input type="submit" class="mt-3 btn btn-secondary btn-lg btn-block btn-dark"  value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
                     
@@ -122,6 +122,95 @@ if (!isset($_SESSION['acceso'])) {
     </div>
 </div>
 <!-- Modal -->
+
+<!-- Modal-2-Editar -->
+<div class="modal fade" id="modalForm2" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                    <span class="sr-only">Close</span>
+                </button>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <p class="statusMsg"></p>
+                    <form class="form-group" action="EditUsuarioab.php" method="post">
+                        <input type="hidden" id="id_usuario" name="id_usuario">
+                        <div class="row">
+                            <div class="col-4">
+                                <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
+                                <input id="vuabnombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                            </div>
+                            <div class="col-4">
+                                <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
+                                <input id="vuabapt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                            </div>
+                            <div class="col-4">
+                                <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
+                                <input id="vuabapm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
+
+                                <div class="row" style="margin: 0 auto;">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" id="vuabceoab" type="radio" id="acceso" name="RAcceso" value="CEOAB">CEOAB
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" id="vuabmanager" type="radio" id="acceso" name="RAcceso" value="ManagerAB" checked autofocus>Manager
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <h5><label for="login" class="badge badge-primary">Usuario:</label></h5>
+                                <input id="vuablogin" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
+                            </div>
+                            <div class="col-4">
+                                <h5><label for="pass" class="badge badge-primary">Contrase&ntilde;a:</label></h5>
+                                <input id="vuabpass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a" required><br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
+
+                                <div class="row" style="margin: 0 auto;">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" id="vuabA" name="REstado" value="A" checked autofocus>Activo
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="radio" id="vuabI" name="REstado" value="I">Inactivo
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="submit" class="mt-3 btn btn-secondary btn-lg btn-block btn-dark"  value="Editar">
+                    </form>
+                    <div id="tableHolder" class="row justify-content-center">
+                    
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal-2-Editar -->
+
+
     <div class="container-fluid">
         <div class="row align-items-start">
           <div class="col-md-12">
@@ -131,7 +220,7 @@ if (!isset($_SESSION['acceso'])) {
                       <div class="input-group-text"><i class="fa fa-search"></i></div>
                       </div>
                       <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                      <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                      <button class="btn btn-primary ml-3 vuabClear" data-toggle="modal" data-target="#modalForm">Agregar</button>
                   </div>
                   <div class="contenedorTabla">
                 <table class="table table-bordered table-hover fixed_headers table-responsive">
@@ -171,7 +260,7 @@ if (!isset($_SESSION['acceso'])) {
                                   <a onclick="if(confirm('SE ELIMINARÁ EL REGISTRO #<?php echo $renglon['idusuariosab']; ?>!'))
                                 {href= 'deleteVUAB.php?id=<?php echo $renglon['idusuariosab']; ?>'} " class="btn btn-warning"><img src="img/eliminarf.png">
                                   </a>
-                                  <a style="margin-left:2px;" class="btn btn-secondary" href="EditVUAB.php?id=<?php echo $renglon['idusuariosab'] ?>">
+                                  <a style="margin-left:2px;"  data-toggle="modal" data-target="#modalForm2" product="<?php echo $renglon['idusuariosab'] ?>" class="btn btn-secondary edit_User_ab" href="#">
                                       <img src="img/edit.png">
                                   </a>
                               </div>
@@ -186,43 +275,7 @@ if (!isset($_SESSION['acceso'])) {
       </div>
         </div>
   </div>
-    <?php
-    if (
-        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-        && isset($_POST['TApellidoM']) && isset($_POST['RAcceso']) &&
-        isset($_POST['TLogin']) && isset($_POST['TPContraseña']) && isset($_POST['REstado'])
-    ) {
-        $usab = new Models\Usuarioab();
-        $usab->setNombre($_POST['TNombre']);
-        $usab->setApaterno($_POST['TApellidoP']);
-        $usab->setAmaterno($_POST['TApellidoM']);
-        $usab->setAcceso($_POST['RAcceso']);
-        $usab->setLogin($_POST['TLogin']);
-        $usab->setPassword($_POST['TPContraseña']);
-        $usab->setEstado($_POST['REstado']);
-        $result = $usab->guardar();
-        if ($result === 1) {
-            ?>
-    <script>
-        swal({
-            title: 'Exito',
-            text: 'Se han registrado los datos exitosamente!',
-            type: 'success'
-        });
-    </script>
 
-    <?php } else {
-            ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'No se han guardado los datos compruebe los campos unicos',
-            type: 'error'
-        });
-    </script>
-    <?php }
-    }
-    ?>
     <script src="js/user_jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
