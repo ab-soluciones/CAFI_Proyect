@@ -52,7 +52,7 @@ if (!isset($_SESSION['acceso'])) {
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
-                    <form class="form-group" action="#" method="post">
+                    <form class="form-group" id="formclientes">
                         <div class="row">
                             <div class="col-lg-4">
                                 <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
@@ -72,21 +72,12 @@ if (!isset($_SESSION['acceso'])) {
                                 <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
 
                                 <div class="row" style="margin: 0 auto;">
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="INE" checked autofocus>INE
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="CURP">CURP
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="doc" name="RDoc" value="Otro">Otro
-                                        </label>
-                                    </div>
+                                            <select class="form form-control" id="documento">
+                                                <option value="INE">INE</option>
+                                                <option value="CURP">CURP</option>
+                                                <option value="Otros">Otros</option>
+                                            </select>  
+
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -109,23 +100,14 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-4">
                                 <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
-
-                                <div class="row" style="margin-left: 5px;">
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="estado" name="REstado" value="A" checked autofocus>Activo
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="estado" name="REstado" value="I">Inactivo
-                                        </label>
-                                    </div>
-                                </div>
+                                        <select class="form form-control" id="vcestado">
+                                            <option value="A">Activo</option>
+                                            <option value="I">Inactivo</option>
+                                        </select>  
                             </div>
                         </div>
 
-                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -152,48 +134,21 @@ if (!isset($_SESSION['acceso'])) {
                         <table class="scroll table table-bordered table-hover fixed_headers table-responsive">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
-                                    <th onclick="sortTable(0)">Nombre</th>
-                                    <th onclick="sortTable(1)">Apellido Paterno</th>
-                                    <th onclick="sortTable(2)">Apellido Materno</th>
-                                    <th onclick="sortTable(3)">Tipo de Documento</th>
-                                    <th onclick="sortTable(4)">Numero Documento</th>
-                                    <th onclick="sortTable(5)">Direccion</th>
-                                    <th onclick="sortTable(6)">Telefono</th>
-                                    <th onclick="sortTable(7)">Correo</th>
-                                    <th onclick="sortTable(8)">Estado</th>
-                                    <th onclick="sortTable(9)">Acciones<th>
+                                    <th onclick="sortTable(0)">Id</th> 
+                                    <th onclick="sortTable(1)">Nombre</th>
+                                    <th onclick="sortTable(2)">Apellido Paterno</th>
+                                    <th onclick="sortTable(3)">Apellido Materno</th>
+                                    <th onclick="sortTable(4)">Tipo de Documento</th>
+                                    <th onclick="sortTable(5)">Numero Documento</th>
+                                    <th onclick="sortTable(6)">Direccion</th>
+                                    <th onclick="sortTable(7)">Telefono</th>
+                                    <th onclick="sortTable(8)">Correo</th>
+                                    <th onclick="sortTable(9)">Estado</th>
+                                    <th onclick="sortTable(10)">Acciones<th>
                                     </tr>
                             </thead>
 
-                    <tbody>
-                        <?php
-                        $negocio = $_SESSION['idnegocio'];
-                        $con = new Models\Conexion();
-                        $query = "SELECT * FROM cliente WHERE negocios_idnegocios ='$negocio' ORDER BY idcliente DESC";
-                        $row = $con->consultaListar($query);
-
-                        while ($renglon = mysqli_fetch_array($row)) {
-                            ?>
-                        <tr>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td><?php echo $renglon['apaterno']; ?></td>
-                            <td><?php echo $renglon['amaterno']; ?></td>
-                            <td><?php echo $renglon['tipo_documento']; ?></td>
-                            <td><?php echo $renglon['numero_documento']; ?></td>
-                            <td><?php echo $renglon['direccion']; ?></td>
-                            <td><?php echo $renglon['telefono']; ?></td>
-                            <td><?php echo $renglon['correo']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
-                                <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVCliente.php?id=<?php echo $renglon['idcliente'] ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php
-                        } ?>
+                    <tbody id="cuerpo">
                     </tbody>
                 </table>
             </div>
@@ -201,48 +156,8 @@ if (!isset($_SESSION['acceso'])) {
       </div>
           </div>
 </div>
-    <?php
-    if (
-        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-        && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-        && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-        && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-        && isset($_POST['REstado'])
-    ) {
-        $cliente = new Models\Cliente();
-        $cliente->setNombre($_POST['TNombre']);
-        $cliente->setApaterno($_POST['TApellidoP']);
-        $cliente->setAmaterno($_POST['TApellidoM']);
-        $cliente->setDocumento($_POST['RDoc']);
-        $cliente->setNumDoc($_POST['TNumDoc']);
-        $cliente->setDireccion($_POST['TDireccion']);
-        $cliente->setTelefono($_POST['TTelefono']);
-        $cliente->setCorreo($_POST['TCorreo']);
-        $cliente->setEstado($_POST['REstado']);
-        $result = $cliente->guardar($_SESSION['idnegocio'], $_SESSION['id']);
-        if ($result === 1) {
-            ?>
-    <script>
-        swal({
-            title: 'Exito',
-            text: 'Se han registrado los datos exitosamente!',
-            type: 'success'
-        });
-    </script>
-
-    <?php } else {
-            ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'No registrado compruebe los campos unicos!',
-            type: 'error'
-        });
-    </script>
-    <?php }
-    }
-    ?>
     <script src="js/user_jquery.js"></script>
+    <script src="js/clientes.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

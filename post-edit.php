@@ -58,4 +58,52 @@ if (
         $cliente->setEstado($_POST['estado']);
         $result = $cliente->editar($_POST['id'], $idusuario);
         echo $result;
-}
+}else if(
+        isset($_POST['concepto']) && isset($_POST['pago']) &&  isset($_POST['descripcion']) && isset($_POST['monto']) && isset($_POST['estado'])
+         && isset($_POST['fecha'])
+    ){
+        $id = $_POST['id'];
+        $gasto = new Models\Gasto();
+        $trabajador = $_SESSION['id'];
+        $gasto->setConcepto($_POST['concepto']);
+        $gasto->setPago($_POST['pago']);
+        $gasto->setDescripcion($_POST['descripcion']);
+        $monto = $_POST['monto'];
+        $monto = floatval($monto);
+        $gasto->setMonto($monto);
+        $gasto->setEstado($_POST['estado']);
+        $gasto->setFecha($_POST['fecha']);
+        $result = $gasto->editar($id, $trabajador);
+        echo $result;
+    }else if (
+        isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso']) && isset($_POST['fecha'])  && isset($_POST['estatus'])
+        ){
+                $otro_ingreso = new Models\OtrosIngresos();
+                $otro_ingreso->setIdOtrosIngresos($_POST['id']);
+                $otro_ingreso->setCantidad($_POST['cantidad']);
+                $otro_ingreso->setTipo($_POST['tipo']);
+                $otro_ingreso->setFormaIngreso($_POST['formaImgreso']);
+                $otro_ingreso->setFecha($_POST['fecha']);
+                $otro_ingreso->setEstado($_POST['estatus']);
+                $trabajador = $_SESSION['id'];
+                $result = $otro_ingreso->editar($trabajador);
+                echo $result;
+        } else if (
+                isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['documento']) 
+                && isset($_POST['numdoc']) && isset($_POST['direccion']) && isset($_POST['telefono']) && isset($_POST['email']) && isset($_POST['estado'])
+            ){
+                $id = $_POST['id'];
+                $cliente = new Models\Cliente();
+                $trabajador = $_SESSION['id'];
+                $cliente->setNombre($_POST['nombre']);
+                $cliente->setApaterno($_POST['apt']);
+                $cliente->setAmaterno($_POST['apm']);
+                $cliente->setDocumento($_POST['documento']);
+                $cliente->setNumDoc($_POST['numdoc']);
+                $cliente->setDireccion($_POST['direccion']);
+                $cliente->setTelefono($_POST['telefono']);
+                $cliente->setCorreo($_POST['email']);
+                $cliente->setEstado($_POST['estado']);
+                $result = $cliente->editar($id, $trabajador);
+                echo $result;
+            }
