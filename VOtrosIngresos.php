@@ -34,9 +34,9 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <?php 
+    <?php
     $sel = "ingresos";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
@@ -56,11 +56,11 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formotrosingresos">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5><label for="can" class="badge badge-primary">Cantidad $ :</label></h5>
+                                <h5 class="importante">Cantidad $ :</h5>
                                 <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off" required>
                             </div>
                             <div class="col-lg-6">
-                                <h5><label for="tipo" class="badge badge-primary">Tipo :</label></h5>
+                                <h5 class="general">Tipo :</h5>
                                 <select id="tipo" name="STipo" id="concepto" class="form form-control" required>
                                     <option></option>
                                     <option>Dinero a caja</option>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5><label for="fingreso" class="badge badge-primary">Forma de Ingreso :</label></h5>
+                                <h5 class="general">Forma de Ingreso :</h5>
                                 <select name="SFIngreso" id="fingreso" class="form form-control" required>
                                     <option></option>
                                     <option>Efectivo</option>
@@ -79,12 +79,12 @@ if (!isset($_SESSION['acceso'])) {
                                 </select> <br>
                             </div>
                             <div class="col-lg-6">
-                                <h5><label for="fecha" class="badge badge-primary">Fecha :</label></h5>
+                                <h5 class="general">Fecha :</h5>
                                 <input class="form-control" id="fecha" type="date" name="DFecha" required>
                             </div>
                             
                             <div class="d-block col-lg-6">
-                                    <h5><label for="estatus" class="badge badge-primary">Estatus:</label></h5>
+                                    <h5 class="general">Estatus:</h5>
                                         <select class="form form-control" id="voestado">
                                             <option value="A">Activo</option>
                                             <option value="I">Inactivo</option>
@@ -113,20 +113,21 @@ if (!isset($_SESSION['acceso'])) {
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                      <div class="contenedorTabla">
-                          <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
+                      <div class="contenedorTabla table-responsive">
+                          <table class="table table-bordered table-hover">
                               <thead class="thead-dark">
                                   <tr class="encabezados">
-                                      <th onclick="sortTable(0)">Id</th>
-                                      <th onclick="sortTable(1)">Cantidad</th>
-                                      <th onclick="sortTable(2)">Tipo</th>
-                                      <th onclick="sortTable(3)">Forma de Ingreso</th>
-                                      <th onclick="sortTable(4)">Fecha</th>
-                                      <th onclick="sortTable(5)">Estado</th>
-                                      <th onclick="sortTable(6)">Tarea</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(1)">Cantidad</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(2)">Tipo</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(3)">Forma de Ingreso</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(4)">Fecha</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(5)">Estado</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(6)">Tarea</th>
                                   </tr>
                               </thead>
-                      <tbody id="cuerpo"></tbody>
+                      <tbody id="cuerpo">
+                      </tbody>
                   </table>
               </div>
             </div>

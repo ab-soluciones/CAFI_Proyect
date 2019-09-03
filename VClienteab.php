@@ -33,15 +33,15 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio();">
 <?php
-$sel = "clientes"; 
-include("NavbarAB.php") 
+$sel = "clientes";
+include("NavbarAB.php")
 ?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
-            <div class="modal-header">
+            <div class="modal-header administrador">
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">×</span>
                     <span class="sr-only">Close</span>
@@ -49,64 +49,66 @@ include("NavbarAB.php")
             </div>
 
             <!-- Modal Body -->
-            <div class="modal-body">
+            <div class="modal-body administrador">
                 <p class="statusMsg"></p>
                     <form class="form-group" id="formclienteab">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="etiquetas"><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off">
+                                <h5 class="admin"> Nombre:</h5>
+                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="etiquetas"><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off">
+                                <h5 class="admin">Apellido Paterno:</h5>
+                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="etiquetas"><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off">
+                                <h5 class="admin">Apellido Materno:</h5>
+                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                            <h5><label for="documento" class="badge badge-primary">Documento</label></h5>
-                                <select class="form form-control" id="documento">
-                                    <option value="INE">INE</option>
-                                    <option value="I">CURP</option>
-                                    <option value="I">Otro</option>
-                                </select>
+                                <h5 class="admin">Documento:</h5>
+                                    <div class="row" style="margin: 0 auto;">
+                                        <select id="documento" class="form form-control">
+                                            <option value="INE">INE</option>
+                                            <option value="CURP">CURP</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>
+                                    </div>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="etiquetas"><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
-                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off">
+                                <h5 class="admin">#Documento:</h5>
+                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="etiquetas"><label for="dir" class="badge badge-primary">Direccion:</label></h5>
-                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion">
+                                <h5 class="admin">Direccion:</h5>
+                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="etiquetas"><label for="tel" class="badge badge-primary">Telefono:</label></h5>
-                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono">
+                                <h5 class="admin">Telefono:</h5>
+                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
                             </div>
                             <div class="col-lg-6">
-                                <h5 class="etiquetas"><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
+                                <h5 class="admin">Correo electrónico:</h5>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="etiquetas"><label for="login" class="badge badge-primary">Usuario:</label></h5>
-                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off">
+                                <h5 class="admin">Usuario:</h5>
+                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
                             </div>
                             <div class="col-lg-6">
-                                <h5 class="etiquetas"><label for="pass" class="badge badge-primary">Contraseña:</label></h5>
-                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña">
+                                <h5 class="admin">Contraseña:</h5>
+                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                            <h5><label for="estado" class="badge badge-primary">Estado</label></h5>
+                            <h5 class="admin">Estado</h5>
                                 <select class="form form-control" id="estado">
                                     <option value="A">A</option>
                                     <option value="I">I</option>
@@ -134,27 +136,30 @@ include("NavbarAB.php")
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <table class="table width="100%" display:block; table-bordered table-hover fixed_headers table-responsive">
-                    <thead class="thead-dark">
-                        <tr class="encabezados">
-                            <th onclick="sortTable(0)">Id Cliente</th>
-                            <th onclick="sortTable(1)">Nombre</th>
-                            <th onclick="sortTable(2)">Ap-P</th>
-                            <th onclick="sortTable(3)">Ap-M</th>
-                            <th onclick="sortTable(4)">Doc</th>
-                            <th onclick="sortTable(5)">#Doc</th>
-                            <th onclick="sortTable(6)">Direcci&oacute;n</th>
-                            <th onclick="sortTable(7)">Tel&eacute;fono</th>
-                            <th onclick="sortTable(8)">Email</th>
-                            <th onclick="sortTable(9)">Usuario</th>
-                            <th onclick="sortTable(10)">Contraseña</th>
-                            <th onclick="sortTable(11)">Estado</th>
-                            <th onclick="sortTable(12)">Registró</th>
-                            <th onclick="sortTable(13)">Tarea</th>
-                        </tr>
-                    </thead>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr class="encabezados">
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(2)">Ap-P</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(3)">Ap-M</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(4)">Doc</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(5)">#Doc</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Direcci&oacute;n</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Tel&eacute;fono</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(8)">Email</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(9)">Usuario</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(10)">Contraseña</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(11)">Estado</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(12)">Registro</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(1)">Tarea</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

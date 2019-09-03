@@ -36,7 +36,7 @@ if (!isset($_SESSION['acceso'])) {
     $sel = "inventario";
     include("Navbar.php") 
     ?>
-
+<div class="contenedor container-fluid">
     <div class="row">
         <div style="margin: 0 auto; margin-top: 15px;" class="col-md-3">
             <nav class="navbar navbar-dark bg-dark">
@@ -61,8 +61,8 @@ if (!isset($_SESSION['acceso'])) {
         <?php if (isset($_POST['STipo']) && $_POST['STipo'] === "Ropa") {
             $tipo = $_POST['STipo'];
             ?>
-            <div class="col-md-8" style=" margin: 0 auto; margin-top:15px;">
-                <table class="table table-bordered table-responsive-md">
+            <div class="contenedorTabla table-responsive col-12">
+                <table class="table table-bordered table-hover">
                     <tr>
                         <th>Nombre</th>
                         <th>Imagen</th>
@@ -237,9 +237,10 @@ if (!isset($_SESSION['acceso'])) {
                         <?php  } ?>
 
                     </table>
-
+                            </div>
                 </div>
 
+        </div>
         </div>
         <script src="js/user_jquery.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

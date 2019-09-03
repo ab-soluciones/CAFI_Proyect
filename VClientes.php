@@ -35,7 +35,7 @@ if (!isset($_SESSION['acceso'])) {
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
     <?php
     $sel = "clientes";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
@@ -55,21 +55,21 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formclientes">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
+                                <h5 class="general">Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
+                                <h5 class="general">Apellido Paterno:</h5>
                                 <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
+                                <h5 class="general">Apellido Materno:</h5>
                                 <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
+                                <h5 class="general">Documento:</h5>
 
                                 <div class="row" style="margin: 0 auto;">
                                             <select class="form form-control" id="documento">
@@ -81,29 +81,31 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
+                                <h5 class="general"># Documento:</h5>
                                 <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
+                                <h5 class="general">Direccion:</h5>
                                 <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
+                                <h5 class="general">Telefono:</h5>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
+                                <h5 class="general">Correo electrónico:</h5>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
+                            <div class="d-block col-lg-12">
+                                    <h5 class="general">Estatus:</h5>
                                         <select class="form form-control" id="vcestado">
                                             <option value="A">Activo</option>
                                             <option value="I">Inactivo</option>
-                                        </select>  
+                                        </select>
+                                </div>
                             </div>
                         </div>
 
@@ -130,25 +132,25 @@ if (!isset($_SESSION['acceso'])) {
                         <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
 
-                    <div class="contenedorTabla">
-                        <table class="scroll table table-bordered table-hover fixed_headers table-responsive">
+                    <div class="contenedorTabla table-responsive">
+                        <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
-                                    <th onclick="sortTable(0)">Id</th> 
-                                    <th onclick="sortTable(1)">Nombre</th>
-                                    <th onclick="sortTable(2)">Apellido Paterno</th>
-                                    <th onclick="sortTable(3)">Apellido Materno</th>
-                                    <th onclick="sortTable(4)">Tipo de Documento</th>
-                                    <th onclick="sortTable(5)">Numero Documento</th>
-                                    <th onclick="sortTable(6)">Direccion</th>
-                                    <th onclick="sortTable(7)">Telefono</th>
-                                    <th onclick="sortTable(8)">Correo</th>
-                                    <th onclick="sortTable(9)">Estado</th>
-                                    <th onclick="sortTable(10)">Acciones<th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Paterno</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(3)">Apellido Materno</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(4)">Tipo de Documento</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(5)">Numero Documento</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Direccion</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Telefono</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(8)">Correo</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(9)">Estado</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(10)">Acciones
                                     </tr>
                             </thead>
 
-                    <tbody id="cuerpo">
+                    <tbody  id="cuerpo">
                     </tbody>
                 </table>
             </div>
