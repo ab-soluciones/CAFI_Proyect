@@ -77,8 +77,8 @@ if (!isset($_SESSION['acceso'])) {
                                 <select class="form form-control" id="acceso">
                                     <option value="ManagerAB">Manager</option>
                                     <option value="CEOAB">CEOAB</option>
+                                    <option value="ManagerAB">Manager</option>
                                 </select>
-
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Usuario:</h5>
