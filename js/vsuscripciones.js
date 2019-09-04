@@ -41,7 +41,7 @@ $(document).ready(function () {
             <td class="text-nowrap text-center">${datos.negocio}</td>
             <td class="text-nowrap text-center">${datos.monto}</td>
             <td class="text-nowrap text-center">${datos.registro}</td>
-            <th class="text-nowrap text-center" style="width:100px;">
+            <th style="width:100px;">
                 <div class="row">
                     <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
                         <img src="img/edit.png">

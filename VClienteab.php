@@ -69,19 +69,21 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-4">
                                 <h5 class="admin">Documento:</h5>
-                                <select class="form form-control" id="documento">
-                                    <option value="INE">INE</option>
-                                    <option value="I">CURP</option>
-                                    <option value="I">Otro</option>
-                                </select>
+                                    <div class="row" style="margin: 0 auto;">
+                                        <select id="documento" class="form form-control">
+                                            <option value="INE">INE</option>
+                                            <option value="CURP">CURP</option>
+                                            <option value="Otro">Otro</option>
+                                        </select>
+                                    </div>
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">#Documento:</h5>
-                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off">
+                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Direccion:</h5>
-                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion">
+                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
                             </div>
                         </div>
                         <div class="row">
@@ -106,7 +108,7 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="admin">Estado:</h5>
+                            <h5 class="admin">Estado</h5>
                                 <select class="form form-control" id="estado">
                                     <option value="A">A</option>
                                     <option value="I">I</option>
@@ -138,7 +140,7 @@ if (!isset($_SESSION['acceso'])) {
                     <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(2)">Ap-P</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(3)">Ap-M</th>

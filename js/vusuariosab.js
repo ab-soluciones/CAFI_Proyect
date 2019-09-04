@@ -7,7 +7,11 @@ $(document).ready(function () {
   $('.close').click(function () {
     $('#formuusers').trigger('reset');
   });
-
+  
+  $('.clearForm').click(function () {
+    $('#formuusers').trigger('reset');
+  });
+  
   $('#bclose').click(function () {
     $('.modal').modal('hide');
   });
