@@ -69,8 +69,9 @@ if (!isset($_SESSION['acceso'])) {
                             <option value="I">I</option>
                         </select><br>
 
-                        <h5 class="admin">Negocio:</h5>
+
                         <div id="divnegocio">
+                            <h5 class="admin">Negocio:</h5>
                             <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" required autocomplete="off">
                             <datalist id="negocios">
                                 <?php
@@ -109,12 +110,12 @@ if (!isset($_SESSION['acceso'])) {
             <div class="col-md-12">
                 <div id="tableContainer" class="d-block col-lg-12">
                     <div class="input-group mb-2">
-                        <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                        <button class="bmodal d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
                         <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                        <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                        <button class="bmodal d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">
                         <table class="table table-bordered table-hover">
