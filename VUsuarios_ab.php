@@ -55,7 +55,7 @@ if (!isset($_SESSION['acceso'])) {
                 <!-- Modal Body -->
                 <div class="modal-body administrador">
                     <p class="statusMsg"></p>
-                    <form class="form-group" action="#" method="post">
+                    <form class="form-group" id="formuusers">
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-4">
                                 <h5 class="admin">Nombre:</h5>

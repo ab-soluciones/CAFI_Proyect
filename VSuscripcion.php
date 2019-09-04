@@ -51,7 +51,7 @@ if (!isset($_SESSION['acceso'])) {
                 <!-- Modal Body -->
                 <div class="modal-body administrador">
                     <p class="statusMsg"></p>
-                    <form class="form-group" action="#" method="post">
+                    <form class="form-group" id="formulario">
                         <div>
                             <h5 class="importante">Fecha Activacion:</h5>
                             <input class="form-control" id="fecha1" type="date" name="DFecha" required>

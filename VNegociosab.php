@@ -43,15 +43,15 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
+                <div class="modal-header administrador">
+                    <button type="button" class="bclose close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
                     </button>
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formunegocio">
                         <div class="row">
