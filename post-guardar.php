@@ -106,4 +106,27 @@ isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso
     $cliente->setEstado($_POST['estado']);
     $result = $cliente->guardar($_SESSION['idnegocio'], $_SESSION['id']);
     echo $result;
+} else if(
+    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['doc']) 
+    && isset($_POST['numdoc']) && isset($_POST['dir']) && isset($_POST['tel']) && isset($_POST['email']) && isset($_POST['acceso']) 
+    && isset($_POST['login']) && isset($_POST['agregarloa']) && isset($_POST['contrasena']) && isset($_POST['sueldo'])
+){
+    $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
+    $trabajador->setNombre($_POST['nombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
+    $trabajador->setApaterno($_POST['apt']);
+    $trabajador->setAmaterno($_POST['apm']);
+    $trabajador->setDocumento($_POST['doc']);
+    $trabajador->setNumDoc($_POST['numdoc']);
+    $trabajador->setDireccion($_POST['dir']);
+    $trabajador->setTelefono($_POST['tel']);
+    $trabajador->setCorreo($_POST['email']);
+    $trabajador->setAcceso($_POST['acceso']);
+    $trabajador->setLogin($_POST['login']);
+    $trabajador->setPassword($_POST['contrasena']);
+    $sueldo = $_POST['sueldo'];
+    $sueldo = floatval($sueldo);
+    $trabajador->setSueldo($sueldo);
+    $trabajador->setEstado($_POST['estado']);
+    $result = $trabajador->guardar($_POST['agregarloa']);
+    echo $result;
 }
