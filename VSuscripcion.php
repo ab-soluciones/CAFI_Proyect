@@ -54,21 +54,21 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formulario">
                         <div>
                             <h5><label for="fecha1" class="badge badge-primary">Fecha Activacion:</label></h5>
-                            <input class="form-control" id="fecha1" type="date" name="DFecha" required>
+                            <input class="form-control" id="fecha1" type="date">
                         </div><br>
 
                         <div>
                             <h5><label for="fecha2" class="badge badge-primary">Fecha Vencimiento:</label></h5>
-                            <input class="form-control" id="fecha2" type="date" name="DFecha2" required><br>
+                            <input class="form-control" id="fecha2" type="date"><br>
                         </div>
                         <h5><label for="estado" class="badge badge-primary">Estado</label></h5>
-                                <select class="form form-control" id="estado">
-                                    <option value="A">A</option>
-                                    <option value="I">I</option>
-                                </select><br>
-                        <h5><label for="innegocio" class="badge badge-primary">Negocio:</label></h5>
-                        <div>
-                            <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" required autocomplete="off">
+                        <select class="form form-control" id="estado">
+                            <option value="A">A</option>
+                            <option value="I">I</option>
+                        </select><br>
+                        <div id="divnegocio">
+                            <h5><label for="innegocio" class="badge badge-primary">Negocio:</label></h5>
+                            <input id="innegocio" class="form form-control" list="negocios" autocomplete="off">
                             <datalist id="negocios">
                                 <?php
                                 $datos = false;
@@ -87,10 +87,10 @@ if (!isset($_SESSION['acceso'])) {
                                     echo "<script>document.getElementById('innegocio').disabled = true;</script>";
                                 } ?>
 
-                            </datalist>
-                        </div><br>
+                            </datalist> <br>
+                        </div>
                         <h5><label for="monto" class="badge badge-primary">Monto:</label></h5>
-                        <input id="monto" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
+                        <input id="monto" type="text" class="form form-control" name="TMonto" placeholder="Monto $"><br>
                         <input id="bclose" type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
@@ -106,12 +106,12 @@ if (!isset($_SESSION['acceso'])) {
             <div class="col-md-12">
                 <div id="tableContainer" class="d-block col-lg-12">
                     <div class="input-group mb-2">
-                        <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                        <button class="bmodal d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
                         <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                        <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                        <button class="bmodal d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                     <div class="contenedorTabla">
                         <table class="table width=" 100%" display:block; table-bordered table-hover fixed_headers table-responsive">
@@ -122,7 +122,7 @@ if (!isset($_SESSION['acceso'])) {
                                     <th onclick="sortTable(2)">Vencimiento</th>
                                     <th onclick="sortTable(3)">Estado</th>
                                     <th onclick="sortTable(4)">Negocio</th>
-                                    <th onclick="sortTable(5)">Monto</th>
+                                    <th onclick="sortTable(5)">$ Monto</th>
                                     <th onclick="sortTable(6)">Registró</th>
                                     <th onclick="sortTable(7)">Tarea</th>
                                 </tr>

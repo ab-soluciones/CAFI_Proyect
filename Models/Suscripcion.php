@@ -36,9 +36,11 @@ class Suscripcion
         $this->estado = $estado;
     }
 
-    public function setIdNegocio($id)
+    public function setIdNegocio($negocio)
     {
-        $this->id_negocio = $id;
+        $query = "SELECT idnegocios FROM negocios WHERE (SELECT CONCAT(nombre_negocio,' ',domicilio,' ' ,ciudad))='$negocio'";
+        $result = $this->con->consultaRetorno($query);
+        $this->id_negocio = $result['idnegocios'];
     }
     public function setMonto($monto)
     {
@@ -64,11 +66,19 @@ class Suscripcion
 
     public function guardar($idusuario)
     {
-        $sql = "INSERT INTO  suscripcion(idsuscripcion,fecha_activacion,fecha_vencimiento,estado,monto,negocio_id,usuariosab_idusuariosab)
-                VALUES  ('{$this->id}', '{$this->activacion}', '{$this->vencimiento}','{$this->estado}',
-                '{$this->monto}','{$this->id_negocio}','$idusuario')";
+        $sql = "SELECT idsuscripcion FROM suscripcion WHERE negocio_id ='{$this->id_negocio}'";
+        $result = $this->con->consultaRetorno($sql);
+        if (isset($result['idsuscripcion'])) {
+            $result = 0;
+        } else {
+            $sql = "INSERT INTO  suscripcion(idsuscripcion,fecha_activacion,fecha_vencimiento,estado,monto,negocio_id,usuariosab_idusuariosab)
+            VALUES  ('{$this->id}', '{$this->activacion}', '{$this->vencimiento}','{$this->estado}',
+            '{$this->monto}','{$this->id_negocio}','$idusuario')";
+            $result = $this->con->consultaSimple($sql);
+        }
 
-        return $this->con->consultaSimple($sql);
+
+        return $result;
     }
 
     public function eliminar($id)
@@ -77,7 +87,7 @@ class Suscripcion
         $this->con->consultaSimple($sql);
     }
 
-    public function editar($id, $idusuario)
+    public function editar($idusuario)
     {
         $sql = "UPDATE negocios
         INNER JOIN suscripcion ON suscripcion.negocio_id=negocios.idnegocios
@@ -86,16 +96,19 @@ class Suscripcion
         SET suscripcion.fecha_activacion = '{$this->activacion}', suscripcion.fecha_vencimiento = '{$this->vencimiento}', 
         suscripcion.estado ='{$this->estado}',suscripcion.monto='{$this->monto}',suscripcion.usuariosab_idusuariosab='$idusuario',
         clientesab.estado ='{$this->estado}', trabajador.estado='{$this->estado}'
-        WHERE suscripcion.idsuscripcion='$id'";
+        WHERE suscripcion.idsuscripcion='{$this->id}'";
 
         $result = $this->con->consultaSimple($sql);
 
         if ($result === 0) {
-            $sql = "UPDATE suscripcion SET fecha_activacion = '{$this->activacion}'
-            ,fecha_vencimiento = '{$this->vencimiento}' , estado ='{$this->estado}'
-            ,monto ='{$this->monto}',usuariosab_idusuariosab = '$idusuario'
-            WHERE idsuscripcion = '$id'";
+            $sql = "UPDATE suscripcion INNER JOIN negocios ON negocio_id = idnegocios INNER JOIN clientesab ON clientesab_idclienteab = id_clienteab  
+                SET fecha_activacion = '{$this->activacion}',fecha_vencimiento = '{$this->vencimiento}' , suscripcion.estado ='{$this->estado}'
+                ,clientesab.estado='{$this->estado}', monto ='{$this->monto}',suscripcion.usuariosab_idusuariosab = '$idusuario'
+                WHERE idsuscripcion = '{$this->id}'";
             $result = $this->con->consultaSimple($sql);
+        }
+        if ($result > 1) {
+            $result = 1;
         }
         return $result;
     }

@@ -42,8 +42,9 @@ if (
         isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['doc'])
         && isset($_POST['numdoc']) && isset($_POST['dir']) && isset($_POST['tel']) && isset($_POST['email']) && isset($_POST['login'])
         && isset($_POST['password']) && isset($_POST['estado'])
-        
-) {     $idusuario = $_SESSION['id'];
+
+) {
+        $idusuario = $_SESSION['id'];
         $cliente = new Models\Clienteab();
         $cliente->setNombre($_POST['nombre']);
         $cliente->setApaterno($_POST['apt']);
@@ -57,5 +58,15 @@ if (
         $cliente->setPassword($_POST['password']);
         $cliente->setEstado($_POST['estado']);
         $result = $cliente->editar($_POST['id'], $idusuario);
+        echo $result;
+} else if (isset($_POST['id']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) && isset($_POST['estado']) && isset($_POST['negocio']) && isset($_POST['monto'])) {
+        $sus = new Models\Suscripcion();
+        $idusuario = $_SESSION['id'];
+        $sus->setId($_POST['id']);
+        $sus->setActivacion($_POST['fecha1']);
+        $sus->setVencimiento($_POST['fecha2']);
+        $sus->setEstado($_POST['estado']);
+        $sus->setMonto($_POST['monto']);
+        $result = $sus->editar($idusuario);
         echo $result;
 }
