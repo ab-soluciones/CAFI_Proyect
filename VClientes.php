@@ -35,7 +35,7 @@ if (!isset($_SESSION['acceso'])) {
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
     <?php
     $sel = "clientes";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
@@ -55,21 +55,21 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" action="#" method="post">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
+                                <h5 class="general">Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
+                                <h5 class="general">Apellido Paterno:</h5>
                                 <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
+                                <h5 class="general">Apellido Materno:</h5>
                                 <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
+                                <h5 class="general">Documento:</h5>
 
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
@@ -90,25 +90,25 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="numdoc" class="badge badge-primary">#Documento:</label></h5>
+                                <h5 class="general"># Documento:</h5>
                                 <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
+                                <h5 class="general">Direccion:</h5>
                                 <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
+                                <h5 class="general">Telefono:</h5>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
+                                <h5 class="general">Correo electrónico:</h5>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                             <div class="col-lg-4">
-                                <h5><label for="acceso" class="badge badge-primary">Estado:</label></h5>
+                                <h5 class="general">Estado:</h5>
 
                                 <div class="row" style="margin-left: 5px;">
                                     <div class="form-check-inline">
@@ -148,20 +148,20 @@ if (!isset($_SESSION['acceso'])) {
                         <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
 
-                    <div class="contenedorTabla">
-                        <table class="scroll table table-bordered table-hover fixed_headers table-responsive">
+                    <div class="contenedorTabla table-responsive">
+                        <table class="table table-bordered table-hover">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
-                                    <th onclick="sortTable(0)">Nombre</th>
-                                    <th onclick="sortTable(1)">Apellido Paterno</th>
-                                    <th onclick="sortTable(2)">Apellido Materno</th>
-                                    <th onclick="sortTable(3)">Tipo de Documento</th>
-                                    <th onclick="sortTable(4)">Numero Documento</th>
-                                    <th onclick="sortTable(5)">Direccion</th>
-                                    <th onclick="sortTable(6)">Telefono</th>
-                                    <th onclick="sortTable(7)">Correo</th>
-                                    <th onclick="sortTable(8)">Estado</th>
-                                    <th onclick="sortTable(9)">Acciones<th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(0)">Nombre</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(1)">Apellido Paterno</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Materno</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(3)">Tipo de Documento</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(4)">Numero Documento</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(5)">Direccion</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Telefono</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Correo</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(8)">Estado</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(9)">Acciones
                                     </tr>
                             </thead>
 
@@ -175,16 +175,16 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td><?php echo $renglon['nombre']; ?></td>
-                            <td><?php echo $renglon['apaterno']; ?></td>
-                            <td><?php echo $renglon['amaterno']; ?></td>
-                            <td><?php echo $renglon['tipo_documento']; ?></td>
-                            <td><?php echo $renglon['numero_documento']; ?></td>
-                            <td><?php echo $renglon['direccion']; ?></td>
-                            <td><?php echo $renglon['telefono']; ?></td>
-                            <td><?php echo $renglon['correo']; ?></td>
-                            <td><?php echo $renglon['estado']; ?></td>
-                            <td style="width:100px;">
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['apaterno']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['amaterno']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['tipo_documento']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['numero_documento']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['direccion']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['telefono']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['correo']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                            <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
                                     <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVCliente.php?id=<?php echo $renglon['idcliente'] ?>">
                                         <img src="img/edit.png">

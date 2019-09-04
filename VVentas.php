@@ -45,10 +45,10 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
     <?php
-    $sel = "venta"; 
-    include("Navbar.php") 
+    $sel = "venta";
+    include("Navbar.php")
     ?>
-
+<div class="contenedor container-fluid">
     <div class="row" style=" margin-top: 15px;">
         <div id="busqueda" class="col-xs-4" style="margin: 0 auto;">
             <div class=" card card-body">
@@ -160,7 +160,8 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     }
     ?>
             <div class="col-md-8" style=" margin: 0 auto; margin-top:15px;">
-            <table class="scroll table width="100%" table-bordered table-responsive-md">
+            <div class="table-responsive">
+            <table class="scroll table table-hover table-bordered">
                 <form action="#" method="post">
                     <div class="row" style="margin: 0 auto;">
                         <div class="form-check-inline">
@@ -181,14 +182,14 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                     </div> <br>
                     <thead>
                         <tr>
-                            <th>Tareas</th>
-                            <th>Imagen</th>
-                            <th>Producto</th>
-                            <th>Descripción</th>
-                            <th>Existencia</th>
-                            <th>Costo</th>
-                            <th>Cant</th>
-                            <th>Subtotal</th>
+                            <th class="text-nowrap text-center">Tareas</th>
+                            <th class="text-nowrap text-center">Imagen</th>
+                            <th class="text-nowrap text-center">Producto</th>
+                            <th class="text-nowrap text-center">Descripción</th>
+                            <th class="text-nowrap text-center">Existencia</th>
+                            <th class="text-nowrap text-center">Costo</th>
+                            <th class="text-nowrap text-center">Cant</th>
+                            <th class="text-nowrap text-center">Subtotal</th>
 
                         </tr>
                     </thead>
@@ -224,7 +225,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                             }
                             ?>
                         <tr>
-                            <td style="width: 30px;">
+                            <td class="text-nowrap text-center" style="width: 30px;">
                                 <div class="row" style="margin: 0 auto;">
                                     <a onclick="if(confirm('SE ELIMINARÁ DE LA LISTA! :<?php echo ' ' . $renglon['cantidad_producto'] . ' ' . $renglon['nombre'] . '(s) ' . $renglon['descripcion'] ?>'))
                                         {href= 'deleteVVentas.php?id=<?php echo $renglon['iddetalle_venta']; ?>'} " class="btn btn-warning"><img src="img/eliminarf.png">
@@ -234,15 +235,15 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                                     </a>
                                 </div>
                             </td>
-                            <td><img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="90" width="90"></td>
-                            <td><?php echo $renglon['nombre'] . " " . $renglon['marca'] . " color " . $renglon['color'] . " talla " . $renglon['talla_numero']; ?></td>
-                            <td><?php echo $renglon['descripcion']; ?></td>
-                            <td><?php if ($imprimir_existencia === true) {
+                            <td class="text-nowrap text-center"><img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="90" width="90"></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['marca'] . " color " . $renglon['color'] . " talla " . $renglon['talla_numero']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['descripcion']; ?></td>
+                            <td class="text-nowrap text-center"><?php if ($imprimir_existencia === true) {
                                         echo $existencia;
                                     } ?></td>
-                            <td>$<?php echo $renglon['precio_venta']; ?></td>
-                            <td><?php echo $renglon['cantidad_producto']; ?></td>
-                            <td>$<?php echo $renglon['subtotal']; ?></td>
+                            <td class="text-nowrap text-center">$<?php echo $renglon['precio_venta']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['cantidad_producto']; ?></td>
+                            <td class="text-nowrap text-center">$<?php echo $renglon['subtotal']; ?></td>
 
                         </tr>
                         <?php
@@ -255,7 +256,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                             $result = $con->consultaRetorno($query_total);
                             if (!is_null($result['total'])) {
                                 ?>
-                            <td colspan="8">
+                            <td class="text-nowrap text-center" colspan="8">
                                 <h5 style="color: white; text-align: right;">Total = $ <?php echo $result['total']; ?></h5>
                             </td>
                             <?php } ?>
@@ -278,6 +279,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                 }
             } ?>
             </form>
+        </div>
         </div>
         </div>
         <script src="js/user_jquery.js"></script>

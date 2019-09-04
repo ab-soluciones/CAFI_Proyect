@@ -35,9 +35,9 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <?php 
+    <?php
     $sel = "gastos";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
@@ -58,7 +58,7 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="container">
                             <div class="row">
                                 <div class="d-block col-lg-6">
-                                    <h5><label for="desc" class="badge badge-primary">Concepto:</label></h5>
+                                    <h5 class="importante">Concepto:</h5>
                                     <select name="SConcepto" id="concepto" class="form form-control" required>
                                         <option></option>
                                         <option>Renta</option>
@@ -74,7 +74,7 @@ if (!isset($_SESSION['acceso'])) {
                                     </select>
                                 </div>
                                 <div class="d-block col-lg-6">
-                                    <h5><label for="pago" class="badge badge-primary">Forma de pago:</label></h5>
+                                    <h5 class="general">Forma de pago:</h5>
                                     <select name="SPago" id="pago" class="form form-control" required>
                                         <option></option>
                                         <option>Efectivo</option>
@@ -85,17 +85,17 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="row mt-3">
                                 <div class="d-block col-lg-12">
-                                    <h5><label for="desc" class="badge badge-primary">Descripcion:</label></h5>
+                                    <h5 class="general">Descripcion:</h5>
                                     <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="d-block col-lg-6">
-                                    <h5><label for="monto" class="badge badge-primary">Monto $:</label></h5>
+                                    <h5 class="general">Monto $:</h5>
                                     <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" required>
                                 </div>
                                 <div class="d-block col-lg-6">
-                                    <h5><label for="fecha" class="badge badge-primary">Fecha:</label></h5>
+                                    <h5 class="general">Fecha:</h5>
                                     <input class="form-control" id="fecha" type="date" name="DFecha" required>
                                 </div>
                             </div>
@@ -124,18 +124,18 @@ if (!isset($_SESSION['acceso'])) {
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <div class="contenedorTabla">
-                    <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
+                <div class="contenedorTabla table-responsive">
+                    <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th onclick="sortTable(0)">Concepto</th>
-                                <th onclick="sortTable(1)">Pago</th>
-                                <th onclick="sortTable(2)">Descripcion</th>
-                                <th onclick="sortTable(3)">Monto</th>
-                                <th onclick="sortTable(4)">Estado</th>
-                                <th onclick="sortTable(5)">Fecha</th>
-                                <th onclick="sortTable(6)">Registró</th>
-                                <th onclick="sortTable(7)">Acciones</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">Concepto</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(1)">Pago</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(2)">Descripcion</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(3)">Monto</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(4)">Estado</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(5)">Fecha</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Registró</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -150,18 +150,18 @@ if (!isset($_SESSION['acceso'])) {
                             while ($renglon = mysqli_fetch_array($row)) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $renglon['concepto']; ?></td>
-                                    <td><?php echo $renglon['pago']; ?></td>
-                                    <td><?php if (strlen($renglon['descripcion']) === 0) {
+                                    <td class="text-nowrap text-center"><?php echo $renglon['concepto']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['pago']; ?></td>
+                                    <td class="text-nowrap text-center"><?php if (strlen($renglon['descripcion']) === 0) {
                                             echo "Sin descripción";
                                         } else {
                                             echo $renglon['descripcion'];
                                         }  ?></td>
-                                    <td>$<?php echo $renglon['monto']; ?></td>
-                                    <td><?php echo $renglon['estado']; ?></td>
-                                    <td><?php echo $renglon['fecha']; ?></td>
-                                    <td><?php echo $renglon['nombre']." ".$renglon['apaterno']; ?></td>
-                                    <td style="width:100px;">
+                                    <td class="text-nowrap text-center">$<?php echo $renglon['monto']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['nombre']." ".$renglon['apaterno']; ?></td>
+                                    <td class="text-nowrap text-center" style="width:100px;">
                                         <div class="row">
                                             <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVGastos.php?id=<?php echo $renglon['idgastos']; ?>">
                                                 <img src="img/edit.png">

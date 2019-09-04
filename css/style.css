@@ -66,6 +66,25 @@ body {
     color: red;
 }
 
+.importante{
+  color: orangered;
+  font-weight: bold;
+}
+
+.general{
+  color: #007BFF;
+  font-weight: bold;
+}
+
+.administrador{
+  background-color: #414247;
+}
+
+.admin{
+  color: white;
+  font-weight: bold;
+}
+
 table.scroll {
     /*width: 100%; /* Optional */
     /* border-collapse: collapse; */
@@ -78,33 +97,13 @@ nav.fixed{
   position: fixed;
 }
 
-.contenedor{
-  position: relative;
-  top: 80px;
-}
-
-
 /*TABLAS*/
 
-/* .table{
-    background-color: white;
+ /*.table{
+    font-size: 7px;
+
 }
-.encabezados{
-    text-align: center;
-    cursor: pointer;
-}
-.encabezados th{
-    padding: 10px 25px;
-}
-.selectedTh{
-    background-color: blue;
-}
-.selectedTds{
-    background-color: red;
-}
-.table tr{
-    height: 100%;
-} */
+
 
 /*xs*/
 /*En esta medida toma lo que esta en el css por default*/
@@ -128,8 +127,38 @@ nav.fixed{
         overflow-y: auto;
         height: 470px;
     } */
+    .contenedor{
+      position: relative;
+      top: 80px;
+    }
 }
+
 /*xl*/
 @media (min-width: 1200px) {
 
 }
+
+/*Siempre mostrar la scrollbar en las tablas*/
+.table-responsive::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+.table-responsive::-webkit-scrollbar:vertical {
+    width: 12px;
+}
+
+.table-responsive::-webkit-scrollbar:horizontal {
+    height: 12px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, .5);
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+  

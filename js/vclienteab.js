@@ -14,20 +14,20 @@ $(document).ready(function () {
                 datos.forEach(datos => {
                     template += `
                     <tr>
-                    <td>${datos.id}</td>
-                    <td>${datos.nombre}</td>
-                    <td>${datos.apt}</td>
-                    <td>${datos.apm}</td>
-                    <td>${datos.tipodoc}</td>
-                    <td>${datos.numdoc}</td>
-                    <td>${datos.direccion}</td>
-                    <td>${datos.telefono}</td>
-                    <td>${datos.correo}</td>
-                    <td>${datos.login}</td>
-                    <td>${datos.password}</td>
-                    <td>${datos.estado}</td>
-                    <td>${datos.registro}</td>
-                    <th style="width:100px;">
+                    <td  class="text-nowrap text-center">${datos.id}</td>
+                    <td  class="text-nowrap text-center">${datos.nombre}</td>
+                    <td  class="text-nowrap text-center">${datos.apt}</td>
+                    <td  class="text-nowrap text-center">${datos.apm}</td>
+                    <td  class="text-nowrap text-center">${datos.tipodoc}</td>
+                    <td  class="text-nowrap text-center">${datos.numdoc}</td>
+                    <td  class="text-nowrap text-center">${datos.direccion}</td>
+                    <td  class="text-nowrap text-center">${datos.telefono}</td>
+                    <td  class="text-nowrap text-center">${datos.correo}</td>
+                    <td  class="text-nowrap text-center">${datos.login}</td>
+                    <td  class="text-nowrap text-center">${datos.password}</td>
+                    <td  class="text-nowrap text-center">${datos.estado}</td>
+                    <td  class="text-nowrap text-center">${datos.registro}</td>
+                    <th  class="text-nowrap text-center" style="width:100px;">
                         <div class="row">
                             <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
                                 <img src="img/edit.png">

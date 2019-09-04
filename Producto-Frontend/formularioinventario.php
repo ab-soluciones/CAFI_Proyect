@@ -1,12 +1,12 @@
 <form class="form-group" action="#" method="post" id="inventario">
     <div class="row">
         <div class="col-lg-6">
-            <h5><label style="color:#E65C00;" for="cantidad" class="badge badge-ligh">Cantidad:</label></h5>
+            <h5 class="importante">Cantidad:</h5>
             <input id="cantidad" name="SCantidad" class="form-control" type="number" value="0" min="0" require> <br>
         </div>
         <div class="col-lg-6">
             <div id="productos">
-                <h5><label for="inproducto" class="badge badge-ligh">Producto:</label></h5>
+                <h5 class="general">Producto:</h5>
                 <input id="inproducto" class="form form-control" list="lproductos" name="DlProductos" autocomplete="off" required>
                 <datalist id="lproductos">
                     <?php
@@ -38,6 +38,6 @@
     </div>
 
     <div class="row justify-content-center">
-        <input type="submit" class="col-3 btn btn-lg btn-block btn-dark" name="" value="Guardar">
+        <input type="submit" class="col-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
     </div>
 </form>

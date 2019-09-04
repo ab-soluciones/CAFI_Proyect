@@ -32,9 +32,9 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
-    <?php 
+    <?php
     $sel = "ventas";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
     <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
@@ -44,21 +44,21 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
-            <div class="contenedorTabla">
-                <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
+            <div class="contenedorTabla table-responsive">
+                <table class="table table-bordered table-hover">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-                            <th onclick="soExplore rtTable(0)">Concepto</th>
-                            <th onclick="sortTable(1)">Descuento</th>
-                            <th onclick="sortTable(2)">Total</th>
-                            <th onclick="sortTable(3)">Pago</th>
-                            <th onclick="sortTable(4)">Forma</th>
-                            <th onclick="sortTable(5)">Cambio</th>
-                            <th onclick="sortTable(6)">Fecha</th>
-                            <th onclick="sortTable(7)">Hora</th>
-                            <th onclick="sortTable(8)">Estado</th>
-                            <th onclick="sortTable(9)">Trabajador</th>
-                            <th onclick="sortTable(10)">Editar</th>
+                            <th class="text-nowrap text-center" onclick="soExplore rtTable(0)">Concepto</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Descuento</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Total</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Pago</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(4)">Forma</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Cambio</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(6)">Fecha</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(7)">Hora</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(8)">Es</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(9)">Trabajador</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(10)">Editar</th>
                         </tr>
                     </thead>
                     <tbody id="renglones">
@@ -67,36 +67,36 @@ if (!isset($_SESSION['acceso'])) {
                         $con = new Models\Conexion();
                         if(isset($_GET['venta'])){
                             $venta = $_GET['venta'];
-                            $query = "SELECT idventas, descuento ,total , pago, forma_pago, 
-                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta 
+                            $query = "SELECT idventas, descuento ,total , pago, forma_pago,
+                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta
                             INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
                             WHERE venta.idnegocios='$negocio' AND idventas = '$venta' ORDER BY idventas DESC";
                             $row = $con->consultaListar($query);
                         }else{
-                            $query = "SELECT idventas, descuento ,total , pago, forma_pago, 
-                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta 
+                            $query = "SELECT idventas, descuento ,total , pago, forma_pago,
+                            cambio, fecha, hora, estado_venta, nombre,apaterno FROM venta
                             INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
                             WHERE venta.idnegocios='$negocio' ORDER BY idventas DESC";
                             $row = $con->consultaListar($query);
                         }
-                     
+
                         $con->cerrarConexion();
 
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td><a href="VConceptoVenta.php?idv3n7a=<?php echo $renglon['idventas'];  ?>">Mostrar</a></td>
-                            <td>$ <?php echo $renglon['descuento']; ?></td>
-                            <td>$ <?php echo $renglon['total']; ?></td>
-                            <td>$ <?php echo $renglon['pago']; ?></td>
-                            <td><?php echo $renglon['forma_pago']; ?></td>
-                            <td>$ <?php echo $renglon['cambio']; ?></td>
-                            <td><?php echo $renglon['fecha']; ?></td>
-                            <td><?php echo $renglon['hora']; ?></td>
-                            <td><?php echo $renglon['estado_venta']; ?></td>
-                            <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
+                            <td class="text-nowrap text-center"><a href="VConceptoVenta.php?idv3n7a=<?php echo $renglon['idventas'];  ?>">Mostrar</a></td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['descuento']; ?></td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['total']; ?></td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['pago']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['forma_pago']; ?></td>
+                            <td class="text-nowrap text-center">$ <?php echo $renglon['cambio']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['estado_venta']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
 
-                            <td style="width:100px;">
+                            <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
                                     <?php if ($_SESSION['acceso'] == "Employes") {
                                             ?>

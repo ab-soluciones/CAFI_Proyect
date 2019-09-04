@@ -56,15 +56,15 @@ $(document).ready(function () {
         datos.forEach(datos => {
           template += `
                 <tr>
-                <td>${datos.id}</td>
-                <td>${datos.nombre}</td>
-                <td>${datos.apaterno}</td>
-                <td>${datos.amaterno}</td>
-                <td>${datos.acceso}</td>
-                <td>${datos.login}</td>
-                <td>${datos.password}</td>
-                <td>${datos.estado}</td>
-                <th style="width:100px;">
+                <td class="text-nowrap text-center">${datos.id}</td>
+                <td class="text-nowrap text-center">${datos.nombre}</td>
+                <td class="text-nowrap text-center">${datos.apaterno}</td>
+                <td class="text-nowrap text-center">${datos.amaterno}</td>
+                <td class="text-nowrap text-center">${datos.acceso}</td>
+                <td class="text-nowrap text-center">${datos.login}</td>
+                <td class="text-nowrap text-center">${datos.password}</td>
+                <td class="text-nowrap text-center">${datos.estado}</td>
+                <th class="text-nowrap text-center" style="width:100px;">
                 <div class="row">
                     <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditarusers btn btn-secondary" href="#">
                         <img src="img/edit.png">

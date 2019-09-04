@@ -136,8 +136,8 @@ $con->cerrarConexion();
 
 <body onload="inicio();">
 <?php
-$sel = "retiros"; 
-include("Navbar.php") 
+$sel = "retiros";
+include("Navbar.php")
 ?>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" role="dialog">
@@ -157,11 +157,11 @@ include("Navbar.php")
                 <form class="form-group" action="#" method="post">
                     <div class="row">
                         <div class="col-lg-6">
-                            <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
+                            <h5 class="importante">Cantidad:</h5>
                             <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad" required>
                         </div>
                         <div class="col-lg-6">
-                            <h5><label for="de" class="badge badge-ligh">De:</label></h5>
+                            <h5 class="general">De:</h5>
                             <select id="de" class="form form-control" name="STipo" required>
                                 <option></option>
                                 <option>Caja</option>
@@ -171,7 +171,7 @@ include("Navbar.php")
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <h5><label for="concepto" class="badge badge-ligh">Concepto:</label></h5>
+                            <h5 class="general">Concepto:</h5>
                             <select id="concepto" class="form form-control" name="SConcepto" required>
                                 <option></option>
                                 <option>Retiro</option>
@@ -179,12 +179,12 @@ include("Navbar.php")
                             </select>
                         </div>
                         <div class="col-lg-6">
-                            <h5><label for="desc" class="badge badge-ligh">Descripcion:</label></h5>
+                            <h5 class="general">Descripcion:</h5>
                             <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
                         </div>
                     </div>
                     <button type="submit" style="color: #005ce6;" class="mt-3 btn btn-dark btn-lg btn-block">
-                        <h6>Retirar</h6><img src="img/retiro.png">
+                        <h6 class="general">Retirar</h6><img src="img/retiro.png">
                     </button>
                 </form>
                 <div id="tableHolder" class="row justify-content-center">
@@ -222,19 +222,19 @@ include("Navbar.php")
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name">
                     <button class="d-none d-lg-flex btn btn-danger ml-3" data-toggle="modal" data-target="#modalForm">Retirar</button>
                 </div>
-                <div class="contenedorTabla">
-                    <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
+                <div class="contenedorTabla table-responsive">
+                    <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th onclick="sortTable(0)">Concepto</th>
-                                <th onclick="sortTable(1)">De</th>
-                                <th onclick="sortTable(2)">Cantidad</th>
-                                <th onclick="sortTable(3)">Descripcion</th>
-                                <th onclick="sortTable(4)">Fecha</th>
-                                <th onclick="sortTable(5)">Hora</th>
-                                <th onclick="sortTable(6)">Estado</th>
-                                <th onclick="sortTable(7)">Retiró</th>
-                                <th onclick="sortTable(8)">Tarea</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">Concepto</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(1)">De</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(2)">Cantidad</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(3)">Descripcion</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(4)">Fecha</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(5)">Hora</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Estado</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Retiró</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(8)">Tarea</th>
                             </tr>
                 <tbody>
                     <?php
@@ -253,19 +253,19 @@ include("Navbar.php")
                     while ($renglon = mysqli_fetch_array($row)) {
                         ?>
                     <tr>
-                        <td><?php echo $renglon['concepto']; ?></td>
-                        <td><?php echo $renglon['tipo']; ?></td>
-                        <td><?php echo $renglon['cantidad']; ?></td>
-                        <td><?php if (strlen($renglon['descripcion']) == 0) {
+                        <td class="text-nowrap text-center"><?php echo $renglon['concepto']; ?></td>
+                        <td class="text-nowrap text-center"><?php echo $renglon['tipo']; ?></td>
+                        <td class="text-nowrap text-center"><?php echo $renglon['cantidad']; ?></td>
+                        <td class="text-nowrap text-center"><?php if (strlen($renglon['descripcion']) == 0) {
                                     echo "Sin descripcion";
                                 } else {
                                     echo $renglon['descripcion'];
                                 } ?></td>
-                        <td><?php echo $renglon['fecha']; ?></td>
-                        <td><?php echo $renglon['hora']; ?></td>
-                        <td><?php echo $renglon['estado']; ?></td>
-                        <td><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-                        <td style="width:100px;">
+                        <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
+                        <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>
+                        <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                        <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
+                        <td class="text-nowrap text-center" style="width:100px;">
                             <div class="row">
                                 <a style="margin: 0 auto;" class="btn btn-secondary" href="VEditRetiros.php?id=<?php echo $renglon['idretiro']; ?>&estado=<?php echo $renglon['estado']; ?>">
                                     <img src="img/edit.png">
