@@ -58,7 +58,7 @@ if (
     $cliente->setEstado($_POST['estado']);
     $result = $cliente->guardar($idusuario);
     echo $result;
-}else if(isset($_POST['id']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) && isset($_POST['estado']) && isset($_POST['negocio']) && isset($_POST['monto'])){
+} else if (isset($_POST['id']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) && isset($_POST['estado']) && isset($_POST['negocio']) && isset($_POST['monto'])) {
     $sus = new Models\Suscripcion();
     $idusuario = $_SESSION['id'];
     $sus->setId($_POST['id']);
@@ -68,10 +68,10 @@ if (
     $sus->setMonto($_POST['monto']);
     $sus->setIdNegocio($_POST['negocio']);
     $result = $sus->guardar($idusuario);
-} else if(
+} else if (
     isset($_POST['concepto']) && isset($_POST['pago']) &&  isset($_POST['descripcion']) && isset($_POST['monto']) && isset($_POST['estado'])
-     && isset($_POST['fecha'])
-){
+    && isset($_POST['fecha'])
+) {
     $gasto = new Models\Gasto();
     $descripcion = $_POST['descripcion'];
     if (strlen($descripcion) === 0) {
@@ -89,8 +89,8 @@ if (
     $result = $gasto->guardar($_SESSION['idnegocio'], $_SESSION['id']);
     echo $result;
 } else if (
-isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso']) && isset($_POST['fecha']) && isset($_POST['estatus'])
-){
+    isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso']) && isset($_POST['fecha']) && isset($_POST['estatus'])
+) {
     $otro_ingreso = new Models\OtrosIngresos();
     $otro_ingreso->setIdOtrosIngresos(null);
     $otro_ingreso->setCantidad($_POST['cantidad']);
@@ -100,10 +100,10 @@ isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso
     $otro_ingreso->setEstado($_POST['estatus']);
     $result = $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
     echo $result;
-}else if (
-    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['documento']) 
+} else if (
+    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['documento'])
     && isset($_POST['numdoc']) && isset($_POST['direccion']) && isset($_POST['telefono']) && isset($_POST['email']) && isset($_POST['estado'])
-){
+) {
     $cliente = new Models\Cliente();
     $cliente->setNombre($_POST['nombre']);
     $cliente->setApaterno($_POST['apt']);
@@ -116,11 +116,11 @@ isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso
     $cliente->setEstado($_POST['estado']);
     $result = $cliente->guardar($_SESSION['idnegocio'], $_SESSION['id']);
     echo $result;
-} else if(
-    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['doc']) 
-    && isset($_POST['numdoc']) && isset($_POST['dir']) && isset($_POST['tel']) && isset($_POST['email']) && isset($_POST['acceso']) 
+} else if (
+    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['doc'])
+    && isset($_POST['numdoc']) && isset($_POST['dir']) && isset($_POST['tel']) && isset($_POST['email']) && isset($_POST['acceso'])
     && isset($_POST['login']) && isset($_POST['agregarloa']) && isset($_POST['contrasena']) && isset($_POST['sueldo'])
-){
+) {
     $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
     $trabajador->setNombre($_POST['nombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
     $trabajador->setApaterno($_POST['apt']);
@@ -139,4 +139,20 @@ isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso
     $trabajador->setEstado($_POST['estado']);
     $result = $trabajador->guardar($_POST['agregarloa']);
     echo $result;
+} else if (
+    isset($_POST['codigo_barras']) || isset($_POST['cantidad_producto'])
+) {
+    if(is_null($_SESSION['idven'] )){
+        $venta = new Models\Venta();
+        $id = $venta->guardar();
+        $_SESSION['idven'] = $id['id'];
+    }
+  
+    $dv = new Models\DetalleVenta();
+    $dv->setVenta($_SESSION['idven']);
+    $dv->setCodigodeBarras($_POST['codigo_barras']);
+    $dv->setCantidad($_POST['cantidad_producto']);
+    $result = $dv->guardar();
+    echo $result;
 }
+
