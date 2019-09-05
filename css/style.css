@@ -98,10 +98,11 @@ nav.fixed{
 }
 
 /*TABLAS*/
-
- /*.table{
-    font-size: 7px;
-
+.table-wrapper
+{
+    width: 536px;
+    height: 350px;
+    overflow: auto;
 }
 
 
