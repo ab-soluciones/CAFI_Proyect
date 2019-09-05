@@ -58,6 +58,16 @@ if (
     $cliente->setEstado($_POST['estado']);
     $result = $cliente->guardar($idusuario);
     echo $result;
+}else if(isset($_POST['id']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) && isset($_POST['estado']) && isset($_POST['negocio']) && isset($_POST['monto'])){
+    $sus = new Models\Suscripcion();
+    $idusuario = $_SESSION['id'];
+    $sus->setId($_POST['id']);
+    $sus->setActivacion($_POST['fecha1']);
+    $sus->setVencimiento($_POST['fecha2']);
+    $sus->setEstado($_POST['estado']);
+    $sus->setMonto($_POST['monto']);
+    $sus->setIdNegocio($_POST['negocio']);
+    $result = $sus->guardar($idusuario);
 } else if(
     isset($_POST['concepto']) && isset($_POST['pago']) &&  isset($_POST['descripcion']) && isset($_POST['monto']) && isset($_POST['estado'])
      && isset($_POST['fecha'])

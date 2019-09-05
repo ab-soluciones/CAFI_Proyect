@@ -34,6 +34,9 @@ if (!isset($_SESSION['acceso'])) {
 
 <body onload="inicio();">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> backend
     <?php
     $sel = "negocios";
     include("NavbarAB.php")
@@ -109,6 +112,7 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
 
                         <input id="bclose" type="submit" class="mt-3 btn btn-primary btn-lg btn-block" value="Guardar">
+<<<<<<< HEAD
 =======
 <?php
 $sel = "negocios";
@@ -220,6 +224,8 @@ include("NavbarAB.php")
 
                     <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
 >>>>>>> EdicionModal
+=======
+>>>>>>> backend
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
@@ -229,6 +235,9 @@ include("NavbarAB.php")
         </div>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> backend
     <!-- Modal -->
     <div class="contenedor container-fluid">
         <div class="row align-items-start">
@@ -269,6 +278,7 @@ include("NavbarAB.php")
             <script src="js/vnegocios.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<<<<<<< HEAD
 =======
 
 
@@ -278,5 +288,7 @@ include("NavbarAB.php")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 >>>>>>> EdicionModal
+=======
+>>>>>>> backend
 </body>
 </html>

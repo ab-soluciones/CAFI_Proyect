@@ -32,26 +32,26 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio();">
-<?php
-$sel = "suscripciones";
-include("NavbarAB.php")
-?>
-<!-- Modal -->
-<div class="modal fade" id="modalForm" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header administrador">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
+    <?php
+    $sel = "suscripciones";
+    include("NavbarAB.php")
+    ?>
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header administrador">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body administrador">
-                <p class="statusMsg"></p>
-                <form class="form-group" id="formuusers">
+                <!-- Modal Body -->
+                <div class="modal-body administrador">
+                    <p class="statusMsg"></p>
+                    <form class="form-group" id="formulario">
                         <div>
                             <h5 class="importante">Fecha Activacion:</h5>
                             <input class="form-control" id="fecha1" type="date" name="DFecha" required>
@@ -72,7 +72,7 @@ include("NavbarAB.php")
 
                         <div id="divnegocio">
                             <h5 class="admin">Negocio:</h5>
-                            <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" required autocomplete="off">
+                            <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
                             <datalist id="negocios">
                                 <?php
                                 $datos = false;
@@ -91,9 +91,11 @@ include("NavbarAB.php")
                                     echo "<script>document.getElementById('innegocio').disabled = true;</script>";
                                 } ?>
 
-                            </datalist>
-                        </div><br>
-                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                            </datalist> <br>
+                        </div>
+                        <h5 class="admin">Monto:</h5>
+                        <input id="monto" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
+                        <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block" name="" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
