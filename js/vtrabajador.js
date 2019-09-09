@@ -16,10 +16,8 @@ $(document).ready(function(){
             type: 'GET',
 
             success: function(response){
-                
+                console.log(response);
                 let datos = JSON.parse(response);
-                console.log('accion');
-                console.log(datos);
                 let template = '';
                 datos.forEach(datos => {
                     template+=`

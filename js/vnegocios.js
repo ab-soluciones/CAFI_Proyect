@@ -76,7 +76,7 @@
      optenerDatosTabla();
    });
    e.preventDefault();
- })
+ });
 
  $(document).on('click', '.beditar', function () {
    var valores = "";
@@ -95,5 +95,5 @@
    $('#incliente').val(datos[6]);
    editar = true;
 
- })
+ });
 });

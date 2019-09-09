@@ -2,7 +2,6 @@
 session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
-
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } elseif ($_SESSION['estado'] == "I") {
@@ -13,7 +12,6 @@ if (!isset($_SESSION['acceso'])) {
 ) {
     header('location: OPCAFI.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
