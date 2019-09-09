@@ -187,6 +187,7 @@ if (!isset($_SESSION['acceso'])) {
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
+
                 <div class="contenedorTabla table-responsive">
                     <table class="table table-bordered table-hover">
                         <thead class="thead-dark">

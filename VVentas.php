@@ -49,7 +49,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     include("Navbar.php")
     ?>
 
-    <div class="contenedor container-fluid border">
+    <div class="contenedor container-fluid">
 
         <div class="row">
             <div class="col-5 p-3">
@@ -203,7 +203,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                         <h5 style="color: white; text-align: right;" class="p-2 font-weight-bold">Total = $300</h5>
                     </td>
                 </div>
-                <input id="bvender" class="btn btn-danger btn-block mt-2 p-3" type="submit" value="Realizar Venta">
+                <input id="bvender" class="btn btn-block mt-2 p-3 font-weight-bold text-white" style="background-color: orangered; color" type="submit" value="Realizar Venta">
             </div>
 
             <div class="col-7 p-3">
@@ -216,13 +216,13 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar Producto..." title="Type in a name" value="">
                     
                     <div class="input-group-prepend ml-3">
-                        <div class="input-group-text">Cantidad:</div>
+                        <div class="input-group-text font-weight-bold">Cantidad:</div>
                     </div>
                     <div>
                         <input type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;">
                     </div> 
 
-                    <button id="bclose" class="d-none d-lg-flex btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar a lista</button>
+                    <button id="bclose" class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar a lista</button>
                 </div>
                 <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">    
                     <table class="table table-bordered table-hover">

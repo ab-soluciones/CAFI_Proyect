@@ -33,14 +33,10 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio();">
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> backend
-    <?php
-    $sel = "negocios";
-    include("NavbarAB.php")
-    ?>
+<?php
+$sel = "negocios";
+include("NavbarAB.php")
+?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">
@@ -112,12 +108,15 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
 
                         <input id="bclose" type="submit" class="mt-3 btn btn-primary btn-lg btn-block" value="Guardar">
-<<<<<<< HEAD
-=======
-<?php
-$sel = "negocios";
-include("NavbarAB.php")
-?>
+                    </form>
+                    <div id="tableHolder" class="row justify-content-center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- Modal -->
+    
     <div class="contenedor container-fluid">
         <div class="row align-items-start">
               <div class="col-md-12">
@@ -223,7 +222,6 @@ include("NavbarAB.php")
                         </div>
 
                     <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
->>>>>>> EdicionModal
 =======
 >>>>>>> backend
                     </form>
