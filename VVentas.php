@@ -49,7 +49,7 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     include("Navbar.php") 
     ?>
 
-    <div class="row" style=" margin-top: 15px;">
+    <div class="row" style=" margin-top: 100px;">
         <div id="busqueda" class="col-xs-4" style="margin: 0 auto;">
             <div class=" card card-body">
                 <form class="form-group" action="#" method="post">

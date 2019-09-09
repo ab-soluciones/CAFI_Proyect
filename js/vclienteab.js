@@ -67,6 +67,7 @@ $(document).ready(function () {
 
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         $.post(url, postData, function (response) {
+            console.log(response);
             $('#formclienteab').trigger('reset');
             optenerDatosTablaClientesab();
             editar = false;

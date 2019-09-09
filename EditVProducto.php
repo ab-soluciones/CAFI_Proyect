@@ -132,7 +132,7 @@ if (!isset($_SESSION['acceso'])) {
 
                     <div class="row">
                         <div style="margin-left: 15px;" id="preview" class="card">
-                            <img src="data:image/jpg;base64,<?php echo base64_encode($result['imagen']) ?>" height="100" width="100" />
+                            <img src="<?php echo $result['imagen'] ?>" height="100" width="100" />
                         </div>
                         <input onclick="ejecutar();" style="margin-left: 10px; margin-top: 10px;" id="imagen" style="margin-left: 4px;" type="file" name="FImagen" />
                     </div><br>

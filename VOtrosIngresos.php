@@ -2,7 +2,6 @@
 session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
-
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } elseif ($_SESSION['estado'] == "I") {
@@ -13,7 +12,6 @@ if (!isset($_SESSION['acceso'])) {
 ) {
     header('location: OPCAFI.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -34,9 +32,9 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
-    <?php 
+    <?php
     $sel = "ingresos";
-    include("Navbar.php") 
+    include("Navbar.php")
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
@@ -53,14 +51,14 @@ if (!isset($_SESSION['acceso'])) {
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
-                    <form class="form-group" action="#" method="post">
+                    <form class="form-group" id="formotrosingresos">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5><label for="can" class="badge badge-primary">Cantidad $ :</label></h5>
+                                <h5 class="importante">Cantidad $ :</h5>
                                 <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off" required>
                             </div>
                             <div class="col-lg-6">
-                                <h5><label for="tipo" class="badge badge-primary">Tipo :</label></h5>
+                                <h5 class="general">Tipo :</h5>
                                 <select id="tipo" name="STipo" id="concepto" class="form form-control" required>
                                     <option></option>
                                     <option>Dinero a caja</option>
@@ -71,7 +69,7 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5><label for="fingreso" class="badge badge-primary">Forma de Ingreso :</label></h5>
+                                <h5 class="general">Forma de Ingreso :</h5>
                                 <select name="SFIngreso" id="fingreso" class="form form-control" required>
                                     <option></option>
                                     <option>Efectivo</option>
@@ -79,11 +77,19 @@ if (!isset($_SESSION['acceso'])) {
                                 </select> <br>
                             </div>
                             <div class="col-lg-6">
-                                <h5><label for="fecha" class="badge badge-primary">Fecha :</label></h5>
+                                <h5 class="general">Fecha :</h5>
                                 <input class="form-control" id="fecha" type="date" name="DFecha" required>
                             </div>
+                            
+                            <div class="d-block col-lg-6">
+                                    <h5 class="general">Estatus:</h5>
+                                        <select class="form form-control" id="voestado">
+                                            <option value="A">Activo</option>
+                                            <option value="I">Inactivo</option>
+                                        </select>  
+                                </div>
                         </div>
-                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -105,43 +111,20 @@ if (!isset($_SESSION['acceso'])) {
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                      <div class="contenedorTabla">
-                          <table class="scroll table width="100%" table-bordered table-hover fixed_headers table-responsive">
+                      <div class="contenedorTabla table-responsive">
+                          <table class="table table-bordered table-hover">
                               <thead class="thead-dark">
                                   <tr class="encabezados">
-                                      <th onclick="sortTable(0)">Cantidad</th>
-                                      <th onclick="sortTable(1)">Tipo</th>
-                                      <th onclick="sortTable(2)">Forma de Ingreso</th>
-                                      <th onclick="sortTable(3)">Fecha</th>
-                                      <th onclick="sortTable(4)">Estado</th>
-                                      <th onclick="sortTable(5)">Tarea</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(1)">Cantidad</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(2)">Tipo</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(3)">Forma de Ingreso</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(4)">Fecha</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(5)">Estado</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(6)">Tarea</th>
                                   </tr>
                               </thead>
-                      <tbody>
-                          <?php
-                          $negocio = $_SESSION['idnegocio'];
-                          $con = new Models\Conexion();
-                          $query = "SELECT * FROM otros_ingresos WHERE negocios_idnegocios ='$negocio' ORDER BY id_otros_ingresos DESC";
-                          $row = $con->consultaListar($query);
-
-                          while ($renglon = mysqli_fetch_array($row)) {
-                              ?>
-                          <tr>
-                              <td><?php echo $renglon['cantidad']; ?></td>
-                              <td><?php echo $renglon['tipo']; ?></td>
-                              <td><?php echo $renglon['forma_ingreso']; ?></td>
-                              <td><?php echo $renglon['fecha']; ?></td>
-                              <td><?php echo $renglon['estado']; ?></td>
-                              <td style="width:100px;">
-                                  <div class="row">
-                                      <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVOtrosIngresos.php?id=<?php echo $renglon['id_otros_ingresos']; ?>">
-                                          <img src="img/edit.png">
-                                      </a>
-                                  </div>
-                              </td>
-                          </tr>
-                          <?php
-                          } ?>
+                      <tbody id="cuerpo">
                       </tbody>
                   </table>
               </div>
@@ -150,42 +133,9 @@ if (!isset($_SESSION['acceso'])) {
             </div>
         </div>
   </div>
-    <?php
-    if (
-        isset($_POST['TCantidad']) && isset($_POST['STipo'])
-        && isset($_POST['SFIngreso']) && isset($_POST['DFecha'])
-    ) {
-        $otro_ingreso = new Models\OtrosIngresos();
-        $otro_ingreso->setIdOtrosIngresos(null);
-        $otro_ingreso->setCantidad($_POST['TCantidad']);
-        $otro_ingreso->setTipo($_POST['STipo']);
-        $otro_ingreso->setFormaIngreso($_POST['SFIngreso']);
-        $otro_ingreso->setFecha($_POST['DFecha']);
-        $otro_ingreso->setEstado("A");
-        $result = $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
-        if ($result === 1) {
-            ?>
-    <script>
-        swal({
-            title: 'Exito',
-            text: 'Se han registrado los datos exitosamente!',
-            type: 'success'
-        });
-    </script>
 
-    <?php } else {
-            ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'No se han guardado los datos',
-            type: 'error'
-        });
-    </script>
-    <?php }
-    }
-    ?>
     <script src="js/user_jquery.js"></script>
+    <script src="js/otrosingresos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

@@ -1,8 +1,6 @@
 <?php
 session_start();
-
 // se comprueba si hay un rol en la sesion si la cuenta esta activa y si ese rol es diferente a ceo
-
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
@@ -12,7 +10,6 @@ if (!isset($_SESSION['acceso'])) {
 ) {
     header('location: OPCAFI.php');
 }
-
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 ?>
@@ -55,8 +52,8 @@ Config\Autoload::run();
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
-                    <form class="form-group" action="#" method="post">
-                        <div class="row">
+                    <form class="form-group" id="formtrabajador">
+                        <div class="d-block d-lg-flex row">
                             <div class="col-4">
                                 <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
@@ -72,25 +69,13 @@ Config\Autoload::run();
                         </div>
                     </div>
                     <div class="d-block d-lg-flex row">
-                        <div class="col-lg-4">
+                            <div class="col-4">
                             <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
-
-                            <div class="row" style="margin: 0 auto;">
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="RDoc" value="INE" checked autofocus>INE
-                                    </label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" id="doc" name="RDoc" value="CURP">CURP
-                                    </label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="RDoc" value="Otro">Otro
-                                    </label>
-                                </div>
+                            <select id="documento" class="form form-control">
+                                <option value="INE">INE</option>
+                                <option value="CURP">CURP</option>
+                                <option value="Otro">Otro</option>
+                            </select>
                             </div>
                             <div class="col-4">
                                 <h5><label for="numdoc" class="badge badge-primary">Documento:</label></h5>
@@ -100,8 +85,8 @@ Config\Autoload::run();
                                 <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
                                 <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required autocomplete="off">
                             </div>
-                        </div>
-                        <div class="row">
+                    </div>
+                    <div class="d-block d-lg-flex row">
                             <div class="col-4">
                                 <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required autocomplete="off">
@@ -112,31 +97,33 @@ Config\Autoload::run();
                             </div>
                             <div class="col-4">
                                 <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
-                                <div class="row" style="margin: 0 auto;">
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="acceso" name="RAcceso" value="Manager">Manajer
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" name="RAcceso" value="Employes" checked autofocus>Employes
-                                        </label>
-                                    </div>
-                                </div>
+                                <select id="acceso" class="form form-control">
+                                    <option value="Manager">Manager</option>
+                                    <option value="Employes">Employes</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
                     <div class="row d-block d-lg-flex">
                         <div class="col-lg-4">
                             <h5><label for="login" class="badge badge-primary">Nombre de Usuario:</label></h5>
                             <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
                         </div>
+
+                        <div class="col-lg-4">
+                            <h5><label for="login" class="badge badge-primary">Contraseña:</label></h5>
+                            <input id="contrasena" class="form form-control" type="text" name="TContrasena" placeholder="Contraseña" autocomplete="off" required>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <h5><label for="login" class="badge badge-primary">Sueldo:</label></h5>
+                            <input id="sueldo" class="form form-control" type="text" name="TSueldo" placeholder="Sueldo" autocomplete="off" required>
+                        </div>
+
+
                         <div class="row">
                             <div class="col-12">
                                 <h5><label for="email" class="badge badge-primary">Agregarlo a:</label></h5>
-                                <select class="form form-control" name="SSucursal" required>
-                                    <option></option>
+                                <select id="agregarloa" class="form form-control" name="SSucursal" required>
                                     <?php
                                     $con = new Models\Conexion();
                                     $dueño = $_SESSION['id'];
@@ -146,19 +133,22 @@ Config\Autoload::run();
                                     $con->cerrarConexion();
                                     $cont = 0;
                                     while ($renglon = mysqli_fetch_array($row)) {
-                                        $nombre[$cont] = $renglon['nombre_negocio'];
-                                        $id[$cont] = $renglon['idnegocios'];
-                                        $cont++;
-                                        echo "<option>" . $renglon['nombre_negocio'] . "</option>";
+                                        echo "<option value=".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
                                     }
                                     ?>
                                 </select> <br>
                             </div>
                         </div>
-
+                            <div class="col-4">
+                                <h5><label  class="badge badge-primary">Estado:</label></h5>
+                                <select id="estado" class="form form-control">
+                                    <option value="A">Activo</option>
+                                    <option value="I">Inactivo</option>
+                                </select>
+                            </div>
                         <div class="row">
                             <div class="col-12"><br>
-                                <input type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                                <input id="bclose" type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
                             </div>
                         </div>
                     </div>
@@ -177,11 +167,6 @@ Config\Autoload::run();
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
-                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
-                    <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="fa fa-search"></i></div>
-                    </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
                     <p>Sucursal:</p>
                     <form action="#" method="POST">
                         <select id="sucursal" class="form form-control" name="SNegocio">
@@ -193,162 +178,58 @@ Config\Autoload::run();
                             WHERE clientesab_idclienteab = '$dueño'";
                             $row = $con->consultaListar($query);
                             $con->cerrarConexion();
-                            $cont = 0;
                             while ($renglon = mysqli_fetch_array($row)) {
-                                $nombre[$cont] = $renglon['nombre_negocio'];
-                                $id[$cont] = $renglon['idnegocios'];
-                                $cont++;
-                                echo "<option>" . $renglon['nombre_negocio'] . "</option>";
+                    
+                                echo "<option value=".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
                             }
                             ?>
                         </select>
                         <input type="submit" style="display: none;">
                     </form>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <div class="contenedorTabla">
-                    <table class="table table-bordered table-hover fixed_headers table-responsive">
+                <div class="contenedorTabla table-responsive">
+                    <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th onclick="sortTable(0)">Nombre</th>
-                                <th onclick="sortTable(1)">Ap-P</th>
-                                <th onclick="sortTable(2)">Ap-M</th>
-                                <th onclick="sortTable(3)">Doc</th>
-                                <th onclick="sortTable(4)">#Doc</th>
-                                <th onclick="sortTable(5)">Direccion</th>
-                                <th onclick="sortTable(6)">Telefono</th>
-                                <th onclick="sortTable(7)">Email</th>
-                                <th onclick="sortTable(8)">Acceso</th>
-                                <th onclick="sortTable(9)">Usuario</th>
-                                <th onclick="sortTable(10)">Contraseña</th>
-                                <th onclick="sortTable(11)">Sueldo</th>
-                                <th onclick="sortTable(12)">Estado</th>
-                                <th onclick="sortTable(13)">Acciones</th>
+                                <th onclick="sortTable(0)">Id trabajador</th>
+                                <th onclick="sortTable(1)">Nombre</th>
+                                <th onclick="sortTable(2)">Ap-P</th>
+                                <th onclick="sortTable(3)">Ap-M</th>
+                                <th onclick="sortTable(4)">Doc</th>
+                                <th onclick="sortTable(5)">#Doc</th>
+                                <th onclick="sortTable(6)">Direccion</th>
+                                <th onclick="sortTable(7)">Telefono</th>
+                                <th onclick="sortTable(8)">Email</th>
+                                <th onclick="sortTable(9)">Acceso</th>
+                                <th onclick="sortTable(10)">Usuario</th>
+                                <th onclick="sortTable(11)">Contraseña</th>
+                                <th onclick="sortTable(12)">Sueldo</th>
+                                <th onclick="sortTable(13)">Estado</th>
+                                <th onclick="sortTable(14)">id negocio</th>
+                                <th onclick="sortTable(15)">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <form action="#" method="post">
-                                <?php
+                        <tbody id="cuerpo">
+                        <?php
                                 if (isset($_POST['SNegocio'])) {
-                                    for ($i = 0; $i < sizeof($id); $i++) {
-                                        if (strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0) {
-                                            $_SESSION['idnegocio'] =  $idnegocio = $id[$i];
-                                        }
-                                    }
+                                            $_SESSION['idnegocio'] =  $_POST['SNegocio'];   
+                                
                                 } else {
-                                    $idnegocio =  $_SESSION['idnegocio'];
-                                }
-
-                                //se optiene el id del negocio para hacer la consulta ..se escoge el id por que puede haber muchos negocios con el mismo nombre pertenecientes a otro dueño
-                                $con = new Models\Conexion();
-                                $query = "SELECT * FROM trabajador WHERE negocios_idnegocios = '$idnegocio' ORDER BY idtrabajador DESC";
-                                $row = $con->consultaListar($query);
-
-                                //a continuacion se mustra en la tabla el resultado de la consulta
-                                while ($renglon = mysqli_fetch_array($row)) {
-                                    ?>
-                                <tr>
-                                    <td><?php echo $renglon['nombre']; ?></td>
-                                    <td><?php echo $renglon['apaterno']; ?></td>
-                                    <td><?php echo $renglon['amaterno']; ?></td>
-                                    <td><?php echo $renglon['tipo_documento']; ?></td>
-                                    <td><?php echo $renglon['numero_documento']; ?></td>
-                                    <td><?php echo $renglon['direccion']; ?></td>
-                                    <td><?php echo $renglon['telefono']; ?></td>
-                                    <td><?php echo $renglon['correo']; ?></td>
-                                    <td><?php echo $renglon['acceso']; ?></td>
-                                    <td><?php echo $renglon['login']; ?></td>
-                                    <td><?php echo $renglon['password']; ?></td>
-                                    <td><?php echo $renglon['sueldo']; ?></td>
-                                    <td><?php echo $renglon['estado']; ?></td>
-                                    <td style="width:100px;">
-                                        <div class="row">
-                                            <button value="<?php echo $renglon['idtrabajador']; ?>" type="submit" name="BEdit" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm"><img src="img/edit.png"></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <?php
-                                } ?>
+                               
+                                }?>
                         </tbody>
-                        </form>
                     </table>
                 </div>
             </div>
         </div>
-        <?php
-        if(isset($_POST['BEdit'])){
-            echo$_POST['BEdit'];
-        }
-        if (
-            isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-            && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-            && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-            && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-            && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
-            && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
-            && isset($_POST['SSucursal'])
-            //se comprueba que existan todos los datos del formulario
-        ) {
-            $negocio = null;
-            if (isset($_POST['SSucursal'])) {
-                for ($i = 0; $i < sizeof($id); $i++) {
-                    if (strcasecmp($_POST['SSucursal'], $nombre[$i]) == 0) {
-                        $negocio = $id[$i];
-                    }
-                }
-            }
-            $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
-            $trabajador->setNombre($_POST['TNombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
-            $trabajador->setApaterno($_POST['TApellidoP']);
-            $trabajador->setAmaterno($_POST['TApellidoM']);
-            $trabajador->setDocumento($_POST['RDoc']);
-            $trabajador->setNumDoc($_POST['TNumDoc']);
-            $trabajador->setDireccion($_POST['TDireccion']);
-            $trabajador->setTelefono($_POST['TTelefono']);
-            $trabajador->setCorreo($_POST['TCorreo']);
-            $trabajador->setAcceso($_POST['RAcceso']);
-            $trabajador->setLogin($_POST['TLogin']);
-            $trabajador->setPassword($_POST['TPContraseña']);
-            $sueldo = $_POST['TSueldo'];
-            $sueldo = floatval($sueldo);
-            $trabajador->setSueldo($sueldo);
-            $trabajador->setEstado("A");
-            $result = $trabajador->guardar($negocio);
-            if ($result === 1) {
-                ?>
-        <script>
-            swal({
-                    title: 'Exito',
-                    text: 'Se han registrado los datos exitosamente!',
-                    type: 'success'
-                },
-                function(isConfirm) {
-                    if (isConfirm) {
-                        window.location.href = "VTrabajador.php";
-                    }
-                });
-        </script>
-
-        <?php } else {
-                ?>
-        <script>
-            swal({
-                    title: 'Error',
-                    text: 'No se han guardado los datos compruebe los campos unicos',
-                    type: 'error'
-                },
-                function(isConfirm) {
-                    if (isConfirm) {
-                        window.location.href = "VTrabajador.php";
-                    }
-                });
-        </script>
-        <?php }
-        }
-        ?>
         <script src="js/user_jquery.js"></script>
-        <script src="js/ajax.js"></script>
+        <script src="js/vtrabajador.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

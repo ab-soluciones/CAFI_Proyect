@@ -24,6 +24,7 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/sweetalert.css">
 
     <script src="js/sweetalert.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
@@ -138,7 +139,7 @@ if (!isset($_SESSION['acceso'])) {
                                         <?php include("Producto-Frontend/formularioproducto.php"); ?>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="Inventario" role="tabpanel" aria-labelledby="Inventario-tab">
+                                <div class="tab-pane fade inventario" id="Inventario" role="tabpanel" aria-labelledby="Inventario-tab">
                                     <div class="col-12">
                                         <?php include("Producto-Frontend/formularioinventario.php"); ?>
                                     </div>
@@ -158,7 +159,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
-                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3 agrega" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
@@ -185,7 +186,7 @@ if (!isset($_SESSION['acceso'])) {
                         </select>
                         <input type="submit" style="display: none;">
                     </form>
-                    <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3 mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div data-spy="scroll" class="contenedorTabla">
                     <table class="scroll table width="100%" table-hover fixed_headers table-responsive">
@@ -203,10 +204,11 @@ if (!isset($_SESSION['acceso'])) {
                                 <th onclick="sortTable(9)">Compra</th>
                                 <th onclick="sortTable(10)">Venta</th>
                                 <th onclick="sortTable(11)">Estado</th>
-                                <th onclick="sortTable(12)">Tarea</th>
+                                <th onclick="sortTable(12)">Cantidad</th>
+                                <th onclick="sortTable(13)">Tarea</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="cuerpo">
                             <?php
                             if (isset($_POST['SNegocio'])) {
                                 for ($i = 0; $i < sizeof($id); $i++) {
@@ -215,53 +217,8 @@ if (!isset($_SESSION['acceso'])) {
                                     }
                                 }
                             } else {
-                                $negocio = $_SESSION['idnegocio'];
-                            }
-
-                            $con = new Models\Conexion();
-                            $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
-                            FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
-                            WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
-                            $row = $con->consultaListar($query);
-                            $con->cerrarConexion();
-
-                            while ($renglon = mysqli_fetch_array($row)) {
-                                ?>
-                            <tr>
-                                <td><?php echo $renglon['codigo_barras']; ?></td>
-                                <td><?php echo $renglon['nombre']; ?></td>
-                                <td> <img src="data:image/jpg;base64,<?php echo base64_encode($renglon['imagen']) ?>" height="100" width="100" /></td>
-                                <td><?php echo $renglon['color']; ?></td>
-                                <td><?php echo $renglon['marca']; ?></td>
-                                <td><?php
-                                        if (strlen($renglon['descripcion']) === 0) {
-                                            echo "Sin descripcion";
-                                        } else {
-                                            echo $renglon['descripcion'];
-                                        }
-                                        ?></td>
-                                <td><?php echo $renglon['cantidad']; ?></td>
-                                <td><?php echo $renglon['unidad_medida']; ?></td>
-                                <td><?php
-                                        if (strlen($renglon['talla_numero']) === 0) {
-                                            echo "N.A";
-                                        } else {
-                                            echo  $renglon['talla_numero'];
-                                        }
-                                        ?></td>
-                                <td>$<?php echo $renglon['precio_compra']; ?></td>
-                                <td>$<?php echo $renglon['precio_venta']; ?></td>
-                                <td><?php echo $renglon['pestado']; ?></td>
-                                <td>
-                                    <div class="row" style="position: absolute;">
-                                        <div class="container" style="margin: 0 auto;">
-                                        <button onclick="window.location.href='EditVProducto.php?id=<?php echo $renglon['codigo_barras']; ?>'" class="btn btn-secondary" <?php if($negocio != $_SESSION['idnegocio']) echo"disabled";?>><img src="img/edit.png"></button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <?php
-                            } ?>
+                                        $negocio = $_SESSION['idnegocio'];
+                            }?>
                         </tbody>
                     </table>
                 </div>
@@ -272,170 +229,9 @@ if (!isset($_SESSION['acceso'])) {
         <!--row-->
     </div>
     <!--container-->
-    <?php
-    if (
-        isset($_POST['TNombre'])  && isset($_POST['TColor'])
-        && isset($_POST['TMarca']) && isset($_POST['TADescription'])
-        && isset($_POST['DLUnidad']) && isset($_POST['SlcMedida'])
-        || isset($_POST['SlcTalla'])  && isset($_POST['TTipoP'])
-        && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen'])
-        && isset($_POST['TCodigoB'])
-    ) {
-        if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
-            //si el usuario cargó un archivo
-            $imagen = addslashes(file_get_contents($_FILES['FImagen']['tmp_name']));
-            //se optiene la ruta
-            $tipo_imagen = $_FILES['FImagen']['type'];
-            //se optine la extencion de la imagen
-            $bytes = $_FILES['FImagen']['size'];
-            //se optiene el tamaño de la imagen
-            if ($bytes <= 10000) {
-                //si la imagen es menor a 1 mega se comprueba la extencion, si la extencion es igual a alguna de la condiconal se registra la imagen
-                if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png') {
-                    registrar($imagen, $negocio);
-                } else {
-                    ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'Seleccione una imagen de tipo jpg, jpeg o png',
-            type: 'error'
-        });
-    </script>
-    <?php }
-            } else {
-                ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'Seleccione una imagen mas pequeña',
-            type: 'error'
-        });
-    </script>
-    <?php  }
-        } else {
-            //si el usuario no cargo una imagen se manda un valor nulo a la columna imagen de la base de datos
-            registrar(null, $negocio);
-        }
-    }
-    function registrar($imagen, $negocio)
-    {
-        $producto = new Models\Producto();
-        if (strlen($_POST['TCodigoB']) === 0) {
-            $numRand = rand(1000000, 9999999);
-            $numRand2 = rand(100000, 999999);
-            $codigob = $numRand . $numRand2;
-        } else {
-            $codigob  = $_POST['TCodigoB'];
-        }
 
-        $descripcion = $_POST['TADescription'];
-
-        if (strlen($descripcion) === 0) {
-            $descripcion = null;
-        }
-
-        $producto->setCodigoBarras($codigob);
-        $producto->setNombre($_POST['TNombre']);
-        $producto->setImagen($imagen);
-        $producto->setColor($_POST['TColor']);
-        $producto->setMarca($_POST['TMarca']);
-        $producto->setDescripcion($descripcion);
-        $producto->setUnidad_Medida($_POST['DLUnidad']);
-        if ($_POST['TTipoP'] === "Calzado") {
-            $producto->setTalla_numero($_POST['SlcMedida']);
-        } else if ($_POST['TTipoP'] === "Ropa") {
-            $producto->setTalla_numero($_POST['SlcTalla']);
-        }
-        $producto->setTipo($_POST['TTipoP']);
-        $producto->setPrecioCompra($_POST['TPrecioC']);
-        $producto->setPrecioVenta($_POST['TPrecioVen']);
-        $producto->setPestado("A");
-        $query = "SELECT clientesab_idclienteab FROM negocios WHERE idnegocios = '$negocio'";
-        $con = new Models\Conexion();
-        $result = $con->consultaRetorno($query);
-        $con->cerrarConexion();
-        $clienteab = $result['clientesab_idclienteab'];
-        $result = $producto->guardar($clienteab, $_SESSION['id']);
-        if ($result === 1) {
-            ?>
-    <script>
-        swal({
-                title: 'Exito',
-                text: 'Se han registrado los datos exitosamente!',
-                type: 'success'
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    window.location.href = "VProductos.php";
-                }
-            });
-    </script>
-
-    <?php } else {
-            ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'No se han guardado los datos compruebe los campos unicos',
-            type: 'error'
-        });
-    </script>
-    <?php }
-    }
-    ?>
-    <?php
-    if (isset($_POST['SCantidad']) && isset($_POST['DlProductos'])) {
-        $inventario = new Models\Inventario();
-        $con = new Models\Conexion();
-        $inventario->setCantidad($_POST['SCantidad']);
-        $inventario->setCodigoB($_POST['DlProductos']);
-        $codigob = $inventario->getCodigoBarras();
-        $inventario->setNegocio($_SESSION['idnegocio']);
-        $inventario->setTrabajador($_SESSION['id']);
-        $query = "SELECT producto_codigo_barras FROM inventario WHERE producto_codigo_barras = '$codigob' AND negocios_idnegocios = '$_SESSION[idnegocio]'";
-        $datos = $con->consultaRetorno($query);
-        if (isset($datos)) {
-            ?>
-    <script>
-        swal({
-            title: 'Alerta',
-            text: 'El producto no se ha agregado al inventario, compruebe que el producto que intenta agregar no exista en el inventario',
-            type: 'warning'
-        });
-    </script>
-    <?php
-        } else {
-            $result = $inventario->guardar();
-            if ($result === 1) {
-                ?>
-    <script>
-        swal({
-                title: 'Exito',
-                text: 'El producto se ha agregado correctamente al inventario',
-                type: 'success'
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    window.location.href = "VProductos.php";
-                }
-            });
-    </script>
-
-    <?php } else {
-                ?>
-    <script>
-        swal({
-            title: 'Alerta',
-            text: 'Producto no agregado consulte a soporte tecnico',
-            type: 'warning'
-        });
-    </script>
-    <?php }
-        }
-    }
-    ?>
     <script src="js/user_jquery.js"></script>
+    <script src="js/vproductos.js"></script>
 </body>
 
 </html>
