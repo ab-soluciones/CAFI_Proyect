@@ -3,26 +3,15 @@ require_once "Config/Autoload.php";
 Config\Autoload::run();
 $con = new Models\Conexion();
 session_start();
-//se inicializan la variables globales
-$_SESSION['descuento'] = null;
 $_SESSION['clienteid'] = null;
 if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] == "Employes"
-
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
 ) {
     header('location: OPCAFI.php');
-}
-
-if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
-    /*se crea una nueva venta para poder hacer uso de la tabla detalle venta(describe el concepto de la venta)
-     ya que tiene relacion de muchos a muchos con la tabla productos y la tabla venta */
-    $venta = new Models\Venta();
-    $id = $venta->guardar();
-    $_SESSION['idven'] = $id['id'];
 }
 ?>
 <!DOCTYPE html>
@@ -35,7 +24,6 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -48,164 +36,36 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
     $sel = "venta";
     include("Navbar.php")
     ?>
-
-    <div class="contenedor container-fluid">
-
+    <div class="contenedor container-fluid border">
         <div class="row">
             <div class="col-5 p-3">
                 <h3 class="text-center bg-dark text-white mb-3">Venta</h3>
-                
                 <div class="table-wrapper">
-                <div class="table-responsive">
-                    <table class="scroll table table-hover table-bordered">
-                        <form action="#" method="post">
+                    <div class="table-responsive">
+                        <table class="scroll table table-hover table-bordered">
                             <thead>
                                 <tr>
                                     <th class="text-nowrap text-center"></th>
+                                    <th class="text-nowrap text-center d-none">Codigo</th>
                                     <th class="text-nowrap text-center">Producto</th>
                                     <th class="text-nowrap text-center">Costo</th>
                                     <th class="text-nowrap text-center">Cant</th>
                                     <th class="text-nowrap text-center">Subtotal</th>
-
                                 </tr>
                             </thead>
                             <tbody id="renglones">
-                                <?php
-                                //se muestran en la tabla los productos agregados al concepto de la venta
-                                $idventa = (int) $_SESSION['idven'];
-                                $query = "SELECT nombre,imagen,color,marca,unidad_medida,talla_numero,descripcion,precio_venta,cantidad,
-                                cantidad_producto,iddetalle_venta,subtotal FROM producto
-                                INNER JOIN detalle_venta ON producto.codigo_barras = detalle_venta.producto_codigo_barras
-                                INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras
-                                WHERE detalle_venta.idventa='$idventa'";
-                                $row = $con->consultaListar($query);
-                                $datos = "none";
-                                while ($renglon = mysqli_fetch_array($row)) {
-                                    $datos = "display";
-                                    $imprimir_existencia = false;
-                                    $existencia = $renglon['cantidad'] - $renglon['cantidad_producto'];
-                                    if ($existencia < 0) {
-                                        //se comprueba el stock si no hay suficiente producto se elimina de la lista
-                                        echo "<script>swal({
-                                            title: 'Atención',
-                                            text: 'No es posible agregar $renglon[cantidad_producto] productos solo existen $renglon[cantidad] en inventario',
-                                            type: 'warning'
-                                        },
-                                        function(isConfirm) {
-                                            if (isConfirm) {
-                                                window.location.href = 'deleteVVentas.php?id=$renglon[iddetalle_venta]';
-                                            }
-                                        });</script>";
-                                    } else {
-                                        $imprimir_existencia = true;
-                                    }
-                                    ?>
-                                <tr>
-                                    <td class="text-center">
-                                        <a onclick="if(confirm('SE ELIMINARÁ DE LA LISTA! :<?php echo ' ' . $renglon['cantidad_producto'] . ' ' . $renglon['nombre'] . '(s) ' . $renglon['descripcion'] ?>'))
-                                            {href= 'deleteVVentas.php?id=<?php echo $renglon['iddetalle_venta']; ?>'} " class="btn btn-warning"><img src="img/eliminarf.png">
-                                        </a>
-                                    </td>
-                                    <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['marca'] . " color " . $renglon['color'] . " talla " . $renglon['talla_numero']; ?></td>
-                                    <td class="text-nowrap text-center">$<?php echo $renglon['precio_venta']; ?></td>
-                                    <td class="text-nowrap text-center"><?php echo $renglon['cantidad_producto']; ?> <a href="#" class="text-weight-bold">Cambiar</a></td>
-                                    <td class="text-nowrap text-center">$<?php echo $renglon['subtotal']; ?></td>
 
-                                </tr>
-                                <?php
-                                }  ?>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">X</a></td>
-                                    <td>Barra de Chocolate</td>
-                                    <td>$14</td>
-                                    <td>2</td>
-                                    <td>$28</td>
-                                </tr>
                             </tbody>
-                    </table>
-                    <?php
-                    if (isset($_POST['RTv'])) {
-                        //se envia al usuario a la pagina correspondiente dependiendo el tipo de venta
-                        if ($_POST['RTv'] == "Efectivo") {
-                            $_SESSION['forma_pago'] = "Efectivo";
-                            echo "<script> window.location.href='VPago.php?v3nd3rpr0=v3nd3r&total=$result[total]'</script>";
-                        } else if ($_POST['RTv'] == "Credito") {
-                            $_SESSION['forma_pago'] = "Crédito";
-                            echo "<script> window.location.href='VAdeudo.php?t0t41v34=$result[total]'</script>";
-                        } else if ($_POST['RTv'] == "Tarjeta") {
-                            $_SESSION['forma_pago'] = "Tarjeta";
-                            echo "<script> window.location.href='VPago.php?v3nd3rpr0=v3nd3r&total=$result[total]'</script>";
-                        }
-                    } ?>
-                    </form>
+                        </table>
+                    </div>
                 </div>
+                <div id="divtotal" style="background:  #3366ff;">
                 </div>
-
-
-                <div style="background:  #3366ff;">
-                    <td class="text-nowrap text-center" colspan="8">
-                        <h5 style="color: white; text-align: right;" class="p-2 font-weight-bold">Total = $300</h5>
-                    </td>
-                </div>
-                <input id="bvender" class="btn btn-block mt-2 p-3 font-weight-bold text-white" style="background-color: orangered; color" type="submit" value="Realizar Venta">
+                <h5 class="text-center bg-danger text-white">Realizar Venta :</h5>
+                <button value="Efectivo" class="bpago1 btn btn-primary" type="button">Pago en efectivo</button>
+                <button value="Crédito" class="bpago2 btn btn-warning" type="button">Pago a crédito</button>
+                <button value="Tarjeta" class="bpago3 btn btn-success" type="button">Pago con tarjeta</button>
             </div>
-
             <div class="col-7 p-3">
                 <h3 class="text-center bg-dark text-white mb-3">Busqueda de Producto</h3>
                 <div class="input-group mb-2">
@@ -213,43 +73,99 @@ if (isset($_POST['nuevaventa']) && is_null($_SESSION['idven'])) {
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar Producto..." title="Type in a name" value="">
-                    
-                    <div class="input-group-prepend ml-3">
-                        <div class="input-group-text font-weight-bold">Cantidad:</div>
-                    </div>
-                    <div>
-                        <input type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;">
-                    </div> 
-
-                    <button id="bclose" class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar a lista</button>
+                    <input class="form-control col-12 col-lg-4" type="search" id="busquedap" placeholder="Buscar Producto...">
                 </div>
-                <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">    
+                <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">
                     <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
+                                <th class="text-nowrap text-center">Codigo</th>
                                 <th class="text-nowrap text-center">Imagen</th>
                                 <th class="text-nowrap text-center">Producto</th>
-                                <th class="text-nowrap text-center">Descripción</th>
                                 <th class="text-nowrap text-center">Existencia</th>
-                                <th class="text-nowrap text-center">Costo</th>
+                                <th class="text-nowrap text-center">Precio</th>
+                                <th class="text-nowrap text-center">Cantidad</th>
+                                <th class="text-nowrap text-center"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-nowrap text-center"><img src="img/cambio.png" alt=""></td>
-                                <td class="text-nowrap text-center">Tennis Adidas</td>
-                                <td class="text-nowrap text-center">Descripción</td>
-                                <td class="text-nowrap text-center">70</td>
-                                <td class="text-nowrap text-center">$</td>
-                            </tr>
+                        <tbody id="cuerpo">
                         </tbody>
                     </table>
                 </div>
             </div>
         </div><!-- Row -->
     </div><!-- Contenedor -->
-    
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header administrador">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body administrador">
+                    <p class="statusMsg"></p>
+                    <div>
+                        <td class="text-nowrap text-center" colspan="8">
+                            <h3 style="color: white; text-align: right;" class="hmtotal p-2 font-weight-bold"></h3>
+                        </td>
+                    </div>
+                    <div id="divpagotarjeta" style="color:white;">
+                        <h3>Ingrese la tarjeta en la terminal y cobre el total</h3>
+                    </div>
+                    <button class="bdescuento btn btn-block btn-large btn-primary" type="button">Aplicar descuento</button><br>
+                    <div id="divdescuento">
+                        <h6 style="color: white;">Descuento :</h6>
+                        <input class="indescuento form form-control" type="text" placeholder="Ingrese el descuento" autocomplete="off"><br>
+                        <button type="button" class="bporcentaje btn btn-success btn-lg">%</button>
+                        <button type="button" class="bpesos btn btn-success btn-lg">$</button>
+                    </div>
+
+                    <div id="tablacliente">
+                        <input class="form-control col-12 col-lg-4" type="search" id="busquedac" placeholder="Buscar Cliente...">
+
+                        <table class="scroll table table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-nowrap text-center"></th>
+                                    <th class="text-nowrap text-center d-none">idcliente</th>
+                                    <th class="text-nowrap text-center">Cliente</th>
+                                    <th class="text-nowrap text-center">Dirección</th>
+                                    <th class="text-nowrap text-center">Teléfono</th>
+                                    <th class="text-nowrap text-center">Estado</th>
+                                    <th class="text-nowrap text-center">Adeudos</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpotcliente">
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+
+                    <div id="divanticipo">
+                        <h6 style="color: white;">Anticipo $ :</h6>
+                        <input class="tanticipo form form-control" type="text" placeholder="$" autocomplete="off"><br>
+                    </div>
+                    <div id="divpago">
+                        <h6 style="color: white;">$ Cantidad Recibida / $ Pago :</h6>
+                        <input class="tpago form form-control" type="text" placeholder="$" autocomplete="off"><br>
+                    </div>
+                    <button type="button" class="bvender btn btn-danger btn-large btn-block">Vender</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <script src="js/vventas.js"></script>
     <script src="js/user_jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
