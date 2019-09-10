@@ -37,6 +37,35 @@ if (!isset($_SESSION['acceso'])) {
     $sel = "adeudos";
     include("Navbar.php")
     ?>
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header administrador">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body administrador">
+                    <p class="statusMsg"></p>
+                    <h2 id="msjtarjeta"></h2>
+                   
+                        <h6 style="color: white;">Abono $ :</h6>
+                        <input class="inabono form form-control" type="text" placeholder="$" autocomplete="off"><br>
+                        <div id="divefectivo">
+                        <h6 style="color: white;">$ Cantidad Recibida / $ Pago :</h6>
+                        <input class="tpago form form-control" type="text" placeholder="$" autocomplete="off"><br>
+                        </div>
+                    <button type="button" class="babonar btn btn-danger btn-large btn-block">Abonar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
 
     <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
@@ -50,13 +79,13 @@ if (!isset($_SESSION['acceso'])) {
                 <table class="table table-hover table-striped table-dark">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-
-                            <th class="text-nowrap text-center" onclick="sortTable(0)">Deuda</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">Pago minimo</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">Estado</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">Cliente</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(4)">Venta</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(5)">Abonar</th>
+                            <th class="text-nowrap text-center d-none" onclick="sortTable(0)">id</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Deuda $</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Anticipo $</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(4)">Estado</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Cliente</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(6)">Venta</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(7)">Abonar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,28 +109,22 @@ if (!isset($_SESSION['acceso'])) {
 
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
-                        <tr>
-                            <td class="text-nowrap text-center">$<?php echo $renglon['total_deuda']; ?></td>
-                            <td class="text-nowrap text-center">$<?php echo $renglon['pago_minimo']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['estado_deuda']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
-                            <td class="text-nowrap text-center"><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>">?></a></td>
-                            <td class="text-nowrap text-center">
-                                <?php if ($renglon['estado_deuda'] == "L") {
-                                        ?>
-                                <button class="btn btn-success" disabled><img src="img/abonos.png"></a></button>
-                                <button class="btn btn-success" disabled><img src="img/tarjeta.png"></a></button>
-                                <?php  } else {
-                                        ?>
-                                <div class="container">
-                                    <button onclick="window.location.href='NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Efectivo'" class="btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/abonos.png"></button>
-                                    <button onclick="window.location.href='NAbono.php?tt=<?php echo $renglon['total_deuda']; ?>&ad=<?php echo $renglon['idadeudos']; ?>&edoda=<?php echo $renglon['estado_deuda']; ?>&frm_pg=Tarjeta'" class="btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/tarjeta.png"></button>
-                                </div>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="datos text-nowrap text-center d-none"><?php echo $renglon['idadeudos']; ?></td>
+                                <td class="datos text-nowrap text-center"><?php echo $renglon['total_deuda']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['pago_minimo']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['estado_deuda']; ?></td>
+                                <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
+                                <td class="text-nowrap text-center"><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>"># <?php echo $renglon['ventas_idventas']; ?></a></td>
+                                <td class="text-nowrap text-center">
+                                    <div class="container">
+                                        <button class="befectivo btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/abonos.png"></button>
+                                        <button class="btarjeta btn btn-success" <?php if ($renglon['estado_deuda'] == "L") echo "disabled"; ?>><img src="img/tarjeta.png"></button>
+                                    </div>
+                                </td>
+                            </tr>
                         <?php
-                            } 
-                         }
+                        }
                         ?>
 
                     </tbody>
@@ -114,6 +137,7 @@ if (!isset($_SESSION['acceso'])) {
     <!--row-->
     </div>
     <!--container-->
+    <script src="js/vconsultasadeudos.js"></script>
     <script src="js/user_jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

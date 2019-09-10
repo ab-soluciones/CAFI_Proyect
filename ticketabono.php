@@ -7,8 +7,8 @@ use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
-if (isset($_GET['ad'])) {
-    $adeudo = $_GET['ad'];
+if (isset($_POST['adeudo'])) {
+    $adeudo = $_POST['adeudo'];
 
     /*
 	Este ejemplo imprime un
