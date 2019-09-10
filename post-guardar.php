@@ -213,7 +213,7 @@ if (
         $_SESSION['idven'] = null;
     }
 } else if (
-    isset($_POST['total']) && isset($_POST['pago']) && isset($_POST['cambio']) 
+    isset($_POST['total']) && isset($_POST['pago']) && isset($_POST['cambio'])
     && isset($_POST['totaldeuda']) && isset($_POST['anticipo']) && isset($_POST['descuento'])  && isset($_POST['formapago'])
 ) {
     /*si la venta es a credito se actualizan los datos de la tabla venta y se crea un nuevo registro en la tabla 
@@ -260,7 +260,7 @@ if (
         $_SESSION['idven'] = null;
         $_SESSION['clienteid'] = null;
     }
-}else if (isset($_POST['total']) && isset($_POST['formapago'])  && isset($_POST['descuento']) && !isset($_POST['pago']) && !isset($_POST['cambio'])) {
+} else if (isset($_POST['total']) && isset($_POST['formapago'])  && isset($_POST['descuento']) && !isset($_POST['pago']) && !isset($_POST['cambio'])) {
     //si la venta fue con tarjeta solo se pasa el total de la venta
     $total = $_POST['total'];
     $forma_pago = $_POST['formapago'];
@@ -293,6 +293,29 @@ if (
         $_SESSION['idven'] = null;
         $_SESSION['clienteid'] = null;
     }
-   
+
     //se emprime el ticket
-}
+} else if (isset($_POST['abono']) && isset($_POST['pago']) &&  isset($_POST['adeudo']) 
+&& isset($_POST['total']) && isset($_POST['cambio']) && isset($_POST['formapago'])) {
+    $negocio = $_SESSION['idnegocio'];
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$negocio'";
+    $resultado = $con->consultaRetorno($query);
+    $con->cerrarConexion();
+    $abono = new Models\Abono();
+    $abono->setCantidad($_POST['abono']);
+    $abono->setPago($_POST['pago']);
+    $abono->setFormaPago($_POST['formapago']);
+    $abono->setCambio($_POST['cambio']);
+    $abono->setFecha();
+    $abono->setHora();
+    $abono->setNegocio($_SESSION['idnegocio']);
+    $abono->setTrabajador($_SESSION['id']);
+    $result = $abono->guardar($_POST['adeudo'],$_POST['total']);
+    if ($resultado['impresora'] === "A" && $result === 1) {
+        echo "con impresora";
+    } else if ($resultado['impresora'] === "I" && $result === 1) {
+        echo "sin impresora";
+    }
+    
+ }
