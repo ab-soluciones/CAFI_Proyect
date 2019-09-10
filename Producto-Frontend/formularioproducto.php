@@ -1,4 +1,4 @@
-<form class="form-group" action="#" method="post" enctype="multipart/form-data" id="producto">
+<form class="form-group" enctype="multipart/form-data" id="formproducto" method="post">
     <div class="row mt-3">
         <div class="col-lg-4">
             <h5 class="general">Codigo:</h5>
@@ -9,12 +9,13 @@
             <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
-            <h5 class="general">Imagen:</h5>
-            <div class="row">
+            <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
+            <div class="row1">
                 <div style="margin-left: 15px;" id="preview" class="card">
-                    <img src="" width="100" height="100" />
+                    <img id="imagenmostrar" src="" width="100" height="100" />
                 </div>
             </div>
+            <div class="rowMostrar"></div>
 
             <div>
                 <input onclick="ejecutar();" style="margin-left: 10px; margin-top: 10px;" id="imagen" style="margin-left: 4px;" type="file" name="FImagen" />
@@ -53,7 +54,7 @@
                     <button onclick="activarDivTalla();" id="tpr" type="button" class="btn btn-danger">Ropa</button>
                     <button onclick="activarDivMedida();" id="tpc" type="button" class="btn btn-success">Calzado</button>
                     <button onclick="activarDivOtro();" id="tpo" type="button" class="btn btn-warning">Otro</button><br>
-                    <input style="display: none" id="tipo_produc" type="text" required name="TTipoP">
+                    <input style="display: none" id="tipo_produc" type="text" name="TTipoP">
                 </div>
             </div>
         </div>
@@ -99,8 +100,20 @@
             <input id="preciov" class="form form-control" type="text" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
         </div>
     </div>
-
-    <div class="row mt-3 justify-content-center">
-        <input type="submit" class="col-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
     </div>
+    <div class="row mt-3">
+    <div class="col-lg-6">
+        <h5><label for="preciov" class="badge badge-primary">Estado:</label></h5>
+        <select name="REstado" id="estado" class="form form-control">
+            <option value="A">Activo</option>
+            <option value="I">Inactivo</option>
+        </select>
+    </div>
+    <div id="divCantidad" class="col-lg-6 ">
+        <h5><label for="preciov" class="badge badge-primary">Cantidad:</label></h5>
+        <input id="cantidadEditar" name="SCantidad" class="form-control" type="number" value="0" min="0" require>  
+    </div>
+    <div class="row mt-3 justify-content-center">
+        <button type="submit" class="col-3 btn btn-lg btn-block btn-primary bclose">Guardar</button><br>
+    </div>  
 </form>

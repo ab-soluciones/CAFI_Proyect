@@ -55,10 +55,10 @@ $(document).ready(function () {
             fecha: $('#fecha').val(),
         };
 
-
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         
         $.post(url,postData,function(response){
+            console.log(response);
             $('#formgastos').trigger('reset');
             obtenerDatosTablaGastos();
             editar = false;

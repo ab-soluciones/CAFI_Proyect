@@ -3,7 +3,6 @@ session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 $con = new Models\Conexion();
-
 $negocio = $_SESSION['idnegocio'];
 $con = new Models\Conexion();
 $query = "SELECT idgastos,concepto,pago,descripcion,monto,gastos.estado,fecha,nombre,apaterno FROM gastos
