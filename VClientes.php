@@ -81,7 +81,7 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <p class="general"># Documento:</p>
+                                <p class="general">#Documento:</p>
                                 <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">

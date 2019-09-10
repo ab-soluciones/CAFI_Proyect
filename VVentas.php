@@ -59,12 +59,13 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </table>
                     </div>
                 </div>
-                <div id="divtotal" style="background:  #3366ff;">
+                <div id="divtotal" style="background:  #3366ff;" class="text-white text-right font-weight-bold p-1">
                 </div>
-                <h5 class="text-center bg-danger text-white">Realizar Venta :</h5>
-                <button value="Efectivo" class="bpago1 btn btn-primary" type="button">Pago en efectivo</button>
-                <button value="Crédito" class="bpago2 btn btn-warning" type="button">Pago a crédito</button>
-                <button value="Tarjeta" class="bpago3 btn btn-success" type="button">Pago con tarjeta</button>
+                <div class="d-block d-lg-flex mt-4 justify-content-center">
+                    <button value="Efectivo" class="col-12 col-lg-4 m-1 bpago1 btn btn-dark text-white" type="button">Pago en efectivo</button>
+                    <button value="Crédito" class="col-12 col-lg-4 m-1 bpago2 btn btn-dark text-white" type="button">Pago a crédito</button>
+                    <button value="Tarjeta" class="col-12 col-lg-4 m-1 bpago3 btn btn-dark text-white" type="button">Pago con tarjeta</button>
+                </div>
             </div>
             <div class="col-7 p-3">
                 <h3 class="text-center bg-dark text-white mb-3">Busqueda de Producto</h3>
@@ -73,17 +74,17 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input class="form-control col-12 col-lg-4" type="search" id="busquedap" placeholder="Buscar Producto...">
+                    <input autofocus style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" placeholder="Buscar Producto...">
                 </div>
                 <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">
                     <table class="table table-hover table-striped table-dark">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th class="text-nowrap text-center">Codigo</th>
+                                <th class="text-nowrap text-center bg-primary">Codigo</th>
                                 <th class="text-nowrap text-center">Imagen</th>
                                 <th class="text-nowrap text-center">Producto</th>
                                 <th class="text-nowrap text-center">Existencia</th>
-                                <th class="text-nowrap text-center">Precio</th>
+                                <th style="background-color: orangered;" class="text-nowrap text-center bg-importante">Precio</th>
                                 <th class="text-nowrap text-center">Cantidad</th>
                                 <th class="text-nowrap text-center"></th>
                             </tr>
@@ -115,19 +116,25 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <h3 style="color: white; text-align: right;" class="hmtotal p-2 font-weight-bold"></h3>
                         </td>
                     </div>
-                    <div id="divpagotarjeta" style="color:white;">
-                        <h3>Ingrese la tarjeta en la terminal y cobre el total</h3>
+                    <div id="divpagotarjeta text-center my-5" style="color:white;">
+                        <h5>Ingrese la tarjeta en la terminal y cobre el total</h5>
                     </div>
                     <button class="bdescuento btn btn-block btn-large btn-primary" type="button">Aplicar descuento</button><br>
                     <div id="divdescuento">
-                        <h6 style="color: white;">Descuento :</h6>
+                        <h6 style="color: white;">Descuento:</h6>
                         <input class="indescuento form form-control" type="text" placeholder="Ingrese el descuento" autocomplete="off"><br>
-                        <button type="button" class="bporcentaje btn btn-success btn-lg">%</button>
-                        <button type="button" class="bpesos btn btn-success btn-lg">$</button>
+                        <button type="button" class="bporcentaje btn btn-dark btn-lg">%</button>
+                        <button type="button" class="bpesos btn btn-dark btn-lg">$</button>
                     </div>
 
-                    <div id="tablacliente">
-                        <input class="form-control col-12 col-lg-4" type="search" id="busquedac" placeholder="Buscar Cliente...">
+                    <div id="tablacliente" class="mt-4">
+                        <div class="input-group mb-2">
+                            <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-search"></i></div>
+                            </div>
+                            <input style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedac" placeholder="Buscar Cliente...">
+                        </div>
 
                         <table class="scroll table table-hover table-striped table-dark">
                             <thead>
@@ -135,7 +142,6 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                                     <th class="text-nowrap text-center"></th>
                                     <th class="text-nowrap text-center d-none">idcliente</th>
                                     <th class="text-nowrap text-center">Cliente</th>
-                                    <th class="text-nowrap text-center">Dirección</th>
                                     <th class="text-nowrap text-center">Teléfono</th>
                                     <th class="text-nowrap text-center">Estado</th>
                                     <th class="text-nowrap text-center">Adeudos</th>
@@ -151,14 +157,14 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 
 
                     <div id="divanticipo">
-                        <h6 style="color: white;">Anticipo $ :</h6>
+                        <h6 style="color: white;">Anticipo:</h6>
                         <input class="tanticipo form form-control" type="text" placeholder="$" autocomplete="off"><br>
                     </div>
-                    <div id="divpago">
-                        <h6 style="color: white;">$ Cantidad Recibida / $ Pago :</h6>
+                    <div id="divpago" class="mt-4">
+                        <h6 style="color: white;">Cantidad Recibida/Pago:</h6>
                         <input class="tpago form form-control" type="text" placeholder="$" autocomplete="off"><br>
                     </div>
-                    <button type="button" class="bvender btn btn-danger btn-large btn-block">Vender</button>
+                    <button style="background-color: orangered;" type="button" class="bvender btn btn-block text-white font-weight-bold p-3"><h5>Vender</h5></button>
 
                 </div>
             </div>

@@ -263,7 +263,7 @@ $(document).ready(function () {
       },
         function (isConfirm) {
           if (isConfirm) {
-            let menseaje = "Total = $ " + stringtotal;
+            let menseaje = "Total: $" + stringtotal;
             $('.hmtotal').html(menseaje);
             $('.indescuento').val("");
             $('#divdescuento').hide();
@@ -306,7 +306,7 @@ $(document).ready(function () {
       },
         function (isConfirm) {
           if (isConfirm) {
-            let menseaje = "Total = $ " + stringtotal;
+            let menseaje = "Total: $" + stringtotal;
             $('.hmtotal').html(menseaje);
             $('.indescuento').val("");
             $('#divdescuento').hide();
@@ -339,7 +339,7 @@ $(document).ready(function () {
     $('.modal').modal('show');
 
     stringtotal = totalglobal.toString();
-    let menseaje = "Total = $ " + stringtotal;
+    let menseaje = "Total: $" + stringtotal;
     $('.hmtotal').html(menseaje);
   });
 
@@ -356,7 +356,7 @@ $(document).ready(function () {
     $('.modal').modal('show');
 
     stringtotal = totalglobal.toString();
-    let menseaje = "Total = $ " + stringtotal;
+    let menseaje = "Total: $" + stringtotal;
     $('.hmtotal').html(menseaje);
   });
 
@@ -373,7 +373,7 @@ $(document).ready(function () {
     $('.modal').modal('show');
 
     stringtotal = totalglobal.toString();
-    let menseaje = "Total = $ " + stringtotal;
+    let menseaje = "Total: $" + stringtotal;
     $('.hmtotal').html(menseaje);
   });
 
@@ -407,11 +407,7 @@ $(document).ready(function () {
     };
     $.post('post-delete.php', postData, function (response) {
       if (response === "1") {
-        swal({
-          title: 'Exito',
-          text: 'Eliminado satisfactoriamente',
-          type: 'success'
-        });
+
       } else {
         swal({
           title: 'Alerta',
@@ -440,17 +436,15 @@ $(document).ready(function () {
                   <td class="text-nowrap text-center"><button class="bdelete btn btn-danger">x</button></td>
                   <td class="text-nowrap text-center d-none">${datos.codigo}</td>
                   <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
-                  <td class="tdcosto text-nowrap text-center">${datos.precio}</td>
+                  <td class="tdcosto text-nowrap text-center">$${datos.precio}</td>
                   <td class="text-nowrap text-center"><input class='incantdv' type="number" value="${datos.cantidad}" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
-                  <td class="text-nowrap text-center">${datos.subtotal}</td>
+                  <td class="text-nowrap text-center">$${datos.subtotal}</td>
               </tr>`;
         });
         $('#renglones').html(template);
         totalglobal = total;
         template = `
-          <td class="text-nowrap text-center" colspan="8">
-              <h5 style="color: white; text-align: right;" class="p-2 font-weight-bold">Total = ${total}</h5>
-          </td>`;
+              <h5>Total: $${total}</h5>`;
         $('#divtotal').html(template);
       }
 
@@ -470,14 +464,14 @@ $(document).ready(function () {
           let template = '';
           datos.forEach(datos => {
             template += `<tr>
-                        <td class="datos">${datos.codigo_barras}</td>
+                        <td class="datos font-weight-bold">${datos.codigo_barras}</td>
                         <td><img src="data:image/jpg;base64,${datos.imagen}" height="50" width="50" /></td>
                         <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
                         <td class="datos">${datos.existencia}</td>
-                        <td class="datos">${datos.precio}</td>
+                        <td class="datos">$${datos.precio}</td>
                         <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
                         <td> <div class="row">
-                        <a style="margin: 0 auto;" class="bagregardv btn btn-secondary" href="#">
+                        <a class="bagregardv btn btn-secondary" href="#">
                             <img src="img/carrito.png">
                         </a>
                     </div></td>
@@ -504,16 +498,14 @@ $(document).ready(function () {
           let datos = JSON.parse(response);
           let template = '';
           datos.forEach(datos => {
-            template += `<tr>
-                       <td> <button class="bagregarc btn btn-success">ok</button></td>
-                       <td class="datoscliente d-none">${datos.idcliente}</td>
-                        <td class="datoscliente">${datos.nombre}</td>
-                        <td>${datos.direccion}</td>
-                        <td>${datos.telefono}</td>
-                        <td class="datoscliente">${datos.estado}</td>
-                        <td>${datos.adeudos}</td>
-                        
-                     </tr>`;
+            template +=`<tr>
+                        <td> <button class="text-nowrap text-center bagregarc btn bg-secondary text-white">ok</button></td>
+                        <td class="text-nowrap text-center datoscliente d-none">${datos.idcliente}</td>
+                        <td class="text-centerdatoscliente">${datos.nombre}</td>
+                        <td class="text-nowrap text-center">${datos.telefono}</td>
+                        <td class="text-nowrap text-center datoscliente">${datos.estado}</td>
+                        <td class="text-nowrap text-center">$${datos.adeudos}</td>
+                        </tr>`;
           });
           $('#cuerpotcliente').html(template);
 
@@ -574,28 +566,22 @@ $(document).ready(function () {
     };
     $.post('post-guardar.php', postData, function (response) {
       optenerDatosTabla(0);
-      if (response === "1") {
-        swal({
-          title: 'Exito',
-          text: 'Datos guardados satisfactoriamente',
-          type: 'success'
-        });
-      } else if (response === "-1") {
+      if (response === "-1") {
         swal({
           title: 'Alerta',
-          text: 'Datos no guardados, compruebe los campos unicos',
+          text: 'Producto agregado, por favor intente de nuevo',
           type: 'warning'
         });
       } else if (response === "stock") {
         swal({
           title: 'Alerta',
-          text: 'Producto no agregado compruebe el stock',
+          text: 'Compruebe el stock del producto',
           type: 'warning'
         });
       } else if (response === "producto existente") {
         swal({
           title: 'Alerta',
-          text: 'Producto existente en la venta , si desea agregar mas modifique la cantidad',
+          text: 'Producto existente en la venta, si desea agregar mas modifique la cantidad',
           type: 'warning'
         });
       }
