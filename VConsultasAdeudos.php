@@ -32,7 +32,7 @@ if (!isset($_SESSION['acceso'])) {
     <title>Adeudos</title>
 </head>
 
-<body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+<body>
     <?php
     $sel = "adeudos";
     include("Navbar.php")
@@ -47,7 +47,7 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-hover table-striped table-dark">
                     <thead class="thead-dark">
                         <tr class="encabezados">
 
@@ -81,8 +81,8 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['total_deuda']; ?></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['pago_minimo']; ?></td>
+                            <td class="text-nowrap text-center">$<?php echo $renglon['total_deuda']; ?></td>
+                            <td class="text-nowrap text-center">$<?php echo $renglon['pago_minimo']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['estado_deuda']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno'] . " " . $renglon['amaterno']; ?></td>
                             <td class="text-nowrap text-center"><a href="VConsultasVentas.php?venta= <?php echo $renglon['ventas_idventas']; ?>">?></a></td>

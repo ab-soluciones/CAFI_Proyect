@@ -31,19 +31,19 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     <title>Ventas</title>
 </head>
 
-<body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+<body>
     <?php
     $sel = "venta";
     include("Navbar.php")
     ?>
-    <div class="contenedor container-fluid border">
+    <div class="contenedor container-fluid">
         <div class="row">
             <div class="col-5 p-3">
                 <h3 class="text-center bg-dark text-white mb-3">Venta</h3>
-                <div class="table-wrapper">
+                <div class="contenedorTabla table-wrapper">
                     <div class="table-responsive">
-                        <table class="scroll table table-hover table-bordered">
-                            <thead>
+                        <table class="table table-hover table-striped table-dark">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th class="text-nowrap text-center"></th>
                                     <th class="text-nowrap text-center d-none">Codigo</th>
@@ -76,7 +76,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <input class="form-control col-12 col-lg-4" type="search" id="busquedap" placeholder="Buscar Producto...">
                 </div>
                 <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover table-striped table-dark">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center">Codigo</th>
@@ -129,7 +129,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <div id="tablacliente">
                         <input class="form-control col-12 col-lg-4" type="search" id="busquedac" placeholder="Buscar Cliente...">
 
-                        <table class="scroll table table-hover table-bordered">
+                        <table class="scroll table table-hover table-striped table-dark">
                             <thead>
                                 <tr>
                                     <th class="text-nowrap text-center"></th>

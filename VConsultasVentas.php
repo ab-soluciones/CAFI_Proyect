@@ -31,7 +31,7 @@ if (!isset($_SESSION['acceso'])) {
     <title>Ventas</title>
 </head>
 
-<body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+<body>
     <?php
     $sel = "ventas";
     include("Navbar.php")
@@ -45,7 +45,7 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-hover table-striped table-dark">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center" onclick="soExplore rtTable(0)">Concepto</th>
@@ -58,7 +58,7 @@ if (!isset($_SESSION['acceso'])) {
                             <th class="text-nowrap text-center" onclick="sortTable(7)">Hora</th>
                             <th class="text-nowrap text-center" onclick="sortTable(8)">Es</th>
                             <th class="text-nowrap text-center" onclick="sortTable(9)">Trabajador</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(10)">Editar</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(10)"></th>
                         </tr>
                     </thead>
                     <tbody id="renglones">

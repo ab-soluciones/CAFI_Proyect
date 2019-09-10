@@ -33,7 +33,7 @@ if (!isset($_SESSION['acceso'])) {
     <title>Ingresos</title>
 </head>
 
-<body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+<body>
     <?php
     $sel = "ingresos";
     include("Navbar.php")
@@ -114,7 +114,7 @@ if (!isset($_SESSION['acceso'])) {
                     <button class="d-none d-lg-flex btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                       <div class="contenedorTabla table-responsive">
-                          <table class="table table-bordered table-hover">
+                          <table class="table table-hover table-striped table-darkr">
                               <thead class="thead-dark">
                                   <tr class="encabezados">
                                       <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
@@ -123,7 +123,7 @@ if (!isset($_SESSION['acceso'])) {
                                       <th class="text-nowrap text-center" onclick="sortTable(3)">Forma de Ingreso</th>
                                       <th class="text-nowrap text-center" onclick="sortTable(4)">Fecha</th>
                                       <th class="text-nowrap text-center" onclick="sortTable(5)">Estado</th>
-                                      <th class="text-nowrap text-center" onclick="sortTable(6)">Tarea</th>
+                                      <th class="text-nowrap text-center" onclick="sortTable(6)"></th>
                                   </tr>
                               </thead>
                       <tbody id="cuerpo">

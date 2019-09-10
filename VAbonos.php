@@ -46,7 +46,7 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover table-striped table-dark">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center" onclick="sortTable(0)">Editar estado</th>

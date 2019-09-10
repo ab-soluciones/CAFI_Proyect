@@ -19,18 +19,18 @@ $(document).ready(function () {
                 datos.forEach(datos => {
                     template+=`
                     <tr>
-                    <td>${datos.id}</td>
-                    <td>${datos.concepto}</td>
-                    <td>${datos.pago}</td>
-                    <td>${datos.descripcion}</td>
-                    <td>${datos.monto}</td>
-                    <td>${datos.estado}</td>
-                    <td>${datos.fecha}</td>
-                    <td>${datos.nombre}</td>
+                    <td class="text-nowrap text-center">${datos.id}</td>
+                    <td class="text-nowrap text-center">${datos.concepto}</td>
+                    <td class="text-nowrap text-center">${datos.pago}</td>
+                    <td class="text-nowrap text-center">${datos.descripcion}</td>
+                    <td class="text-nowrap text-center">${datos.monto}</td>
+                    <td class="text-nowrap text-center">${datos.estado}</td>
+                    <td class="text-nowrap text-center">${datos.fecha}</td>
+                    <td class="text-nowrap text-center">${datos.nombre}</td>
                     <th style="width:100px;">
                         <div class="row">
-                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>`;

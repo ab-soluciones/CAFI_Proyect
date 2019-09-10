@@ -3618,7 +3618,7 @@ input[type="button"].btn-block {
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-  color: #fff;
+  color: #343a40;
   border-color: #007bff;
   background-color: #007bff;
 }
@@ -3632,8 +3632,8 @@ input[type="button"].btn-block {
 }
 
 .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
-  color: #fff;
-  background-color: #b3d7ff;
+  color: #343a40;
+  background-color: #343a40;
   border-color: #b3d7ff;
 }
 
@@ -3642,7 +3642,7 @@ input[type="button"].btn-block {
 }
 
 .custom-control-input:disabled ~ .custom-control-label::before {
-  background-color: #e9ecef;
+  background-color: #343a40;
 }
 
 .custom-control-label {
@@ -3742,7 +3742,7 @@ input[type="button"].btn-block {
 }
 
 .custom-switch .custom-control-input:checked ~ .custom-control-label::after {
-  background-color: #fff;
+  background-color: #343a40;
   -webkit-transform: translateX(0.75rem);
   transform: translateX(0.75rem);
 }
@@ -3830,12 +3830,12 @@ input[type="button"].btn-block {
 }
 
 .custom-file-input:focus ~ .custom-file-label {
-  border-color: #80bdff;
+  border-color: #343a40;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
 .custom-file-input:disabled ~ .custom-file-label {
-  background-color: #e9ecef;
+  background-color: #343a40;
 }
 
 .custom-file-input:lang(en) ~ .custom-file-label::after {

@@ -37,7 +37,7 @@ if (isset($_GET['t0t41v34'])) {
     </head>
 
 
-    <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+    <body>
         <div class="jumbotron" style="background: #3366ff; color:white; text-align: center;">
             <h1>Agregue un cliente para completar la venta a crédito</h1>
         </div>
@@ -77,8 +77,8 @@ if (isset($_GET['t0t41v34'])) {
                 </div>
             </div>
 
-            <div class="col-md-12" style="margin-top:30px;">
-                <table class="table table-bordered">
+            <div class="contenedorTabla table-responsive">
+                <table class="table table-hover table-striped table-dark">
                     <thead>
                         <tr>
                             <th>Nombre</th>

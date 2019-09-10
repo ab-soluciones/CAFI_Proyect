@@ -102,7 +102,7 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 
-<body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+<body>
     <?php
     $sel = "productos";
     include("Navbar.php")
@@ -189,7 +189,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <div class="contenedorTabla table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover table-striped table-dark">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center" onclick="sortTable(0)">Código de barras</th>
@@ -204,7 +204,7 @@ if (!isset($_SESSION['acceso'])) {
                                 <th class="text-nowrap text-center" onclick="sortTable(9)">Compra</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(10)">Venta</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(11)">Estado</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(12)">Tarea</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(12)"></th>
                             </tr>
                         </thead>
                         <tbody>
