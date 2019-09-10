@@ -13,6 +13,7 @@ $(document).ready(function(){
             type: 'GET',
 
             success: function(response){
+                console.log('entro');
                 let datos = JSON.parse(response);
                 let template2 = '';
                 console.log(datos);
@@ -90,7 +91,15 @@ $(document).ready(function(){
                     processData: false,
                     
                     success: function(response) {
-
+                        document.getElementById('tpo').disabled = false;
+                        document.getElementById('tpc').disabled = false;
+                        document.getElementById('tpr').disabled = false;
+                        document.getElementById("divtalla").style.display = "none";
+                        document.getElementById("divmedida").style.display = "none";
+                        $('#formproducto').trigger('reset');
+                        $('#inventario').trigger('reset');
+                        obtenerDatosTablaProducto();
+                        obtenerInventario();
                         console.log("Esto es la respuesta: "+response);
                         if (response === "1") {
                             swal({
@@ -126,10 +135,6 @@ $(document).ready(function(){
                         }
                     }
                 });
-            $('#formproducto').trigger('reset');
-            $('#inventario').trigger('reset');
-            obtenerDatosTablaProducto();
-            obtenerInventario();
         e.preventDefault();
         editar = false;
     });
@@ -146,6 +151,10 @@ $(document).ready(function(){
                     processData: false,
                     
                     success: function(response) {
+                        $('#formproducto').trigger('reset');
+                        $('#inventario').trigger('reset');
+                        obtenerDatosTablaProducto();
+                        obtenerInventario();
                         console.log("Esto es la respuesta: "+response);
                         if (response === "1") {
                             swal({

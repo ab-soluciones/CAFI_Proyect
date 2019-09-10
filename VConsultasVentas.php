@@ -36,6 +36,96 @@ if (!isset($_SESSION['acceso'])) {
     $sel = "ventas";
     include("Navbar.php")
     ?>
+     <!-- Modal -->
+     <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p class="statusMsg"></p>
+                    <form class="form-group" id="formConsulta">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5 class="general">Estado:</h5>
+
+                                <div class="row" style="margin: 0 auto;">
+                                            <select name="estado" id="estado" class="form form-control">
+                                                <option value="R">Realizado</option>
+                                                <option value="C">Cancelado</option>
+                                            </select>  
+                                </div>
+                            </div>
+                            <input type="hidden" id="id" name="id">
+                            <input type="hidden" id="estadoActual">
+                        </div>
+
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="submit" value="Guardar">
+                    </form>
+                    <div id="tableHolder">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal --> 
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalFormMostrar" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p class="statusMsg"></p>
+                    <form class="form-group" id="formConsulta">
+                        <div class="row">
+                            <div class="col-lg-4">
+                            <table class="table table-bordered table-responsive-md">
+                                <thead>
+                                    <tr>
+                                        <th>Cantidad</th>
+                                        <th>Producto</th>
+                                        <th>Imagen</th>
+                                        <th>Marca</th>
+                                        <th>Color</th>
+                                        <th>UM</th>
+                                        <th>Talla</th>
+                                        <th>PU</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                    
+                                    <tbody id="cuerpo"></tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <input id="bclose" type="button" class="mt-3 btn btn-lg btn-block btn-primary" name="submit" value="Salir">
+                    </form>
+                    <div id="tableHolder">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal --> 
+
     <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
@@ -49,11 +139,11 @@ if (!isset($_SESSION['acceso'])) {
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center" onclick="soExplore rtTable(0)">Concepto</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">Descuento</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">Total</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">Pago</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">$ Descuento</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">$ Total</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">$ Pago</th>
                             <th class="text-nowrap text-center" onclick="sortTable(4)">Forma</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(5)">Cambio</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">$ Cambio</th>
                             <th class="text-nowrap text-center" onclick="sortTable(6)">Fecha</th>
                             <th class="text-nowrap text-center" onclick="sortTable(7)">Hora</th>
                             <th class="text-nowrap text-center" onclick="sortTable(8)">Es</th>
@@ -85,12 +175,13 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td class="text-nowrap text-center"><a href="VConceptoVenta.php?idv3n7a=<?php echo $renglon['idventas'];  ?>">Mostrar</a></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['descuento']; ?></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['total']; ?></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['pago']; ?></td>
+                            <td class="text-nowrap text-center"><button id="mostrar" data-toggle="modal" data-target="#modalFormMostrar">Mostrar</button></td>
+                            <td class="text-nowrap text-center d-none"><?php echo $renglon['idventas'];  ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['descuento']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['total']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['pago']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['forma_pago']; ?></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['cambio']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['cambio']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['estado_venta']; ?></td>
@@ -103,7 +194,7 @@ if (!isset($_SESSION['acceso'])) {
                                     <button style="margin: 0 auto;" class="btn btn-secondary" disabled><img src="img/edit.png"></button>
                                     <?php  } else {
                                             ?>
-                                    <a style="margin: 0 auto;" class="btn btn-secondary" href="EditEventas.php?id=<?php echo $renglon['idventas']; ?>&estado=<?php echo $renglon['estado_venta']; ?>">
+                                    <a id=" " style="margin: 0 auto;" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm" >
                                         <img src="img/edit.png">
                                     </a>
                                     <?php } ?>
@@ -122,6 +213,7 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!--container-->
     <script src="js/user_jquery.js"></script>
+    <script src="js/vconsultaVentas.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

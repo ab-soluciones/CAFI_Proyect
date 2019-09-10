@@ -9,13 +9,8 @@
             <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
-<<<<<<< HEAD
-            <h5 class="general">Imagen:</h5>
-            <div class="row">
-=======
             <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
             <div class="row1">
->>>>>>> backend
                 <div style="margin-left: 15px;" id="preview" class="card">
                     <img id="imagenmostrar" src="" width="100" height="100" />
                 </div>
@@ -59,7 +54,7 @@
                     <button onclick="activarDivTalla();" id="tpr" type="button" class="btn btn-danger">Ropa</button>
                     <button onclick="activarDivMedida();" id="tpc" type="button" class="btn btn-success">Calzado</button>
                     <button onclick="activarDivOtro();" id="tpo" type="button" class="btn btn-warning">Otro</button><br>
-                    <input style="display: none" id="tipo_produc" type="text" required name="TTipoP">
+                    <input style="display: none" id="tipo_produc" type="text" name="TTipoP">
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 <?php
+
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
@@ -195,4 +196,42 @@ if (
                 $negocio = $_SESSION['idnegocio'];
                 registrar($result2['imagen'] ,$_POST['TCodigoB']);
             }
-} 
+} else if ( isset($_POST['idAbono']) &&  isset($_POST['estadoActual']) &&  isset($_POST['estadoNuevo'])){
+        $id = $_POST['idAbono'];
+        $estado = $_POST['estadoActual'];
+        $idusuario = $_SESSION['id'];
+
+            $adeudo = new Models\Adeudo();
+            if ($estado == "R" && $_POST['estadoNuevo'] == "C") {
+                $result = $adeudo->editarTotalEstadoC($id, $idusuario);
+                echo $result;
+            } else if ($estado == "C" && $_POST['estadoNuevo'] == "R") {
+                $result = $adeudo->editarTotalEstadoR($id, $idusuario);
+                echo $result;
+            }
+        
+} else if ( isset($_POST['idConsulta']) &&  isset($_POST['estadoActualConsulta']) &&  isset($_POST['estadoNuevoConsulta'])){
+
+        $id = $_POST['idConsulta'];
+        $estado = $_POST['estadoActualConsulta'];
+        $negocio = $_SESSION['idnegocio'];
+        if (isset($_POST['estadoNuevoConsulta'])) {
+            $trabajador = $_SESSION['id'];
+            $v = new Models\Venta();
+            $inventario = new Models\Inventario();
+            $v->setEstado($_POST['estadoNuevoConsulta']);
+            if ($estado == "R" && $_POST['estadoNuevoConsulta'] == "C") {
+                $inventario->actualizarStock2($id,$negocio);
+                $v->setTrabajador($trabajador);
+                $adeudo = "L";
+                $result = $v->editarEstadoV($id, $adeudo);
+                echo $result;
+            } else if ($estado == "C" && $_POST['estadoNuevoConsulta'] == "R") {
+                $inventario->actualizarStock($id,$negocio);
+                $v->setTrabajador($trabajador);
+                $adeudo = "A";
+                $result = $v->editarEstadoV($id, $adeudo);
+                echo $result;
+            }
+        }
+}

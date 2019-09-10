@@ -78,6 +78,7 @@
    e.preventDefault();
  });
 
+
  $(document).on('click', '.beditar', function () {
    var valores = "";
    // Obtenemos todos los valores contenidos en los <td> de la fila

@@ -100,7 +100,8 @@ class Venta
         $sql = "UPDATE venta SET descuento = '{$this->descuento}', total = '{$this->total}', pago ='{$this->pago}',
         forma_pago ='{$this->forma_pago}', cambio = '{$this->cambio}', fecha ='{$this->fecha}', hora ='{$this->hora}', 
         estado_venta = '{$this->estado}' ,idtrabajador ='{$this->trabajador}', idnegocios='{$this->negocio}' WHERE idventas ='$id'";
-        $this->con->consultaSimple($sql);
+         $this->con->consultaSimple($sql);
+        
     }
     public function editarEstadoV($id, $adeudo)
     {
@@ -111,8 +112,10 @@ class Venta
 
         if ($renglones === 0) {
             $sql = "UPDATE venta SET  estado_venta = '{$this->estado}', idtrabajador = '{$this->trabajador}' WHERE idventas ='$id'";
-            $this->con->consultaSimple($sql);
+            $renglones = $this->con->consultaSimple($sql);
         }
+        return $renglones ;
+        
     }
 
     public function __destruct()
