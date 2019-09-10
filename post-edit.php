@@ -1,5 +1,7 @@
 <?php
 
+use Models\DetalleVenta;
+
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
@@ -43,8 +45,9 @@ if (
         isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['doc'])
         && isset($_POST['numdoc']) && isset($_POST['dir']) && isset($_POST['tel']) && isset($_POST['email']) && isset($_POST['login'])
         && isset($_POST['password']) && isset($_POST['estado'])
-        
-) {     $idusuario = $_SESSION['id'];
+
+) {
+        $idusuario = $_SESSION['id'];
         $cliente = new Models\Clienteab();
         $cliente->setNombre($_POST['nombre']);
         $cliente->setApaterno($_POST['apt']);
@@ -59,10 +62,20 @@ if (
         $cliente->setEstado($_POST['estado']);
         $result = $cliente->editar($_POST['id'], $idusuario);
         echo $result;
-} else if(
+} else if (isset($_POST['id']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) && isset($_POST['estado']) && isset($_POST['negocio']) && isset($_POST['monto'])) {
+        $sus = new Models\Suscripcion();
+        $idusuario = $_SESSION['id'];
+        $sus->setId($_POST['id']);
+        $sus->setActivacion($_POST['fecha1']);
+        $sus->setVencimiento($_POST['fecha2']);
+        $sus->setEstado($_POST['estado']);
+        $sus->setMonto($_POST['monto']);
+        $result = $sus->editar($idusuario);
+        echo $result;
+} else if (
         isset($_POST['concepto']) && isset($_POST['pago']) &&  isset($_POST['descripcion']) && isset($_POST['monto']) && isset($_POST['estado'])
-         && isset($_POST['fecha'])
-    ){
+        && isset($_POST['fecha'])
+) {
         $id = $_POST['id'];
         $gasto = new Models\Gasto();
         $trabajador = $_SESSION['id'];
@@ -76,7 +89,7 @@ if (
         $gasto->setFecha($_POST['fecha']);
         $result = $gasto->editar($id, $trabajador);
         echo $result;
-    }else if (
+} else if (
         isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso']) && isset($_POST['fecha'])  && isset($_POST['estatus'])
         ){
                 $otro_ingreso = new Models\OtrosIngresos();
@@ -234,4 +247,16 @@ if (
                 echo $result;
             }
         }
+        
+}       else if (isset($_POST['cantidadv']) && isset($_POST['costo']) && isset($_POST['codigo'])) {
+        $dv = new Models\DetalleVenta();
+        $cantidad = (int) $_POST['cantidadv'];
+        $costo = floatval($_POST['costo']);
+        $subtotal = $cantidad * $costo;
+        $dv->setCantidad($cantidad);
+        $dv->setSubtotal($subtotal);
+        $dv->setVenta($_SESSION['idven']);
+        $dv->setCodigodeBarras($_POST['codigo']);
+        $result = $dv->editar();
+        echo $result;
 }

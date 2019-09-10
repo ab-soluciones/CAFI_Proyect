@@ -19,16 +19,16 @@ $(document).ready(function (){
                 datos.forEach(datos => {
                     template+=`
                     <tr>
-                    <td>${datos.id}</td>
-                    <td>${datos.cantidad}</td>
-                    <td>${datos.tipo}</td>
-                    <td>${datos.forma_ingreso}</td>
-                    <td>${datos.fecha}</td>
-                    <td>${datos.estado}</td>
+                    <td class="text-nowrap text-center">${datos.id}</td>
+                    <td class="text-nowrap text-center">${datos.cantidad}</td>
+                    <td class="text-nowrap text-center">${datos.tipo}</td>
+                    <td class="text-nowrap text-center">${datos.forma_ingreso}</td>
+                    <td class="text-nowrap text-center">${datos.fecha}</td>
+                    <td class="text-nowrap text-center">${datos.estado}</td>
                     <th style="width:100px;">
                         <div class="row">
-                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>`;

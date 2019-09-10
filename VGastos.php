@@ -32,7 +32,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
-<body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+<body>
     <?php
     $sel = "gastos";
     include("Navbar.php")
@@ -130,7 +130,7 @@ if (!isset($_SESSION['acceso'])) {
                     <button id="bclose" class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover table-striped table-dark">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
@@ -141,7 +141,7 @@ if (!isset($_SESSION['acceso'])) {
                                 <th class="text-nowrap text-center" onclick="sortTable(5)">Estado</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(6)">Fecha</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(7)">Registró</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(8)">Acciones</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(8)"></th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">

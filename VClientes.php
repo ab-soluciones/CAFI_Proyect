@@ -27,12 +27,13 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <link rel="icon" href="img/logo/nav1.png">
 
     <title>Clientes</title>
 </head>
 
 
-<body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+<body>
     <?php
     $sel = "clientes";
     include("Navbar.php")
@@ -40,7 +41,7 @@ if (!isset($_SESSION['acceso'])) {
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content administrador">
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
@@ -55,52 +56,51 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formclientes">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="general">Nombre:</h5>
+                                <p class="general">Nombre:</p>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="general">Apellido Paterno:</h5>
+                                <p class="general">Apellido Paterno:</p>
                                 <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="general">Apellido Materno:</h5>
+                                <p class="general">Apellido Materno:</p>
                                 <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="general">Documento:</h5>
+                                <p class="general">Documento:</p>
 
                                 <div class="row" style="margin: 0 auto;">
-                                            <select class="form form-control" id="documento">
-                                                <option value="INE">INE</option>
-                                                <option value="CURP">CURP</option>
-                                                <option value="Otros">Otros</option>
-                                            </select>  
-
+                                    <select class="form form-control" id="documento">
+                                        <option value="INE">INE</option>
+                                        <option value="CURP">CURP</option>
+                                        <option value="Otros">Otros</option>
+                                    </select>  
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="general"># Documento:</h5>
+                                <p class="general">#Documento:</p>
                                 <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="general">Direccion:</h5>
+                                <p class="general">Direccion:</p>
                                 <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="general">Telefono:</h5>
+                                <p class="general">Telefono:</p>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="general">Correo electrónico:</h5>
+                                <p class="general">E-mail:</p>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                             <div class="col-lg-4">
                             <div class="d-block col-lg-12">
-                                    <h5 class="general">Estatus:</h5>
+                                    <p class="general">Estatus:</p>
                                         <select class="form form-control" id="vcestado">
                                             <option value="A">Activo</option>
                                             <option value="I">Inactivo</option>
@@ -133,10 +133,10 @@ if (!isset($_SESSION['acceso'])) {
                     </div>
 
                     <div class="contenedorTabla table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-hover table-striped table-dark">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
-                                    <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
+                                    <th class="text-nowrap text-center bg-primary" onclick="sortTable(0)">Id</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Paterno</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(3)">Apellido Materno</th>
@@ -145,9 +145,8 @@ if (!isset($_SESSION['acceso'])) {
                                     <th class="text-nowrap text-center" onclick="sortTable(6)">Direccion</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(7)">Telefono</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(8)">Correo</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(9)">Estado</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(10)">Acciones
-                                    </tr>
+                                    <th style="background-color: orangered;" class="text-nowrap text-center bg-importante" onclick="sortTable(9)">Estado</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(10)"></tr>
                             </thead>
 
                     <tbody  id="cuerpo">

@@ -37,7 +37,7 @@ if (isset($_GET['t0t41v34'])) {
     </head>
 
 
-    <body onload="inicio(); " onkeypress="parar();" onclick="parar();">
+    <body>
         <div class="jumbotron" style="background: #3366ff; color:white; text-align: center;">
             <h1>Agregue un cliente para completar la venta a crédito</h1>
         </div>
@@ -50,24 +50,24 @@ if (isset($_GET['t0t41v34'])) {
                             <input id="inclientes" class="form form-control" list="clientes" name="DlClientes" required autocomplete="off">
                             <datalist id="clientes">
                                 <?php
-                                //se enlistan todos los clientes del negocio
-                                $negocios = $_SESSION['idnegocio'];
-                                $datos = false;
-                                $con = new Models\Conexion();
-                                $query = "SELECT nombre,apaterno,amaterno FROM cliente WHERE negocios_idnegocios ='$negocios' ORDER BY apaterno ASC";
-                                $row = $con->consultaListar($query);
-                                $con->cerrarConexion();
+                                    //se enlistan todos los clientes del negocio
+                                    $negocios = $_SESSION['idnegocio'];
+                                    $datos = false;
+                                    $con = new Models\Conexion();
+                                    $query = "SELECT nombre,apaterno,amaterno FROM cliente WHERE negocios_idnegocios ='$negocios' ORDER BY apaterno ASC";
+                                    $row = $con->consultaListar($query);
+                                    $con->cerrarConexion();
 
-                                while ($result = mysqli_fetch_array($row)) {
-                                    ?>
+                                    while ($result = mysqli_fetch_array($row)) {
+                                        ?>
 
                                     <?php $datos = true;
-                                    echo "<option value='" . $result['nombre'] . " " . $result['apaterno'] . " " . $result['amaterno'] . "'> "; ?>
+                                            echo "<option value='" . $result['nombre'] . " " . $result['apaterno'] . " " . $result['amaterno'] . "'> "; ?>
                                 <?php
-                                }
-                                if ($datos == false) {
-                                    echo "<script>document.getElementById('inclientes').disabled = true;</script>";
-                                } ?>
+                                    }
+                                    if ($datos == false) {
+                                        echo "<script>document.getElementById('inclientes').disabled = true;</script>";
+                                    } ?>
 
                             </datalist>
                         </div><br>
@@ -77,9 +77,8 @@ if (isset($_GET['t0t41v34'])) {
                 </div>
             </div>
 
-            <div class="col-md-12" style="margin-top:30px;">
-                <table class="table table-bordered">
-
+            <div class="contenedorTabla table-responsive">
+                <table class="table table-hover table-striped table-dark">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -96,25 +95,25 @@ if (isset($_GET['t0t41v34'])) {
                     </thead>
                     <tbody>
                         <?php
-                        if (isset($_POST['DlClientes'])) {
-                            $con = new Models\Conexion();
-                            $negocios = $_SESSION['idnegocio'];
-                            $nombre =  $_POST['DlClientes'];
-                            //se optienen los datos del cliente para mostrarlos en la tabla para que el usuario compruebe si es el cliente
-                            $query = "SELECT idcliente,nombre,apaterno,amaterno,tipo_documento,
+                            if (isset($_POST['DlClientes'])) {
+                                $con = new Models\Conexion();
+                                $negocios = $_SESSION['idnegocio'];
+                                $nombre =  $_POST['DlClientes'];
+                                //se optienen los datos del cliente para mostrarlos en la tabla para que el usuario compruebe si es el cliente
+                                $query = "SELECT idcliente,nombre,apaterno,amaterno,tipo_documento,
                             numero_documento,direccion,telefono,correo, estado FROM cliente
                             WHERE (SELECT CONCAT(nombre,' ',apaterno,' ' ,amaterno))='$nombre'
                             AND negocios_idnegocios= '$negocios' ";
-                            $row = $con->consultaListar($query);
+                                $row = $con->consultaListar($query);
 
-                            while ($renglon = mysqli_fetch_array($row)) {
-                                //se suman el total de adeudos sin liquidar para mostrarle al usuario cuantas cuentas sin pagar tiene antes de realizar la venta
-                                $query2 = "SELECT COUNT(idadeudos) AS total FROM adeudos
+                                while ($renglon = mysqli_fetch_array($row)) {
+                                    //se suman el total de adeudos sin liquidar para mostrarle al usuario cuantas cuentas sin pagar tiene antes de realizar la venta
+                                    $query2 = "SELECT COUNT(idadeudos) AS total FROM adeudos
                                 WHERE cliente_idcliente='$renglon[idcliente]' AND estado_deuda='A'";
 
-                                $totaladeudos = $con->consultaRetorno($query2);
-                                $con->cerrarConexion();
-                                ?>
+                                    $totaladeudos = $con->consultaRetorno($query2);
+                                    $con->cerrarConexion();
+                                    ?>
                                 <tr>
                                     <td><?php echo $renglon['nombre']; ?></td>
                                     <td><?php echo $renglon['apaterno']; ?></td>
@@ -125,12 +124,12 @@ if (isset($_GET['t0t41v34'])) {
                                     <td><?php echo $renglon['telefono']; ?></td>
                                     <td><?php echo $renglon['correo']; ?></td>
                                     <?php if ($totaladeudos['total'] > 0) {
-                                        ?>
+                                                    ?>
                                         <td style="color:red;">
                                             <h4><?php echo $totaladeudos['total']; ?></h4>
                                         </td>
                                     <?php } else {
-                                        ?> <td><?php echo $totaladeudos['total']; ?></td>
+                                                    ?> <td><?php echo $totaladeudos['total']; ?></td>
                                     <?php } ?>
                                     <td style="margin: 0 auto; width:100px;">
                                         <div class="row" style="margin: 0 auto;">
@@ -138,19 +137,19 @@ if (isset($_GET['t0t41v34'])) {
                                                 <input style="display: none;" type="text" name="TID" value="<?php echo $renglon['idcliente']; ?>">
                                                 <button id="inagregar" class="btn btn-lg btn-block btn-success" type="submit"><img src="img/ok.png"></button>
                                                 <?php if ($renglon['estado'] == "I") {
-                                                    echo "<script>document.getElementById('inagregar').disabled = true;
+                                                                echo "<script>document.getElementById('inagregar').disabled = true;
                                                     alert('No es posible realizar la venta a crédito por que el cliente se encuentra inactivo');</script>";
-                                                } //al confirmar que es el cliente se comprueba si esta acitvo o inactivo antes de continuar con la venta
-                                                ?>
+                                                            } //al confirmar que es el cliente se comprueba si esta acitvo o inactivo antes de continuar con la venta
+                                                            ?>
                                             </form>
                                         </div>
                                     </td>
                                 </tr>
                             <?php
-                            } ?>
-                        </tbody>
-                    </table>
-                <?php
+                                    } ?>
+                    </tbody>
+                </table>
+            <?php
                 } ?>
             </div>
         </div>

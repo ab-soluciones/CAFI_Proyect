@@ -32,25 +32,25 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio();">
-<?php
-$sel = "clientes";
-include("NavbarAB.php")
-?>
-<!-- Modal -->
-<div class="modal fade" id="modalForm" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header administrador">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
+    <?php
+    $sel = "clientes";
+    include("NavbarAB.php")
+    ?>
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header administrador">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body administrador">
-                <p class="statusMsg"></p>
+                <!-- Modal Body -->
+                <div class="modal-body administrador">
+                    <p class="statusMsg"></p>
                     <form class="form-group" id="formclienteab">
                         <div class="row">
                             <div class="col-lg-4">
@@ -69,21 +69,19 @@ include("NavbarAB.php")
                         <div class="row">
                             <div class="col-lg-4">
                                 <h5 class="admin">Documento:</h5>
-                                    <div class="row" style="margin: 0 auto;">
-                                        <select id="documento" class="form form-control">
-                                            <option value="INE">INE</option>
-                                            <option value="CURP">CURP</option>
-                                            <option value="Otro">Otro</option>
-                                        </select>
-                                    </div>
+                                <select class="form form-control" id="documento">
+                                    <option value="INE">INE</option>
+                                    <option value="I">CURP</option>
+                                    <option value="I">Otro</option>
+                                </select>
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">#Documento:</h5>
-                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
+                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Direccion:</h5>
-                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
+                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion">
                             </div>
                         </div>
                         <div class="row">
@@ -108,23 +106,23 @@ include("NavbarAB.php")
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                            <h5 class="admin">Estado</h5>
+                                <h5 class="admin">Estado:</h5>
                                 <select class="form form-control" id="estado">
                                     <option value="A">A</option>
                                     <option value="I">I</option>
                                 </select>
                             </div>
                         </div>
-                        <button type="submit"  id="bclose" type="submit" class="mt-3 btn btn-secondary btn-lg btn-block btn-dark">Guardar</button>
+                        <button type="submit" id="bclose" type="submit" class="mt-3 btn btn-primary btn-lg btn-block ">Guardar</button>
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Modal -->
+    <!-- Modal -->
     <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
@@ -140,7 +138,7 @@ include("NavbarAB.php")
                     <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(2)">Ap-P</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(3)">Ap-M</th>
@@ -152,8 +150,8 @@ include("NavbarAB.php")
                                 <th class="text-nowrap text-center" onclick="sortTable(9)">Usuario</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(10)">Contraseña</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(11)">Estado</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(12)">Registro</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(1)">Tarea</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(12)">Registró</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(13)">Tarea</th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
@@ -168,4 +166,5 @@ include("NavbarAB.php")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
 </html>

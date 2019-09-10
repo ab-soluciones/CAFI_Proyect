@@ -22,15 +22,15 @@
        datos.forEach(datos => {
          template += `
                <tr>
-               <td>${datos.id}</td>
-               <td>${datos.nombre}</td>
-               <td>${datos.domicilio}</td>
-               <td>${datos.ciudad}</td>
-               <td>${datos.telefono}</td>
-               <td>${datos.impresora}</td>
-               <td>${datos.cliente}</td>
-               <td>${datos.usuarioab}</td>
-               <th style="width:100px;">
+               <td class="text-nowrap text-center">${datos.id}</td>
+               <td class="text-nowrap text-center">${datos.nombre}</td>
+               <td class="text-nowrap text-center">${datos.domicilio}</td>
+               <td class="text-nowrap text-center">${datos.ciudad}</td>
+               <td class="text-nowrap text-center">${datos.telefono}</td>
+               <td class="text-nowrap text-center">${datos.impresora}</td>
+               <td class="text-nowrap text-center">${datos.cliente}</td>
+               <td class="text-nowrap text-center">${datos.usuarioab}</td>
+               <th class="text-nowrap text-center" style="width:100px;">
                    <div class="row">
                        <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
                            <img src="img/edit.png">

@@ -15,6 +15,28 @@ $(document).ready(function () {
   });
 });
 
+//Autofocus en el primer input de los modales y las ventanas
+$(document).ready(function () {
+  //Focus en el input de la ventana
+  $("input:text:visible:first").focus();
+  //$('input[@type="text"]')[0].focus();
+  //Focus en el modal
+  $('#modalForm').on('shown.bs.modal', function () {
+    $("input:text:visible:first").focus();
+  })
+});
+
+$(document).ready(function () {
+  //Estilo de los componetes
+  
+  //text inputs
+  $("input:text, select, .input-group-prepend, .input-group-text").addClass("bg-dark").css({
+    'color' : 'white',
+    'border-color' : 'grey'
+  });
+  //Selectors
+});
+
 /*Ordenar tabla por encabezado*/
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -98,6 +120,13 @@ $(document).ready(function () {
   });
 });
 
+//Inactividad
+
+$(document).ready(function () {
+  $('body').on('click keyup', function () {
+    parar();
+  });
+});
 
 var datos = false;
 var parametro;

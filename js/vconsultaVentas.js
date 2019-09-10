@@ -12,6 +12,7 @@ $(document).ready(function () {
             venta: datos[1]
         }
         console.log(postData);
+        
         $.post('datosMostrarVenta.php', postData, function (response) {
             let datos = JSON.parse(response);
             let template = '';

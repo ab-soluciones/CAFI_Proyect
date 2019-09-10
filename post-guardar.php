@@ -58,11 +58,20 @@ if (
     $cliente->setEstado($_POST['estado']);
     $result = $cliente->guardar($idusuario);
     echo $result;
-    
-}else if(
+} else if (isset($_POST['id']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) && isset($_POST['estado']) && isset($_POST['negocio']) && isset($_POST['monto'])) {
+    $sus = new Models\Suscripcion();
+    $idusuario = $_SESSION['id'];
+    $sus->setId($_POST['id']);
+    $sus->setActivacion($_POST['fecha1']);
+    $sus->setVencimiento($_POST['fecha2']);
+    $sus->setEstado($_POST['estado']);
+    $sus->setMonto($_POST['monto']);
+    $sus->setIdNegocio($_POST['negocio']);
+    $result = $sus->guardar($idusuario);
+} else if (
     isset($_POST['concepto']) && isset($_POST['pago']) &&  isset($_POST['descripcion']) && isset($_POST['monto']) && isset($_POST['estado'])
-     && isset($_POST['fecha'])
-){
+    && isset($_POST['fecha'])
+) {
     $gasto = new Models\Gasto();
     $descripcion = $_POST['descripcion'];
     if (strlen($descripcion) === 0) {
@@ -79,8 +88,8 @@ if (
     $result = $gasto->guardar($_SESSION['idnegocio'], $_SESSION['id']);
     echo $result;
 } else if (
-isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso']) && isset($_POST['fecha']) && isset($_POST['estatus'])
-){
+    isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso']) && isset($_POST['fecha']) && isset($_POST['estatus'])
+) {
     $otro_ingreso = new Models\OtrosIngresos();
     $otro_ingreso->setIdOtrosIngresos(null);
     $otro_ingreso->setCantidad($_POST['cantidad']);
@@ -90,10 +99,10 @@ isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso
     $otro_ingreso->setEstado($_POST['estatus']);
     $result = $otro_ingreso->guardar($_SESSION['id'], $_SESSION['idnegocio']);
     echo $result;
-}else if (
-    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['documento']) 
+} else if (
+    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['documento'])
     && isset($_POST['numdoc']) && isset($_POST['direccion']) && isset($_POST['telefono']) && isset($_POST['email']) && isset($_POST['estado'])
-){
+) {
     $cliente = new Models\Cliente();
     $cliente->setNombre($_POST['nombre']);
     $cliente->setApaterno($_POST['apt']);
@@ -106,11 +115,11 @@ isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso
     $cliente->setEstado($_POST['estado']);
     $result = $cliente->guardar($_SESSION['idnegocio'], $_SESSION['id']);
     echo $result;
-} else if(
-    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['doc']) 
-    && isset($_POST['numdoc']) && isset($_POST['dir']) && isset($_POST['tel']) && isset($_POST['email']) && isset($_POST['acceso']) 
+} else if (
+    isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['doc'])
+    && isset($_POST['numdoc']) && isset($_POST['dir']) && isset($_POST['tel']) && isset($_POST['email']) && isset($_POST['acceso'])
     && isset($_POST['login']) && isset($_POST['agregarloa']) && isset($_POST['contrasena']) && isset($_POST['sueldo'])
-){
+) {
     $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
     $trabajador->setNombre($_POST['nombre']); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
     $trabajador->setApaterno($_POST['apt']);
@@ -263,3 +272,182 @@ isset($_POST['cantidad']) && isset($_POST['tipo']) && isset($_POST['formaImgreso
         echo $result;
     }
 } 
+   else if( isset($_POST['codigo']) && isset($_POST['existencia']) && isset($_POST['precio']) && isset($_POST['cantidad'])
+) {
+    if (is_null($_SESSION['idven'])) {
+        $venta = new Models\Venta();
+        $id = $venta->guardar();
+        $_SESSION['idven'] = $id['id'];
+    }
+    $codigo = $_POST['codigo'];
+    $existencia = (int) $_POST['existencia'];
+    $precio = floatval($_POST['precio']);
+    $cantidad = (int) $_POST['cantidad'];
+
+    if ($cantidad > $existencia) {
+        echo "stock";
+    } else {
+        $dv = new Models\DetalleVenta();
+        $con = new Models\Conexion();
+        $query = "SELECT subtotal FROM detalle_venta WHERE producto_codigo_barras ='$codigo' AND idventa ='$_SESSION[idven]'";
+        $result = $con->consultaRetorno($query);
+        if (isset($result['subtotal'])) {
+            echo "producto existente";
+        } else {
+            $subtotal = $precio * $cantidad;
+            $dv->setVenta($_SESSION['idven']);
+            $dv->setCodigodeBarras($_POST['codigo']);
+            $dv->setCantidad($_POST['cantidad']);
+            $dv->setSubtotal($subtotal);
+            $result = $dv->guardar();
+            echo $result;
+        }
+    }
+} else if (isset($_POST['idcliente']) && isset($_POST['estcliente'])) {
+
+    if ($_POST['estcliente'] === "A") {
+        $_SESSION['clienteid'] = $_POST['idcliente'];
+    } else {
+        echo "no agregado a la sesion";
+    }
+} else if (
+    isset($_POST['total']) && isset($_POST['pago']) && isset($_POST['cambio'])  && isset($_POST['descuento'])  && isset($_POST['formapago'])
+    && !isset($_POST['totaldeuda']) && !isset($_POST['anticipo'])
+) {
+    //si la venta es pagada en efectivo se actualizan los datos de la tabla venta
+    $total = $_POST['total'];
+    $pago = $_POST['pago'];
+    $cambio = $_POST['cambio'];
+    $inventario = new Models\Inventario();
+    $venta = new Models\Venta();
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+    $result = $con->consultaRetorno($query);
+    $con->cerrarConexion();
+    $idventa = (int) $_SESSION['idven'];
+    $inventario->actualizarStock($idventa, $_SESSION['idnegocio']); //se actualiza el stock
+    $venta->setDescuento($_POST['descuento']);
+    $venta->setTotal($total);
+    $venta->setPago($pago);
+    $venta->setFormaPago($_POST['formapago']);
+    $venta->setCambio($cambio);
+    $venta->setFecha();
+    $venta->setHora();
+    $venta->setEstado('R');
+    $venta->setTrabajador($_SESSION['id']);
+    $venta->setNegocio($_SESSION['idnegocio']);
+    $result2 = $venta->editar($idventa);
+    $_SESSION['clienteid'] = null;
+    if ($result['impresora'] === "A" && $result2 === 1) {
+        echo "con impresora";
+    } else if ($result['impresora'] === "I" && $result2 === 1) {
+        echo "sin impresora";
+        $_SESSION['idven'] = null;
+    }
+} else if (
+    isset($_POST['total']) && isset($_POST['pago']) && isset($_POST['cambio'])
+    && isset($_POST['totaldeuda']) && isset($_POST['anticipo']) && isset($_POST['descuento'])  && isset($_POST['formapago'])
+) {
+    /*si la venta es a credito se actualizan los datos de la tabla venta y se crea un nuevo registro en la tabla 
+    adeudos con el total de la deuda y con el pago minimo/anticipo/o abono como pago minimo */
+    $total = $_POST['total'];
+    $pago = $_POST['pago'];
+    $cambio = $_POST['cambio'];
+    $total_deuda = $_POST['totaldeuda'];
+    $abono = $_POST['anticipo'];
+    $descuento = $_POST['descuento'];
+    $forma_pago = $_POST['formapago'];
+    $inventario = new Models\Inventario();
+    $venta = new Models\Venta();
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+    $result = $con->consultaRetorno($query);
+    $con->cerrarConexion();
+    $idventa = (int) $_SESSION['idven'];
+    $inventario->actualizarStock($idventa, $_SESSION['idnegocio']); //se actualiza el stock
+    $venta->setDescuento($descuento);
+    $venta->setTotal($total);
+    $venta->setPago($pago);
+    $venta->setFormaPago($forma_pago);
+    $venta->setCambio($cambio);
+    $venta->setFecha();
+    $venta->setHora();
+    $venta->setEstado('R');
+    $venta->setTrabajador($_SESSION['id']);
+    $venta->setNegocio($_SESSION['idnegocio']);
+    $result2 = $venta->editar($idventa);
+    $adeudo = new Models\Adeudo();
+    $adeudo->setTotal($total_deuda);
+    $adeudo->setPagoMinimo($abono);
+    $adeudo->setEstado("A");
+    $adeudo->setVenta($idventa);
+    $adeudo->setNegocio($_SESSION['idnegocio']);
+    $adeudo->setCliente($_SESSION['clienteid']);
+    $adeudo->guardar();
+    if ($result['impresora'] === "A" && $result2 === 1) {
+        echo "con impresora";
+        $_SESSION['clienteid'] = null;
+    } else if ($result['impresora'] === "I" && $result2 === 1) {
+        echo "sin impresora";
+        $_SESSION['idven'] = null;
+        $_SESSION['clienteid'] = null;
+    }
+} else if (isset($_POST['total']) && isset($_POST['formapago'])  && isset($_POST['descuento']) && !isset($_POST['pago']) && !isset($_POST['cambio'])) {
+    //si la venta fue con tarjeta solo se pasa el total de la venta
+    $total = $_POST['total'];
+    $forma_pago = $_POST['formapago'];
+    $descuento = $_POST['descuento'];
+    $inventario = new Models\Inventario();
+    $venta = new Models\Venta();
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$_SESSION[idnegocio]'";
+    $result = $con->consultaRetorno($query);
+    $con->cerrarConexion();
+    $idventa = (int) $_SESSION['idven'];
+    $inventario->actualizarStock($idventa, $_SESSION['idnegocio']); //se actualiza el stock
+    $venta->setDescuento($descuento);
+    $venta->setTotal($total);
+    $venta->setPago($total);
+    $venta->setFormaPago($forma_pago);
+    $venta->setCambio(null);
+    $venta->setFecha();
+    $venta->setHora();
+    $venta->setEstado('R');
+    $venta->setTrabajador($_SESSION['id']);
+    $venta->setNegocio($_SESSION['idnegocio']);
+    $result2 = $venta->editar($idventa); //se modifican los datos de la venta ya que todos los campos estaban en null
+    if ($result['impresora'] === "A" && $result2 === 1) {
+        echo "con impresora";
+        $_SESSION['clienteid'] = null;
+        $_SESSION['clienteid'] = null;
+    } else if ($result['impresora'] === "I" && $result2 === 1) {
+        echo "sin impresora";
+        $_SESSION['idven'] = null;
+        $_SESSION['clienteid'] = null;
+    }
+
+    //se emprime el ticket
+} else if (isset($_POST['abono']) && isset($_POST['pago']) &&  isset($_POST['adeudo']) 
+&& isset($_POST['total']) && isset($_POST['cambio']) && isset($_POST['formapago'])) {
+    $negocio = $_SESSION['idnegocio'];
+    $con = new Models\Conexion();
+    $query = "SELECT impresora FROM negocios WHERE idnegocios = '$negocio'";
+    $resultado = $con->consultaRetorno($query);
+    $con->cerrarConexion();
+    $abono = new Models\Abono();
+    $abono->setCantidad($_POST['abono']);
+    $abono->setPago($_POST['pago']);
+    $abono->setFormaPago($_POST['formapago']);
+    $abono->setCambio($_POST['cambio']);
+    $abono->setFecha();
+    $abono->setHora();
+    $abono->setNegocio($_SESSION['idnegocio']);
+    $abono->setTrabajador($_SESSION['id']);
+    $result = $abono->guardar($_POST['adeudo'],$_POST['total']);
+    if ($resultado['impresora'] === "A" && $result === 1) {
+        echo "con impresora";
+    } else if ($resultado['impresora'] === "I" && $result === 1) {
+        echo "sin impresora";
+    }
+    
+ }

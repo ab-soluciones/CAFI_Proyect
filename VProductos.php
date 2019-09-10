@@ -103,7 +103,7 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 
-<body onload="inicio(); " onkeypress="parar();" onclick="parar();" style="background: #f2f2f2;">
+<body>
     <?php
     $sel = "productos";
     include("Navbar.php")
@@ -141,24 +141,24 @@ if (!isset($_SESSION['acceso'])) {
                     </form>
                     <button class="d-none d-lg-flex btn btn-primary ml-3 mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
+
                 <div class="contenedorTabla table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover table-striped table-dark">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th onclick="sortTable(0)">C_Barras</th>
-                                <th onclick="sortTable(1)">Nombre</th>
-                                <th onclick="sortTable(2)">Imagen</th>
-                                <th onclick="sortTable(3)">Color</th>
-                                <th onclick="sortTable(4)">Marca</th>
-                                <th onclick="sortTable(5)">Descripcion</th>
-                                <th onclick="sortTable(6)">Cantidad</th>
-                                <th onclick="sortTable(7)">Unidad de Medida</th>
-                                <th onclick="sortTable(8)">Talla</th>
-                                <th onclick="sortTable(9)">Compra</th>
-                                <th onclick="sortTable(10)">Venta</th>
-                                <th onclick="sortTable(11)">Estado</th>
-                                <th onclick="sortTable(12)">Cantidad</th>
-                                <th onclick="sortTable(13)">Tarea</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">Código de barras</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(2)">Imagen</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(3)">Color</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(4)">Marca</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(5)">Descripcion</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Cantidad</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Unidad de Medida</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(8)">Talla</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(9)">Compra</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(10)">Venta</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(11)">Estado</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(12)"></th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
