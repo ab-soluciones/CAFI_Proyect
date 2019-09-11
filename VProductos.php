@@ -140,6 +140,8 @@ if (!isset($_SESSION['acceso'])) {
                         <input type="submit" style="display: none;">
                     </form>
                     <button class="d-none d-lg-flex btn btn-primary ml-3 mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    
+                    <button id="codigoBarra"  data-toggle="modal" data-target="#modalFormCodigo">Imprimir Codigos</button>
                 </div>
 
                 <div class="contenedorTabla table-responsive">
@@ -219,6 +221,42 @@ if (!isset($_SESSION['acceso'])) {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div id="tableHolder" class="row justify-content-center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalFormCodigo" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p class="statusMsg"></p>
+                    <div class="row justify-content-center">
+                        <form action="codigoBarras.php" method="POST" target="_blank">
+                        <div class="col-12">
+                            <h5>Ingrese la cantidad que desea imprimir (Se imprimiran todos los productos que esten en inventario)</h5>
+                            <div class="tab-content" id="myTabContent">
+                                <p class="general">Cantidad:</p>
+                                <input type="num" name="cantidad">
+                                <input type="submit">
+                            </div>
+                            </form>
                         </div>
                     </div>
                     <div id="tableHolder" class="row justify-content-center">
