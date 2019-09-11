@@ -52,7 +52,7 @@ $(document).ready(function () {
         cambio = valor - totalglobal;
         camiostring = cambio.toString();
         swal({
-          title: 'Su cambio es de $ ' + camiostring,
+          title: 'Su cambio es de $' + camiostring,
           text: 'Confirme la venta',
           imageUrl: 'img/cambio.png',
           showCancelButton: true,
@@ -121,7 +121,7 @@ $(document).ready(function () {
         cambio = pago - anticipo;
         camiostring = cambio.toString();
         swal({
-          title: 'Su cambio es de $ ' + camiostring,
+          title: 'Su cambio es de $' + camiostring,
           text: 'Confirme la venta',
           imageUrl: 'img/cambio.png',
           showCancelButton: true,
@@ -505,7 +505,7 @@ $(document).ready(function () {
                         <td class="text-centerdatoscliente">${datos.nombre}</td>
                         <td class="text-nowrap text-center">${datos.telefono}</td>
                         <td class="text-nowrap text-center datoscliente">${datos.estado}</td>
-                        <td class="text-nowrap text-center">$${datos.adeudos}</td>
+                        <td class="text-nowrap text-center">${datos.adeudos}</td>
                         </tr>`;
           });
           $('#cuerpotcliente').html(template);

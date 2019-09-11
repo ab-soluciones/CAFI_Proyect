@@ -2,7 +2,6 @@
  session_start();
  require_once "Config/Autoload.php";
  Config\Autoload::run();
-
  $negocio = $_SESSION['idnegocio'];
  $con = new Models\Conexion();
  $query = "SELECT * FROM otros_ingresos WHERE negocios_idnegocios ='$negocio' ORDER BY id_otros_ingresos DESC";

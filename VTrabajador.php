@@ -1,8 +1,6 @@
 <?php
 session_start();
-
 // se comprueba si hay un rol en la sesion si la cuenta esta activa y si ese rol es diferente a ceo
-
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
@@ -12,7 +10,6 @@ if (!isset($_SESSION['acceso'])) {
 ) {
     header('location: OPCAFI.php');
 }
-
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 ?>
@@ -231,61 +228,6 @@ Config\Autoload::run();
                 </div>
             </div>
         </div>
-        <?php
-        if(isset($_POST['BEdit'])){
-            echo$_POST['BEdit'];
-        }
-        if (
-            isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-            && isset($_POST['TApellidoM']) && isset($_POST['RDoc'])
-            && isset($_POST['TNumDoc']) && isset($_POST['TDireccion'])
-            && isset($_POST['TTelefono']) && isset($_POST['TCorreo'])
-            && isset($_POST['RAcceso'])  && isset($_POST['TLogin'])
-            && isset($_POST['TPContraseña']) && isset($_POST['TSueldo'])
-            && isset($_POST['SSucursal'])
-            //se comprueba que existan todos los datos del formulario
-        ) {
-            $negocio = null;
-            if (isset($_POST['SSucursal'])) {
-                for ($i = 0; $i < sizeof($id); $i++) {
-                    if (strcasecmp($_POST['SSucursal'], $nombre[$i]) == 0) {
-                        $negocio = $id[$i];
-                    }
-                }
-            }
-
-            if ($result === 1) {
-                ?>
-        <script>
-            swal({
-                    title: 'Exito',
-                    text: 'Se han registrado los datos exitosamente!',
-                    type: 'success'
-                },
-                function(isConfirm) {
-                    if (isConfirm) {
-                        window.location.href = "VTrabajador.php";
-                    }
-                });
-        </script>
-
-        <?php } else {
-                ?>
-        <script>
-            swal({
-                    title: 'Error',
-                    text: 'No se han guardado los datos compruebe los campos unicos',
-                    type: 'error'
-                },
-                function(isConfirm) {
-                    if (isConfirm) {
-                        window.location.href = "VTrabajador.php";
-                    }
-                });
-        </script>
-        <?php }
-        }
-        ?>
         <script src="js/user_jquery.js"></script>
         <script src="js/vtrabajador.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

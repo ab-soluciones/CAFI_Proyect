@@ -23,7 +23,6 @@ if (isset($_GET['id']) && isset($_GET['estado'])) {
         } else if ($estado == "C" && $_POST['DlEstado'] == "R") {
             $adeudo->editarTotalEstadoR($id, $idusuario);
         }
-
         header('location: VAbonos.php');
     }
     ?>
