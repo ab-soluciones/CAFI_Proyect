@@ -52,7 +52,7 @@ $(document).ready(function () {
         cambio = valor - totalglobal;
         camiostring = cambio.toString();
         swal({
-          title: 'Su cambio es de $ ' + camiostring,
+          title: 'Su cambio es de $' + camiostring,
           text: 'Confirme la venta',
           imageUrl: 'img/cambio.png',
           showCancelButton: true,
@@ -121,7 +121,7 @@ $(document).ready(function () {
         cambio = pago - anticipo;
         camiostring = cambio.toString();
         swal({
-          title: 'Su cambio es de $ ' + camiostring,
+          title: 'Su cambio es de $' + camiostring,
           text: 'Confirme la venta',
           imageUrl: 'img/cambio.png',
           showCancelButton: true,
@@ -436,15 +436,15 @@ $(document).ready(function () {
                   <td class="text-nowrap text-center"><button class="bdelete btn btn-danger">x</button></td>
                   <td class="text-nowrap text-center d-none">${datos.codigo}</td>
                   <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
-                  <td class="tdcosto text-nowrap text-center">$${datos.precio}</td>
+                  <td class="tdcosto text-nowrap text-center">${datos.precio}</td>
                   <td class="text-nowrap text-center"><input class='incantdv' type="number" value="${datos.cantidad}" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
-                  <td class="text-nowrap text-center">$${datos.subtotal}</td>
+                  <td class="text-nowrap text-center">${datos.subtotal}</td>
               </tr>`;
         });
         $('#renglones').html(template);
         totalglobal = total;
         template = `
-              <h5>Total: $${total}</h5>`;
+              <h5>Total: ${total}</h5>`;
         $('#divtotal').html(template);
       }
 
@@ -465,10 +465,10 @@ $(document).ready(function () {
           datos.forEach(datos => {
             template += `<tr>
                         <td class="datos font-weight-bold">${datos.codigo_barras}</td>
-                        <td><img src="data:image/jpg;base64,${datos.imagen}" height="50" width="50" /></td>
+                        <td><img src="${datos.imagen}" height="50" width="50" /></td>
                         <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
                         <td class="datos">${datos.existencia}</td>
-                        <td class="datos">$${datos.precio}</td>
+                        <td class="datos">${datos.precio}</td>
                         <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
                         <td> <div class="row">
                         <a class="bagregardv btn btn-secondary" href="#">
@@ -504,7 +504,7 @@ $(document).ready(function () {
                         <td class="text-centerdatoscliente">${datos.nombre}</td>
                         <td class="text-nowrap text-center">${datos.telefono}</td>
                         <td class="text-nowrap text-center datoscliente">${datos.estado}</td>
-                        <td class="text-nowrap text-center">$${datos.adeudos}</td>
+                        <td class="text-nowrap text-center">${datos.adeudos}</td>
                         </tr>`;
           });
           $('#cuerpotcliente').html(template);
