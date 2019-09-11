@@ -139,7 +139,140 @@ if (
     $result = $trabajador->guardar($_POST['agregarloa']);
     echo $result;
 } else if (
-    isset($_POST['codigo']) && isset($_POST['existencia']) && isset($_POST['precio']) && isset($_POST['cantidad'])
+    isset($_POST['cantidad']) && isset($_POST['de']) && isset($_POST['concepto']) && isset($_POST['descripcion']) 
+){
+
+    function retirar($concepto, $tipo, $cantidad, $descripcion){
+        $retiro = new Models\Retiro();
+        $retiro->setConcepto($concepto);
+        $retiro->setTipo($tipo);
+        $retiro->setCantidad($cantidad);
+        $retiro->setDescripcion($descripcion);
+        $retiro->setFecha();
+        $retiro->setHora();
+        $retiro->setEstado("R");
+        $retiro->setNegocio($_SESSION['idnegocio']);
+        $retiro->setTrabajador($_SESSION['id']);
+        $result = $retiro->guardar();
+        echo $result;
+    }
+        $cantidad = $_POST['cantidad'];
+        $concepto = $_POST['concepto'];
+        $tipo = $_POST['de'];
+        $descripcion = $_POST['descripcion'];
+        $efectivo = $_POST['efectivo1'];
+        $banco = $_POST['banco1'];
+
+        if ($concepto == "Corte de caja" && $tipo == "Banco") {
+        //se compara que la cantidad a retirar en efectivo no sea superior a la cantidad en en efectivo que hay en caja
+                echo $result = "CorteErroneo";
+            } else {
+            if ($tipo == "Caja" && $cantidad <= $efectivo) {
+                retirar($concepto, $tipo, $cantidad, $descripcion);
+            } else if ($tipo == "Caja" && $cantidad > $efectivo) {
+                echo $result = "SaldoInsufucienteCaja";
+            } else if ($tipo == "Banco" && $cantidad <= $banco) {
+                //se compara que la cantidad a retirar en banco no sea superior a la cantidad que hay en banco
+                retirar($concepto, $tipo, $cantidad, $descripcion);
+            } else if ($tipo == "Banco" && $cantidad > $banco) {
+            echo $result = "SaldoInsufucienteBanco";
+            }
+        }
+} else if(
+    isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca']) &&
+    isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP']) &&
+    isset($_POST['SlcTalla']) && isset($_POST['SlcMedida']) && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen'])
+){
+    function registrar($imagen, $negocio){
+            $producto = new Models\Producto();
+            if (strlen($_POST['TCodigoB']) === 0) {
+                $numRand = rand(1000000, 9999999);
+                $numRand2 = rand(100000, 999999);
+                $codigob = $numRand . $numRand2;
+            } else {
+                $codigob  = $_POST['TCodigoB'];
+            }
+
+            $descripcion = $_POST['TADescription'];
+
+            if (strlen($descripcion) === 0) {
+                $descripcion = "";
+            }
+
+            $producto->setCodigoBarras($codigob);
+            $producto->setNombre($_POST['TNombre']);
+            $producto->setImagen($imagen);
+            $producto->setColor($_POST['TColor']);
+            $producto->setMarca($_POST['TMarca']);
+            $producto->setDescripcion($descripcion);
+            $producto->setUnidad_Medida($_POST['DLUnidad']);
+            if ($_POST['TTipoP'] === "Calzado") {
+                $producto->setTalla_numero($_POST['SlcMedida']);
+            } else if ($_POST['TTipoP'] === "Ropa") {
+                $producto->setTalla_numero($_POST['SlcTalla']);
+            }
+            $producto->setTipo($_POST['TTipoP']);
+            $producto->setPrecioCompra($_POST['TPrecioC']);
+            $producto->setPrecioVenta($_POST['TPrecioVen']);
+            $producto->setPestado($_POST['REstado']);
+            $query = "SELECT clientesab_idclienteab FROM negocios WHERE idnegocios = '$negocio'";
+            $con = new Models\Conexion();
+            $result2 = $con->consultaRetorno($query);
+            $con->cerrarConexion();
+            $clienteab = $result2['clientesab_idclienteab'];
+            $result = $producto->guardar($clienteab, $_SESSION['id']);
+            echo $result;
+    }
+
+    if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
+        //si el usuario cargó un archivo
+        //se optiene la ruta
+        $tipo_imagen = $_FILES['FImagen']['type'];
+        //se optine la extencion de la imagen
+        $bytes = $_FILES['FImagen']['size'];
+        //se optiene el tamaño de la imagen
+        if ($bytes <= 10000) {
+            //si la imagen es menor a 1 mega se comprueba la extencion, si la extencion es igual a alguna de la condiconal se registra la imagen
+            if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png') {
+                $temp = explode(".", $_FILES["FImagen"]["name"]);
+                $newfilename = round(microtime(true)) . '.' . end($temp);
+                $imagen2 = "http://localhost/CAFI_System/img/productos/".$newfilename."";
+                $carpeta_destino = "img/productos/";
+                move_uploaded_file($_FILES["FImagen"]["tmp_name"],$carpeta_destino.$newfilename);
+                $negocio = $_SESSION['idnegocio'];
+
+                registrar($imagen2, $negocio);
+            }else{
+                echo "imagenNoValida";
+            }
+        }else{
+            echo "imagenGrande";
+        }
+    }else{
+        $negocio = $_SESSION['idnegocio'];
+        registrar("", $negocio);
+    }
+}  else if(isset($_POST['SCantidad']) && isset($_POST['DlProductos'])){
+
+
+
+    $inventario = new Models\Inventario();
+    $con = new Models\Conexion();
+    $inventario->setCantidad($_POST['SCantidad']);
+    $inventario->setCodigoB($_POST['DlProductos']);
+    $codigob = $inventario->getCodigoBarras();
+    $inventario->setNegocio($_SESSION['idnegocio']);
+    $inventario->setTrabajador($_SESSION['id']);
+    $query = "SELECT producto_codigo_barras FROM inventario WHERE producto_codigo_barras = '$codigob' AND negocios_idnegocios = '$_SESSION[idnegocio]'";
+    $datos = $con->consultaRetorno($query);
+    if ($datos['producto_codigo_barras'] != "") {
+        echo "yaExiste";
+    } else {
+        $result = $inventario->guardar();
+        echo $result;
+    }
+} 
+   else if( isset($_POST['codigo']) && isset($_POST['existencia']) && isset($_POST['precio']) && isset($_POST['cantidad'])
 ) {
     if (is_null($_SESSION['idven'])) {
         $venta = new Models\Venta();
@@ -317,136 +450,4 @@ if (
         echo "sin impresora";
     }
     
- }else if (isset($_POST['cantidad']) && isset($_POST['de']) && isset($_POST['concepto']) && isset($_POST['descripcion']) 
-){
-
-    function retirar($concepto, $tipo, $cantidad, $descripcion){
-        $retiro = new Models\Retiro();
-        $retiro->setConcepto($concepto);
-        $retiro->setTipo($tipo);
-        $retiro->setCantidad($cantidad);
-        $retiro->setDescripcion($descripcion);
-        $retiro->setFecha();
-        $retiro->setHora();
-        $retiro->setEstado("R");
-        $retiro->setNegocio($_SESSION['idnegocio']);
-        $retiro->setTrabajador($_SESSION['id']);
-        $result = $retiro->guardar();
-        echo $result;
-    }
-        $cantidad = $_POST['cantidad'];
-        $concepto = $_POST['concepto'];
-        $tipo = $_POST['de'];
-        $descripcion = $_POST['descripcion'];
-        $efectivo = $_POST['efectivo1'];
-        $banco = $_POST['banco1'];
-
-        if ($concepto == "Corte de caja" && $tipo == "Banco") {
-        //se compara que la cantidad a retirar en efectivo no sea superior a la cantidad en en efectivo que hay en caja
-                echo $result = "CorteErroneo";
-            } else {
-            if ($tipo == "Caja" && $cantidad <= $efectivo) {
-                retirar($concepto, $tipo, $cantidad, $descripcion);
-            } else if ($tipo == "Caja" && $cantidad > $efectivo) {
-                echo $result = "SaldoInsufucienteCaja";
-            } else if ($tipo == "Banco" && $cantidad <= $banco) {
-                //se compara que la cantidad a retirar en banco no sea superior a la cantidad que hay en banco
-                retirar($concepto, $tipo, $cantidad, $descripcion);
-            } else if ($tipo == "Banco" && $cantidad > $banco) {
-            echo $result = "SaldoInsufucienteBanco";
-            }
-        }
-} else if(
-    isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca']) &&
-    isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP']) &&
-    isset($_POST['SlcTalla']) && isset($_POST['SlcMedida']) && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen'])
-){
-    function registrar($imagen, $negocio){
-            $producto = new Models\Producto();
-            if (strlen($_POST['TCodigoB']) === 0) {
-                $numRand = rand(1000000, 9999999);
-                $numRand2 = rand(100000, 999999);
-                $codigob = $numRand . $numRand2;
-            } else {
-                $codigob  = $_POST['TCodigoB'];
-            }
-
-            $descripcion = $_POST['TADescription'];
-
-            if (strlen($descripcion) === 0) {
-                $descripcion = "";
-            }
-
-            $producto->setCodigoBarras($codigob);
-            $producto->setNombre($_POST['TNombre']);
-            $producto->setImagen($imagen);
-            $producto->setColor($_POST['TColor']);
-            $producto->setMarca($_POST['TMarca']);
-            $producto->setDescripcion($descripcion);
-            $producto->setUnidad_Medida($_POST['DLUnidad']);
-            if ($_POST['TTipoP'] === "Calzado") {
-                $producto->setTalla_numero($_POST['SlcMedida']);
-            } else if ($_POST['TTipoP'] === "Ropa") {
-                $producto->setTalla_numero($_POST['SlcTalla']);
-            }
-            $producto->setTipo($_POST['TTipoP']);
-            $producto->setPrecioCompra($_POST['TPrecioC']);
-            $producto->setPrecioVenta($_POST['TPrecioVen']);
-            $producto->setPestado($_POST['REstado']);
-            $query = "SELECT clientesab_idclienteab FROM negocios WHERE idnegocios = '$negocio'";
-            $con = new Models\Conexion();
-            $result2 = $con->consultaRetorno($query);
-            $con->cerrarConexion();
-            $clienteab = $result2['clientesab_idclienteab'];
-            $result = $producto->guardar($clienteab, $_SESSION['id']);
-            echo $result;
-    }
-
-    if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
-        //si el usuario cargó un archivo
-        //se optiene la ruta
-        $tipo_imagen = $_FILES['FImagen']['type'];
-        //se optine la extencion de la imagen
-        $bytes = $_FILES['FImagen']['size'];
-        //se optiene el tamaño de la imagen
-        if ($bytes <= 10000) {
-            //si la imagen es menor a 1 mega se comprueba la extencion, si la extencion es igual a alguna de la condiconal se registra la imagen
-            if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png') {
-                $temp = explode(".", $_FILES["FImagen"]["name"]);
-                $newfilename = round(microtime(true)) . '.' . end($temp);
-                $imagen2 = "http://localhost/CAFI_System/img/productos/".$newfilename."";
-                $carpeta_destino = "img/productos/";
-                move_uploaded_file($_FILES["FImagen"]["tmp_name"],$carpeta_destino.$newfilename);
-                $negocio = $_SESSION['idnegocio'];
-
-                registrar($imagen2, $negocio);
-            }else{
-                echo "imagenNoValida";
-            }
-        }else{
-            echo "imagenGrande";
-        }
-    }else{
-        $negocio = $_SESSION['idnegocio'];
-        registrar("", $negocio);
-    }
-}  else if(isset($_POST['SCantidad']) && isset($_POST['DlProductos'])){
-
-
-
-    $inventario = new Models\Inventario();
-    $con = new Models\Conexion();
-    $inventario->setCantidad($_POST['SCantidad']);
-    $inventario->setCodigoB($_POST['DlProductos']);
-    $codigob = $inventario->getCodigoBarras();
-    $inventario->setNegocio($_SESSION['idnegocio']);
-    $inventario->setTrabajador($_SESSION['id']);
-    $query = "SELECT producto_codigo_barras FROM inventario WHERE producto_codigo_barras = '$codigob' AND negocios_idnegocios = '$_SESSION[idnegocio]'";
-    $datos = $con->consultaRetorno($query);
-    if ($datos['producto_codigo_barras'] != "") {
-        echo "yaExiste";
-    } else {
-        $result = $inventario->guardar();
-        echo $result;
-    }
-} 
+ }

@@ -247,4 +247,16 @@ if (
                 echo $result;
             }
         }
+        
+}       else if (isset($_POST['cantidadv']) && isset($_POST['costo']) && isset($_POST['codigo'])) {
+        $dv = new Models\DetalleVenta();
+        $cantidad = (int) $_POST['cantidadv'];
+        $costo = floatval($_POST['costo']);
+        $subtotal = $cantidad * $costo;
+        $dv->setCantidad($cantidad);
+        $dv->setSubtotal($subtotal);
+        $dv->setVenta($_SESSION['idven']);
+        $dv->setCodigodeBarras($_POST['codigo']);
+        $result = $dv->editar();
+        echo $result;
 }
