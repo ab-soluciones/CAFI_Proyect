@@ -248,7 +248,7 @@ if (
             }
         }
         
-}       else if (isset($_POST['cantidadv']) && isset($_POST['costo']) && isset($_POST['codigo'])) {
+}  else if (isset($_POST['cantidadv']) && isset($_POST['costo']) && isset($_POST['codigo'])) {
         $dv = new Models\DetalleVenta();
         $cantidad = (int) $_POST['cantidadv'];
         $costo = floatval($_POST['costo']);

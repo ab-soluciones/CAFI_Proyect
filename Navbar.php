@@ -110,7 +110,7 @@
                 <div class="row">
                     <div class="col-4">
                         <li class="nav-item mx-2 text-center">
-                            <a class="<?php if($sel === 'productos'){ echo seleccionado; } ?> nav-link font-weight-bold text-white" onclick="window.location.href='VProductos.php'" title="Productos"><img src="img/productos.png">Productos</a>
+                            <a class="<?php if($sel === 'productos'){ echo seleccionado; } ?> nav-link font-weight-bold text-white" onclick="window.location.href='VProductos.php'" title="Productos"><img src="img/products.png">Productos</a>
                         </li>
                     </div>
                     <div class="col-4">
