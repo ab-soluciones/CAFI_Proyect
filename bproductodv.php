@@ -15,7 +15,7 @@ WHERE CONCAT(nombre,' ' ,marca,' ',color,' ',talla_numero,' ', producto_codigo_b
     while ($renglon = mysqli_fetch_array($row)) {
         $json[] = array(
             'codigo_barras' =>  $renglon['producto_codigo_barras'],
-            'imagen' => base64_encode($renglon['imagen']),
+            'imagen' =>    $renglon['imagen'],
             'nombre' => $renglon['nombre'],
             'marca' =>  $renglon['marca'],
             'color' => $renglon['color'],
