@@ -23,7 +23,7 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-    
+
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -64,7 +64,10 @@ include("NavbarAB.php")
                         <h5 class="admin">Monto:</h5>
                         <input id="monto" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
                         <h5 class="admin">Negocio:</h5>
-                        <div>
+                        <div id="pintar">
+
+
+                        <div id="divnegocio">
                             <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" required autocomplete="off">
                             <datalist id="negocios">
                                 <?php
@@ -85,7 +88,9 @@ include("NavbarAB.php")
                                 } ?>
 
                             </datalist>
-                        </div><br>
+                            <br>
+                        </div>
+                        </div>
                         <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
@@ -101,7 +106,7 @@ include("NavbarAB.php")
           <div class="col-md-12">
             <div id="tableContainer" class="d-block col-lg-12">
                   <div class="input-group mb-2">
-                      <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                      <button class="Bagregar d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                       <div class="input-group-prepend">
                       <div class="input-group-text"><i class="fa fa-search"></i></div>
                       </div>
@@ -139,7 +144,7 @@ include("NavbarAB.php")
                           <td class="text-nowrap text-center">$ <?php echo $renglon['monto']; ?></td>
                           <td class="text-nowrap text-center" style="width:100px;">
                               <div class="row">
-                                  <a style="margin: 0 auto;" class="btn btn-secondary" href="EditVSuscripcion.php?id=<?php echo $renglon['idsuscripcion'] ?>">
+                                  <a style="margin: 0 auto;" class="beditar btn btn-secondary" data-toggle="modal" data-target="#modalForm" href="#">
                                       <img src="img/edit.png">
                                   </a>
                               </div>
@@ -194,6 +199,7 @@ include("NavbarAB.php")
     <?php }
     }
     ?>
+    <script src="js/suscripcion.js"></script>
     <script src="js/user_jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

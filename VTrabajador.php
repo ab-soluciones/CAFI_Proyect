@@ -36,9 +36,9 @@ Config\Autoload::run();
 </head>
 
 <body onload="inicio();">
-    <?php 
+    <?php
         $sel = "trabajadores";
-        include("NavbarD.php") 
+        include("NavbarD.php")
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
@@ -58,22 +58,22 @@ Config\Autoload::run();
                     <form class="form-group" action="#" method="post">
                         <div class="row">
                             <div class="col-4">
-                                <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
+                                <h5 class="general">Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
                             </div>
                             <div class="col-4">
-                                <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
+                                <h5 class="general">Apellido Paterno:</h5>
                                 <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
                             </div>
                             <div class="col-4">
-                                <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
+                                <h5 class="general">Apellido Materno:</h5>
                                 <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
                             </div>
                         </div>
                     </div>
                     <div class="d-block d-lg-flex row">
                         <div class="col-lg-4">
-                            <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
+                            <h5 class="general">Documento:</h5>
 
                             <div class="row" style="margin: 0 auto;">
                                 <div class="form-check-inline">
@@ -93,25 +93,25 @@ Config\Autoload::run();
                                 </div>
                             </div>
                             <div class="col-4">
-                                <h5><label for="numdoc" class="badge badge-primary">Documento:</label></h5>
+                                <h5 class="general">Documento:</h5>
                                 <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
                             </div>
                             <div class="col-4">
-                                <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
+                                <h5 class="general">Direccion:</h5>
                                 <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required autocomplete="off">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
+                                <h5 class="general">Telefono:</h5>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required autocomplete="off">
                             </div>
                             <div class="col-4">
-                                <h5><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
+                                <h5 class="general">Correo electrónico:</h5>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off">
                             </div>
                             <div class="col-4">
-                                <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
+                                <h5 class="general">Tipo de acceso:</h5>
                                 <div class="row" style="margin: 0 auto;">
                                     <div class="form-check-inline">
                                         <label class="form-check-label">
@@ -129,18 +129,18 @@ Config\Autoload::run();
                     </div>
                     <div class="row d-block d-lg-flex">
                         <div class="col-lg-4">
-                            <h5><label for="login" class="badge badge-primary">Nombre de Usuario:</label></h5>
+                            <h5 class="general">Nombre de Usuario:</h5>
                             <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <h5><label for="email" class="badge badge-primary">Agregarlo a:</label></h5>
+                                <h5 class="general">Agregarlo a:</h5>
                                 <select class="form form-control" name="SSucursal" required>
                                     <option></option>
                                     <?php
                                     $con = new Models\Conexion();
                                     $dueño = $_SESSION['id'];
-                                    $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                                    $query = "SELECT nombre_negocio, idnegocios FROM negocios
                                                 WHERE clientesab_idclienteab = '$dueño'";
                                     $row = $con->consultaListar($query);
                                     $con->cerrarConexion();
@@ -171,7 +171,7 @@ Config\Autoload::run();
 </div>
 <!-- Modal -->
     <p id="nav-title" class="font-weight-bold">
-    
+
     </p>
     <div class="contenedor container-fluid">
         <div class="row align-items-start">
@@ -184,7 +184,7 @@ Config\Autoload::run();
                             <?php
                             $con = new Models\Conexion();
                             $dueño = $_SESSION['id'];
-                            $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                            $query = "SELECT nombre_negocio, idnegocios FROM negocios
                             WHERE clientesab_idclienteab = '$dueño'";
                             $row = $con->consultaListar($query);
                             $con->cerrarConexion();
@@ -210,20 +210,20 @@ Config\Autoload::run();
                     <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th onclick="sortTable(0)">Nombre</th>
-                                <th onclick="sortTable(1)">Ap-P</th>
-                                <th onclick="sortTable(2)">Ap-M</th>
-                                <th onclick="sortTable(3)">Doc</th>
-                                <th onclick="sortTable(4)">#Doc</th>
-                                <th onclick="sortTable(5)">Direccion</th>
-                                <th onclick="sortTable(6)">Telefono</th>
-                                <th onclick="sortTable(7)">Email</th>
-                                <th onclick="sortTable(8)">Acceso</th>
-                                <th onclick="sortTable(9)">Usuario</th>
-                                <th onclick="sortTable(10)">Contraseña</th>
-                                <th onclick="sortTable(11)">Sueldo</th>
-                                <th onclick="sortTable(12)">Estado</th>
-                                <th onclick="sortTable(13)">Acciones</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(0)">Nombre</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(1)">Ap-P</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(2)">Ap-M</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(3)">Doc</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(4)">#Doc</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(5)">Direccion</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Telefono</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Email</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(8)">Acceso</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(9)">Usuario</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(10)">Contraseña</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(11)">Sueldo</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(12)">Estado</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(13)">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -248,20 +248,20 @@ Config\Autoload::run();
                                 while ($renglon = mysqli_fetch_array($row)) {
                                     ?>
                                 <tr>
-                                    <td><?php echo $renglon['nombre']; ?></td>
-                                    <td><?php echo $renglon['apaterno']; ?></td>
-                                    <td><?php echo $renglon['amaterno']; ?></td>
-                                    <td><?php echo $renglon['tipo_documento']; ?></td>
-                                    <td><?php echo $renglon['numero_documento']; ?></td>
-                                    <td><?php echo $renglon['direccion']; ?></td>
-                                    <td><?php echo $renglon['telefono']; ?></td>
-                                    <td><?php echo $renglon['correo']; ?></td>
-                                    <td><?php echo $renglon['acceso']; ?></td>
-                                    <td><?php echo $renglon['login']; ?></td>
-                                    <td><?php echo $renglon['password']; ?></td>
-                                    <td><?php echo $renglon['sueldo']; ?></td>
-                                    <td><?php echo $renglon['estado']; ?></td>
-                                    <td style="width:100px;">
+                                    <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['apaterno']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['amaterno']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['tipo_documento']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['numero_documento']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['direccion']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['telefono']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['correo']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['acceso']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['login']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['password']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['sueldo']; ?></td>
+                                    <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
+                                    <td class="text-nowrap text-center" style="width:100px;">
                                         <div class="row">
                                             <button value="<?php echo $renglon['idtrabajador']; ?>" type="submit" name="BEdit" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm"><img src="img/edit.png"></button>
                                         </div>
