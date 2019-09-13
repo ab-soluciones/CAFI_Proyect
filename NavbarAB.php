@@ -8,9 +8,11 @@
         </div>
         <div class="collapse navbar-collapse col-9 d-flex justify-content-center align-items-center" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item mx-2 text-center">        
-                    <a id="orange" class="<?php if($sel === 'usuarios'){ echo seleccionado; } ?> nav-link font-weight-bold" onclick="window.location.href='VUsuarios_ab.php'" title="Usuarios"><img src="img/usuarios.png">Usuarios</a>
-                </li>
+                <?php if($_SESSION['acceso'] === "CEOAB"){?>
+                    <li class="nav-item mx-2 text-center">        
+                        <a id="orange" class="<?php if($sel === 'usuarios'){ echo seleccionado; } ?> nav-link font-weight-bold" onclick="window.location.href='VUsuarios_ab.php'" title="Usuarios"><img src="img/usuarios.png">Usuarios</a>
+                    </li>
+                <?php } ?>
                 <li class="nav-item mx-2 text-center">
                     <a class="<?php if($sel === 'clientes'){ echo seleccionado; } ?> nav-link font-weight-bold" onclick="window.location.href='VClienteab.php'" title="Clientes"><img src="img/clientes.png">Clientes</a>
                 </li>

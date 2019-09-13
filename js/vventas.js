@@ -14,29 +14,7 @@ $(document).ready(function () {
     //hacer la suma de los subtotales para la variable global total
   });
 
-  function ejecutarImpresionTermica() {
-    let idventa = "";
-    const postData = {
-      idventa: idventa
-    };
-    $.post('ticket.php', postData, function (response2) {
-      if (response2) {
-        var explode = function () {
-          swal({
-            title: 'Exito',
-            text: 'Venta realizada exitosamente',
-            type: 'success'
-          },
-            function (isConfirm) {
-              if (isConfirm) {
-                location.reload();
-              }
-            });
-        };
-        setTimeout(explode, 600);
-      }
-    });
-  }
+
   //terminar la venta
   $(document).on('click', '.bvender', function () {
     if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1) {
@@ -78,9 +56,8 @@ $(document).ready(function () {
               formapago: forma_pago
             };
             $.post('post-guardar.php', postData, function (response) {
-              if (response === "con impresora") {
-                ejecutarImpresionTermica();
-              } else if (response === "sin impresora") {
+              console.log(response);
+              if (response) {
                 var explode = function () {
                   swal({
                     title: 'Exito',
@@ -93,13 +70,12 @@ $(document).ready(function () {
                       }
                     });
                 };
-                setTimeout(explode, 600);
-
-              } else if (response != "con impresora" && response != "sin impresora") {
+                setTimeout(explode, 200);
+              } else {
                 var explode = function () {
                   swal({
                     title: 'Alerta',
-                    text: 'No se a realizado la venta',
+                    text: 'Venta no realizada',
                     type: 'warning'
                   },
                     function (isConfirm) {
@@ -108,7 +84,7 @@ $(document).ready(function () {
                       }
                     });
                 };
-                setTimeout(explode, 600);
+                setTimeout(explode, 200);
               }
             });
           });
@@ -146,9 +122,7 @@ $(document).ready(function () {
                 formapago: forma_pago
               };
               $.post('post-guardar.php', postData, function (response) {
-                if (response === "con impresora") {
-                  ejecutarImpresionTermica();
-                } else if (response === "sin impresora") {
+                if (response) {
                   var explode = function () {
                     swal({
                       title: 'Exito',
@@ -161,13 +135,12 @@ $(document).ready(function () {
                         }
                       });
                   };
-                  setTimeout(explode, 600);
-
-                } else if (response != "con impresora" && response != "sin impresora") {
+                  setTimeout(explode, 200);
+                } else {
                   var explode = function () {
                     swal({
                       title: 'Alerta',
-                      text: 'No se a realizado la venta',
+                      text: 'Venta no realizada',
                       type: 'warning'
                     },
                       function (isConfirm) {
@@ -176,7 +149,7 @@ $(document).ready(function () {
                         }
                       });
                   };
-                  setTimeout(explode, 600);
+                  setTimeout(explode, 200);
                 }
               });
 
@@ -202,9 +175,7 @@ $(document).ready(function () {
           formapago: forma_pago
         };
         $.post('post-guardar.php', postData, function (response) {
-          if (response === "con impresora") {
-            ejecutarImpresionTermica();
-          } else if (response === "sin impresora") {
+          if (response) {
             var explode = function () {
               swal({
                 title: 'Exito',
@@ -217,13 +188,12 @@ $(document).ready(function () {
                   }
                 });
             };
-            setTimeout(explode, 600);
-
-          } else if (response != "con impresora" && response != "sin impresora") {
+            setTimeout(explode, 200);
+          } else {
             var explode = function () {
               swal({
                 title: 'Alerta',
-                text: 'No se a realizado la venta',
+                text: 'Venta no realizada',
                 type: 'warning'
               },
                 function (isConfirm) {
@@ -232,7 +202,7 @@ $(document).ready(function () {
                   }
                 });
             };
-            setTimeout(explode, 600);
+            setTimeout(explode, 200);
           }
         });
 
@@ -330,7 +300,7 @@ $(document).ready(function () {
   //boton pago en efectivo
   $(document).on('click', '.bpago1', function () {
     forma_pago = $('.bpago1').val();
-    $('#divpagotarjeta').hide();
+    $('.divpagotarjeta').hide();
     $('#divdescuento').hide();
     $('#divanticipo').hide();
     $('#tablacliente').hide();
@@ -346,7 +316,7 @@ $(document).ready(function () {
   //boton pago a credito
   $(document).on('click', '.bpago2', function () {
     forma_pago = $('.bpago2').val();
-    $('#divpagotarjeta').hide();
+    $('.divpagotarjeta').hide();
     $('#divdescuento').hide();
     $('#divanticipo').hide();
     $('#divpago').hide();
@@ -369,7 +339,7 @@ $(document).ready(function () {
     $('#tablacliente').show();
     $('.bdescuento').show();
     $('#tablacliente').hide();
-    $('#divpagotarjeta').show();
+    $('.divpagotarjeta').show();
     $('.modal').modal('show');
 
     stringtotal = totalglobal.toString();
@@ -377,26 +347,6 @@ $(document).ready(function () {
     $('.hmtotal').html(menseaje);
   });
 
-
-  //spiner cantidad del concepto de la venta
-  $(document).on('change', '.incantdv', function () {
-    var costodv;
-    $(this).parents("tr").find(".tdcosto").each(function () {
-      costodv = $(this).html();
-    });
-    let element = $(this)[0].parentElement.parentElement;
-    const codigo = $(element).attr('codigoBa');
-    const postData = {
-      cantidadv: $(this).val(),
-      costo: costodv,
-      codigo: codigo
-    };
-
-    $.post('post-edit.php', postData, function (response) {
-      optenerDatosTabla(0);
-
-    });
-  });
 
   //boton delete concepto venta
   $(document).on('click', '.bdelete', function () {
@@ -430,7 +380,6 @@ $(document).ready(function () {
         let template = '';
         datos.forEach(datos => {
           sbtotal = parseFloat(datos.subtotal);
-          console.log(datos.subtotal);
           total += sbtotal;
           template += `
                   <tr codigoBa="${datos.codigo}">
@@ -438,7 +387,7 @@ $(document).ready(function () {
                   <td class="text-nowrap text-center d-none">${datos.codigo}</td>
                   <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
                   <td class="tdcosto text-nowrap text-center">${datos.precio}</td>
-                  <td class="text-nowrap text-center"><input class='incantdv' type="number" value="${datos.cantidad}" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
+                  <td class="text-nowrap text-center">${datos.cantidad}</td>
                   <td class="text-nowrap text-center">${datos.subtotal}</td>
               </tr>`;
         });
@@ -483,6 +432,10 @@ $(document).ready(function () {
 
         }
       });
+    }else{
+      template = `<tr>
+      </tr>`;
+      $('#cuerpo').html(template);
     }
 
   });
@@ -499,7 +452,7 @@ $(document).ready(function () {
           let datos = JSON.parse(response);
           let template = '';
           datos.forEach(datos => {
-            template +=`<tr>
+            template += `<tr>
                         <td> <button class="text-nowrap text-center bagregarc btn bg-secondary text-white">ok</button></td>
                         <td class="text-nowrap text-center datoscliente d-none">${datos.idcliente}</td>
                         <td class="text-centerdatoscliente">${datos.nombre}</td>
@@ -528,9 +481,11 @@ $(document).ready(function () {
     renglon = valores.split("?");
     const postData = {
       idcliente: renglon[0],
-      estcliente: renglon[2],
+      estcliente: renglon[1],
     };
+    console.log(postData);
     $.post('post-guardar.php', postData, function (response) {
+
       if (response === "no agregado a la sesion") {
         swal({
           title: 'Alerta',
@@ -568,6 +523,7 @@ $(document).ready(function () {
     console.log(postData);
     $.post('post-guardar.php', postData, function (response) {
       optenerDatosTabla(0);
+      console.log(response);
       if (response === "-1") {
         swal({
           title: 'Alerta',

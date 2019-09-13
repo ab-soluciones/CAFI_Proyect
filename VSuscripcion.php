@@ -10,7 +10,7 @@ if (!isset($_SESSION['acceso'])) {
     $_SESSION['acceso'] == "Employes" || $_SESSION['acceso'] == "Manager"
     || $_SESSION['acceso'] == "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -38,67 +38,68 @@ if (!isset($_SESSION['acceso'])) {
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header administrador">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">×</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                </div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header administrador">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                        </button>
+        
 
-                <!-- Modal Body -->
-                <div class="modal-body administrador">
-                    <p class="statusMsg"></p>
-                    <form class="form-group" id="formulario">
-                        <div>
-                            <h5 class="importante">Fecha Activacion:</h5>
-                            <input class="form-control" id="fecha1" type="date" name="DFecha" required>
-                        </div><br>
+                    <!-- Modal Body -->
+                    <div class="modal-body administrador">
+                        <p class="statusMsg"></p>
+                        <form class="form-group" id="formulario">
+                            <div>
+                                <h5 class="importante">Fecha Activacion:</h5>
+                                <input class="form-control" id="fecha1" type="date" name="DFecha">
+                            </div><br>
 
-                        <div>
-                            <h5 class="importante">Fecha Vencimiento:</h5>
-                            <input class="form-control" id="fecha2" type="date" name="DFecha2" required><br>
+                            <div>
+                                <h5 class="importante">Fecha Vencimiento:</h5>
+                                <input class="form-control" id="fecha2" type="date" name="DFecha2"><br>
+                            </div>
+
+                            <h5 class="admin">Estado:</h5>
+
+                            <select class="form form-control" id="estado">
+                                <option value="A">A</option>
+                                <option value="I">I</option>
+                            </select><br>
+
+
+                            <div id="divnegocio">
+                                <h5 class="admin">Negocio:</h5>
+                                <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
+                                <datalist id="negocios">
+                                    <?php
+                                    $datos = false;
+                                    $con = new Models\Conexion();
+                                    $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
+                                    $row = $con->consultaListar($query);
+
+                                    while ($result = mysqli_fetch_array($row)) {
+                                        ?>
+
+                                        <?php $datos = true;
+                                            echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
+                                    <?php
+                                    }
+                                    if ($datos == false) {
+                                        echo "<script>document.getElementById('innegocio').disabled = true;</script>";
+                                    } ?>
+
+                                </datalist> <br>
+                            </div>
+                            <h5 class="admin">Monto:</h5>
+                            <input id="monto" type="text" class="form form-control" name="TMonto" placeholder="Monto $"><br>
+                            <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block" name="" value="Guardar">
+                        </form>
+                        <div id="tableHolder" class="row justify-content-center">
+
                         </div>
-
-                        <h5 class="admin">Estado:</h5>
-
-                        <select class="form form-control" id="estado">
-                            <option value="A">A</option>
-                            <option value="I">I</option>
-                        </select><br>
-
-
-                        <div id="divnegocio">
-                            <h5 class="admin">Negocio:</h5>
-                            <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
-                            <datalist id="negocios">
-                                <?php
-                                $datos = false;
-                                $con = new Models\Conexion();
-                                $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
-                                $row = $con->consultaListar($query);
-
-                                while ($result = mysqli_fetch_array($row)) {
-                                    ?>
-
-                                    <?php $datos = true;
-                                        echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
-                                <?php
-                                }
-                                if ($datos == false) {
-                                    echo "<script>document.getElementById('innegocio').disabled = true;</script>";
-                                } ?>
-
-                            </datalist> <br>
-                        </div>
-                        <h5 class="admin">Monto:</h5>
-                        <input id="monto" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
-                        <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block" name="" value="Guardar">
-                    </form>
-                    <div id="tableHolder" class="row justify-content-center">
-
                     </div>
                 </div>
             </div>
@@ -142,7 +143,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/user_jquery.js"></script>
     <script src="js/vsuscripciones.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

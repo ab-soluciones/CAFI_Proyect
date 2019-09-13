@@ -7,9 +7,9 @@ if (!isset($_SESSION['acceso'])) {
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    !$_SESSION['acceso'] == "Manager"
+   $_SESSION['acceso'] != "Manager"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>

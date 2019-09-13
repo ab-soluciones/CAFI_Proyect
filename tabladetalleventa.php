@@ -4,11 +4,11 @@ require_once "Config/Autoload.php";
 Config\Autoload::run();
 $con = new Models\Conexion();
 $idventa = $_SESSION['idven'];
-$query = "SELECT detalle_venta.producto_codigo_barras,nombre,color,marca,unidad_medida,talla_numero,precio_venta,
-cantidad_producto,subtotal FROM producto
-INNER JOIN detalle_venta ON producto.codigo_barras = detalle_venta.producto_codigo_barras
-INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras
-WHERE detalle_venta.idventa='$idventa'";
+$negocio = $_SESSION['idnegocio'];
+$query = "SELECT detalle_venta.producto_codigo_barras,nombre,color,marca,unidad_medida,talla_numero,precio_venta, cantidad_producto,subtotal FROM producto 
+INNER JOIN detalle_venta ON producto.codigo_barras = detalle_venta.producto_codigo_barras 
+INNER JOIN inventario ON producto.codigo_barras = inventario.producto_codigo_barras 
+WHERE detalle_venta.idventa='$idventa' AND inventario.negocios_idnegocios = '$negocio'";
 $row = $con->consultaListar($query);
 $con->cerrarConexion();
 $json = array();

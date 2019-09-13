@@ -4,7 +4,7 @@
  let editar = false;
  optenerDatosTabla();
 
- $('#bclose').click(function () {
+ $('.bclose').click(function () {
    $('.modal').modal('hide');
  });
 
