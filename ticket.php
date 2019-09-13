@@ -7,19 +7,9 @@ use Mike42\Escpos\Printer;
 use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
-if (isset($_GET['idventa'])) {
-	$venta = $_GET['idventa'];
-	/*
-	Este ejemplo imprime un
-	ticket de venta desde una impresora térmica
-*/
-
-
-	/*
-    Aquí, en lugar de "POS" (que es el nombre de mi impresora)
-	escribe el nombre de la tuya. Recuerda que debes compartirla
-	desde el panel de control
-*/
+if (isset($_POST['idventa'])) {
+	echo "impresion exitosa";
+	$venta = $_SESSION['idven'];
 
 	$nombre_impresora = "CAFI";
 
@@ -27,7 +17,7 @@ if (isset($_GET['idventa'])) {
 	$connector = new WindowsPrintConnector($nombre_impresora);
 	$printer = new Printer($connector);
 	#Mando un numero de respuesta para saber que se conecto correctamente.
-	echo "impresion exitosa";
+	
 	/*
 	Vamos a imprimir un logotipo
 	opcional. Recuerda que esto
@@ -164,6 +154,5 @@ if (isset($_GET['idventa'])) {
 	la conexión con la impresora. Recuerda incluir esto al final de todos los archivos
 */
 	$printer->close();
-
-    header("location: VVentas.php");
+	$_SESSION['idven'] = null;
 }

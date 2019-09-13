@@ -135,7 +135,7 @@ class Clienteab
         $sql = "UPDATE clientesab SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
         ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
         ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', login='{$this->login}'
-        ,password ='{$this->password}', usuariosab_idusuariosab = '$idusuario' WHERE id_clienteab ='$id'";
+        ,password ='{$this->password}', estado ='{$this->estado}', usuariosab_idusuariosab = '$idusuario' WHERE id_clienteab ='$id'";
         
         return $this->con->consultaSimple($sql);
     }

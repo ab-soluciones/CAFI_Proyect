@@ -8,12 +8,11 @@ session_start();
 
 //se inicializa las variables globales
 $_SESSION['idven'] = null;
-
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 if (isset($_SESSION['acceso'])) {
 
-  header('location: OPCAFI.php');
+  header('location: VVentas.php');
 
   //si el usuario ya esta logiado y se dirige al index se le redirige a la pagina que en debe de estar segun su rol para evitar el relogeo
 }
@@ -29,7 +28,7 @@ function comprobar()
     //se comprueban los strings a nivel de bits con la funcion strcasecmp. Si el usuario es manager o employe se redirige a la ventana de principal de opciones
 
   ) {
-    header('Location: OPCAFI.php');
+    header('Location: VVentas.php');
   } else if (
     strcasecmp($_SESSION['acceso'], "CEO") == 0
     && strcasecmp($_SESSION['estado'], "A") == 0
@@ -37,7 +36,7 @@ function comprobar()
     //si es CEO se redirige a la pagina principal de opciones o a la pagina de seleccion de negocio
 
   ) {
-    header("Location: OPCAFI.php");
+    header("Location: VTrabajador.php");
     //si solo es un negocio, se redirige al usuario a la pagina de opciones directamente
 
   } else if (
@@ -47,7 +46,7 @@ function comprobar()
 
     //si el rol pertenece a los usuariosab se les redirige a su pagina de opciones
 
-    header('Location: VABOptions.php');
+    header('Location: VUsuarios_ab.php');
   }
 }
 

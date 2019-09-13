@@ -36,7 +36,46 @@ if (!isset($_SESSION['acceso'])) {
     $sel = "abonos";
     include("Navbar.php")
     ?>
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
 
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p class="statusMsg"></p>
+                    <form class="form-group" id="formabonos">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h5 class="general">Estado:</h5>
+
+                                <div class="row" style="margin: 0 auto;">
+                                            <select name="estado" id="estado" class="form form-control">
+                                                <option value="R">Realizado</option>
+                                                <option value="C">Cancelado</option>
+                                            </select>  
+                                </div>
+                            </div>
+                            <input type="hidden" id="id" name="id">
+                            <input type="hidden" id="estadoActual">
+                        </div>
+
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="submit" value="Guardar">
+                    </form>
+                    <div id="tableHolder">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal --> 
     <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
@@ -46,63 +85,23 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover table-striped table-dark">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-                            <th class="text-nowrap text-center" onclick="sortTable(0)">Editar estado</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">Estado</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">Cantidad</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">Pago</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(4)">Cambio</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(5)">Fecha</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(6)">Hora</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(7)">Cliente</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(8)">Registro</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(9)">Adeudo</th>
+                            
+                            <th class="text-nowrap text-center" onclick="sortTable(0)">Estado</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">$ Cantidad</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">$ Pago</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">$ Cambio</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(4)">Fecha</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Hora</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(6)">Cliente</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(7)">Registro</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(8)">Adeudo</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(9)">Editar estado</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php
-                        $con = new Models\Conexion();
-                        $negocios = $_SESSION['idnegocio'];
-                        $query = "SELECT idabono,abono.estado AS a_estado,cantidad,pago,cambio,fecha,hora,cliente.nombre AS nombre_cliente,
-                                            cliente.apaterno AS ap_cliente, cliente.amaterno AS am_cliente,trabajador.nombre,
-                                            trabajador.apaterno, adeudos_id FROM abono
-                                            INNER JOIN adeudos ON abono.adeudos_id=adeudos.idadeudos
-                                            INNER JOIN cliente ON adeudos.cliente_idcliente=cliente.idcliente
-                                            INNER JOIN trabajador ON trabajador.idtrabajador=abono.trabajador_idtrabajador
-                                            WHERE adeudos.negocios_idnegocios = '$negocios'
-                                            ORDER BY adeudos_id DESC";
-                        $row = $con->consultaListar($query);
-                        while ($renglon = mysqli_fetch_array($row)) {
-                            ?>
-                        <tr>
-                            <td class="text-nowrap text-center" style="width:100px;">
-                                <div class="row" style="margin: 0 auto;">
-                                    <?php if ($_SESSION['acceso'] == "Employes") {
-                                            ?>
-                                    <button style="margin: 0 auto;" class="btn btn-secondary" disabled><img src="img/edit.png"></button>
-                                    <?php } else {
-                                            ?>
-                                    <a style="margin-left:2px;" class="btn btn-secondary" href="EditAbonos.php?id=<?php echo $renglon['idabono']; ?>&estado=<?php echo $renglon['a_estado']; ?>">
-                                        <img src="img/edit.png">
-                                    </a>
-                                    <?php   } ?>
-
-                                </div>
-                            </td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['a_estado']; ?></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['cantidad']; ?></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['pago']; ?></td>
-                            <td class="text-nowrap text-center">$ <?php echo $renglon['cambio']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['nombre_cliente'] . " " . $renglon['ap_cliente'] . " " . $renglon['am_cliente']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-                            <td class="text-nowrap text-center"><a href="VConsultasAdeudos.php?ad= <?php echo $renglon['adeudos_id']; ?>"># <?php echo $renglon['adeudos_id']; ?></a></td>
-                        </tr>
-                        <?php
-                        } ?>
+                    <tbody id="cuerpo">
                     </tbody>
                 </table>
             </div>
@@ -114,6 +113,7 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!--container-->
     <script src="js/user_jquery.js"></script>
+    <script src="js/vabonos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

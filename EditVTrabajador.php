@@ -259,7 +259,8 @@ if (!isset($_SESSION['acceso'])) {
         $sueldo = $_POST['TSueldo'];
         $sueldo = floatval($sueldo);
         $trabajador->setSueldo($sueldo);
-        $result = $trabajador->setEstado($_POST['REstado']);
+        $trabajador->setEstado($_POST['REstado']);
+        $result = $trabajador->editar($_POST['agregarloa']);
         if ($result === 1) {
             ?>
 <script>

@@ -36,26 +36,26 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio();">
-<?php
-$sel = "usuarios";
-include("NavbarAB.php")
-?>
-<!-- Modal -->
-<div class="modal fade" id="modalForm" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header administrador">
-                <button type="button" class="close" data-dismiss="modal">
-                    <span aria-hidden="true">×</span>
-                    <span class="sr-only">Close</span>
-                </button>
-            </div>
+    <?php
+    $sel = "usuarios";
+    include("NavbarAB.php")
+    ?>
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header administrador">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
 
-            <!-- Modal Body -->
-            <div class="modal-body administrador">
-                <p class="statusMsg"></p>
-                    <form class="form-group" action="#" method="post">
+                <!-- Modal Body -->
+                <div class="modal-body administrador">
+                    <p class="statusMsg"></p>
+                    <form class="form-group" id="formuusers">
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-4">
                                 <h5 class="admin">Nombre:</h5>
@@ -74,18 +74,11 @@ include("NavbarAB.php")
                             <div class="col-lg-4">
                                 <h5 class="admin">Tipo de acceso:</h5>
 
-                                <div class="row" style="margin: 0 auto;">
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input admin" type="radio" id="acceso" name="RAcceso" value="CEOAB">CEOAB
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="acceso" name="RAcceso" value="ManagerAB" checked autofocus>Manager
-                                        </label>
-                                    </div>
-                                </div>
+                                <select class="form form-control" id="acceso">
+                                    <option value="ManagerAB">Manager</option>
+                                    <option value="CEOAB">CEOAB</option>
+                                    <option value="ManagerAB">Manager</option>
+                                </select>
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Usuario:</h5>
@@ -99,135 +92,60 @@ include("NavbarAB.php")
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-12">
                                 <h5 class="admin">Estado:</h5>
-
-                                <div class="row" style="margin: 0 auto;">
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="estado" name="REstado" value="A" checked autofocus>Activo
-                                        </label>
-                                    </div>
-                                    <div class="form-check-inline">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="radio" id="estado" name="REstado" value="I">Inactivo
-                                        </label>
-                                    </div>
-                                </div>
+                                <select class="form form-control" id="estadousers">
+                                    <option value="A">A</option>
+                                    <option value="I">I</option>
+                                </select>
                             </div>
                         </div>
 
-                        <input type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn btn-primary btn-lg btn-block" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
                     </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Modal -->
+    <!-- Modal -->
     <div class="contenedor container-fluid">
         <div class="row align-items-start">
-          <div class="col-lg-12">
-            <div id="tableContainer" class="d-block col-lg-12">
-                  <div class="input-group mb-2">
-                      <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
-                      <div class="input-group-prepend">
-                      <div class="input-group-text"><i class="fa fa-search"></i></div>
-                      </div>
-                      <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                      <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
-                  </div>
-                <div class="contenedorTabla table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead class="thead-dark">
-                        <tr class="encabezados">
-                            <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Paterno</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">Apellido Materno</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(4)">Acceso</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(5)">Usuario</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(6)">Contraseña</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(7)">Estado</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(8)">Acciones</th>
-                        </tr>
-                    </thead>
-
-                  <tbody>
-                      <?php
-                      $con = new Models\Conexion();
-                      $query = "SELECT * FROM usuariosab ORDER BY idusuariosab DESC";
-                      $row = $con->consultaListar($query);
-
-                      while ($renglon = mysqli_fetch_array($row)) {
-                          ?>
-                      <tr>
-                          <td class="text-nowrap text-center"><?php echo $renglon['idusuariosab']; ?></td>
-                          <td class="text-nowrap text-center"><?php echo $renglon['nombre']; ?></td>
-                          <td class="text-nowrap text-center"><?php echo $renglon['apaterno']; ?></td>
-                          <td class="text-nowrap text-center"><?php echo $renglon['amaterno']; ?></td>
-                          <td class="text-nowrap text-center"><?php echo $renglon['acceso']; ?></td>
-                          <td class="text-nowrap text-center"><?php echo $renglon['login']; ?></td>
-                          <td class="text-nowrap text-center"><?php echo $renglon['password']; ?></td>
-                          <td class="text-nowrap text-center"><?php echo $renglon['estado']; ?></td>
-                          <td class="text-nowrap text-center" style="width:100px;">
-                              <div class="row">
-                                  <a onclick="if(confirm('SE ELIMINARÁ EL REGISTRO #<?php echo $renglon['idusuariosab']; ?>!'))
-                                {href= 'deleteVUAB.php?id=<?php echo $renglon['idusuariosab']; ?>'} " class="btn btn-warning"><img src="img/eliminarf.png">
-                                  </a>
-                                  <a style="margin-left:2px;" class="btn btn-secondary" href="EditVUAB.php?id=<?php echo $renglon['idusuariosab'] ?>">
-                                      <img src="img/edit.png">
-                                  </a>
-                              </div>
-                          </td>
-                      </tr>
-                      <?php
-                      } ?>
-                  </tbody>
-              </table>
-          </div>
+            <div class="col-lg-12">
+                <div id="tableContainer" class="d-block col-lg-12">
+                    <div class="input-group mb-2">
+                        <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-search"></i></div>
+                        </div>
+                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                        <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    </div>
+                    <div class="contenedorTabla table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr class="encabezados">
+                                    <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Paterno</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(3)">Apellido Materno</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(4)">Acceso</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(5)">Usuario</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Contraseña</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Estado</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(8)">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpo">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-        </div>
-  </div>
-    <?php
-    if (
-        isset($_POST['TNombre']) && isset($_POST['TApellidoP'])
-        && isset($_POST['TApellidoM']) && isset($_POST['RAcceso']) &&
-        isset($_POST['TLogin']) && isset($_POST['TPContraseña']) && isset($_POST['REstado'])
-    ) {
-        $usab = new Models\Usuarioab();
-        $usab->setNombre($_POST['TNombre']);
-        $usab->setApaterno($_POST['TApellidoP']);
-        $usab->setAmaterno($_POST['TApellidoM']);
-        $usab->setAcceso($_POST['RAcceso']);
-        $usab->setLogin($_POST['TLogin']);
-        $usab->setPassword($_POST['TPContraseña']);
-        $usab->setEstado($_POST['REstado']);
-        $result = $usab->guardar();
-        if ($result === 1) {
-            ?>
-    <script>
-        swal({
-            title: 'Exito',
-            text: 'Se han registrado los datos exitosamente!',
-            type: 'success'
-        });
-    </script>
-
-    <?php } else {
-            ?>
-    <script>
-        swal({
-            title: 'Error',
-            text: 'No se han guardado los datos compruebe los campos unicos',
-            type: 'error'
-        });
-    </script>
-    <?php }
-    }
-    ?>
+    </div>
     <script src="js/user_jquery.js"></script>
+    <script src="js/vusuariosab.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
