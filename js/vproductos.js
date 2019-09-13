@@ -2,9 +2,19 @@ $(document).ready(function(){
     //productos
     let editar = false;
     let codigoBarras = "";
+    idSesion($('.sucursal').val());
     obtenerDatosTablaProducto();
     obtenerInventario();
     $('#divCantidad').hide();
+
+    function idSesion(id){
+        $.ajax({
+            url: 'sesionProduc.php',
+            type: 'POST',
+            data: {idProducto:id}
+        });
+        obtenerDatosTablaProducto();
+    }
 
 
     function obtenerInventario(){
@@ -26,6 +36,10 @@ $(document).ready(function(){
             }
         });
     }
+
+    $('.sucursal').change(function(){
+        idSesion($('.sucursal').val());
+    });
 
 
 
@@ -54,15 +68,27 @@ $(document).ready(function(){
                     <td>${datos.precio_compra}</td>
                     <td>${datos.precio_venta}</td>
                     <td>${datos.pestado}</td>
-                    <td>${datos.cantidad}</td>
-                    <th style="width:100px;">
+                    <td>${datos.cantidad}</td>`;
+                    if(datos.idNegocio == $('.sucursal').val()){
+                        template += `<th style="width:100px;">
                         <div class="row">
                             <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
                                 <img src="img/edit.png">
                             </a>
                         </div>
                     </th>
+                </tr>`;   
+                    }else{
+                        template +=`<th style="width:100px;">
+                        <div class="row">
+                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
+                                <img src="img/edit.png">
+                            </button>
+                        </div>
+                    </th>
                 </tr>`;
+                    }
+
                 });
                 $('#cuerpo').html(template);
             }

@@ -118,9 +118,7 @@ if (!isset($_SESSION['acceso'])) {
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <p>Sucursal:</p>
-                    <form action="#" method="POST">
-                        <select id="sucursal" class="form form-control" name="SNegocio">
-                            <option></option>
+                        <select  class="form form-control sucursal" name="SNegocio">
                             <?php
                             $negocio = $_SESSION['idnegocio'];
                             $con = new Models\Conexion();
@@ -130,16 +128,14 @@ if (!isset($_SESSION['acceso'])) {
                             $con->cerrarConexion();
                             $cont = 0;
                             while ($renglon = mysqli_fetch_array($row)) {
-                                $nombre[$cont] = $renglon['nombre_negocio'];
-                                $id[$cont] = $renglon['idnegocios'];
-                                $cont++;
-                                echo "<option>" . $renglon['nombre_negocio'] . "</option>";
+                                echo "<option value =".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
                             }
                             ?>
                         </select>
                         <input type="submit" style="display: none;">
-                    </form>
                     <button class="d-none d-lg-flex btn btn-primary ml-3 mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    
+                    <button id="BcodigoBarra"  data-toggle="modal" data-target="#modalFormCodigo">Imprimir Codigos</button>
                 </div>
 
                 <div class="contenedorTabla table-responsive">
@@ -162,16 +158,7 @@ if (!isset($_SESSION['acceso'])) {
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
-                            <?php
-                            if (isset($_POST['SNegocio'])) {
-                                for ($i = 0; $i < sizeof($id); $i++) {
-                                    if (strcasecmp($_POST['SNegocio'], $nombre[$i]) == 0) {
-                                        $negocio = $id[$i];
-                                    }
-                                }
-                            } else {
-                                        $negocio = $_SESSION['idnegocio'];
-                            }?>
+
                         </tbody>
                     </table>
                 </div>
@@ -219,6 +206,42 @@ if (!isset($_SESSION['acceso'])) {
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div id="tableHolder" class="row justify-content-center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+            <!-- Modal -->
+            <div class="modal fade" id="modalFormCodigo" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p class="statusMsg"></p>
+                    <div class="row justify-content-center">
+                        <form action="codigoBarras.php" method="POST" target="_blank">
+                        <div class="col-12">
+                            <h5>Ingrese la cantidad que desea imprimir (Se imprimiran todos los productos que esten en inventario)</h5>
+                            <div class="tab-content" id="myTabContent">
+                                <p class="general">Cantidad:</p>
+                                <input type="num" name="cantidad">
+                                <input type="submit">
+                            </div>
+                            </form>
                         </div>
                     </div>
                     <div id="tableHolder" class="row justify-content-center">

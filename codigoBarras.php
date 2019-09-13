@@ -43,18 +43,14 @@ if (!isset($_SESSION['acceso'])) {
             session_start();
             $con = new Models\Conexion();
             $negocios = $_SESSION['idnegocio'];
-            $cantidad = 5;
+            $cantidad = $_POST['cantidad'];
             $numeracion = true;
             $sql = "SELECT producto_codigo_barras,cantidad FROM inventario WHERE negocios_idnegocios = '$negocios'";
             $resultado = $con->consultaListar($sql);
             while ($row = mysqli_fetch_array($resultado)){
-                for ($i=0; $i<$cantidad; $i++){
-                    ?>
-                        <tr>
-                            <td><img src="barcode.php?text=<?php echo $row['producto_codigo_barras'];?>&size=50&orientation=horizontal&codetype=Code39&print=true&sizefactor=1"/></td>
-                        </tr>
-                    <?php 
-                }
+                for ($i=0; $i<$cantidad; $i++){?>
+                    <img src="barcode.php?text=<?php echo $row['producto_codigo_barras'];?>&size=50&orientation=horizontal&codetype=Code39&print=true&sizefactor=1"/>
+        <?php }
             }
         ?>
         </tbody>

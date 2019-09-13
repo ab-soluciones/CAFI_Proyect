@@ -66,7 +66,7 @@ if (!isset($_SESSION['acceso'])) {
                             <input type="hidden" id="id" name="id">
                             <input type="hidden" id="estadoActual">
                         </div>
-
+                        
                         <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="submit" value="Guardar">
                     </form>
                     <div id="tableHolder">
@@ -105,7 +105,7 @@ if (!isset($_SESSION['acceso'])) {
                                         <th>Color</th>
                                         <th>UM</th>
                                         <th>Talla</th>
-                                        <th>PU</th>
+                                        <th>PV</th>
                                         <th>Subtotal</th>
                                     </tr>
                                 </thead>
@@ -115,8 +115,6 @@ if (!isset($_SESSION['acceso'])) {
                                 </table>
                             </div>
                         </div>
-
-                        <input id="bclose" type="button" class="mt-3 btn btn-lg btn-block btn-primary" name="submit" value="Salir">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -175,7 +173,7 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td class="text-nowrap text-center"><button id="mostrar" data-toggle="modal" data-target="#modalFormMostrar">Mostrar</button></td>
+                            <td class="text-nowrap text-center"><button class="mostrar" data-toggle="modal" data-target="#modalFormMostrar">Mostrar</button></td>
                             <td class="text-nowrap text-center d-none"><?php echo $renglon['idventas'];  ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['descuento']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['total']; ?></td>

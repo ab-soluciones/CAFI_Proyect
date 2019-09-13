@@ -44,6 +44,7 @@ session_start();
 
 //se inicializa las variables globales
 $_SESSION['idven'] = null;
+$_SESSION['comboID'] = null;
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 if (isset($_SESSION['acceso']) && strcasecmp($_SESSION['estado'], "A") == 0) {

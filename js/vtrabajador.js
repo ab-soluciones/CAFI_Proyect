@@ -2,8 +2,23 @@ $(document).ready(function(){
     //Trabajadores
     let editar = false;
     let idtrabajador = "";
-
+    let idnego = "";
+    var id = $('.sucursal').val();
+    idSesion(id);
     obtenerDatosTablaTrabajador();
+
+    function idSesion(id){
+        $.ajax({
+            url: 'sesionTrabajador.php',
+            type: 'POST',
+            data: {idSucursal:id}
+        });
+        obtenerDatosTablaTrabajador();
+    }
+
+    $('.sucursal').change(function(){
+        idSesion($(this).val());
+    });
 
 
     $('.close').click(function(){
@@ -11,12 +26,12 @@ $(document).ready(function(){
     });
 
     function obtenerDatosTablaTrabajador(){
+
         $.ajax({
             url: 'tablaTrabajador.php',
             type: 'GET',
-
             success: function(response){
-                console.log(response);
+                
                 let datos = JSON.parse(response);
                 let template = '';
                 datos.forEach(datos => {
@@ -36,7 +51,6 @@ $(document).ready(function(){
                     <td class="text-nowrap text-center">${datos.password}</td>
                     <td class="text-nowrap text-center">${datos.sueldo}</td>
                     <td class="text-nowrap text-center">${datos.estado}</td>
-                    <td class="text-nowrap text-center">${datos.negocios_idnegocios}</td>
                     <th style="width:100px;">
                         <div class="row">
                             <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
@@ -55,6 +69,8 @@ $(document).ready(function(){
     });
 
     $('#formtrabajador').submit(function(e){
+
+        idnego = $('#agregarloa').val();
 
         const postData = {
             id: idtrabajador,
@@ -77,6 +93,7 @@ $(document).ready(function(){
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         $.post(url,postData, function (response) {
             $('#formclienteab').trigger('reset');
+            idSesion(idnego);
             obtenerDatosTablaTrabajador();
             editar = false;
             if (response === "1") {

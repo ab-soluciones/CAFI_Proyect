@@ -3,7 +3,7 @@
      Config\Autoload::run();
      session_start();
      $con = new Models\Conexion();
-     $negocio = $_SESSION['idnegocio'];
+     $negocio = $_SESSION['comboID'];
      $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
      FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
      WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
@@ -24,7 +24,9 @@
                 'precio_compra' => $renglon['precio_compra'],
                 'precio_venta' => $renglon['precio_venta'],
                 'pestado' => $renglon['pestado'],
-                'cantidad' => $renglon['cantidad']
+                'cantidad' => $renglon['cantidad'],
+                'idNegocio' => $_SESSION['idnegocio']
+                
             );
         }
         $jsonstring = json_encode($json);
