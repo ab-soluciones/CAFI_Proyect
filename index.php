@@ -10,6 +10,7 @@ session_start();
 $_SESSION['idven'] = null;
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+$_SESSION['comboID'] = null;
 if (isset($_SESSION['acceso'])) {
 
   header('location: VVentas.php');

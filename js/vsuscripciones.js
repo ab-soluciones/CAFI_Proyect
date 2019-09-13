@@ -70,7 +70,7 @@ $(document).ready(function () {
     $.post(url, postData, function (response) {
       $('#formulario').trigger('reset');
       editar = false;
-      if (response === "1") {
+      if (response == "1") {
         swal({
           title: 'Exito',
           text: 'Datos guardados satisfactoriamente',

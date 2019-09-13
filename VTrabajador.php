@@ -131,7 +131,6 @@ Config\Autoload::run();
                                                 WHERE clientesab_idclienteab = '$dueño'";
                                     $row = $con->consultaListar($query);
                                     $con->cerrarConexion();
-                                    $cont = 0;
                                     while ($renglon = mysqli_fetch_array($row)) {
                                         echo "<option value=".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
                                     }
@@ -168,9 +167,8 @@ Config\Autoload::run();
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
                     <p>Sucursal:</p>
-                    <form action="#" method="POST">
-                        <select id="sucursal" class="form form-control" name="SNegocio">
-                            <option></option>
+
+                        <select id="" class="form form-control sucursal" name="SNegocio">
                             <?php
                             $con = new Models\Conexion();
                             $dueño = $_SESSION['id'];
@@ -185,7 +183,7 @@ Config\Autoload::run();
                             ?>
                         </select>
                         <input type="submit" style="display: none;">
-                    </form>
+                    
                     <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
@@ -211,18 +209,10 @@ Config\Autoload::run();
                                 <th onclick="sortTable(11)">Contraseña</th>
                                 <th onclick="sortTable(12)">Sueldo</th>
                                 <th onclick="sortTable(13)">Estado</th>
-                                <th onclick="sortTable(14)">id negocio</th>
-                                <th onclick="sortTable(15)">Acciones</th>
+                                <th onclick="sortTable(14)">Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
-                        <?php
-                                if (isset($_POST['SNegocio'])) {
-                                            $_SESSION['idnegocio'] =  $_POST['SNegocio'];   
-                                
-                                } else {
-                               
-                                }?>
                         </tbody>
                     </table>
                 </div>

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#mostrar').click(function(){
+    $('.mostrar').click(function(){
         var valores = "";
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
@@ -8,26 +8,26 @@ $(document).ready(function () {
           valores += $(this).html() + "?";
         });
         datos = valores.split("?");
+
         const postData = {
             venta: datos[1]
         }
         console.log(postData);
-        
         $.post('datosMostrarVenta.php', postData, function (response) {
             let datos = JSON.parse(response);
+            console.log(datos);
             let template = '';
             datos.forEach(datos => {
               template += `
                     <tr>
+                    <td>${datos.cantidad_producto}</td>
                     <td>${datos.nombre}</td>
-                    <td>${datos.imagen}</td>
-                    <td>${datos.domicilio}</td>
-                    <td>${datos.color}</td>
+                    <td><img width=150% height=50% src=${datos.imagen} ></td>
                     <td>${datos.marca}</td>
-                    <td>${datos.precio_venta}</td>
+                    <td>${datos.color}</td>
                     <td>${datos.unidad_medida}</td>
                     <td>${datos.talla_numero}</td>
-                    <td>${datos.cantidad_producto}</td>
+                    <td>${datos.precio_venta}</td>
                     <td>${datos.subtotal}</td>
                 </tr>`;
             });

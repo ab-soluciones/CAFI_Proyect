@@ -409,7 +409,7 @@ if (
         //se optine la extencion de la imagen
         $bytes = $_FILES['FImagen']['size'];
         //se optiene el tamaño de la imagen
-        if ($bytes <= 10000) {
+        if ($bytes <= 1000000) {
             //si la imagen es menor a 1 mega se comprueba la extencion, si la extencion es igual a alguna de la condiconal se registra la imagen
             if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png') {
                 $temp = explode(".", $_FILES["FImagen"]["name"]);

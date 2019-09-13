@@ -55,6 +55,7 @@ $(document).ready(function (){
         console.log(postData);
 
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
+        
         $.post(url,postData,function(response){
             console.log(response);
            $('#formotrosingresos').trigger('reset');
