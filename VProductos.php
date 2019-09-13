@@ -132,6 +132,7 @@ if (!isset($_SESSION['acceso'])) {
                             }
                             ?>
                         </select>
+                        <input type="hidden" id="negocioActual" value=<?php echo  $_SESSION['idnegocio'];?>>
                         <input type="submit" style="display: none;">
                     <button class="d-none d-lg-flex btn btn-primary ml-3 mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     

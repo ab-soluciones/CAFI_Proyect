@@ -136,6 +136,7 @@ Config\Autoload::run();
                                     }
                                     ?>
                                 </select> <br>
+                                <input type="hidden" id="idDueno" value=<?php echo $_SESSION['id'];?>>
                             </div>
                         </div>
                             <div class="col-4">
