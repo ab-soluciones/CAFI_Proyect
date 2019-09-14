@@ -87,7 +87,7 @@ $(document).ready(function(){
             };
 
             let url = 'post-guardar.php';
-        
+
         $.post(url,postData,function(response){
             $('#formuventas').trigger('reset');
                 if (response === "1") {
@@ -105,16 +105,16 @@ $(document).ready(function(){
                 }else if(response == "SaldoInsufucienteCaja"){
                     swal({
                         title: 'Alerta',
-                        text: 'Saldo insufucuinte en caja',
+                        text: 'Saldo insuficiente en caja',
                         type: 'warning'
                     });
                 }else if(response == "SaldoInsufucienteBanco"){
                     swal({
                         title: 'Alerta',
-                        text: 'Saldo insufucuinte en Banco',
+                        text: 'Saldo insuficiente en Banco',
                         type: 'warning'
                     });
-                } else { 
+                } else {
                     swal({
                         title: 'Alerta',
                         text: 'Datos no guardados, compruebe los campos unicos',
@@ -134,7 +134,7 @@ $(document).ready(function(){
         };
 
         let url = 'post-edit.php';
-    
+
     $.post(url,postData,function(response){
 
         $('#formuventas').trigger('reset');
@@ -144,7 +144,7 @@ $(document).ready(function(){
                     text: 'Datos guardados satisfactoriamente',
                     type: 'success'
                 });
-            } else { 
+            } else {
                 swal({
                     title: 'Alerta',
                     text: 'Datos no guardados, compruebe los campos unicos',
@@ -168,7 +168,7 @@ $(document).ready(function(){
         $('#estado').val(datos[7]);
 
         editar = true;
-     
+
       });
 
 
