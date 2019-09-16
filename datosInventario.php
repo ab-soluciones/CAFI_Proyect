@@ -8,7 +8,7 @@ $datos = false;
 $query = "SELECT clientesab_idclienteab FROM negocios WHERE idnegocios = '$negocios'";
 $result = $con->consultaRetorno($query);
 $query = "SELECT nombre,color,marca,talla_numero FROM producto t1
-WHERE t1.clientesab_id_clienteab = '$result[clientesab_idclienteab]' AND T1.pestado = 'A'
+WHERE t1.clientesab_id_clienteab = '$result[clientesab_idclienteab]' AND t1.pestado = 'A'
 AND NOT EXISTS (SELECT NULL FROM inventario t2 WHERE t2.producto_codigo_barras = t1.codigo_barras AND t2.negocios_idnegocios = '$negocios')";
 $row = $con->consultaListar($query);
 $con->cerrarConexion();
