@@ -7,7 +7,7 @@ if (!isset($_SESSION['acceso'])) {
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if ($_SESSION['acceso'] != "CEOAB") {
-    header('location: VABOptions.php');
+    header('location: index.php');
 }
 
 
@@ -59,15 +59,15 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-4">
                                 <h5 class="admin">Nombre:</h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Apellido Paterno:</h5>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Apellido Materno:</h5>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off">
                             </div>
                         </div>
                         <div class="d-block d-lg-flex row">
@@ -75,18 +75,17 @@ if (!isset($_SESSION['acceso'])) {
                                 <h5 class="admin">Tipo de acceso:</h5>
 
                                 <select class="form form-control" id="acceso">
-                                    <option value="ManagerAB">Manager</option>
                                     <option value="CEOAB">CEOAB</option>
                                     <option value="ManagerAB">Manager</option>
                                 </select>
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Usuario:</h5>
-                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
+                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off"><br>
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Contrase&ntilde;a:</h5>
-                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a" required><br>
+                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a"><br>
                             </div>
                         </div>
                         <div class="d-block d-lg-flex row">

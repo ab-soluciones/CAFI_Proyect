@@ -10,7 +10,7 @@ if (!isset($_SESSION['acceso'])) {
     $_SESSION['acceso'] == "Employes" || $_SESSION['acceso'] == "ManagerAB"
     || $_SESSION['acceso'] == "CEOAB"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 

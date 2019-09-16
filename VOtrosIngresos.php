@@ -10,7 +10,7 @@ if (!isset($_SESSION['acceso'])) {
     $_SESSION['acceso'] == "CEOAB" || $_SESSION['acceso'] == "ManagerAB"
     || $_SESSION['acceso'] == "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -55,11 +55,11 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="importante">Cantidad $ :</h5>
-                                <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off" required>
+                                <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off">
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Tipo :</h5>
-                                <select id="tipo" name="STipo" id="concepto" class="form form-control" required>
+                                <select id="tipo" name="STipo" id="concepto" class="form form-control" >
                                     <option></option>
                                     <option>Dinero a caja</option>
                                     <option>Capital Externo</option>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="general">Forma de Ingreso :</h5>
-                                <select name="SFIngreso" id="fingreso" class="form form-control" required>
+                                <select name="SFIngreso" id="fingreso" class="form form-control" >
                                     <option></option>
                                     <option>Efectivo</option>
                                     <option>Banco</option>
@@ -78,7 +78,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Fecha :</h5>
-                                <input class="form-control" id="fecha" type="date" name="DFecha" required>
+                                <input class="form-control" id="fecha" type="date" name="DFecha" >
                             </div>
                             
                             <div class="d-block col-lg-6">
@@ -140,4 +140,3 @@ if (!isset($_SESSION['acceso'])) {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
-</html>

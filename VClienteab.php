@@ -10,7 +10,7 @@ if (!isset($_SESSION['acceso'])) {
     $_SESSION['acceso'] == "Employes" || $_SESSION['acceso'] == "Manager"
     ||  $_SESSION['acceso'] == "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -55,15 +55,15 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-4">
                                 <h5 class="admin"> Nombre:</h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Apellido Paterno:</h5>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Apellido Materno:</h5>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
@@ -87,9 +87,9 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="admin">Telefono:</h5>
-                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
+                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" >
                             </div>
-                            <div class="col-lg-6">
+                            <div class="co
                                 <h5 class="admin">Correo electrónico:</h5>
                                 <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
@@ -97,11 +97,11 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="admin">Usuario:</h5>
-                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
+                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="admin">Contraseña:</h5>
-                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required>
+                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" >
                             </div>
                         </div>
                         <div class="row">

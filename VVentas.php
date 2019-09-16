@@ -11,7 +11,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 } else if (
     $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -74,7 +74,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input autofocus style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" placeholder="Buscar Producto...">
+                    <input autofocus style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" autocomplete="off"  placeholder="Buscar Producto...">
                 </div>
                 <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">
                     <table class="table table-hover table-striped table-dark">
@@ -116,7 +116,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <h3 style="color: white; text-align: right;" class="hmtotal p-2 font-weight-bold"></h3>
                         </td>
                     </div>
-                    <div id="divpagotarjeta text-center my-5" style="color:white;">
+                    <div class="divpagotarjeta text-center my-5" style="color:white;">
                         <h5>Ingrese la tarjeta en la terminal y cobre el total</h5>
                     </div>
                     <button class="bdescuento btn btn-block btn-large btn-primary" type="button">Aplicar descuento</button><br>
@@ -133,7 +133,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-search"></i></div>
                             </div>
-                            <input style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedac" placeholder="Buscar Cliente...">
+                            <input autocomplete="off"  style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedac" placeholder="Buscar Cliente...">
                         </div>
 
                         <table class="scroll table table-hover table-striped table-dark">

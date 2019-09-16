@@ -9,7 +9,7 @@ if (!isset($_SESSION['acceso'])) {
 } else if (
     $_SESSION['acceso'] != "Manager"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 
@@ -57,15 +57,15 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-4">
                                 <p class="general">Nombre:</p>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">Apellido Paterno:</p>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">Apellido Materno:</p>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
@@ -82,21 +82,21 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">#Documento:</p>
-                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
+                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">Direccion:</p>
-                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required>
+                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" autocomplete="off"  >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
                                 <p class="general">Telefono:</p>
-                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
+                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">E-mail:</p>
-                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
+                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                             <div class="d-block col-lg-12">

@@ -9,7 +9,7 @@ if (!isset($_SESSION['acceso'])) {
 } else if (
     $_SESSION['acceso'] != "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 

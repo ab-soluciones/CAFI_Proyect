@@ -8,7 +8,7 @@ if (!isset($_SESSION['acceso'])) {
 } else if (
     $_SESSION['acceso'] != "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 require_once "Config/Autoload.php";
 Config\Autoload::run();
@@ -56,15 +56,15 @@ Config\Autoload::run();
                         <div class="d-block d-lg-flex row">
                             <div class="col-4">
                                 <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-4">
                                 <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
                             </div>
                             <div class="col-4">
                                 <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
                             </div>
                         </div>
                     </div>
@@ -79,17 +79,17 @@ Config\Autoload::run();
                             </div>
                             <div class="col-4">
                                 <h5><label for="numdoc" class="badge badge-primary">Documento:</label></h5>
-                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" required>
+                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
                             </div>
                             <div class="col-4">
                                 <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
-                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" required autocomplete="off">
+                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion"  autocomplete="off">
                             </div>
                     </div>
                     <div class="d-block d-lg-flex row">
                             <div class="col-4">
                                 <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
-                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required autocomplete="off">
+                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono"  autocomplete="off">
                             </div>
                             <div class="col-4">
                                 <h5><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
@@ -106,24 +106,24 @@ Config\Autoload::run();
                     <div class="row d-block d-lg-flex">
                         <div class="col-lg-4">
                             <h5><label for="login" class="badge badge-primary">Nombre de Usuario:</label></h5>
-                            <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
+                            <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
                         </div>
 
                         <div class="col-lg-4">
                             <h5><label for="login" class="badge badge-primary">Contraseña:</label></h5>
-                            <input id="contrasena" class="form form-control" type="text" name="TContrasena" placeholder="Contraseña" autocomplete="off" required>
+                            <input id="contrasena" class="form form-control" type="text" name="TContrasena" placeholder="Contraseña" autocomplete="off" >
                         </div>
 
                         <div class="col-lg-4">
                             <h5><label for="login" class="badge badge-primary">Sueldo:</label></h5>
-                            <input id="sueldo" class="form form-control" type="text" name="TSueldo" placeholder="Sueldo" autocomplete="off" required>
+                            <input id="sueldo" class="form form-control" type="text" name="TSueldo" placeholder="Sueldo" autocomplete="off" >
                         </div>
 
 
                         <div class="row">
                             <div class="col-12">
                                 <h5><label for="email" class="badge badge-primary">Agregarlo a:</label></h5>
-                                <select id="agregarloa" class="form form-control" name="SSucursal" required>
+                                <select id="agregarloa" class="form form-control" name="SSucursal" >
                                     <?php
                                     $con = new Models\Conexion();
                                     $dueño = $_SESSION['id'];
@@ -136,6 +136,7 @@ Config\Autoload::run();
                                     }
                                     ?>
                                 </select> <br>
+                                <input type="hidden" id="idDueno" value=<?php echo $_SESSION['id'];?>>
                             </div>
                         </div>
                             <div class="col-4">

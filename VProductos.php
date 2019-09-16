@@ -7,9 +7,9 @@ if (!isset($_SESSION['acceso'])) {
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    !$_SESSION['acceso'] == "Manager"
+   $_SESSION['acceso'] != "Manager"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -132,6 +132,7 @@ if (!isset($_SESSION['acceso'])) {
                             }
                             ?>
                         </select>
+                        <input type="hidden" id="negocioActual" value=<?php echo  $_SESSION['idnegocio'];?>>
                         <input type="submit" style="display: none;">
                     <button class="d-none d-lg-flex btn btn-primary ml-3 mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     

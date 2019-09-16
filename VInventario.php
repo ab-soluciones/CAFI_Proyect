@@ -10,7 +10,7 @@ if (!isset($_SESSION['acceso'])) {
     $_SESSION['acceso'] == "Employes" || $_SESSION['acceso'] == "ManagerAB"
     || $_SESSION['acceso'] == "CEOAB"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 
@@ -116,7 +116,7 @@ if (!isset($_SESSION['acceso'])) {
                                     document.getElementById("XS").id = "";
                                 </script>
                                 <td><?php echo $result['nombre'] ?></td>
-                                <td><img src="data:image/jpg;base64,<?php echo base64_encode($result['imagen']) ?>" height="30" width="30" /> </td>
+                                <td><img src="<?php echo $result['imagen'];?>" height="30" width="30" /> </td>
                                 <td><?php echo $result['marca'] ?></td>
                                 <td><?php echo $result['color'] ?></td>
                                 <td><?php echo $result['unidad_medida'] ?></td>
@@ -195,7 +195,7 @@ if (!isset($_SESSION['acceso'])) {
                                     <?php                } else {
                                         ?>
                                         <td><?php echo $result['nombre'] ?></td>
-                                        <td><img src="data:image/jpg;base64,<?php echo base64_encode($result['imagen']) ?>" height="30" width="30" /> </td>
+                                        <td><img src="<?php echo $result['imagen'];?>" height="30" width="30" /> </td>
                                         <td><?php echo $result['marca'] ?></td>
                                         <td><?php echo $result['color'] ?></td>
                                         <td><?php echo $result['unidad_medida'] ?></td>

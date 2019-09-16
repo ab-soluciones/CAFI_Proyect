@@ -1,7 +1,313 @@
 <?php
 require_once "Config/Autoload.php";
+require __DIR__ . '/ticket/autoload.php'; //Nota: si renombraste la carpeta a algo diferente de "ticket" cambia el nombre en esta línea
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\EscposImage;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 Config\Autoload::run();
+
 session_start();
+
+function ejecutarImpresionTermicaAbono($adeudo){
+    
+    /*
+	Este ejemplo imprime un
+	ticket de venta desde una impresora térmica
+*/
+
+
+    /*
+    Aquí, en lugar de "POS" (que es el nombre de mi impresora)
+	escribe el nombre de la tuya. Recuerda que debes compartirla
+	desde el panel de control
+*/
+
+$nombre_impresora = "CAFI";
+
+
+$connector = new WindowsPrintConnector($nombre_impresora);
+$printer = new Printer($connector);
+#Mando un numero de respuesta para saber que se conecto correctamente.
+/*
+Vamos a imprimir un logotipo
+opcional. Recuerda que esto
+no funcionará en todas las
+impresoras
+
+Pequeña nota: Es recomendable que la imagen no sea
+transparente (aunque sea png hay que quitar el canal alfa)
+y que tenga una resolución baja. En mi caso
+la imagen que uso es de 250 x 250
+*/
+
+# Vamos a alinear al centro lo próximo que imprimamos
+$printer->setJustification(Printer::JUSTIFY_CENTER);
+
+/*
+Intentaremos cargar e imprimir
+el logo
+*/
+try {
+    $logo = EscposImage::load("img/ticketcafi.png", false);
+    $printer->bitImage($logo);
+} catch (Exception $e) { }
+
+/*
+Ahora vamos a imprimir un encabezado
+*/
+Config\Autoload::run();
+$con = new Models\Conexion();
+$idnegocio = $_SESSION['idnegocio'];
+$query = "SELECT pago_minimo,cantidad,abono.pago AS pago_abono,abono.cambio AS cambio_abono,total_deuda,abono.fecha,abono.hora ,idventas ,
+total,descuento, trabajador.nombre,trabajador.apaterno, cliente.nombre AS n_cliente, cliente.apaterno AS ap_cliente,
+cliente.amaterno AS am_cliente,nombre_negocio, domicilio, ciudad,telefono_negocio FROM abono 
+INNER JOIN adeudos ON abono.adeudos_id=adeudos.idadeudos 
+INNER JOIN cliente ON adeudos.cliente_idcliente=cliente.idcliente 
+INNER JOIN trabajador ON trabajador.idtrabajador = abono.trabajador_idtrabajador 
+INNER JOIN venta ON venta.idventas = adeudos.ventas_idventas 
+INNER JOIN negocios ON venta.idnegocios=negocios.idnegocios 
+WHERE idabono = (SELECT MAX(idabono) from abono)";
+
+$row = $con->consultaListar($query);
+$renglon = mysqli_fetch_array($row);
+
+$printer->text("\n" . "ABONO VENTA A CRÉDITO # $renglon[idventas]");
+$printer->text("\n" . "Cliente: $renglon[n_cliente] $renglon[ap_cliente] $renglon[am_cliente]" . "\n");
+$printer->text("$renglon[nombre_negocio]" . "\n");
+$printer->text("$renglon[domicilio]" . " " . "$renglon[ciudad]" . "\n");
+if (isset($renglon['telefono_negocio'])) {
+    $printer->text("Tel: $renglon[telefono_negocio]" . "\n");
+}
+
+
+#La fecha también
+
+$printer->text($renglon['fecha'] . " " . $renglon['hora'] . "\n");
+$printer->text("-----------------------------" . "\n");
+$printer->setJustification(Printer::JUSTIFY_LEFT);
+$printer->text("CANT  DESCRIPCION  P.U  IMP  UM  Talla\n");
+$printer->text("-----------------------------" . "\n");
+/*
+Ahora vamos a imprimir los
+productos
+*/
+/*Alinear a la izquierda para la cantidad y el nombre*/
+$query = "SELECT nombre,color,marca,precio_venta, cantidad_producto, unidad_medida,talla_numero,subtotal FROM
+producto INNER JOIN detalle_venta ON codigo_barras = producto_codigo_barras WHERE
+detalle_venta.idventa='$renglon[idventas]'";
+$row = $con->consultaListar($query);
+while ($renglon2 = mysqli_fetch_array($row)) {
+    $printer->setJustification(Printer::JUSTIFY_LEFT);
+    $printer->text("$renglon2[nombre] $renglon2[marca] color $renglon2[color].\n");
+    $printer->text("$renglon2[cantidad_producto]" . " " . "$ $renglon2[precio_venta]" . " " . " $ $renglon2[subtotal] " . " " . "$renglon2[unidad_medida]" . " " . "$renglon2[talla_numero]"  . "\n");
+}
+$printer->text("-----------------------------" . "\n");
+$printer->setJustification(Printer::JUSTIFY_RIGHT);
+if ($renglon['descuento'] > 0.00) {
+    $printer->text("DESCUENTO: $ $renglon[descuento]\n");
+}
+$printer->text("TOTAL VENTA: $ $renglon[total]\n");
+
+if ($renglon['pago_minimo'] > 0.00) {
+    $printer->text("PAGO MINIMO: $ $renglon[pago_minimo]\n");
+}
+$printer->text("ABONO ACTUAL: $ $renglon[cantidad]\n");
+if ($renglon['pago_abono'] > 0.00) {
+    $printer->text("PAGÓ: $ $renglon[pago_abono]\n");
+}
+if ($renglon['cambio_abono'] > 0.00) {
+    $printer->text("      CAMBIO: $ $renglon[cambio_abono]\n");
+}
+$printer->text("ADEUDO ACTUAL: $ $renglon[total_deuda]\n");
+
+
+
+
+
+/*
+Podemos poner también un pie de página
+*/
+$printer->setJustification(Printer::JUSTIFY_CENTER);
+$printer->text("\nMuchas gracias por su nuevo abono :-)\n");
+$printer->text("\nUsted fué atendido por $renglon[nombre] $renglon[apaterno]");
+
+
+
+/*Alimentamos el papel 3 veces*/
+$printer->feed(3);
+
+/*
+Cortamos el papel. Si nuestra impresora
+no tiene soporte para ello, no generará
+ningún error
+*/
+$printer->cut();
+
+/*
+Por medio de la impresora mandamos un pulso.
+Esto es útil cuando la tenemos conectada
+por ejemplo a un cajón
+*/
+$printer->pulse();
+
+/*
+Para imprimir realmente, tenemos que "cerrar"
+la conexión con la impresora. Recuerda incluir esto al final de todos los archivos
+*/
+$printer->close();
+}
+
+function ejecutarImpresionTermica()
+{
+
+    $venta = $_SESSION['idven'];
+
+    $nombre_impresora = "CAFI";
+
+
+    $connector = new WindowsPrintConnector($nombre_impresora);
+    $printer = new Printer($connector);
+    #Mando un numero de respuesta para saber que se conecto correctamente.
+
+    /*
+	Vamos a imprimir un logotipo
+	opcional. Recuerda que esto
+	no funcionará en todas las
+	impresoras
+
+	Pequeña nota: Es recomendable que la imagen no sea
+	transparente (aunque sea png hay que quitar el canal alfa)
+	y que tenga una resolución baja. En mi caso
+	la imagen que uso es de 250 x 250
+*/
+
+    # Vamos a alinear al centro lo próximo que imprimamos
+    $printer->setJustification(Printer::JUSTIFY_CENTER);
+
+    /*
+	Intentaremos cargar e imprimir
+	el logo
+*/
+    try {
+        $logo = EscposImage::load("img/ticketcafi.png", false);
+        $printer->bitImage($logo);
+    } catch (Exception $e) { }
+
+    /*
+	Ahora vamos a imprimir un encabezado
+*/
+    Config\Autoload::run();
+    $con = new Models\Conexion();
+    $idnegocio = $_SESSION['idnegocio'];
+    $query = "SELECT descuento,total,pago, cambio,fecha,hora,nombre,apaterno,nombre_negocio,domicilio, ciudad,telefono_negocio FROM venta 
+	INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
+	INNER JOIN negocios ON venta.idnegocios=negocios.idnegocios
+ 	WHERE idventas = '$venta'";
+    $row = $con->consultaListar($query);
+    $renglon = mysqli_fetch_array($row);
+
+    $query = "SELECT pago_minimo, total_deuda,nombre,apaterno,amaterno FROM adeudos INNER JOIN cliente ON adeudos.cliente_idcliente=cliente.idcliente WHERE ventas_idventas ='$venta'";
+    $row = $con->consultaListar($query);
+    $abono = mysqli_fetch_array($row);
+
+    if (isset($abono)) {
+        $printer->text("\n" . "VENTA A CRÉDITO # $venta");
+        $printer->text("\n" . "Cliente: $abono[nombre] $abono[apaterno] $abono[amaterno]" . "\n");
+    } else {
+        $printer->text("\n" . "VENTA # $venta" . "\n");
+    }
+    $printer->text("$renglon[nombre_negocio]" . "\n");
+    $printer->text("$renglon[domicilio]" . " " . "$renglon[ciudad]" . "\n");
+    if (isset($renglon['telefono_negocio'])) {
+        $printer->text("Tel: $renglon[telefono_negocio]" . "\n");
+    }
+
+
+    #La fecha también
+
+    $printer->text($renglon['fecha'] . " " . $renglon['hora'] . "\n");
+    $printer->text("-----------------------------" . "\n");
+    $printer->setJustification(Printer::JUSTIFY_LEFT);
+    $printer->text("CANT  DESCRIPCION  P.U  IMP  UM  Talla\n");
+    $printer->text("-----------------------------" . "\n");
+    /*
+	Ahora vamos a imprimir los
+	productos
+*/
+    /*Alinear a la izquierda para la cantidad y el nombre*/
+    $query = "SELECT nombre,color,marca,precio_venta, cantidad_producto, unidad_medida,talla_numero,subtotal FROM
+	producto INNER JOIN detalle_venta ON codigo_barras = producto_codigo_barras WHERE
+	detalle_venta.idventa='$venta'";
+    $row = $con->consultaListar($query);
+    while ($renglon2 = mysqli_fetch_array($row)) {
+        $printer->setJustification(Printer::JUSTIFY_LEFT);
+        $printer->text("$renglon2[nombre] $renglon2[marca] color $renglon2[color].\n");
+        $printer->text("$renglon2[cantidad_producto]" . " " . "$ $renglon2[precio_venta]" . " " . " $ $renglon2[subtotal] " . " " . "$renglon2[unidad_medida]" . " " . "$renglon2[talla_numero]"  . "\n");
+    }
+
+    $printer->text("-----------------------------" . "\n");
+    $printer->setJustification(Printer::JUSTIFY_RIGHT);
+    if (isset($abono)) {
+        if ($renglon['descuento'] > 0.00) {
+            $printer->text("DESCUENTO: $ $renglon[descuento]\n");
+        }
+
+        $printer->text("TOTAL: $ $renglon[total]\n");
+        $printer->text("ABONO: $ $abono[pago_minimo]\n");
+        if ($renglon['pago'] > 0.00) {
+            $printer->text("PAGÓ: $ $renglon[pago]\n");
+        }
+        if ($renglon['cambio'] > 0.00) {
+            $printer->text("CAMBIO: $ $renglon[cambio]\n");
+        }
+        $printer->text("ADEUDO: $ $abono[total_deuda]\n");
+    } else {
+        if ($renglon['descuento'] > 0.00) {
+            $printer->text("DESCUENTO: $ $renglon[descuento]\n");
+        }
+
+        $printer->text("TOTAL: $ $renglon[total]\n");
+
+        $printer->text("PAGÓ: $ $renglon[pago]\n");
+        if ($renglon['cambio'] > 0.00) {
+            $printer->text("CAMBIO: $ $renglon[cambio]\n");
+        }
+    }
+
+    /*
+	Podemos poner también un pie de página
+*/
+    $printer->setJustification(Printer::JUSTIFY_CENTER);
+    $printer->text("\nMuchas gracias por su compra :-)\n");
+    $printer->text("\nUsted fué atendido por $renglon[nombre] $renglon[apaterno]");
+
+
+
+    /*Alimentamos el papel 3 veces*/
+    $printer->feed(3);
+
+    /*
+	Cortamos el papel. Si nuestra impresora
+	no tiene soporte para ello, no generará
+	ningún error
+*/
+    $printer->cut();
+
+    /*
+	Por medio de la impresora mandamos un pulso.
+	Esto es útil cuando la tenemos conectada
+	por ejemplo a un cajón
+*/
+    $printer->pulse();
+
+    /*
+	Para imprimir realmente, tenemos que "cerrar"
+	la conexión con la impresora. Recuerda incluir esto al final de todos los archivos
+*/
+    $printer->close();
+    $_SESSION['idven'] = null;
+}
+
 if (
     isset($_POST['id']) && isset($_POST['nombre']) && isset($_POST['domicilio'])
     && isset($_POST['ciudad']) && isset($_POST['telefono']) && isset($_POST['impresora'])
@@ -53,6 +359,7 @@ if (
     $cliente->setDireccion($_POST['dir']);
     $cliente->setTelefono($_POST['tel']);
     $cliente->setCorreo($_POST['email']);
+    $cliente->setAcceso("CEO");
     $cliente->setLogin($_POST['login']);
     $cliente->setPassword($_POST['password']);
     $cliente->setEstado($_POST['estado']);
@@ -68,6 +375,7 @@ if (
     $sus->setMonto($_POST['monto']);
     $sus->setIdNegocio($_POST['negocio']);
     $result = $sus->guardar($idusuario);
+    echo $result;
 } else if (
     isset($_POST['concepto']) && isset($_POST['pago']) &&  isset($_POST['descripcion']) && isset($_POST['monto']) && isset($_POST['estado'])
     && isset($_POST['fecha'])
@@ -156,10 +464,18 @@ if (
     } else {
         $dv = new Models\DetalleVenta();
         $con = new Models\Conexion();
-        $query = "SELECT subtotal FROM detalle_venta WHERE producto_codigo_barras ='$codigo' AND idventa ='$_SESSION[idven]'";
+        $query = "SELECT cantidad_producto FROM detalle_venta WHERE producto_codigo_barras ='$codigo' AND idventa ='$_SESSION[idven]'";
         $result = $con->consultaRetorno($query);
-        if (isset($result['subtotal'])) {
-            echo "producto existente";
+        if (isset($result['cantidad_producto'])) {
+            $cantidad = $result['cantidad_producto'] + $_POST['cantidad'];
+            $costo = floatval($_POST['precio']);
+            $subtotal = $cantidad * $costo;
+            $dv->setCantidad($cantidad);
+            $dv->setSubtotal($subtotal);
+            $dv->setVenta($_SESSION['idven']);
+            $dv->setCodigodeBarras($_POST['codigo']);
+            $result = $dv->editar();
+            echo $result;
         } else {
             $subtotal = $precio * $cantidad;
             $dv->setVenta($_SESSION['idven']);
@@ -206,9 +522,10 @@ if (
     $result2 = $venta->editar($idventa);
     $_SESSION['clienteid'] = null;
     if ($result['impresora'] === "A" && $result2 === 1) {
-        echo "con impresora";
+          ejecutarImpresionTermica();
+          echo "Exito";
     } else if ($result['impresora'] === "I" && $result2 === 1) {
-        echo "sin impresora";
+          echo "Exito";
         $_SESSION['idven'] = null;
     }
 } else if (
@@ -252,10 +569,11 @@ if (
     $adeudo->setCliente($_SESSION['clienteid']);
     $adeudo->guardar();
     if ($result['impresora'] === "A" && $result2 === 1) {
-        echo "con impresora";
+        echo "Exito";
+        ejecutarImpresionTermica();
         $_SESSION['clienteid'] = null;
     } else if ($result['impresora'] === "I" && $result2 === 1) {
-        echo "sin impresora";
+        echo "Exito";
         $_SESSION['idven'] = null;
         $_SESSION['clienteid'] = null;
     }
@@ -284,18 +602,19 @@ if (
     $venta->setNegocio($_SESSION['idnegocio']);
     $result2 = $venta->editar($idventa); //se modifican los datos de la venta ya que todos los campos estaban en null
     if ($result['impresora'] === "A" && $result2 === 1) {
-        echo "con impresora";
-        $_SESSION['clienteid'] = null;
-        $_SESSION['clienteid'] = null;
+        echo "Exito";
+        ejecutarImpresionTermica();
     } else if ($result['impresora'] === "I" && $result2 === 1) {
-        echo "sin impresora";
+        echo "Exito";
         $_SESSION['idven'] = null;
         $_SESSION['clienteid'] = null;
     }
 
     //se emprime el ticket
-} else if (isset($_POST['abono']) && isset($_POST['pago']) &&  isset($_POST['adeudo']) 
-&& isset($_POST['total']) && isset($_POST['cambio']) && isset($_POST['formapago'])) {
+} else if (
+    isset($_POST['abono']) && isset($_POST['pago']) &&  isset($_POST['adeudo'])
+    && isset($_POST['total']) && isset($_POST['cambio']) && isset($_POST['formapago'])
+) {
     $negocio = $_SESSION['idnegocio'];
     $con = new Models\Conexion();
     $query = "SELECT impresora FROM negocios WHERE idnegocios = '$negocio'";
@@ -310,11 +629,12 @@ if (
     $abono->setHora();
     $abono->setNegocio($_SESSION['idnegocio']);
     $abono->setTrabajador($_SESSION['id']);
-    $result = $abono->guardar($_POST['adeudo'],$_POST['total']);
+    $result = $abono->guardar($_POST['adeudo'], $_POST['total']);
     if ($resultado['impresora'] === "A" && $result === 1) {
-        echo "con impresora";
+        echo "Exito";
+        ejecutarImpresionTermicaAbono($_POST['adeudo']);
     } else if ($resultado['impresora'] === "I" && $result === 1) {
-        echo "sin impresora";
+        echo "Exito";
     }
     
  }else if (isset($_POST['cantidad']) && isset($_POST['de']) && isset($_POST['concepto']) && isset($_POST['descripcion']) 

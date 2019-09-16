@@ -124,7 +124,6 @@ $(document).ready(function(){
                         document.getElementById("divmedida").style.display = "none";
                         $('#formproducto').trigger('reset');
                         $('#inventario').trigger('reset');
-                        obtenerDatosTablaProducto();
                         obtenerInventario();
                         console.log("Esto es la respuesta: "+response);
                         if (response === "1") {
@@ -132,35 +131,61 @@ $(document).ready(function(){
                                 title: 'Exito',
                                 text: 'Datos guardados satisfactoriamente',
                                 type: 'success'
-                            });
+                            },
+                            function (isConfirm) {
+                              if (isConfirm){
+                                idSesion($('#negocioActual').val());
+                              }
+                              });
                         } else if( response == "2"){
                             swal({
                                 title: 'Exito',
                                 text: 'Datos guardados satisfactoriamente',
                                 type: 'success'
-                            });
+                            },
+                            function (isConfirm) {
+                              if (isConfirm) {
+                                idSesion($('#negocioActual').val());
+                              }
+                              });
                         } else if(response == "imagenGrande"){
                             swal({
                                 title: 'Alerta',
                                 text: 'Esta imagen es demaciado grande',
                                 type: 'warning'
-                            });
+                            },
+                            function (isConfirm) {
+                              if (isConfirm) {
+                                idSesion($('#negocioActual').val());
+                              }
+                              });
                         }else if(response == "imagenNoValida"){
                             swal({
                                 title: 'Alerta',
                                 text: 'Este tipo de imagen no es permitido',
                                 type: 'error'
-                            });
+                            },
+                            function (isConfirm) {
+                              if (isConfirm) {
+                                idSesion($('#negocioActual').val());
+                              }
+                              });
                         }
                          else {
                             swal({
                                 title: 'Alerta',
                                 text: 'Datos no guardados, compruebe los campos unicos',
                                 type: 'warning'
-                            });
+                            },
+                            function (isConfirm) {
+                              if (isConfirm) {
+                                idSesion($('#negocioActual').val());
+                              }
+                              });
                         }
                     }
                 });
+               
         e.preventDefault();
         editar = false;
     });
@@ -187,19 +212,34 @@ $(document).ready(function(){
                                 title: 'Exito',
                                 text: 'Datos guardados satisfactoriamente',
                                 type: 'success'
-                            });
+                            },
+                            function (isConfirm) {
+                              if (isConfirm) {
+                                idSesion($('#negocioActual').val());
+                              }
+                              });
                         } else if( response == "yaExiste"){
                             swal({
                                 title: 'Alerta',
                                 text: 'El producto no se ha agregado al inventario, compruebe que el producto que intenta agregar no exista en el inventario',
                                 type: 'warning'
-                            });
+                            },
+                            function (isConfirm) {
+                              if (isConfirm) {
+                                idSesion($('#negocioActual').val());
+                              }
+                              });
                         } else {
                             swal({
                                 title: 'Alerta',
                                 text: 'Datos no guardados, compruebe los campos unicos',
                                 type: 'warning'
-                            });
+                            },
+                            function (isConfirm) {
+                              if (isConfirm) {
+                                idSesion($('#negocioActual').val());
+                              }
+                              });
                         }
                     }
                 });

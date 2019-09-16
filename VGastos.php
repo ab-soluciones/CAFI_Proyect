@@ -10,7 +10,7 @@ if (!isset($_SESSION['acceso'])) {
     $_SESSION['acceso'] == "CEOAB" || $_SESSION['acceso'] == "ManagerAB"
     || $_SESSION['acceso'] == "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -57,7 +57,7 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row">
                                 <div class="d-block col-lg-6">
                                     <h5 class="importante">Concepto:</h5>
-                                    <select name="SConcepto" id="concepto" class="form form-control" required>
+                                    <select name="SConcepto" id="concepto" class="form form-control" >
                                         <option></option>
                                         <option>Renta</option>
                                         <option>Luz</option>
@@ -73,7 +73,7 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                                 <div class="d-block col-lg-6">
                                     <h5 class="general">Forma de pago:</h5>
-                                    <select name="SPago" id="pago" class="form form-control" required>
+                                    <select name="SPago" id="pago" class="form form-control" >
                                         <option></option>
                                         <option>Efectivo</option>
                                         <option>Transferencia</option>
@@ -90,7 +90,7 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row">
                                 <div class="d-block col-lg-6">
                                     <h5 class="general">Monto $:</h5>
-                                    <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" required>
+                                    <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" >
 
                                 <div class="d-block col-lg-12">
                                     <h5><label class="general">Estatus:</label></h5>
@@ -102,7 +102,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                                 <div class="d-block col-lg-6">
                                     <h5 class="general">Fecha:</h5>
-                                    <input class="form-control" id="fecha" type="date" name="DFecha" required>
+                                    <input class="form-control" id="fecha" type="date" name="DFecha" >
                                 </div>
                             </div>
                             <div class="row mt-3 justify-content-around">
