@@ -259,4 +259,4 @@ if (
         $dv->setCodigodeBarras($_POST['codigo']);
         $result = $dv->editar();
         echo $result;
-}
+} 

@@ -57,13 +57,13 @@ if (!isset($_SESSION['acceso'])) {
                                 <h5 class="general">Estado:</h5>
 
                                 <div class="row" style="margin: 0 auto;">
-                                            <select name="estado" id="estado" class="form form-control">
+                                            <select id="estado" class="form form-control">
                                                 <option value="R">Realizado</option>
                                                 <option value="C">Cancelado</option>
                                             </select>  
                                 </div>
                             </div>
-                            <input type="hidden" id="id" name="id">
+                            <input type="hidden" id="id" >
                             <input type="hidden" id="estadoActual">
                         </div>
                         
@@ -184,18 +184,11 @@ if (!isset($_SESSION['acceso'])) {
                             <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['estado_venta']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
-
                             <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
-                                    <?php if ($_SESSION['acceso'] == "Employes") {
-                                            ?>
-                                    <button style="margin: 0 auto;" class="btn btn-secondary" disabled><img src="img/edit.png"></button>
-                                    <?php  } else {
-                                            ?>
-                                    <a id=" " style="margin: 0 auto;" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm" >
+                                    <a id="beditar" style="margin: 0 auto;" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm" >
                                         <img src="img/edit.png">
                                     </a>
-                                    <?php } ?>
                                 </div>
                             </td>
                         </tr>

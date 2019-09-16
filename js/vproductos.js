@@ -5,7 +5,7 @@ $(document).ready(function(){
     idSesion($('.sucursal').val());
     obtenerDatosTablaProducto();
     obtenerInventario();
-    $('#divCantidad').hide();
+    $('.divCantidad').hide();
 
     function idSesion(id){
         $.ajax({
@@ -213,7 +213,7 @@ $(document).ready(function(){
     $(document).on('click', '.beditar', function () {
         var valores = "";
         var valores2 = "";
-        $('#divCantidad').show();       
+        $('.divCantidad').show();       
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
         $(this).parents("tr").find("td").each(function () {
@@ -258,8 +258,8 @@ $(document).ready(function(){
         $('#nav-Inventario-tab').show();
     });
 
-    $('.agrega').click(function(){
-        $('#divCantidad').hide(); 
+    $(document).on('click','.agrega', function () {
+        $('.divCantidad').hide();
     });
 
 

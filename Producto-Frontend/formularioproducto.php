@@ -109,7 +109,7 @@
             <option value="I">Inactivo</option>
         </select>
     </div>
-    <div id="divCantidad" class="col-lg-6 ">
+    <div id="" class="col-lg-6 divCantidad">
         <h5><label for="preciov" class="badge badge-primary">Cantidad:</label></h5>
         <input id="cantidadEditar" name="SCantidad" class="form-control" type="number" value="0" min="0" require>  
     </div>
