@@ -5,7 +5,7 @@ $(document).ready(function(){
     idSesion($('.sucursal').val());
     obtenerDatosTablaProducto();
     obtenerInventario();
-    $('#divCantidad').hide();
+    $('.divCantidad').hide();
 
     function idSesion(id){
         $.ajax({
@@ -98,10 +98,12 @@ $(document).ready(function(){
     $('.close').click(function(){
         $('#formproducto').trigger('reset');
         $('#inventario').trigger('reset');
+        $('.divCantidad').hide();
     });
 
     $('.bclose').click(function(){
         $('.modal').modal('hide');
+        
     });
 
     $('#formproducto').submit(function(e){
@@ -122,8 +124,11 @@ $(document).ready(function(){
                         document.getElementById('tpr').disabled = false;
                         document.getElementById("divtalla").style.display = "none";
                         document.getElementById("divmedida").style.display = "none";
+                        $('#preview img').remove();
+                        $("#preview").append("<img src='..' width='100' height='100'/>");
                         $('#formproducto').trigger('reset');
                         $('#inventario').trigger('reset');
+                        $('.divCantidad').hide();
                         obtenerInventario();
                         console.log("Esto es la respuesta: "+response);
                         if (response === "1") {
@@ -194,6 +199,7 @@ $(document).ready(function(){
     
         var formData = new FormData(this);
         console.log(formData);
+        $("#imagen").remove();
                 $.ajax({
                     url: 'post-guardar.php',
                     type: 'POST',
@@ -253,7 +259,7 @@ $(document).ready(function(){
     $(document).on('click', '.beditar', function () {
         var valores = "";
         var valores2 = "";
-        $('#divCantidad').show();       
+        $('.divCantidad').show();       
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
         $(this).parents("tr").find("td").each(function () {
@@ -263,7 +269,7 @@ $(document).ready(function(){
         console.log("Esto es el img "+valores2)
 
         datos = valores.split("?");
-
+        $('#nav-Producto-tab').click();
         console.log(datos);
         $('.row1').css("display","none");
         $('#cb').val(datos[0]);
@@ -296,11 +302,8 @@ $(document).ready(function(){
 
     $('.mostra').click(function(){
         $('#nav-Inventario-tab').show();
+        $('.divCantidad').hide();
+        $('#nav-Producto-tab').click();
     });
-
-    $('.agrega').click(function(){
-        $('#divCantidad').hide(); 
-    });
-
 
 });

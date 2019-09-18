@@ -58,7 +58,7 @@ if (!isset($_SESSION['acceso'])) {
 
                     image.src = reader.result;
                     image.height = 100;
-                    image.width = 100;
+                    image.width = 100;  
                     preview.innerHTML = '';
                     preview.append(image);
                 };
@@ -112,7 +112,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
-                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3 agrega" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3 agrega mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
@@ -134,7 +134,7 @@ if (!isset($_SESSION['acceso'])) {
                         </select>
                         <input type="hidden" id="negocioActual" value=<?php echo  $_SESSION['idnegocio'];?>>
                         <input type="submit" style="display: none;">
-                    <button class="d-none d-lg-flex btn btn-primary ml-3 mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3 agrega mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     
                     <button id="BcodigoBarra"  data-toggle="modal" data-target="#modalFormCodigo">Imprimir Codigos</button>
                 </div>

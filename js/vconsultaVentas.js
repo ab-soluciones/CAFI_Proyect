@@ -44,9 +44,10 @@ $(document).ready(function () {
           valores += $(this).html() + "?";
         });
         datos = valores.split("?");
-        $('#id').val(datos[2]);
-        $('#estado').val(datos[10]);
-        $('#estadoActual').val(datos[10]);
+        console.log(datos);
+        $('#id').val(datos[1]);
+        $('#estado').val(datos[9]);
+        $('#estadoActual').val(datos[9]);
         console.log(datos);
       });
 

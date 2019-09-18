@@ -45,6 +45,16 @@ $(document).ready(function () {
         $('#formclienteab').trigger('reset');
     });
 
+    $('#login').keyup(function(){
+        var username = $('#login').val();
+        if(username.length >= 3){
+
+            $.post("username_check.php", {username3: username}, function(data, status){
+                $("#status").html(data);
+                });
+        }
+    });
+
     $('#bclose').click(function () {
         $('.modal').modal('hide');
     });
