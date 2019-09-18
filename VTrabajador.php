@@ -107,8 +107,9 @@ Config\Autoload::run();
                         <div class="col-lg-4">
                             <h5><label for="login" class="badge badge-primary">Nombre de Usuario:</label></h5>
                             <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
+                            <div id="status"></div>
                         </div>
-
+                        
                         <div class="col-lg-4">
                             <h5><label for="login" class="badge badge-primary">Contraseña:</label></h5>
                             <input id="contrasena" class="form form-control" type="text" name="TContrasena" placeholder="Contraseña" autocomplete="off" >

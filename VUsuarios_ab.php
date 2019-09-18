@@ -82,6 +82,7 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="col-lg-4">
                                 <h5 class="admin">Usuario:</h5>
                                 <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off"><br>
+                                <div id="status"></div>
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Contrase&ntilde;a:</h5>

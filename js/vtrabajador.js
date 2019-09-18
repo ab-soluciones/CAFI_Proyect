@@ -15,6 +15,16 @@ $(document).ready(function(){
         });
         obtenerDatosTablaTrabajador();
     }
+    
+    $('#login').keyup(function(){
+        var username = $('#login').val();
+        if(username.length >= 3){
+
+            $.post("username_check.php", {username: username}, function(data, status){
+                $("#status").html(data);
+                });
+        }
+    });
 
     $('.sucursal').change(function(){
         idSesion($(this).val());

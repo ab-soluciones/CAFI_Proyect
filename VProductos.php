@@ -58,7 +58,7 @@ if (!isset($_SESSION['acceso'])) {
 
                     image.src = reader.result;
                     image.height = 100;
-                    image.width = 100;
+                    image.width = 100;  
                     preview.innerHTML = '';
                     preview.append(image);
                 };
