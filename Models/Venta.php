@@ -82,25 +82,12 @@ class Venta
 
     public function guardar()
     {
-        $sql = "INSERT INTO venta (idventas, descuento, total, pago, cambio, fecha, hora, estado_venta, idtrabajador, idnegocios) 
-        VALUES (NULL, NULL, NULL,NULL,NULL, NULL, NULL, NULL, NULL, NULL);";
-        $sql2 = "SELECT MAX(idventas) AS id FROM venta";
-        $this->con->consultaSimple($sql);
-        return $this->con->consultaRetorno($sql2);
-    }
+        $sql = "INSERT INTO venta (idventas, descuento, total, pago, forma_pago, cambio, fecha, hora, estado_venta, idtrabajador, idnegocios) 
+        VALUES (NULL, '{$this->descuento}', '{$this->total}','{$this->pago}','{$this->forma_pago}','{$this->cambio}','{$this->fecha}'
+        ,'{$this->hora}','{$this->estado}','{$this->trabajador}','{$this->negocio}');";
 
-    public function eliminar($id)
-    {
-        $sql = "DELETE FROM venta WHERE  idventa = '$id'";
-        $this->con->consultaSimple($sql);
-    }
+        return  $this->con->consultaSimple($sql);
 
-    public function editar($id)
-    {
-        $sql = "UPDATE venta SET descuento = '{$this->descuento}', total = '{$this->total}', pago ='{$this->pago}',
-        forma_pago ='{$this->forma_pago}', cambio = '{$this->cambio}', fecha ='{$this->fecha}', hora ='{$this->hora}', 
-        estado_venta = '{$this->estado}' ,idtrabajador ='{$this->trabajador}', idnegocios='{$this->negocio}' WHERE idventas ='$id'";
-        return $this->con->consultaSimple($sql);
     }
     public function editarEstadoV($id, $adeudo)
     {
@@ -113,8 +100,7 @@ class Venta
             $sql = "UPDATE venta SET  estado_venta = '{$this->estado}', idtrabajador = '{$this->trabajador}' WHERE idventas ='$id'";
             $renglones = $this->con->consultaSimple($sql);
         }
-        return $renglones ;
-        
+        return $renglones;
     }
 
     public function __destruct()

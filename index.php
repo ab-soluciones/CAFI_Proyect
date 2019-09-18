@@ -43,7 +43,6 @@ las partes de los CRUD en donde se hagan procedimientos diferentes.. El CRUD Com
 session_start();
 
 //se inicializa las variables globales
-$_SESSION['idven'] = null;
 $_SESSION['comboID'] = null;
 require_once "Config/Autoload.php";
 Config\Autoload::run();
@@ -112,7 +111,6 @@ function comprobar()
 
     $comprobar = new Models\Comprobar();
     $comprobar->comprobarFv();
-    $comprobar->eliminarVentasNull();
 
     /*Ejecucion de la funcion comprobar de la clase Comprobar.. su tarea es cambiar a estado inactivo
    la cuenta del dueño del negocio y las cuentas de todos los trabajadores pertenecientes a dicho negocio
@@ -124,9 +122,9 @@ function comprobar()
 
     //Consultas para comprobar si existe una cuenta con el nombre de usuario y contraseña optenida.
 
-    $query = "SELECT acceso,estado,idusuariosab FROM usuariosab WHERE login= '$nombre' AND password='$password'";
-    $query2 = "SELECT acceso,estado,negocios_idnegocios,idtrabajador FROM trabajador WHERE login= '$nombre' AND password='$password'";
-    $query3 = "SELECT acceso,estado,id_clienteab FROM clientesab WHERE login = '$nombre' AND password ='$password'";
+    $query = "SELECT acceso,estado,idusuariosab FROM usuariosab WHERE  BINARY login= '$nombre' AND  BINARY  password='$password'";
+    $query2 = "SELECT login,acceso,estado,negocios_idnegocios,idtrabajador FROM trabajador WHERE  BINARY  login= '$nombre' AND  BINARY password='$password'";
+    $query3 = "SELECT login,acceso,estado,id_clienteab FROM clientesab WHERE  BINARY  login = '$nombre' AND  BINARY password ='$password'";
     $datos1 = $con->consultaRetorno($query);
     $datos2 = $con->consultaRetorno($query2);
     $datos3 = $con->consultaRetorno($query3);
@@ -151,14 +149,14 @@ function comprobar()
     } else if (isset($datos2)) {
 
       //si existe una cuenta en la tabla trabajador se guarda en la variable sesion el rol de la cuenta, el estado, su id y a que negocio pertenece
-
+      $_SESSION['login'] = $datos2['login'];
       $_SESSION['acceso'] = $datos2['acceso'];
       $_SESSION['estado'] = $datos2['estado'];
       $_SESSION['idnegocio'] = $datos2['negocios_idnegocios'];
       $_SESSION['id'] = $datos2['idtrabajador'];
       comprobar();
     } else if (isset($datos3)) {
-
+      $_SESSION['login'] = $datos3['login'];
       $_SESSION['acceso'] = $datos3['acceso'];
       $_SESSION['estado'] = $datos3['estado'];
       $_SESSION['id'] = $datos3['id_clienteab'];

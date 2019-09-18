@@ -4,7 +4,7 @@ namespace Models;
 
 class DetalleVenta
 {
-    private $venta;
+    private $usuario;
     private $codigo_barras;
     private $cantidad;
     private $subtotal;
@@ -14,11 +14,9 @@ class DetalleVenta
     {
         $this->con = new Conexion();
     }
-
-
-    public function setVenta($venta)
+    public function setUsuario($usuario)
     {
-        $this->venta = $venta;
+        $this->usuario = $usuario;
     }
     public function setCodigodeBarras($codigo_barras)
     {
@@ -35,21 +33,27 @@ class DetalleVenta
     }
     public function guardar()
     {
-        $sql = "INSERT INTO detalle_venta (idventa, producto_codigo_barras, cantidad_producto, subtotal) 
-            VALUES('{$this->venta}','{$this->codigo_barras}',
+        $sql = "INSERT INTO detalle_venta (usuario,idventa, producto_codigo_barras, cantidad_producto, subtotal) 
+            VALUES('{$this->usuario}',NULL,'{$this->codigo_barras}',
             '{$this->cantidad}', '{$this->subtotal}')";
-         return $this->con->consultaSimple($sql);
+        return $this->con->consultaSimple($sql);
     }
 
     public function eliminar()
     {
-        $sql = "DELETE FROM detalle_venta WHERE idventa = '{$this->venta}' AND producto_codigo_barras = '{$this->codigo_barras}'";
-       return $this->con->consultaSimple($sql);
+        $sql = "DELETE FROM detalle_venta WHERE usuario = '{$this->usuario}' AND idventa IS NULL AND producto_codigo_barras = '{$this->codigo_barras}'";
+        return $this->con->consultaSimple($sql);
     }
 
     public function editar()
     {
-        $sql = "UPDATE detalle_venta SET cantidad_producto = '{$this->cantidad}', subtotal = '{$this->subtotal}' WHERE idventa ='{$this->venta}' AND producto_codigo_barras = '{$this->codigo_barras}'";
+        $sql = "UPDATE detalle_venta SET cantidad_producto = '{$this->cantidad}', subtotal = '{$this->subtotal}' WHERE usuario = '{$this->usuario}' AND idventa IS NULL AND producto_codigo_barras = '{$this->codigo_barras}'";
+        return $this->con->consultaSimple($sql);
+    }
+
+    public function quitarNullIdVenta($venta)
+    {
+        $sql = "UPDATE detalle_venta SET idventa = '$venta' WHERE usuario = '{$this->usuario}' AND idventa IS NULL";
         return $this->con->consultaSimple($sql);
     }
 

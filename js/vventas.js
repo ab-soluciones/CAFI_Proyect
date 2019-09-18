@@ -455,7 +455,7 @@ $(document).ready(function () {
             template += `<tr>
                         <td> <button class="text-nowrap text-center bagregarc btn bg-secondary text-white">ok</button></td>
                         <td class="text-nowrap text-center datoscliente d-none">${datos.idcliente}</td>
-                        <td class="text-centerdatoscliente">${datos.nombre}</td>
+                        <td class="text-center datoscliente">${datos.nombre}</td>
                         <td class="text-nowrap text-center">${datos.telefono}</td>
                         <td class="text-nowrap text-center datoscliente">${datos.estado}</td>
                         <td class="text-nowrap text-center">${datos.adeudos}</td>
@@ -481,7 +481,7 @@ $(document).ready(function () {
     renglon = valores.split("?");
     const postData = {
       idcliente: renglon[0],
-      estcliente: renglon[1],
+      estcliente: renglon[2]
     };
     console.log(postData);
     $.post('post-guardar.php', postData, function (response) {
@@ -534,12 +534,6 @@ $(document).ready(function () {
         swal({
           title: 'Alerta',
           text: 'Compruebe el stock del producto',
-          type: 'warning'
-        });
-      } else if (response === "producto existente") {
-        swal({
-          title: 'Alerta',
-          text: 'Producto existente en la venta, si desea agregar mas modifique la cantidad',
           type: 'warning'
         });
       }

@@ -5,7 +5,7 @@ session_start();
 if(isset($_POST['codigo'])){
 $dv= new Models\DetalleVenta();
 $dv->setCodigodeBarras($_POST['codigo']);
-$dv->setVenta($_SESSION['idven']);
+$dv->setUsuario($_SESSION['login']);
 $result = $dv->eliminar();
 echo $result;
 }
