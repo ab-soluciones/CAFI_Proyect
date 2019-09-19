@@ -1,8 +1,9 @@
 <?php
 require_once "Config/Autoload.php";
 Config\Autoload::run();
-$con = new Models\Conexion();
 session_start();
+include "check_token.php";
+
 $_SESSION['clienteid'] = null;
 if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');

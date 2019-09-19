@@ -1,5 +1,8 @@
 <?php
+require_once "Config/Autoload.php";
+Config\Autoload::run();
 session_start();
+include "check_token.php";
 // se comprueba si hay un rol en la sesion si la cuenta esta activa y si ese rol es diferente a ceo
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');

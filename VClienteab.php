@@ -1,7 +1,9 @@
 <?php
-session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {

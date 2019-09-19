@@ -41,12 +41,46 @@
 las partes de los CRUD en donde se hagan procedimientos diferentes.. El CRUD Comentado es el CRUD de trabajador*/
 
 session_start();
+// Generate token
+date_default_timezone_set("America/Mexico_City");
+function getDateTime()
+{
+  $año = date("Y");
+  $mes = date("m");
+  $dia = date("d");
+  $fecha = $año . "-" . $mes . "-" . $dia;
+  $hora = date("H");
+  $minuto = date("i");
+  $segundo = date("s");
+  $hora = $hora . ":" . $minuto . ":" . $segundo;
+
+  return  $fecha . " " . $hora;
+}
+
+function getToken($length)
+{
+  $token = "";
+  $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  $codeAlphabet .= "abcdefghijklmnopqrstuvwxyz";
+  $codeAlphabet .= "0123456789";
+  $max = strlen($codeAlphabet); // edited
+
+  for ($i = 0; $i < $length; $i++) {
+    $token .= $codeAlphabet[random_int(0, $max - 1)];
+  }
+
+  return $token;
+}
 
 //se inicializa las variables globales
 $_SESSION['comboID'] = null;
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 if (isset($_SESSION['acceso']) && strcasecmp($_SESSION['estado'], "A") == 0) {
+  $con = new Models\Conexion();
+  $datetime = getDateTime();
+  $con->consultaSimple("UPDATE sesiones SET fin = '$datetime' WHERE usuario='$_SESSION[login]'");
+  $con->cerrarConexion();
   session_unset();
   session_destroy();
   header('location: index.php');
@@ -76,16 +110,16 @@ function comprobar()
 
   } else if (
     strcasecmp($_SESSION['acceso'], "CEOAB") == 0 && strcasecmp($_SESSION['estado'], "A" == 0)
-   
+
   ) {
 
     //si el rol pertenece a los usuariosab se les redirige a su pagina de opciones
 
     header('Location: VUsuarios_ab.php');
-  }else if( strcasecmp($_SESSION['acceso'], "ManagerAB") == 0 && strcasecmp($_SESSION['estado'], "A" == 0)){
+  } else if (strcasecmp($_SESSION['acceso'], "ManagerAB") == 0 && strcasecmp($_SESSION['estado'], "A" == 0)) {
 
     header('Location: VClienteab.php');
-  }else if (isset($_SESSION['acceso']) && strcasecmp($_SESSION['estado'], "I") == 0) {
+  } else if (isset($_SESSION['acceso']) && strcasecmp($_SESSION['estado'], "I") == 0) {
     ?>
     <script>
       swal({
@@ -122,7 +156,7 @@ function comprobar()
 
     //Consultas para comprobar si existe una cuenta con el nombre de usuario y contraseña optenida.
 
-    $query = "SELECT acceso,estado,idusuariosab FROM usuariosab WHERE  BINARY login= '$nombre' AND  BINARY  password='$password'";
+    $query = "SELECT login,acceso,estado,idusuariosab FROM usuariosab WHERE  BINARY login= '$nombre' AND  BINARY  password='$password'";
     $query2 = "SELECT login,acceso,estado,negocios_idnegocios,idtrabajador FROM trabajador WHERE  BINARY  login= '$nombre' AND  BINARY password='$password'";
     $query3 = "SELECT login,acceso,estado,id_clienteab FROM clientesab WHERE  BINARY  login = '$nombre' AND  BINARY password ='$password'";
     $datos1 = $con->consultaRetorno($query);
@@ -134,12 +168,29 @@ function comprobar()
     $con->cerrarConexion();
 
     if (isset($datos1)) {
-
       //si existe una cuenta en la tabla usuariosab se guarda en la variable sesion el rol de la cuenta el estado y su id
 
+      $_SESSION['login'] = $datos1['login'];
       $_SESSION['acceso'] = $datos1['acceso'];
       $_SESSION['estado'] = $datos1['estado'];
       $_SESSION['id'] = $datos1['idusuariosab'];
+
+      $token = getToken(10);
+      $_SESSION['token'] = $token;
+      $datetime = getDateTime();
+
+      // Update user token 
+      $con = new Models\Conexion();
+      $result_token = $con->consultaRetorno("SELECT id FROM sesiones WHERE usuario='$_SESSION[login]'");
+
+      if (isset($result_token['id'])) {
+        $con->consultaSimple("UPDATE sesiones SET token='$token', inicio = '$datetime' WHERE usuario='$_SESSION[login]'");
+      } else {
+        $con->consultaSimple("INSERT INTO sesiones(usuario,token,inicio) VALUES('$_SESSION[login]','$token','$datetime')");
+      }
+
+      $con->cerrarConexion();
+
       comprobar();
 
       /*esta funcion comprueba el rol/acceso de la cuenta para mandar al usuario al apartado correspodiente
@@ -154,6 +205,22 @@ function comprobar()
       $_SESSION['estado'] = $datos2['estado'];
       $_SESSION['idnegocio'] = $datos2['negocios_idnegocios'];
       $_SESSION['id'] = $datos2['idtrabajador'];
+
+      $token = getToken(10);
+      $_SESSION['token'] = $token;
+      $datetime = getDateTime();
+
+      // Update user token 
+      $con = new Models\Conexion();
+      $result_token = $con->consultaRetorno("SELECT id FROM sesiones WHERE usuario='$_SESSION[login]'");
+
+      if (isset($result_token['id'])) {
+        $con->consultaSimple("UPDATE sesiones SET token='$token',inicio = '$datetime' WHERE usuario='$_SESSION[login]'");
+      } else {
+        $con->consultaSimple("INSERT INTO sesiones(usuario,token,inicio) VALUES('$_SESSION[login]','$token','$datetime')");
+      }
+      $con->cerrarConexion();
+
       comprobar();
     } else if (isset($datos3)) {
       $_SESSION['login'] = $datos3['login'];
@@ -162,7 +229,21 @@ function comprobar()
       $_SESSION['id'] = $datos3['id_clienteab'];
       $_SESSION['idnegocio'] = null;
 
-      //se almacena en la variable sesion los datos del usuario
+      $token = getToken(10);
+      $_SESSION['token'] = $token;
+      $datetime = getDateTime();
+      // Update user token 
+      $con = new Models\Conexion();
+      $result_token = $con->consultaRetorno("SELECT id FROM sesiones WHERE usuario='$_SESSION[login]'");
+
+      if (isset($result_token['id'])) {
+        $con->consultaSimple("UPDATE sesiones SET token='$token', inicio = '$datetime' WHERE usuario='$_SESSION[login]'");
+      } else {
+        $con->consultaSimple("INSERT INTO sesiones(usuario,token,inicio) VALUES('$_SESSION[login]','$token','$datetime')");
+      }
+
+      $con->cerrarConexion();
+
       comprobar();
     } else {
       ?>
@@ -192,5 +273,7 @@ if (isset($_GET['cerrar_sesion'])) {
 
   //se destruye la sesion al dar click en los botones de salir
 }
+
+
 
 ?>
