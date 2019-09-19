@@ -2,11 +2,11 @@
     <div class="row mt-3">
         <div class="col-lg-4">
             <h5 class="general">Codigo:</h5>
-            <input id="cb" class="form form-control" type="text" name="TCodigoB" placeholder="0000000000000">
+            <input id="cb" class="form form-control" type="text" name="TCodigoB" onkeypress="return check(event)" placeholder="0000000000000">
         </div>
         <div class="col-lg-4">
             <h5 class="general">Nombre:</h5>
-            <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+            <input id="nombre" class="form form-control" type="text" name="TNombre" onkeypress="return check(event)" placeholder="Nombre" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
             <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
@@ -26,11 +26,11 @@
     <div class="row mt-3">
         <div class="col-lg-4">
             <h5 class="general">Color:</h5>
-            <input id="color" class="form form-control" type="text" name="TColor" placeholder="Color" autocomplete="off" required>
+            <input id="color" class="form form-control" type="text" onkeypress="return check(event)" name="TColor" placeholder="Color" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
             <h5 class="general">Marca:</h5>
-            <input id="marca" class="form form-control" type="text" name="TMarca" placeholder="Marca" autocomplete="off" required>
+            <input id="marca" class="form form-control" type="text" onkeypress="return check(event)" name="TMarca" placeholder="Marca" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
             <h5 class="general">Descripcion:</h5>
@@ -93,11 +93,11 @@
     <div class="row mt-3">
         <div class="col-lg-6">
             <h5 class="general">Precio de Compra $:</h5>
-            <input id="precioc" class="form form-control" type="text" name="TPrecioC" placeholder="$" autocomplete="off" required><br>
+            <input id="precioc" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioC" placeholder="$" autocomplete="off" required><br>
         </div>
         <div class="col-lg-6">
             <h5 class="general">Precio de Venta $:</h5>
-            <input id="preciov" class="form form-control" type="text" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
+            <input id="preciov" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
         </div>
     </div>
     </div>

@@ -28,6 +28,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
 
     <title>Negocios</title>
 </head>
@@ -56,21 +57,21 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-4">
                                 <h5 class="admin">Nombre:</h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" >
+                                <input id="nombre" class="form form-control" onkeypress="return check(event)" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Domicilio:</h5>
-                                <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" >
+                                <input id="dom" class="form form-control" onkeypress="return check(event)" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Ciudad:</h5>
-                                <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" >
+                                <input id="cd" class="form form-control" onkeypress="return check(event)" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
                                 <h5 class="admin">Teléfono:</h5>
-                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Teléfono" autocomplete="off" >
+                                <input id="tel" class="form form-control" type="text" onkeypress="return check(event)" name="TTelefono" placeholder="Teléfono" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Impresora:</h5>
@@ -125,7 +126,7 @@ if (!isset($_SESSION['acceso'])) {
                         <button class="d-lg-none btn btn-success col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
-                            <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                            <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                             <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                         </div>
                         <div class="contenedorTabla table-responsive">

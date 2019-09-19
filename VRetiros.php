@@ -24,6 +24,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
 
     <title>Retiros</title>
 
@@ -53,7 +54,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
-                                <input name="TCantidad" id="cant" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad">
+                                <input name="TCantidad" id="cant" onkeypress="return check(event)" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad">
                             </div>
                             <div class="col-lg-6">
                                 <h5><label for="de" class="badge badge-ligh">De:</label></h5>
@@ -147,7 +148,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
-                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name">
+                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name">
                         <button class="d-none d-lg-flex btn btn-danger ml-3 bclose" data-toggle="modal" data-target="#modalForm">Retirar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">

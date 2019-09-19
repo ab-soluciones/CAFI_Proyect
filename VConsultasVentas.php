@@ -28,6 +28,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
     <title>Ventas</title>
 </head>
 
@@ -130,7 +131,7 @@ if (!isset($_SESSION['acceso'])) {
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                 </div>
-                <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
+                <input class="form-control col-12 col-lg-4" type="text" onkeypress="return check(event)" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
                 <table class="table table-hover table-striped table-dark">

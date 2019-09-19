@@ -26,6 +26,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
 
     <title>Usuarios</title>
     <script>
@@ -59,15 +60,15 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-4">
                                 <h5 class="admin">Nombre:</h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off">
+                                <input id="nombre" class="form form-control"  onkeypress="return check(event)" type="text" name="TNombre" placeholder="Nombre" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Apellido Paterno:</h5>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off">
+                                <input id="apt" class="form form-control"  onkeypress="return check(event)" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Apellido Materno:</h5>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off">
+                                <input id="apm" class="form form-control"  onkeypress="return check(event)" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off">
                             </div>
                         </div>
                         <div class="d-block d-lg-flex row">
@@ -81,12 +82,12 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Usuario:</h5>
-                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off"><br>
+                                <input id="login" class="form form-control" type="text"  onkeypress="return check(event)" name="TLogin" placeholder="Nombre de usuario" autocomplete="off"><br>
                                 <div id="status"></div>
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Contrase&ntilde;a:</h5>
-                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a"><br>
+                                <input id="pass" class="form form-control" type="password" onkeypress="return check(event)" name="TPContraseña" placeholder="Contrase&ntilde;a"><br>
                             </div>
                         </div>
                         <div class="d-block d-lg-flex row">
@@ -118,7 +119,7 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
-                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda"  onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                         <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">

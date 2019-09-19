@@ -74,7 +74,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input autofocus style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" autocomplete="off"  placeholder="Buscar Producto...">
+                    <input autofocus style="color: white; border-color: gray;" onkeypress="return check(event)" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" autocomplete="off"  placeholder="Buscar Producto...">
                 </div>
                 <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">
                     <table class="table table-hover table-striped table-dark">
@@ -122,7 +122,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <button class="bdescuento btn btn-block btn-large btn-primary" type="button">Aplicar descuento</button><br>
                     <div id="divdescuento">
                         <h6 style="color: white;">Descuento:</h6>
-                        <input class="indescuento form form-control" type="text" placeholder="Ingrese el descuento" autocomplete="off"><br>
+                        <input class="indescuento form form-control" onkeypress="return check(event)" type="text" placeholder="Ingrese el descuento" autocomplete="off"><br>
                         <button type="button" class="bporcentaje btn btn-dark btn-lg">%</button>
                         <button type="button" class="bpesos btn btn-dark btn-lg">$</button>
                     </div>
@@ -158,11 +158,11 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 
                     <div id="divanticipo">
                         <h6 style="color: white;">Anticipo:</h6>
-                        <input class="tanticipo form form-control" type="text" placeholder="$" autocomplete="off"><br>
+                        <input class="tanticipo form form-control" type="text" onkeypress="return check(event)" placeholder="$" autocomplete="off"><br>
                     </div>
                     <div id="divpago" class="mt-4">
                         <h6 style="color: white;">Cantidad Recibida/Pago:</h6>
-                        <input class="tpago form form-control" type="text" placeholder="$" autocomplete="off"><br>
+                        <input class="tpago form form-control" type="text" onkeypress="return check(event)" placeholder="$" autocomplete="off"><br>
                     </div>
                     <button style="background-color: orangered;" type="button" class="bvender btn btn-block text-white font-weight-bold p-3"><h5>Vender</h5></button>
 
@@ -173,6 +173,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     <!-- Modal -->
     <script src="js/vventas.js"></script>
     <script src="js/user_jquery.js"></script>
+    <script src="js/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
