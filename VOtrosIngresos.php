@@ -29,7 +29,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
-
+    <script src="js/index.js"></script>
     <title>Ingresos</title>
 </head>
 
@@ -57,7 +57,7 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="importante">Cantidad $ :</h5>
-                                <input id="can" name="TCantidad" class="form form-control" type="text" placeholder="Ingrese la cantidad $" autocomplete="off">
+                                <input id="can" name="TCantidad" class="form form-control" onkeypress="return check(event)" type="text" placeholder="Ingrese la cantidad $" autocomplete="off">
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Tipo :</h5>
@@ -110,7 +110,7 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                       <div class="contenedorTabla table-responsive">

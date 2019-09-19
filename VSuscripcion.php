@@ -29,6 +29,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
 
     <title>Suscripciones</title>
 </head>
@@ -96,7 +97,7 @@ if (!isset($_SESSION['acceso'])) {
                                 </datalist> <br>
                             </div>
                             <h5 class="admin">Monto:</h5>
-                            <input id="monto" type="text" class="form form-control" name="TMonto" placeholder="Monto $"><br>
+                            <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="Monto $"><br>
                             <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block" name="" value="Guardar">
                         </form>
                         <div id="tableHolder" class="row justify-content-center">
@@ -117,7 +118,7 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
-                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                         <button class="bmodal d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">

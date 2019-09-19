@@ -29,7 +29,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
-
+    <script src="js/index.js"></script>
     <title>Gastos</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row">
                                 <div class="d-block col-lg-6">
                                     <h5 class="general">Monto $:</h5>
-                                    <input id="monto" class="form form-control" type="text" name="TMonto" placeholder="$" autocomplete="off" >
+                                    <input id="monto" class="form form-control" onkeypress="return check(event)" type="text" name="TMonto" placeholder="$" autocomplete="off" >
 
                                 <div class="d-block col-lg-12">
                                     <h5><label class="general">Estatus:</label></h5>
@@ -128,7 +128,7 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button id="bclose" class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla table-responsive">

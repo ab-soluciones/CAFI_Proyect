@@ -30,7 +30,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
-
+    <script src="js/index.js"></script>
     <title>Adeudos</title>
 </head>
 
@@ -57,10 +57,10 @@ if (!isset($_SESSION['acceso'])) {
                     <h2 id="msjtarjeta"></h2>
                    
                         <h6 style="color: white;">Abono $ :</h6>
-                        <input class="inabono form form-control" type="text" placeholder="$" autocomplete="off"><br>
+                        <input class="inabono form form-control" onkeypress="return check(event)" type="text" placeholder="$" autocomplete="off"><br>
                         <div id="divefectivo">
                         <h6 style="color: white;">$ Cantidad Recibida / $ Pago :</h6>
-                        <input class="tpago form form-control" type="text" placeholder="$" autocomplete="off"><br>
+                        <input class="tpago form form-control" type="text" onkeypress="return check(event)" placeholder="$" autocomplete="off"><br>
                         </div>
                     <button type="button" class="babonar btn btn-danger btn-large btn-block">Abonar</button>
                 </div>
@@ -75,7 +75,7 @@ if (!isset($_SESSION['acceso'])) {
                 <div class="input-group-prepend">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                 </div>
-                <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
+                <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
                 <table class="table table-hover table-striped table-dark">

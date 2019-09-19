@@ -30,6 +30,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="js/index.js"></script>
 
     <title>Productos</title>
     <script type="text/javascript">
@@ -118,7 +119,7 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" onkeypress="return check(event)" placeholder="Buscar..." title="Type in a name" value="">
                     <p>Sucursal:</p>
                         <select  class="form form-control sucursal" name="SNegocio">
                             <?php

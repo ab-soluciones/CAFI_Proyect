@@ -9,7 +9,6 @@
                 <h5 class="general">Producto:</h5>
                 <input id="inproducto" class="form form-control" list="lproductos" name="DlProductos" autocomplete="off" required>
                 <datalist id="lproductos">
-                    
                 </datalist>
             </div>
         </div>

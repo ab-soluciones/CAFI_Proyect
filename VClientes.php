@@ -29,6 +29,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
     <link rel="icon" href="img/logo/nav1.png">
 
     <title>Clientes</title>
@@ -59,15 +60,15 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="row">
                             <div class="col-lg-4">
                                 <p class="general">Nombre:</p>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" >
+                                <input id="nombre" class="form form-control" type="text" onkeypress="return check(event)" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">Apellido Paterno:</p>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
+                                <input id="apt" class="form form-control" type="text" onkeypress="return check(event)" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">Apellido Materno:</p>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
+                                <input id="apm" class="form form-control" type="text" onkeypress="return check(event)" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
@@ -84,21 +85,21 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">#Documento:</p>
-                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
+                                <input id="numdoc" class="form form-control" type="text" onkeypress="return check(event)" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">Direccion:</p>
-                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion" autocomplete="off"  >
+                                <input id="dir" class="form form-control" type="text" onkeypress="return check(event)" name="TDireccion" placeholder="Direccion" autocomplete="off"  >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
                                 <p class="general">Telefono:</p>
-                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" >
+                                <input id="tel" class="form form-control" type="text" onkeypress="return check(event)" name="TTelefono" placeholder="Telefono" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">E-mail:</p>
-                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off" >
+                                <input id="email" class="form form-control" type="text" onkeypress="return check(event)" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                             <div class="d-block col-lg-12">
@@ -130,7 +131,7 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
-                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                         <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
 
