@@ -3,19 +3,19 @@ session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 
-  
+  $idventa = $_SESSION['idven'];
 
     $con = new Models\Conexion();
 
     $query = "SELECT descuento,total,pago, cambio,fecha,hora,nombre,apaterno,nombre_negocio,domicilio, ciudad,telefono_negocio, idventas FROM venta
                 INNER JOIN trabajador ON venta.idtrabajador = trabajador.idtrabajador
                 INNER JOIN negocios ON venta.idnegocios=negocios.idnegocios
-                WHERE idventas = '2'";
+                WHERE idventas = '$idventa'";
 
     $row = $con->consultaListar($query);
     $renglonVenta = mysqli_fetch_array($row);
 
-    $query = "SELECT pago_minimo, total_deuda,nombre,apaterno,amaterno FROM adeudos INNER JOIN cliente ON adeudos.cliente_idcliente=cliente.idcliente WHERE ventas_idventas ='1'";
+    $query = "SELECT pago_minimo, total_deuda,nombre,apaterno,amaterno FROM adeudos INNER JOIN cliente ON adeudos.cliente_idcliente=cliente.idcliente WHERE ventas_idventas ='$idventa'";
     $adeudos = $con->consultaListar($query);
     $abono = mysqli_fetch_array($adeudos);
     $tipoVenta = (isset($abono)) ? "VENTA A CRÉDITO " . $renglonVenta['idventas'] : "VENTA " . $renglonVenta['idventas']; /*Define la descripcion del tipo de venta */
@@ -25,7 +25,7 @@ Config\Autoload::run();
 
     $query = "SELECT nombre,color,marca,precio_venta, cantidad_producto, unidad_medida,talla_numero,subtotal FROM
 	producto INNER JOIN detalle_venta ON codigo_barras = producto_codigo_barras WHERE
-	detalle_venta.idventa='2'";
+	detalle_venta.idventa='$idventa'";
     $rowPro = $con->consultaListar($query);
 
 
@@ -38,14 +38,8 @@ Config\Autoload::run();
         <link rel="stylesheet" href="css/bootstrap.css">
         <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="css/ticket.css">
-        <script >
-
-
-                window.print();
-
-        </script>
     </head>
-    <body class="border" style="width: 400px;">
+    <body class="border" style="width: 400px;" onmouseover="cerrar()">
         <div class="ticket justify-content-center">
             <div class="border">
                 <img
@@ -93,21 +87,23 @@ Config\Autoload::run();
             </table>
             <?php if(isset($abono)){
                     if ($renglonVenta['descuento'] > 0.00) {?>
-                <br><?php echo "DESCUENTO: ". $renglonVenta['descuento'];?>
+                <br><?php echo "DESCUENTO: $". $renglonVenta['descuento'];?>
             <?php   }?>
-                <br><?php echo "TOTAL: ". $renglonVenta['total'];?>
-                <br><?php echo "ABONO: ". $abono['pago_minimo'];?>
+                <br><?php echo "TOTAL: $". $renglonVenta['total'];?>
+                <br><?php echo "ANTICIPO: $". $abono['pago_minimo'];?>
             <?php   if ($renglonVenta['pago'] > 0.00){?>
-                <br><?php echo "PAGÓ: ". $renglonVenta['pago'];?>
+                <br><?php echo "PAGÓ: $". $renglonVenta['pago'];?>
             <?php   }?>
-                <br><?php echo "ADEUDO: ". $abono['total_deuda'];?>
+            <?php if ($renglonVenta['cambio'] > 0.00){?>
+                    <br><?php echo "CAMBIO: $". $renglonVenta['cambio'];}?>
+                <br><?php echo "ADEUDO: $". $abono['total_deuda'];?>
             <?php }else{
                 if ($renglonVenta['descuento'] > 0.00){?>
-                    <br><?php echo "DESCUENTO: ". $renglonVenta['descuento'];}?>
+                    <br><?php echo "DESCUENTO: $". $renglonVenta['descuento'];}?>
                     <br><p class="text-right"><span class="font-weight-bold">TOTAL: </span><?php echo "$".$renglonVenta['total'];?></p>
                     <br><span class="font-weight-bold">PAGÓ: </span><?php echo "$". $renglonVenta['pago'];?>
                 <?php if ($renglonVenta['cambio'] > 0.00){?>
-                    <br><?php echo "CAMBIO: ". $renglonVenta['cambio'];}?>
+                    <br><?php echo "CAMBIO: $". $renglonVenta['cambio'];}?>
             <?php }?>
 
             <br>
@@ -115,6 +111,14 @@ Config\Autoload::run();
             <p class="centrado">¡GRACIAS POR SU COMPRA :-)!
             <p class="centrado">USTED FUÉ ATENDIDO POR <?php echo $renglonVenta['nombre'] . " " .$renglonVenta['apaterno'] ?>
         </div>
+
+        <script >
+            window.print();
+
+            function cerrar(){
+                window.close();
+            }      
+        </script>
     </body>
 
 </html>

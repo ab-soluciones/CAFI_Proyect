@@ -37,6 +37,7 @@
       </div>
       <script src="js/index.js"></script>
 </body>
+
 </html>
 <?php
 
@@ -46,6 +47,7 @@ las partes de los CRUD en donde se hagan procedimientos diferentes.. El CRUD Com
 
 session_start();
 // Generate token
+
 date_default_timezone_set("America/Mexico_City");
 function getDateTime()
 {
@@ -76,8 +78,7 @@ function getToken($length)
   return $token;
 }
 
-//se inicializa las variables globales
-$_SESSION['comboID'] = null;
+
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 if (isset($_SESSION['acceso']) && strcasecmp($_SESSION['estado'], "A") == 0) {
@@ -174,10 +175,15 @@ function comprobar()
     if (isset($datos1)) {
       //si existe una cuenta en la tabla usuariosab se guarda en la variable sesion el rol de la cuenta el estado y su id
 
+      //se inicializa las variables globales
+      $_SESSION['comboID'] = null;
+      $_SESSION['idven'] = null;
+
       $_SESSION['login'] = $datos1['login'];
       $_SESSION['acceso'] = $datos1['acceso'];
       $_SESSION['estado'] = $datos1['estado'];
       $_SESSION['id'] = $datos1['idusuariosab'];
+
 
       $token = getToken(10);
       $_SESSION['token'] = $token;
@@ -204,6 +210,10 @@ function comprobar()
     } else if (isset($datos2)) {
 
       //si existe una cuenta en la tabla trabajador se guarda en la variable sesion el rol de la cuenta, el estado, su id y a que negocio pertenece
+
+      //se inicializa las variables globales
+      $_SESSION['comboID'] = null;
+      $_SESSION['idven'] = null;
       $_SESSION['login'] = $datos2['login'];
       $_SESSION['acceso'] = $datos2['acceso'];
       $_SESSION['estado'] = $datos2['estado'];
@@ -227,6 +237,9 @@ function comprobar()
 
       comprobar();
     } else if (isset($datos3)) {
+      //se inicializa las variables globales
+      $_SESSION['comboID'] = null;
+      $_SESSION['idven'] = null;
       $_SESSION['login'] = $datos3['login'];
       $_SESSION['acceso'] = $datos3['acceso'];
       $_SESSION['estado'] = $datos3['estado'];
