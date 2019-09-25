@@ -72,8 +72,8 @@ $(document).ready(function(){
                     if(datos.idNegocio == $('.sucursal').val()){
                         template += `<th style="width:100px;">
                         <div class="row">
-                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>
@@ -81,8 +81,8 @@ $(document).ready(function(){
                     }else{
                         template +=`<th style="width:100px;">
                         <div class="row">
-                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </button>
                         </div>
                     </th>

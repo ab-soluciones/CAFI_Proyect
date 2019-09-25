@@ -201,7 +201,7 @@ Config\Autoload::run();
                     <table class="table table-bordered table-hover">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th onclick="sortTable(0)">Id trabajador</th>
+                                <th onclick="sortTable(0)">ID</th>
                                 <th onclick="sortTable(1)">Nombre</th>
                                 <th onclick="sortTable(2)">Ap-P</th>
                                 <th onclick="sortTable(3)">Ap-M</th>

@@ -414,17 +414,19 @@ $(document).ready(function () {
           let template = '';
           datos.forEach(datos => {
             template += `<tr>
-                        <td class="datos font-weight-bold">${datos.codigo_barras}</td>
-                        <td><img src="${datos.imagen}" height="50" width="50" /></td>
-                        <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
-                        <td class="datos">${datos.existencia}</td>
-                        <td class="datos">${datos.precio}</td>
-                        <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
-                        <td> <div class="row">
-                        <a class="bagregardv btn btn-secondary" href="#">
-                            <img src="img/carrito.png">
-                        </a>
-                    </div></td>
+                          <td> 
+                            <div class="row">
+                              <a class="bagregardv btn btn-secondary ml-1" href="#">
+                                  <img src="img/carrito.png">
+                              </a>
+                            </div>
+                          </td>
+                          <td><img src="${datos.imagen}" height="50" width="50" /></td>
+                          <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
+                          <td class="datos font-weight-bold">${datos.codigo_barras}</td>
+                          <td class="datos">${datos.existencia}</td>
+                          <td class="datos">${datos.precio}</td>
+                          <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
                         </tr>`;
           });
           datos = "";

@@ -114,32 +114,44 @@ if (!isset($_SESSION['acceso'])) {
     <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
-                <div class="input-group mb-2">
-                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3 agrega mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
-                    <div class="input-group-prepend">
-                        <div class="input-group-text"><i class="fa fa-search"></i></div>
-                    </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" onkeypress="return check(event)" placeholder="Buscar..." title="Type in a name" value="">
-                    <p>Sucursal:</p>
-                        <select  class="form form-control sucursal" name="SNegocio">
-                            <?php
-                            $negocio = $_SESSION['idnegocio'];
-                            $con = new Models\Conexion();
-                            $query = "SELECT nombre_negocio, idnegocios FROM negocios 
-                            WHERE clientesab_idclienteab = (SELECT clientesab_idclienteab AS dueno FROM negocios WHERE negocios.idnegocios='$negocio')";
-                            $row = $con->consultaListar($query);
-                            $con->cerrarConexion();
-                            $cont = 0;
-                            while ($renglon = mysqli_fetch_array($row)) {
-                                echo "<option value =".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
-                            }
-                            ?>
-                        </select>
-                        <input type="hidden" id="negocioActual" value=<?php echo  $_SESSION['idnegocio'];?>>
-                        <input type="submit" style="display: none;">
-                    <button class="d-none d-lg-flex btn btn-primary ml-3 agrega mostra" data-toggle="modal" data-target="#modalForm">Agregar</button>
-                    
-                    <button id="BcodigoBarra"  data-toggle="modal" data-target="#modalFormCodigo">Imprimir Codigos</button>
+                    <div class="row col-12">
+                        <div class="input-group mb-2">
+
+                            <div class="row col-12">
+                                <button class="d-lg-none btn btn-primary col-6 mb-3 p-3 agrega mostra" data-toggle="modal" data-target="#modalForm">Agregar Productos</button>
+                                <button class="d-lg-none btn btn-danger col-6 mb-3 p-3 agrega mostra" id="BcodigoBarra"  data-toggle="modal" data-target="#modalFormCodigo">Imprimir Codigos</button>
+                            </div>
+
+                            <div class="bg-dark text-white px-3 d-flex align-items-center">
+                                <p>Sucursal:</p>
+                            </div>
+                            <select class="form form-control sucursal col-6 col-lg-2" name="SNegocio">
+                                <?php
+                                $negocio = $_SESSION['idnegocio'];
+                                $con = new Models\Conexion();
+                                $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                                WHERE clientesab_idclienteab = (SELECT clientesab_idclienteab AS dueno FROM negocios WHERE negocios.idnegocios='$negocio')";
+                                $row = $con->consultaListar($query);
+                                $con->cerrarConexion();
+                                $cont = 0;
+                                while ($renglon = mysqli_fetch_array($row)) {
+                                    echo "<option value =".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
+                                }
+                                ?>
+                            </select>
+
+                            <div class="ml-0 ml-lg-3 input-group-prepend">
+                                <div class="input-group-text"><i class="fa fa-search"></i>
+                                </div>
+                            </div>
+
+                            <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" onkeypress="return check(event)" placeholder="Buscar..." title="Type in a name" value="">
+                            
+                            <input type="hidden" id="negocioActual" value=<?php echo  $_SESSION['idnegocio'];?>>
+                            <input type="submit" style="display: none;">
+                            <button class="d-none d-lg-flex btn btn-primary ml-5 agrega mostra" data-toggle="modal" data-target="#modalForm">Agregar Producto</button>
+                            <button class="d-none d-lg-flex btn btn-danger ml-5 agrega mostra" id="BcodigoBarra"  data-toggle="modal" data-target="#modalFormCodigo">Imprimir Codigos</button>
+                        </div>
                 </div>
 
                 <div class="contenedorTabla table-responsive">
@@ -178,7 +190,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -186,16 +198,16 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
+                                    <a class="bg-dark nav-link text-white active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
+                                    <a class="bg-dark nav-link text-white" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
@@ -226,7 +238,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -234,16 +246,16 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <div class="row justify-content-center">
                         <form action="codigoBarras.php" method="POST" target="_blank">
                         <div class="col-12">
-                            <h5>Ingrese la cantidad que desea imprimir (Se imprimiran todos los productos que esten en inventario)</h5>
+                            <p class="text-white">Ingrese la cantidad que desea imprimir (Se imprimiran todos los productos que esten en inventario)</p>
                             <div class="tab-content" id="myTabContent">
                                 <p class="general">Cantidad:</p>
                                 <input type="num" name="cantidad">
-                                <input type="submit">
+                                <input class="btn btn-danger" type="submit" value="Imprimir">
                             </div>
                             </form>
                         </div>

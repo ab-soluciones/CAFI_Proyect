@@ -44,7 +44,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -52,7 +52,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formgastos">
                         <div class="container">
@@ -86,7 +86,7 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row mt-3">
                                 <div class="d-block col-lg-12">
                                     <h5 class="general">Descripcion:</h5>
-                                    <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
+                                    <textarea id="desc" name="TADescription" rows="2" class="form-control bg-dark text-white" placeholder="Agregue su descripcion" maxlength="50"></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -104,7 +104,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                                 <div class="d-block col-lg-6">
                                     <h5 class="general">Fecha:</h5>
-                                    <input class="form-control" id="fecha" type="date" name="DFecha" >
+                                    <input class="form-control bg-dark text-white" id="fecha" type="date" name="DFecha" >
                                 </div>
                             </div>
                             <div class="row mt-3 justify-content-around">

@@ -39,11 +39,11 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     ?>
     <div class="contenedor container-fluid">
         <div class="row">
-            <div class="col-5 p-3">
+            <div class="col-12 col-lg-5 p-3 order-2 order-lg-1">
                 <h3 class="text-center bg-dark text-white mb-3">Venta</h3>
                 <div class="contenedorTabla table-wrapper">
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped table-dark">
+                        <table class="scroll table table-hover table-striped table-dark">
                             <thead class="thead-dark">
                                 <tr>
                                     <th class="text-nowrap text-center"></th>
@@ -60,7 +60,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </table>
                     </div>
                 </div>
-                <div id="divtotal" style="background:  #3366ff;" class="text-white text-right font-weight-bold p-1">
+                <div id="divtotal" style="background:  #3366ff;" class="text-white text-right font-weight-bold p-1 col-12">
                 </div>
                 <div class="d-block d-lg-flex mt-4 justify-content-center">
                     <button value="Efectivo" class="col-12 col-lg-4 m-1 bpago1 btn btn-dark text-white" type="button">Pago en efectivo</button>
@@ -68,26 +68,26 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <button value="Tarjeta" class="col-12 col-lg-4 m-1 bpago3 btn btn-dark text-white" type="button">Pago con tarjeta</button>
                 </div>
             </div>
-            <div class="col-7 p-3">
+            <div class="col-12 col-lg-7 p-3 order-1 order-lg-2">
                 <h3 class="text-center bg-dark text-white mb-3">Busqueda de Producto</h3>
                 <div class="input-group mb-2">
-                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <!-- <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button> -->
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input autofocus style="color: white; border-color: gray;" onkeypress="return check(event)" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" autocomplete="off"  placeholder="Buscar Producto...">
                 </div>
-                <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">
+                <div class="contenedorTabla table-responsive table-wrapper-productos">
                     <table class="table table-hover table-striped table-dark">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th class="text-nowrap text-center bg-primary">Codigo</th>
+                                <th class="text-nowrap text-center"></th>
                                 <th class="text-nowrap text-center">Imagen</th>
                                 <th class="text-nowrap text-center">Producto</th>
+                                <th class="text-nowrap text-center bg-primary">Codigo</th>
                                 <th class="text-nowrap text-center">Existencia</th>
                                 <th style="background-color: orangered;" class="text-nowrap text-center bg-importante">Precio</th>
                                 <th class="text-nowrap text-center">Cantidad</th>
-                                <th class="text-nowrap text-center"></th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
@@ -154,8 +154,6 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </table>
 
                     </div>
-
-
 
                     <div id="divanticipo">
                         <h6 style="color: white;">Anticipo:</h6>

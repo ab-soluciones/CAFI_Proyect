@@ -9,9 +9,9 @@
             <input id="nombre" class="form form-control" type="text" name="TNombre" onkeypress="return check(event)" placeholder="Nombre" autocomplete="off" required>
         </div>
         <div class="col-lg-4">
-            <h5><label for="imagen" class="badge badge-primary">Imagen:</label></h5>
-            <div class="row1">
-                <div style="margin-left: 15px;" id="preview" class="card">
+            <h5><label for="imagen" class="general">Imagen:</label></h5>
+            <div class="row">
+                <div id="preview">
                     <img id="imagenmostrar" src="" width="100" height="100" />
                 </div>
             </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="col-lg-4">
             <h5 class="general">Descripcion:</h5>
-            <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
+            <textarea id="desc" name="TADescription" rows="2" class="form-control bg-dark text-white" placeholder="Agregue su descripcion"></textarea>
         </div>
     </div>
 

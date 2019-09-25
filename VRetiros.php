@@ -44,7 +44,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -52,7 +52,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formuventas">
                         <div class="row">
@@ -80,7 +80,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Descripcion:</h5>
-                                <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
+                                <textarea id="desc" name="TADescription" rows="2" class="form-control bg-dark text-white" placeholder="Agregue su descripcion"></textarea>
                             </div>
                         </div>
                         <button type="submit" style="color: #005ce6;" class="mt-3 btn btn-dark btn-lg btn-block bclose">
@@ -110,7 +110,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -118,7 +118,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formuventas2">
                         <div class="row">
@@ -170,7 +170,9 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                                     <th onclick="sortTable(8)">Retiró</th>
                                     <th onclick="sortTable(9)">Tarea</th>
                                 </tr>
-                            <tbody id="cuerpo"></tbody>
+                            <tbody id="cuerpo">
+                            
+                            </tbody>
                         </table>
                     </div>
                 </div>

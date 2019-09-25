@@ -29,7 +29,7 @@ $(document).ready(function(){
                     <td class="text-nowrap text-center">${datos.telefono}</td>
                     <td class="text-nowrap text-center">${datos.correo}</td>
                     <td class="text-nowrap text-center bg-importante font-weight-bold">${datos.estado}</td>
-                    <th style="width:100px;">
+                    <th style="width:100px; class="p-1">
                         <div class="row">
                             <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
                                 Editar

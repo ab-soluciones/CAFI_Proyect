@@ -24,8 +24,8 @@ $(document).ready(function () {
                     <td class="text-nowrap text-center"><a href="VConsultasAdeudos.php?ad=${datos.adeudos_id}"># ${datos.adeudos_id} </a></td>
                     <th style="width:100px;">
                     <div class="row">
-                        <a data-toggle="modal" data-target="#modalForm" id="beditar" style="margin: 0 auto;" class=" btn btn-secondary" href="#">
-                            <img src="img/edit.png">
+                        <a data-toggle="modal" data-target="#modalForm" id="beditar" style="margin: 0 auto;" class="btn btn-danger" href="#">
+                            Editar
                         </a>
                     </div>
                 </th>

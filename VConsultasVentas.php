@@ -44,7 +44,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -52,7 +52,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formConsulta">
                         <div class="row">
@@ -81,42 +81,43 @@ if (!isset($_SESSION['acceso'])) {
     <!-- Modal --> 
 
     <!-- Modal -->
-    <div class="modal fade" id="modalFormMostrar" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
+    <div  class="modal fade" id="modalFormMostrar" role="dialog">
+        <div  class="modal-dialog">
+            <div  class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
+                <div  class="modal-header administrador">
+                    <button type="button" class="close btn-danger text-white" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
                     </button>
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div  class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formConsulta">
                         <div class="row">
-                            <div class="col-lg-4">
-                            <table class="table table-bordered table-responsive-md">
-                                <thead>
-                                    <tr>
-                                        <th>Cantidad</th>
-                                        <th>Producto</th>
-                                        <th>Imagen</th>
-                                        <th>Marca</th>
-                                        <th>Color</th>
-                                        <th>UM</th>
-                                        <th>Talla</th>
-                                        <th>PV</th>
-                                        <th>Subtotal</th>
-                                    </tr>
-                                </thead>
-                                    
-                                    <tbody id="cuerpo"></tbody>
+                                <div class="contenedorTabla table-responsive">
+                                    <table class="scroll table table-hover table-striped table-dark">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Cantidad</th>
+                                                <th>Producto</th>
+                                                <th>Imagen</th>
+                                                <th>Marca</th>
+                                                <th>Color</th>
+                                                <th>UM</th>
+                                                <th>Talla</th>
+                                                <th>PV</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
 
-                                </table>
-                            </div>
+                                        <tbody id="cuerpo">
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
                         </div>
                     </form>
                     <div id="tableHolder">
@@ -176,7 +177,7 @@ if (!isset($_SESSION['acceso'])) {
                         while ($renglon = mysqli_fetch_array($row)) {
                             ?>
                         <tr>
-                            <td class="text-nowrap text-center"><button class="mostrar" data-toggle="modal" data-target="#modalFormMostrar">Mostrar</button></td>
+                            <td class="text-nowrap text-center"><button class="mostrar btn btn-info" data-toggle="modal" data-target="#modalFormMostrar">Mostrar</button></td>
                             <td class="text-nowrap text-center d-none"><?php echo $renglon['idventas'];  ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['descuento']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['total']; ?></td>
@@ -189,8 +190,8 @@ if (!isset($_SESSION['acceso'])) {
                             <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
                             <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
-                                    <a id="beditar" style="margin: 0 auto;" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm" >
-                                        <img src="img/edit.png">
+                                    <a id="beditar" style="margin: 0 auto;" class="btn btn-danger" data-toggle="modal" data-target="#modalForm" >
+                                        Editar
                                     </a>
                                 </div>
                             </td>

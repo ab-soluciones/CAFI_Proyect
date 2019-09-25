@@ -128,45 +128,104 @@ nav.fixed{
   position: fixed;
 }
 
-/*TABLAS*/
+/*TABLAS VENTA*/
 .table-wrapper
 {
-    width: 536px;
+    width: 290px;
     height: 350px;
+    overflow: auto;
+}
+.table-wrapper-productos{
+    width: 290px;
+    height: 420px;
     overflow: auto;
 }
 
 /*xs*/
 /*En esta medida toma lo que esta en el css por default*/
 /*sm*/
-@media (min-width: 576px) {
-
+@media (min-width: 300px) {
+    /*TABLAS VENTA*/
+    .table-wrapper
+    {
+        width: 340px;
+        height: 350px;
+        overflow: auto;
+    }
+    .table-wrapper-productos{
+        width: 340px;
+        height: 420px;
+        overflow: auto;
+    }
+}
+/*iPhone 6 Plus*/
+@media (min-width: 377px) {
+    /*TABLAS VENTA*/
+    .table-wrapper
+    {
+        width: 376px;
+        height: 350px;
+        overflow: auto;
+    }
+    .table-wrapper-productos{
+        width: 376px;
+        height: 420px;
+        overflow: auto;
+    }
 }
 /*md*/
 @media (min-width: 768px) {
-
+    /*TABLAS VENTA*/
+    .table-wrapper
+    {
+        width: 736px;
+        height: 350px;
+        overflow: auto;
+    }
+    .table-wrapper-productos{
+        width: 736px;
+        height: 420px;
+        overflow: auto;
+    }
 }
 /*lg*/
 @media (min-width: 992px) {
-    /* .table thead{
-        position: absolute;
-        top: 40px;
+    /*TABLAS VENTA*/
+    .table-wrapper
+    {
+        width: 416px;
+        height: 350px;
+        overflow: auto;
     }
-    .contenedorTabla{
-        margin-top: 50px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        height: 470px;
-    } */
+    .table-wrapper-productos{
+        width: 645px;
+        height: 420px;
+        overflow: auto;
+    }
     .contenedor{
-      position: relative;
-      top: 80px;
-    }
+        position: relative;
+        top: 80px;
+        }
 }
 
 /*xl*/
 @media (min-width: 1200px) {
-
+    /*TABLAS VENTA*/
+    .table-wrapper
+    {
+        width: 536px;
+        height: 350px;
+        overflow: auto;
+    }
+    .table-wrapper-productos{
+        width: 765px;
+        height: 420px;
+        overflow: auto;
+    }
+    .contenedor{
+    position: relative;
+    top: 80px;
+    }
 }
 
 /*Siempre mostrar la scrollbar en las tablas*/

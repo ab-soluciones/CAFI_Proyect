@@ -46,7 +46,7 @@ if (!isset($_SESSION['acceso'])) {
                     <a style="margin: 0 auto;" href="#" class="navbar-brand">Inventario</a>
                 </div>
             </nav>
-            <div class="card card-body">
+            <div class="card card-body administrador">
                 <form action="#" method="post">
                     <h5><label for="tipo" class="badge badge-primary">Tipo producto:</label></h5>
                     <select id="tipo" class="form form-control" name="STipo" id="">
@@ -63,8 +63,8 @@ if (!isset($_SESSION['acceso'])) {
         <?php if (isset($_POST['STipo']) && $_POST['STipo'] === "Ropa") {
             $tipo = $_POST['STipo'];
             ?>
-            <div class="contenedorTabla table-responsive col-12">
-                <table class="table table-bordered table-hover">
+            <div class="contenedorTabla table-responsive">
+                <table class="table table-hover table-striped table-dark">
                     <tr>
                         <th>Nombre</th>
                         <th>Imagen</th>
@@ -150,8 +150,8 @@ if (!isset($_SESSION['acceso'])) {
                 <?php } else if (isset($_POST['STipo']) && $_POST['STipo'] === "Calzado") {
                     $tipo = $_POST['STipo'];
                     ?>
-                    <div class="col-xl-12" style=" margin: 0 auto; margin-top:15px;">
-                        <table class="table table-bordered table-responsive-xl">
+                    <div class="contenedorTabla table-responsive">
+                        <table class="table table-hover table-striped table-dark">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Imagen</th>
