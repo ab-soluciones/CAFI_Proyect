@@ -97,7 +97,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">E-mail:</p>
-                                <input id="email" class="form form-control" type="text" onkeypress="return check(event)" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off" >
+                                <input id="email" class="form form-control" type="text"  name="TCorreo" placeholder="correo@dominio.com" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                             <div class="d-block col-lg-12">

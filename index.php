@@ -28,8 +28,8 @@
         <div id="index_form" class="card card-body row d-block col-md-4">
           <legend>Ingrese su usuario y contraseña:</legend>
           <form class="form-group" action="index.php" method="post">
-            <input id="user" class="index_input form-control" type="text" name="nombre-us" placeholder="Usuario" autocomplete="off" required onkeypress="return check(event)"><br>
-            <input id="password" class="index_input form-control" type="password" name="password" value="" placeholder="Contraseña" required onkeypress="return check(event)"><br>
+            <input id="user" class="index_input form-control" type="text" pattern= "[A-Za-z0-9_-@.]{1,15}" name="nombre-us" placeholder="Usuario" autocomplete="off" required ><br>
+            <input id="password" class="index_input form-control" pattern= "[A-Za-z0-9_-@.]{1,15}"type="password" name="password" value="" placeholder="Contraseña" required ><br>
             <input id="index_button" type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="Login" value="Continuar">
           </form>
         </div>
@@ -121,10 +121,11 @@ function comprobar()
     /*Ejecucion de la funcion comprobar de la clase Comprobar.. su tarea es cambiar a estado inactivo
    la cuenta del dueño del negocio y las cuentas de todos los trabajadores pertenecientes a dicho negocio
    cuando la fecha actual sea igual a la fecha de vencimiento de la suscripcion */
-
-    $nombre = $_POST['nombre-us'];
-    $password = $_POST['password'];
     $con = new Models\Conexion();
+
+    $nombre =  $con->eliminar_simbolos($_POST['nombre-us']);
+    $password =  $con->eliminar_simbolos($_POST['password']);
+
 
     //Consultas para comprobar si existe una cuenta con el nombre de usuario y contraseña optenida.
 

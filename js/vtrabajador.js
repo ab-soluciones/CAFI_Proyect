@@ -133,7 +133,7 @@ $(document).ready(function(){
             valores += $(this).html() + "?";
         });
         datos = valores.split("?");
-       
+       console.log(datos);
         idtrabajador = datos[0];
         $('#nombre').val(datos[1]);
         $('#apt').val(datos[2]);
