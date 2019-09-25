@@ -56,7 +56,9 @@ $(document).ready(function () {
               formapago: forma_pago
             };
             $.post('post-guardar.php', postData, function (response) {
-              console.log(response);
+              if(response === "Exitoprinter"){
+                window.open('ticketVenta.php');
+              }
               if (response) {
                 var explode = function () {
                   swal({
@@ -64,11 +66,11 @@ $(document).ready(function () {
                     text: 'Venta realizada exitosamente',
                     type: 'success'
                   },
-                    function (isConfirm) {
-                      if (isConfirm) {
-                        location.reload();
-                      }
-                    });
+                  function (isConfirm) {
+                    if (isConfirm) {
+                      location.reload();
+                    }
+                  });
                 };
                 setTimeout(explode, 200);
               } else {
@@ -122,6 +124,9 @@ $(document).ready(function () {
                 formapago: forma_pago
               };
               $.post('post-guardar.php', postData, function (response) {
+                if(response === "Exitoprinter"){
+                  window.open('ticketVenta.php');
+                }
                 if (response) {
                   var explode = function () {
                     swal({
@@ -129,11 +134,11 @@ $(document).ready(function () {
                       text: 'Venta realizada exitosamente',
                       type: 'success'
                     },
-                      function (isConfirm) {
-                        if (isConfirm) {
-                          location.reload();
-                        }
-                      });
+                    function (isConfirm) {
+                      if (isConfirm) {
+                        location.reload();
+                      }
+                    });
                   };
                   setTimeout(explode, 200);
                 } else {
@@ -175,6 +180,9 @@ $(document).ready(function () {
           formapago: forma_pago
         };
         $.post('post-guardar.php', postData, function (response) {
+          if(response === "Exitoprinter"){
+            window.open('ticketVenta.php');
+          }
           if (response) {
             var explode = function () {
               swal({
@@ -434,7 +442,7 @@ $(document).ready(function () {
 
         }
       });
-    }else{
+    } else {
       template = `<tr>
       </tr>`;
       $('#cuerpo').html(template);
