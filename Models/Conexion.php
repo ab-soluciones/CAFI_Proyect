@@ -74,9 +74,7 @@ class Conexion
     }
 
    public function eliminar_simbolos($string){
- 
         $string = trim($string);
-     
         $string = str_replace(
             array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
             array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
