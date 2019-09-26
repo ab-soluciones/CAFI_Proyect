@@ -41,12 +41,12 @@ Config\Autoload::run();
     </head>
 
     <body style="width: 500px;" onmouseover="cerrar()">
-        <div class="container justify-content-center">
-            <div class="row justify-content-center">
+        
+            <div class="row justify-content-left">
                 <img src="img/ticketcafi.png" alt="Logotipo">
             </div>
             
-            <div>
+            <div class="row justify-content-left">
                     <p class="centrado"> <?php echo $tipoVenta;?>
                 <?php if(isset($abono)){?>
                     <br> <?php echo $cliente;}?>
@@ -58,7 +58,8 @@ Config\Autoload::run();
                     <br> <?php echo $fechaYHora;?>
                     <br> -----------------------------------
             </div>
-                
+            
+            <div class="row justify-content-left">
             <table class="table">
                 <thead>
                     <tr>
@@ -84,7 +85,7 @@ Config\Autoload::run();
                         <td class="text-center"><?php echo $productos['talla_numero']; ?></td>
                     </tr>
                 <?php }?>
-                <!--Prueba
+                
                 <tr>
                     <td class="text-center">Zapatos Louis Vouiton</td>
                     <td class="text-center">Edicion especial</td>
@@ -124,9 +125,11 @@ Config\Autoload::run();
                     <td class="text-center">Unidad</td>
                     <td class="text-center">-</td>
                 </tr>
-                -->
+                
                 </tbody>
             </table>
+            </div>
+
             <?php if(isset($abono)){
                     if ($renglonVenta['descuento'] > 0.00) {?>
                 <p class="text-right"><span class="font-weight-bold">DESCUENTO: </span><?php echo "$". $renglonVenta['descuento'];?></p>
@@ -153,7 +156,7 @@ Config\Autoload::run();
 
             <p class="centrado font-weight-bold">¡GRACIAS POR SU COMPRA!</p>
             <p class="centrado">Usted fue atendido por <?php echo $renglonVenta['nombre'] . " " .$renglonVenta['apaterno'] ?></p>
-        </div>
+        
 
         <script >
             window.print();
