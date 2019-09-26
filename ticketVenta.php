@@ -39,13 +39,14 @@ Config\Autoload::run();
         <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="css/ticket.css">
     </head>
-    <body class="border" style="width: 400px;" onmouseover="cerrar()">
-        <div class="ticket justify-content-center">
-            <div class="border">
-                <img
-                    src="img/ticketcafi.png"
-                    alt="Logotipo">
 
+    <body style="width: 500px;" onmouseover="cerrar()">
+        <div class="container justify-content-center">
+            <div class="row justify-content-center">
+                <img src="img/ticketcafi.png" alt="Logotipo">
+            </div>
+            
+            <div>
                     <p class="centrado"> <?php echo $tipoVenta;?>
                 <?php if(isset($abono)){?>
                     <br> <?php echo $cliente;}?>
@@ -83,33 +84,75 @@ Config\Autoload::run();
                         <td class="text-center"><?php echo $productos['talla_numero']; ?></td>
                     </tr>
                 <?php }?>
+                <!--Prueba
+                <tr>
+                    <td class="text-center">Zapatos Louis Vouiton</td>
+                    <td class="text-center">Edicion especial</td>
+                    <td class="text-center">1</td>
+                    <td class="text-center">$12,000</td>
+                    <td class="text-center">$12,000</td>
+                    <td class="text-center">Par</td>
+                    <td class="text-center">28.5</td>
+                </tr>
+                
+                <tr>
+                    <td class="text-center">Playera Supreme</td>
+                    <td class="text-center"></td>
+                    <td class="text-center">1</td>
+                    <td class="text-center">$5,000</td>
+                    <td class="text-center">$5,000</td>
+                    <td class="text-center">Unidad</td>
+                    <td class="text-center">Chica</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center">Lentes Gucci</td>
+                    <td class="text-center">Edicion especial</td>
+                    <td class="text-center">2</td>
+                    <td class="text-center">$120,000</td>
+                    <td class="text-center">$120,000</td>
+                    <td class="text-center">Unidad</td>
+                    <td class="text-center">-</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center">Cadena de Oro</td>
+                    <td class="text-center">24k</td>
+                    <td class="text-center">3</td>
+                    <td class="text-center">$300,000</td>
+                    <td class="text-center">$300,000</td>
+                    <td class="text-center">Unidad</td>
+                    <td class="text-center">-</td>
+                </tr>
+                -->
                 </tbody>
             </table>
             <?php if(isset($abono)){
                     if ($renglonVenta['descuento'] > 0.00) {?>
-                <br><?php echo "DESCUENTO: $". $renglonVenta['descuento'];?>
+                <p class="text-right"><span class="font-weight-bold">DESCUENTO: </span><?php echo "$". $renglonVenta['descuento'];?></p>
             <?php   }?>
-                <br><?php echo "TOTAL: $". $renglonVenta['total'];?>
-                <br><?php echo "ANTICIPO: $". $abono['pago_minimo'];?>
-            <?php   if ($renglonVenta['pago'] > 0.00){?>
-                <br><?php echo "PAGÓ: $". $renglonVenta['pago'];?>
-            <?php   }?>
-            <?php if ($renglonVenta['cambio'] > 0.00){?>
-                    <br><?php echo "CAMBIO: $". $renglonVenta['cambio'];}?>
-                <br><?php echo "ADEUDO: $". $abono['total_deuda'];?>
-            <?php }else{
-                if ($renglonVenta['descuento'] > 0.00){?>
-                    <br><?php echo "DESCUENTO: $". $renglonVenta['descuento'];}?>
-                    <br><p class="text-right"><span class="font-weight-bold">TOTAL: </span><?php echo "$".$renglonVenta['total'];?></p>
-                    <br><span class="font-weight-bold">PAGÓ: </span><?php echo "$". $renglonVenta['pago'];?>
-                <?php if ($renglonVenta['cambio'] > 0.00){?>
-                    <br><?php echo "CAMBIO: $". $renglonVenta['cambio'];}?>
+                <p class="text-right"><span class="font-weight-bold">TOTAL: </span><?php echo "$". $renglonVenta['total'];?></p>
+                <p class="text-right"><span class="font-weight-bold">ANTICIPO: </span><?php echo "$". $abono['pago_minimo'];?></p>
+            <?php if ($renglonVenta['pago'] > 0.00){?>
+                <p class="text-right"><span class="font-weight-bold">PAGÓ: </span><?php echo "PAGÓ: $". $renglonVenta['pago'];?></p>
             <?php }?>
+            <?php if ($renglonVenta['cambio'] > 0.00){?>
+                <p class="text-right"><span class="font-weight-bold">CAMBIO: </span><?php echo "$". $renglonVenta['cambio'];}?></p>
+                <p class="text-right"><span class="font-weight-bold">ADEUDO: </span><?php echo "ADEUDO: $". $abono['total_deuda'];?></p>
+            <?php }else{
+                    if ($renglonVenta['descuento'] > 0.00){?><br><?php echo "DESCUENTO: $". $renglonVenta['descuento'];}?>
+                    <p class="text-right"><span class="font-weight-bold">TOTAL: </span><?php echo "$".$renglonVenta['total'];?></p>
+                    <p class="text-right"><span class="font-weight-bold">PAGÓ: </span><?php echo "$". $renglonVenta['pago'];?></p>
+                
+                    <?php if ($renglonVenta['cambio'] > 0.00){?><p class="text-right"><span class="font-weight-bold">CAMBIO: </span><?php echo "$". $renglonVenta['cambio'];}?></p>
+            
+            <?php }?>
+            
+            <br>
+            <br>
 
-            <br>
-            <br>
-            <p class="centrado">¡GRACIAS POR SU COMPRA :-)!
-            <p class="centrado">USTED FUÉ ATENDIDO POR <?php echo $renglonVenta['nombre'] . " " .$renglonVenta['apaterno'] ?>
+            <p class="centrado font-weight-bold">¡GRACIAS POR SU COMPRA!</p>
+            <p class="centrado">Usted fue atendido por <?php echo $renglonVenta['nombre'] . " " .$renglonVenta['apaterno'] ?></p>
         </div>
 
         <script >
