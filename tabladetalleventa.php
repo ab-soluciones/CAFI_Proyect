@@ -2,6 +2,16 @@
 session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+} else if (
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+    && $_SESSION['acceso'] != "CEO"
+) {
+    header('location: index.php');
+}
 $con = new Models\Conexion();
 $negocio = $_SESSION['idnegocio'];
 $query = "SELECT detalle_venta.producto_codigo_barras,nombre,color,marca,unidad_medida,talla_numero,precio_venta, cantidad_producto,subtotal FROM producto 

@@ -6,11 +6,11 @@ include "check_token.php";
 
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
-} elseif ($_SESSION['estado'] == "I") {
+} else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] == "CEOAB" || $_SESSION['acceso'] == "ManagerAB"
-    || $_SESSION['acceso'] == "CEO"
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+    && $_SESSION['acceso'] != "CEO"
 ) {
     header('location: index.php');
 }

@@ -2,6 +2,16 @@
 session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+if (!isset($_SESSION['acceso'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+} else if (
+    $_SESSION['acceso'] == "Employes" || $_SESSION['acceso'] == "Manager"
+    ||  $_SESSION['acceso'] == "CEO"
+) {
+    header('location: index.php');
+}
 $con = new Models\Conexion();
 $query = "SELECT id_clienteab,clientesab.nombre,clientesab.apaterno,clientesab.amaterno,tipo_documento,
 numero_documento,direccion,telefono,correo,clientesab.acceso,clientesab.login,clientesab.password,

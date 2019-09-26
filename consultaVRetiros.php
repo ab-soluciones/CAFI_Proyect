@@ -3,7 +3,16 @@ require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
 //se optienen las cantidades que hay en banco y en efectivo
-
+if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+} else if (
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+    && $_SESSION['acceso'] != "CEO"
+) {
+    header('location: index.php');
+}
 $con = new Models\Conexion();
 $negocio = $_SESSION['idnegocio'];
 

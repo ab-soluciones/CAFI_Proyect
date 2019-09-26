@@ -1,12 +1,13 @@
 <?php
 session_start();
 $negocios = $_SESSION['idnegocio'];
-if (!isset($_SESSION['acceso'])) {
+if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
     $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+    && $_SESSION['acceso'] != "CEO"
 ) {
     header('location: index.php');
 }
