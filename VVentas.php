@@ -11,7 +11,6 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');
 } else if (
     $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
-    && $_SESSION['acceso'] != "CEO"
 ) {
     header('location: index.php');
 }
@@ -35,8 +34,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 
 <body>
     <?php
-    $sel = "venta";
-    include("Navbar.php")
+    include("Navbar.php");
     ?>
     <div class="contenedor container-fluid">
         <div class="row">
@@ -76,7 +74,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input autofocus style="color: white; border-color: gray;" onkeypress="return check(event)" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" autocomplete="off"  placeholder="Buscar Producto...">
+                    <input autofocus style="color: white; border-color: gray;" onkeypress="return check(event)" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" autocomplete="off" placeholder="Buscar Producto...">
                 </div>
                 <div class="contenedorTabla table-responsive table-wrapper-productos">
                     <table class="table table-hover table-striped table-dark">
@@ -135,7 +133,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-search"></i></div>
                             </div>
-                            <input autocomplete="off"  style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedac" placeholder="Buscar Cliente...">
+                            <input autocomplete="off" style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedac" placeholder="Buscar Cliente...">
                         </div>
 
                         <table class="scroll table table-hover table-striped table-dark">
@@ -164,7 +162,9 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         <h6 style="color: white;">Cantidad Recibida/Pago:</h6>
                         <input class="tpago form form-control" type="text" onkeypress="return check(event)" placeholder="$" autocomplete="off"><br>
                     </div>
-                    <button style="background-color: orangered;" type="button" class="bvender btn btn-block text-white font-weight-bold p-3"><h5>Vender</h5></button>
+                    <button style="background-color: orangered;" type="button" class="bvender btn btn-block text-white font-weight-bold p-3">
+                        <h5>Vender</h5>
+                    </button>
 
                 </div>
             </div>

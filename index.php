@@ -163,7 +163,7 @@ function comprobar()
 
     $query = "SELECT login,acceso,estado,idusuariosab FROM usuariosab WHERE  BINARY login= '$nombre' AND  BINARY  password='$password'";
     $query2 = "SELECT login,acceso,estado,negocios_idnegocios,idtrabajador FROM trabajador WHERE  BINARY  login= '$nombre' AND  BINARY password='$password'";
-    $query3 = "SELECT login,acceso,estado,id_clienteab FROM clientesab WHERE  BINARY  login = '$nombre' AND  BINARY password ='$password'";
+    $query3 = "SELECT acceso,estado,id_clienteab FROM clientesab WHERE login = '$nombre' AND password ='$password'";
     $datos1 = $con->consultaRetorno($query);
     $datos2 = $con->consultaRetorno($query2);
     $datos3 = $con->consultaRetorno($query3);
@@ -239,7 +239,6 @@ function comprobar()
     } else if (isset($datos3)) {
       //se inicializa las variables globales
       $_SESSION['comboID'] = null;
-      $_SESSION['idven'] = null;
       $_SESSION['login'] = $datos3['login'];
       $_SESSION['acceso'] = $datos3['acceso'];
       $_SESSION['estado'] = $datos3['estado'];

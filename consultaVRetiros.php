@@ -9,7 +9,6 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');
 } else if (
     $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
-    && $_SESSION['acceso'] != "CEO"
 ) {
     header('location: index.php');
 }
