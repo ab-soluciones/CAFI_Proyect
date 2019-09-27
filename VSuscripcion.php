@@ -1,4 +1,4 @@
-<?php
+ <?php
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
@@ -78,21 +78,27 @@ if (!isset($_SESSION['acceso'])) {
                                     <?php
                                     $datos = false;
                                     $con = new Models\Conexion();
-                                    $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
+                                    $query = "SELECT idnegocios,nombre_negocio,ciudad,domicilio FROM negocios t1
+                                    WHERE NOT EXISTS (SELECT NULL FROM suscripcion t2 WHERE t2.negocio_id = t1.idnegocios)";
                                     $row = $con->consultaListar($query);
 
-                                    while ($result = mysqli_fetch_array($row)) {
-                                        ?>
-
-                                        <?php $datos = true;
+                                    while ($result = mysqli_fetch_array($row)) {?>
+                                        <?php 
+                                            $datos = true;
                                             echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
-                                    <?php
+                                        <?php
                                     }
                                     if ($datos == false) {
                                         echo "<script>document.getElementById('innegocio').disabled = true;</script>";
                                     } ?>
 
                                 </datalist> <br>
+                                <h5 class="admin">Paquete:</h5>
+                                <select class="form form-control" id="sus">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select><br>
                             </div>
                             <h5 class="admin">Monto:</h5>
                             <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="Monto $"><br>
@@ -130,7 +136,8 @@ if (!isset($_SESSION['acceso'])) {
                                     <th class="text-nowrap text-center" onclick="sortTable(4)">Negocio</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(5)">Monto</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(6)">Registró</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Tarea</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Paquete</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(8)">Tarea</th>
                                 </tr>
                             </thead>
                             <tbody id="cuerpo">

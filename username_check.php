@@ -12,7 +12,7 @@ $username = $_POST['username'];
  if(mysqli_num_rows($result) > 0)
  {
   // username is already exist 
-  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario ya existe! </div>';
+  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario no esta disponible! </div>';
  }
  else
  {
@@ -31,7 +31,7 @@ if(isset($_POST['username2'])){
  if(mysqli_num_rows($result) > 0)
  {
   // username is already exist 
-  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario ya existe! </div>';
+  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario no esta disponible! </div>';
  }
  else
  {
@@ -50,7 +50,7 @@ if(isset($_POST['username3'])){
  if(mysqli_num_rows($result) > 0)
  {
   // username is already exist 
-  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario ya existe! </div>';
+  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario no esta disponible! </div>';
  }
  else
  {

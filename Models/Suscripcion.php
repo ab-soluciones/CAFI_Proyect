@@ -13,6 +13,7 @@ class Suscripcion
     private $monto;
     private $id_negocio;
     private $con;
+    private $paquete;
 
     public function __construct()
     {
@@ -22,7 +23,9 @@ class Suscripcion
     {
         $this->id = $id;
     }
-
+    public function setPaquete($paquete){
+        $this ->paquete = $paquete;
+    }
     public function setActivacion($activacion)
     {
         $this->activacion = $activacion;
@@ -71,9 +74,9 @@ class Suscripcion
         if (isset($result['idsuscripcion'])) {
             $result = 0;
         } else {
-            $sql = "INSERT INTO  suscripcion(idsuscripcion,fecha_activacion,fecha_vencimiento,estado,monto,negocio_id,usuariosab_idusuariosab)
+            $sql = "INSERT INTO  suscripcion(idsuscripcion,fecha_activacion,fecha_vencimiento,estado,monto,negocio_id,usuariosab_idusuariosab,paquete)
             VALUES  ('{$this->id}', '{$this->activacion}', '{$this->vencimiento}','{$this->estado}',
-            '{$this->monto}','{$this->id_negocio}','$idusuario')";
+            '{$this->monto}','{$this->id_negocio}','$idusuario','$this->paquete')";
             $result = $this->con->consultaSimple($sql);
         }
 
@@ -95,7 +98,7 @@ class Suscripcion
         INNER JOIN trabajador ON trabajador.negocios_idnegocios = negocios.idnegocios 
         SET suscripcion.fecha_activacion = '{$this->activacion}', suscripcion.fecha_vencimiento = '{$this->vencimiento}', 
         suscripcion.estado ='{$this->estado}',suscripcion.monto='{$this->monto}',suscripcion.usuariosab_idusuariosab='$idusuario',
-        clientesab.estado ='{$this->estado}', trabajador.estado='{$this->estado}'
+        clientesab.estado ='{$this->estado}', trabajador.estado='{$this->estado}',suscripcion.paquete = '{$this->paquete}'
         WHERE suscripcion.idsuscripcion='{$this->id}'";
 
         $result = $this->con->consultaSimple($sql);

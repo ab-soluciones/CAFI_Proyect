@@ -8,6 +8,7 @@ $(document).ready(function(){
     obtenerDatosTablaTrabajador();
 
     function idSesion(id){
+        idnego = id;
         $.ajax({
             url: 'sesionTrabajador.php',
             type: 'POST',
@@ -19,10 +20,12 @@ $(document).ready(function(){
     $('#login').keyup(function(){
         var username = $('#login').val();
         if(username.length >= 3){
-
+            $(".contro").show();
             $.post("username_check.php", {username: username}, function(data, status){
                 $("#status").html(data);
                 });
+        }else{
+                $(".contro").hide();
         }
     });
 
@@ -33,6 +36,7 @@ $(document).ready(function(){
 
     $('.close').click(function(){
         $('#formtrabajador').trigger('reset');
+        $(".contro").hide();
     });
 
     function obtenerDatosTablaTrabajador(){
@@ -76,6 +80,7 @@ $(document).ready(function(){
 
     $('#bclose').click(function () {
         $('.modal').modal('hide');
+
     });
 
     $('#formtrabajador').submit(function(e){
@@ -99,18 +104,26 @@ $(document).ready(function(){
             agregarloa: $('#agregarloa').val(),
             estado:$('#estado').val()
         };
-
+        idnego = $('#agregarloa').val();
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         $.post(url,postData, function (response) {
             $('#formclienteab').trigger('reset');
+            console.log(idnego);
             idSesion(idnego);
             obtenerDatosTablaTrabajador();
             editar = false;
+            $("#status").hide();
             if (response === "1") {
                 swal({
                     title: 'Exito',
                     text: 'Datos guardados satisfactoriamente',
                     type: 'success'
+                });
+            }else if(response == 'limite'){
+                swal({
+                    title: 'Alerta',
+                    text: 'Limite de trabajadores exedido',
+                    type: 'warning'
                 });
             } else {
                 swal({

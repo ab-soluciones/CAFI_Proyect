@@ -187,7 +187,7 @@ if (!isset($_SESSION['acceso'])) {
                             <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
                             <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
-                                    <a id="beditar" style="margin: 0 auto;" class="btn btn-secondary" data-toggle="modal" data-target="#modalForm" >
+                                    <a style="margin: 0 auto;" class="btn btn-secondary beditar" data-toggle="modal" data-target="#modalForm" >
                                         <img src="img/edit.png">
                                     </a>
                                 </div>

@@ -13,6 +13,7 @@ $(document).ready(function () {
             venta: datos[1]
         }
         console.log(postData);
+
         $.post('datosMostrarVenta.php', postData, function (response) {
             let datos = JSON.parse(response);
             console.log(datos);
@@ -36,7 +37,7 @@ $(document).ready(function () {
       });
 
 
-    $(document).on('click','#beditar', function () {
+    $(document).on('click','.beditar', function () {
         var valores = "";
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
@@ -61,7 +62,8 @@ $(document).ready(function () {
             estadoActualConsulta: $('#estadoActual').val(),
             estadoNuevoConsulta: $('#estado').val()
           };
-          
+          console.log(postData);
+          e.preventDefault();
           $.post('post-edit.php', postData, function (response) {
             $('#formConsulta').trigger('reset');  
             console.log(response);

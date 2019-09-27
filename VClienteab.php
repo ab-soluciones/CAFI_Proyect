@@ -27,6 +27,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    
     <title>Clientes AB</title>
 
 </head>
@@ -81,7 +82,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Direccion:</h5>
-                                <input id="dir" class="form form-control" type="text" onkeypress="return check(event)" name="TDireccion" placeholder="Direccion">
+                                <input id="dir" class="form form-control" type="text"  name="TDireccion" placeholder="Direccion">
                             </div>
                         </div>
                         <div class="row">
@@ -91,14 +92,14 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="co
                                 <h5 class="admin">Correo electrónico:</h5>
-                                <input id="email" class="form form-control" type="text" onkeypress="return check(event)" name="TCorreo" placeholder="correo@dominio.com">
+                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="admin">Usuario:</h5>
                                 <input id="login" class="form form-control" type="text" onkeypress="return check(event)" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
-                                <div id="status"></div>
+                                <div id="status" class="contro"></div>
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="admin">Contraseña:</h5>

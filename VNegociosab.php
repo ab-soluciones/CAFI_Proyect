@@ -61,7 +61,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Domicilio:</h5>
-                                <input id="dom" class="form form-control" onkeypress="return check(event)" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" >
+                                <input id="dom" class="form form-control"  type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <h5 class="admin">Ciudad:</h5>

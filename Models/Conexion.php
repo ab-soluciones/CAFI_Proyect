@@ -70,7 +70,6 @@ class Conexion
             $row = $resultado->fetch_assoc();
             return $row;
         }
-
     }
 
    public function eliminar_simbolos($string){
@@ -112,14 +111,14 @@ class Conexion
         );
      
         $string = str_replace(
-            array("\\", "¨", "º", "-", "~",
-                 "#", "@", "|", "!", "\"",
-                 "·", "$", "%", "&", "/",
+            array("\\", "¨", "º", "~",
+                 "|", "!", "\"",
+                 "·", "$", "%", "&",
                  "(", ")", "?", "'", "¡",
                  "¿", "[", "^", "<code>", "]",
                  "+", "}", "{", "¨", "´",
                  ">", "< ", ";", ",", ":",
-                 ".", "''"," "),
+                "''"," "),
             ' ',
             $string
         );
@@ -129,27 +128,23 @@ class Conexion
 
     public function consultaSimple($sql)
     {
-        $stmt = $this->con->prepare($sql);
-        return $stmt->execute();
+        $this->con->query($sql);
+        return $this->con->affected_rows;
     }
     public function consultaListar($sql)
     {
-        $stmt = $this->con->prepare($sql);
-        $stmt->execute();
-        return  $resultado = $stmt->get_result();
+        return $this->con->query($sql);
     }
-
+    
     public function cerrarConexion()
     {
         $this->con->close();
     }
-
+    
     public function consultaRetorno($sql)
     {
-        $stmt = $this->con->prepare($sql);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        $row = $resultado->fetch_assoc();
+        $datos = $this->con->query($sql);
+        $row = mysqli_fetch_assoc($datos);
         return $row;
     }
 }

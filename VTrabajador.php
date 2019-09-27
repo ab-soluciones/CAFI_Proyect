@@ -84,7 +84,7 @@ Config\Autoload::run();
                             </div>
                             <div class="col-4">
                                 <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
-                                <input id="dir" class="form form-control" type="text"  onkeypress="return check(event)" name="TDireccion" placeholder="Direccion"  autocomplete="off">
+                                <input id="dir" class="form form-control" type="text"   name="TDireccion" placeholder="Direccion"  autocomplete="off">
                             </div>
                     </div>
                     <div class="d-block d-lg-flex row">
@@ -94,7 +94,7 @@ Config\Autoload::run();
                             </div>
                             <div class="col-4">
                                 <h5><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
-                                <input id="email" class="form form-control" type="text"  onkeypress="return check(event)" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off">
+                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off">
                             </div>
                             <div class="col-4">
                                 <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
@@ -107,13 +107,13 @@ Config\Autoload::run();
                     <div class="row d-block d-lg-flex">
                         <div class="col-lg-4">
                             <h5><label for="login" class="badge badge-primary">Nombre de Usuario:</label></h5>
-                            <input id="login" class="form form-control" type="text"  onkeypress="return check(event)" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
-                            <div id="status"></div>
+                            <input id="login" class="form form-control" type="text"  name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
+                            <div class="contro" id="status"></div>
                         </div>
                         
                         <div class="col-lg-4">
                             <h5><label for="login" class="badge badge-primary">Contraseña:</label></h5>
-                            <input id="contrasena" class="form form-control" type="text"  onkeypress="return check(event)" name="TContrasena" placeholder="Contraseña" autocomplete="off" >
+                            <input id="contrasena" class="form form-control" type="text"  name="TContrasena" placeholder="Contraseña" autocomplete="off" >
                         </div>
 
                         <div class="col-lg-4">

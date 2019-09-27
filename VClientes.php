@@ -83,11 +83,11 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">#Documento:</p>
-                                <input id="numdoc" class="form form-control" type="text" onkeypress="return check(event)" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
+                                <input id="numdoc" class="form form-control" type="text" onkeypress="return check(event)"  name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                                 <p class="general">Direccion:</p>
-                                <input id="dir" class="form form-control" type="text" onkeypress="return check(event)" name="TDireccion" placeholder="Direccion" autocomplete="off"  >
+                                <input id="dir" class="form form-control" type="text"  name="TDireccion" placeholder="Direccion" autocomplete="off"  >
                             </div>
                         </div>
                         <div class="row">

@@ -2,7 +2,7 @@
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 $con = new Models\Conexion();
-$query = "SELECT idsuscripcion , fecha_activacion,fecha_vencimiento ,suscripcion.estado, monto, nombre_negocio,ciudad,domicilio,nombre,apaterno FROM suscripcion 
+$query = "SELECT idsuscripcion , fecha_activacion,fecha_vencimiento ,suscripcion.estado, monto, nombre_negocio,ciudad,domicilio,nombre,apaterno,paquete FROM suscripcion 
 INNER JOIN negocios ON negocio_id = idnegocios INNER JOIN usuariosab ON suscripcion.usuariosab_idusuariosab = idusuariosab
 ORDER BY idsuscripcion DESC";
 $row = $con->consultaListar($query);
@@ -16,7 +16,8 @@ while ($renglon = mysqli_fetch_array($row)) {
         'estado' =>  $renglon['estado'],
         'negocio' =>  $renglon['nombre_negocio'] . " " . $renglon['ciudad'] . " " . $renglon['domicilio'],
         'monto' =>  $renglon['monto'],
-        'registro' =>  $renglon['nombre'] . " " . $renglon['apaterno']
+        'registro' =>  $renglon['nombre'] . " " . $renglon['apaterno'],
+        'paquete' => $renglon['paquete']
     );
 }
 $jsonstring = json_encode($json);
