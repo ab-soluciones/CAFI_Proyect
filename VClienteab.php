@@ -56,21 +56,21 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formclienteab">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="admin"> Nombre:</h5>
+                                <h5 class="general"> Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" onkeypress="return check(event)" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Apellido Paterno:</h5>
+                                <h5 class="general">Apellido P:</h5>
                                 <input id="apt" class="form form-control" type="text" onkeypress="return check(event)" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Apellido Materno:</h5>
+                                <h5 class="general">Apellido M:</h5>
                                 <input id="apm" class="form form-control" type="text" onkeypress="return check(event)" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="admin">Documento:</h5>
+                                <h5 class="general">Documento:</h5>
                                 <select class="form form-control" id="documento">
                                     <option value="INE">INE</option>
                                     <option value="I">CURP</option>
@@ -78,38 +78,42 @@ if (!isset($_SESSION['acceso'])) {
                                 </select>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">#Documento:</h5>
+                                <h5 class="general">#Documento:</h5>
                                 <input id="numdoc" class="form form-control" type="text" onkeypress="return check(event)" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Direccion:</h5>
-                                <input id="dir" class="form form-control" type="text" onkeypress="return check(event)" name="TDireccion" placeholder="Direccion">
+                                <h5 class="general">Direccion:</h5>
+                                <input id="dir" class="form form-control" type="text" onkeypress="return check(event)" name="TDireccion" placeholder="Direccion" autocomplete="off">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="admin">Telefono:</h5>
+                                <h5 class="general">Telefono:</h5>
                                 <input id="tel" class="form form-control" type="text" onkeypress="return check(event)" name="TTelefono" placeholder="Telefono" >
                             </div>
-                            <div class="co
-                                <h5 class="admin">Correo electrónico:</h5>
+                            <div class="col-lg-6">
+                                <h5 class="general">Correo electrónico:</h5>
                                 <input id="email" class="form form-control" type="text" onkeypress="return check(event)" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="admin">Usuario:</h5>
+                                <h5 class="general">Usuario:</h5>
                                 <input id="login" class="form form-control" type="text" onkeypress="return check(event)" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
-                                <div id="status"></div>
                             </div>
                             <div class="col-lg-6">
-                                <h5 class="admin">Contraseña:</h5>
-                                <input id="pass" class="form form-control" type="password" onkeypress="return check(event)" name="TPContraseña" placeholder="Contraseña" >
+                                <h5 class="general">Contraseña:</h5>
+                                <input id="pass" class="form form-control bg-dark text-white" type="password" onkeypress="return check(event)" name="TPContraseña" placeholder="Contraseña" >
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-6">
-                                <h5 class="admin">Estado:</h5>
+                            <div id="status" class="col-12">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 class="general">Estado:</h5>
                                 <select class="form form-control" id="estado">
                                     <option value="A">A</option>
                                     <option value="I">I</option>
@@ -138,7 +142,7 @@ if (!isset($_SESSION['acceso'])) {
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover table-striped table-dark">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>

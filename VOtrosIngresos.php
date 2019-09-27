@@ -56,7 +56,7 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formotrosingresos">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="importante">Cantidad $ :</h5>
+                                <h5 class="importante">Cantidad:</h5>
                                 <input id="can" name="TCantidad" class="form form-control" onkeypress="return check(event)" type="text" placeholder="Ingrese la cantidad $" autocomplete="off">
                             </div>
                             <div class="col-lg-6">
@@ -82,14 +82,15 @@ if (!isset($_SESSION['acceso'])) {
                                 <h5 class="general">Fecha :</h5>
                                 <input class="form-control bg-dark text-white" id="fecha" type="date" name="DFecha" >
                             </div>
-                            
-                            <div class="d-block col-lg-6">
-                                    <h5 class="general">Estatus:</h5>
-                                        <select class="form form-control" id="voestado">
-                                            <option value="A">Activo</option>
-                                            <option value="I">Inactivo</option>
-                                        </select>  
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="general">Estatus:</h5>
+                                <select class="form form-control" id="voestado">
+                                    <option value="A">Activo</option>
+                                    <option value="I">Inactivo</option>
+                                </select>  
+                            </div>
                         </div>
                         <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
                     </form>

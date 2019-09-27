@@ -43,13 +43,13 @@ $rowPro = $con->consultaListar($query);
         <link rel="stylesheet" href="css/ticket.css">
     </head>
 
-    <body style="width: 500px;" onmouseover="cerrar()">
-        <div class="container justify-content-center">
+    <body style="width: 200px;" onmouseover="cerrar()">
+        <div class="border" style="width: 410px; max-width: 410px;">
             <div class="row justify-content-center">
                 <img src="img/ticketcafi.png" alt="Logotipo">
             </div>
         
-            <div>
+            <div class="justify-content-center">
                 <p class="centrado"> <?php echo $titulo; ?>
                 <br> <?php echo $cliente; ?>
 
@@ -61,7 +61,9 @@ $rowPro = $con->consultaListar($query);
                     <br> <?php echo $fechaYHora; ?>
                     <br> -----------------------------------
             </div>
+        </div>
 
+        <div style="width: 140px; max-width: 140px;">
             <table class="table">
                 <thead>
                     <tr>
@@ -87,8 +89,8 @@ $rowPro = $con->consultaListar($query);
                             <td class="text-center"><?php echo $productos['talla_numero']; ?></td>
                         </tr>
                     <?php } ?>
-                    <!--Prueba
-                    <tr>
+                    
+                    <!-- Prueba <tr>
                         <td class="text-center">Zapatos Louis Vouiton</td>
                         <td class="text-center">Edicion especial</td>
                         <td class="text-center">1</td>
@@ -96,56 +98,30 @@ $rowPro = $con->consultaListar($query);
                         <td class="text-center">$12,000</td>
                         <td class="text-center">Par</td>
                         <td class="text-center">28.5</td>
-                    </tr>
-                    
-                    <tr>
-                        <td class="text-center">Playera Supreme</td>
-                        <td class="text-center"></td>
-                        <td class="text-center">1</td>
-                        <td class="text-center">$5,000</td>
-                        <td class="text-center">$5,000</td>
-                        <td class="text-center">Unidad</td>
-                        <td class="text-center">Chica</td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-center">Lentes Gucci</td>
-                        <td class="text-center">Edicion especial</td>
-                        <td class="text-center">2</td>
-                        <td class="text-center">$120,000</td>
-                        <td class="text-center">$120,000</td>
-                        <td class="text-center">Unidad</td>
-                        <td class="text-center">-</td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-center">Cadena de Oro</td>
-                        <td class="text-center">24k</td>
-                        <td class="text-center">3</td>
-                        <td class="text-center">$300,000</td>
-                        <td class="text-center">$300,000</td>
-                        <td class="text-center">Unidad</td>
-                        <td class="text-center">-</td>
-                    </tr>
-                    -->
+                    </tr> -->
                 </tbody>
             </table>
-            <?php
-            if ($renglon['descuento'] > 0.00) { ?>
-                <p class="text-right"><span class="font-weight-bold">DESCUENTO: </span><?php echo "$" . $renglon['descuento']; ?></p>
-            <?php   } ?>
-                <p class="text-right"><span class="font-weight-bold">TOTAL: </span><?php echo "$" . $renglon['total']; ?></p>
-            <?php
-            if ($renglon['pago_minimo'] > 0.00) {?>
-                <p class="text-right"><span class="font-weight-bold">ANTICIPO: </span><?php echo "$" . $renglon['pago_minimo']; ?> <?php } ?></p>
-                <p class="text-right"><span class="font-weight-bold">ABONO ACTUAL: </span><?php echo "$". $renglon['cantidad']; ?></p>
-            <?php if ($renglon['pago_abono'] > 0.00) { ?>
-                <p class="text-right"><span class="font-weight-bold">PAGÓ: </span><?php echo "$" . $renglon['pago_abono']; ?></p>
-            <?php   } ?>
-            <?php if ($renglon['cambio_abono'] > 0.00) { ?>
-                <p class="text-right"><span class="font-weight-bold">CAMBIO: </span><?php echo "$" . $renglon['cambio_abono']; ?></p>
-            <?php } ?>
-            <p class="text-right"><span class="font-weight-bold">ADEUDO ACTUAL: </span><?php echo "$" . $renglon['total_deuda'];?></p>
+        </div>
+
+        <div style="width: 410px; max-width: 410px;">
+            <div class="justify-content-right mr-3">
+                <?php
+                if ($renglon['descuento'] > 0.00) { ?>
+                    <p class="text-right"><span class="font-weight-bold">DESCUENTO: </span><?php echo "$" . $renglon['descuento']; ?></p>
+                <?php   } ?>
+                    <p class="text-right"><span class="font-weight-bold">TOTAL: </span><?php echo "$" . $renglon['total']; ?></p>
+                <?php
+                if ($renglon['pago_minimo'] > 0.00) {?>
+                    <p class="text-right"><span class="font-weight-bold">ANTICIPO: </span><?php echo "$" . $renglon['pago_minimo']; ?> <?php } ?></p>
+                    <p class="text-right"><span class="font-weight-bold">ABONO ACTUAL: </span><?php echo "$". $renglon['cantidad']; ?></p>
+                <?php if ($renglon['pago_abono'] > 0.00) { ?>
+                    <p class="text-right"><span class="font-weight-bold">PAGÓ: </span><?php echo "$" . $renglon['pago_abono']; ?></p>
+                <?php   } ?>
+                <?php if ($renglon['cambio_abono'] > 0.00) { ?>
+                    <p class="text-right"><span class="font-weight-bold">CAMBIO: </span><?php echo "$" . $renglon['cambio_abono']; ?></p>
+                <?php } ?>
+                <p class="text-right"><span class="font-weight-bold">ADEUDO ACTUAL: </span><?php echo "$" . $renglon['total_deuda'];?></p>
+            </div>
 
             <br>
             <br>
@@ -153,6 +129,7 @@ $rowPro = $con->consultaListar($query);
             <p class="centrado font-weight-bold">¡GRACIAS POR SU COMPRA!</p>
             <p class="centrado">Usted fue atendido por <?php echo $renglonVenta['nombre'] . " " .$renglonVenta['apaterno'] ?></p>
         </div>
+
         <script >
             window.print();
 

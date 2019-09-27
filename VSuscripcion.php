@@ -49,56 +49,64 @@ if (!isset($_SESSION['acceso'])) {
                             <span aria-hidden="true">×</span>
                             <span class="sr-only">Close</span>
                         </button>
-        
+                    </div>
 
                     <!-- Modal Body -->
                     <div class="modal-body administrador">
                         <p class="statusMsg"></p>
                         <form class="form-group" id="formulario">
-                            <div>
-                                <h5 class="importante">Fecha Activacion:</h5>
-                                <input class="form-control" id="fecha1" type="date" name="DFecha">
-                            </div><br>
-
-                            <div>
-                                <h5 class="importante">Fecha Vencimiento:</h5>
-                                <input class="form-control" id="fecha2" type="date" name="DFecha2"><br>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="importante">Fecha Activacion:</h5>
+                                    <input class="form-control bg-dark text-white" id="fecha1" type="date" name="DFecha">
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="importante">Fecha Vencimiento:</h5>
+                                    <input class="form-control bg-dark text-white" id="fecha2" type="date" name="DFecha2">
+                                </div>
                             </div>
 
-                            <h5 class="admin">Estado:</h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5 class="general">Estado:</h5>
+                                    <select class="form form-control" id="estado">
+                                        <option value="A">A</option>
+                                        <option value="I">I</option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="general">Negocio:</h5>
+                                    <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
+                                    <datalist id="negocios">
+                                        <?php
+                                        $datos = false;
+                                        $con = new Models\Conexion();
+                                        $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
+                                        $row = $con->consultaListar($query);
 
-                            <select class="form form-control" id="estado">
-                                <option value="A">A</option>
-                                <option value="I">I</option>
-                            </select><br>
+                                        while ($result = mysqli_fetch_array($row)) {
+                                            ?>
 
+                                            <?php $datos = true;
+                                                echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
+                                        <?php
+                                        }
+                                        if ($datos == false) {
+                                            echo "<script>document.getElementById('innegocio').disabled = true;</script>";
+                                        } ?>
 
-                            <div id="divnegocio">
-                                <h5 class="admin">Negocio:</h5>
-                                <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
-                                <datalist id="negocios">
-                                    <?php
-                                    $datos = false;
-                                    $con = new Models\Conexion();
-                                    $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
-                                    $row = $con->consultaListar($query);
-
-                                    while ($result = mysqli_fetch_array($row)) {
-                                        ?>
-
-                                        <?php $datos = true;
-                                            echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
-                                    <?php
-                                    }
-                                    if ($datos == false) {
-                                        echo "<script>document.getElementById('innegocio').disabled = true;</script>";
-                                    } ?>
-
-                                </datalist> <br>
+                                    </datalist> <br>
+                                </div>
                             </div>
-                            <h5 class="admin">Monto:</h5>
-                            <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="Monto $"><br>
-                            <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block" name="" value="Guardar">
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <h5 class="general">Monto:</h5>
+                                    <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="Monto $" autocomplete="off">
+                                </div>
+                            </div>
+
+                            <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block mt-4" name="" value="Guardar">
                         </form>
                         <div id="tableHolder" class="row justify-content-center">
 
@@ -122,7 +130,7 @@ if (!isset($_SESSION['acceso'])) {
                         <button class="bmodal d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-hover table-striped table-dark">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>

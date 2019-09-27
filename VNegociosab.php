@@ -58,25 +58,25 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formunegocio">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="admin">Nombre:</h5>
+                                <h5 class="general">Nombre:</h5>
                                 <input id="nombre" class="form form-control" onkeypress="return check(event)" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Domicilio:</h5>
+                                <h5 class="general">Domicilio:</h5>
                                 <input id="dom" class="form form-control" onkeypress="return check(event)" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Ciudad:</h5>
+                                <h5 class="general">Ciudad:</h5>
                                 <input id="cd" class="form form-control" onkeypress="return check(event)" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="admin">Teléfono:</h5>
+                                <h5 class="general">Teléfono:</h5>
                                 <input id="tel" class="form form-control" type="text" onkeypress="return check(event)" name="TTelefono" placeholder="Teléfono" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Impresora:</h5>
+                                <h5 class="general">Impresora:</h5>
                                 <select class="form form-control" id="impresora">
                                     <option value="A">A</option>
                                     <option value="I">I</option>
@@ -85,7 +85,7 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="col-lg-4">
 
                                 <div>
-                                    <h5 class="admin">Cliente:</h5>
+                                    <h5 class="general">Cliente:</h5>
                                     <input id="incliente" class="form form-control" list="clientes" name="DlCliente"  autocomplete="off">
                                     <datalist id="clientes">
                                         <?php
@@ -125,14 +125,15 @@ if (!isset($_SESSION['acceso'])) {
             <div class="col-md-12">
                 <div id="tableContainer" class="d-block col-lg-12">
                     <div class="input-group mb-2">
-                        <button class="d-lg-none btn btn-success col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                        <button class="d-lg-none btn btn-info col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
-                            <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                            <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                         </div>
+                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                        <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    </div>
                         <div class="contenedorTabla table-responsive">
-                            <table class="table table-bordered table-hover">
+                            <table class="table table-bordered table-hover table-striped table-dark">
                                 <thead class="thead-dark">
                                     <tr class="encabezados">
                                         <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>
@@ -172,25 +173,25 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formunegocio">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="admin">Nombre:</h5>
+                                <h5 class="general">Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Domicilio:</h5>
+                                <h5 class="general">Domicilio:</h5>
                                 <input id="dom" class="form form-control" type="text" name="TDomicilio" placeholder="Domicilio" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Ciudad:</h5>
+                                <h5 class="general">Ciudad:</h5>
                                 <input id="cd" class="form form-control" type="text" name="TCiudad" placeholder="Ciudad" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="admin">Teléfono:</h5>
+                                <h5 class="general">Teléfono:</h5>
                                 <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Teléfono" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Configuracion de impresora:</h5>
+                                <h5 class="general">Configuracion de impresora:</h5>
                                 <div class="row" style="margin: 0 auto;">
                                     <select id="impresora" class="form form-control">
                                         <option value="A">Activa</option>
@@ -199,7 +200,7 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Cliente:</h5>
+                                <h5 class="general">Cliente:</h5>
                                 <div>
                                     <input id="incliente" class="form form-control" list="clientes" name="DlCliente"  autocomplete="off">
                                     <datalist id="clientes">

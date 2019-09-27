@@ -92,7 +92,6 @@ if (!isset($_SESSION['acceso'])) {
                 <table class="table table-bordered table-hover table-striped table-dark">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-                            
                             <th class="text-nowrap text-center" onclick="sortTable(0)">Estado</th>
                             <th class="text-nowrap text-center" onclick="sortTable(1)">$ Cantidad</th>
                             <th class="text-nowrap text-center" onclick="sortTable(2)">$ Pago</th>

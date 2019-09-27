@@ -55,25 +55,25 @@ if (!isset($_SESSION['acceso'])) {
 
                 <!-- Modal Body -->
                 <div class="modal-body">
-                    <p class="statusMsg"></p>
+                    <h5 class="statusMsg"></h5>
                     <form class="form-group" id="formclientes">
                         <div class="row">
                             <div class="col-lg-4">
-                                <p class="general">Nombre:</p>
+                                <h5 class="general">Nombre:</h5>
                                 <input id="nombre" class="form form-control" type="text" onkeypress="return check(event)" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <p class="general">Apellido Paterno:</p>
+                                <h5 class="general">Apellido P:</h5>
                                 <input id="apt" class="form form-control" type="text" onkeypress="return check(event)" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <p class="general">Apellido Materno:</p>
+                                <h5 class="general">Apellido M:</h5>
                                 <input id="apm" class="form form-control" type="text" onkeypress="return check(event)" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <p class="general">Documento:</p>
+                                <h5 class="general">Documento:</h5>
 
                                 <div class="row" style="margin: 0 auto;">
                                     <select class="form form-control" id="documento">
@@ -84,30 +84,30 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                             </div>
                             <div class="col-lg-4">
-                                <p class="general">#Documento:</p>
+                                <h5 class="general">#Documento:</h5>
                                 <input id="numdoc" class="form form-control" type="text" onkeypress="return check(event)" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <p class="general">Direccion:</p>
+                                <h5 class="general">Direccion:</h5>
                                 <input id="dir" class="form form-control" type="text" onkeypress="return check(event)" name="TDireccion" placeholder="Direccion" autocomplete="off"  >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <p class="general">Telefono:</p>
+                                <h5 class="general">Telefono:</h5>
                                 <input id="tel" class="form form-control" type="text" onkeypress="return check(event)" name="TTelefono" placeholder="Telefono" >
                             </div>
                             <div class="col-lg-4">
-                                <p class="general">E-mail:</p>
+                                <h5 class="general">E-mail:</h5>
                                 <input id="email" class="form form-control" type="text" onkeypress="return check(event)" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
                             <div class="d-block col-lg-12">
-                                    <p class="general">Estatus:</p>
-                                        <select class="form form-control" id="vcestado">
-                                            <option value="A">Activo</option>
-                                            <option value="I">Inactivo</option>
-                                        </select>
+                                    <h5 class="general">Estatus:</h5>
+                                    <select class="form form-control" id="vcestado">
+                                        <option value="A">Activo</option>
+                                        <option value="I">Inactivo</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +162,7 @@ if (!isset($_SESSION['acceso'])) {
 </div>
     <script src="js/user_jquery.js"></script>
     <script src="js/clientes.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/h5opper.js/1.14.7/umd/h5opper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

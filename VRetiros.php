@@ -57,11 +57,11 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <form class="form-group" id="formuventas">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
+                                <h5 class="general">Cantidad:</h5>
                                 <input name="TCantidad" id="cant" onkeypress="return check(event)" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad">
                             </div>
                             <div class="col-lg-6">
-                                <h5><label for="de" class="badge badge-ligh">De:</label></h5>
+                                <h5 class="general">Desde:</h5>
                                 <select id="de" class="form form-control" name="STipo">
                                     <option></option>
                                     <option value="Caja">Caja</option>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5><label for="concepto" class="badge badge-ligh">Concepto:</label></h5>
+                                <h5 class="general">Concepto:</h5>
                                 <select id="concepto" class="form form-control" name="SConcepto">
                                     <option></option>
                                     <option value="Retiro">Retiro</option>
@@ -87,8 +87,8 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <h6>Retirar</h6><img src="img/retiro.png">
                         </button>
                     </form>
-                    <div id="tableHolder" class="row justify-content-center">
-                        <table class="col-12 table table-hover table-responsive">
+                    <div class="contenedorTabla table-responsive">
+                        <table class="scroll table table-hover table-striped table-dark">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th>Saldo en caja</th>

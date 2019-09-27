@@ -56,7 +56,7 @@ if (!isset($_SESSION['acceso'])) {
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formConsulta">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-12">
                                 <h5 class="general">Estado:</h5>
 
                                 <div class="row" style="margin: 0 auto;">

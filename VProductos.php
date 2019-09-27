@@ -108,8 +108,8 @@ if (!isset($_SESSION['acceso'])) {
 
 <body>
     <?php
-    $sel = "productos";
-    include("Navbar.php")
+        $sel = "productos";
+        include("Navbar.php")
     ?>
     <div class="contenedor container-fluid">
         <div class="row align-items-start">

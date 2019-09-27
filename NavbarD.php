@@ -9,10 +9,13 @@
                     <a id="orange" class="<?php if($sel === 'trabajadores'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VTrabajador.php'" title="Trabajadores"><img src="img/clientes.png">Trabajadores</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'edr'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VEstadoResultados.php'" title="Estado de Resultados"><img src="img/line-chart.png">E.R</a>
+                    <a class="<?php if($sel === 'edr'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VEstadoResultados.php'" title="Estado de Resultados"><img src="img/line-chart.png">Estado de Resultados</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'fde'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VFlujoEfectivo.php'" title="Flujo de Efectivo"><img src="img/cake-graphic.png">F.E</a>
+                    <a class="<?php if($sel === 'fde'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VFlujoEfectivo.php'" title="Flujo de Efectivo"><img src="img/cake-graphic.png">Flujo de Efectivo</a>
+                </li>
+                <li class="nav-item mx-2 text-center">
+                    <a class="<?php if($sel === 'mv'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VMasVendidos.php'" title="Mas Vendidos"><img src="img/cake-graphic.png">Mas Vendidos</a>
                 </li>
             </ul>
         </div>
@@ -31,19 +34,26 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-6">
                         <li class="nav-item mx-2 text-center">        
                             <a class="<?php if($sel === 'trabajadores'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VTrabajador.php'" title="Trabajadores"><img src="img/clientes.png">Trabajadores</a>
                         </li>
                     </div>
-                    <div class="col-4">
+                    <div class="col-6">
                         <li class="nav-item mx-2 text-center">
-                            <a class="<?php if($sel === 'edr'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VEstadoResultados.php'" title="Estado de Resultados"><img src="img/line-chart.png">E.R</a>
+                            <a class="<?php if($sel === 'edr'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VEstadoResultados.php'" title="Estado de Resultados"><img src="img/line-chart.png">Estado de Resultados</a>
                         </li>
                     </div>
-                    <div class="col-4">
+                </div>
+                <div class="row">
+                    <div class="col-6">
                         <li class="nav-item mx-2 text-center">
-                            <a class="<?php if($sel === 'fde'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VFlujoEfectivo.php'" title="Flujo de Efectivo"><img src="img/cake-graphic.png">F.E</a>
+                            <a class="<?php if($sel === 'fde'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VFlujoEfectivo.php'" title="Flujo de Efectivo"><img src="img/cake-graphic.png">Flujo de Efectivo</a>
+                        </li>
+                    </div>
+                    <div class="col-6">
+                        <li class="nav-item mx-2 text-center">
+                            <a class="<?php if($sel === 'mv'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VMasVendidos.php'" title="Mas Vendidos"><img src="img/cake-graphic.png">Mas Vendidos</a>
                         </li>
                     </div>
                 </div>
