@@ -67,14 +67,14 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
 
                             <div class="row">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <h5 class="general">Estado:</h5>
                                     <select class="form form-control" id="estado">
                                         <option value="A">A</option>
                                         <option value="I">I</option>
                                     </select>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <h5 class="general">Negocio:</h5>
                                     <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
                                     <datalist id="negocios">
@@ -95,46 +95,19 @@ if (!isset($_SESSION['acceso'])) {
                                             echo "<script>document.getElementById('innegocio').disabled = true;</script>";
                                         } ?>
 
-                                    </datalist> <br>
-                                    <h5 class="admin">Paquete:</h5>
+                                    </datalist>
+                                </div>
+                                <div class="col4">
+                                    <h5 class="general">Paquete:</h5>
                                     <select class="form form-control" id="sus">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                     </select>
                                 </div>
-
+                            </div>
                             <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block mt-4" name="" value="Guardar">
                         </form>
-                        <div id="tableHolder" class="row justify-content-center">
-
-                        <div id="divnegocio">
-                            <h5 class="admin">Negocio:</h5>
-                            <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
-                            <datalist id="negocios">
-                                <?php
-                                $datos = false;
-                                $con = new Models\Conexion();
-                                $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
-                                $row = $con->consultaListar($query);
-
-                                while ($result = mysqli_fetch_array($row)) {
-                                    ?>
-
-                                    <?php $datos = true;
-                                        echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
-                                <?php
-                                }
-                                if ($datos == false) {
-                                    echo "<script>document.getElementById('innegocio').disabled = true;</script>";
-                                } ?>
-
-                            </datalist> <br>
-                        </div>
-                        <h5 class="admin">Monto:</h5>
-                        <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="Monto $"><br>
-                        <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block" name="" value="Guardar">
-                    </form>
                     <div id="tableHolder" class="row justify-content-center">
 
                     </div>
@@ -179,6 +152,7 @@ if (!isset($_SESSION['acceso'])) {
             </div>
         </div>
     </div>
+
     <script src="js/user_jquery.js"></script>
     <script src="js/vsuscripciones.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
