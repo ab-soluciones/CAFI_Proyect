@@ -33,6 +33,7 @@ if (!isset($_SESSION['acceso'])) {
     <script src="js/index.js"></script>
 
     <title>Negocios</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body onload="inicio();">
@@ -155,17 +156,6 @@ if (!isset($_SESSION['acceso'])) {
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="modalForm" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header administrador">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">×</span>
-                        <span class="sr-only">Close</span>
-                    </button>
-                </div>
 
                 <!-- Modal Body -->
                 <div class="modal-body administrador">
@@ -226,8 +216,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
 
                             <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
-                            =======
-                            >>>>>>> backend
+
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
@@ -236,7 +225,7 @@ if (!isset($_SESSION['acceso'])) {
             </div>
         </div>
     </div>
-    <<<<<<< HEAD <<<<<<< HEAD=======>>>>>>> backend
+
         <!-- Modal -->
         <div class="contenedor container-fluid">
             <div class="row align-items-start">
@@ -277,5 +266,5 @@ if (!isset($_SESSION['acceso'])) {
                 <script src="js/vnegocios.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+ </body>
 </html>

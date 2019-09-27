@@ -2,6 +2,15 @@
 session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+if (!isset($_SESSION['acceso'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+} else if (
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+) {
+    header('location: index.php');
+}
 
   $idventa = $_SESSION['idven'];
 

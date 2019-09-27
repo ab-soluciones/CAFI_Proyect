@@ -110,13 +110,42 @@ if (!isset($_SESSION['acceso'])) {
                         </form>
                         <div id="tableHolder" class="row justify-content-center">
 
+                        <div id="divnegocio">
+                            <h5 class="admin">Negocio:</h5>
+                            <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
+                            <datalist id="negocios">
+                                <?php
+                                $datos = false;
+                                $con = new Models\Conexion();
+                                $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
+                                $row = $con->consultaListar($query);
+
+                                while ($result = mysqli_fetch_array($row)) {
+                                    ?>
+
+                                    <?php $datos = true;
+                                        echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
+                                <?php
+                                }
+                                if ($datos == false) {
+                                    echo "<script>document.getElementById('innegocio').disabled = true;</script>";
+                                } ?>
+
+                            </datalist> <br>
                         </div>
+                        <h5 class="admin">Monto:</h5>
+                        <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="Monto $"><br>
+                        <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block" name="" value="Guardar">
+                    </form>
+                    <div id="tableHolder" class="row justify-content-center">
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Modal -->
+    
     <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <div class="col-md-12">

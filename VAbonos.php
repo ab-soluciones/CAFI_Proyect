@@ -9,8 +9,7 @@ if (!isset($_SESSION['acceso'])) {
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] == "CEO" || $_SESSION['acceso'] == "ManagerAB"
-    || $_SESSION['acceso'] == "CEOAB"
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
 ) {
     header('location: index.php');
 }

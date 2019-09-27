@@ -2,6 +2,15 @@
     require_once "Config/Autoload.php";
     Config\Autoload::run();
     session_start();
+    if (!isset($_SESSION['acceso'])) {
+        header('location: index.php');
+    } else if ($_SESSION['estado'] == "I") {
+        header('location: index.php');
+    } else if (
+        $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+    ) {
+        header('location: index.php');
+    }
     $con = new Models\Conexion();
     $negocios = $_SESSION['idnegocio'];
     $query = "SELECT idabono,abono.estado AS a_estado,cantidad,pago,cambio,fecha,hora,cliente.nombre AS nombre_cliente,
