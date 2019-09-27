@@ -6,6 +6,7 @@ $(document).ready(function () {
 
   $('.close').click(function () {
     $('#formuusers').trigger('reset');
+    $(".contro").hide();
   });
   
   $('.clearForm').click(function () {
@@ -15,9 +16,12 @@ $(document).ready(function () {
   $('#login').keyup(function(){
     var username = $('#login').val();
     if(username.length >= 3){
+      $(".contro").show();
         $.post("username_check.php", {username2: username}, function(data, status){
             $("#status").html(data);
             });
+    }else{
+            $(".contro").hide();
     }
 });
   
@@ -40,6 +44,7 @@ $(document).ready(function () {
     let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
     $.post(url, postData, function (response) {
       $('#formunegocio').trigger('reset');
+      $(".contro").hide();
       editar = false;
       if (response === "1") {
         swal({

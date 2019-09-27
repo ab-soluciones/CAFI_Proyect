@@ -43,15 +43,18 @@ $(document).ready(function () {
 
     $('.close').click(function () {
         $('#formclienteab').trigger('reset');
+        $('.contro').hide();
     });
 
     $('#login').keyup(function(){
         var username = $('#login').val();
         if(username.length >= 3){
-
+            $('.contro').show();
             $.post("username_check.php", {username3: username}, function(data, status){
                 $("#status").html(data);
                 });
+        }else{
+            $('.contro').hide();
         }
     });
 
@@ -79,6 +82,7 @@ $(document).ready(function () {
         $.post(url, postData, function (response) {
             console.log(response);
             $('#formclienteab').trigger('reset');
+            $('.contro').hide();
             optenerDatosTablaClientesab();
             editar = false;
             if (response === "1") {

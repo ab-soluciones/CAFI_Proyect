@@ -41,6 +41,7 @@ $(document).ready(function () {
             <td class="text-nowrap text-center">${datos.negocio}</td>
             <td class="text-nowrap text-center">${datos.monto}</td>
             <td class="text-nowrap text-center">${datos.registro}</td>
+            <td class="text-nowrap text-center">${datos.paquete}</td>
             <th class="text-nowrap text-center" style="width:100px;">
                 <div class="row">
                     <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
@@ -63,11 +64,14 @@ $(document).ready(function () {
       fecha2: $('#fecha2').val(),
       estado: $('#estado').val(),
       monto: $('#monto').val(),
-      negocio: $('#innegocio').val()
+      negocio: $('#innegocio').val(),
+      suscrip: $('#sus').val()
     };
+    console.log(postData);
 
     let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
     $.post(url, postData, function (response) {
+      console.log(response);
       $('#formulario').trigger('reset');
       editar = false;
       if (response == "1") {
@@ -97,6 +101,7 @@ $(document).ready(function () {
       valores += $(this).html() + "?";
     });
     datos = valores.split("?");
+
     idsuscripcion = datos[0];
     $('#fecha1').val(datos[1]);
     $('#fecha2').val(datos[2]);
