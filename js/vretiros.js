@@ -19,8 +19,7 @@ $(document).ready(function(){
                 datos.forEach(datos => {
                     efectivo = datos.efectivo;
                     banco = datos.banco;
-                    console.log(efectivo);
-                    console.log(banco);
+ 
                     template +=`
                     <td>${datos.efectivo}</td>
                     <td>${datos.banco}</td>

@@ -51,8 +51,8 @@ $rowPro = $con->consultaListar($query);
         <link rel="stylesheet" href="css/ticket.css">
     </head>
 
-    <body style="width: 200px;" onmouseover="cerrar()">
-        <div class="border" style="width: 410px; max-width: 410px;">
+    <body style="width: 380px;">
+        <div style="width: 380px; max-width: 380px;" class="font-weight-bold">
             <div class="row justify-content-center">
                 <img src="img/ticketcafi.png" alt="Logotipo">
             </div>
@@ -63,56 +63,33 @@ $rowPro = $con->consultaListar($query);
 
                 <p class="centrado"> <?php echo $renglon['nombre_negocio']; ?>
                     <br> <?php echo $direccion; ?>
-                    <?php if (isset($renglonVenta['telefono_negocio'])) { ?>
-                        <br> <?php echo "Tel: " . $renglonVenta['telefono_negocio'];
-                                } ?>
+                    <?php if (isset($renglon['telefono_negocio'])) { ?>
+                        <br> <?php echo "Tel: " . $renglon['telefono_negocio'];
+                            } ?>
                     <br> <?php echo $fechaYHora; ?>
-                    <br> -----------------------------------
+                    <br>
             </div>
         </div>
+        <div style="border-top: 1px solid black; margin-bottom: 1rem;">
 
-        <div style="width: 140px; max-width: 140px;">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="text-center">PROD</th>
-                        <th class="text-center">DESC</th>
-                        <th class="text-center">CANT</th>
-                        <th class="text-center">P.U</th>
-                        <th class="text-center">IMP</th>
-                        <th class="text-center">UM</th>
-                        <th class="text-center">Talla</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <?php while ($productos = mysqli_fetch_array($rowPro)) { ?>
-                        <tr>
-                            <td class="text-center"><?php echo $productos['nombre']; ?> <?php echo $productos['marca']; ?></td>
-                            <td class="text-center"><?php echo $productos['color']; ?></td>
-                            <td class="text-center"><?php echo $productos['cantidad_producto']; ?></td>
-                            <td class="text-center"><?php echo $productos['precio_venta']; ?></td>
-                            <td class="text-center"><?php echo $productos['subtotal']; ?></td>
-                            <td class="text-center"><?php echo $productos['unidad_medida']; ?></td>
-                            <td class="text-center"><?php echo $productos['talla_numero']; ?></td>
-                        </tr>
-                    <?php } ?>
-                    
-                    <!-- Prueba <tr>
-                        <td class="text-center">Zapatos Louis Vouiton</td>
-                        <td class="text-center">Edicion especial</td>
-                        <td class="text-center">1</td>
-                        <td class="text-center">$12,000</td>
-                        <td class="text-center">$12,000</td>
-                        <td class="text-center">Par</td>
-                        <td class="text-center">28.5</td>
-                    </tr> -->
-                </tbody>
-            </table>
         </div>
+        <div style="width: 380px; max-width: 380px; line-height: 13px;">
+                    <?php while ($productos = mysqli_fetch_array($rowPro)) { ?>
+                        <span class="font-weight-bold"><?php echo $productos['cantidad_producto']."x"; ?></span>
+                            <span class="font-weight-bold"><?php echo $productos['nombre'];?> <?php echo $productos['marca'];?></span>
+                            <span class="font-weight-bold"><?php echo $productos['color'];?></span>
+                            <span class="font-weight-bold"><?php echo $productos['unidad_medida']; ?></span>
+                            <span class="font-weight-bold"><?php echo $productos['talla_numero']; ?></span>
+                            <p class="text-right">
+                                <span class="font-weight-bold text-right"><?php echo "$".$productos['subtotal']; ?></span>
+                            <p>
+                    <?php } ?>
+        </div>
+        <div style="border-top: 1px solid black; margin-bottom: 1rem;">
 
-        <div style="width: 410px; max-width: 410px;">
-            <div class="justify-content-right mr-3">
+        </div>
+        <div class="font-weight-bold" style="width: 380px; max-width: 380px; line-height: 13px;">
+            <div class="justify-content-right">
                 <?php
                 if ($renglon['descuento'] > 0.00) { ?>
                     <p class="text-right"><span class="font-weight-bold">DESCUENTO: </span><?php echo "$" . $renglon['descuento']; ?></p>
@@ -123,7 +100,7 @@ $rowPro = $con->consultaListar($query);
                     <p class="text-right"><span class="font-weight-bold">ANTICIPO: </span><?php echo "$" . $renglon['pago_minimo']; ?> <?php } ?></p>
                     <p class="text-right"><span class="font-weight-bold">ABONO ACTUAL: </span><?php echo "$". $renglon['cantidad']; ?></p>
                 <?php if ($renglon['pago_abono'] > 0.00) { ?>
-                    <p class="text-right"><span class="font-weight-bold">PAGÓ: </span><?php echo "$" . $renglon['pago_abono']; ?></p>
+                    <p class="text-right"><span class="font-weight-bold">PAGO: </span><?php echo "$" . $renglon['pago_abono']; ?></p>
                 <?php   } ?>
                 <?php if ($renglon['cambio_abono'] > 0.00) { ?>
                     <p class="text-right"><span class="font-weight-bold">CAMBIO: </span><?php echo "$" . $renglon['cambio_abono']; ?></p>
@@ -134,16 +111,13 @@ $rowPro = $con->consultaListar($query);
             <br>
             <br>
 
-            <p class="centrado font-weight-bold">¡GRACIAS POR SU COMPRA!</p>
-            <p class="centrado">Usted fue atendido por <?php echo $renglonVenta['nombre'] . " " .$renglonVenta['apaterno'] ?></p>
+            <p class="centrado font-weight-bold">¡GRACIAS POR SU COMPRA =)!</p>
+            <p class="centrado">Usted fue atendido por <?php echo $renglon['nombre'] . " " .$renglon['apaterno'] ?></p>
         </div>
 
         <script >
             window.print();
-
-            function cerrar(){
-                window.close();
-            }      
+            window.close();    
         </script>
     </body>
 

@@ -26,7 +26,8 @@ Config\Autoload::run();
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
@@ -111,7 +112,9 @@ Config\Autoload::run();
                         <div class="col-lg-4">
                             <h5 class="general">Usuario:</h5>
                             <input id="login" class="form form-control" type="text"  onkeypress="return check(event)" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
+                            <div id="status" class="contro"></div>
                         </div>
+                        
                         
                         <div class="col-lg-4">
                             <h5 class="general">Contraseña:</h5>
@@ -178,7 +181,8 @@ Config\Autoload::run();
                             <p>Sucursal:</p>
                         </div>
 
-                        <select id="" class="form form-control sucursal col-6 col-lg-2" name="SNegocio">
+                        <select id="comboSucursal" class="col-6 col-lg-2 form form-control sucursal" name="SNegocio">
+
                             <?php
                             $con = new Models\Conexion();
                             $dueño = $_SESSION['id'];

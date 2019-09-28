@@ -25,7 +25,8 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -55,10 +56,10 @@ if (!isset($_SESSION['acceso'])) {
                     <p class="statusMsg"></p>
                     <h2 id="msjtarjeta"></h2>
                    
-                        <h6 style="color: white;">Abono $ :</h6>
+                        <h6 style="color: white;">Abono:</h6>
                         <input class="inabono form form-control" onkeypress="return check(event)" type="text" placeholder="$" autocomplete="off"><br>
                         <div id="divefectivo">
-                        <h6 style="color: white;">$ Cantidad Recibida / $ Pago :</h6>
+                        <h6 style="color: white;">Cantidad Recibida/Pago:</h6>
                         <input class="tpago form form-control" type="text" onkeypress="return check(event)" placeholder="$" autocomplete="off"><br>
                         </div>
                     <button type="button" class="babonar btn btn-danger btn-large btn-block">Abonar</button>

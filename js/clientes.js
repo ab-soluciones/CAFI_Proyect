@@ -60,12 +60,12 @@ $(document).ready(function(){
             estado: $('#vcestado').val(),
         };
 
-        console.log(postData);
+       
 
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
 
         $.post(url,postData,function(response){
-            console.log(response);
+          
             $('#formclientes').trigger('reset');
             obtenerDatosTablaCliente();
             editar = false;

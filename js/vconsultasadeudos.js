@@ -54,7 +54,7 @@ $(document).ready(function () {
                                 formapago: formapago
                             };
                             $.post('post-guardar.php', postData, function (response) {
-                                console.log(response);
+                                
                                 if(response === "Exitoprinter"){
                                     window.open('ticketAbono.php');
                                   }
@@ -123,7 +123,7 @@ $(document).ready(function () {
                 };
            
                 $.post('post-guardar.php', postData, function (response) {
-                    console.log(response);
+                    
                     if(response === "Exitoprinter"){
                         window.open('ticketAbono.php');
                       }

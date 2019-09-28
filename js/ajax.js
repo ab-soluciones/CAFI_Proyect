@@ -20,8 +20,8 @@ function submitContactForm(accion,num,solicitud){
                 $('.modal-body').css('opacity', '.5');
             },
             success:function(msg){
-                console.log(msg);/*Mensajes de debug*/
-                console.log(solicitud);/*Mensajes de debug*/
+                
+                
                 if(msg == 'ok'){
                     $('#inputCuenta').val('');
                     $('#inputCantidad').val('');

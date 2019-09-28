@@ -10,10 +10,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/sweetalert.css">
   <link rel="stylesheet" href="css/animations.css">
+  <link rel="icon" href="img/logo/nav1.png">
+  
   <script src="js/sweetalert.js"></script>
   <script src="js/sweetalert.min.js"></script>
   <script src="js/jquery.js"></script>
-
   <script type="text/javascript">
 
   </script>
@@ -23,7 +24,7 @@
   <div class="container text-center">
 
     <div id="index_logo" class="row d-block">
-      <img src="img/logo/1.png" alt="" id="logo" class="animaLogo">
+      <img src="img/logo/2.png" alt="" id="logo" class="animaLogo">
       <div>
 
         <div id="index_form" class="card card-body row d-block col-md-4">
@@ -165,7 +166,7 @@ function comprobar()
 
     $query = "SELECT login,acceso,estado,idusuariosab FROM usuariosab WHERE  BINARY login= '$nombre' AND  BINARY  password='$password'";
     $query2 = "SELECT login,acceso,estado,negocios_idnegocios,idtrabajador FROM trabajador WHERE  BINARY  login= '$nombre' AND  BINARY password='$password'";
-    $query3 = "SELECT acceso,estado,id_clienteab FROM clientesab WHERE login = '$nombre' AND password ='$password'";
+    $query3 = "SELECT acceso,estado,id_clienteab,login FROM clientesab WHERE login = '$nombre' AND password ='$password'";
     $datos1 = $con->consultaRetorno($query);
     $datos2 = $con->consultaRetorno($query2);
     $datos3 = $con->consultaRetorno($query3);

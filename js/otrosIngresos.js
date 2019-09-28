@@ -43,6 +43,7 @@ $(document).ready(function (){
     });
 
     $('#formotrosingresos').submit(function(e){
+        
         const postData = {
             id: idotrosIngresos,
             cantidad: $('#can').val(),
@@ -51,17 +52,22 @@ $(document).ready(function (){
             fecha: $('#fecha').val(),
             estatus: $('#voestado').val(),
         };
-
-        console.log(postData);
+        
+        
 
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         
-        $.post(url,postData,function(response){
-            console.log(response);
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: postData,
+
+            success: function(response) {
+                
            $('#formotrosingresos').trigger('reset');
            obtenerDatosTablaOtrosIngresos();
            editar = false;
-           if(response === "1"){
+           if(response == "1"){
             swal({
                 title: 'Exito',
                 text: 'Datos guardados satisfactoriamente',
@@ -74,6 +80,7 @@ $(document).ready(function (){
                 type: 'warning'
             });
            }
+        }
         });
         e.preventDefault();
     });

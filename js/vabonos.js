@@ -61,23 +61,18 @@ $(document).ready(function () {
             estadoNuevo: $('#estado').val()
           };
           
-          $.post('post-edit.php', postData, function (response) {
+         $.post('post-edit.php', postData, function (response) {
+
             $('#formabonos').trigger('reset');  
-            console.log(response);
+           
             obtenerDatosTabla();
-            if (response === "1") {
+            if (response) {
               swal({
                 title: 'Exito',
                 text: 'Datos guardados satisfactoriamente',
                 type: 'success'
               });
-            } else {
-              swal({
-                title: 'Alerta',
-                text: 'Datos no guardados, compruebe los campos unicos',
-                type: 'warning'
-              });
-            }
+            } 
 
           });
           e.preventDefault();

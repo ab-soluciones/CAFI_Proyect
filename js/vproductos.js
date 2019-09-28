@@ -3,7 +3,6 @@ $(document).ready(function(){
     let editar = false;
     let codigoBarras = "";
     idSesion($('.sucursal').val());
-    obtenerDatosTablaProducto();
     obtenerInventario();
     $('.divCantidad').hide();
 
@@ -11,47 +10,12 @@ $(document).ready(function(){
         $.ajax({
             url: 'sesionProduc.php',
             type: 'POST',
-            data: {idProducto:id}
-        });
-        obtenerDatosTablaProducto();
-    }
-
-
-    function obtenerInventario(){
-        $.ajax({
-            url: 'datosInventario.php',
-            type: 'GET',
-
-            success: function(response){
-                console.log('entro');
-                let datos = JSON.parse(response);
-                let template2 = '';
-                console.log(datos);
-                datos.forEach(datos => {
-                    template2 += `
-                    <option value="${datos.nombre +" "+ datos.marca + " color " + datos.color + " talla " + datos.talla_numero}"> 
-                    `;
-                });
-                $('#lproductos').html(template2);
-            }
-        });
-    }
-
-    $('.sucursal').change(function(){
-        idSesion($('.sucursal').val());
-    });
-
-
-
-    function obtenerDatosTablaProducto(){
-        $.ajax({
-            url: 'tablaProductos.php',
-            type: 'GET',
+            data: {idProducto:id},
 
             success: function(response){
                 let datos = JSON.parse(response);
                 let template = '';
-                console.log(datos);
+                
                 datos.forEach(datos => {
 
                     template += `
@@ -72,8 +36,8 @@ $(document).ready(function(){
                     if(datos.idNegocio == $('.sucursal').val()){
                         template += `<th style="width:100px;">
                         <div class="row">
-                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
-                                Editar
+                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
+                                <img src="img/edit.png">
                             </a>
                         </div>
                     </th>
@@ -81,19 +45,44 @@ $(document).ready(function(){
                     }else{
                         template +=`<th style="width:100px;">
                         <div class="row">
-                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
-                                Editar
+                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
+                                <img src="img/edit.png">
                             </button>
                         </div>
                     </th>
                 </tr>`;
                     }
-
                 });
                 $('#cuerpo').html(template);
             }
-        })
+        });
+
     }
+
+
+    function obtenerInventario(){
+        $.ajax({
+            url: 'datosInventario.php',
+            type: 'GET',
+
+            success: function(response){
+                
+                let datos = JSON.parse(response);
+                let template2 = '';
+                
+                datos.forEach(datos => {
+                    template2 += `
+                    <option value="${datos.nombre +" "+ datos.marca + " color " + datos.color + " talla " + datos.talla_numero}"> 
+                    `;
+                });
+                $('#lproductos').html(template2);
+            }
+        });
+    }
+
+    $('.sucursal').change(function(){
+        idSesion($('.sucursal').val());
+    });
 
     $('.close').click(function(){
         $('#formproducto').trigger('reset');
@@ -130,7 +119,7 @@ $(document).ready(function(){
                         $('#inventario').trigger('reset');
                         $('.divCantidad').hide();
                         obtenerInventario();
-                        console.log("Esto es la respuesta: "+response);
+                       
                         if (response === "1") {
                             swal({
                                 title: 'Exito',
@@ -190,7 +179,6 @@ $(document).ready(function(){
                         }
                     }
                 });
-               
         e.preventDefault();
         editar = false;
     });
@@ -198,7 +186,8 @@ $(document).ready(function(){
     $('#inventario').submit(function(e){
     
         var formData = new FormData(this);
-        console.log(formData);
+        
+
         $("#imagen").remove();
                 $.ajax({
                     url: 'post-guardar.php',
@@ -212,7 +201,7 @@ $(document).ready(function(){
                         $('#inventario').trigger('reset');
                         obtenerDatosTablaProducto();
                         obtenerInventario();
-                        console.log("Esto es la respuesta: "+response);
+                        
                         if (response === "1") {
                             swal({
                                 title: 'Exito',
@@ -266,11 +255,10 @@ $(document).ready(function(){
             valores += $(this).html() + "?";
         });
         
-        console.log("Esto es el img "+valores2)
+        
 
         datos = valores.split("?");
         $('#nav-Producto-tab').click();
-        console.log(datos);
         $('.row1').css("display","none");
         $('#cb').val(datos[0]);
         $('#nombre').val(datos[1]);

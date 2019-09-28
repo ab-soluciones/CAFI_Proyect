@@ -28,12 +28,13 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
-
+    <link rel="icon" href="img/logo/nav1.png">
     <title>Ventas</title>
 </head>
 
 <body>
     <?php
+    $sel = "venta";
     include("Navbar.php");
     ?>
     <div class="contenedor container-fluid">

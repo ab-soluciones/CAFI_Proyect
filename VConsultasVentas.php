@@ -25,7 +25,8 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -189,7 +190,7 @@ if (!isset($_SESSION['acceso'])) {
                             <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
                             <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
-                                    <a id="beditar" style="margin: 0 auto;" class="btn btn-danger" data-toggle="modal" data-target="#modalForm" >
+                                    <a style="margin: 0 auto;" class="btn btn-danger beditar" data-toggle="modal" data-target="#modalForm" >
                                         Editar
                                     </a>
                                 </div>

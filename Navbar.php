@@ -2,9 +2,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-around p-0">
         <div class="col-2 d-flex justify-content-between align-items-center">
             <img class="img-fluid" src="img/logo/nav1-dark.png">
-            <p id="nav-title" class="font-weight-bold">
-    
-            </p>
         </div>
         <div class="collapse navbar-collapse col-9 d-flex justify-content-center align-items-center" id="navbarNav">
             <ul class="navbar-nav">

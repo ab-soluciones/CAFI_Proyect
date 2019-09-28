@@ -49,74 +49,61 @@ if (!isset($_SESSION['acceso'])) {
         <link rel="stylesheet" href="css/ticket.css">
     </head>
 
-    <body style="width: 200px;" onmouseover="cerrar()">
-            <div class="border" style="width: 410px; max-width: 410px;">
+    <body style="width: 380px;">
+            <div style="width: 380px; max-width: 380px;" class="font-weight-bold">
                 <div class="row justify-content-center">
                     <img src="img/ticketcafi.png" alt="Logotipo">
                 </div>
                 
                 <div class="justify-content-center">
-                        <p class="centrado"> <?php echo $tipoVenta;?>
+                        <p class="centrado font-weight-bold"> <?php echo $tipoVenta;?>
                     <?php if(isset($abono)){?>
                         <br> <?php echo $cliente;}?>
 
-                    <p class="centrado"> <?php echo $renglonVenta['nombre_negocio'];?>
+                    <p class="centrado font-weight-bold"> <?php echo $renglonVenta['nombre_negocio'];?>
                         <br> <?php echo $direccion;?>
                     <?php if(isset($renglonVenta['telefono_negocio'])){?>
                         <br> <?php echo "Tel: ". $renglonVenta['telefono_negocio'];}?>
                         <br> <?php echo $fechaYHora;?>
-                        <br> -----------------------------------
+                        <br>
                 </div>
             </div>
+            <div style="border-top: 1px solid black; margin-bottom: 1rem;">
 
-            <div style="width: 140px; max-width: 140px;">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="text-center">PROD</th>
-                            <th class="text-center">DESC</th>
-                            <th class="text-center">CANT</th>
-                            <th class="text-center">P.U</th>
-                            <th class="text-center">IMP</th>
-                            <th class="text-center">UM</th>
-                            <th class="text-center">Talla</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    <?php while ($productos = mysqli_fetch_array($rowPro)){ ?>
-                        <tr>
-                            <td class="text-center"><?php echo $productos['nombre'];?> <?php echo $productos['marca'];?></td>
-                            <td class="text-center"><?php echo $productos['color'];?></td>
-                            <td class="text-center"><?php echo $productos['cantidad_producto']; ?></td>
-                            <td class="text-center"><?php echo $productos['precio_venta']; ?></td>
-                            <td class="text-center"><?php echo $productos['subtotal']; ?></td>
-                            <td class="text-center"><?php echo $productos['unidad_medida']; ?></td>
-                            <td class="text-center"><?php echo $productos['talla_numero']; ?></td>
-                        </tr>
-                    <?php }?>
-                    </tbody>
-                </table>
             </div>
+            <div style="width: 380px; max-width: 380px; line-height: 13px;" class="ml-1">
+                    <?php while ($productos = mysqli_fetch_array($rowPro)){ ?>
+                            <span class="font-weight-bold"><?php echo $productos['cantidad_producto']."x"; ?></span>
+                            <span class="font-weight-bold"><?php echo $productos['nombre'];?> <?php echo $productos['marca'];?></span>
+                            <span class="font-weight-bold"><?php echo $productos['color'];?></span>
+                            <span class="font-weight-bold"><?php echo $productos['unidad_medida']; ?></span>
+                            <span class="font-weight-bold"><?php echo $productos['talla_numero']; ?></span>
+                            <p class="text-right">
+                                <span class="font-weight-bold text-right"><?php echo "$".$productos['subtotal']; ?></span>
+                            <p>
+                    <?php }?>
+            </div>
+            <div style="border-top: 1px solid black; margin-bottom: 1rem;">
 
-            <div style="width: 410px; max-width: 410px;">
-                <div class="justify-content-right mr-3">
+            </div>
+            <div class="font-weight-bold" style="width: 380px; max-width: 380px; line-height: 13px;" class="">
+                <div class="justify-content-right">
                     <?php if(isset($abono)){
                             if ($renglonVenta['descuento'] > 0.00) {?>
-                        <p class="text-right"><span class="font-weight-bold">DESCUENTO: </span><?php echo "$". $renglonVenta['descuento'];?></p>
+                        <p class="text-right font-weight-bold"><span class="font-weight-bold">DESCUENTO: </span><?php echo "$". $renglonVenta['descuento'];?></p>
                     <?php   }?>
-                        <p class="text-right"><span class="font-weight-bold">TOTAL: </span><?php echo "$". $renglonVenta['total'];?></p>
-                        <p class="text-right"><span class="font-weight-bold">ANTICIPO: </span><?php echo "$". $abono['pago_minimo'];?></p>
+                        <p class="text-right font-weight-bold"><span class="font-weight-bold">TOTAL: </span><?php echo "$". $renglonVenta['total'];?></p>
+                        <p class="text-right font-weight-bold"><span class="font-weight-bold">ANTICIPO: </span><?php echo "$". $abono['pago_minimo'];?></p>
                     <?php if ($renglonVenta['pago'] > 0.00){?>
-                        <p class="text-right"><span class="font-weight-bold">PAGÓ: </span><?php echo "PAGÓ: $". $renglonVenta['pago'];?></p>
+                        <p class="text-right font-weight-bold"><span class="font-weight-bold">PAGO: </span><?php echo "$". $renglonVenta['pago'];?></p>
                     <?php }?>
                     <?php if ($renglonVenta['cambio'] > 0.00){?>
-                        <p class="text-right"><span class="font-weight-bold">CAMBIO: </span><?php echo "$". $renglonVenta['cambio'];}?></p>
-                        <p class="text-right"><span class="font-weight-bold">ADEUDO: </span><?php echo "ADEUDO: $". $abono['total_deuda'];?></p>
+                        <p class="text-right font-weight-bold"><span class="font-weight-bold">CAMBIO: </span><?php echo "$". $renglonVenta['cambio'];}?></p>
+                        <p class="text-right font-weight-bold"><span class="font-weight-bold">ADEUDO: </span><?php echo "$". $abono['total_deuda'];?></p>
                     <?php }else{
                             if ($renglonVenta['descuento'] > 0.00){?><br><?php echo "DESCUENTO: $". $renglonVenta['descuento'];}?>
-                            <p class="text-right"><span class="font-weight-bold">TOTAL: </span><?php echo "$".$renglonVenta['total'];?></p>
-                            <p class="text-right"><span class="font-weight-bold">PAGÓ: </span><?php echo "$". $renglonVenta['pago'];?></p>
+                            <p class="text-right font-weight-bold"><span class="font-weight-bold">TOTAL: </span><?php echo "$".$renglonVenta['total'];?></p>
+                            <p class="text-right font-weight-bold"><span class="font-weight-bold">PAGO: </span><?php echo "$". $renglonVenta['pago'];?></p>
                         
                             <?php if ($renglonVenta['cambio'] > 0.00){?><p class="text-right"><span class="font-weight-bold">CAMBIO: </span><?php echo "$". $renglonVenta['cambio'];}?></p>
                     
@@ -126,16 +113,13 @@ if (!isset($_SESSION['acceso'])) {
                 <br>
                 <br>
 
-                <p class="centrado font-weight-bold">¡GRACIAS POR SU COMPRA!</p>
-                <p class="centrado">Usted fue atendido por <?php echo $renglonVenta['nombre'] . " " .$renglonVenta['apaterno'] ?></p>
+                <p class="centrado font-weight-bold">¡GRACIAS POR SU COMPRA =)!</p>
+                <p class="centrado font-weight-bold">Usted fue atendido por <?php echo $renglonVenta['nombre'] . " " .$renglonVenta['apaterno'] ?></p>
             </div>
 
         <script >
             window.print();
-
-            function cerrar(){
-                window.close();
-            }      
+            window.close();    
         </script>
     </body>
 

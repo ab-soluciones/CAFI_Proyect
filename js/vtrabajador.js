@@ -5,47 +5,14 @@ $(document).ready(function(){
     let idnego = "";
     var id = $('.sucursal').val();
     idSesion(id);
-    obtenerDatosTablaTrabajador();
 
     function idSesion(id){
         idnego = id;
         $.ajax({
             url: 'sesionTrabajador.php',
             type: 'POST',
-            data: {idSucursal:id}
-        });
-        obtenerDatosTablaTrabajador();
-    }
-    
-    $('#login').keyup(function(){
-        var username = $('#login').val();
-        if(username.length >= 3){
-            $(".contro").show();
-            $.post("username_check.php", {username: username}, function(data, status){
-                $("#status").html(data);
-                });
-        }else{
-                $(".contro").hide();
-        }
-    });
-
-    $('.sucursal').change(function(){
-        idSesion($(this).val());
-    });
-
-
-    $('.close').click(function(){
-        $('#formtrabajador').trigger('reset');
-        $(".contro").hide();
-    });
-
-    function obtenerDatosTablaTrabajador(){
-
-        $.ajax({
-            url: 'tablaTrabajador.php',
-            type: 'GET',
+            data: {idSucursal:id},
             success: function(response){
-                
                 let datos = JSON.parse(response);
                 let template = '';
                 datos.forEach(datos => {
@@ -67,8 +34,8 @@ $(document).ready(function(){
                     <td class="text-nowrap text-center">${datos.estado}</td>
                     <th style="width:100px;">
                         <div class="row">
-                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
-                                Editar
+                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
+                                <img src="img/edit.png">
                             </a>
                         </div>
                     </th>`;
@@ -77,6 +44,28 @@ $(document).ready(function(){
             }
         });
     }
+    
+    $('#login').keyup(function(){
+        var username = $('#login').val();
+        if(username.length >= 3){
+            $(".contro").show();
+            $.post("username_check.php", {username: username}, function(data, status){
+                $("#status").html(data);
+                });
+        }else{
+                $(".contro").hide();
+        }
+    });
+
+    $('.sucursal').click(function(){
+        idSesion($(this).val());
+    });
+
+
+    $('.close').click(function(){
+        $('#formtrabajador').trigger('reset');
+        $(".contro").hide();
+    });
 
     $('#bclose').click(function () {
         $('.modal').modal('hide');
@@ -84,8 +73,6 @@ $(document).ready(function(){
     });
 
     $('#formtrabajador').submit(function(e){
-
-        idnego = $('#agregarloa').val();
 
         const postData = {
             id: idtrabajador,
@@ -104,16 +91,17 @@ $(document).ready(function(){
             agregarloa: $('#agregarloa').val(),
             estado:$('#estado').val()
         };
-        idnego = $('#agregarloa').val();
+
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
+
         $.post(url,postData, function (response) {
+           
             $('#formclienteab').trigger('reset');
-            console.log(idnego);
-            idSesion(idnego);
-            obtenerDatosTablaTrabajador();
+            idSesion($('#agregarloa').val());
             editar = false;
             $("#status").hide();
-            if (response === "1") {
+
+            if (response == "1") {
                 swal({
                     title: 'Exito',
                     text: 'Datos guardados satisfactoriamente',
@@ -132,7 +120,6 @@ $(document).ready(function(){
                     type: 'warning'
                 });
             }
-            
         });
         $('#formtrabajador').trigger('reset');
         e.preventDefault();
@@ -146,7 +133,6 @@ $(document).ready(function(){
             valores += $(this).html() + "?";
         });
         datos = valores.split("?");
-       console.log(datos);
         idtrabajador = datos[0];
         $('#nombre').val(datos[1]);
         $('#apt').val(datos[2]);

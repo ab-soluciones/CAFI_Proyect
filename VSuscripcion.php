@@ -1,4 +1,4 @@
- <?php
+<?php
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
@@ -25,6 +25,7 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/logo/nav1.png">
 
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
@@ -67,29 +68,29 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
 
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-6">
                                     <h5 class="general">Estado:</h5>
                                     <select class="form form-control" id="estado">
                                         <option value="A">A</option>
                                         <option value="I">I</option>
                                     </select>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6" id="divnegocio">
                                     <h5 class="general">Negocio:</h5>
                                     <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
                                     <datalist id="negocios">
                                         <?php
                                         $datos = false;
                                         $con = new Models\Conexion();
-                                        $query = "SELECT idnegocios,nombre_negocio,ciudad,domicilio FROM negocios t1
-                                        WHERE NOT EXISTS (SELECT NULL FROM suscripcion t2 WHERE t2.negocio_id = t1.idnegocios)";
+                                        $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
                                         $row = $con->consultaListar($query);
 
-                                        while ($result = mysqli_fetch_array($row)) {?>
-                                            <?php 
-                                                $datos = true;
+                                        while ($result = mysqli_fetch_array($row)) {
+                                            ?>
+
+                                            <?php $datos = true;
                                                 echo "<option value='" . $result['nombre_negocio'] . " " . $result['domicilio'] . " " . $result['ciudad'] . "'> "; ?>
-                                            <?php
+                                        <?php
                                         }
                                         if ($datos == false) {
                                             echo "<script>document.getElementById('innegocio').disabled = true;</script>";
@@ -97,13 +98,19 @@ if (!isset($_SESSION['acceso'])) {
 
                                     </datalist>
                                 </div>
-                                <div class="col4">
+                            </div>
+                            <div class="row">
+                                <div class="paquete col-6">
                                     <h5 class="general">Paquete:</h5>
-                                    <select class="form form-control" id="sus">
+                                    <select class="form form-control" id="spaquete">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                     </select>
+                                </div>
+                                <div class="col-6">
+                                    <h5 class="general">Monto:</h5>
+                                    <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="$">
                                 </div>
                             </div>
                             <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block mt-4" name="" value="Guardar">
@@ -132,15 +139,15 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="contenedorTabla table-responsive">
                         <table class="table table-hover table-striped table-dark">
                             <thead class="thead-dark">
-                                <tr class="encabezados">
+                              <tr class="encabezados">
                                     <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(1)">Activacion</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(2)">Vencimiento</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(3)">Estado</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(4)">Negocio</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(5)">Monto</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Registró</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Paquete</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(5)">Paquete</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Monto</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Registró</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(8)">Tarea</th>
                                 </tr>
                             </thead>

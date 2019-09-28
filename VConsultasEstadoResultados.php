@@ -22,6 +22,7 @@ if (!isset($_SESSION['acceso'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="icon" href="img/logo/nav1.png">
     <title>Estado de Resultado</title>
     <script>
         var parametro;

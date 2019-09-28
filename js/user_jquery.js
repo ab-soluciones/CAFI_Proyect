@@ -79,9 +79,6 @@ var parametro;
 
 function inicio() {
 parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
-
-var titulo = document.getElementsByTagName("title")[0].innerHTML;
-document.getElementById("nav-title").innerHTML = titulo;
 }
 
 function parar() {

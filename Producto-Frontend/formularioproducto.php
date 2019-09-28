@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-6">
             <h5 class="general">Codigo:</h5>
-            <input id="cb" class="form form-control" type="text" name="TCodigoB" onkeypress="return check(event)" placeholder="0000000000000">
+            <input id="cb" class="form form-control" onkeypress="return codigo(event)" type="text" name="TCodigoB" placeholder="0000000000000">
         </div>
         <div class="col-lg-6">
             <h5 class="general">Nombre:</h5>
@@ -118,6 +118,12 @@
                 <option value="A">Activo</option>
                 <option value="I">Inactivo</option>
             </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 divCantidad">
+            <h5 class="general">Cantidad:</label></h5>
+            <input id="cantidadEditar" name="SCantidad" class="form-control bg-dark text-white" type="number" value="0" min="0" require> 
         </div>
     </div>
     <div class="row">

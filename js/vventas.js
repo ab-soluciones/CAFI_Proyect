@@ -17,7 +17,8 @@ $(document).ready(function () {
 
   //terminar la venta
   $(document).on('click', '.bvender', function () {
-    if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1) {
+    //pago efectivo
+    if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1 && forma_pago === "Efectivo") {
       valor = $('.tpago').val();
       pago = valor = parseFloat(valor);
       if (valor < totalglobal) {
@@ -91,7 +92,8 @@ $(document).ready(function () {
             });
           });
       }
-    } else if ($('.tpago').val().length > 0 && $('.tanticipo').val().length > 0) {
+      //pago a credito
+    } else if ($('.tpago').val().length > 0 && $('.tanticipo').val().length > 0 && forma_pago === "Crédito") {
       valor = $('.tpago').val();
       pago = valor = parseFloat(valor);
       anticipo = parseFloat($('.tanticipo').val());
@@ -172,7 +174,8 @@ $(document).ready(function () {
         });
       }
 
-    } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1) {
+    } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1 && forma_pago === "Tarjeta") {
+   //pago con tarjeta
       if (totalglobal) {
         const postData = {
           total: totalglobal,
@@ -493,7 +496,7 @@ $(document).ready(function () {
       idcliente: renglon[0],
       estcliente: renglon[2]
     };
-    console.log(postData);
+   
     $.post('post-guardar.php', postData, function (response) {
 
       if (response === "no agregado a la sesion") {
@@ -530,10 +533,10 @@ $(document).ready(function () {
       precio: result[2],
       cantidad: result[3]
     };
-    console.log(postData);
+    
     $.post('post-guardar.php', postData, function (response) {
       optenerDatosTabla(0);
-      console.log(response);
+     
       if (response === "-1") {
         swal({
           title: 'Alerta',

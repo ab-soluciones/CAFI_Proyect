@@ -15,7 +15,7 @@
                     <a class="<?php if($sel === 'fde'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VFlujoEfectivo.php'" title="Flujo de Efectivo"><img src="img/cake-graphic.png">Flujo de Efectivo</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'mv'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VMasVendidos.php'" title="Mas Vendidos"><img src="img/cake-graphic.png">Mas Vendidos</a>
+                    <a class="<?php if($sel === 'mv'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VMasVendidos.php'" title="Mas Vendidos"><img src="img/most.png">Mas Vendidos</a>
                 </li>
             </ul>
         </div>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-6">
                         <li class="nav-item mx-2 text-center">
-                            <a class="<?php if($sel === 'mv'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VMasVendidos.php'" title="Mas Vendidos"><img src="img/cake-graphic.png">Mas Vendidos</a>
+                            <a class="<?php if($sel === 'mv'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VMasVendidos.php'" title="Mas Vendidos"><img src="img/most.png">Mas Vendidos</a>
                         </li>
                     </div>
                 </div>
