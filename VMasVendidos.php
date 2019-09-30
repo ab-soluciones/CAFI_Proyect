@@ -39,7 +39,7 @@ if (!isset($_SESSION['acceso'])) {
     <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
-                <div class="bg-dark text-white px-3 d-flex align-items-center">
+                <div class="font-weight-bold px-3 d-flex align-items-center">
                     <p>Sucursal:</p>
                 </div>
                 
@@ -66,7 +66,7 @@ if (!isset($_SESSION['acceso'])) {
             </div>
 
             <div class="contenedorTabla table-responsive">
-                <table class="table table-hover table-striped table-dark">
+                <table class="table table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <tr>
                             <th>Producto</th>

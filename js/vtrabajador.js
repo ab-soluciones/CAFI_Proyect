@@ -34,8 +34,8 @@ $(document).ready(function(){
                     <td class="text-nowrap text-center">${datos.estado}</td>
                     <th style="width:100px;">
                         <div class="row">
-                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>`;

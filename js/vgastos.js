@@ -23,7 +23,7 @@ $(document).ready(function () {
                     <td class="text-nowrap text-center">${datos.concepto}</td>
                     <td class="text-nowrap text-center">${datos.pago}</td>
                     <td class="text-nowrap text-center">${datos.descripcion}</td>
-                    <td class="text-nowrap text-center">${datos.monto}</td>
+                    <td class="text-nowrap text-center">$${datos.monto}</td>
                     <td class="text-nowrap text-center">${datos.estado}</td>
                     <td class="text-nowrap text-center">${datos.fecha}</td>
                     <td class="text-nowrap text-center">${datos.nombre}</td>

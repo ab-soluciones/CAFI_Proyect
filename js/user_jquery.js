@@ -30,10 +30,10 @@ $(document).ready(function () {
 //Estilo de los componetes
 
 //text inputs
-$("input:text, select, .input-group-prepend, .input-group-text").addClass("bg-dark").css({
+/* $("input:text, select, .input-group-prepend, .input-group-text").addClass("bg-dark").css({
 'color' : 'white',
 'border-color' : 'grey'
-});
+}); */
 //Selectors
 });
 
@@ -78,7 +78,7 @@ var datos = false;
 var parametro;
 
 function inicio() {
-parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 min
+parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 25 mi
 }
 
 function parar() {

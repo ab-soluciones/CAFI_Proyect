@@ -55,7 +55,7 @@ Config\Autoload::run();
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formtrabajador">
                     
@@ -162,7 +162,7 @@ Config\Autoload::run();
 
                     <div class="row d-block d-lg-flex">
                         <div class="col-12"><br>
-                            <input id="bclose" type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                            <input id="bclose" type="submit" class="btn btn-lg btn-block btn-dark text-primary" name="" value="Guardar">
                         </div>
                     </div>
                 </form>
@@ -177,7 +177,7 @@ Config\Autoload::run();
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
-                        <div class="bg-dark text-white px-3 d-flex align-items-center">
+                        <div class="font-weight-bold px-3 d-flex align-items-center">
                             <p>Sucursal:</p>
                         </div>
 
@@ -206,7 +206,7 @@ Config\Autoload::run();
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla table-responsive">
-                    <table class="table table-hover table-striped table-dark">
+                    <table class="table table-hover table-striped table-light">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th onclick="sortTable(0)">ID</th>

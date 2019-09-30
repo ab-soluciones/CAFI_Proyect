@@ -45,9 +45,9 @@ if (!isset($_SESSION['acceso'])) {
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content administrador">
+            <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -113,7 +113,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                         </div>
 
-                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-dark text-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -137,10 +137,10 @@ if (!isset($_SESSION['acceso'])) {
                     </div>
 
                     <div class="contenedorTabla table-responsive">
-                        <table class="table table-hover table-striped table-dark">
+                        <table class="table table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
-                                    <th class="text-nowrap text-center bg-primary" onclick="sortTable(0)">Id</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Paterno</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(3)">Apellido Materno</th>
@@ -149,7 +149,7 @@ if (!isset($_SESSION['acceso'])) {
                                     <th class="text-nowrap text-center" onclick="sortTable(6)">Direccion</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(7)">Telefono</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(8)">Correo</th>
-                                    <th style="background-color: orangered;" class="text-nowrap text-center bg-importante" onclick="sortTable(9)">Estado</th>
+                                    <th style="bg-dark" class="text-nowrap text-center" onclick="sortTable(9)">Estado</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(10)"></tr>
                             </thead>
 

@@ -397,15 +397,15 @@ $(document).ready(function () {
                   <td class="text-nowrap text-center"><button class="bdelete btn btn-danger">x</button></td>
                   <td class="text-nowrap text-center d-none">${datos.codigo}</td>
                   <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
-                  <td class="tdcosto text-nowrap text-center">${datos.precio}</td>
+                  <td class="tdcosto text-nowrap text-center">$${datos.precio}</td>
                   <td class="text-nowrap text-center">${datos.cantidad}</td>
-                  <td class="text-nowrap text-center">${datos.subtotal}</td>
+                  <td class="text-nowrap text-center">$${datos.subtotal}</td>
               </tr>`;
         });
         $('#renglones').html(template);
         totalglobal = total;
         template = `
-              <h5>Total: ${total}</h5>`;
+              <h5>Total: $${total}</h5>`;
         $('#divtotal').html(template);
       }
 
@@ -436,7 +436,7 @@ $(document).ready(function () {
                           <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
                           <td class="datos font-weight-bold">${datos.codigo_barras}</td>
                           <td class="datos">${datos.existencia}</td>
-                          <td class="datos">${datos.precio}</td>
+                          <td class="datos">$${datos.precio}</td>
                           <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
                         </tr>`;
           });

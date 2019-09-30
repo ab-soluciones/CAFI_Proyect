@@ -1,12 +1,12 @@
 <div class="container-fluid px-0 d-none d-lg-block fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-around p-0">
-        <div class="col-2 d-flex justify-content-between align-items-center">
+    <nav style="background-color: black;" class="navbar navbar-expand-lg navbar-dark justify-content-around p-0">
+        <div class="col-1 d-flex justify-content-between align-items-center">
             <img class="img-fluid" src="img/logo/nav1-dark.png">
         </div>
-        <div class="collapse navbar-collapse col-9 d-flex justify-content-center align-items-center" id="navbarNav">
+        <div class="collapse navbar-collapse col-10 d-flex justify-content-center align-items-center" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item mx-2 text-center">        
-                    <a class="<?php if($sel === 'venta'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VVentas.php'" title="Venta"><img src="img/sell.png">Vender</a>
+                    <a style="color: #fe6f00;" class="<?php if($sel === 'venta'){ echo seleccionado; } ?> nav-link" onclick="window.location.href='VVentas.php'" title="Venta"><img src="img/sell.png">Venta</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
                     <a class="<?php if($sel === 'abonos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VAbonos.php'" title="Abonos"><img src="img/abonos-dark.png">Abonos</a>
@@ -36,7 +36,7 @@
                     </li>
                 <?php } ?>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'ventas'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VConsultasVentas.php'" title="Venta"><img src="img/sales.png">Ventas</a>
+                    <a class="<?php if($sel === 'ventas'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VConsultasVentas.php'" title="Venta"><img src="img/sales.png">Historial Ventas</a>
                 </li>
             </ul>
         </div>
@@ -47,7 +47,7 @@
 </div>
 
 <div class="container-fluid d-lg-none">
-    <nav class="navbar navbar-dark bg-dark justify-content-around p-0">
+    <nav style="background-color: black;" class="navbar navbar-dark justify-content-around p-0">
         <button class="d-lg-none navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <img class="img-fluid" src="img/logo/nav1-dark.png">
         </button>

@@ -53,17 +53,17 @@ if (!isset($_SESSION['acceso'])) {
                     </div>
 
                     <!-- Modal Body -->
-                    <div class="modal-body administrador">
+                    <div class="modal-body">
                         <p class="statusMsg"></p>
                         <form class="form-group" id="formulario">
                             <div class="row">
                                 <div class="col-6">
                                     <h5 class="importante">Fecha Activacion:</h5>
-                                    <input class="form-control bg-dark text-white" id="fecha1" type="date" name="DFecha">
+                                    <input class="form-control" id="fecha1" type="date" name="DFecha">
                                 </div>
                                 <div class="col-6">
                                     <h5 class="importante">Fecha Vencimiento:</h5>
-                                    <input class="form-control bg-dark text-white" id="fecha2" type="date" name="DFecha2">
+                                    <input class="form-control" id="fecha2" type="date" name="DFecha2">
                                 </div>
                             </div>
 
@@ -113,7 +113,7 @@ if (!isset($_SESSION['acceso'])) {
                                     <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="$">
                                 </div>
                             </div>
-                            <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block mt-4" name="" value="Guardar">
+                            <input id="bclose" type="submit" class="btn bg-dark text-primary btn-lg btn-block mt-4" name="" value="Guardar">
                         </form>
                     <div id="tableHolder" class="row justify-content-center">
 
@@ -137,7 +137,7 @@ if (!isset($_SESSION['acceso'])) {
                         <button class="bmodal d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">
-                        <table class="table table-hover table-striped table-dark">
+                        <table class="table table-hover table-striped table-light">
                             <thead class="thead-dark">
                               <tr class="encabezados">
                                     <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>

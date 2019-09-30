@@ -51,16 +51,16 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="bg-dark text-white nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Rango de Fecha</a>
+                                    <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Rango de Fecha</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="bg-dark text-white nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Mes</a>
+                                    <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Mes</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
@@ -88,12 +88,12 @@ if (!isset($_SESSION['acceso'])) {
                                                     <h6>FECHA 1 - FECHA 2</h6>
                                                 </legend>
                                                 <h5 class="general">De:</h5>
-                                                <input id="fecha1" class="form-control bg-dark text-white" type="date" name="DFecha1">
+                                                <input id="fecha1" class="form-control" type="date" name="DFecha1">
                                                 <br>
                                                 <h5 class="general">A:</h5>
-                                                <input id="fecha2" class="form-control bg-dark text-white" type="date" name="DFecha2">
+                                                <input id="fecha2" class="form-control" type="date" name="DFecha2">
                                             
-                                            <input type="submit" class="btn btn-primary col-12 mt-4" name="" value="Consultar">
+                                            <input type="submit" class="btn btn-dark text-primary col-12 mt-4" name="" value="Consultar">
                                         </form>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@ if (!isset($_SESSION['acceso'])) {
                                                 <option value="Todos">Todos</option>
                                             </select> <br>
                                             <h5 class="general">Mes:</label></h5>
-                                            <input id="inmes" class="form-control bg-dark text-white" type="month" name="DMes"><br>
+                                            <input id="inmes" class="form-control" type="month" name="DMes"><br>
 
                                             <input type="submit" class="btn btn-primary col-12 mt-4" name="" value="Consultar">
                                         </form>
@@ -138,7 +138,7 @@ if (!isset($_SESSION['acceso'])) {
     <div class="contenedor container-fluid">
         <div id="tableContainer" class="d-block col-lg-12">
             <div class="input-group mb-2">
-                <div class="bg-dark text-white px-3 d-flex align-items-center">
+                <div class="font-weight-bold px-3 d-flex align-items-center">
                     <p>Sucursal:</p>
                 </div>
                 
@@ -171,7 +171,7 @@ if (!isset($_SESSION['acceso'])) {
             </div>
 
             <div class="contenedorTabla table-responsive">
-                <table class="table table-hover table-striped table-dark">
+                <table class="table table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <tr>
                             <th>Ventas</th>

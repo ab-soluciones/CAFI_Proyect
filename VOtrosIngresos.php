@@ -51,13 +51,13 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formotrosingresos">
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="importante">Cantidad:</h5>
-                                <input id="can" name="TCantidad" class="form form-control" onkeypress="return check(event)" type="text" placeholder="Ingrese la cantidad $" autocomplete="off">
+                                <input id="can" name="TCantidad" class="form form-control" onkeypress="return check(event)" type="text" placeholder="" autocomplete="off">
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Tipo :</h5>
@@ -80,7 +80,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Fecha :</h5>
-                                <input class="form-control bg-dark text-white" id="fecha" type="date" name="DFecha" >
+                                <input class="form-control" id="fecha" type="date" name="DFecha" >
                             </div>
                         </div>
                         <div class="row">
@@ -92,7 +92,7 @@ if (!isset($_SESSION['acceso'])) {
                                 </select>  
                             </div>
                         </div>
-                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-dark text-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -112,10 +112,10 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                    <button class="d-none d-lg-flex btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                       <div class="contenedorTabla table-responsive">
-                          <table class="scroll table table-hover table-striped table-dark">
+                          <table class="scroll table table-hover table-striped table-light">
                               <thead class="thead-dark">
                                   <tr class="encabezados">
                                       <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>

@@ -123,7 +123,7 @@ if (!isset($_SESSION['acceso'])) {
                                 <button class="d-lg-none btn btn-danger col-6 mb-3 p-3 agrega mostra" id="BcodigoBarra"  data-toggle="modal" data-target="#modalFormCodigo">Imprimir Codigos</button>
                             </div>
 
-                            <div class="bg-dark text-white px-3 d-flex align-items-center">
+                            <div class="font-weight-bold px-3 d-flex align-items-center">
                                 <p>Sucursal:</p>
                             </div>
                             <select class="form form-control sucursal col-6 col-lg-2" name="SNegocio">
@@ -156,7 +156,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <div class="contenedorTabla table-responsive">
-                    <table class="table table-hover table-striped table-dark">
+                    <table class="table table-hover table-striped table-light">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center" onclick="sortTable(0)">Código de barras</th>
@@ -165,13 +165,14 @@ if (!isset($_SESSION['acceso'])) {
                                 <th class="text-nowrap text-center" onclick="sortTable(3)">Color</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(4)">Marca</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(5)">Descripcion</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(6)">Cantidad</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(7)">Unidad de Medida</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Unidad de Medida</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Tipo</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(8)">Talla</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(9)">Compra</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(10)">Venta</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(11)">Estado</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(12)"></th>
+                                <th class="text-nowrap text-center" onclick="sortTable(12)">Cantidad</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(13)"></th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
@@ -199,16 +200,16 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="bg-dark nav-link text-white active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
+                                    <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="bg-dark nav-link text-white" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
+                                    <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
@@ -247,7 +248,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <div class="row justify-content-center">
                         <form action="codigoBarras.php" method="POST" target="_blank">

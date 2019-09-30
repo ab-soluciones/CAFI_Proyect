@@ -52,7 +52,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formConsulta">
                         <div class="row">
@@ -70,7 +70,7 @@ if (!isset($_SESSION['acceso'])) {
                             <input type="hidden" id="estadoActual">
                         </div>
                         
-                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="submit" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-dark text-primary" name="submit" value="Guardar">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -93,12 +93,12 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div  class="modal-body administrador">
+                <div  class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formConsulta">
                         <div class="row">
                                 <div class="contenedorTabla table-responsive">
-                                    <table class="scroll table table-hover table-striped table-dark">
+                                    <table class="scroll table table-hover table-striped table-light">
                                         <thead class="thead-dark">
                                             <tr>
                                                 <th>Cantidad</th>
@@ -137,18 +137,18 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" onkeypress="return check(event)" id="busqueda" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
-                <table class="table table-hover table-striped table-dark">
+                <table class="table table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center" onclick="soExplore rtTable(0)">Concepto</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">$ Descuento</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">$ Total</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">$ Pago</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Descuento</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Total</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Pago</th>
                             <th class="text-nowrap text-center" onclick="sortTable(4)">Forma</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(5)">$ Cambio</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Cambio</th>
                             <th class="text-nowrap text-center" onclick="sortTable(6)">Fecha</th>
                             <th class="text-nowrap text-center" onclick="sortTable(7)">Hora</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(8)">Es</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(8)">Estado</th>
                             <th class="text-nowrap text-center" onclick="sortTable(9)">Trabajador</th>
                             <th class="text-nowrap text-center" onclick="sortTable(10)"></th>
                         </tr>
@@ -179,18 +179,18 @@ if (!isset($_SESSION['acceso'])) {
                         <tr>
                             <td class="text-nowrap text-center"><button class="mostrar btn btn-info" data-toggle="modal" data-target="#modalFormMostrar">Mostrar</button></td>
                             <td class="text-nowrap text-center d-none"><?php echo $renglon['idventas'];  ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['descuento']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['total']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['pago']; ?></td>
+                            <td class="text-nowrap text-center">$<?php echo $renglon['descuento']; ?></td>
+                            <td class="text-nowrap text-center">$<?php echo $renglon['total']; ?></td>
+                            <td class="text-nowrap text-center">$<?php echo $renglon['pago']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['forma_pago']; ?></td>
-                            <td class="text-nowrap text-center"><?php echo $renglon['cambio']; ?></td>
+                            <td class="text-nowrap text-center">$<?php echo $renglon['cambio']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['estado_venta']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['nombre'] . " " . $renglon['apaterno']; ?></td>
                             <td class="text-nowrap text-center" style="width:100px;">
                                 <div class="row">
-                                    <a style="margin: 0 auto;" class="btn btn-danger beditar" data-toggle="modal" data-target="#modalForm" >
+                                    <a style="margin: 0 auto;" class="btn btn-danger text-white beditar" data-toggle="modal" data-target="#modalForm" >
                                         Editar
                                     </a>
                                 </div>

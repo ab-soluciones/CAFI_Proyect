@@ -1,5 +1,5 @@
 <div class="container-fluid px-0 d-none d-lg-block fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-around p-0">
+    <nav style="background-color: black;" class="navbar navbar-expand-lg navbar-dark justify-content-around p-0">
         <div class="col-1 d-flex justify-content-between align-items-center">
             <img class="img-fluid" src="img/logo/nav1-dark.png"/>
         </div>
@@ -28,7 +28,7 @@
 </div>
 
 <div class="container-fluid d-lg-none">
-    <nav class="navbar navbar-dark bg-dark justify-content-around p-0">
+    <nav style="background-color: black;" class="navbar navbar-dark justify-content-around p-0">
         <button class="d-lg-none navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <img class="img-fluid" src="img/logo/nav1-dark.png">
         </button>

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-6">
             <h5 class="importante">Cantidad:</h5>
-            <input id="cantidad" name="SCantidad" class="form-control bg-dark text-white" type="number" value="0" min="0" require> <br>
+            <input id="cantidad" name="SCantidad" class="form-control" type="number" value="0" min="0" require> <br>
         </div>
         <div class="col-lg-6">
             <div id="productos">

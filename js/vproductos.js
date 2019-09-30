@@ -36,8 +36,8 @@ $(document).ready(function(){
                     if(datos.idNegocio == $('.sucursal').val()){
                         template += `<th style="width:100px;">
                         <div class="row">
-                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>
@@ -45,8 +45,8 @@ $(document).ready(function(){
                     }else{
                         template +=`<th style="width:100px;">
                         <div class="row">
-                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </button>
                         </div>
                     </th>
@@ -248,7 +248,9 @@ $(document).ready(function(){
     $(document).on('click', '.beditar', function () {
         var valores = "";
         var valores2 = "";
-        $('.divCantidad').show();       
+        $('.divCantidad').show();
+        $('#imagenmostrar').hide();
+        $('.rowMostrar').show();
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
         $(this).parents("tr").find("td").each(function () {
@@ -292,6 +294,9 @@ $(document).ready(function(){
         $('#nav-Inventario-tab').show();
         $('.divCantidad').hide();
         $('#nav-Producto-tab').click();
+        $('.divCantidad').show();
+        $('#imagenmostrar').show();
+        $('.rowMostrar').hide();
     });
 
 });

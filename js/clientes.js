@@ -19,7 +19,7 @@ $(document).ready(function(){
                 datos.forEach(datos => {
                     template+=`
                     <tr>
-                    <td class="text-nowrap text-center bg-primary font-weight-bold">${datos.id}</td>
+                    <td class="text-nowrap text-center">${datos.id}</td>
                     <td class="text-nowrap text-center">${datos.nombre}</td>
                     <td class="text-nowrap text-center">${datos.apt}</td>
                     <td class="text-nowrap text-center">${datos.apm}</td>
@@ -28,7 +28,7 @@ $(document).ready(function(){
                     <td class="text-nowrap text-center">${datos.direccion}</td>
                     <td class="text-nowrap text-center">${datos.telefono}</td>
                     <td class="text-nowrap text-center">${datos.correo}</td>
-                    <td class="text-nowrap text-center bg-importante font-weight-bold">${datos.estado}</td>
+                    <td class="text-nowrap text-center">${datos.estado}</td>
                     <th style="width:100px; class="p-1">
                         <div class="row">
                             <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">

@@ -20,7 +20,7 @@
   </script>
 </head>
 
-<body id="menu_back">
+<body style="background-color: white;">
   <div class="container text-center">
 
     <div id="index_logo" class="row d-block">

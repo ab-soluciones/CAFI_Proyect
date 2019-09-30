@@ -1,6 +1,6 @@
 body {
     /* background-color: #222227; */
-    background-color: lightgray;
+    background-color: #e9ebee;
 }
 
 #logo {
@@ -9,14 +9,9 @@ body {
 
 #index_form {
     font-weight: bold;
-    background-color: lightgray;
+    background-color: white;
     margin: auto;
-    box-shadow: grey 1px 1px 10px;
-}
-
-.index_input {
-    border: 1px solid gray;
-    background-color: lightgrey;
+    box-shadow: lightgray 1px 1px 10px;
 }
 
 #index_button {
@@ -40,14 +35,12 @@ body {
 
 /*Components Colors*/
 select, .input-group-prepend, .input-group-text{
-    color: white;
     border-color: grey;
-    background-color: #343a40;
+    background-color: white;
 }
 input{
-    color: white;
     border-color: grey;
-    background-color: #343a40;
+    background-color: white;
 }
 
 /*Scrollbar*/

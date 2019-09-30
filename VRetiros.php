@@ -53,13 +53,13 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formuventas">
                         <div class="row">
                             <div class="col-lg-6">
                                 <h5 class="general">Cantidad:</h5>
-                                <input name="TCantidad" id="cant" onkeypress="return check(event)" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad">
+                                <input style="" name="TCantidad" id="cant" onkeypress="return check(event)" class="form form-control bg-light" type="text" autocomplete="off" placeholder="Ingrese la cantidad">
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Desde:</h5>
@@ -81,15 +81,15 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Descripcion:</h5>
-                                <textarea id="desc" name="TADescription" rows="2" class="form-control bg-dark text-white" placeholder="Agregue su descripcion"></textarea>
+                                <textarea id="desc" name="TADescription" rows="2" class="form-control bg-light" placeholder="Agregue su descripcion"></textarea>
                             </div>
                         </div>
-                        <button type="submit" style="color: #005ce6;" class="mt-3 btn btn-dark btn-lg btn-block bclose">
-                            <h6>Retirar</h6><img src="img/retiro.png">
+                        <button type="submit" style="" class="mt-3 btn btn-lg btn-block bclose btn-dark text-primary">
+                            <h6>Retirar</h6>
                         </button>
                     </form>
                     <div class="contenedorTabla table-responsive">
-                        <table class="scroll table table-hover table-striped table-dark">
+                        <table class="scroll table table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th>Saldo en caja</th>
@@ -119,7 +119,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formuventas2">
                         <div class="row">
@@ -131,7 +131,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" style="color: white" class="mt-3 btn btn-dark btn-lg btn-block bclose">
+                        <button type="submit" style="color:#E65C00;" class="mt-3 btn btn-dark btn-lg btn-block bclose">
                             <h6>Modificar</h6>
                         </button>
                     </form>
@@ -157,7 +157,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         <button class="d-none d-lg-flex btn btn-danger ml-3 bclose" data-toggle="modal" data-target="#modalForm">Retirar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">
-                        <table class="scroll table table-hover table-striped table-dark">
+                        <table class="scroll table table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th onclick="sortTable(0)">Id</th>

@@ -55,7 +55,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formunegocio">
                         <div class="row">
@@ -111,7 +111,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                         </div>
 
-                        <input type="submit" class="bclose mt-3 btn btn-primary btn-lg btn-block" value="Guardar">
+                        <input type="submit" class="bclose mt-3 btn bg-dark text-primary btn-lg btn-block" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
@@ -134,7 +134,7 @@ if (!isset($_SESSION['acceso'])) {
                         <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                         <div class="contenedorTabla table-responsive">
-                            <table class="table table-bordered table-hover table-striped table-dark">
+                            <table class="table table-bordered table-hover table-striped table-light">
                                 <thead class="thead-dark">
                                     <tr class="encabezados">
                                         <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>

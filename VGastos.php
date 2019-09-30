@@ -52,7 +52,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formgastos">
                         <div class="container">
@@ -86,13 +86,13 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row">
                                 <div class="col-lg-12">
                                     <h5 class="general">Descripcion:</h5>
-                                    <textarea id="desc" name="TADescription" rows="2" class="form-control bg-dark text-white" placeholder="Agregue su descripcion" maxlength="50"></textarea>
+                                    <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <h5 class="general">Monto $:</h5>
-                                    <input id="monto" class="form form-control" onkeypress="return check(event)" type="text" name="TMonto" placeholder="$" autocomplete="off" >
+                                    <h5 class="general">Monto:</h5>
+                                    <input id="monto" class="form form-control" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
                                 </div>
                                 <div class="d-block col-lg-6">
                                     <h5><label class="general">Estatus:</label></h5>
@@ -105,11 +105,11 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row">
                                 <div class="d-block col-lg-12">
                                     <h5 class="general">Fecha:</h5>
-                                    <input class="form-control bg-dark text-white" id="fecha" type="date" name="DFecha" >
+                                    <input class="form-control" id="fecha" type="date" name="DFecha" >
                                 </div>
                             </div>
                             <div class="row mt-3 justify-content-around">
-                                <button type="submit" id="bclose" class="col-12 btn btn-lg btn-primary" name="">Guardar</button>
+                                <button type="submit" id="bclose" class="col-12 btn btn-lg btn-dark text-primary" name="">Guardar</button>
                             </div>
                         </div>
                     </form>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['acceso'])) {
                     <button id="bclose" class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla table-responsive">
-                    <table class="table table-hover table-striped table-dark">
+                    <table class="table table-hover table-striped table-light">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>

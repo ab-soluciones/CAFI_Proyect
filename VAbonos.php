@@ -53,7 +53,7 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formabonos">
                         <div class="row">
@@ -71,7 +71,7 @@ if (!isset($_SESSION['acceso'])) {
                             <input type="hidden" id="estadoActual">
                         </div>
 
-                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="submit" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-dark text-primary" name="submit" value="Guardar">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -89,13 +89,13 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
-                <table class="table table-bordered table-hover table-striped table-dark">
+                <table class="table table-bordered table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center" onclick="sortTable(0)">Estado</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">$ Cantidad</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">$ Pago</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">$ Cambio</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Cantidad</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Pago</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Cambio</th>
                             <th class="text-nowrap text-center" onclick="sortTable(4)">Fecha</th>
                             <th class="text-nowrap text-center" onclick="sortTable(5)">Hora</th>
                             <th class="text-nowrap text-center" onclick="sortTable(6)">Cliente</th>

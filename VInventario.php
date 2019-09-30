@@ -46,14 +46,14 @@ if (!isset($_SESSION['acceso'])) {
                     <a style="margin: 0 auto;" href="#" class="navbar-brand">Inventario</a>
                 </div>
             </nav>
-            <div class="card card-body administrador">
+            <div class="card card-body">
                 <form action="#" method="post">
-                    <h5><label for="tipo" class="badge badge-primary">Tipo producto:</label></h5>
+                    <h5 class="general">Tipo producto:</h5>
                     <select id="tipo" class="form form-control" name="STipo" id="">
                         <option value="Ropa">Ropa</option>
                         <option value="Calzado">Calzado</option>
                     </select><br>
-                    <input class="btn btn-lg btn-block btn-primary" type="submit" value="Inventariar">
+                    <input class="btn btn-lg btn-block btn-dark text-primary" type="submit" value="Inventariar">
                 </form>
             </div>
         </div>
@@ -64,8 +64,8 @@ if (!isset($_SESSION['acceso'])) {
             $tipo = $_POST['STipo'];
             ?>
             <div class="contenedorTabla table-responsive mt-4">
-                <table class="table table-hover table-striped table-dark">
-                    <tr>
+                <table class="table table-hover table-striped table-light">
+                    <thead class="thead-dark">
                         <th>Nombre</th>
                         <th>Imagen</th>
                         <th>Marca</th>
@@ -77,6 +77,10 @@ if (!isset($_SESSION['acceso'])) {
                         <th>M</th>
                         <th>S</th>
                         <th>XS</th>
+                    </thead>
+               
+                    <tbody>
+                    <tr>
                         <?php
                         $negocio = $_SESSION['idnegocio'];
                         $con = new Models\Conexion();
@@ -146,32 +150,33 @@ if (!isset($_SESSION['acceso'])) {
 
 
                     </tr>
-
                 <?php } else if (isset($_POST['STipo']) && $_POST['STipo'] === "Calzado") {
                     $tipo = $_POST['STipo'];
                     ?>
                     <div class="contenedorTabla table-responsive mt-4">
-                        <table class="table table-hover table-striped table-dark">
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Imagen</th>
-                                <th>Marca</th>
-                                <th>Color</th>
-                                <th>UM</th>
+                        <table class="table table-hover table-striped table-light">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Imagen</th>
+                                    <th>Marca</th>
+                                    <th>Color</th>
+                                    <th>UM</th>
 
-                                <?php
-                                for ($i = 1; $i < 34; $i++) {
-                                    for ($j = 0; $j < 2; $j++) {
-                                        if ($j === 0) {
-                                            echo "<th class = '$i'>$i</th>";
-                                        } else if ($j > 0) {
-                                            $media = $i + 0.5;
-                                            echo "<th class = '$media'>$media</th>";
+                                    <?php
+                                    for ($i = 1; $i < 34; $i++) {
+                                        for ($j = 0; $j < 2; $j++) {
+                                            if ($j === 0) {
+                                                echo "<th class = '$i'>$i</th>";
+                                            } else if ($j > 0) {
+                                                $media = $i + 0.5;
+                                                echo "<th class = '$media'>$media</th>";
+                                            }
                                         }
                                     }
-                                }
-                                ?>
-                            </tr>
+                                    ?>
+                                </tr>
+                            </thead>
                             <?php
                             $negocio = $_SESSION['idnegocio'];
                             $con = new Models\Conexion();
@@ -237,10 +242,10 @@ if (!isset($_SESSION['acceso'])) {
                             }
                             ?>
                         <?php  } ?>
-
+                        </tbody>
                     </table>
-                            </div>
                 </div>
+            </div>
 
         </div>
         </div>

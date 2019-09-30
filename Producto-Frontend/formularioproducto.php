@@ -41,7 +41,7 @@
     <div class="row">
         <div class="col-12">
             <h5 class="general">Descripcion:</h5>
-            <textarea id="desc" name="TADescription" rows="2" class="form-control bg-dark text-white" placeholder="Agregue su descripcion"></textarea>
+            <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
         </div>
     </div>
 
@@ -103,11 +103,11 @@
     <div class="row">
         <div class="col-lg-6">
             <h5 class="general">Precio de Compra:</h5>
-            <input id="precioc" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioC" placeholder="$" autocomplete="off" required><br>
+            <input id="precioc" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioC" placeholder="" autocomplete="off" required><br>
         </div>
         <div class="col-lg-6">
             <h5 class="general">Precio de Venta:</h5>
-            <input id="preciov" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioVen" placeholder="$" autocomplete="off" required><br>
+            <input id="preciov" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioVen" placeholder="" autocomplete="off" required><br>
         </div>
     </div>
 
@@ -123,10 +123,10 @@
     <div class="row">
         <div class="col-lg-12 divCantidad">
             <h5 class="general">Cantidad:</label></h5>
-            <input id="cantidadEditar" name="SCantidad" class="form-control bg-dark text-white" type="number" value="0" min="0" require> 
+            <input id="cantidadEditar" name="SCantidad" class="form-control" type="number" value="0" min="0" require> 
         </div>
     </div>
     <div class="row">
-        <button type="submit" class="mt-4 col-12 btn btn-lg btn-block btn-primary bclose">Guardar</button><br>
+        <button type="submit" class="mt-4 col-12 btn btn-lg btn-block btn-dark text-primary bclose">Guardar</button><br>
     </div>  
 </form>

@@ -21,8 +21,8 @@ $(document).ready(function(){
                     banco = datos.banco;
  
                     template +=`
-                    <td>${datos.efectivo}</td>
-                    <td>${datos.banco}</td>
+                    <td>$${datos.efectivo}</td>
+                    <td>$${datos.banco}</td>
                     `;
                 });
                 $('#cuerpoEfectivo').html(template);
@@ -53,7 +53,7 @@ $(document).ready(function(){
                     <td>${datos.id}</td>
                     <td>${datos.concepto}</td>
                     <td>${datos.tipo}</td>
-                    <td>${datos.cantidad}</td>
+                    <td>$${datos.cantidad}</td>
                     <td>${datos.descripcion}</td>
                     <td>${datos.fecha}</td>
                     <td>${datos.hora}</td>
