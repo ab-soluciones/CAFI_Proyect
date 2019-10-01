@@ -3,6 +3,8 @@ $(document).ready(function () {
     let editar = false;
     let idclienteab = "";
     optenerDatosTablaClientesab();
+
+
     
     function optenerDatosTablaClientesab() {
         $.ajax({

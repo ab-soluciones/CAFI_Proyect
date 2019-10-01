@@ -1,4 +1,6 @@
 <?php
+require_once "Config/Autoload.php";
+Config\Autoload::run();
 session_start();
 // se comprueba si hay un rol en la sesion si la cuenta esta activa y si ese rol es diferente a ceo
 if (!isset($_SESSION['acceso'])) {
@@ -23,7 +25,8 @@ Config\Autoload::run();
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
@@ -43,7 +46,7 @@ Config\Autoload::run();
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -51,107 +54,114 @@ Config\Autoload::run();
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formtrabajador">
-                        <div class="d-block d-lg-flex row">
-                            <div class="col-4">
-                                <h5><label for="nombre" class="badge badge-primary">Nombre:</label></h5>
-                                <input id="nombre" class="form form-control" type="text"  onkeypress="return check(event)" name="TNombre" placeholder="Nombre" autocomplete="off" >
-                            </div>
-                            <div class="col-4">
-                                <h5><label for="apt" class="badge badge-primary">Apellido Paterno:</label></h5>
-                                <input id="apt" class="form form-control" type="text"  onkeypress="return check(event)" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
-                            </div>
-                            <div class="col-4">
-                                <h5><label for="apm" class="badge badge-primary">Apellido Materno:</label></h5>
-                                <input id="apm" class="form form-control" type="text"  onkeypress="return check(event)" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
-                            </div>
+                    
+                    <div class="d-block d-lg-flex row">
+                        <div class="col-lg-4">
+                            <h5 class="general">Nombre:</h5>
+                            <input id="nombre" class="form form-control" type="text"  onkeypress="return check(event)" name="TNombre" placeholder="Nombre" autocomplete="off" >
+                        </div>
+                        <div class="col-lg-4">
+                            <h5 class="general">Apellido P:</h5>
+                            <input id="apt" class="form form-control" type="text"  onkeypress="return check(event)" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
+                        </div>
+                        <div class="col-lg-4">
+                            <h5 class="general">Apellido M:</h5>
+                            <input id="apm" class="form form-control" type="text"  onkeypress="return check(event)" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
                         </div>
                     </div>
                     <div class="d-block d-lg-flex row">
-                            <div class="col-4">
-                            <h5><label for="doc" class="badge badge-primary">Documento:</label></h5>
+                        <div class="col-lg-4">
+                            <h5 class="general">Documento:</h5>
                             <select id="documento" class="form form-control">
                                 <option value="INE">INE</option>
                                 <option value="CURP">CURP</option>
                                 <option value="Otro">Otro</option>
                             </select>
-                            </div>
-                            <div class="col-4">
-                                <h5><label for="numdoc" class="badge badge-primary">Documento:</label></h5>
-                                <input id="numdoc" class="form form-control" type="text"  onkeypress="return check(event)" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
-                            </div>
-                            <div class="col-4">
-                                <h5><label for="dir" class="badge badge-primary">Direccion:</label></h5>
-                                <input id="dir" class="form form-control" type="text"   name="TDireccion" placeholder="Direccion"  autocomplete="off">
-                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <h5 class="general">Documento:</h5>
+                            <input id="numdoc" class="form form-control" type="text"  onkeypress="return check(event)" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off" >
+                        </div>
+                        <div class="col-lg-4">
+                            <h5 class="general">Direccion:</h5>
+                            <input id="dir" class="form form-control" type="text"  onkeypress="return check(event)" name="TDireccion" placeholder="Direccion"  autocomplete="off">
+                        </div>
                     </div>
                     <div class="d-block d-lg-flex row">
-                            <div class="col-4">
-                                <h5><label for="tel" class="badge badge-primary">Telefono:</label></h5>
-                                <input id="tel" class="form form-control" type="text"  onkeypress="return check(event)" name="TTelefono" placeholder="Telefono"  autocomplete="off">
-                            </div>
-                            <div class="col-4">
-                                <h5><label for="email" class="badge badge-primary">Correo electrónico:</label></h5>
-                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off">
-                            </div>
-                            <div class="col-4">
-                                <h5><label for="acceso" class="badge badge-primary">Tipo de acceso:</label></h5>
-                                <select id="acceso" class="form form-control">
-                                    <option value="Manager">Manager</option>
-                                    <option value="Employes">Employes</option>
-                                </select>
-                            </div>
+                        <div class="col-lg-4">
+                            <h5 class="general">Telefono:</h5>
+                            <input id="tel" class="form form-control" type="text"  onkeypress="return check(event)" name="TTelefono" placeholder="Telefono"  autocomplete="off">
                         </div>
+                        <div class="col-lg-4">
+                            <h5 class="general">E-mail:</h5>
+                            <input id="email" class="form form-control" type="text"  onkeypress="return check(event)" name="TCorreo" placeholder="correo@dominio.com" autocomplete="off">
+                        </div>
+                        <div class="col-lg-4">
+                            <h5 class="general">Acceso:</h5>
+                            <select id="acceso" class="form form-control">
+                                <option value="Manager">Manager</option>
+                                <option value="Employes">Employes</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row d-block d-lg-flex">
                         <div class="col-lg-4">
-                            <h5><label for="login" class="badge badge-primary">Nombre de Usuario:</label></h5>
-                            <input id="login" class="form form-control" type="text"  name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
-                            <div class="contro" id="status"></div>
+                            <h5 class="general">Usuario:</h5>
+                            <input id="login" class="form form-control" type="text"  onkeypress="return check(event)" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
+                            <div id="status" class="contro"></div>
                         </div>
                         
+                        
                         <div class="col-lg-4">
-                            <h5><label for="login" class="badge badge-primary">Contraseña:</label></h5>
-                            <input id="contrasena" class="form form-control" type="text"  name="TContrasena" placeholder="Contraseña" autocomplete="off" >
+                            <h5 class="general">Contraseña:</h5>
+                            <input id="contrasena" class="form form-control" type="text"  onkeypress="return check(event)" name="TContrasena" placeholder="Contraseña" autocomplete="off" >
                         </div>
 
                         <div class="col-lg-4">
-                            <h5><label for="login" class="badge badge-primary">Sueldo:</label></h5>
+                            <h5 class="general">Sueldo:</h5>
                             <input id="sueldo" class="form form-control" type="text"  onkeypress="return check(event)" name="TSueldo" placeholder="Sueldo" autocomplete="off" >
                         </div>
+                    </div>
 
+                    <div class="row">
+                        <div id="status" class="col-12">
 
-                        <div class="row">
-                            <div class="col-12">
-                                <h5><label for="email" class="badge badge-primary">Agregarlo a:</label></h5>
-                                <select id="agregarloa" class="form form-control" name="SSucursal" >
-                                    <?php
-                                    $con = new Models\Conexion();
-                                    $dueño = $_SESSION['id'];
-                                    $query = "SELECT nombre_negocio, idnegocios FROM negocios 
-                                                WHERE clientesab_idclienteab = '$dueño'";
-                                    $row = $con->consultaListar($query);
-                                    $con->cerrarConexion();
-                                    while ($renglon = mysqli_fetch_array($row)) {
-                                        echo "<option value=".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
-                                    }
-                                    ?>
-                                </select> <br>
-                                <input type="hidden" id="idDueno" value=<?php echo $_SESSION['id'];?>>
-                            </div>
                         </div>
-                            <div class="col-4">
-                                <h5><label  class="badge badge-primary">Estado:</label></h5>
-                                <select id="estado" class="form form-control">
-                                    <option value="A">Activo</option>
-                                    <option value="I">Inactivo</option>
-                                </select>
-                            </div>
-                        <div class="row">
-                            <div class="col-12"><br>
-                                <input id="bclose" type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
-                            </div>
+                    </div>
+
+                    <div class="row d-block d-lg-flex">
+                        <div class="col-lg-6">
+                            <h5 class="general">Agregarlo a:</h5>
+                            <select id="agregarloa" class="form form-control" name="SSucursal" >
+                                <?php
+                                $con = new Models\Conexion();
+                                $dueño = $_SESSION['id'];
+                                $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                                            WHERE clientesab_idclienteab = '$dueño'";
+                                $row = $con->consultaListar($query);
+                                $con->cerrarConexion();
+                                while ($renglon = mysqli_fetch_array($row)) {
+                                    echo "<option value=".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
+                                }
+                                ?>
+                            </select> <br>
+                            <input type="hidden" id="idDueno" value=<?php echo $_SESSION['id'];?>>
+                        </div>
+                        <div class="col-lg-6">
+                            <h5 class="general">Estado:</h5>
+                            <select id="estado" class="form form-control">
+                                <option value="A">Activo</option>
+                                <option value="I">Inactivo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row d-block d-lg-flex">
+                        <div class="col-12"><br>
+                            <input id="bclose" type="submit" class="btn btn-lg btn-block btn-primary" name="" value="Guardar">
                         </div>
                     </div>
                 </form>
@@ -162,16 +172,15 @@ Config\Autoload::run();
     </div>
 </div>
 <!-- Modal -->
-    <p id="nav-title" class="font-weight-bold">
-    
-    </p>
     <div class="contenedor container-fluid">
         <div class="row align-items-start">
             <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
-                    <p>Sucursal:</p>
+                        <div class="bg-dark text-white px-3 d-flex align-items-center">
+                            <p>Sucursal:</p>
+                        </div>
 
-                        <select id="" class="form form-control sucursal" name="SNegocio">
+                        <select class="form form-control sucursal" name="SNegocio">
                             <?php
                             $con = new Models\Conexion();
                             $dueño = $_SESSION['id'];
@@ -180,7 +189,6 @@ Config\Autoload::run();
                             $row = $con->consultaListar($query);
                             $con->cerrarConexion();
                             while ($renglon = mysqli_fetch_array($row)) {
-                    
                                 echo "<option value=".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
                             }
                             ?>
@@ -195,10 +203,10 @@ Config\Autoload::run();
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="contenedorTabla table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-hover table-striped table-dark">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th onclick="sortTable(0)">Id trabajador</th>
+                                <th onclick="sortTable(0)">ID</th>
                                 <th onclick="sortTable(1)">Nombre</th>
                                 <th onclick="sortTable(2)">Ap-P</th>
                                 <th onclick="sortTable(3)">Ap-M</th>

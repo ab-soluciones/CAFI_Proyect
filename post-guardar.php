@@ -461,7 +461,7 @@ if (
 ) {
     $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
     $con = new Models\Conexion();
-    $trabajador->setNombre($con->eliminar_simbolos($_POST['nombre'])); //se pasan a los atributos de la clase todos los valores del formulario por el metodo set
+    $trabajador->setNombre($con->eliminar_simbolos($_POST['nombre']));
     $trabajador->setApaterno($con->eliminar_simbolos($_POST['apt']));
     $trabajador->setAmaterno($con->eliminar_simbolos($_POST['apm']));
     $trabajador->setDocumento($con->eliminar_simbolos($_POST['doc']));

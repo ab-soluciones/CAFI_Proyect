@@ -3,7 +3,6 @@ $(document).ready(function(){
     let editar = false;
     let codigoBarras = "";
     idSesion($('.sucursal').val());
-    obtenerDatosTablaProducto();
     obtenerInventario();
     $('.divCantidad').hide();
 
@@ -11,42 +10,7 @@ $(document).ready(function(){
         $.ajax({
             url: 'sesionProduc.php',
             type: 'POST',
-            data: {idProducto:id}
-        });
-        obtenerDatosTablaProducto();
-    }
-
-
-    function obtenerInventario(){
-        $.ajax({
-            url: 'datosInventario.php',
-            type: 'GET',
-
-            success: function(response){
-                console.log('entro');
-                let datos = JSON.parse(response);
-                let template2 = '';
-                console.log(datos);
-                datos.forEach(datos => {
-                    template2 += `
-                    <option value="${datos.nombre +" "+ datos.marca + " color " + datos.color + " talla " + datos.talla_numero}"> 
-                    `;
-                });
-                $('#lproductos').html(template2);
-            }
-        });
-    }
-
-    $('.sucursal').change(function(){
-        idSesion($('.sucursal').val());
-    });
-
-
-
-    function obtenerDatosTablaProducto(){
-        $.ajax({
-            url: 'tablaProductos.php',
-            type: 'GET',
+            data: {idProducto:id},
 
             success: function(response){
                 let datos = JSON.parse(response);
@@ -88,12 +52,37 @@ $(document).ready(function(){
                     </th>
                 </tr>`;
                     }
-
                 });
                 $('#cuerpo').html(template);
             }
-        })
+        });
+
     }
+
+
+    function obtenerInventario(){
+        $.ajax({
+            url: 'datosInventario.php',
+            type: 'GET',
+
+            success: function(response){
+                console.log('entro');
+                let datos = JSON.parse(response);
+                let template2 = '';
+                console.log(datos);
+                datos.forEach(datos => {
+                    template2 += `
+                    <option value="${datos.nombre +" "+ datos.marca + " color " + datos.color + " talla " + datos.talla_numero}"> 
+                    `;
+                });
+                $('#lproductos').html(template2);
+            }
+        });
+    }
+
+    $('.sucursal').change(function(){
+        idSesion($('.sucursal').val());
+    });
 
     $('.close').click(function(){
         $('#formproducto').trigger('reset');
@@ -190,7 +179,6 @@ $(document).ready(function(){
                         }
                     }
                 });
-               
         e.preventDefault();
         editar = false;
     });
@@ -199,6 +187,7 @@ $(document).ready(function(){
     
         var formData = new FormData(this);
         console.log(formData);
+
         $("#imagen").remove();
                 $.ajax({
                     url: 'post-guardar.php',
