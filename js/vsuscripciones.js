@@ -39,6 +39,7 @@ $(document).ready(function () {
             <td class="text-nowrap text-center">${datos.fecha_vencimiento}</td>
             <td class="text-nowrap text-center">${datos.estado}</td>
             <td class="text-nowrap text-center">${datos.negocio}</td>
+            <td class="text-nowrap text-center">${datos.paquete}</td>
             <td class="text-nowrap text-center">${datos.monto}</td>
             <td class="text-nowrap text-center">${datos.registro}</td>
             <th class="text-nowrap text-center" style="width:100px;">
@@ -62,6 +63,7 @@ $(document).ready(function () {
       fecha1: $('#fecha1').val(),
       fecha2: $('#fecha2').val(),
       estado: $('#estado').val(),
+      paquete: $('#spaquete').val(),
       monto: $('#monto').val(),
       negocio: $('#innegocio').val()
     };
@@ -101,7 +103,8 @@ $(document).ready(function () {
     $('#fecha1').val(datos[1]);
     $('#fecha2').val(datos[2]);
     $('#estado').val(datos[3]);
-    $('#monto').val(datos[5]);
+    $('#spaquete').val(datos[5]);
+    $('#monto').val(datos[6]);
     editar = true;
 
   })

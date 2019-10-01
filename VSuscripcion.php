@@ -97,6 +97,14 @@ if (!isset($_SESSION['acceso'])) {
 
                             </datalist> <br>
                         </div>
+                        <h5 class="admin">Paquete:</h5>
+                        <div id="paquete">
+                        <select class="form form-control" id="spaquete">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select><br>
+                        </div>
                         <h5 class="admin">Monto:</h5>
                         <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="Monto $"><br>
                         <input id="bclose" type="submit" class="btn btn-primary btn-lg btn-block" name="" value="Guardar">
@@ -131,9 +139,10 @@ if (!isset($_SESSION['acceso'])) {
                                     <th class="text-nowrap text-center" onclick="sortTable(2)">Vencimiento</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(3)">Estado</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(4)">Negocio</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(5)">Monto</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Registró</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Tarea</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(5)">Paquete</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Monto</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Registró</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(8)">Tarea</th>
                                 </tr>
                             </thead>
                             <tbody id="cuerpo">

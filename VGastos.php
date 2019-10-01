@@ -85,13 +85,13 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row mt-3">
                                 <div class="d-block col-lg-12">
                                     <h5 class="general">Descripcion:</h5>
-                                    <textarea id="desc" name="TADescription" rows="2" class="form-control bg-dark text-white" placeholder="Agregue su descripcion" maxlength="50"></textarea>
+                                    <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="d-block col-lg-6">
                                     <h5 class="general">Monto $:</h5>
-                                    <input id="monto" class="form form-control" onkeypress="return check(event)" type="text" name="TMonto" placeholder="$" autocomplete="off" >
+                                    <input id="monto" class="form form-control bg-light" onkeypress="return check(event)" type="text" name="TMonto" placeholder="$" autocomplete="off" >
 
                                 <div class="d-block col-lg-12">
                                     <h5><label class="general">Estatus:</label></h5>
