@@ -28,8 +28,7 @@ $(document).ready(function () {
                     <td>${datos.color}</td>
                     <td>${datos.unidad_medida}</td>
                     <td>${datos.talla_numero}</td>
-                    <td>$${datos.pmsjtarjetaio_venta}</td>
-                    <td>$${datos.subtotal}</td>
+                    <td>${datos.subtotal}</td>
                 </tr>`;
             });
             $('#cuerpo').html(template);

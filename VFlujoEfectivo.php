@@ -206,7 +206,7 @@ if (!isset($_SESSION['acceso'])) {
                         $ventastotal = $result['totalventas'];
 
                         $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos
-                WHERE negocios_idnegocios ='$negocio' AND estado_deuda = 'A'";
+                WHERE negocios_idnegocios ='$negocio' AND estado_deuda = 'A' OR negocios_idnegocios ='$negocio' AND estado_deuda = 'L'";
                         $result = $con->consultaRetorno($query);
                         $anticipos = $result['anticipos'];
 
@@ -263,7 +263,7 @@ if (!isset($_SESSION['acceso'])) {
                 adeudos WHERE negocios_idnegocios = '$negocio' AND estado_deuda='A'";
                         $result = $con->consultaRetorno($query);
 
-                        $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo;
+                        $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo + $anticipos;
                         $ingresos_banco = $ventas_tarjeta + $abonos_tarjeta;
                         $ingresos_credito = $result['ingresos_credito'];
 
@@ -298,9 +298,9 @@ if (!isset($_SESSION['acceso'])) {
                         $ventastotal = $result['totalventas'];
 
                         $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos 
-                    INNER JOIN negocios ON negocios.idnegocios=adeudos.negocios_idnegocios
-                    INNER JOIN clientesab ON negocios.clientesab_idclienteab=clientesab.id_clienteab  
-                    WHERE clientesab.id_clienteab ='$dueño' AND estado_deuda = 'A'";
+                        INNER JOIN negocios ON negocios.idnegocios=adeudos.negocios_idnegocios
+                        INNER JOIN clientesab ON negocios.clientesab_idclienteab=clientesab.id_clienteab  
+                        WHERE clientesab.id_clienteab ='$dueño' AND estado_deuda = 'A' OR clientesab.id_clienteab ='$dueño' AND estado_deuda = 'L'";
                         $result = $con->consultaRetorno($query);
                         $anticipos = $result['anticipos'];
 
@@ -377,7 +377,7 @@ if (!isset($_SESSION['acceso'])) {
                         $result = $con->consultaRetorno($query);
 
 
-                        $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo;
+                        $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo + $anticipos;
                         $ingresos_banco = $ventas_tarjeta + $abonos_tarjeta;
                         $ingresos_credito = $result['ingresos_credito'];
 
@@ -425,9 +425,9 @@ if (!isset($_SESSION['acceso'])) {
                             $ventastotal = $result['totalventas'];
 
                             $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos INNER JOIN venta 
-                        ON adeudos.ventas_idventas = venta.idventas WHERE venta.fecha BETWEEN '$fecha1' AND '$fecha2'
-                        AND estado_deuda = 'A' AND negocios_idnegocios ='$negocio' OR MONTH(venta.fecha) = '$mes' AND 
-                        YEAR(venta.fecha)='$año' AND estado_deuda = 'A' AND negocios_idnegocios ='$negocio'";
+                            ON adeudos.ventas_idventas = venta.idventas WHERE venta.fecha BETWEEN '$fecha1' AND '$fecha2'
+                            AND estado_deuda != 'C' AND negocios_idnegocios ='$negocio' OR MONTH(venta.fecha) = '$mes' AND 
+                            YEAR(venta.fecha)='$año' AND estado_deuda != 'C' AND negocios_idnegocios ='$negocio'";
                             $result = $con->consultaRetorno($query);
                             $anticipos = $result['anticipos'];
 
@@ -497,7 +497,7 @@ if (!isset($_SESSION['acceso'])) {
                         OR MONTH(venta.fecha)='$mes' AND YEAR(venta.fecha)='$año' AND negocios_idnegocios = '$negocio' AND estado_deuda='A'";
                             $result = $con->consultaRetorno($query);
 
-                            $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo;
+                            $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo +  $anticipos;
                             $ingresos_banco = $ventas_tarjeta + $abonos_tarjeta;
                             $ingresos_credito = $result['ingresos_credito'];
 
@@ -529,11 +529,11 @@ if (!isset($_SESSION['acceso'])) {
                             $ventastotal = $result['totalventas'];
 
                             $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos 
-                        INNER JOIN venta ON adeudos.ventas_idventas = venta.idventas 
-                        INNER JOIN negocios ON negocios.idnegocios=venta.idnegocios
-                        INNER JOIN clientesab ON negocios.clientesab_idclienteab=clientesab.id_clienteab WHERE venta.fecha BETWEEN 
-                        '$fecha1' AND '$fecha2' AND estado_deuda = 'A' AND clientesab.id_clienteab ='$dueño' 
-                        OR MONTH(venta.fecha) = '$mes' AND YEAR(venta.fecha)='$año' AND estado_deuda = 'A' AND clientesab.id_clienteab ='$dueño'";
+                            INNER JOIN venta ON adeudos.ventas_idventas = venta.idventas 
+                            INNER JOIN negocios ON negocios.idnegocios=venta.idnegocios
+                            INNER JOIN clientesab ON negocios.clientesab_idclienteab=clientesab.id_clienteab WHERE venta.fecha BETWEEN 
+                            '$fecha1' AND '$fecha2' AND estado_deuda != 'C' AND clientesab.id_clienteab ='$dueño' 
+                            OR MONTH(venta.fecha) = '$mes' AND YEAR(venta.fecha)='$año' AND estado_deuda != 'C' AND clientesab.id_clienteab ='$dueño'";
                             $result = $con->consultaRetorno($query);
                             $anticipos = $result['anticipos'];
 
@@ -618,7 +618,7 @@ if (!isset($_SESSION['acceso'])) {
                         OR MONTH(venta.fecha)='$mes' AND YEAR(venta.fecha)='$año' AND clientesab.id_clienteab ='$dueño' AND estado_deuda='A'";
                             $result = $con->consultaRetorno($query);
 
-                            $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo;
+                            $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo +  $anticipos;
                             $ingresos_banco = $ventas_tarjeta + $abonos_tarjeta;
                             $ingresos_credito = $result['ingresos_credito'];
 

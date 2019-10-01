@@ -261,7 +261,7 @@ if (
         if ($estado == "R" && $_POST['estadoNuevoConsulta'] == "C") {
                 $inventario->actualizarStock2($id, $negocio);
                 $v->setTrabajador($trabajador);
-                $adeudo = "L";
+                $adeudo = "C";
                 $result = $v->editarEstadoV($id, $adeudo);
                 echo $result;
         } else if ($estado == "C" && $_POST['estadoNuevoConsulta'] == "R") {

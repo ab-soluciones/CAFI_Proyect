@@ -108,7 +108,6 @@ if (!isset($_SESSION['acceso'])) {
                                                 <th>Color</th>
                                                 <th>UM</th>
                                                 <th>Talla</th>
-                                                <th>PV</th>
                                                 <th>Subtotal</th>
                                             </tr>
                                         </thead>
@@ -179,11 +178,11 @@ if (!isset($_SESSION['acceso'])) {
                         <tr>
                             <td class="text-nowrap text-center"><button class="mostrar btn btn-info" data-toggle="modal" data-target="#modalFormMostrar">Mostrar</button></td>
                             <td class="text-nowrap text-center d-none"><?php echo $renglon['idventas'];  ?></td>
-                            <td class="text-nowrap text-center">$<?php echo $renglon['descuento']; ?></td>
-                            <td class="text-nowrap text-center">$<?php echo $renglon['total']; ?></td>
-                            <td class="text-nowrap text-center">$<?php echo $renglon['pago']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['descuento']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['total']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['pago']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['forma_pago']; ?></td>
-                            <td class="text-nowrap text-center">$<?php echo $renglon['cambio']; ?></td>
+                            <td class="text-nowrap text-center"><?php echo $renglon['cambio']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['fecha']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['hora']; ?></td>
                             <td class="text-nowrap text-center"><?php echo $renglon['estado_venta']; ?></td>
