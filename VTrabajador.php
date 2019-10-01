@@ -55,7 +55,7 @@ Config\Autoload::run();
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body">
+                <div class="modal-body administrador">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formtrabajador">
                     
@@ -191,7 +191,6 @@ Config\Autoload::run();
                             $row = $con->consultaListar($query);
                             $con->cerrarConexion();
                             while ($renglon = mysqli_fetch_array($row)) {
-                    
                                 echo "<option value=".$renglon['idnegocios'].">" . $renglon['nombre_negocio'] . "</option>";
                             }
                             ?>

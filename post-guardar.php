@@ -463,7 +463,9 @@ if (
             $producto->setTalla_numero($_POST['SlcMedida']);
         } else if ($_POST['TTipoP'] === "Ropa") {
             $producto->setTalla_numero($_POST['SlcTalla']);
-        }
+        }else if($_POST['TTipoP'] === "Otro"){
+            $producto->setTalla_numero("N.A");
+    }
         $producto->setTipo($con->eliminar_simbolos($_POST['TTipoP']));
         $producto->setPrecioCompra($con->eliminar_simbolos($_POST['TPrecioC']));
         $producto->setPrecioVenta($con->eliminar_simbolos($_POST['TPrecioVen']));

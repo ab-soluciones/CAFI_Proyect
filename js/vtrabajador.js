@@ -91,13 +91,15 @@ $(document).ready(function(){
             agregarloa: $('#agregarloa').val(),
             estado:$('#estado').val()
         };
+        idnego = $('#agregarloa').val();
 
+        console.log($('#estado').val());
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
 
         $.post(url,postData, function (response) {
-           
+            console.log(response);
             $('#formclienteab').trigger('reset');
-            idSesion($('#agregarloa').val());
+            idSesion(idnego);
             editar = false;
             $("#status").hide();
 
@@ -147,7 +149,7 @@ $(document).ready(function(){
         $('#contrasena').val(datos[11]);
         $('#sueldo').val(datos[12]);
         $('#estado').val(datos[13]);
-        $('#agregarloa').val(datos[14]);
+        $('#agregarloa').val($('#comboSucursal').val());
         editar = true;
     });
 });

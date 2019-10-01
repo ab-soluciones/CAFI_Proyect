@@ -159,7 +159,7 @@ if (
                 $sueldo = floatval($sueldo);
                 $trabajador->setSueldo($sueldo);
                 $trabajador->setEstado($con->eliminar_simbolos($_POST['estado']));
-                $result = $trabajador->editar($con->eliminar_simbolos($_POST['id']));
+                $result = $trabajador->editar($con->eliminar_simbolos($_POST['id']),$_POST['agregarloa'],$_POST['estado']);
                 echo $result;
 } else if (
         isset($_POST['estado']) && isset($_POST['id'])
@@ -173,12 +173,12 @@ if (
         echo $result;
 } else if (
         isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca']) &&
-        isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP']) &&
-        isset($_POST['SlcTalla']) && isset($_POST['SlcMedida']) && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen']) &&
+        isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP'])  && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen']) &&
         isset($_POST['SCantidad']) && isset($_POST['REstado'])
 ) {
         function registrar($imagen, $id)
         {
+                
                 $producto = new Models\Producto();
                 $con = new Models\Conexion();
                 $producto->setNombre($con->eliminar_simbolos($_POST['TNombre']));
@@ -192,6 +192,8 @@ if (
                         $producto->setTalla_numero($_POST['SlcMedida']);
                 } else if ($_POST['TTipoP'] === "Ropa") {
                         $producto->setTalla_numero($_POST['SlcTalla']);
+                } else if($_POST['TTipoP'] == "Otro"){
+                        $producto->setTalla_numero("N.A");
                 }
                 $producto->setTipo($con->eliminar_simbolos($_POST['TTipoP']));
                 $producto->setPrecioCompra($con->eliminar_simbolos($_POST['TPrecioC']));
@@ -201,9 +203,9 @@ if (
                 $result = $producto->editar($con->eliminar_simbolos($_POST['TCodigoB']), $_SESSION['id']);
                 echo $result;
         }
-
+        
         if (strlen($_FILES['FImagen']['tmp_name']) != 0) {
-
+                
                 $tipo_imagen = $_FILES['FImagen']['type'];
                 $bytes = $_FILES['FImagen']['size'];
                 if ($bytes <= 1000000) {
@@ -214,7 +216,7 @@ if (
                                 $carpeta_destino = "img/productos/";
                                 move_uploaded_file($_FILES["FImagen"]["tmp_name"], $carpeta_destino . $newfilename);
                                 $negocio = $_SESSION['idnegocio'];
-                                registrar($imagen2, $_POST['TCodigoB']);
+                                registrar($imagen2,$_POST['TCodigoB']);
                         } else {
                                 echo "imagenNoValida";
                         }
@@ -222,6 +224,7 @@ if (
                         echo "imagenGrande";
                 }
         } else {
+                
                 $query = "SELECT imagen FROM producto WHERE codigo_barras = " . $_POST['TCodigoB'];
                 $con = new Models\Conexion();
                 $result2 = $con->consultaRetorno($query);

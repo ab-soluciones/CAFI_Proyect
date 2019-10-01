@@ -34,8 +34,8 @@ class Conexion
     }
 
 
-    public function executeStatements($action,$datos,$consulta)
-    {      
+    public function consultaPreparada($datos,$consulta,$accion){
+       
         for ($i = 0; $i < sizeof($datos); $i++) {
             
             if (gettype($datos[$i]) === "string") {
@@ -51,27 +51,27 @@ class Conexion
 
         $datatipe = $this->datatipe;
         $valCount = count($datos);
+        
         $stmt = $this->con->prepare($consulta);
-        /* Populate args with references to values */
+        
         $args = array(&$datatipe);
         for ($i = 0; $i < $valCount; $i++) {
             $args[] = &$datos[$i];
         }
-        /* call $stmt->bind_params() using $args as its parameter list */
-        call_user_func_array( array($stmt, 'bind_param'), $args);
-        if($action == 1){
-            return $stmt->execute();
-        }else if($action == 2){
+       
+        call_user_func_array( array($stmt,'bind_param'), $args);
+        
+        if($accion == 1){
             $stmt->execute();
-            return $stmt->get_result();
-        }else if($action == 3){
+        }else{
             $stmt->execute();
-            $resultado = $stmt->get_result();
-            $row = $resultado->fetch_assoc();
-            return $row;
+            return mysqli_fetch_all($stmt->get_result());
         }
-    }
+        
+        
+        
 
+    }
    public function eliminar_simbolos($string){
         $string = trim($string);
         $string = str_replace(
@@ -125,6 +125,12 @@ class Conexion
     return $string;
     } 
 
+    public function obtenerDatosDeTabla($sql)
+    {
+        $result = $this->con->query($sql);
+        return $result;
+    }
+
 
     public function consultaSimple($sql)
     {
@@ -147,4 +153,7 @@ class Conexion
         $row = mysqli_fetch_assoc($datos);
         return $row;
     }
+
+    
+
 }

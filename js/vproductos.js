@@ -98,7 +98,8 @@ $(document).ready(function(){
     $('#formproducto').submit(function(e){
     
         var formData = new FormData(this);
-
+        console.log(formData);  
+        console.log ("Esto es :"+$('#tipo_produc').val() )
         let url2 = editar === false ? 'post-guardar.php' : 'post-edit.php';
                 $.ajax({
                     url: url2,
@@ -108,6 +109,8 @@ $(document).ready(function(){
                     processData: false,
                     
                     success: function(response) {
+                        console.log("Respuesta: "+response);
+
                         document.getElementById('tpo').disabled = false;
                         document.getElementById('tpc').disabled = false;
                         document.getElementById('tpr').disabled = false;
@@ -186,9 +189,10 @@ $(document).ready(function(){
     $('#inventario').submit(function(e){
     
         var formData = new FormData(this);
-        
+;
 
         $("#imagen").remove();
+
                 $.ajax({
                     url: 'post-guardar.php',
                     type: 'POST',
@@ -260,6 +264,7 @@ $(document).ready(function(){
         
 
         datos = valores.split("?");
+        console.log(datos);
         $('#nav-Producto-tab').click();
         $('.row1').css("display","none");
         $('#cb').val(datos[0]);
@@ -276,6 +281,7 @@ $(document).ready(function(){
         }else if(datos[7] == "Otro"){
             $('#tpo').trigger('click');
         }
+        $('#tipo_produc').val(datos[7]);
         if(datos[8] > 0){
             $('#med').val(datos[8]);
         }else{
