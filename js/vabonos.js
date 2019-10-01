@@ -16,6 +16,7 @@ $(document).ready(function () {
                     <td class="text-nowrap text-center">${datos.a_estado}</td>
                     <td class="text-nowrap text-center">${datos.cantidad}</td>
                     <td class="text-nowrap text-center">${datos.pago}</td>
+                    <td class="text-nowrap text-center">${datos.forma_pago}</td>
                     <td class="text-nowrap text-center">${datos.cambio}</td>
                     <td class="text-nowrap text-center">${datos.fecha}</td>
                     <td class="text-nowrap text-center">${datos.hora}</td>
