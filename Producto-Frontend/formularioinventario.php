@@ -15,6 +15,6 @@
     </div>
 
     <div class="row justify-content-center">
-        <button type="submit" class="col-3 btn btn-lg btn-block btn-dark bclose">Guardar</button>
+        <button type="submit" class="col-12 btn btn-lg btn-primary bclose">Guardar</button>
     </div>
 </form>

@@ -2,13 +2,14 @@
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } elseif ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] == "CEO" || $_SESSION['acceso'] == "ManagerAB"
-    || $_SESSION['acceso'] == "CEOAB"
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
 ) {
     header('location: index.php');
 }
@@ -24,7 +25,8 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -50,17 +52,17 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
-                    <h2 id="msjtarjeta"></h2>
+                    <p id="msjtarjeta" class="font-weight-bold"></p>
                    
-                        <h6 style="color: white;">Abono $ :</h6>
-                        <input class="inabono form form-control" onkeypress="return check(event)" type="text" placeholder="$" autocomplete="off"><br>
+                        <h6 style="">Abono:</h6>
+                        <input class="inabono form form-control" onkeypress="return check(event)" type="text" placeholder="" autocomplete="off"><br>
                         <div id="divefectivo">
-                        <h6 style="color: white;">$ Cantidad Recibida / $ Pago :</h6>
-                        <input class="tpago form form-control" type="text" onkeypress="return check(event)" placeholder="$" autocomplete="off"><br>
+                        <h6 style="">Cantidad Recibida/Pago:</h6>
+                        <input class="tpago form form-control" type="text" onkeypress="return check(event)" placeholder="" autocomplete="off"><br>
                         </div>
-                    <button type="button" class="babonar btn btn-danger btn-large btn-block">Abonar</button>
+                    <button type="button" class="babonar btn btn-dark text-danger font-weight-bold btn-large btn-block">Abonar</button>
                 </div>
             </div>
         </div>
@@ -76,12 +78,12 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
-                <table class="table table-hover table-striped table-dark">
+                <table class="table table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center d-none" onclick="sortTable(0)">id</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">Deuda $</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">Anticipo $</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Deuda</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Anticipo</th>
                             <th class="text-nowrap text-center" onclick="sortTable(4)">Estado</th>
                             <th class="text-nowrap text-center" onclick="sortTable(5)">Cliente</th>
                             <th class="text-nowrap text-center" onclick="sortTable(6)">Venta</th>

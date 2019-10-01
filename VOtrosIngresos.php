@@ -1,14 +1,15 @@
 <?php
-session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
-} elseif ($_SESSION['estado'] == "I") {
+} else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] == "CEOAB" || $_SESSION['acceso'] == "ManagerAB"
-    || $_SESSION['acceso'] == "CEO"
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
 ) {
     header('location: index.php');
 }
@@ -23,7 +24,8 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -41,7 +43,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -54,8 +56,8 @@ if (!isset($_SESSION['acceso'])) {
                     <form class="form-group" id="formotrosingresos">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="importante">Cantidad $ :</h5>
-                                <input id="can" name="TCantidad" class="form form-control" onkeypress="return check(event)" type="text" placeholder="Ingrese la cantidad $" autocomplete="off">
+                                <h5 class="importante">Cantidad:</h5>
+                                <input id="can" name="TCantidad" class="form form-control" onkeypress="return check(event)" type="text" placeholder="" autocomplete="off">
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Tipo :</h5>
@@ -80,16 +82,17 @@ if (!isset($_SESSION['acceso'])) {
                                 <h5 class="general">Fecha :</h5>
                                 <input class="form-control" id="fecha" type="date" name="DFecha" >
                             </div>
-                            
-                            <div class="d-block col-lg-6">
-                                    <h5 class="general">Estatus:</h5>
-                                        <select class="form form-control" id="voestado">
-                                            <option value="A">Activo</option>
-                                            <option value="I">Inactivo</option>
-                                        </select>  
-                                </div>
                         </div>
-                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="" value="Guardar">
+                        <div class="row">
+                            <div class="col-12">
+                                <h5 class="general">Estatus:</h5>
+                                <select class="form form-control" id="voestado">
+                                    <option value="A">Activo</option>
+                                    <option value="I">Inactivo</option>
+                                </select>  
+                            </div>
+                        </div>
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-dark text-primary" name="" value="Guardar">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -109,10 +112,10 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                    <button class="d-none d-lg-flex btn btn-success ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                       <div class="contenedorTabla table-responsive">
-                          <table class="scroll table table-hover table-striped table-dark">
+                          <table class="scroll table table-hover table-striped table-light">
                               <thead class="thead-dark">
                                   <tr class="encabezados">
                                       <th class="text-nowrap text-center" onclick="sortTable(0)">Id</th>
@@ -133,9 +136,8 @@ if (!isset($_SESSION['acceso'])) {
             </div>
         </div>
   </div>
-
     <script src="js/user_jquery.js"></script>
-    <script src="js/otrosingresos.js"></script>
+    <script src="js/otrosIngresos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

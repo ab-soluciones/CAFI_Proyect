@@ -2,6 +2,15 @@
 session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+} else if (
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+) {
+    header('location: index.php');
+}
 if (isset($_POST['search'])) {
     $busqueda = $_POST['search'];
     $con = new Models\Conexion();

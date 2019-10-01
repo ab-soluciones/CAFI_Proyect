@@ -19,8 +19,7 @@ $(document).ready(function(){
                 datos.forEach(datos => {
                     efectivo = datos.efectivo;
                     banco = datos.banco;
-                    console.log(efectivo);
-                    console.log(banco);
+ 
                     template +=`
                     <td>${datos.efectivo}</td>
                     <td>${datos.banco}</td>
@@ -62,8 +61,8 @@ $(document).ready(function(){
                     <td>${datos.nombre}</td>
                     <th style="width:100px;">
                     <div class="row">
-                        <a data-toggle="modal" data-target="#modalForm2" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                            <img src="img/edit.png">
+                        <a data-toggle="modal" data-target="#modalForm2" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                            Editar
                         </a>
                     </div>
                 </th>

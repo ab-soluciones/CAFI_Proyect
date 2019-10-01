@@ -54,7 +54,10 @@ $(document).ready(function () {
                                 formapago: formapago
                             };
                             $.post('post-guardar.php', postData, function (response) {
-                             
+                                
+                                if(response === "Exitoprinter"){
+                                    window.open('ticketAbono.php');
+                                  }
                              if (response) {
                                     var explode = function () {
                                         swal({
@@ -120,7 +123,10 @@ $(document).ready(function () {
                 };
            
                 $.post('post-guardar.php', postData, function (response) {
-                 
+                    
+                    if(response === "Exitoprinter"){
+                        window.open('ticketAbono.php');
+                      }
                   if (response) {
                         var explode = function () {
                             swal({

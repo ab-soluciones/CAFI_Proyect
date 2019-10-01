@@ -2,11 +2,15 @@
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
-date_default_timezone_set("America/Mexico_City");
-$año = date("Y");
-$mes = date("m");
-$dia = date("d");
-$fecha = $año . "-" . $mes . "-" . $dia;
+if (!isset($_SESSION['acceso'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+} else if (
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+) {
+    header('location: index.php');
+}
 $negocio = $_SESSION['idnegocio'];
 $con = new Models\Conexion();
 $query = "SELECT idretiro,concepto,tipo,cantidad,descripcion,fecha,hora,retiros.estado,nombre,apaterno FROM retiros INNER JOIN trabajador ON retiros.trabajador_idtrabajador=trabajador.idtrabajador

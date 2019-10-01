@@ -2,6 +2,15 @@
 session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+if (!isset($_SESSION['acceso'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+} else if (
+    $_SESSION['acceso'] != "Manager" 
+) {
+    header('location: index.php');
+}
 $negocio = $_SESSION['idnegocio'];
 $con = new Models\Conexion();
 $query = "SELECT * FROM cliente WHERE negocios_idnegocios ='$negocio' ORDER BY idcliente DESC";

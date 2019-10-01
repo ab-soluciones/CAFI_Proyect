@@ -17,7 +17,8 @@ $(document).ready(function () {
 
   //terminar la venta
   $(document).on('click', '.bvender', function () {
-    if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1) {
+    //pago efectivo
+    if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1 && forma_pago === "Efectivo") {
       valor = $('.tpago').val();
       pago = valor = parseFloat(valor);
       if (valor < totalglobal) {
@@ -56,7 +57,9 @@ $(document).ready(function () {
               formapago: forma_pago
             };
             $.post('post-guardar.php', postData, function (response) {
-              console.log(response);
+              if(response === "Exitoprinter"){
+                window.open('ticketVenta.php');
+              }
               if (response) {
                 var explode = function () {
                   swal({
@@ -64,11 +67,11 @@ $(document).ready(function () {
                     text: 'Venta realizada exitosamente',
                     type: 'success'
                   },
-                    function (isConfirm) {
-                      if (isConfirm) {
-                        location.reload();
-                      }
-                    });
+                  function (isConfirm) {
+                    if (isConfirm) {
+                      location.reload();
+                    }
+                  });
                 };
                 setTimeout(explode, 200);
               } else {
@@ -89,7 +92,8 @@ $(document).ready(function () {
             });
           });
       }
-    } else if ($('.tpago').val().length > 0 && $('.tanticipo').val().length > 0) {
+      //pago a credito
+    } else if ($('.tpago').val().length > 0 && $('.tanticipo').val().length > 0 && forma_pago === "Crédito") {
       valor = $('.tpago').val();
       pago = valor = parseFloat(valor);
       anticipo = parseFloat($('.tanticipo').val());
@@ -122,6 +126,9 @@ $(document).ready(function () {
                 formapago: forma_pago
               };
               $.post('post-guardar.php', postData, function (response) {
+                if(response === "Exitoprinter"){
+                  window.open('ticketVenta.php');
+                }
                 if (response) {
                   var explode = function () {
                     swal({
@@ -129,11 +136,11 @@ $(document).ready(function () {
                       text: 'Venta realizada exitosamente',
                       type: 'success'
                     },
-                      function (isConfirm) {
-                        if (isConfirm) {
-                          location.reload();
-                        }
-                      });
+                    function (isConfirm) {
+                      if (isConfirm) {
+                        location.reload();
+                      }
+                    });
                   };
                   setTimeout(explode, 200);
                 } else {
@@ -167,7 +174,8 @@ $(document).ready(function () {
         });
       }
 
-    } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1) {
+    } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1 && forma_pago === "Tarjeta") {
+   //pago con tarjeta
       if (totalglobal) {
         const postData = {
           total: totalglobal,
@@ -175,6 +183,9 @@ $(document).ready(function () {
           formapago: forma_pago
         };
         $.post('post-guardar.php', postData, function (response) {
+          if(response === "Exitoprinter"){
+            window.open('ticketVenta.php');
+          }
           if (response) {
             var explode = function () {
               swal({
@@ -394,7 +405,7 @@ $(document).ready(function () {
         $('#renglones').html(template);
         totalglobal = total;
         template = `
-              <h5>Total: ${total}</h5>`;
+              <h5>Total: $${total}</h5>`;
         $('#divtotal').html(template);
       }
 
@@ -414,17 +425,19 @@ $(document).ready(function () {
           let template = '';
           datos.forEach(datos => {
             template += `<tr>
-                        <td class="datos font-weight-bold">${datos.codigo_barras}</td>
-                        <td><img src="${datos.imagen}" height="50" width="50" /></td>
-                        <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
-                        <td class="datos">${datos.existencia}</td>
-                        <td class="datos">${datos.precio}</td>
-                        <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
-                        <td> <div class="row">
-                        <a class="bagregardv btn btn-secondary" href="#">
-                            <img src="img/carrito.png">
-                        </a>
-                    </div></td>
+                          <td> 
+                            <div class="row">
+                              <a class="bagregardv btn btn-secondary ml-1" href="#">
+                                  <img src="img/carrito.png">
+                              </a>
+                            </div>
+                          </td>
+                          <td><img src="${datos.imagen}" height="50" width="50" /></td>
+                          <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
+                          <td class="datos font-weight-bold">${datos.codigo_barras}</td>
+                          <td class="datos">${datos.existencia}</td>
+                          <td class="datos">${datos.precio}</td>
+                          <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
                         </tr>`;
           });
           datos = "";
@@ -432,7 +445,7 @@ $(document).ready(function () {
 
         }
       });
-    }else{
+    } else {
       template = `<tr>
       </tr>`;
       $('#cuerpo').html(template);
@@ -455,7 +468,7 @@ $(document).ready(function () {
             template += `<tr>
                         <td> <button class="text-nowrap text-center bagregarc btn bg-secondary text-white">ok</button></td>
                         <td class="text-nowrap text-center datoscliente d-none">${datos.idcliente}</td>
-                        <td class="text-centerdatoscliente">${datos.nombre}</td>
+                        <td class="text-center datoscliente">${datos.nombre}</td>
                         <td class="text-nowrap text-center">${datos.telefono}</td>
                         <td class="text-nowrap text-center datoscliente">${datos.estado}</td>
                         <td class="text-nowrap text-center">${datos.adeudos}</td>
@@ -481,9 +494,9 @@ $(document).ready(function () {
     renglon = valores.split("?");
     const postData = {
       idcliente: renglon[0],
-      estcliente: renglon[1],
+      estcliente: renglon[2]
     };
-    console.log(postData);
+   
     $.post('post-guardar.php', postData, function (response) {
 
       if (response === "no agregado a la sesion") {
@@ -520,10 +533,10 @@ $(document).ready(function () {
       precio: result[2],
       cantidad: result[3]
     };
-    console.log(postData);
+    
     $.post('post-guardar.php', postData, function (response) {
       optenerDatosTabla(0);
-      console.log(response);
+     
       if (response === "-1") {
         swal({
           title: 'Alerta',
@@ -534,12 +547,6 @@ $(document).ready(function () {
         swal({
           title: 'Alerta',
           text: 'Compruebe el stock del producto',
-          type: 'warning'
-        });
-      } else if (response === "producto existente") {
-        swal({
-          title: 'Alerta',
-          text: 'Producto existente en la venta, si desea agregar mas modifique la cantidad',
           type: 'warning'
         });
       }

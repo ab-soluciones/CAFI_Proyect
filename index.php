@@ -9,20 +9,22 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/sweetalert.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="icon" href="img/logo/nav1.png">
+  
   <script src="js/sweetalert.js"></script>
   <script src="js/sweetalert.min.js"></script>
   <script src="js/jquery.js"></script>
-
   <script type="text/javascript">
 
   </script>
 </head>
 
-<body id="menu_back">
+<body style="background-color: white;">
   <div class="container text-center">
 
     <div id="index_logo" class="row d-block">
-      <img src="img/logo/1.png" alt="" id="logo" class="animaLogo">
+      <img src="img/logo/2.png" alt="" id="logo" class="animaLogo">
       <div>
 
         <div id="index_form" class="card card-body row d-block col-md-4">
@@ -37,6 +39,7 @@
       </div>
       <script src="js/index.js"></script>
 </body>
+
 </html>
 <?php
 
@@ -45,13 +48,46 @@
 las partes de los CRUD en donde se hagan procedimientos diferentes.. El CRUD Comentado es el CRUD de trabajador*/
 
 session_start();
+// Generate token
 
-//se inicializa las variables globales
-$_SESSION['idven'] = null;
-$_SESSION['comboID'] = null;
+date_default_timezone_set("America/Mexico_City");
+function getDateTime()
+{
+  $año = date("Y");
+  $mes = date("m");
+  $dia = date("d");
+  $fecha = $año . "-" . $mes . "-" . $dia;
+  $hora = date("H");
+  $minuto = date("i");
+  $segundo = date("s");
+  $hora = $hora . ":" . $minuto . ":" . $segundo;
+
+  return  $fecha . " " . $hora;
+}
+
+function getToken($length)
+{
+  $token = "";
+  $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  $codeAlphabet .= "abcdefghijklmnopqrstuvwxyz";
+  $codeAlphabet .= "0123456789";
+  $max = strlen($codeAlphabet); // edited
+
+  for ($i = 0; $i < $length; $i++) {
+    $token .= $codeAlphabet[random_int(0, $max - 1)];
+  }
+
+  return $token;
+}
+
+
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 if (isset($_SESSION['acceso']) && strcasecmp($_SESSION['estado'], "A") == 0) {
+  $con = new Models\Conexion();
+  $datetime = getDateTime();
+  $con->consultaSimple("UPDATE sesiones SET fin = '$datetime' WHERE usuario='$_SESSION[login]'");
+  $con->cerrarConexion();
   session_unset();
   session_destroy();
   header('location: index.php');
@@ -81,16 +117,16 @@ function comprobar()
 
   } else if (
     strcasecmp($_SESSION['acceso'], "CEOAB") == 0 && strcasecmp($_SESSION['estado'], "A" == 0)
-   
+
   ) {
 
     //si el rol pertenece a los usuariosab se les redirige a su pagina de opciones
 
     header('Location: VUsuarios_ab.php');
-  }else if( strcasecmp($_SESSION['acceso'], "ManagerAB") == 0 && strcasecmp($_SESSION['estado'], "A" == 0)){
+  } else if (strcasecmp($_SESSION['acceso'], "ManagerAB") == 0 && strcasecmp($_SESSION['estado'], "A" == 0)) {
 
     header('Location: VClienteab.php');
-  }else if (isset($_SESSION['acceso']) && strcasecmp($_SESSION['estado'], "I") == 0) {
+  } else if (isset($_SESSION['acceso']) && strcasecmp($_SESSION['estado'], "I") == 0) {
     ?>
     <script>
       swal({
@@ -116,7 +152,6 @@ function comprobar()
 
     $comprobar = new Models\Comprobar();
     $comprobar->comprobarFv();
-    $comprobar->eliminarVentasNull();
 
     /*Ejecucion de la funcion comprobar de la clase Comprobar.. su tarea es cambiar a estado inactivo
    la cuenta del dueño del negocio y las cuentas de todos los trabajadores pertenecientes a dicho negocio
@@ -129,9 +164,9 @@ function comprobar()
 
     //Consultas para comprobar si existe una cuenta con el nombre de usuario y contraseña optenida.
 
-    $query = "SELECT acceso,estado,idusuariosab FROM usuariosab WHERE login= '$nombre' AND password='$password'";
-    $query2 = "SELECT acceso,estado,negocios_idnegocios,idtrabajador FROM trabajador WHERE login= '$nombre' AND password='$password'";
-    $query3 = "SELECT acceso,estado,id_clienteab FROM clientesab WHERE login = '$nombre' AND password ='$password'";
+    $query = "SELECT login,acceso,estado,idusuariosab FROM usuariosab WHERE  BINARY login= '$nombre' AND  BINARY  password='$password'";
+    $query2 = "SELECT login,acceso,estado,negocios_idnegocios,idtrabajador FROM trabajador WHERE  BINARY  login= '$nombre' AND  BINARY password='$password'";
+    $query3 = "SELECT acceso,estado,id_clienteab,login FROM clientesab WHERE login = '$nombre' AND password ='$password'";
     $datos1 = $con->consultaRetorno($query);
     $datos2 = $con->consultaRetorno($query2);
     $datos3 = $con->consultaRetorno($query3);
@@ -141,12 +176,34 @@ function comprobar()
     $con->cerrarConexion();
 
     if (isset($datos1)) {
-
       //si existe una cuenta en la tabla usuariosab se guarda en la variable sesion el rol de la cuenta el estado y su id
 
+      //se inicializa las variables globales
+      $_SESSION['comboID'] = null;
+      $_SESSION['idven'] = null;
+
+      $_SESSION['login'] = $datos1['login'];
       $_SESSION['acceso'] = $datos1['acceso'];
       $_SESSION['estado'] = $datos1['estado'];
       $_SESSION['id'] = $datos1['idusuariosab'];
+
+
+      $token = getToken(10);
+      $_SESSION['token'] = $token;
+      $datetime = getDateTime();
+
+      // Update user token 
+      $con = new Models\Conexion();
+      $result_token = $con->consultaRetorno("SELECT id FROM sesiones WHERE usuario='$_SESSION[login]'");
+
+      if (isset($result_token['id'])) {
+        $con->consultaSimple("UPDATE sesiones SET token='$token', inicio = '$datetime' WHERE usuario='$_SESSION[login]'");
+      } else {
+        $con->consultaSimple("INSERT INTO sesiones(usuario,token,inicio) VALUES('$_SESSION[login]','$token','$datetime')");
+      }
+
+      $con->cerrarConexion();
+
       comprobar();
 
       /*esta funcion comprueba el rol/acceso de la cuenta para mandar al usuario al apartado correspodiente
@@ -157,19 +214,55 @@ function comprobar()
 
       //si existe una cuenta en la tabla trabajador se guarda en la variable sesion el rol de la cuenta, el estado, su id y a que negocio pertenece
 
+      //se inicializa las variables globales
+      $_SESSION['comboID'] = null;
+      $_SESSION['idven'] = null;
+      $_SESSION['login'] = $datos2['login'];
       $_SESSION['acceso'] = $datos2['acceso'];
       $_SESSION['estado'] = $datos2['estado'];
       $_SESSION['idnegocio'] = $datos2['negocios_idnegocios'];
       $_SESSION['id'] = $datos2['idtrabajador'];
+
+      $token = getToken(10);
+      $_SESSION['token'] = $token;
+      $datetime = getDateTime();
+
+      // Update user token 
+      $con = new Models\Conexion();
+      $result_token = $con->consultaRetorno("SELECT id FROM sesiones WHERE usuario='$_SESSION[login]'");
+
+      if (isset($result_token['id'])) {
+        $con->consultaSimple("UPDATE sesiones SET token='$token',inicio = '$datetime' WHERE usuario='$_SESSION[login]'");
+      } else {
+        $con->consultaSimple("INSERT INTO sesiones(usuario,token,inicio) VALUES('$_SESSION[login]','$token','$datetime')");
+      }
+      $con->cerrarConexion();
+
       comprobar();
     } else if (isset($datos3)) {
-
+      //se inicializa las variables globales
+      $_SESSION['comboID'] = null;
+      $_SESSION['login'] = $datos3['login'];
       $_SESSION['acceso'] = $datos3['acceso'];
       $_SESSION['estado'] = $datos3['estado'];
       $_SESSION['id'] = $datos3['id_clienteab'];
       $_SESSION['idnegocio'] = null;
 
-      //se almacena en la variable sesion los datos del usuario
+      $token = getToken(10);
+      $_SESSION['token'] = $token;
+      $datetime = getDateTime();
+      // Update user token 
+      $con = new Models\Conexion();
+      $result_token = $con->consultaRetorno("SELECT id FROM sesiones WHERE usuario='$_SESSION[login]'");
+
+      if (isset($result_token['id'])) {
+        $con->consultaSimple("UPDATE sesiones SET token='$token', inicio = '$datetime' WHERE usuario='$_SESSION[login]'");
+      } else {
+        $con->consultaSimple("INSERT INTO sesiones(usuario,token,inicio) VALUES('$_SESSION[login]','$token','$datetime')");
+      }
+
+      $con->cerrarConexion();
+
       comprobar();
     } else {
       ?>
@@ -199,5 +292,7 @@ if (isset($_GET['cerrar_sesion'])) {
 
   //se destruye la sesion al dar click en los botones de salir
 }
+
+
 
 ?>

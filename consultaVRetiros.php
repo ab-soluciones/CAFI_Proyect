@@ -3,7 +3,15 @@ require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
 //se optienen las cantidades que hay en banco y en efectivo
-
+if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+} else if (
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+) {
+    header('location: index.php');
+}
 $con = new Models\Conexion();
 $negocio = $_SESSION['idnegocio'];
 
@@ -22,12 +30,12 @@ while ($renglon = mysqli_fetch_array($result)) {
     }
 }
 $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos INNER JOIN venta ON adeudos.ventas_idventas=venta.idventas
-WHERE negocios_idnegocios =' $negocio ' AND estado_deuda = 'A'";
+WHERE negocios_idnegocios =' $negocio ' AND estado_deuda != 'C'";
 $result = $con->consultaRetorno($query);
 $anticipos_efectivo = $result['anticipos'];
 
 $query = "SELECT forma_pago, SUM(cantidad) AS totalabonos FROM abono
-WHERE forma_pago='Efectivo' AND estado='R' AND negocios_idnegocios ='$negocio' GROUP BY forma_pago ";
+WHERE estado='R' AND negocios_idnegocios ='$negocio' GROUP BY forma_pago";
 $result = $con->consultaListar($query);
 
 $abonos_efectivo = 0;
@@ -45,7 +53,7 @@ while ($renglon = mysqli_fetch_array($result)) {
 $ventas_efectivo = $ventas_efectivo + $abonos_efectivo + $anticipos_efectivo;
 $ventas_banco = $ventas_banco +  $abonos_banco;
 
-$query = "SELECT pago, SUM(monto) AS totalgastos  FROM gastos WHERE pago='Efectivo' AND estado='A' AND negocios_idnegocios ='$negocio' GROUP BY pago";
+$query = "SELECT pago, SUM(monto) AS totalgastos  FROM gastos WHERE estado='A' AND negocios_idnegocios ='$negocio' GROUP BY pago";
 $result = $con->consultaListar($query);
 
 $gastos_efectivo = 0;
@@ -63,8 +71,7 @@ while ($renglon = mysqli_fetch_array($result)) {
 }
 $gastos_banco = $gastos_tarjeta + $gastos_transferencia;
 
-$query = "SELECT forma_ingreso, SUM(cantidad) AS oingresos  FROM otros_ingresos WHERE forma_ingreso ='Efectivo'
-AND estado='A' AND negocios_idnegocios ='$negocio' GROUP BY forma_ingreso";
+$query = "SELECT forma_ingreso, SUM(cantidad) AS oingresos  FROM otros_ingresos WHERE estado='A' AND negocios_idnegocios ='$negocio' GROUP BY forma_ingreso";
 $result = $con->consultaListar($query);
 
 $otros_ingresos_efectivo = 0;

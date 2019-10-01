@@ -39,13 +39,13 @@ $(document).ready(function () {
             <td class="text-nowrap text-center">${datos.fecha_vencimiento}</td>
             <td class="text-nowrap text-center">${datos.estado}</td>
             <td class="text-nowrap text-center">${datos.negocio}</td>
+            <td class="text-nowrap text-center">${datos.paquete}</td>
             <td class="text-nowrap text-center">${datos.monto}</td>
             <td class="text-nowrap text-center">${datos.registro}</td>
-            <td class="text-nowrap text-center">${datos.paquete}</td>
             <th class="text-nowrap text-center" style="width:100px;">
                 <div class="row">
-                    <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                        <img src="img/edit.png">
+                    <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                        Editar
                     </a>
                 </div>
             </th>
@@ -63,15 +63,13 @@ $(document).ready(function () {
       fecha1: $('#fecha1').val(),
       fecha2: $('#fecha2').val(),
       estado: $('#estado').val(),
+      paquete: $('#spaquete').val(),
       monto: $('#monto').val(),
-      negocio: $('#innegocio').val(),
-      suscrip: $('#sus').val()
+      negocio: $('#innegocio').val()
     };
-    console.log(postData);
 
     let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
     $.post(url, postData, function (response) {
-      console.log(response);
       $('#formulario').trigger('reset');
       editar = false;
       if (response == "1") {
@@ -101,12 +99,12 @@ $(document).ready(function () {
       valores += $(this).html() + "?";
     });
     datos = valores.split("?");
-
     idsuscripcion = datos[0];
     $('#fecha1').val(datos[1]);
     $('#fecha2').val(datos[2]);
     $('#estado').val(datos[3]);
-    $('#monto').val(datos[5]);
+    $('#spaquete').val(datos[5]);
+    $('#monto').val(datos[6]);
     editar = true;
 
   })

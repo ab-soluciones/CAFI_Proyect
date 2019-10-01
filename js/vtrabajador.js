@@ -34,8 +34,8 @@ $(document).ready(function(){
                     <td class="text-nowrap text-center">${datos.estado}</td>
                     <th style="width:100px;">
                         <div class="row">
-                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>`;
@@ -58,7 +58,6 @@ $(document).ready(function(){
     });
 
     $('.sucursal').click(function(){
-        console.log($('.sucursal').val());
         idSesion($(this).val());
     });
 
@@ -96,7 +95,7 @@ $(document).ready(function(){
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
 
         $.post(url,postData, function (response) {
-            console.log(response);
+           
             $('#formclienteab').trigger('reset');
             idSesion($('#agregarloa').val());
             editar = false;
@@ -134,7 +133,6 @@ $(document).ready(function(){
             valores += $(this).html() + "?";
         });
         datos = valores.split("?");
-       console.log(datos);
         idtrabajador = datos[0];
         $('#nombre').val(datos[1]);
         $('#apt').val(datos[2]);

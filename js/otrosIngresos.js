@@ -43,7 +43,7 @@ $(document).ready(function (){
     });
 
     $('#formotrosingresos').submit(function(e){
-
+        
         const postData = {
             id: idotrosIngresos,
             cantidad: $('#can').val(),
@@ -52,16 +52,18 @@ $(document).ready(function (){
             fecha: $('#fecha').val(),
             estatus: $('#voestado').val(),
         };
-        console.log(postData);
+        
+        
 
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         
         $.ajax({
             url: url,
-            type: 'post',
+            type: 'POST',
             data: postData,
 
             success: function(response) {
+                
            $('#formotrosingresos').trigger('reset');
            obtenerDatosTablaOtrosIngresos();
            editar = false;

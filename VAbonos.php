@@ -2,13 +2,14 @@
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] == "CEO" || $_SESSION['acceso'] == "ManagerAB"
-    || $_SESSION['acceso'] == "CEOAB"
+    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
 ) {
     header('location: index.php');
 }
@@ -24,7 +25,8 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -43,7 +45,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -69,7 +71,7 @@ if (!isset($_SESSION['acceso'])) {
                             <input type="hidden" id="estadoActual">
                         </div>
 
-                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-primary" name="submit" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn btn-lg btn-block btn-dark text-primary" name="submit" value="Guardar">
                     </form>
                     <div id="tableHolder">
                     </div>
@@ -87,14 +89,13 @@ if (!isset($_SESSION['acceso'])) {
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
             <div class="contenedorTabla table-responsive">
-                <table class="table table-bordered table-hover table-striped table-dark">
+                <table class="table table-bordered table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <tr class="encabezados">
-                            
                             <th class="text-nowrap text-center" onclick="sortTable(0)">Estado</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(1)">$ Cantidad</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(2)">$ Pago</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">$ Cambio</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(1)">Cantidad</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(2)">Pago</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Cambio</th>
                             <th class="text-nowrap text-center" onclick="sortTable(4)">Fecha</th>
                             <th class="text-nowrap text-center" onclick="sortTable(5)">Hora</th>
                             <th class="text-nowrap text-center" onclick="sortTable(6)">Cliente</th>

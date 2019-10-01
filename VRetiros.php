@@ -1,5 +1,9 @@
 <?php
+require_once "Config/Autoload.php";
+Config\Autoload::run();
 session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
@@ -20,7 +24,8 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
@@ -40,7 +45,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -53,11 +58,11 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <form class="form-group" id="formuventas">
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Cantidad:</label></h5>
-                                <input name="TCantidad" id="cant" onkeypress="return check(event)" class="form form-control" type="text" autocomplete="off" placeholder="Ingrese la cantidad">
+                                <h5 class="general">Cantidad:</h5>
+                                <input style="" name="TCantidad" id="cant" onkeypress="return check(event)" class="form form-control bg-light" type="text" autocomplete="off" placeholder="Ingrese la cantidad">
                             </div>
                             <div class="col-lg-6">
-                                <h5><label for="de" class="badge badge-ligh">De:</label></h5>
+                                <h5 class="general">Desde:</h5>
                                 <select id="de" class="form form-control" name="STipo">
                                     <option></option>
                                     <option value="Caja">Caja</option>
@@ -67,7 +72,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5><label for="concepto" class="badge badge-ligh">Concepto:</label></h5>
+                                <h5 class="general">Concepto:</h5>
                                 <select id="concepto" class="form form-control" name="SConcepto">
                                     <option></option>
                                     <option value="Retiro">Retiro</option>
@@ -76,15 +81,15 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Descripcion:</h5>
-                                <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
+                                <textarea id="desc" name="TADescription" rows="2" class="form-control bg-light" placeholder="Agregue su descripcion"></textarea>
                             </div>
                         </div>
-                        <button type="submit" style="color: #005ce6;" class="mt-3 btn btn-dark btn-lg btn-block bclose">
-                            <h6>Retirar</h6><img src="img/retiro.png">
+                        <button type="submit" style="" class="mt-3 btn btn-lg btn-block bclose btn-dark text-primary">
+                            <h6>Retirar</h6>
                         </button>
                     </form>
-                    <div id="tableHolder" class="row justify-content-center">
-                        <table class="col-12 table table-hover table-responsive">
+                    <div class="contenedorTabla table-responsive">
+                        <table class="scroll table table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th>Saldo en caja</th>
@@ -106,7 +111,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -126,7 +131,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" style="color: white" class="mt-3 btn btn-dark btn-lg btn-block bclose">
+                        <button type="submit" style="color:#E65C00;" class="mt-3 btn btn-dark btn-lg btn-block bclose">
                             <h6>Modificar</h6>
                         </button>
                     </form>
@@ -152,7 +157,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         <button class="d-none d-lg-flex btn btn-danger ml-3 bclose" data-toggle="modal" data-target="#modalForm">Retirar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">
-                        <table class="scroll table table-hover table-striped table-dark">
+                        <table class="scroll table table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th onclick="sortTable(0)">Id</th>
@@ -166,7 +171,9 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                                     <th onclick="sortTable(8)">Retiró</th>
                                     <th onclick="sortTable(9)">Tarea</th>
                                 </tr>
-                            <tbody id="cuerpo"></tbody>
+                            <tbody id="cuerpo">
+                            
+                            </tbody>
                         </table>
                     </div>
                 </div>

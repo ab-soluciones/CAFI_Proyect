@@ -15,7 +15,7 @@ $(document).ready(function(){
             success: function(response){
                 let datos = JSON.parse(response);
                 let template = '';
-                console.log(datos);
+                
                 datos.forEach(datos => {
 
                     template += `
@@ -36,8 +36,8 @@ $(document).ready(function(){
                     if(datos.idNegocio == $('.sucursal').val()){
                         template += `<th style="width:100px;">
                         <div class="row">
-                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>
@@ -45,8 +45,8 @@ $(document).ready(function(){
                     }else{
                         template +=`<th style="width:100px;">
                         <div class="row">
-                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <button data-toggle="modal" disabled="false" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </button>
                         </div>
                     </th>
@@ -66,10 +66,10 @@ $(document).ready(function(){
             type: 'GET',
 
             success: function(response){
-                console.log('entro');
+                
                 let datos = JSON.parse(response);
                 let template2 = '';
-                console.log(datos);
+                
                 datos.forEach(datos => {
                     template2 += `
                     <option value="${datos.nombre +" "+ datos.marca + " color " + datos.color + " talla " + datos.talla_numero}"> 
@@ -119,7 +119,7 @@ $(document).ready(function(){
                         $('#inventario').trigger('reset');
                         $('.divCantidad').hide();
                         obtenerInventario();
-                        console.log("Esto es la respuesta: "+response);
+                       
                         if (response === "1") {
                             swal({
                                 title: 'Exito',
@@ -186,7 +186,7 @@ $(document).ready(function(){
     $('#inventario').submit(function(e){
     
         var formData = new FormData(this);
-        console.log(formData);
+        
 
         $("#imagen").remove();
                 $.ajax({
@@ -201,7 +201,7 @@ $(document).ready(function(){
                         $('#inventario').trigger('reset');
                         obtenerDatosTablaProducto();
                         obtenerInventario();
-                        console.log("Esto es la respuesta: "+response);
+                        
                         if (response === "1") {
                             swal({
                                 title: 'Exito',
@@ -248,18 +248,19 @@ $(document).ready(function(){
     $(document).on('click', '.beditar', function () {
         var valores = "";
         var valores2 = "";
-        $('.divCantidad').show();       
+        $('.divCantidad').show();
+        $('#imagenmostrar').hide();
+        $('.rowMostrar').show();
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
         $(this).parents("tr").find("td").each(function () {
             valores += $(this).html() + "?";
         });
         
-        console.log("Esto es el img "+valores2)
+        
 
         datos = valores.split("?");
         $('#nav-Producto-tab').click();
-        console.log(datos);
         $('.row1').css("display","none");
         $('#cb').val(datos[0]);
         $('#nombre').val(datos[1]);
@@ -293,6 +294,9 @@ $(document).ready(function(){
         $('#nav-Inventario-tab').show();
         $('.divCantidad').hide();
         $('#nav-Producto-tab').click();
+        $('.divCantidad').show();
+        $('#imagenmostrar').show();
+        $('.rowMostrar').hide();
     });
 
 });

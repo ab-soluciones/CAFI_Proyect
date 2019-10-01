@@ -1,6 +1,12 @@
 <?php
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+session_start();
+if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
+    header('location: index.php');
+} else if ($_SESSION['estado'] == "I") {
+    header('location: index.php');
+}
 
 if(isset($_POST['username'])){
 $con = new Models\Conexion();
@@ -12,12 +18,12 @@ $username = $_POST['username'];
  if(mysqli_num_rows($result) > 0)
  {
   // username is already exist 
-  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario no esta disponible! </div>';
+  echo '<div style="color: red;">Nombre de usuario no disponible</div>';
  }
  else
  {
   // username is avaialable to use.
-  echo '<div style="color: green;"> <b>'.$username.'</b> Usuario disponible! </div>';
+  echo '<div style="color: green;">Nombre de usuario disponible</div>';
  }
 }
 
@@ -31,12 +37,12 @@ if(isset($_POST['username2'])){
  if(mysqli_num_rows($result) > 0)
  {
   // username is already exist 
-  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario no esta disponible! </div>';
+  echo '<div style="color: red;">Nombre de usuario no disponible</div>';
  }
  else
  {
   // username is avaialable to use.
-  echo '<div style="color: green;"> <b>'.$username.'</b> Usuario disponible! </div>';
+  echo '<div style="color: green;">Nombre de usuario disponible</div>';
  }
 }
 
@@ -50,12 +56,12 @@ if(isset($_POST['username3'])){
  if(mysqli_num_rows($result) > 0)
  {
   // username is already exist 
-  echo '<div style="color: red;"> <b>'.$username.'</b> Este usuario no esta disponible! </div>';
+  echo '<div style="color: red;">Nombre de usuario no disponible</div>';
  }
  else
  {
   // username is avaialable to use.
-  echo '<div style="color: green;"> <b>'.$username.'</b> Usuario disponible! </div>';
+  echo '<div style="color: green;">Nombre de usuario disponible</div>';
  }
 }
 ?>

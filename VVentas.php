@@ -1,8 +1,9 @@
 <?php
 require_once "Config/Autoload.php";
 Config\Autoload::run();
-$con = new Models\Conexion();
 session_start();
+include "check_token.php";
+
 $_SESSION['clienteid'] = null;
 if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     header('location: index.php');
@@ -27,23 +28,23 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
-
+    <link rel="icon" href="img/logo/nav1.png">
     <title>Ventas</title>
 </head>
 
 <body>
     <?php
     $sel = "venta";
-    include("Navbar.php")
+    include("Navbar.php");
     ?>
     <div class="contenedor container-fluid">
         <div class="row">
-            <div class="col-5 p-3">
-                <h3 class="text-center bg-dark text-white mb-3">Venta</h3>
+            <div class="col-12 col-lg-5 p-3 order-2 order-lg-1">
+                <h3 style="background-color: #262626;" class="text-center text-white mb-3">Venta</h3>
                 <div class="contenedorTabla table-wrapper">
                     <div class="table-responsive">
-                        <table class="table table-hover table-striped table-dark">
-                            <thead class="thead-dark">
+                        <table class="scroll table table-hover table-striped table-light">
+                            <thead class="bg-dark text-white">
                                 <tr>
                                     <th class="text-nowrap text-center"></th>
                                     <th class="text-nowrap text-center d-none">Codigo</th>
@@ -59,34 +60,34 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </table>
                     </div>
                 </div>
-                <div id="divtotal" style="background:  #3366ff;" class="text-white text-right font-weight-bold p-1">
+                <div id="divtotal" style="background:  #262626;" class="text-white text-right font-weight-bold p-1 col-12">
                 </div>
                 <div class="d-block d-lg-flex mt-4 justify-content-center">
-                    <button value="Efectivo" class="col-12 col-lg-4 m-1 bpago1 btn btn-dark text-white" type="button">Pago en efectivo</button>
-                    <button value="Crédito" class="col-12 col-lg-4 m-1 bpago2 btn btn-dark text-white" type="button">Pago a crédito</button>
-                    <button value="Tarjeta" class="col-12 col-lg-4 m-1 bpago3 btn btn-dark text-white" type="button">Pago con tarjeta</button>
+                    <button value="Efectivo" class="col-12 col-lg-4 m-1 bpago1 btn btn-primary text-white" type="button">Pago en efectivo</button>
+                    <button value="Crédito" class="col-12 col-lg-4 m-1 bpago2 btn btn-primary text-white" type="button">Pago a crédito</button>
+                    <button value="Tarjeta" class="col-12 col-lg-4 m-1 bpago3 btn btn-primary text-white" type="button">Pago con tarjeta</button>
                 </div>
             </div>
-            <div class="col-7 p-3">
-                <h3 class="text-center bg-dark text-white mb-3">Busqueda de Producto</h3>
+            <div class="col-12 col-lg-7 p-3 order-1 order-lg-2">
+                <h3 style="background-color: #262626;" class="text-center text-white mb-3">Busqueda de Producto</h3>
                 <div class="input-group mb-2">
-                    <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <!-- <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button> -->
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input autofocus style="color: white; border-color: gray;" onkeypress="return check(event)" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedap" autocomplete="off"  placeholder="Buscar Producto...">
+                    <input autofocus onkeypress="return check(event)" class="form-control col-12 col-lg-4" type="search" id="busquedap" autocomplete="off" placeholder="Buscar Producto...">
                 </div>
-                <div class="contenedorTabla table-responsive" style="display: table; height: 200px;">
-                    <table class="table table-hover table-striped table-dark">
+                <div class="contenedorTabla table-responsive table-wrapper-productos">
+                    <table class="table table-hover table-striped table-light">
                         <thead class="thead-dark">
                             <tr class="encabezados">
-                                <th class="text-nowrap text-center bg-primary">Codigo</th>
+                                <th class="text-nowrap text-center"></th>
                                 <th class="text-nowrap text-center">Imagen</th>
                                 <th class="text-nowrap text-center">Producto</th>
+                                <th style="text: orangered;" class="text-nowrap text-center bg-dark">Codigo</th>
                                 <th class="text-nowrap text-center">Existencia</th>
-                                <th style="background-color: orangered;" class="text-nowrap text-center bg-importante">Precio</th>
+                                <th style="text: orangered;" class="text-nowrap text-center bg-dark">Precio</th>
                                 <th class="text-nowrap text-center">Cantidad</th>
-                                <th class="text-nowrap text-center"></th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
@@ -109,19 +110,19 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <div>
                         <td class="text-nowrap text-center" colspan="8">
-                            <h3 style="color: white; text-align: right;" class="hmtotal p-2 font-weight-bold"></h3>
+                            <h3 style="text-align: right;" class="hmtotal p-2 font-weight-bold"></h3>
                         </td>
                     </div>
-                    <div class="divpagotarjeta text-center my-5" style="color:white;">
+                    <div class="divpagotarjeta text-center my-5">
                         <h5>Ingrese la tarjeta en la terminal y cobre el total</h5>
                     </div>
-                    <button class="bdescuento btn btn-block btn-large btn-primary" type="button">Aplicar descuento</button><br>
+                    <button class="bdescuento btn btn-block btn-large btn-dark text-primary" type="button">Aplicar descuento</button><br>
                     <div id="divdescuento">
-                        <h6 style="color: white;">Descuento:</h6>
+                        <h6>Descuento:</h6>
                         <input class="indescuento form form-control" onkeypress="return check(event)" type="text" placeholder="Ingrese el descuento" autocomplete="off"><br>
                         <button type="button" class="bporcentaje btn btn-dark btn-lg">%</button>
                         <button type="button" class="bpesos btn btn-dark btn-lg">$</button>
@@ -133,10 +134,10 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fa fa-search"></i></div>
                             </div>
-                            <input autocomplete="off"  style="color: white; border-color: gray;" class="form-control col-12 col-lg-4 bg-dark" type="search" id="busquedac" placeholder="Buscar Cliente...">
+                            <input autocomplete="off" class="form-control col-12 col-lg-4" type="search" id="busquedac" placeholder="Buscar Cliente...">
                         </div>
 
-                        <table class="scroll table table-hover table-striped table-dark">
+                        <table class="scroll table table-hover table-striped table-light">
                             <thead>
                                 <tr>
                                     <th class="text-nowrap text-center"></th>
@@ -154,17 +155,17 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
 
                     </div>
 
-
-
                     <div id="divanticipo">
-                        <h6 style="color: white;">Anticipo:</h6>
-                        <input class="tanticipo form form-control" type="text" onkeypress="return check(event)" placeholder="$" autocomplete="off"><br>
+                        <h6>Anticipo:</h6>
+                        <input class="tanticipo form form-control" type="text" onkeypress="return check(event)" placeholder="" autocomplete="off"><br>
                     </div>
                     <div id="divpago" class="mt-4">
-                        <h6 style="color: white;">Cantidad Recibida/Pago:</h6>
-                        <input class="tpago form form-control" type="text" onkeypress="return check(event)" placeholder="$" autocomplete="off"><br>
+                        <h6>Cantidad Recibida/Pago:</h6>
+                        <input class="tpago form form-control" type="text" onkeypress="return check(event)" placeholder="" autocomplete="off"><br>
                     </div>
-                    <button style="background-color: orangered;" type="button" class="bvender btn btn-block text-white font-weight-bold p-3"><h5>Vender</h5></button>
+                    <button style="color: orangered;" type="button" class="bvender btn btn-block bg-dark font-weight-bold p-3">
+                        <h5>Vender</h5>
+                    </button>
 
                 </div>
             </div>
