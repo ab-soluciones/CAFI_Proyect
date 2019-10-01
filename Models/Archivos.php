@@ -63,7 +63,7 @@ class Archivos{
     }
 
     public function diferencia_de_fechas($fecha_inicio,$fecha_fin){
-        //Indice 0 son anos
+        //Indice 0 son años
         //indice 1 Meses
         //Indice 2 Dias
         //Indice 11 = a todos los dias transcurridos
