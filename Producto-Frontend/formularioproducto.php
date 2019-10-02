@@ -3,6 +3,7 @@
         <div class="col-lg-6">
             <h5 class="general">Codigo:</h5>
             <input id="cb" class="form form-control" onkeypress="return codigo(event)" type="text" name="TCodigoB" placeholder="0000000000000" maxlength="13">
+            <input type="button" id="generador" value="Generar Código" class="btn btn-primary">
         </div>
         <div class="col-lg-6">
             <h5 class="general">Nombre:</h5>
