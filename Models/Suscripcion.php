@@ -44,7 +44,6 @@ class Suscripcion
         $result = $this->con->consultaRetorno($query);
         $this->id_negocio = $result['idnegocios'];
     }
-
     public function setPaquete($paquete)
     {
         $this->paquete = $paquete;
