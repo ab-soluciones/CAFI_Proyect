@@ -123,8 +123,8 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formuventas2">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <h5><label style="color:#E65C00;" for="cant" class="badge badge-ligh">Estado:</label></h5>
+                            <div class="col-lg-12">
+                                <h5 class="general">Estado:</label></h5>
                                 <select id="estado" class="form form-control">
                                     <option value="R">Realizado</option>
                                     <option value="C">Cancelado</option>

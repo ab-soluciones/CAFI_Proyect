@@ -42,6 +42,7 @@ $(document).ready(function () {
 
     $('#bclose').click(function(){
         $('.modal').modal('hide');
+        $('#hideedit').show();
     });
 
     $('#formgastos').submit(function(e){
@@ -81,6 +82,8 @@ $(document).ready(function () {
 
     $(document).on('click','.beditar', function(){
         var valores = "";
+        $('#hideedit').hide();
+
         $(this).parents("tr").find("td").each(function () {
             valores += $(this).html() + "?";
         });

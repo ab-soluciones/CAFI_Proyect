@@ -54,33 +54,35 @@ if (!isset($_SESSION['acceso'])) {
                 <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formotrosingresos">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h5 class="importante">Cantidad:</h5>
-                                <input id="can" name="TCantidad" class="form form-control" onkeypress="return check(event)" type="text" placeholder="" autocomplete="off">
+                        <div id="hideedit">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h5 class="importante">Cantidad:</h5>
+                                    <input id="can" name="TCantidad" class="form form-control" onkeypress="return check(event)" type="text" placeholder="" autocomplete="off">
+                                </div>
+                                <div class="col-lg-6">
+                                    <h5 class="general">Tipo :</h5>
+                                    <select id="tipo" name="STipo" id="concepto" class="form form-control" >
+                                        <option></option>
+                                        <option>Dinero a caja</option>
+                                        <option>Capital Externo</option>
+                                        <option>Prestamo</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-lg-6">
-                                <h5 class="general">Tipo :</h5>
-                                <select id="tipo" name="STipo" id="concepto" class="form form-control" >
-                                    <option></option>
-                                    <option>Dinero a caja</option>
-                                    <option>Capital Externo</option>
-                                    <option>Prestamo</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h5 class="general">Forma de Ingreso :</h5>
-                                <select name="SFIngreso" id="fingreso" class="form form-control" >
-                                    <option></option>
-                                    <option>Efectivo</option>
-                                    <option>Banco</option>
-                                </select> <br>
-                            </div>
-                            <div class="col-lg-6">
-                                <h5 class="general">Fecha :</h5>
-                                <input class="form-control" id="fecha" type="date" name="DFecha" >
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <h5 class="general">Forma de Ingreso :</h5>
+                                    <select name="SFIngreso" id="fingreso" class="form form-control" >
+                                        <option></option>
+                                        <option>Efectivo</option>
+                                        <option>Banco</option>
+                                    </select> <br>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h5 class="general">Fecha :</h5>
+                                    <input class="form-control" id="fecha" type="date" name="DFecha" >
+                                </div>
                             </div>
                         </div>
                         <div class="row">

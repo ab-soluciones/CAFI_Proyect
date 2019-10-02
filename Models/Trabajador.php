@@ -139,7 +139,7 @@ class Trabajador
         
         if($estadoActual == 'A'){
             if($paquete['paquete'] == 3){
-                if($limitar['limite'] < 3 ){
+                if($limitar['limite'] <= 3){
                     $sql = "UPDATE trabajador SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
                     ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
                     ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', acceso ='{$this->acceso}'
@@ -149,7 +149,7 @@ class Trabajador
 
 
             }else if($paquete['paquete'] == 2){
-                if($limitar['limite'] < 2){
+                if($limitar['limite'] <= 2){
                     $sql = "UPDATE trabajador SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
                     ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
                     ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', acceso ='{$this->acceso}'
@@ -159,7 +159,7 @@ class Trabajador
 
 
             }else if( $paquete['paquete'] == 1){
-                if($limitar['limite'] < 1){
+                if($limitar['limite'] <= 1){
                     $sql = "UPDATE trabajador SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
                     ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
                     ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', acceso ='{$this->acceso}'
