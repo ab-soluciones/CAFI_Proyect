@@ -42,7 +42,7 @@
     <div class="row">
         <div class="col-12">
             <h5 class="general">Descripcion:</h5>
-            <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
+            <textarea id="desc" name="TADescription" rows="2" onkeypress="return check2(event)" class="form-control" placeholder="Agregue su descripcion"></textarea>
         </div>
     </div>
 

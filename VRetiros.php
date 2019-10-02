@@ -81,7 +81,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             </div>
                             <div class="col-lg-6">
                                 <h5 class="general">Descripcion:</h5>
-                                <textarea id="desc" name="TADescription" rows="2" class="form-control bg-light" placeholder="Agregue su descripcion"></textarea>
+                                <textarea id="desc" name="TADescription" onkeypress="return check2(event)" rows="2" class="form-control bg-light" placeholder="Agregue su descripcion"></textarea>
                             </div>
                         </div>
                         <button type="submit" style="" class="mt-3 btn btn-lg btn-block bclose btn-dark text-primary">
