@@ -94,7 +94,8 @@ if (
     echo $result;
 } else if(isset($_POST['id']) && isset($_POST['fecha1']) && !empty($_POST['fecha1']) && isset($_POST['fecha2']) && !empty($_POST['fecha2'])
 && isset($_POST['estado']) && !empty($_POST['estado']) && isset($_POST['negocio']) && !empty($_POST['negocio'])
-&& isset($_POST['paquete']) && !empty($_POST['paquete']) && isset($_POST['monto'])){
+&& isset($_POST['paquete']) && !empty($_POST['paquete']) && isset($_POST['monto']) && isset($_POST['usextra']))
+{
     $con = new Models\Conexion();
     $sus = new Models\Suscripcion();
     $idusuario = $_SESSION['id'];
@@ -103,6 +104,7 @@ if (
     $sus->setVencimiento($con->eliminar_simbolos($_POST['fecha2']));
     $sus->setEstado($con->eliminar_simbolos($_POST['estado']));
     $sus->setPaquete($con->eliminar_simbolos($_POST['paquete']));
+    $sus->setUsuarioExtra($con->eliminar_simbolos($_POST['usextra']));
     $sus->setMonto($con->eliminar_simbolos($_POST['monto']));
     $sus->setIdNegocio($con->eliminar_simbolos($_POST['negocio']));
     $result = $sus->guardar($idusuario);

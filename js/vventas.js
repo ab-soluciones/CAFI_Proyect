@@ -7,6 +7,7 @@ $(document).ready(function () {
   let totalglobal;
   let codigo;
   let cantidad;
+  filtradoProductos();
   optenerDatosTabla(0);
   //cerrar el modal
   $(document).on('click', '.close', function () {
@@ -57,7 +58,7 @@ $(document).ready(function () {
               formapago: forma_pago
             };
             $.post('post-guardar.php', postData, function (response) {
-              if(response === "Exitoprinter"){
+              if (response === "Exitoprinter") {
                 window.open('ticketVenta.php');
               }
               if (response) {
@@ -67,11 +68,11 @@ $(document).ready(function () {
                     text: 'Venta realizada exitosamente',
                     type: 'success'
                   },
-                  function (isConfirm) {
-                    if (isConfirm) {
-                      location.reload();
-                    }
-                  });
+                    function (isConfirm) {
+                      if (isConfirm) {
+                        location.reload();
+                      }
+                    });
                 };
                 setTimeout(explode, 200);
               } else {
@@ -126,7 +127,7 @@ $(document).ready(function () {
                 formapago: forma_pago
               };
               $.post('post-guardar.php', postData, function (response) {
-                if(response === "Exitoprinter"){
+                if (response === "Exitoprinter") {
                   window.open('ticketVenta.php');
                 }
                 if (response) {
@@ -136,11 +137,11 @@ $(document).ready(function () {
                       text: 'Venta realizada exitosamente',
                       type: 'success'
                     },
-                    function (isConfirm) {
-                      if (isConfirm) {
-                        location.reload();
-                      }
-                    });
+                      function (isConfirm) {
+                        if (isConfirm) {
+                          location.reload();
+                        }
+                      });
                   };
                   setTimeout(explode, 200);
                 } else {
@@ -175,7 +176,7 @@ $(document).ready(function () {
       }
 
     } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1 && forma_pago === "Tarjeta") {
-   //pago con tarjeta
+      //pago con tarjeta
       if (totalglobal) {
         const postData = {
           total: totalglobal,
@@ -183,7 +184,7 @@ $(document).ready(function () {
           formapago: forma_pago
         };
         $.post('post-guardar.php', postData, function (response) {
-          if(response === "Exitoprinter"){
+          if (response === "Exitoprinter") {
             window.open('ticketVenta.php');
           }
           if (response) {
@@ -412,9 +413,7 @@ $(document).ready(function () {
     })
   }
 
-  //filtrado tabla productos
-  $('#busquedap').keyup(function (e) {
-    if ($('#busquedap').val()) {
+  function filtradoProductos() {
       let search = $('#busquedap').val();
       $.ajax({
         url: 'bproductodv.php',
@@ -425,32 +424,33 @@ $(document).ready(function () {
           let template = '';
           datos.forEach(datos => {
             template += `<tr>
-                          <td> 
-                            <div class="row">
-                              <a class="bagregardv btn btn-secondary ml-1" href="#">
-                                  <img src="img/carrito.png">
-                              </a>
-                            </div>
-                          </td>
-                          <td><img src="${datos.imagen}" height="50" width="50" /></td>
-                          <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
-                          <td class="datos font-weight-bold">${datos.codigo_barras}</td>
-                          <td class="datos">${datos.existencia}</td>
-                          <td class="datos">${datos.precio}</td>
-                          <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
-                        </tr>`;
+                        <td> 
+                          <div class="row">
+                            <a class="bagregardv btn btn-secondary ml-1" href="#">
+                                <img src="img/carrito.png">
+                            </a>
+                          </div>
+                        </td>
+                        <td><img src="${datos.imagen}" height="50" width="50" /></td>
+                        <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
+                        <td class="datos font-weight-bold">${datos.codigo_barras}</td>
+                        <td class="datos">${datos.existencia}</td>
+                        <td class="datos">${datos.precio}</td>
+                        <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
+                      </tr>`;
           });
           datos = "";
           $('#cuerpo').html(template);
 
         }
       });
-    } else {
-      template = `<tr>
-      </tr>`;
-      $('#cuerpo').html(template);
-    }
 
+  }
+
+  //filtrado tabla productos
+  $('#busquedap').keyup(function (e) {
+
+    filtradoProductos();
   });
 
   //filtrado tabla clientes
@@ -496,7 +496,7 @@ $(document).ready(function () {
       idcliente: renglon[0],
       estcliente: renglon[2]
     };
-   
+
     $.post('post-guardar.php', postData, function (response) {
 
       if (response === "no agregado a la sesion") {
@@ -533,10 +533,10 @@ $(document).ready(function () {
       precio: result[2],
       cantidad: result[3]
     };
-    
+
     $.post('post-guardar.php', postData, function (response) {
       optenerDatosTabla(0);
-     
+
       if (response === "-1") {
         swal({
           title: 'Alerta',
