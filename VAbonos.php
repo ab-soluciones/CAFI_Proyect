@@ -57,14 +57,13 @@ if (!isset($_SESSION['acceso'])) {
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formabonos">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-12">
                                 <h5 class="general">Estado:</h5>
-
                                 <div class="row" style="margin: 0 auto;">
-                                            <select name="estado" id="estado" class="form form-control">
-                                                <option value="R">Realizado</option>
-                                                <option value="C">Cancelado</option>
-                                            </select>  
+                                    <select name="estado" id="estado" class="form form-control">
+                                        <option value="R">Realizado</option>
+                                        <option value="C">Cancelado</option>
+                                    </select>  
                                 </div>
                             </div>
                             <input type="hidden" id="id" name="id">

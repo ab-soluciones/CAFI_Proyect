@@ -6,16 +6,16 @@
         <div class="collapse navbar-collapse col-10 d-flex justify-content-center align-items-center" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item mx-2 text-center">        
-                    <a style="color: #fe6f00;" class="<?php if($sel === 'venta'){ echo seleccionado; } ?> nav-link" onclick="window.location.href='VVentas.php'" title="Venta"><img src="img/sell.png">Venta</a>
+                    <a style="color: #fe6f00;" class="<?php if($sel === 'venta'){ echo seleccionado; } ?> nav-link" onclick="window.location.href='VVentas.php'" title="Venta"><img src="img/sell1.png">Venta</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'abonos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VAbonos.php'" title="Abonos"><img src="img/abonos-dark.png">Abonos</a>
+                    <a class="<?php if($sel === 'abonos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VAbonos.php'" title="Abonos"><img src="img/abonos-dark1.png">Abonos</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'adeudos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VConsultasAdeudos.php'" title="Adeudos"><img src="img/adeudos-dark.png">Adeudos</a>
+                    <a class="<?php if($sel === 'adeudos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VConsultasAdeudos.php'" title="Adeudos"><img src="img/adeudos-dark1.png">Adeudos</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'gastos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VGastos.php'" title="Gastos"><img src="img/expenses.png">Gastos</a>
+                    <a class="<?php if($sel === 'gastos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VGastos.php'" title="Gastos"><img src="img/expenses1.png">Gastos</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
                     <a class="<?php if($sel === 'retiros'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VRetiros.php'" title="Retiro"><img src="img/atm.png">Retiros</a>
@@ -29,10 +29,10 @@
                         <a class="<?php if($sel === 'clientes'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VClientes.php'" title="Clientes"><img src="img/client.png">Clientes</a>
                     </li>
                     <li class="nav-item mx-2 text-center">
-                        <a class="<?php if($sel === 'inventario'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VInventario.php'" title="Inventario"><img src="img/Inventory-dark.png">Inventario</a>
+                        <a class="<?php if($sel === 'inventario'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VInventario.php'" title="Inventario"><img src="img/Inventory-dark.png">Reporte Inventario</a>
                     </li>
                     <li class="nav-item mx-2 text-center">
-                        <a class="<?php if($sel === 'productos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VProductos.php'" title="Productos"><img src="img/products.png">Productos</a>
+                        <a style="color: #fe6f00;" class="<?php if($sel === 'productos'){ echo seleccionado; } ?> nav-link" onclick="window.location.href='VProductos.php'" title="Productos"><img src="img/products.png">Productos</a>
                     </li>
                 <?php } ?>
                 <li class="nav-item mx-2 text-center">
@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col-4">
                             <li class="nav-item mx-2 text-center">        
-                                <a id="orange" class="<?php if($sel === 'venta'){ echo seleccionado; } ?> nav-link font-weight-bold text-white" onclick="window.location.href='VVentas.php'" title="Venta"><img src="img/sell.png">Vender</a>
+                                <a style="color: #fe6f00;" class="<?php if($sel === 'venta'){ echo seleccionado; } ?> nav-link font-weight-bold" onclick="window.location.href='VVentas.php'" title="Venta"><img src="img/sell.png">Vender</a>
                             </li>
                         </div>
                         <div class="col-4">
@@ -144,12 +144,12 @@
                         </div>
                         <div class="col-4">
                             <li class="nav-item mx-2 text-center">
-                                <a id="orange" class="<?php if($sel === 'inventario'){ echo seleccionado; } ?> nav-link font-weight-bold text-white" onclick="window.location.href='VInventario.php'" title="Inventario"><img src="img/Inventory-dark.png">Inventario</a>
+                                <a id="orange" class="<?php if($sel === 'inventario'){ echo seleccionado; } ?> nav-link font-weight-bold text-white" onclick="window.location.href='VInventario.php'" title="Inventario"><img src="img/Inventory-dark.png">Reporte Inventario</a>
                             </li>
                         </div>
                         <div class="col-4">
                             <li class="nav-item mx-2 text-center">
-                                <a class="<?php if($sel === 'productos'){ echo seleccionado; } ?> nav-link font-weight-bold text-white" onclick="window.location.href='VProductos.php'" title="Productos"><img src="img/products.png">Productos</a>
+                                <a style="color: #fe6f00;" class="<?php if($sel === 'productos'){ echo seleccionado; } ?> nav-link font-weight-bold" onclick="window.location.href='VProductos.php'" title="Productos"><img src="img/products.png">Productos</a>
                             </li>
                         </div>
                     </div>

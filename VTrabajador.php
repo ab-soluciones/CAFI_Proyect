@@ -55,9 +55,9 @@ Config\Autoload::run();
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
-                    <form class="form-group" id="formtrabajador">
+                    <form class="form-group" id="formtrabajador" autocomplete="off">
                     
                     <div class="d-block d-lg-flex row">
                         <div class="col-lg-4">

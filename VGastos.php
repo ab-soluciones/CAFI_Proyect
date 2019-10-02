@@ -56,56 +56,58 @@ if (!isset($_SESSION['acceso'])) {
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formgastos">
                         <div class="container">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h5 class="importante">Concepto:</h5>
-                                    <select name="SConcepto" id="concepto" class="form form-control" >
-                                        <option></option>
-                                        <option>Renta</option>
-                                        <option>Luz</option>
-                                        <option>Agua</option>
-                                        <option>Teléfono</option>
-                                        <option>Internet</option>
-                                        <option>Transporte</option>
-                                        <option>Sueldo</option>
-                                        <option>Articulos de Venta</option>
-                                        <option>Pago de Prestamo</option>
-                                        <option>Otro</option>
-                                    </select>
+                            <div id="hideedit">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <h5 class="importante">Concepto:</h5>
+                                        <select name="SConcepto" id="concepto" class="form form-control" >
+                                            <option></option>
+                                            <option>Renta</option>
+                                            <option>Luz</option>
+                                            <option>Agua</option>
+                                            <option>Teléfono</option>
+                                            <option>Internet</option>
+                                            <option>Transporte</option>
+                                            <option>Sueldo</option>
+                                            <option>Articulos de Venta</option>
+                                            <option>Pago de Prestamo</option>
+                                            <option>Otro</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h5 class="general">Forma de pago:</h5>
+                                        <select name="SPago" id="pago" class="form form-control" >
+                                            <option></option>
+                                            <option>Efectivo</option>
+                                            <option>Transferencia</option>
+                                            <option>Tarjeta</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-lg-6">
-                                    <h5 class="general">Forma de pago:</h5>
-                                    <select name="SPago" id="pago" class="form form-control" >
-                                        <option></option>
-                                        <option>Efectivo</option>
-                                        <option>Transferencia</option>
-                                        <option>Tarjeta</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h5 class="general">Descripcion:</h5>
+                                        <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="d-block col-lg-6">
+                                        <h5 class="general">Fecha:</h5>
+                                        <input class="form-control" id="fecha" type="date" name="DFecha" >
+                                    </div>
+                                    <div class="d-block col-lg-6">
+                                        <h5 class="general">Monto:</h5>
+                                        <input id="monto" class="form form-control" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <h5 class="general">Descripcion:</h5>
-                                    <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <h5 class="general">Monto:</h5>
-                                    <input id="monto" class="form form-control" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
-                                </div>
-                                <div class="d-block col-lg-6">
                                     <h5><label class="general">Estatus:</label></h5>
                                     <select class="form form-control" id="vgestado">
                                         <option value="A">Activo</option>
                                         <option value="I">Inactivo</option>
                                     </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="d-block col-lg-12">
-                                    <h5 class="general">Fecha:</h5>
-                                    <input class="form-control" id="fecha" type="date" name="DFecha" >
                                 </div>
                             </div>
                             <div class="row mt-3 justify-content-around">

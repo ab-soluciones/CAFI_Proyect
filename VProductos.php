@@ -253,7 +253,7 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="row justify-content-center">
                         <form action="codigoBarras.php" method="POST" target="_blank">
                         <div class="col-12">
-                            <p class="text-white">Ingrese la cantidad que desea imprimir (Se imprimiran todos los productos que esten en inventario)</p>
+                            <p>Ingrese la cantidad que desea imprimir (Se imprimiran todos los productos que esten en inventario)</p>
                             <div class="tab-content" id="myTabContent">
                                 <p class="general">Cantidad:</p>
                                 <input type="num" name="cantidad">
