@@ -122,8 +122,8 @@ Config\Autoload::run();
                         </div>
 
                         <div class="col-lg-4">
-                            <h5 class="general">Sueldo:</h5>
-                            <input id="sueldo" class="form form-control" type="text"  onkeypress="return check(event)" name="TSueldo" placeholder="Sueldo" autocomplete="off" />
+                            <h5 class="general">Sueldo semanal:</h5>
+                            <input id="sueldo" class="form form-control" type="text"  onkeypress="return check(event)" name="TSueldo" placeholder="Sueldo" autocomplete="off" >
                         </div>
                     </div>
 

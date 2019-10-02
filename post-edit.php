@@ -70,7 +70,7 @@ if (
         echo $result;
 } else if (isset($_POST['id']) && !empty($_POST['id']) && isset($_POST['fecha1']) && !empty($_POST['fecha1']) && isset($_POST['fecha2']) && !empty($_POST['fecha2'])
 && isset($_POST['estado']) && !empty($_POST['estado']) && isset($_POST['negocio'])
-&& isset($_POST['paquete']) && !empty($_POST['paquete']) && isset($_POST['monto']))  {
+&& isset($_POST['paquete']) && !empty($_POST['paquete']) && isset($_POST['monto'])  && isset($_POST['usextra']))  {
 
         $con = new Models\Conexion();
         $sus = new Models\Suscripcion();
@@ -80,8 +80,15 @@ if (
         $sus->setVencimiento($con->eliminar_simbolos($_POST['fecha2']));
         $sus->setEstado($con->eliminar_simbolos($_POST['estado']));
         $sus->setPaquete($con->eliminar_simbolos($_POST['paquete']));
+        $sus->setUsuarioExtra($con->eliminar_simbolos($_POST['usextra']));
         $sus->setMonto($con->eliminar_simbolos($_POST['monto']));
-        $result = $sus->editar($idusuario);
+        if($_POST['estado'] === "A"){
+         $result = $sus->ponerSuscripcionActiva($idusuario);
+        }else if($_POST['estado'] === "I"){
+         $result = $sus->ponerSuscripcionInactiva($idusuario);
+        }
+       
+
         echo $result;
 } else if (
         isset($_POST['concepto']) && isset($_POST['pago']) &&  isset($_POST['descripcion']) && isset($_POST['monto'])
