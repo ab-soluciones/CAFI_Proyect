@@ -203,28 +203,7 @@ if (!isset($_SESSION['acceso'])) {
                 <div class="modal-body">
                     <p class="statusMsg"></p>
                     <div class="row justify-content-center">
-                        <div class="col-12">
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                <li class="nav-item">
-                                    <a class="nav-link active" id="nav-Producto-tab" data-toggle="tab" href="#Producto" role="tab" aria-controls="Producto" aria-selected="false">Producto</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="nav-Inventario-tab" data-toggle="tab" href="#Inventario" role="tab" aria-controls="Inventario" aria-selected="true">Inventario</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="Producto" role="tabpanel" aria-labelledby="Producto-tab">
-                                    <div class="col-12">
-                                        <?php include("Producto-Frontend/formularioproducto.php"); ?>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade inventario" id="Inventario" role="tabpanel" aria-labelledby="Inventario-tab">
-                                    <div class="col-12">
-                                        <?php include("Producto-Frontend/formularioinventario.php"); ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php include("Producto-Frontend/formularioproducto.php"); ?>
                     </div>
                     <div id="tableHolder" class="row justify-content-center">
 

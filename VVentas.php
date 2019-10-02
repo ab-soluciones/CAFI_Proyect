@@ -47,7 +47,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                             <thead class="bg-dark text-white">
                                 <tr>
                                     <th class="text-nowrap text-center"></th>
-                                    <th class="text-nowrap text-center d-none">Codigo</th>
+                                    <th class="text-nowrap text-center d-none">Código</th>
                                     <th class="text-nowrap text-center">Producto</th>
                                     <th class="text-nowrap text-center">Costo</th>
                                     <th class="text-nowrap text-center">Cant</th>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                 </div>
             </div>
             <div class="col-12 col-lg-7 p-3 order-1 order-lg-2">
-                <h3 style="background-color: #262626; border-radius: 7px;" class="text-center text-white mb-3">Busqueda de Producto</h3>
+                <h3 style="background-color: #262626; border-radius: 7px;" class="text-center text-white mb-3">Búsqueda de Producto</h3>
                 <div class="input-group mb-2">
                     <!-- <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button> -->
                     <div class="input-group-prepend">
@@ -84,7 +84,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                                 <th class="text-nowrap text-center"></th>
                                 <th class="text-nowrap text-center">Imagen</th>
                                 <th class="text-nowrap text-center">Producto</th>
-                                <th style="text: orangered;" class="text-nowrap text-center bg-dark">Codigo</th>
+                                <th style="text: orangered;" class="text-nowrap text-center bg-dark">Código</th>
                                 <th class="text-nowrap text-center">Existencia</th>
                                 <th style="text: orangered;" class="text-nowrap text-center bg-dark">Precio</th>
                                 <th class="text-nowrap text-center">Cantidad</th>

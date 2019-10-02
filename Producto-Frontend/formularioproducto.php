@@ -1,7 +1,6 @@
 <form class="form-group" enctype="multipart/form-data" id="formproducto" method="post">
     <div class="row">
         <div class="col-lg-6">
-            
             <h5 class="general">Codigo:</h5>
             <input id="cb" class="form form-control" onkeypress="return codigo(event)" type="text" name="TCodigoB" placeholder="0000000000000" maxlength="13">
         </div>
