@@ -88,7 +88,7 @@ Config\Autoload::run();
                         </div>
                         <div class="col-lg-4">
                             <h5 class="general">Direccion:</h5>
-                            <input id="dir" class="form form-control" type="text"  onkeypress="return check(event)" name="TDireccion" placeholder="Direccion"  autocomplete="off">
+                            <input id="dir" class="form form-control" type="text"  onkeypress="return check(event)" name="TDireccion" placeholder="Direccion"  autocomplete="off" />
                         </div>
                     </div>
                     <div class="d-block d-lg-flex row">
@@ -123,7 +123,7 @@ Config\Autoload::run();
 
                         <div class="col-lg-4">
                             <h5 class="general">Sueldo:</h5>
-                            <input id="sueldo" class="form form-control" type="text"  onkeypress="return check(event)" name="TSueldo" placeholder="Sueldo" autocomplete="off" >
+                            <input id="sueldo" class="form form-control" type="text"  onkeypress="return check(event)" name="TSueldo" placeholder="Sueldo" autocomplete="off" />
                         </div>
                     </div>
 
