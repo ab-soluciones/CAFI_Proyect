@@ -3,6 +3,10 @@ body {
     background-color: #e9ebee;
 }
 
+thead{
+    border-radius:  7px;
+}
+
 #logo {
     height: 15rem;
 }

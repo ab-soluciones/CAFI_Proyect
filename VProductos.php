@@ -155,8 +155,8 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                 </div>
 
-                <div class="contenedorTabla table-responsive">
-                    <table class="table table-hover table-striped table-light">
+                <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
+                    <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center" onclick="sortTable(0)">Código de barras</th>

@@ -6,16 +6,16 @@
         <div class="collapse navbar-collapse col-10 d-flex justify-content-center align-items-center" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item mx-2 text-center">        
-                    <a style="color: #fe6f00;" class="<?php if($sel === 'venta'){ echo seleccionado; } ?> nav-link" onclick="window.location.href='VVentas.php'" title="Venta"><img src="img/sell1.png">Venta</a>
+                    <a style="color: #fe6f00;" class="<?php if($sel === 'venta'){ echo seleccionado; } ?> nav-link" onclick="window.location.href='VVentas.php'" title="Venta"><img src="img/sell.png">Venta</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'abonos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VAbonos.php'" title="Abonos"><img src="img/abonos-dark1.png">Abonos</a>
+                    <a class="<?php if($sel === 'abonos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VAbonos.php'" title="Abonos"><img src="img/abonos-dark.png">Abonos</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'adeudos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VConsultasAdeudos.php'" title="Adeudos"><img src="img/adeudos-dark1.png">Adeudos</a>
+                    <a class="<?php if($sel === 'adeudos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VConsultasAdeudos.php'" title="Adeudos"><img src="img/adeudos-dark.png">Adeudos</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a class="<?php if($sel === 'gastos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VGastos.php'" title="Gastos"><img src="img/expenses1.png">Gastos</a>
+                    <a class="<?php if($sel === 'gastos'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VGastos.php'" title="Gastos"><img src="img/expenses.png">Gastos</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
                     <a class="<?php if($sel === 'retiros'){ echo seleccionado; } ?> nav-link text-white" onclick="window.location.href='VRetiros.php'" title="Retiro"><img src="img/atm.png">Retiros</a>

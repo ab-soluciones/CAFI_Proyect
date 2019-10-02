@@ -38,7 +38,7 @@ $(document).ready(function (){
         });
     }
 
-    $('#bclose').click(function(){
+    $('.bclose').click(function(){
         $('.modal').modal('hide');
         $('#hideedit').show();
     });

@@ -77,8 +77,8 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
-            <div class="contenedorTabla table-responsive">
-                <table class="table table-hover table-striped table-light">
+            <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
+                <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center d-none" onclick="sortTable(0)">id</th>

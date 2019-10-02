@@ -156,8 +156,8 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name">
                         <button class="d-none d-lg-flex btn btn-danger ml-3 bclose" data-toggle="modal" data-target="#modalForm">Retirar</button>
                     </div>
-                    <div class="contenedorTabla table-responsive">
-                        <table class="scroll table table-hover table-striped table-light">
+                    <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
+                        <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th onclick="sortTable(0)">Id</th>
