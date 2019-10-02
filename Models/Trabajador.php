@@ -132,12 +132,14 @@ class Trabajador
     {
         $consuLimite = "SELECT COUNT(idtrabajador) AS limite FROM trabajador WHERE negocios_idnegocios = '$idnegocio' AND estado = 'A'";
         $consuPaquete = "SELECT paquete FROM suscripcion WHERE negocio_id = '$idnegocio'";
+        $conEstado = "SELECT estado FROM trabajador WHERE idtrabajador = '$id'";
 
         $limitar = $this->con->consultaRetorno($consuLimite);
         $paquete = $this->con->consultaRetorno($consuPaquete);
+        $esta = $this->con->consultaRetorno($conEstado);
 
         
-        if($estadoActual == 'A'){
+        if($estadoActual != $esta['estado']){
             if($paquete['paquete'] == 3){
                 if($limitar['limite'] < 3 ){
                     $sql = "UPDATE trabajador SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'

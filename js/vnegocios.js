@@ -4,9 +4,7 @@
  let editar = false;
  optenerDatosTabla();
 
- $('.bclose').click(function () {
-   $('.modal').modal('hide');
- });
+
 
  $('.close').click(function () {
     $('#formunegocio').trigger('reset');
@@ -58,13 +56,19 @@
 
    let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
    $.post(url, postData, function (response) {
-     $('#formunegocio').trigger('reset');
-     editar = false;
+
      if (response === "1") {
        swal({
          title: 'Exito',
          text: 'Datos guardados satisfactoriamente',
          type: 'success'
+       },
+       function (isConfirm){
+           if(isConfirm){
+            $('#formunegocio').trigger('reset');
+            $('.modal').modal('hide');
+            editar = false;
+           }
        });
      } else {
        swal({

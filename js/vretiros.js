@@ -94,7 +94,12 @@ $(document).ready(function(){
                         title: 'Exito',
                         text: 'Datos guardados satisfactoriamente',
                         type: 'success'
-                    });
+                    },
+                    function (isConfirm) {
+                      if (isConfirm) {
+                        console.log("si entro");
+                      }
+                      });
                 }else if(response == "CorteErroneo"){
                     swal({
                         title: 'Alerta',

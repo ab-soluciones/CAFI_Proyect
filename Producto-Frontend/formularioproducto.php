@@ -1,7 +1,9 @@
 <form class="form-group" enctype="multipart/form-data" id="formproducto" method="post">
     <div class="row">
         <div class="col-lg-6">
+            
             <h5 class="general">Codigo:</h5>
+            <input type="button" id="generador" value="Generar">
             <input id="cb" class="form form-control" onkeypress="return codigo(event)" type="text" name="TCodigoB" placeholder="0000000000000">
         </div>
         <div class="col-lg-6">
@@ -121,6 +123,7 @@
         </div>
     </div>
     <div class="row">
+
         <div class="col-lg-12 divCantidad">
             <h5 class="general">Cantidad:</label></h5>
             <input id="cantidadEditar" name="SCantidad" class="form-control" type="number" value="0" min="0" require> 

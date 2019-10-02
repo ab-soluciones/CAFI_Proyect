@@ -67,10 +67,6 @@ $(document).ready(function(){
         $(".contro").hide();
     });
 
-    $('#bclose').click(function () {
-        $('.modal').modal('hide');
-
-    });
 
     $('#formtrabajador').submit(function(e){
 
@@ -98,16 +94,22 @@ $(document).ready(function(){
 
         $.post(url,postData, function (response) {
             console.log(response);
-            $('#formclienteab').trigger('reset');
-            idSesion(idnego);
-            editar = false;
-            $("#status").hide();
+
 
             if (response == "1") {
                 swal({
                     title: 'Exito',
                     text: 'Datos guardados satisfactoriamente',
                     type: 'success'
+                },
+                function (isConfirm){
+                    if(isConfirm){
+                        $('#formtrabajador').trigger('reset');
+                        idSesion(idnego);
+                        editar = false;
+                        $("#status").hide();
+                        $('.modal').modal('hide');
+                    }
                 });
             }else if(response == 'limite'){
                 swal({
@@ -123,8 +125,12 @@ $(document).ready(function(){
                 });
             }
         });
-        $('#formtrabajador').trigger('reset');
+
         e.preventDefault();
+    });
+
+    $('.mostra').click(function(){
+        $('.divCantidad').hide();
     });
 
     $(document).on('click','.beditar', function () {
