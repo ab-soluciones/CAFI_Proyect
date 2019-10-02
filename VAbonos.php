@@ -95,13 +95,14 @@ if (!isset($_SESSION['acceso'])) {
                             <th class="text-nowrap text-center" onclick="sortTable(0)">Estado</th>
                             <th class="text-nowrap text-center" onclick="sortTable(1)">Cantidad</th>
                             <th class="text-nowrap text-center" onclick="sortTable(2)">Pago</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(3)">Cambio</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(4)">Fecha</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(5)">Hora</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(6)">Cliente</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(7)">Registro</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(8)">Adeudo</th>
-                            <th class="text-nowrap text-center" onclick="sortTable(9)">Editar estado</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(3)">Forma de Pago</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(4)">Cambio</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(5)">Fecha</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(6)">Hora</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(7)">Cliente</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(8)">Registro</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(9)">Adeudo</th>
+                            <th class="text-nowrap text-center" onclick="sortTable(10)">Editar estado</th>
                         </tr>
                     </thead>
                     <tbody id="cuerpo">
