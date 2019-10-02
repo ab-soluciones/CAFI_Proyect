@@ -114,7 +114,7 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                    <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3 bclose" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                       <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
                           <table style="border-radius: 10px;" class="table table-hover table-striped table-light">

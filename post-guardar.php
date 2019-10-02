@@ -429,7 +429,7 @@ if (
     }
 } else if (
     isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca']) &&
-    isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP']) &&
+    isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP']) && !empty($_POST['TCodigoB']) &&
     isset($_POST['SlcTalla']) && isset($_POST['SlcMedida']) && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen']) &&
     !empty($_POST['TNombre'])  && !empty($_POST['TColor']) && !empty($_POST['TMarca']) && !empty($_POST['TPrecioC'])
     && !empty($_POST['TPrecioVen'])
@@ -438,13 +438,8 @@ if (
     {
         $producto = new Models\Producto();
         $con = new Models\Conexion();
-        if (strlen($_POST['TCodigoB']) === 0) {
-            $numRand = rand(1000000, 9999999);
-            $numRand2 = rand(100000, 999999);
-            $codigob = $numRand . $numRand2;
-        } else {
-            $codigob  = $_POST['TCodigoB'];
-        }
+
+        $codigob  = $_POST['TCodigoB'];
 
         $descripcion = $_POST['TADescription'];
 
@@ -475,7 +470,17 @@ if (
         $con->cerrarConexion();
         $clienteab = $result2['clientesab_idclienteab'];
         $result = $producto->guardar($clienteab, $_SESSION['id']);
-        echo $result;
+        if($result != 0){
+
+            $inventario = new Models\Inventario();
+            $inventario->setCantidad($con->eliminar_simbolos($_POST['SCantidad']));
+            $inventario->setCodigoBarras($codigob);
+            $inventario->setNegocio($_SESSION['idnegocio']);
+            $inventario->setTrabajador($_SESSION['id']);
+
+            $result = $inventario->guardar();
+            echo $result;
+        }
     }
 
     if (strlen($_FILES['FImagen']['tmp_name']) != 0) {

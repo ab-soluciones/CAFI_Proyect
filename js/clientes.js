@@ -43,7 +43,7 @@ $(document).ready(function(){
     }
 
     $('#bclose').click(function(){
-        $('.modal').modal('hide');
+        
     });
 
     $('#formclientes').submit(function(e){
@@ -60,21 +60,25 @@ $(document).ready(function(){
             estado: $('#vcestado').val(),
         };
 
-       
-
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
 
         $.post(url,postData,function(response){
-          
-            $('#formclientes').trigger('reset');
+
             obtenerDatosTablaCliente();
-            editar = false;
             if(response === "1"){
                 swal({
                     title: 'Exito',
                     text: 'Datos guardados satisfactoriamente',
                     type: 'success'
-                });     
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        console.log("si entro");
+                        $('#formclientes').trigger('reset');
+                        $('.modal').modal('hide');
+                        editar = false;
+                    }
+                  });     
             }else{
                 swal({
                     title: 'Alerta',

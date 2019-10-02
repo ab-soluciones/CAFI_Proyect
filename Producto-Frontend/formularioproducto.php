@@ -1,6 +1,7 @@
 <form class="form-group" enctype="multipart/form-data" id="formproducto" method="post">
     <div class="row">
         <div class="col-lg-6">
+            
             <h5 class="general">Codigo:</h5>
             <input id="cb" class="form form-control" onkeypress="return codigo(event)" type="text" name="TCodigoB" placeholder="0000000000000" maxlength="13">
         </div>
@@ -41,7 +42,7 @@
     <div class="row">
         <div class="col-12">
             <h5 class="general">Descripcion:</h5>
-            <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion"></textarea>
+            <textarea id="desc" name="TADescription" rows="2" onkeypress="return check2(event)" class="form-control" placeholder="Agregue su descripcion"></textarea>
         </div>
     </div>
 
@@ -121,6 +122,7 @@
         </div>
     </div>
     <div class="row">
+
         <div class="col-lg-12 divCantidad">
             <h5 class="general">Cantidad:</label></h5>
             <input id="cantidadEditar" name="SCantidad" class="form-control" type="number" value="0" min="0" require> 

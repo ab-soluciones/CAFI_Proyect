@@ -25,9 +25,7 @@ $(document).ready(function () {
     }
 });
   
-  $('#bclose').click(function () {
-    $('.modal').modal('hide');
-  });
+
 
   $('#formuusers').submit(function (e) {
     const postData = {
@@ -43,14 +41,21 @@ $(document).ready(function () {
  
     let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
     $.post(url, postData, function (response) {
-      $('#formunegocio').trigger('reset');
-      $(".contro").hide();
-      editar = false;
+
+   
       if (response === "1") {
         swal({
           title: 'Exito',
           text: 'Datos guardados satisfactoriamente',
           type: 'success'
+        },
+        function (isConfirm){
+            if(isConfirm){
+              editar = false;
+              $('#formunegocio').trigger('reset');
+              $(".contro").hide();
+              $('.modal').modal('hide');
+            }
         });
       } else {
         swal({

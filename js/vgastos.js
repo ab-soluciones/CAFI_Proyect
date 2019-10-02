@@ -40,7 +40,8 @@ $(document).ready(function () {
         });
     }
 
-    $('#bclose').click(function(){
+
+    $('.bclose').click(function(){
         $('.modal').modal('hide');
         $('#hideedit').show();
     });
@@ -59,15 +60,20 @@ $(document).ready(function () {
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         
         $.post(url,postData,function(response){
-            
-            $('#formgastos').trigger('reset');
             obtenerDatosTablaGastos();
-            editar = false;
+           
             if(response === "1"){
                 swal({
                     title: 'Exito',
                     text: 'Datos guardados satisfactoriamente',
                     type: 'success'
+                },
+                function (isConfirm){
+                    if(isConfirm){
+                        editar = false;
+                        $('#formgastos').trigger('reset');
+                        $('.modal').modal('hide');
+                    }
                 });
             } else {
                 swal({

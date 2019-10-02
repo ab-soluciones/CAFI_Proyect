@@ -60,10 +60,6 @@ $(document).ready(function () {
         }
     });
 
-    $('#bclose').click(function () {
-        $('.modal').modal('hide');
-    });
-
     $('#formclienteab').submit(function (e) {
         const postData = {
             id: idclienteab,
@@ -83,15 +79,22 @@ $(document).ready(function () {
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         $.post(url, postData, function (response) {
             
-            $('#formclienteab').trigger('reset');
-            $('.contro').hide();
+
             optenerDatosTablaClientesab();
-            editar = false;
+            
             if (response === "1") {
                 swal({
                     title: 'Exito',
                     text: 'Datos guardados satisfactoriamente',
                     type: 'success'
+                },
+                function (isConfirm){
+                    if(isConfirm){
+                        editar = false;
+                        $('#formclienteab').trigger('reset');
+                        $('.contro').hide();
+                        $('.modal').modal('hide');
+                    }
                 });
             } else {
                 swal({

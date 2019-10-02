@@ -64,15 +64,21 @@ $(document).ready(function (){
             data: postData,
 
             success: function(response) {
-                
-           $('#formotrosingresos').trigger('reset');
+           
            obtenerDatosTablaOtrosIngresos();
-           editar = false;
+           
            if(response == "1"){
             swal({
                 title: 'Exito',
                 text: 'Datos guardados satisfactoriamente',
                 type: 'success'
+            },
+            function (isConfirm){
+                if(isConfirm){
+                    editar = false;
+                    $('#formotrosingresos').trigger('reset');
+                    $('.modal').modal('hide');
+                }
             });
            } else{
             swal({

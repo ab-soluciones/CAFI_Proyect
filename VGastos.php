@@ -87,7 +87,7 @@ if (!isset($_SESSION['acceso'])) {
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <h5 class="general">Descripcion:</h5>
-                                        <textarea id="desc" name="TADescription" rows="2" class="form-control" placeholder="Agregue su descripcion" maxlength="50"></textarea>
+                                        <textarea id="desc" name="TADescription" rows="2" class="form-control" onkeypress="return check2(event)" placeholder="Agregue su descripcion" maxlength="50"></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -134,7 +134,7 @@ if (!isset($_SESSION['acceso'])) {
                         </div>
                     </div>
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                    <button id="bclose" class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                    <button class="d-none d-lg-flex btn btn-primary ml-3 bclose" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
                     <table style="border-radius: 10px;" class="table table-hover table-striped table-light">

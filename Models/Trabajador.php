@@ -90,11 +90,14 @@ class Trabajador
     {
         $consuLimite = "SELECT COUNT(idtrabajador) AS limite FROM trabajador WHERE negocios_idnegocios = '$idnegocio' AND estado = 'A'";
         $consuPaquete = "SELECT paquete FROM suscripcion WHERE negocio_id = '$idnegocio'";
+        $consuUserEstra = "SELECT usuario_extra FROM suscripcion WHERE negocio_id = '$idnegocio'";
+        $userEstra = $this->con->consultaRetorno($consuUserEstra);
 
         $limitar = $this->con->consultaRetorno($consuLimite);
         $paquete = $this->con->consultaRetorno($consuPaquete);
+        
 
-        if($limitar['limite'] < 3 && $paquete['paquete'] == 3){
+        if($limitar['limite'] < 3 + $userEstra['usuario_extra']  && $paquete['paquete'] == 3){
             $sql = "INSERT INTO trabajador (idtrabajador, nombre, apaterno, amaterno, tipo_documento, 
             numero_documento, direccion, telefono, correo, acceso, login, password, sueldo , estado, negocios_idnegocios) 
             VALUES('{$this->id}', '{$this->nombre}', '{$this->apaterno}', '{$this->amaterno}', '{$this->documento}',
@@ -102,7 +105,7 @@ class Trabajador
              '{$this->login}', '{$this->password}', '{$this->sueldo}' ,'{$this->estado}' ,'$idnegocio')";
     
              return $this->con->consultaSimple($sql);
-        } else if($limitar['limite'] < 2 && $paquete['paquete'] == 2){
+        } else if($limitar['limite'] < 2 + $userEstra['usuario_extra'] && $paquete['paquete'] == 2){
             $sql = "INSERT INTO trabajador (idtrabajador, nombre, apaterno, amaterno, tipo_documento, 
             numero_documento, direccion, telefono, correo, acceso, login, password, sueldo , estado, negocios_idnegocios) 
             VALUES('{$this->id}', '{$this->nombre}', '{$this->apaterno}', '{$this->amaterno}', '{$this->documento}',
@@ -110,7 +113,7 @@ class Trabajador
              '{$this->login}', '{$this->password}', '{$this->sueldo}' ,'{$this->estado}' ,'$idnegocio')";
     
              return $this->con->consultaSimple($sql);
-        } else if($limitar['limite'] < 1 && $paquete['paquete'] == 1){
+        } else if($limitar['limite'] < 1 + $userEstra['usuario_extra'] && $paquete['paquete'] == 1){
             $sql = "INSERT INTO trabajador (idtrabajador, nombre, apaterno, amaterno, tipo_documento, 
             numero_documento, direccion, telefono, correo, acceso, login, password, sueldo , estado, negocios_idnegocios) 
             VALUES('{$this->id}', '{$this->nombre}', '{$this->apaterno}', '{$this->amaterno}', '{$this->documento}',
@@ -132,14 +135,18 @@ class Trabajador
     {
         $consuLimite = "SELECT COUNT(idtrabajador) AS limite FROM trabajador WHERE negocios_idnegocios = '$idnegocio' AND estado = 'A'";
         $consuPaquete = "SELECT paquete FROM suscripcion WHERE negocio_id = '$idnegocio'";
+        $conEstado = "SELECT estado FROM trabajador WHERE idtrabajador = '$id'";
+        $consuUserEstra = "SELECT usuario_extra FROM suscripcion WHERE negocio_id = '$idnegocio'";
 
         $limitar = $this->con->consultaRetorno($consuLimite);
         $paquete = $this->con->consultaRetorno($consuPaquete);
+        $esta = $this->con->consultaRetorno($conEstado);
+        $userEstra = $this->con->consultaRetorno($consuUserEstra);
 
         
-        if($estadoActual == 'A'){
+        if($estadoActual != $esta['estado'] && $estadoActual == "A"){
             if($paquete['paquete'] == 3){
-                if($limitar['limite'] <= 3){
+                if($limitar['limite'] < 3 + $userEstra['usuario_extra'] ){
                     $sql = "UPDATE trabajador SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
                     ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
                     ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', acceso ='{$this->acceso}'
@@ -149,7 +156,7 @@ class Trabajador
 
 
             }else if($paquete['paquete'] == 2){
-                if($limitar['limite'] <= 2){
+                if($limitar['limite'] < 2 + $userEstra['usuario_extra'] ){
                     $sql = "UPDATE trabajador SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
                     ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
                     ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', acceso ='{$this->acceso}'
@@ -159,7 +166,7 @@ class Trabajador
 
 
             }else if( $paquete['paquete'] == 1){
-                if($limitar['limite'] <= 1){
+                if($limitar['limite'] < 1 + $userEstra['usuario_extra'] ){
                     $sql = "UPDATE trabajador SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
                     ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
                     ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', acceso ='{$this->acceso}'

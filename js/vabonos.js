@@ -51,10 +51,6 @@ $(document).ready(function () {
      
       });
 
-      $('#bclose').click(function(){
-        $('.modal').modal('hide');
-      });
-
       $('#formabonos').submit(function(e){
         const postData = {
             idAbono: $('#id').val(),
@@ -64,15 +60,19 @@ $(document).ready(function () {
           
          $.post('post-edit.php', postData, function (response) {
 
-            $('#formabonos').trigger('reset');  
-           
             obtenerDatosTabla();
             if (response) {
               swal({
                 title: 'Exito',
                 text: 'Datos guardados satisfactoriamente',
                 type: 'success'
-              });
+              },
+              function (isConfirm) {
+                if (isConfirm) {
+                  $('#formabonos').trigger('reset');
+                  $('.modal').modal('hide');
+                }
+                });
             } 
 
           });

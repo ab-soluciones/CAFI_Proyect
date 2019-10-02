@@ -4,7 +4,18 @@ $(document).ready(function(){
     let codigoBarras = "";
     idSesion($('.sucursal').val());
     obtenerInventario();
-    $('.divCantidad').hide();
+
+    $('#generador').click(function(){
+        $.ajax({
+            url: 'generador.php',
+            type: 'GET',
+
+            success: function(response){
+                $('#cb').val(response);
+            }
+
+        });
+    });
 
     function idSesion(id){
         $.ajax({
@@ -90,10 +101,20 @@ $(document).ready(function(){
         $('.divCantidad').hide();
     });
 
-    $('.bclose').click(function(){
-        $('.modal').modal('hide');
+    function limpiar(){
         
-    });
+        document.getElementById('tpo').disabled = false;
+        document.getElementById('tpc').disabled = false;
+        document.getElementById('tpr').disabled = false;
+        document.getElementById("divtalla").style.display = "none";
+        document.getElementById("divmedida").style.display = "none";
+        $('#preview img').remove();
+        $("#preview").append("<img src='..' width='100' height='100'/>");
+        $('#formproducto').trigger('reset');
+        $('#inventario').trigger('reset');
+        $('.divCantidad').hide();
+        obtenerInventario();
+    }
 
     $('#formproducto').submit(function(e){
     
@@ -110,18 +131,6 @@ $(document).ready(function(){
                     
                     success: function(response) {
                         console.log("Respuesta: "+response);
-
-                        document.getElementById('tpo').disabled = false;
-                        document.getElementById('tpc').disabled = false;
-                        document.getElementById('tpr').disabled = false;
-                        document.getElementById("divtalla").style.display = "none";
-                        document.getElementById("divmedida").style.display = "none";
-                        $('#preview img').remove();
-                        $("#preview").append("<img src='..' width='100' height='100'/>");
-                        $('#formproducto').trigger('reset');
-                        $('#inventario').trigger('reset');
-                        $('.divCantidad').hide();
-                        obtenerInventario();
                        
                         if (response === "1") {
                             swal({
@@ -132,6 +141,8 @@ $(document).ready(function(){
                             function (isConfirm) {
                               if (isConfirm){
                                 idSesion($('#negocioActual').val());
+                                limpiar();
+                                $('.modal').modal('hide');
                               }
                               });
                         } else if( response == "2"){
@@ -143,6 +154,8 @@ $(document).ready(function(){
                             function (isConfirm) {
                               if (isConfirm) {
                                 idSesion($('#negocioActual').val());
+                                limpiar();
+                                $('.modal').modal('hide');
                               }
                               });
                         } else if(response == "imagenGrande"){
@@ -171,7 +184,7 @@ $(document).ready(function(){
                          else {
                             swal({
                                 title: 'Alerta',
-                                text: 'Datos no guardados, compruebe los campos unicos',
+                                text: 'Error, favor de comprovar los campos',
                                 type: 'warning'
                             },
                             function (isConfirm) {

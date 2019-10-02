@@ -26,10 +26,9 @@ class Inventario
 
         $this->codigob = $result['codigo_barras'];
     }
-    public function getCodigoBarras()
+    public function setCodigoBarras($codigo)
     {
-        $codigob =  $this->codigob;
-        return $codigob;
+        $this->codigob = $codigo;
     }
     public function setNegocio($negocio)
     {
@@ -43,7 +42,7 @@ class Inventario
     public function guardar()
     {
         $query = "INSERT INTO inventario (cantidad,producto_codigo_barras,negocios_idnegocios,trabajador_idtrabajador) 
-    VALUES ('{$this->cantidad}','{$this->codigob}','{$this->negocio}','{$this->trabajador}')";
+        VALUES ('{$this->cantidad}','{$this->codigob}','{$this->negocio}','{$this->trabajador}')";
         return $this->con->consultaSimple($query);
     }
 
