@@ -41,7 +41,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
         <div class="row">
             <div class="col-12 col-lg-5 p-3 order-2 order-lg-1">
                 <h3 style="background-color: #262626; border-radius: 7px;" class="text-center text-white mb-3">Venta</h3>
-                <div class="contenedorTabla table-wrapper">
+                <div class="table-wrapper">
                     <div class="rounded table-responsive">
                         <table class="scroll table table-hover table-striped table-light">
                             <thead class="bg-dark text-white">

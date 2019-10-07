@@ -138,6 +138,13 @@ nav.fixed{
     overflow: auto;
 }
 
+/*Tabla compra*/
+.table-wrapper-compra
+{
+    height: 490px;
+    overflow: auto;
+}
+
 /*xs*/
 /*En esta medida toma lo que esta en el css por default*/
 /*sm*/
