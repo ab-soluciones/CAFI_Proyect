@@ -284,7 +284,6 @@ function comprobar()
   //si ninguna consulta regreso nada es por el el usuario y contraseña son incorrectos
 }
 
-
 if (isset($_GET['cerrar_sesion'])) {
   session_unset();
   session_destroy();
@@ -292,6 +291,7 @@ if (isset($_GET['cerrar_sesion'])) {
 
   //se destruye la sesion al dar click en los botones de salir
 }
+
 
 
 

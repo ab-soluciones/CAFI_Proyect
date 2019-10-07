@@ -7,7 +7,7 @@
         </div>
         <div class="col-lg-6">
             <h5 class="general">Nombre:</h5>
-            <input id="nombre" class="form form-control" type="text" name="TNombre" onkeypress="return check(event)" placeholder="Nombre" autocomplete="off" required>
+            <input id="nombre" class="form form-control" type="text" name="TNombre" onkeypress="return check(event)" placeholder="Nombre" autocomplete="off">
         </div>
     </div>
 
@@ -31,11 +31,15 @@
     <div class="row">
         <div class="col-lg-6">
             <h5 class="general">Color:</h5>
-            <input id="color" class="form form-control" type="text" onkeypress="return check(event)" name="TColor" placeholder="Color" autocomplete="off" required>
+            <input id="color" class="form form-control" type="text" onkeypress="return check(event)" name="TColor" placeholder="Color" autocomplete="off" >
         </div>
         <div class="col-lg-6">
             <h5 class="general">Marca:</h5>
-            <input id="marca" class="form form-control" type="text" onkeypress="return check(event)" name="TMarca" placeholder="Marca" autocomplete="off" required>
+            <input id="marca" class="form form-control" type="text" onkeypress="return check(event)" name="TMarca" placeholder="Marca" autocomplete="off" >
+        </div>
+        <div class="col-lg-6">
+            <h5 class="general">Proveedor:</h5>
+            <input id="proveedor" name="proveedor" class="form form-control" type="text" onkeypress="return check(event)" placeholder="Proveedor" autocomplete="off" >
         </div>
     </div>
 
@@ -104,31 +108,35 @@
     <div class="row">
         <div class="col-lg-6">
             <h5 class="general">Precio de Compra:</h5>
-            <input id="precioc" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioC" placeholder="" autocomplete="off" required><br>
+            <input id="precioc" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioC" placeholder="" autocomplete="off" ><br>
         </div>
         <div class="col-lg-6">
             <h5 class="general">Precio de Venta:</h5>
-            <input id="preciov" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioVen" placeholder="" autocomplete="off" required><br>
+            <input id="preciov" class="form form-control" type="text" onkeypress="return check(event)" name="TPrecioVen" placeholder="" autocomplete="off"><br>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <h5 class="general">Estado:</h5>
             <select name="REstado" id="estado" class="form form-control">
                 <option value="A">Activo</option>
                 <option value="I">Inactivo</option>
             </select>
         </div>
-    </div>
-    <div class="row">
-
-        <div class="col-lg-12 divCantidad">
-            <h5 class="general">Cantidad:</label></h5>
-            <input id="cantidadEditar" name="SCantidad" class="form-control" type="number" value="0" min="0" require> 
+        <div class="col-lg-6">
+            <h5 class="general">Stock minimo:</h5>
+            <input type="number" class="form form-control" min="0" max="" value="0" id="stockminimo" name="stockminimo" onkeypress="return check(event)">
         </div>
     </div>
+    
     <div class="row">
+        <div class="col-lg-12 divCantidad">
+            <h5 class="general">Cantidad:</label></h5>
+            <input id="cantidadEditar" name="SCantidad" class="form-control" type="number" value="0" min="0"  onkeypress="return check(event)">
+        </div>
+    </div>
+    <div class="row mx-3">
         <button type="submit" class="mt-4 col-12 btn btn-lg btn-block btn-dark text-primary bclose">Guardar</button><br>
     </div>  
 </form>

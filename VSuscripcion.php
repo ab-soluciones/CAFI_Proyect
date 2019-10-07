@@ -111,7 +111,7 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                                <div class="divusextra col-6">
                                <h5 class="general">Usuario extra:</h5>
-                               <input type="number" class="form form-control" min="0" max="1" id="usextra">
+                               <input type="number" class="form form-control" min="0" id="usextra">
                                </div>
                                 <div class="col-6">
                                     <h5 class="general">Monto:</h5>

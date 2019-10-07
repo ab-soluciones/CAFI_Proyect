@@ -7,9 +7,9 @@ class Conexion
 
     private $datos = array(
         "host" => "localhost",
-        "user" => "root",
-        "pass" => "",
-        "db" => "cafi_db"
+        "user" => "u926133147_admin",
+        "pass" => "bvEwV3XQjRDb",
+        "db" => "u926133147_cafi"
 
     );
 

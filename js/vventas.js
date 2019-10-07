@@ -4,7 +4,7 @@ $(document).ready(function () {
   let descuento = 0.0;
   let anticipo = 0.0;
   let forma_pago;
-  let totalglobal;
+  let totalglobal = 0.0;
   let codigo;
   let cantidad;
   filtradoProductos();
@@ -19,7 +19,7 @@ $(document).ready(function () {
   //terminar la venta
   $(document).on('click', '.bvender', function () {
     //pago efectivo
-    if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1 && forma_pago === "Efectivo") {
+    if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1 && forma_pago === "Efectivo" && totalglobal>0) {
       valor = $('.tpago').val();
       pago = valor = parseFloat(valor);
       if (valor < totalglobal) {
@@ -94,7 +94,7 @@ $(document).ready(function () {
           });
       }
       //pago a credito
-    } else if ($('.tpago').val().length > 0 && $('.tanticipo').val().length > 0 && forma_pago === "Crédito") {
+    } else if ($('.tpago').val().length > 0 && $('.tanticipo').val().length > 0 && forma_pago === "Crédito" && totalglobal>0) {
       valor = $('.tpago').val();
       pago = valor = parseFloat(valor);
       anticipo = parseFloat($('.tanticipo').val());
@@ -175,7 +175,7 @@ $(document).ready(function () {
         });
       }
 
-    } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1 && forma_pago === "Tarjeta") {
+    } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1 && forma_pago === "Tarjeta" && totalglobal>0) {
       //pago con tarjeta
       if (totalglobal) {
         const postData = {

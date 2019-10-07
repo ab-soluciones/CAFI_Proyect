@@ -154,10 +154,9 @@ if (
     isset($_POST['nombre']) && isset($_POST['apt']) && isset($_POST['apm']) && isset($_POST['doc'])
     && isset($_POST['numdoc']) && isset($_POST['dir']) && isset($_POST['tel']) && isset($_POST['email'])
     && isset($_POST['acceso']) && isset($_POST['login']) && isset($_POST['agregarloa'])
-    && isset($_POST['contrasena']) && isset($_POST['sueldo']) &&
-    !empty($_POST['nombre']) && !empty($_POST['apt']) && !empty($_POST['apm']) && !empty($_POST['numdoc']) &&
-    !empty($_POST['dir']) && !empty($_POST['tel']) && !empty($_POST['email']) && !empty($_POST['login']) &&
-    !empty($_POST['contrasena']) && !empty($_POST['sueldo'])
+    && isset($_POST['contrasena']) && isset($_POST['sueldo']) && isset($_POST['estado']) &&
+    !empty($_POST['acceso']) && !empty($_POST['login']) &&
+    !empty($_POST['contrasena']) && !empty($_POST['estado'])
 ) {
     $trabajador = new Models\Trabajador(); // se hace la instancia a la clase trabajador
     $con = new Models\Conexion();
@@ -198,10 +197,6 @@ if (
     $result = $con->consultaRetorno($query);
     $con->cerrarConexion();
     $cantidad = $cantidad + (int) $result['cantidad_producto'];
-
-    if ($cantidad > $existencia) {
-        echo "stock";
-    } else {
         $dv = new Models\DetalleVenta();
         if (isset($result['cantidad_producto'])) {
             $cantidad = $result['cantidad_producto'] + $con->eliminar_simbolos($_POST['cantidad']);
@@ -222,7 +217,7 @@ if (
             $result = $dv->guardar();
             echo $result;
         }
-    }
+    
 } else if (isset($_POST['idcliente']) && isset($_POST['estcliente'])) {
 
     if ($_POST['estcliente'] === "A") {
@@ -430,11 +425,11 @@ if (
         }
     }
 } else if (
-    isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca']) &&
-    isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP']) && !empty($_POST['TCodigoB']) &&
+    isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca'])  && isset($_POST['proveedor'])  &&
+    isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP']) && isset($_POST['REstado'])  && isset($_POST['stockminimo'])  && !empty($_POST['TCodigoB']) &&
     isset($_POST['SlcTalla']) && isset($_POST['SlcMedida']) && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen']) &&
-    !empty($_POST['TNombre'])  && !empty($_POST['TColor']) && !empty($_POST['TMarca']) && !empty($_POST['TPrecioC'])
-    && !empty($_POST['TPrecioVen'])
+    !empty($_POST['TNombre']) 
+    && !empty($_POST['TPrecioVen'])   && !empty(($_POST['REstado']))
 ) {
     function registrar($imagen, $negocio)
     {
@@ -454,6 +449,7 @@ if (
         $producto->setImagen($imagen);
         $producto->setColor($con->eliminar_simbolos($_POST['TColor']));
         $producto->setMarca($con->eliminar_simbolos($_POST['TMarca']));
+        $producto->setProveedor($con->eliminar_simbolos($_POST['proveedor']));
         $producto->setDescripcion($descripcion);
         $producto->setUnidad_Medida($_POST['DLUnidad']);
         if ($_POST['TTipoP'] === "Calzado") {
@@ -467,6 +463,7 @@ if (
         $producto->setPrecioCompra($con->eliminar_simbolos($_POST['TPrecioC']));
         $producto->setPrecioVenta($con->eliminar_simbolos($_POST['TPrecioVen']));
         $producto->setPestado($con->eliminar_simbolos($_POST['REstado']));
+        $producto->setStockMinimo($con->eliminar_simbolos($_POST['stockminimo']));
         $query = "SELECT clientesab_idclienteab FROM negocios WHERE idnegocios = '$negocio'";
         $result2 = $con->consultaRetorno($query);
         $con->cerrarConexion();

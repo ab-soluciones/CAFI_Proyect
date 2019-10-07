@@ -1,6 +1,6 @@
 function check(e) {
         tecla = (document.all) ? e.keyCode : e.which;
-        if (tecla == 8 || tecla == 13 ) {
+        if (tecla == 8 || tecla == 13 || tecla == 32 ) {
             return true;
         }
         patron = /[A-Za-z0-9/@._-]/;
@@ -10,7 +10,7 @@ function check(e) {
 
 function codigo(e){
         tecla = (document.all) ? e.keyCode : e.which;
-        if (tecla == 8 || tecla == 13) {
+        if (tecla == 8 || tecla == 13 || tecla == 32) {
             return true;
         }
         patron = /[A-Za-z0-9@._-]/;

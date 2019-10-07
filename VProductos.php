@@ -4,15 +4,6 @@ Config\Autoload::run();
 session_start();
 include "check_token.php";
 
-if (!isset($_SESSION['acceso'])) {
-    header('location: index.php');
-} else if ($_SESSION['estado'] == "I") {
-    header('location: index.php');
-} else if (
-   $_SESSION['acceso'] != "Manager"
-) {
-    header('location: index.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -26,25 +17,10 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="icon" href="img/logo/nav1.png">
     
-    <script src="js/sweetalert.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    <script src="js/sweetalert.min.js"></script>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/index.js"></script>
 
     <title>Productos</title>
     <script type="text/javascript">
         var parametro;
-
-        function ini() {
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 15 min
-        }
-
-        function parar() {
-            clearTimeout(parametro);
-            parametro = setTimeout("window.location.href = 'Inactividad.php';", 1500000); // 15 min
-        }
         //funcion para la vista previa de la imagen
         function ejecutar() {
 
@@ -59,7 +35,9 @@ if (!isset($_SESSION['acceso'])) {
                 reader.onload = function() {
                     let preview = document.getElementById('preview'),
                         image = document.createElement('img');
-
+                        $('.rowMostrar').css('display', 'none');
+                        $('#preview').css('display', 'block');
+                        
                     image.src = reader.result;
                     image.height = 100;
                     image.width = 100;  
@@ -121,6 +99,7 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row col-12">
                                 <button class="d-lg-none btn btn-primary col-6 mb-3 p-3 agrega mostra" data-toggle="modal" data-target="#modalForm">Agregar Productos</button>
                                 <button class="d-lg-none btn btn-danger col-6 mb-3 p-3 agrega mostra" id="BcodigoBarra"  data-toggle="modal" data-target="#modalFormCodigo">Imprimir Codigos</button>
+                                <p id="stockrequerido"></p>
                             </div>
 
                             <div class="font-weight-bold px-3 d-flex align-items-center">
@@ -164,15 +143,18 @@ if (!isset($_SESSION['acceso'])) {
                                 <th class="text-nowrap text-center" onclick="sortTable(2)">Imagen</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(3)">Color</th>
                                 <th class="text-nowrap text-center" onclick="sortTable(4)">Marca</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(5)">Descripcion</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(6)">Unidad de Medida</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(7)">Tipo</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(8)">Talla</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(9)">Compra</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(10)">Venta</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(11)">Estado</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(12)">Cantidad</th>
-                                <th class="text-nowrap text-center" onclick="sortTable(13)"></th>
+                                <th class="text-nowrap text-center" onclick="sortTable(5)">Proveedor</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(6)">Descripcion</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(7)">Unidad de Medida</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(8)">Tipo</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(9)">Talla</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(10)">Compra</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(11)">Venta</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(12)">Estado</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(13)">Cantidad</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(14)">Stock minimo</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(15)">Stock requerido</th>
+                                <th class="text-nowrap text-center" onclick="sortTable(16)"></th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
@@ -187,8 +169,9 @@ if (!isset($_SESSION['acceso'])) {
         <!--row-->
     </div>
     <!--container-->
-        <!-- Modal -->
-        <div class="modal fade" id="modalForm" role="dialog">
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -202,9 +185,9 @@ if (!isset($_SESSION['acceso'])) {
                 <!-- Modal Body -->
                 <div class="modal-body">
                     <p class="statusMsg"></p>
-                    <div class="row justify-content-center">
+                    
                         <?php include("Producto-Frontend/formularioproducto.php"); ?>
-                    </div>
+                    
                     <div id="tableHolder" class="row justify-content-center">
 
                     </div>
@@ -249,7 +232,12 @@ if (!isset($_SESSION['acceso'])) {
         </div>
     </div>
     <!-- Modal -->
-
+    <script src="js/jquery.js"></script>
+    <script src="js/sweetalert.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/index.js"></script>
     <script src="js/user_jquery.js"></script>
     <script src="js/vproductos.js"></script>
 </body>

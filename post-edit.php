@@ -179,9 +179,9 @@ if (
         $result = $retiro->editar($con->eliminar_simbolos($_POST['id']));
         echo $result;
 } else if (
-        isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca']) &&
+        isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca'])  && isset($_POST['proveedor']) &&
         isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP'])  && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen']) &&
-        isset($_POST['SCantidad']) && isset($_POST['REstado'])
+        isset($_POST['SCantidad']) && isset($_POST['REstado'])  && isset($_POST['stockminimo'])
 ) {
         function registrar($imagen, $id)
         {
@@ -192,6 +192,7 @@ if (
                 $producto->setImagen($imagen);
                 $producto->setColor($con->eliminar_simbolos($_POST['TColor']));
                 $producto->setMarca($con->eliminar_simbolos($_POST['TMarca']));
+                $producto->setProveedor($con->eliminar_simbolos($_POST['proveedor']));
                 $producto->setDescripcion($con->eliminar_simbolos($_POST['TADescription']));
                 $producto->setCantidad($con->eliminar_simbolos($_POST['SCantidad']));
                 $producto->setUnidad_Medida($con->eliminar_simbolos($_POST['DLUnidad']));
@@ -207,6 +208,7 @@ if (
                 $producto->setPrecioVenta($con->eliminar_simbolos($_POST['TPrecioVen']));
                 $producto->setCodigoBarras($con->eliminar_simbolos($_POST['TCodigoB']));
                 $producto->setPestado($con->eliminar_simbolos($_POST['REstado']));
+                $producto->setStockMinimo($con->eliminar_simbolos($_POST['stockminimo']));
                 $result = $producto->editar($con->eliminar_simbolos($_POST['TCodigoB']), $_SESSION['id']);
                 echo $result;
         }
@@ -219,7 +221,7 @@ if (
                         if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png') {
                                 $temp = explode(".", $_FILES["FImagen"]["name"]);
                                 $newfilename = round(microtime(true)) . '.' . end($temp);
-                                $imagen2 = "http://localhost/CAFI_System/img/productos/" . $newfilename . "";
+                                $imagen2 = "http://test.cafionline.com/img/productos/" . $newfilename . "";
                                 $carpeta_destino = "img/productos/";
                                 move_uploaded_file($_FILES["FImagen"]["tmp_name"], $carpeta_destino . $newfilename);
                                 $negocio = $_SESSION['idnegocio'];
