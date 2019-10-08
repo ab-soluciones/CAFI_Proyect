@@ -3,6 +3,10 @@ body {
     background-color: #e9ebee;
 }
 
+thead{
+    border-radius:  7px;
+}
+
 #logo {
     height: 15rem;
 }
@@ -131,6 +135,13 @@ nav.fixed{
 .table-wrapper-productos{
     width: 290px;
     height: 420px;
+    overflow: auto;
+}
+
+/*Tabla compra*/
+.table-wrapper-compra
+{
+    height: 490px;
     overflow: auto;
 }
 

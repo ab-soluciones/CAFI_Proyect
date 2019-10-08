@@ -70,7 +70,7 @@ if (
         echo $result;
 } else if (isset($_POST['id']) && !empty($_POST['id']) && isset($_POST['fecha1']) && !empty($_POST['fecha1']) && isset($_POST['fecha2']) && !empty($_POST['fecha2'])
 && isset($_POST['estado']) && !empty($_POST['estado']) && isset($_POST['negocio'])
-&& isset($_POST['paquete']) && !empty($_POST['paquete']) && isset($_POST['monto']))  {
+&& isset($_POST['paquete']) && !empty($_POST['paquete']) && isset($_POST['monto'])  && isset($_POST['usextra']))  {
 
         $con = new Models\Conexion();
         $sus = new Models\Suscripcion();
@@ -80,8 +80,15 @@ if (
         $sus->setVencimiento($con->eliminar_simbolos($_POST['fecha2']));
         $sus->setEstado($con->eliminar_simbolos($_POST['estado']));
         $sus->setPaquete($con->eliminar_simbolos($_POST['paquete']));
+        $sus->setUsuarioExtra($con->eliminar_simbolos($_POST['usextra']));
         $sus->setMonto($con->eliminar_simbolos($_POST['monto']));
-        $result = $sus->editar($idusuario);
+        if($_POST['estado'] === "A"){
+         $result = $sus->ponerSuscripcionActiva($idusuario);
+        }else if($_POST['estado'] === "I"){
+         $result = $sus->ponerSuscripcionInactiva($idusuario);
+        }
+       
+
         echo $result;
 } else if (
         isset($_POST['concepto']) && isset($_POST['pago']) &&  isset($_POST['descripcion']) && isset($_POST['monto'])
@@ -172,9 +179,9 @@ if (
         $result = $retiro->editar($con->eliminar_simbolos($_POST['id']));
         echo $result;
 } else if (
-        isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca']) &&
+        isset($_POST['TCodigoB']) && isset($_POST['TNombre']) && isset($_POST['TColor']) && isset($_POST['TMarca'])  && isset($_POST['proveedor']) &&
         isset($_POST['TADescription']) && isset($_POST['DLUnidad']) && isset($_POST['TTipoP'])  && isset($_POST['TPrecioC']) && isset($_POST['TPrecioVen']) &&
-        isset($_POST['SCantidad']) && isset($_POST['REstado'])
+        isset($_POST['SCantidad']) && isset($_POST['REstado'])  && isset($_POST['stockminimo'])
 ) {
         function registrar($imagen, $id)
         {
@@ -185,6 +192,7 @@ if (
                 $producto->setImagen($imagen);
                 $producto->setColor($con->eliminar_simbolos($_POST['TColor']));
                 $producto->setMarca($con->eliminar_simbolos($_POST['TMarca']));
+                $producto->setProveedor($con->eliminar_simbolos($_POST['proveedor']));
                 $producto->setDescripcion($con->eliminar_simbolos($_POST['TADescription']));
                 $producto->setCantidad($con->eliminar_simbolos($_POST['SCantidad']));
                 $producto->setUnidad_Medida($con->eliminar_simbolos($_POST['DLUnidad']));
@@ -200,6 +208,7 @@ if (
                 $producto->setPrecioVenta($con->eliminar_simbolos($_POST['TPrecioVen']));
                 $producto->setCodigoBarras($con->eliminar_simbolos($_POST['TCodigoB']));
                 $producto->setPestado($con->eliminar_simbolos($_POST['REstado']));
+                $producto->setStockMinimo($con->eliminar_simbolos($_POST['stockminimo']));
                 $result = $producto->editar($con->eliminar_simbolos($_POST['TCodigoB']), $_SESSION['id']);
                 var_dump($_SESSION['acceso'], $_SESSION['comboID'],$_SESSION['idven'],$_SESSION['login'] ,
                 $_SESSION['estado'],$_SESSION['idnegocio'],$_SESSION['id']);
@@ -215,7 +224,7 @@ if (
                         if ($tipo_imagen == "image/jpg" || $tipo_imagen == 'image/jpeg' || $tipo_imagen == 'image/png') {
                                 $temp = explode(".", $_FILES["FImagen"]["name"]);
                                 $newfilename = round(microtime(true)) . '.' . end($temp);
-                                $imagen2 = "http://localhost/CAFI_System/img/productos/" . $newfilename . "";
+                                $imagen2 = "http://test.cafionline.com/img/productos/" . $newfilename . "";
                                 $carpeta_destino = "img/productos/";
                                 move_uploaded_file($_FILES["FImagen"]["tmp_name"], $carpeta_destino . $newfilename);
                                 registrar($imagen2,$_POST['TCodigoB']);

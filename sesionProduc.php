@@ -3,7 +3,7 @@ session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 $con = new Models\Conexion();
-$query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
+$query = "SELECT codigo_barras,nombre,imagen,color,marca,proveedor,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad,stock_minimo
 FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
 WHERE inventario.negocios_idnegocios='$_POST[idProducto]' ORDER BY nombre ASC";
 $row = $con->consultaListar($query);
@@ -17,6 +17,7 @@ $idnego = $_SESSION['idnegocio'];
            'imagen' =>  $renglon['imagen'],
            'color' =>  $renglon['color'],
            'marca' =>  $renglon['marca'],
+           'proveedor' =>  $renglon['proveedor'],
            'descripcion' => $renglon['descripcion'],
            'unidad_medida' => $renglon['unidad_medida'],
            'talla_numero' =>  $renglon['talla_numero'],
@@ -25,6 +26,7 @@ $idnego = $_SESSION['idnegocio'];
            'precio_venta' => $renglon['precio_venta'],
            'pestado' => $renglon['pestado'],
            'cantidad' => $renglon['cantidad'],
+            'stockmin' =>  $renglon['stock_minimo'],
            'idNegocio' => $idnego
            
        );

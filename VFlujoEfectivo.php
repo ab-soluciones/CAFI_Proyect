@@ -168,8 +168,8 @@ if (!isset($_SESSION['acceso'])) {
             </div>
 
         
-        <div class="contenedorTabla table-responsive">
-            <table class="table table-hover table-striped table-light">
+        <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
+            <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                 <thead class="thead-dark">
                     <tr>
                         <th>Ventas</th>
@@ -675,8 +675,8 @@ if (!isset($_SESSION['acceso'])) {
                 </tbody>
             </table>
             </div>
-            <div class="contenedorTabla table-responsive mt-3">
-                <table class="table table-hover table-striped table-light">
+            <div style="border-radius: 10px;" class="contenedorTabla table-responsive mt-3">
+                <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                 <thead class="thead-dark">
                     <tr>
                         <th colspan="5" style="text-align: center;">INGRESOS DETALLADOS</th>

@@ -3,18 +3,9 @@ require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
 
-if (!isset($_SESSION['acceso'])) {
-    header('location: index.php');
-} else if ($_SESSION['estado'] == "I") {
-    header('location: index.php');
-} else if (
-    $_SESSION['acceso'] != "Manager"
-) {
-    header('location: index.php');
-}
 $con = new Models\Conexion();
 $negocio = $_SESSION['comboID'];
-$query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
+$query = "SELECT codigo_barras,nombre,imagen,color,marca,proveedor,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad,stock_minimo
      FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
      WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
 $row = $con->consultaListar($query);
@@ -27,6 +18,7 @@ while ($renglon = mysqli_fetch_array($row)) {
         'imagen' =>  $renglon['imagen'],
         'color' =>  $renglon['color'],
         'marca' =>  $renglon['marca'],
+        'proveedor' =>  $renglon['proveedor'],
         'descripcion' => $renglon['descripcion'],
         'unidad_medida' => $renglon['unidad_medida'],
         'talla_numero' =>  $renglon['talla_numero'],
@@ -35,6 +27,7 @@ while ($renglon = mysqli_fetch_array($row)) {
         'precio_venta' => $renglon['precio_venta'],
         'pestado' => $renglon['pestado'],
         'cantidad' => $renglon['cantidad'],
+        'stockmin' =>  $renglon['stock_minimo'],
         'idNegocio' => $_SESSION['idnegocio']
 
     );

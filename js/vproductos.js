@@ -3,7 +3,7 @@ $(document).ready(function(){
     let editar = false;
     let codigoBarras = "";
     idSesion($('.sucursal').val());
-    obtenerInventario();
+    //obtenerInventario();
 
     $('#generador').click(function(){
         $.ajax({
@@ -26,9 +26,16 @@ $(document).ready(function(){
             success: function(response){
                 let datos = JSON.parse(response);
                 let template = '';
-                
+                let stockrequerido = 0;
+                let stock_minimo = 0;
+                let cantidad = 0;
                 datos.forEach(datos => {
-
+                stockrequerido = 0;
+                cantidad =  parseInt(datos.cantidad);
+                stock_minimo =  parseInt(datos.stockmin);
+                if(cantidad < stock_minimo){
+                    stockrequerido = stock_minimo - stockrequerido;
+                }
                     template += `
                     <tr>
                     <td>${datos.codigo_barras}</td>
@@ -36,6 +43,7 @@ $(document).ready(function(){
                     <td><img src= "${datos.imagen}" height="100" width="100" /></td>
                     <td>${datos.color}</td>
                     <td>${datos.marca}</td>
+                    <td>${datos.proveedor}</td>
                     <td>${datos.descripcion}</td>
                     <td>${datos.unidad_medida}</td>
                     <td>${datos.tipo}</td>
@@ -43,7 +51,10 @@ $(document).ready(function(){
                     <td>${datos.precio_compra}</td>
                     <td>${datos.precio_venta}</td>
                     <td>${datos.pestado}</td>
-                    <td>${datos.cantidad}</td>`;
+                    <td>${datos.cantidad}</td>
+                    <td>${datos.stockmin}</td>
+                    <td>${stockrequerido}</td>
+                    `;
                     if(datos.idNegocio == $('.sucursal').val()){
                         template += `<th style="width:100px;">
                         <div class="row">
@@ -70,7 +81,7 @@ $(document).ready(function(){
 
     }
 
-
+/*
     function obtenerInventario(){
         $.ajax({
             url: 'datosInventario.php',
@@ -90,6 +101,7 @@ $(document).ready(function(){
             }
         });
     }
+    */
 
     $('.sucursal').change(function(){
         idSesion($('.sucursal').val());
@@ -113,10 +125,10 @@ $(document).ready(function(){
         $('#formproducto').trigger('reset');
         $('#inventario').trigger('reset');
         $('.divCantidad').hide();
-        obtenerInventario();
+        //obtenerInventario();
     }
 
-    $('#formproducto').submit(function(e){
+   $('#formproducto').submit(function(e){
     
         var formData = new FormData(this);
         console.log(formData);  
@@ -132,7 +144,7 @@ $(document).ready(function(){
                     success: function(response) {
                         console.log("Respuesta: "+response);
                        
-                        if (response === "1") {
+                        if (response == "1" || response == "2") {
                             swal({
                                 title: 'Exito',
                                 text: 'Datos guardados satisfactoriamente',
@@ -140,25 +152,10 @@ $(document).ready(function(){
                             },
                             function (isConfirm) {
                               if (isConfirm){
+                                $('.modal').modal('hide');
+                                 editar = false;
                                 var idne = $('#negocioActual').val()
                                 idSesion(idne);
-                                limpiar();
-                                $('.modal').modal('hide');
-                                editar = false;
-                              }
-                              });
-                        } else if( response == "2"){
-                            swal({
-                                title: 'Exito',
-                                text: 'Datos guardados satisfactoriamente',
-                                type: 'success'
-                            },
-                            function (isConfirm) {
-                              if (isConfirm) {
-                                idSesion($('#negocioActual').val());
-                                limpiar();
-                                $('.modal').modal('hide');
-                                editar = false;
                               }
                               });
                         } else if(response == "imagenGrande"){
@@ -166,45 +163,31 @@ $(document).ready(function(){
                                 title: 'Alerta',
                                 text: 'Esta imagen es demaciado grande',
                                 type: 'warning'
-                            },
-                            function (isConfirm) {
-                              if (isConfirm) {
-                                idSesion($('#negocioActual').val());
-                              }
-                              });
+                            });
                         }else if(response == "imagenNoValida"){
                             swal({
                                 title: 'Alerta',
                                 text: 'Este tipo de imagen no es permitido',
                                 type: 'error'
-                            },
-                            function (isConfirm) {
-                              if (isConfirm) {
-                                idSesion($('#negocioActual').val());
-                              }
-                              });
+                            });
                         }
                          else {
                             swal({
                                 title: 'Alerta',
                                 text: 'Error, favor de comprovar los campos',
                                 type: 'warning'
-                            },
-                            function (isConfirm) {
-                              if (isConfirm) {
-                                idSesion($('#negocioActual').val());
-                              }
-                              });
+                            });
                         }
                     }
                 });
         e.preventDefault();
+       
     });
 
-    /*$('#inventario').submit(function(e){
+/*
+    $('#inventario').submit(function(e){
     
         var formData = new FormData(this);
-;
 
         $("#imagen").remove();
 
@@ -262,13 +245,14 @@ $(document).ready(function(){
                 obtenerDatosTablaProducto();
                 obtenerInventario();
                 e.preventDefault();
-    });*/
-
+    });
+*/
     $(document).on('click', '.beditar', function () {
         var valores = "";
-        $('.divCantidad').show();
-        $('#imagenmostrar').hide();
-        $('.rowMostrar').show();
+        $('.divCantidad').css('display', 'block');
+        $('#imagenmostrar').css('display', 'none');
+        $('.rowMostrar').css('display', 'block');
+        $('#preview').css('display', 'block');
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
         $(this).parents("tr").find("td").each(function () {
@@ -286,25 +270,27 @@ $(document).ready(function(){
         $('.rowMostrar').html(datos[2]);
         $('#color').val(datos[3]);
         $('#marca').val(datos[4]);
-        $('#desc').val(datos[5]);
-        $('#um').val(datos[6]);
-        if(datos[7] == "Ropa"){
+        $('#proveedor').val(datos[5]);
+        $('#desc').val(datos[6]);
+        $('#um').val(datos[7]);
+        if(datos[8] == "Ropa"){
             $('#tpr').trigger('click');
-        }else if(datos[7] == "Calzado"){
+        }else if(datos[8] == "Calzado"){
             $('#tpc').trigger('click');
-        }else if(datos[7] == "Otro"){
+        }else if(datos[8] == "Otro"){
             $('#tpo').trigger('click');
         }
-        $('#tipo_produc').val(datos[7]);
-        if(datos[8] > 0){
-            $('#med').val(datos[8]);
+        $('#tipo_produc').val(datos[8]);
+        if(datos[9] > 0){
+            $('#med').val(datos[9]);
         }else{
-            $('#ta').val(datos[8]);
+            $('#ta').val(datos[9]);
         }
-        $('#precioc').val(datos[9]);
-        $('#preciov').val(datos[10]);
-        $('#estado').val(datos[11]);
-        $('#cantidadEditar').val(datos[12]);
+        $('#precioc').val(datos[10]);
+        $('#preciov').val(datos[11]);
+        $('#estado').val(datos[12]);
+        $('#cantidadEditar').val(datos[13]);
+        $('#stockminimo').val(datos[14]);
         $('#nav-Inventario-tab').hide();
         editar = true;
 

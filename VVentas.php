@@ -40,14 +40,14 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
     <div class="contenedor container-fluid">
         <div class="row">
             <div class="col-12 col-lg-5 p-3 order-2 order-lg-1">
-                <h3 style="background-color: #262626;" class="text-center text-white mb-3">Venta</h3>
-                <div class="contenedorTabla table-wrapper">
-                    <div class="table-responsive">
+                <h3 style="background-color: #262626; border-radius: 7px;" class="text-center text-white mb-3">Venta</h3>
+                <div class="table-wrapper">
+                    <div class="rounded table-responsive">
                         <table class="scroll table table-hover table-striped table-light">
                             <thead class="bg-dark text-white">
                                 <tr>
                                     <th class="text-nowrap text-center"></th>
-                                    <th class="text-nowrap text-center d-none">Codigo</th>
+                                    <th class="text-nowrap text-center d-none">Código</th>
                                     <th class="text-nowrap text-center">Producto</th>
                                     <th class="text-nowrap text-center">Costo</th>
                                     <th class="text-nowrap text-center">Cant</th>
@@ -60,7 +60,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                         </table>
                     </div>
                 </div>
-                <div id="divtotal" style="background:  #262626;" class="text-white text-right font-weight-bold p-1 col-12">
+                <div id="divtotal" style="background:  #262626; border-radius: 7px;" class="text-white text-right font-weight-bold p-1 col-12">
                 </div>
                 <div class="d-block d-lg-flex mt-4 justify-content-center">
                     <button value="Efectivo" class="col-12 col-lg-4 m-1 bpago1 btn btn-primary text-white" type="button">Pago en efectivo</button>
@@ -69,7 +69,7 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                 </div>
             </div>
             <div class="col-12 col-lg-7 p-3 order-1 order-lg-2">
-                <h3 style="background-color: #262626;" class="text-center text-white mb-3">Busqueda de Producto</h3>
+                <h3 style="background-color: #262626; border-radius: 7px;" class="text-center text-white mb-3">Búsqueda de Producto</h3>
                 <div class="input-group mb-2">
                     <!-- <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button> -->
                     <div class="input-group-prepend">
@@ -77,14 +77,14 @@ if (!isset($_SESSION['acceso']) && !isset($_SESSION['estado'])) {
                     </div>
                     <input autofocus onkeypress="return check(event)" class="form-control col-12 col-lg-4" type="search" id="busquedap" autocomplete="off" placeholder="Buscar Producto...">
                 </div>
-                <div class="contenedorTabla table-responsive table-wrapper-productos">
-                    <table class="table table-hover table-striped table-light">
+                <div style="border-radius: 10px;" class="contenedorTabla table-responsive table-wrapper-productos">
+                    <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center"></th>
                                 <th class="text-nowrap text-center">Imagen</th>
                                 <th class="text-nowrap text-center">Producto</th>
-                                <th style="text: orangered;" class="text-nowrap text-center bg-dark">Codigo</th>
+                                <th style="text: orangered;" class="text-nowrap text-center bg-dark">Código</th>
                                 <th class="text-nowrap text-center">Existencia</th>
                                 <th style="text: orangered;" class="text-nowrap text-center bg-dark">Precio</th>
                                 <th class="text-nowrap text-center">Cantidad</th>

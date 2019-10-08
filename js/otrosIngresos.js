@@ -38,7 +38,6 @@ $(document).ready(function (){
         });
     }
 
-
     $('.bclose').click(function(){
         $('.modal').modal('hide');
         $('#hideedit').show();

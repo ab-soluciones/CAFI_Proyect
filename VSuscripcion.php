@@ -59,11 +59,11 @@ if (!isset($_SESSION['acceso'])) {
                             <div class="row">
                                 <div class="col-6">
                                     <h5 class="importante">Fecha Activacion:</h5>
-                                    <input class="form-control" id="fecha1" type="date" name="DFecha">
+                                    <input class="form-control" id="fecha1" type="date">
                                 </div>
                                 <div class="col-6">
                                     <h5 class="importante">Fecha Vencimiento:</h5>
-                                    <input class="form-control" id="fecha2" type="date" name="DFecha2">
+                                    <input class="form-control" id="fecha2" type="date">
                                 </div>
                             </div>
 
@@ -77,12 +77,13 @@ if (!isset($_SESSION['acceso'])) {
                                 </div>
                                 <div class="col-6" id="divnegocio">
                                     <h5 class="general">Negocio:</h5>
-                                    <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" autocomplete="off">
+                                    <input id="innegocio" class="form form-control" list="negocios" autocomplete="off">
                                     <datalist id="negocios">
                                         <?php
                                         $datos = false;
                                         $con = new Models\Conexion();
-                                        $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios ORDER BY nombre_negocio ASC";
+                                        $query = "SELECT nombre_negocio,ciudad,domicilio FROM negocios t1
+                                        WHERE NOT EXISTS (SELECT NULL FROM suscripcion t2 WHERE t2.negocio_id = t1.idnegocios)";
                                         $row = $con->consultaListar($query);
 
                                         while ($result = mysqli_fetch_array($row)) {
@@ -108,9 +109,13 @@ if (!isset($_SESSION['acceso'])) {
                                         <option value="3">3</option>
                                     </select>
                                 </div>
+                               <div class="divusextra col-6">
+                               <h5 class="general">Usuario extra:</h5>
+                               <input type="number" class="form form-control" min="0" id="usextra">
+                               </div>
                                 <div class="col-6">
                                     <h5 class="general">Monto:</h5>
-                                    <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" name="TMonto" placeholder="$">
+                                    <input id="monto" type="text" onkeypress="return check(event)" class="form form-control" placeholder="$">
                                 </div>
                             </div>
                             <input id="bclose" type="submit" class="btn bg-dark text-primary btn-lg btn-block mt-4" name="" value="Guardar">
@@ -136,8 +141,8 @@ if (!isset($_SESSION['acceso'])) {
                         <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                         <button class="bmodal d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
-                    <div class="contenedorTabla table-responsive">
-                        <table class="table table-hover table-striped table-light">
+                    <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
+                        <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                             <thead class="thead-dark">
                               <tr class="encabezados">
                                     <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>
@@ -146,9 +151,10 @@ if (!isset($_SESSION['acceso'])) {
                                     <th class="text-nowrap text-center" onclick="sortTable(3)">Estado</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(4)">Negocio</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(5)">Paquete</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Monto</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Registró</th>
-                                    <th class="text-nowrap text-center" onclick="sortTable(8)">Tarea</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(6)">Usuarios extra</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(7)">Monto</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(8)">Registró</th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(9)">Tarea</th>
                                 </tr>
                             </thead>
                             <tbody id="cuerpo">

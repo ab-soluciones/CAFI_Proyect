@@ -41,12 +41,12 @@ if (!isset($_SESSION['acceso'])) {
 <div class="contenedor container-fluid">
     <div class="row">
         <div style="margin: 0 auto; margin-top: 15px;" class="col-md-3">
-            <nav class="navbar navbar-dark bg-dark">
+            <nav style="border-radius: 10px 10px 0px 0px;" class="navbar navbar-dark bg-dark">
                 <div class="container">
                     <a style="margin: 0 auto;" href="#" class="navbar-brand">Inventario</a>
                 </div>
             </nav>
-            <div class="card card-body">
+            <div style="border-radius: 0px 0px 10px 10px;"  class="card card-body">
                 <form action="#" method="post">
                     <h5 class="general">Tipo producto:</h5>
                     <select id="tipo" class="form form-control" name="STipo" id="">
@@ -63,8 +63,8 @@ if (!isset($_SESSION['acceso'])) {
         <?php if (isset($_POST['STipo']) && $_POST['STipo'] === "Ropa") {
             $tipo = $_POST['STipo'];
             ?>
-            <div class="contenedorTabla table-responsive mt-4">
-                <table class="table table-hover table-striped table-light">
+            <div style="border-radius: 10px;" class="contenedorTabla table-responsive mt-4">
+                <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <th>Nombre</th>
                         <th>Imagen</th>
@@ -153,8 +153,8 @@ if (!isset($_SESSION['acceso'])) {
                 <?php } else if (isset($_POST['STipo']) && $_POST['STipo'] === "Calzado") {
                     $tipo = $_POST['STipo'];
                     ?>
-                    <div class="contenedorTabla table-responsive mt-4">
-                        <table class="table table-hover table-striped table-light">
+                    <div style="border-radius: 10px;" class="contenedorTabla table-responsive mt-4">
+                        <table style="border-radius: 10px;"s class="table table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Nombre</th>

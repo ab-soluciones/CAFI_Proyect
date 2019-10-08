@@ -88,7 +88,7 @@ Config\Autoload::run();
                         </div>
                         <div class="col-lg-4">
                             <h5 class="general">Direccion:</h5>
-                            <input id="dir" class="form form-control" type="text"  onkeypress="return check(event)" name="TDireccion" placeholder="Direccion"  autocomplete="off">
+                            <input id="dir" class="form form-control" type="text"  onkeypress="return check(event)" name="TDireccion" placeholder="Direccion"  autocomplete="off" />
                         </div>
                     </div>
                     <div class="d-block d-lg-flex row">
@@ -122,7 +122,7 @@ Config\Autoload::run();
                         </div>
 
                         <div class="col-lg-4">
-                            <h5 class="general">Sueldo:</h5>
+                            <h5 class="general">Sueldo semanal:</h5>
                             <input id="sueldo" class="form form-control" type="text"  onkeypress="return check(event)" name="TSueldo" placeholder="Sueldo" autocomplete="off" >
                         </div>
                     </div>
@@ -204,8 +204,8 @@ Config\Autoload::run();
                     <input class="form-control col-12 col-lg-4" type="text" id="busqueda"  onkeypress="return check(event)" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
-                <div class="contenedorTabla table-responsive">
-                    <table class="table table-hover table-striped table-light">
+                <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
+                    <table style="border-radius: 10px;" class="table table-hover table-striped table-light">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th onclick="sortTable(0)">ID</th>

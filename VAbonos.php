@@ -45,7 +45,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header administrador">
+                <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -87,8 +87,8 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
                 <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda();" placeholder="Buscar..." title="Type in a name" value="">
             </div>
-            <div class="contenedorTabla table-responsive">
-                <table class="table table-bordered table-hover table-striped table-light">
+            <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
+                <table style="border-radius: 10px;" class="table table-bordered table-hover table-striped table-light">
                     <thead class="thead-dark">
                         <tr class="encabezados">
                             <th class="text-nowrap text-center" onclick="sortTable(0)">Estado</th>
