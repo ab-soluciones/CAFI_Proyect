@@ -75,6 +75,10 @@ class Producto
 
     public function guardar($negocio, $trabajador)
     {
+        $datos = array($this->codigo_barras,$this->nombre,$this->imagen,$this->color,$this->marca,$this->descripcion,
+        $this->unidad_medida,$this->talla_numero,$this->tipo,$this->precio_compra,$this->precio_venta,$this->pestado,
+        $trabajador,$negocio);
+
         $sql = "INSERT INTO producto (codigo_barras, nombre, imagen,color,marca ,descripcion, unidad_medida, talla_numero,
         tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab)
         VALUES('{$this->codigo_barras}', '{$this->nombre}', '{$this->imagen}','{$this->color}','{$this->marca}','{$this->descripcion}',
@@ -86,6 +90,9 @@ class Producto
 
     public function editar($id, $trabajador)
     {
+        $datos = array($this->nombre,$this->imagen,$this->color,$this->marca,$this->descripcion,$this->cantidad,$this->unidad_medida,
+        $this->talla_numero,$this->tipo,$this->precio_compra,$this->precio_venta,$this->pestado,$trabajador,$this->cantidad,$id);
+
         $sql = "UPDATE producto INNER JOIN inventario ON codigo_barras = producto_codigo_barras
         SET  nombre = '{$this->nombre}', imagen = '{$this->imagen}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
                 ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
@@ -97,6 +104,9 @@ class Producto
     
     public function editarSinImagen($id, $trabajador)
     {
+        $datos = array($this->codigo_barras,$this->nombre,$this->color,$this->marca,$this->descripcion,$this->cantidad,$this->unidad_medida,
+        $this->talla_numero,$this->tipo,$this->precio_compra,$this->precio_venta,$this->pestado,$trabajador,$this->cantidad,$this->codigo_barras,$id);
+
         $sql = "UPDATE producto INNER JOIN inventario ON codigo_barras = producto_codigo_barras
         SET  codigo_barras = '{$this->codigo_barras}', nombre = '{$this->nombre}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
                 ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',

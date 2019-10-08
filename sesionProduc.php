@@ -1,16 +1,15 @@
 <?php 
+session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
-session_start();
-$_SESSION['comboID'] =  $_POST['idProducto'];
 $con = new Models\Conexion();
-$negocio = $_SESSION['comboID'];
 $query = "SELECT codigo_barras,nombre,imagen,color,marca,descripcion,unidad_medida,talla_numero,tipo,precio_compra,precio_venta,pestado,cantidad
 FROM producto INNER JOIN inventario ON producto.codigo_barras=inventario.producto_codigo_barras
-WHERE inventario.negocios_idnegocios='$negocio' ORDER BY nombre ASC";
+WHERE inventario.negocios_idnegocios='$_POST[idProducto]' ORDER BY nombre ASC";
 $row = $con->consultaListar($query);
 $con->cerrarConexion();
 $json = array();
+$idnego = $_SESSION['idnegocio'];
    while ($renglon = mysqli_fetch_array($row)) {
        $json[] = array(
            'codigo_barras' =>  $renglon['codigo_barras'],
@@ -26,7 +25,7 @@ $json = array();
            'precio_venta' => $renglon['precio_venta'],
            'pestado' => $renglon['pestado'],
            'cantidad' => $renglon['cantidad'],
-           'idNegocio' => $_SESSION['idnegocio']
+           'idNegocio' => $idnego
            
        );
    }

@@ -115,6 +115,10 @@ class Clienteab
 
     public function guardar($idusuario)
     {
+        $datos = array($this->id,$this->nombre,$this->apaterno,$this->amaterno,$this->documento,$this->numerodoc,
+        $this->direccion,$this->telefono,$this->correo,$this->acceso,$this->login,$this->password,$this->estado,
+        $idusuario);
+
         $sql = "INSERT INTO clientesab (id_clienteab, nombre, apaterno, amaterno, tipo_documento, 
         numero_documento, direccion, telefono, correo, acceso, login, password , estado, usuariosab_idusuariosab) 
         VALUES('{$this->id}', '{$this->nombre}', '{$this->apaterno}', '{$this->amaterno}', '{$this->documento}',
@@ -126,12 +130,16 @@ class Clienteab
 
     public function eliminar($id)
     {
+        $datos = array($id);
         $sql = "DELETE FROM `clientesab` WHERE `clientesab`.`id_clienteab` = '$id'";
         $this->con->consultaSimple($sql);
     }
 
     public function editar($id, $idusuario)
     {
+        $datos = array($this->nombre,$this->apaterno,$this->amaterno,$this->documento,$this->numerodoc,
+        $this->direccion,$this->telefono,$this->correo,$this->login,$this->password,$this->estado,$idusuario,$id);
+        
         $sql = "UPDATE clientesab SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
         ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
         ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}', login='{$this->login}'

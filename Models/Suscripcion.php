@@ -74,11 +74,16 @@ class Suscripcion
 
     public function guardar($idusuario)
     {
+        
+
         $sql = "SELECT idsuscripcion FROM suscripcion WHERE negocio_id ='{$this->id_negocio}'";
         $result = $this->con->consultaRetorno($sql);
         if (isset($result['idsuscripcion'])) {
             $result = 0;
         } else {
+            $datos = arrays($this->id,$this->activacion,$this->vencimiento,$this->estado,$this->paquete,$this->monto,
+            $this->id_negocio,$idusuario);
+
             $sql = "INSERT INTO  suscripcion(idsuscripcion,fecha_activacion,fecha_vencimiento,estado,paquete,monto,negocio_id,usuariosab_idusuariosab)
             VALUES  ('{$this->id}', '{$this->activacion}', '{$this->vencimiento}','{$this->estado}',
             '{$this->paquete}','{$this->monto}','{$this->id_negocio}','$idusuario')";
@@ -91,12 +96,17 @@ class Suscripcion
 
     public function eliminar($id)
     {
+        $datos = array($id);
+
         $sql = "DELETE FROM suscripcion WHERE idsuscripcion='$id'";
         $this->con->consultaSimple($sql);
     }
 
     public function editar($idusuario)
     {
+        $datos = array($this->activacion,$this->vencimiento,$this->estado,$this->paquete,$this->monto,
+        $idusuario,$this->estado,$this->estado,$this->id);
+
         $sql = "UPDATE negocios
         INNER JOIN suscripcion ON suscripcion.negocio_id=negocios.idnegocios
         INNER JOIN clientesab ON clientesab.id_clienteab=negocios.clientesab_idclienteab 
@@ -109,6 +119,9 @@ class Suscripcion
         $result = $this->con->consultaSimple($sql);
 
         if ($result === 0) {
+            $datos2 = array($this->activacion,$this->vencimiento,$this->estado,$this->estado,$this->paquete,
+            $this->monto,$idusuario,$this->id);
+            
             $sql = "UPDATE suscripcion INNER JOIN negocios ON negocio_id = idnegocios INNER JOIN clientesab ON clientesab_idclienteab = id_clienteab  
                 SET fecha_activacion = '{$this->activacion}',fecha_vencimiento = '{$this->vencimiento}' , suscripcion.estado ='{$this->estado}'
                 ,clientesab.estado='{$this->estado}',suscripcion.paquete='{$this->paquete}', suscripcion.monto ='{$this->monto}',suscripcion.usuariosab_idusuariosab = '$idusuario'

@@ -41,6 +41,8 @@ class Inventario
 
     public function guardar()
     {
+        $datos =  array($this->cantidad,$this->codigob,$this->negocio,$this->trabajador);
+
         $query = "INSERT INTO inventario (cantidad,producto_codigo_barras,negocios_idnegocios,trabajador_idtrabajador) 
         VALUES ('{$this->cantidad}','{$this->codigob}','{$this->negocio}','{$this->trabajador}')";
         return $this->con->consultaSimple($query);
@@ -48,13 +50,17 @@ class Inventario
 
     public function editar()
     {
-        $query = "UPDATE invetario SET cantidad = '{$this->cantidad}', producto_codigo_barras = '{$this->codigob}', trabajador_idtrabajador = '{$this->trabajador}' WHERE producto_codigo_barras = '{$this->trabajador}'";
+        $datos = array($this->cantidad,$this->codigob,$this->trabajador,$this->trabajador);
+
+        $query = "UPDATE invetario SET cantidad = '{$this->cantidad}', producto_codigo_barras = '{$this->codigob}',
+         trabajador_idtrabajador = '{$this->trabajador}' WHERE producto_codigo_barras = '{$this->trabajador}'";
 
         return $this->con->consultaSimple($query);
     }
 
     public function actualizarStock($idventa, $negocio)
     {
+        
         $query = "SELECT inventario.producto_codigo_barras ,(cantidad - cantidad_producto) AS stock FROM
         inventario INNER JOIN detalle_venta ON inventario.producto_codigo_barras = detalle_venta.producto_codigo_barras
         WHERE detalle_venta.idventa='$idventa'";

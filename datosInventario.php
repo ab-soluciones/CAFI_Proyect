@@ -13,7 +13,6 @@ if (!isset($_SESSION['acceso'])) {
 }
 $con = new Models\Conexion();
 $negocios = $_SESSION['idnegocio'];
-$datos = false;
 $query = "SELECT clientesab_idclienteab FROM negocios WHERE idnegocios = '$negocios'";
 $result = $con->consultaRetorno($query);
 $query = "SELECT nombre,color,marca,talla_numero FROM producto t1

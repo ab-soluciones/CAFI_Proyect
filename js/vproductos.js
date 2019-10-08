@@ -140,9 +140,11 @@ $(document).ready(function(){
                             },
                             function (isConfirm) {
                               if (isConfirm){
-                                idSesion($('#negocioActual').val());
+                                var idne = $('#negocioActual').val()
+                                idSesion(idne);
                                 limpiar();
                                 $('.modal').modal('hide');
+                                editar = false;
                               }
                               });
                         } else if( response == "2"){
@@ -156,6 +158,7 @@ $(document).ready(function(){
                                 idSesion($('#negocioActual').val());
                                 limpiar();
                                 $('.modal').modal('hide');
+                                editar = false;
                               }
                               });
                         } else if(response == "imagenGrande"){
@@ -196,10 +199,9 @@ $(document).ready(function(){
                     }
                 });
         e.preventDefault();
-        editar = false;
     });
 
-    $('#inventario').submit(function(e){
+    /*$('#inventario').submit(function(e){
     
         var formData = new FormData(this);
 ;
@@ -260,11 +262,10 @@ $(document).ready(function(){
                 obtenerDatosTablaProducto();
                 obtenerInventario();
                 e.preventDefault();
-    });
+    });*/
 
     $(document).on('click', '.beditar', function () {
         var valores = "";
-        var valores2 = "";
         $('.divCantidad').show();
         $('#imagenmostrar').hide();
         $('.rowMostrar').show();

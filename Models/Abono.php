@@ -65,6 +65,8 @@ class Abono
     }
     public function guardar($adeudo, $total)
     {
+        $datos = array($this->id,"R",$this->cantidad,$this->pago,$this->forma_pago,$this->cambio,$this->fecha,$this->hora,$this->negocio,$this->trabajador,$adeudo);
+        
         $sql = "INSERT INTO abono (idabono, estado, cantidad, pago,forma_pago, cambio, fecha, hora, negocios_idnegocios, trabajador_idtrabajador, adeudos_id) 
         VALUES ('$this->id', 'R','$this->cantidad', '$this->pago', '$this->forma_pago', '$this->cambio', '$this->fecha', '$this->hora', '$this->negocio', '$this->trabajador', '$adeudo')";
 

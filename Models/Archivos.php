@@ -24,6 +24,7 @@ class Archivos{
             echo "imagenGrande";
         }
     }
+   
     
     function archivos($nombre){
         $temp = explode(".", $_FILES[$nombre]["name"]);

@@ -3,6 +3,7 @@
         <div class="col-lg-6">
             
             <h5 class="general">Codigo:</h5>
+            <input type="button" id="generador" value="Generador">
             <input id="cb" class="form form-control" onkeypress="return codigo(event)" type="text" name="TCodigoB" placeholder="0000000000000" maxlength="13">
         </div>
         <div class="col-lg-6">
@@ -19,7 +20,8 @@
                 <img id="imagenmostrar" src="" width="100" height="100" />
             </div>
 
-            <div class="rowMostrar">
+            <div id="rowMostrar">
+               
             </div>
 
             <div>

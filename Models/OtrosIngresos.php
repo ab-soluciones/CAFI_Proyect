@@ -45,17 +45,24 @@ class OtrosIngresos
 
     public function guardar($id, $negocio)
     {
+        $datos = array($this->id_otros_ingresos,$this->cantidad,$this->tipo,$this->forma_ingreso,$this->fecha,
+        $this->fecha,$this->estado,$id,$negocio
+    );
         $sql = "INSERT INTO otros_ingresos (id_otros_ingresos,cantidad,tipo,forma_ingreso,fecha,estado,
         trabajador_idpersona,negocios_idnegocios) VALUES('{$this->id_otros_ingresos}','{$this->cantidad}',
         '{$this->tipo}','{$this->forma_ingreso}','{$this->fecha}','{$this->estado}','$id','$negocio')";
+
         return $this->con->consultaSimple($sql);
     }
 
 
     public function editar($trabajador)
     {
+        $datos = array($this->cantidad,$this->tipo,$this->forma_ingreso,$this->fecha,$this->estado,$trabajador,$this->id_otros_ingresos);
+
         $sql = "UPDATE otros_ingresos SET cantidad='{$this->cantidad}',tipo='{$this->tipo}',forma_ingreso='{$this->forma_ingreso}',
         fecha='{$this->fecha}',estado='{$this->estado}',trabajador_idpersona='$trabajador' WHERE id_otros_ingresos='{$this->id_otros_ingresos}'";
+        
         return $this->con->consultaSimple($sql);
     }
 

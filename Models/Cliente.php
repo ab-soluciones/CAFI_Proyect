@@ -98,6 +98,9 @@ class Cliente
 
     public function guardar($negocio, $trabajador)
     {
+        $datos = array($this->id,$this->nombre,$this->apaterno,$this->amaterno,$this->documento,$this->numerodoc,
+        $this->direccion,$this->telefono,$this->correo,$this->estado,$negocio,$trabajador);
+
         $sql = "INSERT INTO cliente (idcliente, nombre, apaterno, amaterno, tipo_documento, 
         numero_documento, direccion, telefono, correo, estado, negocios_idnegocios, trabajador_idtrabajador) 
         VALUES('{$this->id}', '{$this->nombre}', '{$this->apaterno}', '{$this->amaterno}', '{$this->documento}','{$this->numerodoc}'
@@ -108,16 +111,21 @@ class Cliente
 
     public function eliminar($id)
     {
+        $datos = array($id);
         $sql = "DELETE FROM cliente WHERE  idcliente = '$id'";
         $this->con->consultaSimple($sql);
     }
 
     public function editar($id, $trabajador)
     {
+        $datos = array($this->nombre,$this->apaterno,$this->amaterno,$this->documento,$this->numerodoc,
+        $this->direccion,$this->telefono,$this->correo,$this->estado,$trabajador,$id);
+        
         $sql = "UPDATE cliente SET nombre = '{$this->nombre}', apaterno = '{$this->apaterno}'
         ,amaterno ='{$this->amaterno}',tipo_documento ='{$this->documento}',numero_documento = '{$this->numerodoc}'
         ,direccion ='{$this->direccion}',telefono='{$this->telefono}',correo='{$this->correo}'
         , estado ='{$this->estado}', trabajador_idtrabajador = '$trabajador' WHERE idcliente ='$id'";
+
         return $this->con->consultaSimple($sql);
     }
 

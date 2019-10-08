@@ -48,6 +48,8 @@ class Gasto
     }
     public function guardar($negocio, $trabajador)
     {
+        $datos = array($this->id,$this->concepto,$this->pago,$this->descripcion,$this->monto,$this->estado,$this->fecha,
+        $negocio,$trabajador);
         $sql = "INSERT INTO gastos(idgastos,concepto, pago , descripcion, monto, estado, fecha,  negocios_idnegocios, trabajador_idtrabajador) 
         VALUES('{$this->id}', '{$this->concepto}', '{$this->pago}', '{$this->descripcion}', '{$this->monto}' , '{$this->estado}' ,'{$this->fecha}','$negocio', '$trabajador')";
         return $this->con->consultaSimple($sql);
@@ -55,12 +57,15 @@ class Gasto
 
     public function eliminar($id)
     {
+        $datos = array($id);
         $sql = "DELETE FROM gastos WHERE  idgastos = '$id'";
         $this->con->consultaSimple($sql);
     }
 
     public function editar($id, $trabajador)
     {
+        $datos = array($this->concepto,$this->pago,$this->descripcion,$this->monto,$this->estado,$this->fecha,$trabajador,$id);
+        
         $sql = "UPDATE gastos SET concepto = '{$this->concepto}', pago = '{$this->pago}', descripcion = '{$this->descripcion}', 
         monto ='{$this->monto}', estado ='{$this->estado}', fecha ='{$this->fecha}' , trabajador_idtrabajador = '{$trabajador}'
         WHERE idgastos ='$id'";

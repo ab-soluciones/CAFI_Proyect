@@ -69,6 +69,9 @@ class Retiro
     }
     public function guardar()
     {
+        $datos = array($this->id,$this->concepto,$this->tipo,$this->cantidad,$this->descripcion,$this->fecha,$this->hora,
+        $this->estado,$this->negocio,$this->trabajador);
+
         $sql = "INSERT INTO retiros (idretiro, concepto, tipo, cantidad, descripcion, fecha, hora,estado, negocios_idnegocios, trabajador_idtrabajador) 
         VALUES ('$this->id', '$this->concepto','$this->tipo','$this->cantidad', '$this->descripcion', '$this->fecha','$this->hora','$this->estado', '$this->negocio', '$this->trabajador')";
         return $this->con->consultaSimple($sql);
@@ -76,6 +79,8 @@ class Retiro
 
     public function editar($id)
     {
+        $datos = arrays($this->estado,$this->trabajador,$id);
+        
         $sql = "UPDATE retiros SET estado = '$this->estado', trabajador_idtrabajador='$this->trabajador' WHERE idretiro='$id'";
         return $this->con->consultaSimple($sql);
     }

@@ -48,6 +48,8 @@ class Adeudo
     }
     public function guardar()
     {
+        $datos = array($this->id,$this->total,$this->pago_minimo,$this->estado,$this->venta,$this->negocio,$this->cliente);
+
         $sql = "INSERT INTO adeudos (idadeudos, total_deuda, pago_minimo, estado_deuda, ventas_idventas, 
          negocios_idnegocios, cliente_idcliente) 
         VALUES('{$this->id}', '{$this->total}', '{$this->pago_minimo}', '{$this->estado}', '{$this->venta}',
@@ -57,20 +59,27 @@ class Adeudo
     }
       public function editarTotalEstadoR($id, $idusuario)
     {
+        $datos1 = array($idusuario,$id);
+
         $sql = "UPDATE adeudos INNER JOIN abono ON adeudos.idadeudos=abono.adeudos_id 
         SET adeudos.total_deuda=(adeudos.total_deuda-abono.cantidad),abono.estado='R',
         abono.trabajador_idtrabajador='$idusuario' WHERE abono.idabono='$id'";
         $result =  $this->con->consultaSimple($sql);
+        $datos2 = array($id);
         $sql = "UPDATE adeudos INNER JOIN abono SET estado_deuda = IF(total_deuda = '0','L','A')  WHERE abono.idabono='$id'";
         $result = $this->con->consultaSimple($sql);
         return $result;
     }
     public function editarTotalEstadoC($id, $idusuario)
     {
+        $datos = array($idusuario,$id);
+
         $sql = "UPDATE adeudos INNER JOIN abono ON adeudos.idadeudos=abono.adeudos_id 
         SET adeudos.total_deuda=(adeudos.total_deuda+abono.cantidad),abono.estado='C',
         abono.trabajador_idtrabajador='$idusuario' WHERE abono.idabono='$id'";
         $result = $this->con->consultaSimple($sql);
+        
+        $datos2 = array($id);
         $sql = "UPDATE adeudos INNER JOIN abono SET estado_deuda = IF(total_deuda = '0','L','A')  WHERE abono.idabono='$id'";
         $result = $this->con->consultaSimple($sql);
         return $result;

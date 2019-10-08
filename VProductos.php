@@ -236,7 +236,7 @@ if (!isset($_SESSION['acceso'])) {
     <!-- Modal -->
 
             <!-- Modal -->
-            <div class="modal fade" id="modalFormCodigo" role="dialog">
+            <div class="f fade" id="modalFormCodigo" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->

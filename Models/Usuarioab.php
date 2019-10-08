@@ -85,9 +85,12 @@ class Usuarioab
 
     public function guardar()
     {
+        $datos = array($this->id,$this->nombre,$this->apaterno,$this->amaterno,$this->acceso,$this->login,
+        $this->password,$this->estado);
+
         $sql = "INSERT INTO usuariosab(idusuariosab,nombre,apaterno,amaterno,acceso,login,password,estado)
-   VALUES  ('{$this->id}', '{$this->nombre}', '{$this->apaterno}',
-  '{$this->amaterno}','{$this->acceso}','{$this->login}','{$this->password}','{$this->estado}')";
+        VALUES  ('{$this->id}', '{$this->nombre}', '{$this->apaterno}',
+        '{$this->amaterno}','{$this->acceso}','{$this->login}','{$this->password}','{$this->estado}')";
 
     return $this->con->consultaSimple($sql);
     
@@ -95,12 +98,16 @@ class Usuarioab
 
     public function eliminar($id)
     {
+        $datos = array($id);
         $sql = "DELETE FROM usuariosab WHERE idusuariosab='$id'";
         $this->con->consultaSimple($sql);
     }
 
     public function editar($id)
     {
+        $datos = array($this->nombre,$this->apaterno,$this->amaterno,$this->acceso,$this->login,$this->password,
+        $this->estado,$id);
+        
         $sql = "UPDATE usuariosab SET nombre = '{$this->nombre}',apaterno = '{$this->apaterno}'
         ,amaterno ='{$this->amaterno}', acceso = '{$this->acceso}',login = '{$this->login}'
         ,password =  '{$this->password}' ,estado ='{$this->estado}' WHERE idusuariosab = '$id'";

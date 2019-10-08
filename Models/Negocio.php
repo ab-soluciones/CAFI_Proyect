@@ -48,6 +48,8 @@ class Negocio
 
     public function guardar($idusuario)
     {
+        $datos = array(null,$this->nombre,$this->domicilio,$this->ciudad,$this->telefono,$this->impresora,$this->idcliente,$idusuario);
+
         $sql = "INSERT INTO negocios(idnegocios,nombre_negocio,domicilio,ciudad,telefono_negocio,impresora,clientesab_idclienteab,usuariosab_idusuariosab) VALUES('null', 
         '{$this->nombre}','{$this->domicilio}','{$this->ciudad}','{$this->telefono}','{$this->impresora}','{$this->idcliente}','$idusuario')";
 
@@ -56,12 +58,16 @@ class Negocio
 
     public function eliminar($id)
     {
+        $datos = array($id);
         $sql = "DELETE FROM negocios WHERE idnegocios = '$id'";
+
         $this->con->consultaSimple($sql);
     }
 
     public function editar($id, $idusuario)
     {
+        $datos = array($this->nombre,$this->domicilio,$this->ciudad,$this->telefono,$this->impresora,$idusuario,$id);
+        
         $sql = "UPDATE negocios SET nombre_negocio = '{$this->nombre}', domicilio = '{$this->domicilio}'
         ,ciudad ='{$this->ciudad}',telefono_negocio = '{$this->telefono}',impresora = '{$this->impresora}', clientesab_idclienteab ='{$this->idcliente}'
         , usuariosab_idusuariosab = '$idusuario' WHERE idnegocios ='$id'";

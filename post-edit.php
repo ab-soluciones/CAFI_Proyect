@@ -201,6 +201,9 @@ if (
                 $producto->setCodigoBarras($con->eliminar_simbolos($_POST['TCodigoB']));
                 $producto->setPestado($con->eliminar_simbolos($_POST['REstado']));
                 $result = $producto->editar($con->eliminar_simbolos($_POST['TCodigoB']), $_SESSION['id']);
+                var_dump($_SESSION['acceso'], $_SESSION['comboID'],$_SESSION['idven'],$_SESSION['login'] ,
+                $_SESSION['estado'],$_SESSION['idnegocio'],$_SESSION['id']);
+                
                 echo $result;
         }
         
@@ -215,7 +218,6 @@ if (
                                 $imagen2 = "http://localhost/CAFI_System/img/productos/" . $newfilename . "";
                                 $carpeta_destino = "img/productos/";
                                 move_uploaded_file($_FILES["FImagen"]["tmp_name"], $carpeta_destino . $newfilename);
-                                $negocio = $_SESSION['idnegocio'];
                                 registrar($imagen2,$_POST['TCodigoB']);
                         } else {
                                 echo "imagenNoValida";
@@ -229,8 +231,8 @@ if (
                 $con = new Models\Conexion();
                 $result2 = $con->consultaRetorno($query);
                 $con->cerrarConexion();
-                $negocio = $_SESSION['idnegocio'];
                 registrar($result2['imagen'], $_POST['TCodigoB']);
+
         }
 } else if (
         isset($_POST['idAbono']) &&  isset($_POST['estadoActual']) &&  isset($_POST['estadoNuevo'])

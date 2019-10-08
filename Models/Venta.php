@@ -82,6 +82,9 @@ class Venta
 
     public function guardar()
     {
+        $datos = array($this->descuento,$this->total,$this->pago,$this->forma_pago,$this->cambio,$this->fecha,
+        $this->hora,$this->estado,$this->trabajador,$this->negocio);
+        
         $sql = "INSERT INTO venta (idventas, descuento, total, pago, forma_pago, cambio, fecha, hora, estado_venta, idtrabajador, idnegocios) 
         VALUES (NULL, '{$this->descuento}', '{$this->total}','{$this->pago}','{$this->forma_pago}','{$this->cambio}','{$this->fecha}'
         ,'{$this->hora}','{$this->estado}','{$this->trabajador}','{$this->negocio}');";
