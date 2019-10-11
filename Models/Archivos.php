@@ -15,7 +15,7 @@ class Archivos{
                         if(move_uploaded_file($_FILES[$nombre]["tmp_name"],"img/".$newfilename)){
                             echo $imagen2;
                         }else{
-                            echo 0;
+                            echo "Error";
                         }
             }else{
                 echo "imagenNoValida";

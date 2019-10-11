@@ -7,8 +7,8 @@ class Conexion
 
     private $datos = array(
         "host" => "localhost",
-        "user" => "u926133147_admin",
-        "pass" => "bvEwV3XQjRDb",
+        "user" => "root",
+        "pass" => "",
         "db" => "cafi_db"
 
     );
@@ -119,7 +119,7 @@ class Conexion
                  "+", "}", "{", "¨", "´",
                  ">", "< ", ";", ",", ":",
                 "''"," "),
-            ' ',
+            '',
             $string
         );
     return $string;

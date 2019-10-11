@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    var datos = [];
     $(document).on('click','#btncompra, #guardar_compra, #cancelar_compra, #agregar_producto, #eliminar_producto', function(){
         var boton = $(this).attr('id');
 
@@ -15,6 +15,10 @@ $(document).ready(function () {
             var costo = $('#costo_producto').val();
             var cantidad = $('#cantidad').val();
 
+            if(codigo.trim() == ''){
+                $('#codigo_producto').focus();
+                return false;
+            }
             if(nombre.trim() == ''){
                 $('#nombre_producto').focus();
                 return false;
@@ -27,14 +31,12 @@ $(document).ready(function () {
             }else{
                 var subtotal = costo*cantidad;
                 var total = parseInt($('#total_compra').text().split('$')[1])+subtotal;
-                console.log($('#total_compra').text().split('$')[1]);
+                console.log($('#total_compra').text().split('$')[1]+subtotal);
 
                 var row=`
                         <tr>
-                            <td class="text-nowrap text-center">
-                                <button id="eliminar_producto" class="btn btn-danger" name="">Eliminar</button>
-                            </td>
-                            <td class="text-nowrap text-center">${codigo}</td>
+                            <td class="text-nowrap text-center"><button id='eliminar_producto' class='btn btn-danger' name=''>Eliminar</button></td>
+                            <td class="text-nowrap text-center numero">${codigo}</td>
                             <td class="text-nowrap text-center">${nombre}</td>
                             <td class="text-nowrap text-center">$${costo}</td>
                             <td class="text-nowrap text-center">${cantidad}</td>
@@ -50,6 +52,8 @@ $(document).ready(function () {
                 $('#costo_producto').val('');
                 $('#cantidad').val('');
                 $('#codigo_producto').focus();
+
+
             }
         }else if(boton == "eliminar_producto"){
             var subtotal = parseInt($(this).parent().parent().find("#producto_subtotal").text().split('$')[1]);
@@ -60,7 +64,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#FPago').on('change', function() {
+    $('#forma_de_pago').on('change', function() {
         if(this.value == "Credito"){
             $(this).parent().removeClass("col-lg-12").addClass("col-lg-4");
             $('.fechascredito').removeClass("d-none").addClass("d-block");
@@ -68,6 +72,29 @@ $(document).ready(function () {
             $(this).parent().removeClass("col-lg-4").addClass("col-lg-12");
             $('.fechascredito').removeClass("d-block").addClass("d-none");
         }
+    });
+
+    $(document).on('click','.compra_finalizada',function(){
+        var valores = "";
+        var cont = 0;
+        $(".numero").parent("tr").find("td").each(function() {
+            if($(this).html() != '<button id="eliminar_producto" class="btn btn-danger" name="">Eliminar</button>'){
+            valores += $(this).html() + "?";
+            }
+
+        });
+        console.log(valores);
+        datos = valores.split("?");
+        console.log(datos);
+        $.ajax({
+            type: "POST",
+            url: 'guardarCompra.php',
+            data: {'array': JSON.stringify(datos)},//capturo array     
+            success: function(response){
+                console.log("La respuesta: "+response);
+          }
+  });
+
     });
     
 });

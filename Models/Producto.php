@@ -6,16 +6,14 @@ class Producto
     private $imagen;
     private $color;
     private $marca;
-    private $proveedor;
     private $descripcion;
+    private $cantidad;
     private $unidad_medida;
     private $talla_numero;
     private $tipo;
     private $precio_compra;
     private $precio_venta;
     private $pestado;
-    private $cantidad;
-    private $stock_minimo;
     private $con;
 
     public function __construct()
@@ -42,13 +40,13 @@ class Producto
     {
         $this->marca = $marca;
     }
-    public function setProveedor($proveedor)
-    {
-        $this->$proveedor =$proveedor;
-    }
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
+    }
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
     }
     public function setUnidad_Medida($unidad_medida)
     {
@@ -74,18 +72,8 @@ class Producto
     {
         $this->pestado = $pestado;
     }
-    public function setCantidad($cantidad)
-    {
-        $this->cantidad = $cantidad;
-    }
-    public function setStockMinimo($stock_minimo)
-    {
-        $this->stock_minimo = $stock_minimo;
-    }
 
-    public function guardar($negocio, $trabajador)
-    {
-<<<<<<< HEAD
+    public function guardar($negocio, $trabajador){
         $datos = array($this->codigo_barras,$this->nombre,$this->imagen,$this->color,$this->marca,$this->descripcion,
         $this->unidad_medida,$this->talla_numero,$this->tipo,$this->precio_compra,$this->precio_venta,$this->pestado,
         $trabajador,$negocio);
@@ -93,13 +81,8 @@ class Producto
         $sql = "INSERT INTO producto (codigo_barras, nombre, imagen,color,marca ,descripcion, unidad_medida, talla_numero,
         tipo, precio_compra, precio_venta, pestado,trabajador_idtrabajador, clientesab_id_clienteab)
         VALUES('{$this->codigo_barras}', '{$this->nombre}', '{$this->imagen}','{$this->color}','{$this->marca}','{$this->descripcion}',
-=======
-        $sql = "INSERT INTO producto (codigo_barras, nombre, imagen,color,marca,proveedor,descripcion, unidad_medida, talla_numero,
-        tipo, precio_compra, precio_venta, pestado,stock_minimo,trabajador_idtrabajador, clientesab_id_clienteab)
-        VALUES('{$this->codigo_barras}', '{$this->nombre}', '{$this->imagen}','{$this->color}','{$this->marca}','{$this->proveedor}','{$this->descripcion}',
->>>>>>> barras_de_busqueda
         '{$this->unidad_medida}','{$this->talla_numero}', '{$this->tipo}','{$this->precio_compra}'
-        ,'{$this->precio_venta}','{$this->pestado}','{$this->stock_minimo}','$trabajador','$negocio')";
+        ,'{$this->precio_venta}','{$this->pestado}','$trabajador','$negocio')";
 
         return $this->con->consultaSimple($sql);
     }
@@ -110,11 +93,11 @@ class Producto
         $this->talla_numero,$this->tipo,$this->precio_compra,$this->precio_venta,$this->pestado,$trabajador,$this->cantidad,$id);
 
         $sql = "UPDATE producto INNER JOIN inventario ON codigo_barras = producto_codigo_barras
-        SET  nombre = '{$this->nombre}', imagen = '{$this->imagen}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}', marca = '{$this->marca}', proveedor = '{$this->proveedor}'
+        SET  nombre = '{$this->nombre}', imagen = '{$this->imagen}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
                 ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
-                 precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', pestado = '{$this->pestado}',stock_minimo ='{$this->stock_minimo}'
+                 precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', pestado = '{$this->pestado}'
                  ,producto.trabajador_idtrabajador = '{$trabajador}',cantidad ='{$this->cantidad}' WHERE codigo_barras ='$id'";
-
+ 
         return $this->con->consultaSimple($sql);
     }
     
@@ -124,9 +107,9 @@ class Producto
         $this->talla_numero,$this->tipo,$this->precio_compra,$this->precio_venta,$this->pestado,$trabajador,$this->cantidad,$this->codigo_barras,$id);
 
         $sql = "UPDATE producto INNER JOIN inventario ON codigo_barras = producto_codigo_barras
-        SET  codigo_barras = '{$this->codigo_barras}', nombre = '{$this->nombre}', color = '{$this->color}', marca = '{$this->marca}', proveedor = '{$this->proveedor}',descripcion = '{$this->descripcion}'
+        SET  codigo_barras = '{$this->codigo_barras}', nombre = '{$this->nombre}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
                 ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
-                 precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', pestado = '{$this->pestado}',stock_minimo ='{$this->stock_minimo}'
+                 precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', pestado = '{$this->pestado}'
                  ,producto.trabajador_idtrabajador = '{$trabajador}',cantidad ='{$this->cantidad}',producto_codigo_barras = '{$this->codigo_barras}' WHERE codigo_barras ='$id'";
 
         return $this->con->consultaSimple($sql);

@@ -93,56 +93,56 @@ if (!isset($_SESSION['acceso'])) {
             <div class="col-6">
                 <p class="statusMsg"></p>
                 <div class="row mb-2">
-                    <button id="guardar_compra" class="btn btn-primary mr-2">Guardar Compra</button>
+                    <button id="guardar_compra" class="btn btn-primary mr-2 compra_finalizada">Guardar Compra</button>
                     <button id="cancelar_compra" class="btn btn-danger">Cancelar Compra</button>
                 </div>
                 <form class="form-group border p-3" id="formgastos">
                     <div class="row">
                         <div class="d-block col-lg-4">
                             <p class="general">Folio de factura:</p>
-                            <input id="monto" class="form-control form-control-sm" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
+                            <input id="folio_factura" class="form-control form-control-sm" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
                         </div>
                         <div class="d-block col-lg-4">
                             <p class="importante">Fecha de facturación:</p>
-                            <input class="form-control form-control-sm" id="fecha" type="date" name="DFecha" >
+                            <input class="form-control form-control-sm" id="fecha_facturacion" type="date" name="DFecha" >
                         </div>
                         <div class="d-block col-lg-4">
                             <p class="importante">Fecha de vencimiento:</p>
-                            <input class="form-control form-control-sm" id="fecha" type="date" name="DFecha" >
+                            <input class="form-control form-control-sm" id="fecha_vencimiento" type="date" name="DFecha" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="d-block col-lg-4">
                             <p class="general">Codigo de proveedor:</p>
-                            <input id="monto" class="form form-control form-control-sm" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
+                            <input id="codigo_proveedor" class="form form-control form-control-sm" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
                         </div>
                         <div class="d-block col-lg-4">
-                            <p class="general">Nombre:</p>
-                            <input id="monto" class="form form-control form-control-sm" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
+                            <p class="general">Nombre proveedor:</p>
+                            <input id="nombre_proveedor" class="form form-control form-control-sm" onkeypress="return check(event)" type="text" name="TMonto" placeholder="" autocomplete="off" >
                         </div>
                         <div class="d-block col-lg-4">
                             <p class="general">Metodo de pago:</p>
-                            <select name="SPago" id="pago" class="form form-control form-control-sm" >
-                                <option>Efectivo</option>
-                                <option>Tarjeta</option>
+                            <select name="SPago" id="metodo_pago" class="form form-control form-control-sm" >
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Tarjeta">Tarjeta</option>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class="d-block col-lg-12">
                             <p class="importante">Forma de pago:</p>
-                            <select id="FPago" class="form form-control form-control-sm" >
+                            <select id="forma_de_pago" class="form form-control form-control-sm" >
                                 <option value="De Contado">De Contado</option>
                                 <option value="Credito">Credito</option>
                             </select>
                         </div>
                         <div class="fechascredito d-none col-lg-4">
                             <p class="general">Inicio del credito:</p>
-                            <input class="form-control form-control-sm" id="fecha" type="date" name="DFecha" >
+                            <input class="form-control form-control-sm" id="inicio_de_credito" type="date" name="DFecha" >
                         </div>
                         <div class="fechascredito d-none col-lg-4">
                             <p class="general">Fecha del credito:</p>
-                            <input class="form-control form-control-sm" id="fecha" type="date" name="DFecha" >
+                            <input class="form-control form-control-sm" id="fecha_del_credito" type="date" name="DFecha" >
                         </div>
                     </div>
                 </form>
@@ -179,7 +179,7 @@ if (!isset($_SESSION['acceso'])) {
                         <table class="table table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
-                                    <th class="text-nowrap text-center" onclick="sortTable(0)"></th>
+                                    <th class="text-nowrap text-center" onclick="sortTable(0)">Accion</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(1)">Codigo</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(2)">Nombre</th>
                                     <th class="text-nowrap text-center" onclick="sortTable(3)">Costo</th>
