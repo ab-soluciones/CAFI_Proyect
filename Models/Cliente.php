@@ -14,9 +14,10 @@ class Cliente
     private $estado;
     private $con;
 
-    public function __construct()
+    public function __construct( )
     {
         $this->con = new Conexion();
+        
     }
     public function setId($id)
     {

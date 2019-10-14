@@ -2,11 +2,15 @@ $(document).ready(function () {
   //VUsuarios_ab
   let editar=false;
   let idusuario="";
-  optenerDatosTablaUsuarios();
+ // optenerDatosTablaUsuarios();
 
   $('.close').click(function () {
     $('#formuusers').trigger('reset');
     $(".contro").hide();
+  });
+  $('#bclose').click(function () {
+    $(".modal").modal('hide');
+
   });
   
   $('.clearForm').click(function () {
@@ -27,21 +31,11 @@ $(document).ready(function () {
   
 
 
-  $('#formuusers').submit(function (e) {
-    const postData = {
-      id: idusuario,
-      nombre:$('#nombre').val(),
-      apt: $('#apt').val(),
-      apm: $('#apm').val(),
-      acceso:$('#acceso').val(),
-      login: $('#login').val(),
-      password: $('#pass').val(),
-      estado: $('#estadousers').val()
-    };
+  $('#formulario').submit(function (e) {
+    
  
-    let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
-    $.post(url, postData, function (response) {
-
+    $.post('../Controllers/usuariosab.php?accion='+editar, $('#formulario').serialize(), function (response) {
+    console.log(response);
    
       if (response === "1") {
         swal({
@@ -64,12 +58,12 @@ $(document).ready(function () {
           type: 'warning'
         });
       }
-      optenerDatosTablaUsuarios();
+    //  optenerDatosTablaUsuarios();
     });
     e.preventDefault();
   })
 
-  function optenerDatosTablaUsuarios() {
+ /*  function optenerDatosTablaUsuarios() {
     $.ajax({
       url: 'tablausuariosab.php',
       type: 'GET',
@@ -99,7 +93,7 @@ $(document).ready(function () {
         $('#cuerpo').html(template);
       }
     })
-  }
+  } */
 
   $(document).on('click', '.beditarusers', function () {
     var valores = "";

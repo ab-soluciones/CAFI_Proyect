@@ -6,18 +6,16 @@ $con = new Models\Conexion();
 $data = json_decode($_POST['array']);
 //var_dump($data);
 $cont = 0;
-$vueltas = 0;
-$dst = array();
+
 $datos = array();
 foreach($data as $k => $v) {
     if($v != ""){
         if($cont <= 4){
             array_push($datos,$con->eliminar_simbolos($v));
-            array_push($dst,$con->eliminar_simbolos($v));
             $cont++;
             if($cont == 5){
                 //Aqui va el codigo de registro
-                $vueltas++;
+
                 $cont=0;
                 $datos = array();
             }
@@ -25,6 +23,4 @@ foreach($data as $k => $v) {
     }
 
 }
-var_dump($dst);
-echo "Vueltas: ".$vueltas;
 ?>

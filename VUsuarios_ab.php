@@ -42,7 +42,7 @@ if (!isset($_SESSION['acceso'])) {
 <body onload="inicio();">
     <?php
     $sel = "usuarios";
-    include("NavbarAB.php")
+    include("NavbarAB.php");
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
