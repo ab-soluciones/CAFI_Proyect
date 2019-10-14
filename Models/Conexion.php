@@ -47,14 +47,18 @@ class Conexion
         call_user_func_array(array($stmt,'bind_param'), $args);
         //accion 1 para insertar o actualizar
         if($accion == 1){
-            return $stmt->execute();
+            if($stmt->execute()){
+              $mensaje="Registro exitoso";
+            }else{
+              $mensaje="Ocurrio un problema, intente de nuevo";
+            }
+          return $mensaje;
         }else{
             $stmt->execute();
             return mysqli_fetch_all($stmt->get_result());
         }
         
-        $this->datatipe = "";
-        $datatipe = "";
+        $this->con->close();
 
     }
    public function eliminar_simbolos($string){
@@ -112,8 +116,8 @@ class Conexion
 
     public function obtenerDatosDeTabla($sql)
     {
-        $result = $this->con->query($sql);
-        return $result;
+        return mysqli_fetch_all($this->con->query($sql));
+        $this->con->close();
     }
 
 
