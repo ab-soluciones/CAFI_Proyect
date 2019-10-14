@@ -5,6 +5,29 @@ var url = 'prueva.php';
 var tabla = 'cuerpo';
 var editar = 'editar';
 
+function obtenerDatosCombo(){
+    $.ajax({
+      url:'../Controllers/usuariosab.php?combo=combo',
+      type: 'GET',
+
+      success: function(response){
+        let datos = JSON.parse(response);
+        let template = `
+        <select>
+        `;
+        $.each(datos, function(i, item) {
+          alert(datos[i].PageName);
+          template += `
+          <option value=${datos[i].PageName}>${datos[i].PageName}</option>
+          `;
+        });
+        template += `</select>`;
+        $('#combo').html(template);
+      }
+    });
+  }
+
+
 pintarTabla(url,tabla,editar);
 
     function enviarFormulario(nombreIdFormulario,url){

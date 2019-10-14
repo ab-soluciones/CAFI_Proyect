@@ -1,19 +1,4 @@
-<?php
-require_once "Config/Autoload.php";
-Config\Autoload::run();
-session_start();
-include "check_token.php";
 
-if (!isset($_SESSION['acceso'])) {
-    header('location: index.php');
-} else if ($_SESSION['estado'] == "I") {
-    header('location: index.php');
-} else if ($_SESSION['acceso'] != "CEOAB") {
-    header('location: index.php');
-}
-
-
-?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -40,10 +25,7 @@ if (!isset($_SESSION['acceso'])) {
 </head>
 
 <body onload="inicio();">
-    <?php
-    $sel = "usuarios";
-    include("NavbarAB.php");
-    ?>
+
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
         <div class="modal-dialog">

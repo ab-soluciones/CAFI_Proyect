@@ -9,7 +9,7 @@ class Conexion
         "host" => "localhost",
         "user" => "root",
         "pass" => "",
-        "db" => "cafi_db"
+        "db" => "cafi_bd"
 
     );
 
@@ -48,22 +48,19 @@ class Conexion
         //accion 1 para insertar o actualizar
         if($accion == 1){
             return $stmt->execute();
-<<<<<<< HEAD
         }else if($accion == 2){ 
             $stmt->execute();
             if($stmt == 1){
                return $stmt->insert_id();
             }
             return $stmt;
-=======
->>>>>>> 62c33b1ebe8ea7cd2eaa1fff6d43de2c245cdfbe
         }else{
             $stmt->execute();
             return mysqli_fetch_all($stmt->get_result());
         }
+
+        $this->con->close();
         
-        $this->datatipe = "";
-        $datatipe = "";
 
     }
    public function eliminar_simbolos($string){
