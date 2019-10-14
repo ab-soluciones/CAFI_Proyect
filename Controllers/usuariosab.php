@@ -39,7 +39,6 @@ $tipo_datos_persona = "sssssssssssss";
 $consulta_usuarioab = "INSERT INTO usuariosab (email,acceso,entrada_sistema,contrasena) VALUES (?,?,?,?)";
 $tipo_datos_usuarioab = "ssss";
 $result = $conexion->consultaPreparada($datos_persona,$consulta_persona,1,$tipo_datos_persona);
-<<<<<<< HEAD
 //respuesta al front
 echo $conexion->consultaPreparada($datos_usuarioab,$consulta_usuarioab,1,$tipo_datos_usuarioab);
 
@@ -82,11 +81,4 @@ echo $conexion->consultaPreparada($datos_usuarioab,$consulta_usuarioab,1,$tipo_d
     
 }
 
-=======
-if($result != 0){
-    echo $result2 = $conexion->consultaPreparada($datos_usuarioab,$consulta_usuarioab,1,$tipo_datos_usuarioab);
-}
-    echo $result;
-}
->>>>>>> e55bcacae72b480428a59800c0a37cc3f270ae44
 ?>
