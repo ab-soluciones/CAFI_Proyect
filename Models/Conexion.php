@@ -62,7 +62,13 @@ class Conexion
         call_user_func_array( array($stmt,'bind_param'), $args);
         
         if($accion == 1){
+            return $stmt->execute();
+        }else if($accion == 2){ 
             $stmt->execute();
+            if($stmt == 1){
+               return $stmt->insert_id();
+            }
+            return $stmt;
         }else{
             $stmt->execute();
             return mysqli_fetch_all($stmt->get_result());

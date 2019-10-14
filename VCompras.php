@@ -2,17 +2,6 @@
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
-include "check_token.php";
-
-if (!isset($_SESSION['acceso'])) {
-    header('location: index.php');
-} else if ($_SESSION['estado'] == "I") {
-    header('location: index.php');
-} else if (
-    $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
-) {
-    header('location: index.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -31,7 +20,7 @@ if (!isset($_SESSION['acceso'])) {
 <body>
     <?php
     $sel = "compras";
-    include("Navbar.php")
+ 
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
