@@ -3,6 +3,8 @@ $(document).ready(function () {
     let editar = false;
     let idclienteab = "";
     optenerDatosTablaClientesab();
+
+
     
     function optenerDatosTablaClientesab() {
         $.ajax({
@@ -29,8 +31,8 @@ $(document).ready(function () {
                     <td  class="text-nowrap text-center">${datos.registro}</td>
                     <th  class="text-nowrap text-center" style="width:100px;">
                         <div class="row">
-                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>
@@ -43,6 +45,19 @@ $(document).ready(function () {
 
     $('.close').click(function () {
         $('#formclienteab').trigger('reset');
+        $('.contro').hide();
+    });
+
+    $('#login').keyup(function(){
+        var username = $('#login').val();
+        if(username.length >= 3){
+            $('.contro').show();
+            $.post("username_check.php", {username3: username}, function(data, status){
+                $("#status").html(data);
+                });
+        }else{
+            $('.contro').hide();
+        }
     });
 
     $('#bclose').click(function () {
@@ -67,8 +82,9 @@ $(document).ready(function () {
 
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
         $.post(url, postData, function (response) {
-            console.log(response);
+            
             $('#formclienteab').trigger('reset');
+            $('.contro').hide();
             optenerDatosTablaClientesab();
             editar = false;
             if (response === "1") {

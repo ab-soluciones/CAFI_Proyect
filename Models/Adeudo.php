@@ -55,12 +55,12 @@ class Adeudo
 
         $this->con->consultaSimple($sql);
     }
-    public function editarTotalEstadoR($id, $idusuario)
+      public function editarTotalEstadoR($id, $idusuario)
     {
         $sql = "UPDATE adeudos INNER JOIN abono ON adeudos.idadeudos=abono.adeudos_id 
         SET adeudos.total_deuda=(adeudos.total_deuda-abono.cantidad),abono.estado='R',
         abono.trabajador_idtrabajador='$idusuario' WHERE abono.idabono='$id'";
-        $this->con->consultaSimple($sql);
+        $result =  $this->con->consultaSimple($sql);
         $sql = "UPDATE adeudos INNER JOIN abono SET estado_deuda = IF(total_deuda = '0','L','A')  WHERE abono.idabono='$id'";
         $result = $this->con->consultaSimple($sql);
         return $result;
@@ -70,7 +70,7 @@ class Adeudo
         $sql = "UPDATE adeudos INNER JOIN abono ON adeudos.idadeudos=abono.adeudos_id 
         SET adeudos.total_deuda=(adeudos.total_deuda+abono.cantidad),abono.estado='C',
         abono.trabajador_idtrabajador='$idusuario' WHERE abono.idabono='$id'";
-        $this->con->consultaSimple($sql);
+        $result = $this->con->consultaSimple($sql);
         $sql = "UPDATE adeudos INNER JOIN abono SET estado_deuda = IF(total_deuda = '0','L','A')  WHERE abono.idabono='$id'";
         $result = $this->con->consultaSimple($sql);
         return $result;

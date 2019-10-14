@@ -7,6 +7,7 @@ $(document).ready(function () {
   let totalglobal;
   let codigo;
   let cantidad;
+  filtradoProductos();
   optenerDatosTabla(0);
   //cerrar el modal
   $(document).on('click', '.close', function () {
@@ -14,32 +15,11 @@ $(document).ready(function () {
     //hacer la suma de los subtotales para la variable global total
   });
 
-  function ejecutarImpresionTermica() {
-    let idventa = "";
-    const postData = {
-      idventa: idventa
-    };
-    $.post('ticket.php', postData, function (response2) {
-      if (response2) {
-        var explode = function () {
-          swal({
-            title: 'Exito',
-            text: 'Venta realizada exitosamente',
-            type: 'success'
-          },
-            function (isConfirm) {
-              if (isConfirm) {
-                location.reload();
-              }
-            });
-        };
-        setTimeout(explode, 600);
-      }
-    });
-  }
+
   //terminar la venta
   $(document).on('click', '.bvender', function () {
-    if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1) {
+    //pago efectivo
+    if ($('.tpago').val().length > 0 && $('.tanticipo').val().length < 1 && forma_pago === "Efectivo") {
       valor = $('.tpago').val();
       pago = valor = parseFloat(valor);
       if (valor < totalglobal) {
@@ -52,7 +32,7 @@ $(document).ready(function () {
         cambio = valor - totalglobal;
         camiostring = cambio.toString();
         swal({
-          title: 'Su cambio es de $ ' + camiostring,
+          title: 'Su cambio es de $' + camiostring,
           text: 'Confirme la venta',
           imageUrl: 'img/cambio.png',
           showCancelButton: true,
@@ -78,9 +58,10 @@ $(document).ready(function () {
               formapago: forma_pago
             };
             $.post('post-guardar.php', postData, function (response) {
-              if (response === "con impresora") {
-                ejecutarImpresionTermica();
-              } else if (response === "sin impresora") {
+              if (response === "Exitoprinter") {
+                window.open('ticketVenta.php');
+              }
+              if (response) {
                 var explode = function () {
                   swal({
                     title: 'Exito',
@@ -93,13 +74,12 @@ $(document).ready(function () {
                       }
                     });
                 };
-                setTimeout(explode, 600);
-
-              } else if (response != "con impresora" && response != "sin impresora") {
+                setTimeout(explode, 200);
+              } else {
                 var explode = function () {
                   swal({
                     title: 'Alerta',
-                    text: 'No se a realizado la venta',
+                    text: 'Venta no realizada',
                     type: 'warning'
                   },
                     function (isConfirm) {
@@ -108,12 +88,13 @@ $(document).ready(function () {
                       }
                     });
                 };
-                setTimeout(explode, 600);
+                setTimeout(explode, 200);
               }
             });
           });
       }
-    } else if ($('.tpago').val().length > 0 && $('.tanticipo').val().length > 0) {
+      //pago a credito
+    } else if ($('.tpago').val().length > 0 && $('.tanticipo').val().length > 0 && forma_pago === "Crédito") {
       valor = $('.tpago').val();
       pago = valor = parseFloat(valor);
       anticipo = parseFloat($('.tanticipo').val());
@@ -121,7 +102,7 @@ $(document).ready(function () {
         cambio = pago - anticipo;
         camiostring = cambio.toString();
         swal({
-          title: 'Su cambio es de $ ' + camiostring,
+          title: 'Su cambio es de $' + camiostring,
           text: 'Confirme la venta',
           imageUrl: 'img/cambio.png',
           showCancelButton: true,
@@ -146,9 +127,10 @@ $(document).ready(function () {
                 formapago: forma_pago
               };
               $.post('post-guardar.php', postData, function (response) {
-                if (response === "con impresora") {
-                  ejecutarImpresionTermica();
-                } else if (response === "sin impresora") {
+                if (response === "Exitoprinter") {
+                  window.open('ticketVenta.php');
+                }
+                if (response) {
                   var explode = function () {
                     swal({
                       title: 'Exito',
@@ -161,13 +143,12 @@ $(document).ready(function () {
                         }
                       });
                   };
-                  setTimeout(explode, 600);
-
-                } else if (response != "con impresora" && response != "sin impresora") {
+                  setTimeout(explode, 200);
+                } else {
                   var explode = function () {
                     swal({
                       title: 'Alerta',
-                      text: 'No se a realizado la venta',
+                      text: 'Venta no realizada',
                       type: 'warning'
                     },
                       function (isConfirm) {
@@ -176,7 +157,7 @@ $(document).ready(function () {
                         }
                       });
                   };
-                  setTimeout(explode, 600);
+                  setTimeout(explode, 200);
                 }
               });
 
@@ -194,7 +175,8 @@ $(document).ready(function () {
         });
       }
 
-    } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1) {
+    } else if ($('.tpago').val().length < 1 && $('.tanticipo').val().length < 1 && forma_pago === "Tarjeta") {
+      //pago con tarjeta
       if (totalglobal) {
         const postData = {
           total: totalglobal,
@@ -202,9 +184,10 @@ $(document).ready(function () {
           formapago: forma_pago
         };
         $.post('post-guardar.php', postData, function (response) {
-          if (response === "con impresora") {
-            ejecutarImpresionTermica();
-          } else if (response === "sin impresora") {
+          if (response === "Exitoprinter") {
+            window.open('ticketVenta.php');
+          }
+          if (response) {
             var explode = function () {
               swal({
                 title: 'Exito',
@@ -217,13 +200,12 @@ $(document).ready(function () {
                   }
                 });
             };
-            setTimeout(explode, 600);
-
-          } else if (response != "con impresora" && response != "sin impresora") {
+            setTimeout(explode, 200);
+          } else {
             var explode = function () {
               swal({
                 title: 'Alerta',
-                text: 'No se a realizado la venta',
+                text: 'Venta no realizada',
                 type: 'warning'
               },
                 function (isConfirm) {
@@ -232,7 +214,7 @@ $(document).ready(function () {
                   }
                 });
             };
-            setTimeout(explode, 600);
+            setTimeout(explode, 200);
           }
         });
 
@@ -330,7 +312,7 @@ $(document).ready(function () {
   //boton pago en efectivo
   $(document).on('click', '.bpago1', function () {
     forma_pago = $('.bpago1').val();
-    $('#divpagotarjeta').hide();
+    $('.divpagotarjeta').hide();
     $('#divdescuento').hide();
     $('#divanticipo').hide();
     $('#tablacliente').hide();
@@ -346,7 +328,7 @@ $(document).ready(function () {
   //boton pago a credito
   $(document).on('click', '.bpago2', function () {
     forma_pago = $('.bpago2').val();
-    $('#divpagotarjeta').hide();
+    $('.divpagotarjeta').hide();
     $('#divdescuento').hide();
     $('#divanticipo').hide();
     $('#divpago').hide();
@@ -369,7 +351,7 @@ $(document).ready(function () {
     $('#tablacliente').show();
     $('.bdescuento').show();
     $('#tablacliente').hide();
-    $('#divpagotarjeta').show();
+    $('.divpagotarjeta').show();
     $('.modal').modal('show');
 
     stringtotal = totalglobal.toString();
@@ -377,26 +359,6 @@ $(document).ready(function () {
     $('.hmtotal').html(menseaje);
   });
 
-
-  //spiner cantidad del concepto de la venta
-  $(document).on('change', '.incantdv', function () {
-    var costodv;
-    $(this).parents("tr").find(".tdcosto").each(function () {
-      costodv = $(this).html();
-    });
-    let element = $(this)[0].parentElement.parentElement;
-    const codigo = $(element).attr('codigoBa');
-    const postData = {
-      cantidadv: $(this).val(),
-      costo: costodv,
-      codigo: codigo
-    };
-
-    $.post('post-edit.php', postData, function (response) {
-      optenerDatosTabla(0);
-
-    });
-  });
 
   //boton delete concepto venta
   $(document).on('click', '.bdelete', function () {
@@ -436,9 +398,9 @@ $(document).ready(function () {
                   <td class="text-nowrap text-center"><button class="bdelete btn btn-danger">x</button></td>
                   <td class="text-nowrap text-center d-none">${datos.codigo}</td>
                   <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
-                  <td class="tdcosto text-nowrap text-center">$${datos.precio}</td>
-                  <td class="text-nowrap text-center"><input class='incantdv' type="number" value="${datos.cantidad}" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
-                  <td class="text-nowrap text-center">$${datos.subtotal}</td>
+                  <td class="tdcosto text-nowrap text-center">${datos.precio}</td>
+                  <td class="text-nowrap text-center">${datos.cantidad}</td>
+                  <td class="text-nowrap text-center">${datos.subtotal}</td>
               </tr>`;
         });
         $('#renglones').html(template);
@@ -451,9 +413,7 @@ $(document).ready(function () {
     })
   }
 
-  //filtrado tabla productos
-  $('#busquedap').keyup(function (e) {
-    if ($('#busquedap').val()) {
+  function filtradoProductos() {
       let search = $('#busquedap').val();
       $.ajax({
         url: 'bproductodv.php',
@@ -464,26 +424,33 @@ $(document).ready(function () {
           let template = '';
           datos.forEach(datos => {
             template += `<tr>
-                        <td class="datos font-weight-bold">${datos.codigo_barras}</td>
-                        <td><img src="data:image/jpg;base64,${datos.imagen}" height="50" width="50" /></td>
+                        <td> 
+                          <div class="row">
+                            <a class="bagregardv btn btn-secondary ml-1" href="#">
+                                <img src="img/carrito.png">
+                            </a>
+                          </div>
+                        </td>
+                        <td><img src="${datos.imagen}" height="50" width="50" /></td>
                         <td>${datos.nombre} ${datos.marca} ${datos.color} talla ${datos.talla_numero} um ${datos.unidad_medida}</td>
+                        <td class="datos font-weight-bold">${datos.codigo_barras}</td>
                         <td class="datos">${datos.existencia}</td>
-                        <td class="datos">$${datos.precio}</td>
+                        <td class="datos">${datos.precio}</td>
                         <td><input class='incan' type="number" value="1" name="quantity" min="1" max="" style="width: 60px; height: 38px;"></td>
-                        <td> <div class="row">
-                        <a class="bagregardv btn btn-secondary" href="#">
-                            <img src="img/carrito.png">
-                        </a>
-                    </div></td>
-                        </tr>`;
+                      </tr>`;
           });
           datos = "";
           $('#cuerpo').html(template);
 
         }
       });
-    }
 
+  }
+
+  //filtrado tabla productos
+  $('#busquedap').keyup(function (e) {
+
+    filtradoProductos();
   });
 
   //filtrado tabla clientes
@@ -498,13 +465,13 @@ $(document).ready(function () {
           let datos = JSON.parse(response);
           let template = '';
           datos.forEach(datos => {
-            template +=`<tr>
+            template += `<tr>
                         <td> <button class="text-nowrap text-center bagregarc btn bg-secondary text-white">ok</button></td>
                         <td class="text-nowrap text-center datoscliente d-none">${datos.idcliente}</td>
-                        <td class="text-centerdatoscliente">${datos.nombre}</td>
+                        <td class="text-center datoscliente">${datos.nombre}</td>
                         <td class="text-nowrap text-center">${datos.telefono}</td>
                         <td class="text-nowrap text-center datoscliente">${datos.estado}</td>
-                        <td class="text-nowrap text-center">$${datos.adeudos}</td>
+                        <td class="text-nowrap text-center">${datos.adeudos}</td>
                         </tr>`;
           });
           $('#cuerpotcliente').html(template);
@@ -527,9 +494,11 @@ $(document).ready(function () {
     renglon = valores.split("?");
     const postData = {
       idcliente: renglon[0],
-      estcliente: renglon[2],
+      estcliente: renglon[2]
     };
+
     $.post('post-guardar.php', postData, function (response) {
+
       if (response === "no agregado a la sesion") {
         swal({
           title: 'Alerta',
@@ -564,8 +533,10 @@ $(document).ready(function () {
       precio: result[2],
       cantidad: result[3]
     };
+
     $.post('post-guardar.php', postData, function (response) {
       optenerDatosTabla(0);
+
       if (response === "-1") {
         swal({
           title: 'Alerta',
@@ -576,12 +547,6 @@ $(document).ready(function () {
         swal({
           title: 'Alerta',
           text: 'Compruebe el stock del producto',
-          type: 'warning'
-        });
-      } else if (response === "producto existente") {
-        swal({
-          title: 'Alerta',
-          text: 'Producto existente en la venta, si desea agregar mas modifique la cantidad',
           type: 'warning'
         });
       }

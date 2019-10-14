@@ -9,13 +9,12 @@
                 <h5 class="general">Producto:</h5>
                 <input id="inproducto" class="form form-control" list="lproductos" name="DlProductos" autocomplete="off" required>
                 <datalist id="lproductos">
-                    
                 </datalist>
             </div>
         </div>
     </div>
 
     <div class="row justify-content-center">
-        <button type="submit" class="col-3 btn btn-lg btn-block btn-dark bclose">Guardar</button>
+        <button type="submit" class="col-12 btn btn-lg btn-primary bclose">Guardar</button>
     </div>
 </form>

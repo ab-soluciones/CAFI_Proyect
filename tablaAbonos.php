@@ -2,9 +2,18 @@
     require_once "Config/Autoload.php";
     Config\Autoload::run();
     session_start();
+    if (!isset($_SESSION['acceso'])) {
+        header('location: index.php');
+    } else if ($_SESSION['estado'] == "I") {
+        header('location: index.php');
+    } else if (
+        $_SESSION['acceso'] != "Manager" && $_SESSION['acceso'] != "Employes"
+    ) {
+        header('location: index.php');
+    }
     $con = new Models\Conexion();
     $negocios = $_SESSION['idnegocio'];
-    $query = "SELECT idabono,abono.estado AS a_estado,cantidad,pago,cambio,fecha,hora,cliente.nombre AS nombre_cliente,
+    $query = "SELECT idabono,abono.estado AS a_estado,cantidad,pago,forma_pago,cambio,fecha,hora,cliente.nombre AS nombre_cliente,
                         cliente.apaterno AS ap_cliente, cliente.amaterno AS am_cliente,trabajador.nombre,
                         trabajador.apaterno, adeudos_id FROM abono
                         INNER JOIN adeudos ON abono.adeudos_id=adeudos.idadeudos
@@ -20,6 +29,7 @@
             'a_estado' => $renglon['a_estado'],
             'cantidad' => $renglon['cantidad'],
             'pago' => $renglon['pago'],
+            'forma_pago' => $renglon['forma_pago'],
             'cambio' =>  $renglon['cambio'],
             'fecha' =>  $renglon['fecha'],
             'hora' =>  $renglon['hora'],

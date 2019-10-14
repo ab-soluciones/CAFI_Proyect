@@ -87,10 +87,10 @@ class Producto
     public function editar($id, $trabajador)
     {
         $sql = "UPDATE producto INNER JOIN inventario ON codigo_barras = producto_codigo_barras
-        SET  codigo_barras = '{$this->codigo_barras}', nombre = '{$this->nombre}', imagen = '{$this->imagen}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
+        SET  nombre = '{$this->nombre}', imagen = '{$this->imagen}', color = '{$this->color}', marca = '{$this->marca}',descripcion = '{$this->descripcion}'
                 ,cantidad ='{$this->cantidad}', unidad_medida ='{$this->unidad_medida}', talla_numero = '{$this->talla_numero}', tipo = '{$this->tipo}',
                  precio_compra = '{$this->precio_compra}',precio_venta ='{$this->precio_venta}', pestado = '{$this->pestado}'
-                 ,producto.trabajador_idtrabajador = '{$trabajador}',cantidad ='{$this->cantidad}',producto_codigo_barras = '{$this->codigo_barras}' WHERE codigo_barras ='$id'";
+                 ,producto.trabajador_idtrabajador = '{$trabajador}',cantidad ='{$this->cantidad}' WHERE codigo_barras ='$id'";
 
         return $this->con->consultaSimple($sql);
     }

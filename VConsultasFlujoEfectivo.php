@@ -2,15 +2,16 @@
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } elseif ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] == "Employes" || $_SESSION['acceso'] == "ManagerAB"
-    || $_SESSION['acceso'] == "CEOAB"
+    $_SESSION['acceso'] != "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 
@@ -21,6 +22,7 @@ if (!isset($_SESSION['acceso'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="icon" href="img/logo/nav1.png">
     <title>Flujo de efectivo</title>
     <script>
         var parametro;

@@ -2,15 +2,16 @@
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if (
-    $_SESSION['acceso'] == "Employes" || $_SESSION['acceso'] == "ManagerAB"
-    || $_SESSION['acceso'] == "CEOAB"
+    $_SESSION['acceso'] != "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 
@@ -23,7 +24,8 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
 
@@ -40,7 +42,7 @@ if (!isset($_SESSION['acceso'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
-                <div class="modal-header">
+                <div class="modal-header administrador">
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">×</span>
                         <span class="sr-only">Close</span>
@@ -64,7 +66,7 @@ if (!isset($_SESSION['acceso'])) {
                                 <div class="tab-pane fade show active" id="Producto" role="tabpanel" aria-labelledby="Producto-tab">
                                     <div class="col-12"><br>
                                         <form action="#" method="post">
-                                            <h5><label for="negocio" style="margin: 0 auto;" class="badge badge-info">Negocio:</label></h5>
+                                            <h5 class="general">Negocio:</h5>
                                             <select class="form form-control" name="SSucursal">
                                                 <option value=""></option>
                                                 <?php
@@ -79,18 +81,15 @@ if (!isset($_SESSION['acceso'])) {
                                                 }
                                                 ?>
                                                 <option value="Todos">Todos</option>
-                                            </select> <br>
-                                            <fieldset class="border p-2">
-                                                <legend class="w-auto">
-                                                    <h6>FECHA 1 - FECHA 2</h6>
-                                                </legend>
-                                                <h5><label for="fecha1" style="margin: 0 auto;" class="badge badge-primary">De:</label></h5>
+                                            </select> 
+                                            
+                                                <h5 class="general">De:</h5>
                                                 <input id="fecha1" class="form-control" type="date" name="DFecha1">
                                                 <br>
-                                                <h5><label for="fecha2" style="margin: 0 auto;" class="badge badge-success">A:</label></h5>
+                                                <h5 class="general">A:</h5>
                                                 <input id="fecha2" class="form-control" type="date" name="DFecha2">
-                                            </fieldset><br>
-                                            <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Consultar">
+                                            
+                                            <input type="submit" class="btn btn-dark text-primary mt-4 col-12" name="" value="Consultar">
                                         </form>
                                     </div>
                                 </div>
@@ -98,7 +97,7 @@ if (!isset($_SESSION['acceso'])) {
                                     <div class="col-12">
                                         <br>
                                         <form action="#" method="post">
-                                            <h5><label for="negocio" style="margin: 0 auto;" class="badge badge-info">Negocio:</label></h5>
+                                            <h5 class="general">Negocio:</h5>
                                             <select class="form form-control" name="SSucursal">
                                                 <option value=""></option>
                                                 <?php
@@ -114,9 +113,10 @@ if (!isset($_SESSION['acceso'])) {
                                                 ?>
                                                 <option value="Todos">Todos</option>
                                             </select> <br>
-                                            <h5><label for="inmes" style="margin: 0 auto;" class="badge badge-primary">Mes:</label></h5>
-                                            <input id="inmes" class="form-control" type="month" name="DMes"><br>
-                                            <input type="submit" class="btn btn-secondary btn-lg btn-block btn-dark" name="" value="Consultar">
+                                            <h5 class="general">Mes:</label></h5>
+                                            <input id="inmes" class="form-control" type="month" name="DMes">
+
+                                            <input type="submit" class="btn bg-dark text-primary col-12 mt-4" name="" value="Consultar">
                                         </form>
                                     </div>
                                 </div>
@@ -132,32 +132,45 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <!-- Modal -->
     <div class="contenedor container-fluid">
-        <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Consultar</button>
-        <p>Sucursal:</p>
-        <form action="#" method="POST">
-            <select id="sucursal" class="form form-control" name="SNegocio">
-                <option></option>
-                <?php
-                $con = new Models\Conexion();
-                $dueño = $_SESSION['id'];
-                $query = "SELECT nombre_negocio, idnegocios FROM negocios 
-                            WHERE clientesab_idclienteab = '$dueño'";
-                $row = $con->consultaListar($query);
-                $con->cerrarConexion();
+        <div id="tableContainer" class="d-block col-lg-12">
+            <div class="input-group mb-2">
+                <div class="font-weight-bold px-3 d-flex align-items-center">
+                    <p>Sucursal:</p>
+                </div>
+                
+                <div class="col-3">
+                    <form action="#" method="POST">
+                        <select id="sucursal" class="form form-control" name="SNegocio">
+                            <option></option>
+                            <?php
+                            $con = new Models\Conexion();
+                            $dueño = $_SESSION['id'];
+                            $query = "SELECT nombre_negocio, idnegocios FROM negocios 
+                                        WHERE clientesab_idclienteab = '$dueño'";
+                            $row = $con->consultaListar($query);
+                            $con->cerrarConexion();
 
-                while ($renglon = mysqli_fetch_array($row)) {
-                    echo "<option value='$renglon[idnegocios]'>" . $renglon['nombre_negocio'] . "</option>";
-                }
-                ?>
-            </select>
-            <input type="submit" style="display: none;">
-        </form>
-        <div style="margin: 0 auto; margin-top:10px;" class="col-md-8">
-            <h5 style="margin: 0 auto;"><label class="badge badge-info">
-                    <a style="color: white;" href="VConsultasFlujoEfectivo.php">Consultar otras fechas --></a>
-                </label></h5>
-            <table class="table table-bordered table-responsive-md">
-                <thead>
+                            while ($renglon = mysqli_fetch_array($row)) {
+                                echo "<option value='$renglon[idnegocios]'>" . $renglon['nombre_negocio'] . "</option>";
+                            }
+                            ?>
+                        </select>
+
+                        <input type="submit" style="display: none;">
+                    </form>
+                </div>
+                
+                <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Filtrar</button>
+                
+                <form action="#" method="post">
+                    <button name="BSucursales" type="submit" class="btn btn-danger ml-4">Flujo de todas las sucursales</button>
+                </form>
+            </div>
+
+        
+        <div class="contenedorTabla table-responsive">
+            <table class="table table-hover table-striped table-light">
+                <thead class="thead-dark">
                     <tr>
                         <th>Ventas</th>
                         <th>Otros Ingresos</th>
@@ -193,7 +206,7 @@ if (!isset($_SESSION['acceso'])) {
                         $ventastotal = $result['totalventas'];
 
                         $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos
-                WHERE negocios_idnegocios ='$negocio' AND estado_deuda = 'A'";
+                WHERE negocios_idnegocios ='$negocio' AND estado_deuda = 'A' OR negocios_idnegocios ='$negocio' AND estado_deuda = 'L'";
                         $result = $con->consultaRetorno($query);
                         $anticipos = $result['anticipos'];
 
@@ -250,7 +263,7 @@ if (!isset($_SESSION['acceso'])) {
                 adeudos WHERE negocios_idnegocios = '$negocio' AND estado_deuda='A'";
                         $result = $con->consultaRetorno($query);
 
-                        $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo;
+                        $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo + $anticipos;
                         $ingresos_banco = $ventas_tarjeta + $abonos_tarjeta;
                         $ingresos_credito = $result['ingresos_credito'];
 
@@ -285,9 +298,9 @@ if (!isset($_SESSION['acceso'])) {
                         $ventastotal = $result['totalventas'];
 
                         $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos 
-                    INNER JOIN negocios ON negocios.idnegocios=adeudos.negocios_idnegocios
-                    INNER JOIN clientesab ON negocios.clientesab_idclienteab=clientesab.id_clienteab  
-                    WHERE clientesab.id_clienteab ='$dueño' AND estado_deuda = 'A'";
+                        INNER JOIN negocios ON negocios.idnegocios=adeudos.negocios_idnegocios
+                        INNER JOIN clientesab ON negocios.clientesab_idclienteab=clientesab.id_clienteab  
+                        WHERE clientesab.id_clienteab ='$dueño' AND estado_deuda = 'A' OR clientesab.id_clienteab ='$dueño' AND estado_deuda = 'L'";
                         $result = $con->consultaRetorno($query);
                         $anticipos = $result['anticipos'];
 
@@ -364,7 +377,7 @@ if (!isset($_SESSION['acceso'])) {
                         $result = $con->consultaRetorno($query);
 
 
-                        $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo;
+                        $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo + $anticipos;
                         $ingresos_banco = $ventas_tarjeta + $abonos_tarjeta;
                         $ingresos_credito = $result['ingresos_credito'];
 
@@ -412,9 +425,9 @@ if (!isset($_SESSION['acceso'])) {
                             $ventastotal = $result['totalventas'];
 
                             $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos INNER JOIN venta 
-                        ON adeudos.ventas_idventas = venta.idventas WHERE venta.fecha BETWEEN '$fecha1' AND '$fecha2'
-                        AND estado_deuda = 'A' AND negocios_idnegocios ='$negocio' OR MONTH(venta.fecha) = '$mes' AND 
-                        YEAR(venta.fecha)='$año' AND estado_deuda = 'A' AND negocios_idnegocios ='$negocio'";
+                            ON adeudos.ventas_idventas = venta.idventas WHERE venta.fecha BETWEEN '$fecha1' AND '$fecha2'
+                            AND estado_deuda != 'C' AND negocios_idnegocios ='$negocio' OR MONTH(venta.fecha) = '$mes' AND 
+                            YEAR(venta.fecha)='$año' AND estado_deuda != 'C' AND negocios_idnegocios ='$negocio'";
                             $result = $con->consultaRetorno($query);
                             $anticipos = $result['anticipos'];
 
@@ -484,7 +497,7 @@ if (!isset($_SESSION['acceso'])) {
                         OR MONTH(venta.fecha)='$mes' AND YEAR(venta.fecha)='$año' AND negocios_idnegocios = '$negocio' AND estado_deuda='A'";
                             $result = $con->consultaRetorno($query);
 
-                            $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo;
+                            $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo +  $anticipos;
                             $ingresos_banco = $ventas_tarjeta + $abonos_tarjeta;
                             $ingresos_credito = $result['ingresos_credito'];
 
@@ -516,11 +529,11 @@ if (!isset($_SESSION['acceso'])) {
                             $ventastotal = $result['totalventas'];
 
                             $query = "SELECT SUM(pago_minimo) AS anticipos FROM adeudos 
-                        INNER JOIN venta ON adeudos.ventas_idventas = venta.idventas 
-                        INNER JOIN negocios ON negocios.idnegocios=venta.idnegocios
-                        INNER JOIN clientesab ON negocios.clientesab_idclienteab=clientesab.id_clienteab WHERE venta.fecha BETWEEN 
-                        '$fecha1' AND '$fecha2' AND estado_deuda = 'A' AND clientesab.id_clienteab ='$dueño' 
-                        OR MONTH(venta.fecha) = '$mes' AND YEAR(venta.fecha)='$año' AND estado_deuda = 'A' AND clientesab.id_clienteab ='$dueño'";
+                            INNER JOIN venta ON adeudos.ventas_idventas = venta.idventas 
+                            INNER JOIN negocios ON negocios.idnegocios=venta.idnegocios
+                            INNER JOIN clientesab ON negocios.clientesab_idclienteab=clientesab.id_clienteab WHERE venta.fecha BETWEEN 
+                            '$fecha1' AND '$fecha2' AND estado_deuda != 'C' AND clientesab.id_clienteab ='$dueño' 
+                            OR MONTH(venta.fecha) = '$mes' AND YEAR(venta.fecha)='$año' AND estado_deuda != 'C' AND clientesab.id_clienteab ='$dueño'";
                             $result = $con->consultaRetorno($query);
                             $anticipos = $result['anticipos'];
 
@@ -605,7 +618,7 @@ if (!isset($_SESSION['acceso'])) {
                         OR MONTH(venta.fecha)='$mes' AND YEAR(venta.fecha)='$año' AND clientesab.id_clienteab ='$dueño' AND estado_deuda='A'";
                             $result = $con->consultaRetorno($query);
 
-                            $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo;
+                            $ingresos_efectivo = $ventas_efectivo + $abonos_efectivo +  $anticipos;
                             $ingresos_banco = $ventas_tarjeta + $abonos_tarjeta;
                             $ingresos_credito = $result['ingresos_credito'];
 
@@ -660,9 +673,11 @@ if (!isset($_SESSION['acceso'])) {
                                 echo $efectivo;
                             } ?></td>
                 </tbody>
-            </table><br>
-            <table class="table table-bordered table-responsive-md">
-                <thead>
+            </table>
+            </div>
+            <div class="contenedorTabla table-responsive mt-3">
+                <table class="table table-hover table-striped table-light">
+                <thead class="thead-dark">
                     <tr>
                         <th colspan="5" style="text-align: center;">INGRESOS DETALLADOS</th>
                     </tr>
@@ -704,12 +719,8 @@ if (!isset($_SESSION['acceso'])) {
                             } ?></td>
                 </tbody>
             </table>
-            <form action="#" method="post">
-                <button name="BSucursales" type="submit" class="btn btn-primary btn-lg btn-block">Flujo de todas las sucursales</button>
-            </form>
+            </div>
         </div>
-    </div>
-    </div>
     </div>
     <script src="js/user_jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

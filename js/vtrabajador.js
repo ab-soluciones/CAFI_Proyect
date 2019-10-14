@@ -2,21 +2,17 @@ $(document).ready(function(){
     //Trabajadores
     let editar = false;
     let idtrabajador = "";
+    let idnego = "";
+    var id = $('.sucursal').val();
+    idSesion(id);
 
-    obtenerDatosTablaTrabajador();
-
-
-    $('.close').click(function(){
-        $('#formtrabajador').trigger('reset');
-    });
-
-    function obtenerDatosTablaTrabajador(){
+    function idSesion(id){
+        idnego = id;
         $.ajax({
-            url: 'tablaTrabajador.php',
-            type: 'GET',
-
+            url: 'sesionTrabajador.php',
+            type: 'POST',
+            data: {idSucursal:id},
             success: function(response){
-                console.log(response);
                 let datos = JSON.parse(response);
                 let template = '';
                 datos.forEach(datos => {
@@ -36,11 +32,10 @@ $(document).ready(function(){
                     <td class="text-nowrap text-center">${datos.password}</td>
                     <td class="text-nowrap text-center">${datos.sueldo}</td>
                     <td class="text-nowrap text-center">${datos.estado}</td>
-                    <td class="text-nowrap text-center">${datos.negocios_idnegocios}</td>
                     <th style="width:100px;">
                         <div class="row">
-                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-secondary" href="#">
-                                <img src="img/edit.png">
+                            <a  data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="beditar btn btn-danger" href="#">
+                                Editar
                             </a>
                         </div>
                     </th>`;
@@ -49,9 +44,32 @@ $(document).ready(function(){
             }
         });
     }
+    
+    $('#login').keyup(function(){
+        var username = $('#login').val();
+        if(username.length >= 3){
+            $(".contro").show();
+            $.post("username_check.php", {username: username}, function(data, status){
+                $("#status").html(data);
+                });
+        }else{
+                $(".contro").hide();
+        }
+    });
+
+    $('.sucursal').click(function(){
+        idSesion($(this).val());
+    });
+
+
+    $('.close').click(function(){
+        $('#formtrabajador').trigger('reset');
+        $(".contro").hide();
+    });
 
     $('#bclose').click(function () {
         $('.modal').modal('hide');
+
     });
 
     $('#formtrabajador').submit(function(e){
@@ -73,17 +91,29 @@ $(document).ready(function(){
             agregarloa: $('#agregarloa').val(),
             estado:$('#estado').val()
         };
+        idnego = $('#agregarloa').val();
 
+        console.log($('#estado').val());
         let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
+
         $.post(url,postData, function (response) {
+            console.log(response);
             $('#formclienteab').trigger('reset');
-            obtenerDatosTablaTrabajador();
+            idSesion(idnego);
             editar = false;
-            if (response === "1") {
+            $("#status").hide();
+
+            if (response == "1") {
                 swal({
                     title: 'Exito',
                     text: 'Datos guardados satisfactoriamente',
                     type: 'success'
+                });
+            }else if(response == 'limite'){
+                swal({
+                    title: 'Alerta',
+                    text: 'Limite de trabajadores exedido',
+                    type: 'warning'
                 });
             } else {
                 swal({
@@ -92,7 +122,6 @@ $(document).ready(function(){
                     type: 'warning'
                 });
             }
-            
         });
         $('#formtrabajador').trigger('reset');
         e.preventDefault();
@@ -106,7 +135,6 @@ $(document).ready(function(){
             valores += $(this).html() + "?";
         });
         datos = valores.split("?");
-       
         idtrabajador = datos[0];
         $('#nombre').val(datos[1]);
         $('#apt').val(datos[2]);
@@ -121,7 +149,7 @@ $(document).ready(function(){
         $('#contrasena').val(datos[11]);
         $('#sueldo').val(datos[12]);
         $('#estado').val(datos[13]);
-        $('#agregarloa').val(datos[14]);
+        $('#agregarloa').val($('#comboSucursal').val());
         editar = true;
     });
 });

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('#mostrar').click(function(){
+    $('.mostrar').click(function(){
         var valores = "";
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
@@ -8,26 +8,26 @@ $(document).ready(function () {
           valores += $(this).html() + "?";
         });
         datos = valores.split("?");
+
         const postData = {
             venta: datos[1]
         }
-        console.log(postData);
         
+
         $.post('datosMostrarVenta.php', postData, function (response) {
             let datos = JSON.parse(response);
+            
             let template = '';
             datos.forEach(datos => {
               template += `
                     <tr>
+                    <td>${datos.cantidad_producto}</td>
                     <td>${datos.nombre}</td>
-                    <td>${datos.imagen}</td>
-                    <td>${datos.domicilio}</td>
-                    <td>${datos.color}</td>
+                    <td><img width="50px" height="50px" src=${datos.imagen} ></td>
                     <td>${datos.marca}</td>
-                    <td>${datos.precio_venta}</td>
+                    <td>${datos.color}</td>
                     <td>${datos.unidad_medida}</td>
                     <td>${datos.talla_numero}</td>
-                    <td>${datos.cantidad_producto}</td>
                     <td>${datos.subtotal}</td>
                 </tr>`;
             });
@@ -36,7 +36,7 @@ $(document).ready(function () {
       });
 
 
-    $(document).on('click','#beditar', function () {
+    $(document).on('click','.beditar', function () {
         var valores = "";
         // Obtenemos todos los valores contenidos en los <td> de la fila
         // seleccionada
@@ -44,10 +44,10 @@ $(document).ready(function () {
           valores += $(this).html() + "?";
         });
         datos = valores.split("?");
-        $('#id').val(datos[2]);
-        $('#estado').val(datos[10]);
-        $('#estadoActual').val(datos[10]);
-        console.log(datos);
+
+        $('#id').val(datos[1]);
+        $('#estado').val(datos[9]);
+        $('#estadoActual').val(datos[9]);
       });
 
       $('#bclose').click(function(){
@@ -61,9 +61,10 @@ $(document).ready(function () {
             estadoNuevoConsulta: $('#estado').val()
           };
           
+          e.preventDefault();
           $.post('post-edit.php', postData, function (response) {
             $('#formConsulta').trigger('reset');  
-            console.log(response);
+            
             if (response == "1") {
               swal({
                 title: 'Exito',

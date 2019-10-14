@@ -2,12 +2,14 @@
 require_once "Config/Autoload.php";
 Config\Autoload::run();
 session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
     header('location: index.php');
 } else if ($_SESSION['acceso'] != "CEOAB") {
-    header('location: VABOptions.php');
+    header('location: index.php');
 }
 
 
@@ -22,10 +24,12 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" href="css/sweetalert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
 
     <title>Usuarios</title>
     <script>
@@ -53,45 +57,49 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formuusers">
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-4">
-                                <h5 class="admin">Nombre:</h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                                <h5 class="general">Nombre:</h5>
+                                <input id="nombre" class="form form-control"  onkeypress="return check(event)" type="text" name="TNombre" placeholder="Nombre" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Apellido Paterno:</h5>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                                <h5 class="general">Apellido P:</h5>
+                                <input id="apt" class="form form-control"  onkeypress="return check(event)" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Apellido Materno:</h5>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                                <h5 class="general">Apellido M:</h5>
+                                <input id="apm" class="form form-control"  onkeypress="return check(event)" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off">
                             </div>
                         </div>
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-4">
-                                <h5 class="admin">Tipo de acceso:</h5>
+                                <h5 class="general">Usuario:</h5>
+                                <input id="login" class="form form-control" type="text"  onkeypress="return check(event)" name="TLogin" placeholder="Nombre de usuario" autocomplete="off"><br>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5 class="general">Contrase&ntilde;a:</h5>
+                                <input id="pass" class="form form-control" type="password" onkeypress="return check(event)" name="TPContraseña" placeholder="Contrase&ntilde;a"><br>
+                            </div>
+                            <div class="col-lg-4">
+                                <h5 class="general">Acceso:</h5>
 
                                 <select class="form form-control" id="acceso">
-                                    <option value="ManagerAB">Manager</option>
                                     <option value="CEOAB">CEOAB</option>
                                     <option value="ManagerAB">Manager</option>
                                 </select>
                             </div>
-                            <div class="col-lg-4">
-                                <h5 class="admin">Usuario:</h5>
-                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required><br>
-                            </div>
-                            <div class="col-lg-4">
-                                <h5 class="admin">Contrase&ntilde;a:</h5>
-                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contrase&ntilde;a" required><br>
+                        </div>
+                        <div class="row">
+                            <div id="status" class="col-12">
+
                             </div>
                         </div>
                         <div class="d-block d-lg-flex row">
                             <div class="col-lg-12">
-                                <h5 class="admin">Estado:</h5>
+                                <h5 class="general">Estado:</h5>
                                 <select class="form form-control" id="estadousers">
                                     <option value="A">A</option>
                                     <option value="I">I</option>
@@ -99,7 +107,7 @@ if (!isset($_SESSION['acceso'])) {
                             </div>
                         </div>
 
-                        <input id="bclose" type="submit" class="mt-3 btn btn-primary btn-lg btn-block" value="Guardar">
+                        <input id="bclose" type="submit" class="mt-3 btn bg-dark text-primary btn-lg btn-block" value="Guardar">
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
@@ -118,11 +126,11 @@ if (!isset($_SESSION['acceso'])) {
                         <div class="input-group-prepend">
                             <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
-                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                        <input class="form-control col-12 col-lg-4" type="text" id="busqueda"  onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                         <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                     </div>
                     <div class="contenedorTabla table-responsive">
-                        <table class="table table-bordered table-hover">
+                        <table class="table table-bordered table-hover table-striped table-light">
                             <thead class="thead-dark">
                                 <tr class="encabezados">
                                     <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>

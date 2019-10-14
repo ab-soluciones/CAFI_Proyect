@@ -6,31 +6,6 @@ $(document).ready(function () {
     let total;
     let formapago;
 
-    function ejecutarImpresionTermica() {
-        let idventa = "";
-        const postData = {
-            adeudo: adeudo
-        };
-
-        $.post('ticketabono.php', postData, function (response) {
-            if (response) {
-                var explode = function () {
-                    swal({
-                        title: 'Exito',
-                        text: 'Abono realizado exitosamente',
-                        type: 'success'
-                    },
-                        function (isConfirm) {
-                            if (isConfirm) {
-                                location.reload();
-                            }
-                        });
-                };
-                setTimeout(explode, 600);
-            }
-        });
-    }
-
     $(document).on('click', '.befectivo', function () {
         formapago = "Efectivo";
         let valores = "";
@@ -79,13 +54,15 @@ $(document).ready(function () {
                                 formapago: formapago
                             };
                             $.post('post-guardar.php', postData, function (response) {
-                                if (response === "con impresora") {
-                                    ejecutarImpresionTermica();
-                                } else if (response === "sin impresora") {
+                                
+                                if(response === "Exitoprinter"){
+                                    window.open('ticketAbono.php');
+                                  }
+                             if (response) {
                                     var explode = function () {
                                         swal({
                                             title: 'Exito',
-                                            text: 'Venta realizada exitosamente',
+                                            text: 'Abono realizado exitosamente',
                                             type: 'success'
                                         },
                                             function (isConfirm) {
@@ -94,13 +71,13 @@ $(document).ready(function () {
                                                 }
                                             });
                                     };
-                                    setTimeout(explode, 600);
+                                    setTimeout(explode, 200);
 
-                                } else if (response != "con impresora" && response != "sin impresora") {
+                                } else {
                                     var explode = function () {
                                         swal({
                                             title: 'Alerta',
-                                            text: 'No se a realizado la venta',
+                                            text: 'Abono no realizado',
                                             type: 'warning'
                                         },
                                             function (isConfirm) {
@@ -109,7 +86,7 @@ $(document).ready(function () {
                                                 }
                                             });
                                     };
-                                    setTimeout(explode, 600);
+                                    setTimeout(explode, 200);
                                 }
 
                             });
@@ -144,12 +121,13 @@ $(document).ready(function () {
                     cambio: cambio,
                     formapago: formapago
                 };
-                console.log(postData);
+           
                 $.post('post-guardar.php', postData, function (response) {
-                    console.log(response);
-                    if (response === "con impresora") {
-                        ejecutarImpresionTermica();
-                    } else if (response === "sin impresora") {
+                    
+                    if(response === "Exitoprinter"){
+                        window.open('ticketAbono.php');
+                      }
+                  if (response) {
                         var explode = function () {
                             swal({
                                 title: 'Exito',
@@ -162,9 +140,9 @@ $(document).ready(function () {
                                     }
                                 });
                         };
-                        setTimeout(explode, 600);
+                        setTimeout(explode, 200);
 
-                    } else if (response != "con impresora" && response != "sin impresora") {
+                    } else {
                         var explode = function () {
                             swal({
                                 title: 'Alerta',
@@ -177,7 +155,7 @@ $(document).ready(function () {
                                     }
                                 });
                         };
-                        setTimeout(explode, 600);
+                        setTimeout(explode, 200);
                     }
 
                 });

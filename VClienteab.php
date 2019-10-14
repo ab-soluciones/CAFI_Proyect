@@ -1,7 +1,9 @@
 <?php
-session_start();
 require_once "Config/Autoload.php";
 Config\Autoload::run();
+session_start();
+include "check_token.php";
+
 if (!isset($_SESSION['acceso'])) {
     header('location: index.php');
 } else if ($_SESSION['estado'] == "I") {
@@ -10,7 +12,7 @@ if (!isset($_SESSION['acceso'])) {
     $_SESSION['acceso'] == "Employes" || $_SESSION['acceso'] == "Manager"
     ||  $_SESSION['acceso'] == "CEO"
 ) {
-    header('location: OPCAFI.php');
+    header('location: index.php');
 }
 ?>
 <!DOCTYPE html>
@@ -23,10 +25,12 @@ if (!isset($_SESSION['acceso'])) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/sweetalert.css">
-
+    <link rel="icon" href="img/logo/nav1.png">
+    
     <script src="js/sweetalert.js"></script>
     <script src="js/sweetalert.min.js"></script>
     <script src="js/jquery.js"></script>
+    
     <title>Clientes AB</title>
 
 </head>
@@ -49,26 +53,26 @@ if (!isset($_SESSION['acceso'])) {
                 </div>
 
                 <!-- Modal Body -->
-                <div class="modal-body administrador">
+                <div class="modal-body">
                     <p class="statusMsg"></p>
                     <form class="form-group" id="formclienteab">
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="admin"> Nombre:</h5>
-                                <input id="nombre" class="form form-control" type="text" name="TNombre" placeholder="Nombre" autocomplete="off" required>
+                                <h5 class="general"> Nombre:</h5>
+                                <input id="nombre" class="form form-control" type="text" onkeypress="return check(event)" name="TNombre" placeholder="Nombre" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Apellido Paterno:</h5>
-                                <input id="apt" class="form form-control" type="text" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" required>
+                                <h5 class="general">Apellido P:</h5>
+                                <input id="apt" class="form form-control" type="text" onkeypress="return check(event)" name="TApellidoP" placeholder="Apellido Paterno" autocomplete="off" >
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Apellido Materno:</h5>
-                                <input id="apm" class="form form-control" type="text" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" required>
+                                <h5 class="general">Apellido M:</h5>
+                                <input id="apm" class="form form-control" type="text" onkeypress="return check(event)" name="TApellidoM" placeholder="Apellido Materno" autocomplete="off" >
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-4">
-                                <h5 class="admin">Documento:</h5>
+                                <h5 class="general">Documento:</h5>
                                 <select class="form form-control" id="documento">
                                     <option value="INE">INE</option>
                                     <option value="I">CURP</option>
@@ -76,44 +80,49 @@ if (!isset($_SESSION['acceso'])) {
                                 </select>
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">#Documento:</h5>
-                                <input id="numdoc" class="form form-control" type="text" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off">
+                                <h5 class="general">#Documento:</h5>
+                                <input id="numdoc" class="form form-control" type="text" onkeypress="return check(event)" name="TNumDoc" placeholder="Numero del Documento" autocomplete="off">
                             </div>
                             <div class="col-lg-4">
-                                <h5 class="admin">Direccion:</h5>
-                                <input id="dir" class="form form-control" type="text" name="TDireccion" placeholder="Direccion">
+                                <h5 class="general">Direccion:</h5>
+                                <input id="dir" class="form form-control" type="text" onkeypress="return check(event)" name="TDireccion" placeholder="Direccion" autocomplete="off">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="admin">Telefono:</h5>
-                                <input id="tel" class="form form-control" type="text" name="TTelefono" placeholder="Telefono" required>
+                                <h5 class="general">Telefono:</h5>
+                                <input id="tel" class="form form-control" type="text" onkeypress="return check(event)" name="TTelefono" placeholder="Telefono" >
                             </div>
                             <div class="col-lg-6">
-                                <h5 class="admin">Correo electrónico:</h5>
-                                <input id="email" class="form form-control" type="text" name="TCorreo" placeholder="correo@dominio.com">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <h5 class="admin">Usuario:</h5>
-                                <input id="login" class="form form-control" type="text" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" required>
-                            </div>
-                            <div class="col-lg-6">
-                                <h5 class="admin">Contraseña:</h5>
-                                <input id="pass" class="form form-control" type="password" name="TPContraseña" placeholder="Contraseña" required>
+                                <h5 class="general">Correo electrónico:</h5>
+                                <input id="email" class="form form-control" type="text" onkeypress="return check(event)" name="TCorreo" placeholder="correo@dominio.com">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <h5 class="admin">Estado:</h5>
+                                <h5 class="general">Usuario:</h5>
+                                <input id="login" class="form form-control" type="text" onkeypress="return check(event)" name="TLogin" placeholder="Nombre de usuario" autocomplete="off" >
+                            </div>
+                            <div class="col-lg-6">
+                                <h5 class="general">Contraseña:</h5>
+                                <input id="pass" class="form form-control" type="password" onkeypress="return check(event)" name="TPContraseña" placeholder="Contraseña" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="status" class="col-12">
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h5 class="general">Estado:</h5>
                                 <select class="form form-control" id="estado">
                                     <option value="A">A</option>
                                     <option value="I">I</option>
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" id="bclose" type="submit" class="mt-3 btn btn-primary btn-lg btn-block ">Guardar</button>
+                        <button type="submit" id="bclose" type="submit" class="mt-3 btn bg-dark text-primary btn-lg btn-block ">Guardar</button>
                     </form>
                     <div id="tableHolder" class="row justify-content-center">
 
@@ -131,11 +140,11 @@ if (!isset($_SESSION['acceso'])) {
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-search"></i></div>
                     </div>
-                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
+                    <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
                     <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover table-striped table-light">
                         <thead class="thead-dark">
                             <tr class="encabezados">
                                 <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>
@@ -163,6 +172,7 @@ if (!isset($_SESSION['acceso'])) {
     </div>
     <script src="js/user_jquery.js"></script>
     <script src="js/vclienteab.js"></script>
+    <script src="js/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
