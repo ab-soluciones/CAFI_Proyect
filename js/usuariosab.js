@@ -4,13 +4,10 @@ $(document).ready(function () {
   let idusuario="";
  // optenerDatosTablaUsuarios();
 
-  $('.close').click(function () {
-    $('#formuusers').trigger('reset');
-    $(".contro").hide();
-  });
-  $('#bclose').click(function () {
-    $(".modal").modal('hide');
 
+  $('.close').click(function () {
+    $('#formulario').trigger('reset');
+    $('#mensaje').css('display','none');
   });
   
   $('.clearForm').click(function () {
@@ -36,41 +33,40 @@ $(document).ready(function () {
  
     $.post('../Controllers/usuariosab.php?accion='+editar, $('#formulario').serialize(), function (response) {
     console.log(response);
-   
-      if (response === "1") {
-        swal({
-          title: 'Exito',
-          text: 'Datos guardados satisfactoriamente',
-          type: 'success'
-        },
-        function (isConfirm){
-            if(isConfirm){
-              editar = false;
-              $('#formunegocio').trigger('reset');
-              $(".contro").hide();
-              $('.modal').modal('hide');
-            }
-        });
+    $('#mensaje').css('display','block');
+      if (response === "11") {
+        $('#mensaje').text('Registro Exitoso');
+        $('#mensaje').css('color','green');
+        $('#email').focus();
+        $('#formulario').trigger('reset');
       } else {
-        swal({
-          title: 'Alerta',
-          text: 'Datos no guardados, compruebe los campos unicos',
-          type: 'warning'
-        });
+        $('#mensaje').text('Registro fallido');
+        $('#mensaje').css('color','red');
+        $('#email').focus();
       }
-    //  optenerDatosTablaUsuarios();
+      optenerDatosTablaUsuarios();
     });
     e.preventDefault();
   })
 
- /*  function optenerDatosTablaUsuarios() {
+
+
+   function optenerDatosTablaUsuarios() {
     $.ajax({
-      url: 'tablausuariosab.php',
+      url: '../Controllers/usuariosab.php?tabla=tabla',
       type: 'GET',
       success: function (response) {
         let datos = JSON.parse(response);
         let template = '';
-        datos.forEach(datos => {
+        $.each(datos, function(i, item) {
+          alert(datos[i].PageName);
+          template += `
+          <tr>
+                <td class="text-nowrap text-center">${datos[i].PageName}</td>
+          `;
+        });
+        $('#cuerpo').html(template);
+        /*datos.forEach(datos => {
           template += `
                 <tr>
                 <td class="text-nowrap text-center">${datos.id}</td>
@@ -89,11 +85,11 @@ $(document).ready(function () {
                 </div>
             </th>
             </tr>`;
-        });
-        $('#cuerpo').html(template);
+        });*/
+       // $('#cuerpo').html(template);
       }
-    })
-  } */
+    });
+  } 
 
   $(document).on('click', '.beditarusers', function () {
     var valores = "";
