@@ -10,6 +10,7 @@ $(document).ready(function () {
 
   $('.bmodal').click(function () {
     $('#divnegocio').show();
+    $('.divusextra').hide();
   });
 
   $('.close').click(function () {
@@ -40,6 +41,7 @@ $(document).ready(function () {
             <td class="text-nowrap text-center">${datos.estado}</td>
             <td class="text-nowrap text-center">${datos.negocio}</td>
             <td class="text-nowrap text-center">${datos.paquete}</td>
+            <td class="text-nowrap text-center">${datos.usextra}</td>
             <td class="text-nowrap text-center">${datos.monto}</td>
             <td class="text-nowrap text-center">${datos.registro}</td>
             <th class="text-nowrap text-center" style="width:100px;">
@@ -64,12 +66,14 @@ $(document).ready(function () {
       fecha2: $('#fecha2').val(),
       estado: $('#estado').val(),
       paquete: $('#spaquete').val(),
+      usextra: $('#usextra').val(),
       monto: $('#monto').val(),
       negocio: $('#innegocio').val()
     };
 
     let url = editar === false ? 'post-guardar.php' : 'post-edit.php';
     $.post(url, postData, function (response) {
+      console.log(response);
       $('#formulario').trigger('reset');
       editar = false;
       if (response == "1") {
@@ -93,6 +97,7 @@ $(document).ready(function () {
   $(document).on('click', '.beditar', function () {
     var valores = "";
     $('#divnegocio').hide();
+    $('.divusextra').show();
     // Obtenemos todos los valores contenidos en los <td> de la fila
     // seleccionada
     $(this).parents("tr").find("td").each(function () {
@@ -104,7 +109,8 @@ $(document).ready(function () {
     $('#fecha2').val(datos[2]);
     $('#estado').val(datos[3]);
     $('#spaquete').val(datos[5]);
-    $('#monto').val(datos[6]);
+    $('#usextra').val(datos[6]);
+    $('#monto').val(datos[7]);
     editar = true;
 
   })

@@ -69,7 +69,7 @@
             $('.modal').modal('hide');
             editar = false;
            }
-       });
+           $('.modal').modal('hide');       });
      } else {
        swal({
          title: 'Alerta',
