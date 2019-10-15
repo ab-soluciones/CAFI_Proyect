@@ -19,7 +19,7 @@ $(document).ready(function(){
                 datos.forEach(datos => {
                     efectivo = datos.efectivo;
                     banco = datos.banco;
- 
+
                     template +=`
                     <td>${datos.efectivo}</td>
                     <td>${datos.banco}</td>
@@ -82,9 +82,9 @@ $(document).ready(function(){
             };
 
             let url = 'post-guardar.php';
-        
+
         $.post(url,postData,function(response){
-           
+
                 if (response === "1") {
                     swal({
                         title: 'Exito',
@@ -106,16 +106,16 @@ $(document).ready(function(){
                 }else if(response == "SaldoInsufucienteCaja"){
                     swal({
                         title: 'Alerta',
-                        text: 'Saldo insufucuinte en caja',
+                        text: 'Saldo insuficiente en caja',
                         type: 'warning'
                     });
                 }else if(response == "SaldoInsufucienteBanco"){
                     swal({
                         title: 'Alerta',
-                        text: 'Saldo insufucuinte en Banco',
+                        text: 'Saldo insuficiente en Banco',
                         type: 'warning'
                     });
-                } else { 
+                } else {
                     swal({
                         title: 'Alerta',
                         text: 'Datos no guardados, compruebe los campos unicos',
@@ -135,10 +135,10 @@ $(document).ready(function(){
         };
 
         let url = 'post-edit.php';
-    
+
     $.post(url,postData,function(response){
 
-        
+
             if (response === "1") {
                 swal({
                     title: 'Exito',
@@ -151,7 +151,7 @@ $(document).ready(function(){
                     $('.modal').modal('hide');
                   }
                   });
-            } else { 
+            } else {
                 swal({
                     title: 'Alerta',
                     text: 'Datos no guardados, compruebe los campos unicos',
@@ -175,7 +175,7 @@ $(document).ready(function(){
         $('#estado').val(datos[7]);
 
         editar = true;
-     
+
       });
 
 

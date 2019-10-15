@@ -1,21 +1,22 @@
 $(document).ready(function () {
     //VUsuarios_ab
     let editar = false;
+    let idusuario = "";
+    optenerDatosTablaUsuarios();
 
-  
     $(".close").click(function () {
       $("#formulario").trigger("reset");
       $("#mensaje").css("display", "none");
     });
-  
+
     $(".clearForm").click(function () {
       $("#formuusers").trigger("reset");
     });
-  
+
     $('.agregar').click(function(){
       editar = false;
     });
-  
+
     $("#login").keyup(function () {
       var username = $("#email").val();
       if (username.length >= 7) {
@@ -29,7 +30,7 @@ $(document).ready(function () {
         $(".contro").hide();
       }
     });
-  
+
     $("#formulario").submit(function (e) {
       $.post("../Controllers/clienteab.php",$("#formulario").serialize() + '&accion=' + editar, function (response) {
         console.log(response);
@@ -48,14 +49,14 @@ $(document).ready(function () {
       });
       e.preventDefault();
     });
-  
+
     function optenerDatosTablaUsuarios() {
       $.ajax({
         url: "../Controllers/clienteab.php",
         type: "POST",
         data: "tabla=tabla",
         success: function (response) {
-          
+
          let datos = JSON.parse(response);
           let template = "";
           $.each(datos, function (i, item) {
@@ -87,11 +88,11 @@ $(document).ready(function () {
                   </th>
             `;
           });
-          $("#cuerpo").html(template); 
+          $("#cuerpo").html(template);
         }
       });
     }
-  
+
     $(document).on("click", ".BeditarUsuarios", function () {
       var valores = "";
       // Obtenemos todos los valores contenidos en los <td> de la fila
@@ -117,9 +118,6 @@ $(document).ready(function () {
       $("#acceso").val(datos[13]);
       $("#entrada_sistema").val(datos[14]);
       $("#contrasena").val(datos[15]);
-      $("#negocio").val(datos[16]);
-      
       editar = true;
     });
   });
-  
