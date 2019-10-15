@@ -29,7 +29,7 @@ $(document).ready(function () {
   });
 
   $("#formulario").submit(function (e) {
-    $.post("../Controllers/clienteab.php",$("#formulario").serialize() + '&accion=' + editar, function (response) {
+    $.post("../Controllers/clienteab.php",$("#formulario").serialize() + '&idsuscripcion=' + idSuscripcion + '&accion=' + editar, function (response) {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
