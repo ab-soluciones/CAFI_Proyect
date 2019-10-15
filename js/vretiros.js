@@ -19,7 +19,7 @@ $(document).ready(function(){
                 datos.forEach(datos => {
                     efectivo = datos.efectivo;
                     banco = datos.banco;
- 
+
                     template +=`
                     <td>${datos.efectivo}</td>
                     <td>${datos.banco}</td>
@@ -29,10 +29,6 @@ $(document).ready(function(){
             }
         })
     }
-
-    $('.bclose').click(function () {
-        $('.modal').modal('hide');
-    });
 
     $('.close').click(function () {
         $('#formuventas').trigger('reset');
@@ -88,13 +84,19 @@ $(document).ready(function(){
             let url = 'post-guardar.php';
 
         $.post(url,postData,function(response){
-            $('#formuventas').trigger('reset');
+
                 if (response === "1") {
                     swal({
                         title: 'Exito',
                         text: 'Datos guardados satisfactoriamente',
                         type: 'success'
-                    });
+                    },
+                    function (isConfirm) {
+                      if (isConfirm) {
+                        $('#formuventas').trigger('reset');
+                        $('.modal').modal('hide');
+                      }
+                      });
                 }else if(response == "CorteErroneo"){
                     swal({
                         title: 'Alerta',
@@ -136,13 +138,19 @@ $(document).ready(function(){
 
     $.post(url,postData,function(response){
 
-        $('#formuventas').trigger('reset');
+
             if (response === "1") {
                 swal({
                     title: 'Exito',
                     text: 'Datos guardados satisfactoriamente',
                     type: 'success'
-                });
+                },
+                function (isConfirm) {
+                  if (isConfirm) {
+                    $('#formuventas').trigger('reset');
+                    $('.modal').modal('hide');
+                  }
+                  });
             } else {
                 swal({
                     title: 'Alerta',

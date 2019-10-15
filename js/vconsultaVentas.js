@@ -50,9 +50,6 @@ $(document).ready(function () {
         $('#estadoActual').val(datos[9]);
       });
 
-      $('#bclose').click(function(){
-        $('.modal').modal('hide');
-      });
 
     $('#formConsulta').submit(function(e){
         const postData = {
@@ -63,7 +60,7 @@ $(document).ready(function () {
           
           e.preventDefault();
           $.post('post-edit.php', postData, function (response) {
-            $('#formConsulta').trigger('reset');  
+            
             
             if (response == "1") {
               swal({
@@ -73,6 +70,8 @@ $(document).ready(function () {
               },
               function (isConfirm){
                   if(isConfirm){
+                    $('#formConsulta').trigger('reset');  
+                    $('.modal').modal('hide');
                     location.reload();
                   }
               });
@@ -83,6 +82,8 @@ $(document).ready(function () {
                     type: 'success'
                   },
                   function (isConfirm){
+                    $('#formConsulta').trigger('reset');  
+                    $('.modal').modal('hide');
                       if(isConfirm){
                         location.reload();
                       }

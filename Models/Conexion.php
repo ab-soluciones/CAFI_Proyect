@@ -9,7 +9,7 @@ class Conexion
         "host" => "localhost",
         "user" => "root",
         "pass" => "",
-        "db" => "cafi_db"
+        "db" => "cafi_bd"
 
     );
 
@@ -34,42 +34,31 @@ class Conexion
     }
 
 
-    public function consultaPreparada($datos,$consulta,$accion){
+    public function consultaPreparada($datos,$consulta,$accion,$datatipe){
        
-        for ($i = 0; $i < sizeof($datos); $i++) {
-            
-            if (gettype($datos[$i]) === "string") {
-                $this->datatipe .= "s";
-            }
-            if (gettype($datos[$i]) === "double") {
-                $this->datatipe .= "d";
-            }
-            if (gettype($datos[$i]) === "integer") {
-                $this->datatipe .= "i";
-            }
-        }
-
-        $datatipe = $this->datatipe;
-        $valCount = count($datos);
         
         $stmt = $this->con->prepare($consulta);
         
         $args = array(&$datatipe);
-        for ($i = 0; $i < $valCount; $i++) {
+        for ($i = 0; $i < sizeof($datos); $i++) {
             $args[] = &$datos[$i];
         }
        
-        call_user_func_array( array($stmt,'bind_param'), $args);
-        
+        call_user_func_array(array($stmt,'bind_param'), $args);
+        //accion 1 para insertar o actualizar
         if($accion == 1){
-            $stmt->execute();
+            if($stmt->execute()){
+              $mensaje="Registro exitoso";
+            }else{
+              $mensaje="Ocurrio un problema, intente de nuevo";
+            }
+          return $mensaje;
         }else{
             $stmt->execute();
             return mysqli_fetch_all($stmt->get_result());
         }
         
-        
-        
+        $this->con->close();
 
     }
    public function eliminar_simbolos($string){
@@ -119,7 +108,7 @@ class Conexion
                  "+", "}", "{", "¨", "´",
                  ">", "< ", ";", ",", ":",
                 "''"," "),
-            ' ',
+            '',
             $string
         );
     return $string;
@@ -127,8 +116,8 @@ class Conexion
 
     public function obtenerDatosDeTabla($sql)
     {
-        $result = $this->con->query($sql);
-        return $result;
+        return mysqli_fetch_all($this->con->query($sql));
+        $this->con->close();
     }
 
 

@@ -38,8 +38,9 @@ $(document).ready(function (){
         });
     }
 
-    $('#bclose').click(function(){
+    $('.bclose').click(function(){
         $('.modal').modal('hide');
+        $('#hideedit').show();
     });
 
     $('#formotrosingresos').submit(function(e){
@@ -63,15 +64,21 @@ $(document).ready(function (){
             data: postData,
 
             success: function(response) {
-                
-           $('#formotrosingresos').trigger('reset');
+           
            obtenerDatosTablaOtrosIngresos();
-           editar = false;
+           
            if(response == "1"){
             swal({
                 title: 'Exito',
                 text: 'Datos guardados satisfactoriamente',
                 type: 'success'
+            },
+            function (isConfirm){
+                if(isConfirm){
+                    editar = false;
+                    $('#formotrosingresos').trigger('reset');
+                    $('.modal').modal('hide');
+                }
             });
            } else{
             swal({
@@ -87,6 +94,8 @@ $(document).ready(function (){
 
     $(document).on('click','.beditar',function(){
         var valores = "";
+        $('#hideedit').hide();
+
         $(this).parents("tr").find("td").each(function(){
             valores+= $(this).html() + "?";
         });
