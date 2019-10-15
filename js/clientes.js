@@ -3,20 +3,20 @@ $(document).ready(function () {
     let editar = false;
     let idusuario = "";
     optenerDatosTablaUsuarios();
-  
+
     $(".close").click(function () {
       $("#formulario").trigger("reset");
       $("#mensaje").css("display", "none");
     });
-  
+
     $(".clearForm").click(function () {
       $("#formuusers").trigger("reset");
     });
-  
+
     $('.agregar').click(function(){
       editar = false;
     });
-  
+
     $("#login").keyup(function () {
       var username = $("#login").val();
       if (username.length >= 3) {
@@ -30,7 +30,7 @@ $(document).ready(function () {
         $(".contro").hide();
       }
     });
-  
+
     $("#formulario").submit(function (e) {
       $.post("../Controllers/usuariosab.php",$("#formulario").serialize() + '&accion=' + editar, function (response) {
         console.log(response);
@@ -49,14 +49,14 @@ $(document).ready(function () {
       });
       e.preventDefault();
     });
-  
+
     function optenerDatosTablaUsuarios() {
       $.ajax({
         url: "../Controllers/usuariosab.php",
         type: "POST",
         data: "tabla=tabla",
         success: function (response) {
-          
+
          let datos = JSON.parse(response);
           let template = "";
           $.each(datos, function (i, item) {
@@ -87,11 +87,11 @@ $(document).ready(function () {
               </th>
             `;
           });
-          $("#cuerpo").html(template); 
+          $("#cuerpo").html(template);
         }
       });
     }
-  
+
     $(document).on("click", ".BeditarUsuarios", function () {
       var valores = "";
       // Obtenemos todos los valores contenidos en los <td> de la fila
@@ -101,24 +101,24 @@ $(document).ready(function () {
       });
       datos = valores.split("?");
       console.log(datos);
-      $("#email").val(datos[0]);
-      $("#rfc").val(datos[1]);
-      $("#nombre").val(datos[2]);
-      $("#cp").val(datos[3]);
-      $("#calle_numero").val(datos[4]);
-      $("#colonia").val(datos[5]);
-      $("#localidad").val(datos[6]);
-      $("#municipio").val(datos[7]);
-      $("#estado").val(datos[8]);
-      $("#pais").val(datos[9]);
-      $("#telefono").val(datos[10]);
-      $("#fecha_nacimiento").val(datos[11]);
-      $("#sexo").val(datos[12]);
-      $("#acceso").val(datos[13]);
-      $("#entrada_sistema").val(datos[14]);
-      $("#contrasena").val(datos[15]);
-      
+      $("#Temail").val(datos[0]);
+      $("#Trfc").val(datos[1]);
+      $("#Tnombre").val(datos[2]);
+      $("#Tcp").val(datos[3]);
+      $("#Tcalle_numero").val(datos[4]);
+      $("#Tcolonia").val(datos[5]);
+      $("#Tlocalidad").val(datos[6]);
+      $("#Tmunicipio").val(datos[7]);
+      $("#Testado").val(datos[8]);
+      $("#Tpais").val(datos[9]);
+      $("#Ttelefono").val(datos[10]);
+      $("#Dfecha_nacimiento").val(datos[11]);
+      $("#Tsexo").val(datos[12]);
+      $("#Tacceso").val(datos[13]);
+      $("#Tentrada_sistema").val(datos[14]);
+      $("#Pcontrasena").val(datos[15]);
+      $("#Snegocio").val(datos[16]);
+
       editar = true;
     });
   });
-  
