@@ -9,10 +9,6 @@ $(document).ready(function () {
     $("#mensaje").css("display", "none");
   });
 
-  $(".clearForm").click(function () {
-    $("#formuusers").trigger("reset");
-  });
-
   $('.agregar').click(function(){
     editar = false;
   });
@@ -35,7 +31,7 @@ $(document).ready(function () {
     $.post("../Controllers/usuariosab.php",$("#formulario").serialize() + '&accion=' + editar, function (response) {
       console.log(response);
       $("#mensaje").css("display", "block");
-      if (response == "Registro exitoso") {
+      if (response == "1") {
         $("#mensaje").text(response);
         $("#mensaje").css("color", "green");
         $("#email").focus();
@@ -125,7 +121,7 @@ $(document).ready(function () {
         data: postData,
 
         success: function (response) {
-          if(response == "Eliminacion exitosa"){
+          if(response == "1"){
             swal(
             "Eliminado!", 
             "Registro Eliminado.", 
@@ -170,7 +166,6 @@ $(document).ready(function () {
     $("#acceso").val(datos[13]);
     $("#entrada_sistema").val(datos[14]);
     $("#contrasena").val(datos[15]);
-    
     editar = true;
   });
 });
