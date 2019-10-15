@@ -42,7 +42,7 @@ if (!isset($_SESSION['acceso'])) {
     ?>
     <!-- Modal -->
     <div class="modal fade" id="modalForm" role="dialog">
-<<<<<<< HEAD
+
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -66,7 +66,7 @@ if (!isset($_SESSION['acceso'])) {
                             <h5 class="importante">Fecha Vencimiento:</h5>
                             <input class="form-control" id="fecha2" type="date" name="DFecha2" required><br>
                         </div>
-<<<<<<< HEAD
+
                         <h5 class="admin">Monto:</h5>
                         <input id="monto" type="text" class="form form-control" name="TMonto" required placeholder="Monto $"><br>
                         <h5 class="admin">Negocio:</h5>
@@ -75,7 +75,7 @@ if (!isset($_SESSION['acceso'])) {
 
                         <div id="divnegocio">
                             <input id="innegocio" class="form form-control" list="negocios" name="DlNegocios" required autocomplete="off">
-=======
+
 
                         <h5 class="admin">Estado:</h5>
 
@@ -93,7 +93,7 @@ if (!isset($_SESSION['acceso'])) {
                             <span class="sr-only">Close</span>
                         </button>
                     </div>
->>>>>>> backend
+
 
                     <!-- Modal Body -->
                     <div class="modal-body">
