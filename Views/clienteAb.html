@@ -2,18 +2,18 @@
 <html lang="en" dir="ltr">
 
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/sweetalert.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="icon" href="img/logo/nav1.png">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="../css/bootstrap.css">
+        <link rel="stylesheet" href="../css/sweetalert.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="icon" href="img/logo/nav1.png">
 
-    <script src="../js/sweetalert.js"></script>
-    <script src="../js/sweetalert.min.js"></script>
-    <script src="../js/jquery.js"></script>
-    <script src="../js/index.js"></script>
+        <script src="../js/sweetalert.js"></script>
+        <script src="../js/sweetalert.min.js"></script>
+        <script src="../js/jquery.js"></script>
+        <script src="../js/index.js"></script>
 
     <title>Usuarios</title>
     <script>
@@ -56,10 +56,9 @@
                         <th class="text-nowrap text-center" onclick="sortTable(9)">Telefono</th>
                         <th class="text-nowrap text-center" onclick="sortTable(10)">Fecha nacimiento</th>
                         <th class="text-nowrap text-center" onclick="sortTable(11)">Sexo</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(12)">Acceso</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(13)">Entrada</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(14)">Contraseña</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(15)">Accion</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(12)">Entrada</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(13)">Contraseña</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(14)">Accion</th>
                       </tr>
                     </thead>
                     <tbody id="cuerpo"></tbody>
@@ -122,9 +121,42 @@
                         <input id="municipio" class="form form-control" type="text" onkeypress="return check(event)" name="Tmunicipio" placeholder="Municipio" autocomplete="new-password"><br>
                       </div>
                       <div class="col-lg-4">
-                        <h5 class="general">Estado:</h5>
-                        <input id="estado" class="form form-control" type="text" onkeypress="return check(event)" name="Testado" placeholder="Estado" autocomplete="new-password"><br>
-                      </div>
+                            <h5 class="general">Estado:</h5>
+                            <select class="form form-control" id="estado" name="Sestado">
+                              <option value="Aguascalientes">Aguascalientes</option>
+                              <option value="Baja California">Baja California	</option>
+                              <option value="Baja California Sur">Baja California Sur</option>
+                              <option value="Campeche">Campeche</option>
+                              <option value="Chiapas">Chiapas</option>
+                              <option value="Chihuahua">Chihuahua</option>
+                              <option value="Ciudad de México">Ciudad de México</option>
+                              <option value="Coahuila">Coahuila</option>
+                              <option value="Colima">Colima</option>
+                              <option value="Durango">Durango</option>
+                              <option value="Guanajuato">Guanajuato</option>
+                              <option value="Guerrero">Guerrero</option>
+                              <option value="Hidalgo">Hidalgo</option>
+                              <option value="Jalisco">Jalisco</option>
+                              <option value="México">México</option>
+                              <option value="Michoacán">Michoacán</option>
+                              <option value="Morelos">Morelos</option>
+                              <option value="Nayarit">Nayarit</option>
+                              <option value="Nuevo León">Nuevo León</option>
+                              <option value="Oaxaca">Oaxaca</option>
+                              <option value="Puebla">Puebla</option>
+                              <option value="Querétaro">Querétaro</option>
+                              <option value="Quintana Roo">Quintana Roo</option>
+                              <option value="San Luis Potosí">San Luis Potosí</option>
+                              <option value="Sinaloa">Sinaloa</option>
+                              <option value="Sonora">Sonora</option>
+                              <option value="Tabasco">Tabasco</option>
+                              <option value="Tamaulipas">Tamaulipas</option>
+                              <option value="Tlaxcala">Tlaxcala</option>
+                              <option value="Veracruz">Veracruz</option>
+                              <option value="Yucatán">Yucatán</option>
+                              <option value="Zacatecas">Zacatecas</option>
+                            </select>
+                          </div>
                       <div class="col-lg-4">
                         <h5 class="general">Pais:</h5>
                         <input id="pais" class="form form-control" type="text" onkeypress="return check(event)" name="Tpais" placeholder="País" autocomplete="new-password"><br>
@@ -164,7 +196,7 @@
                         </div>
                         <div class="col-lg-4">
                           <h5 class="general">Contraseña:</h5>
-                          <input id="contrasena" class="form form-control" type="password" onkeypress="return check(event)" name="Pcontrasena" placeholder="Contraseña" autocomplete="off" required><br>
+                          <input id="contrasena" class="form form-control" type="password" onkeypress="return check(event)" name="Pcontrasena" placeholder="Contraseña" autocomplete="new-password" required><br>
                         </div>
                         <input id="bclose" type="submit" class="mt-3 btn bg-dark text-primary btn-lg btn-block" value="Guardar">
                       </form>

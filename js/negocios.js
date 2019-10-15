@@ -1,7 +1,7 @@
 $(document).ready(function () {
   //VUsuarios_ab
   let editar = false;
-  let idSuscripcion = "";
+  let idnegocio = "";
   optenerDatosTablaUsuarios();
 
   $(".close").click(function () {
@@ -14,22 +14,9 @@ $(document).ready(function () {
     editar = false;
   });
 
-  $("#login").keyup(function () {
-    var username = $("#email").val();
-    if (username.length >= 7) {
-      $(".contro").show();
-      $.post("username_check.php", {
-        username2: username
-      }, function (data, status) {
-        $("#status").html(data);
-      });
-    } else {
-      $(".contro").hide();
-    }
-  });
 
   $("#formulario").submit(function (e) {
-    $.post("../Controllers/clienteab.php",$("#formulario").serialize() + '&accion=' + editar, function (response) {
+    $.post("../Controllers/negocios.php",$("#formulario").serialize() + '&idnegocio=' + idnegocio + '&accion=' + editar, function (response) {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
@@ -67,6 +54,10 @@ $(document).ready(function () {
                 <td class="text-nowrap text-center">${item[6]}</td>
                 <td class="text-nowrap text-center">${item[7]}</td>
                 <td class="text-nowrap text-center">${item[8]}</td>
+                <td class="text-nowrap text-center">${item[9]}</td>
+                <td class="text-nowrap text-center">${item[10]}</td>
+                <td class="text-nowrap text-center">${item[11]}</td>
+                <td class="text-nowrap text-center">${item[12]}</td>
                 <th class="text-nowrap text-center" style="width:100px;">
                 <div class="row">
                     <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="Beditar btn btn-danger" href="#">
@@ -89,15 +80,19 @@ $(document).ready(function () {
       valores += $(this).html() + "?";
     });
     datos = valores.split("?");
-    idSuscripcion = datos[0];
-    $("#fecha_activacion").val(datos[1]);
-    $("#fecha_vencimiento").val(datos[2]);
-    $("#estado").val(datos[3]);
-    $("#monto").val(datos[4]);
-    $("#paquete").val(datos[5]);
-    $("#usuario_extra").val(datos[6]);
-    $("#negocio").val(datos[7]);
-    $("#usuarioab").val(datos[8]);
+    console.log(datos);
+ 
+    $("#nombre").val(datos[1]);
+    $("#giro").val(datos[2]);
+    $("#calle_numero").val(datos[3]);
+    $("#colonia").val(datos[4]);
+    $("#localidad").val(datos[5]);
+    $("#municipio").val(datos[6]);
+    $("#estado").val(datos[7]);
+    $("#pais").val(datos[8]);
+    $("#telefono").val(datos[9]);
+    $("#impresora").val(datos[10]);
+    $("#dueno").val(datos[11]);
     editar = true;
   });
 });
