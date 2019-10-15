@@ -2,7 +2,7 @@ $(document).ready(function () {
   //VUsuarios_ab
   let editar = false;
   let idusuario = "";
-  optenerDatosTablaUsuarios();
+  obtenerDatosTablaUsuarios();
 
   $(".close").click(function () {
     $("#formulario").trigger("reset");
@@ -32,7 +32,7 @@ $(document).ready(function () {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
-        $("#mensaje").text(response);
+        $("#mensaje").text("Registro Exitoso");
         $("#mensaje").css("color", "green");
         $("#email").focus();
         $("#formulario").trigger("reset");
@@ -41,12 +41,12 @@ $(document).ready(function () {
         $("#mensaje").css("color", "red");
         $("#email").focus();
       }
-      optenerDatosTablaUsuarios();
+      obtenerDatosTablaUsuarios();
     });
     e.preventDefault();
   });
 
-  function optenerDatosTablaUsuarios() {
+  function obtenerDatosTablaUsuarios() {
     $.ajax({
       url: "../Controllers/usuariosab.php",
       type: "POST",
@@ -136,7 +136,7 @@ $(document).ready(function () {
         }
   
       });
-      optenerDatosTablaUsuarios();
+      obtenerDatosTablaUsuarios();
     });
     
   });

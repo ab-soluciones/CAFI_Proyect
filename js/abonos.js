@@ -1,7 +1,7 @@
 $(document).ready(function () {
   //VUsuarios_ab
   let editar = false;
-  let idnegocio = "";
+  let idabono = "";
   obtenerDatosTablaUsuarios();
 
   $(".close").click(function () {
@@ -16,7 +16,7 @@ $(document).ready(function () {
 
 
   $("#formulario").submit(function (e) {
-    $.post("../Controllers/negocios.php",$("#formulario").serialize() + '&idnegocio=' + idnegocio + '&accion=' + editar, function (response) {
+    $.post("../Controllers/negocios.php",$("#formulario").serialize() + '&idabono=' + idabono + '&accion=' + editar, function (response) {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
@@ -30,7 +30,6 @@ $(document).ready(function () {
         $("#email").focus();
       }
     });
-    obtenerDatosTablaUsuarios();
     e.preventDefault();
   });
 
@@ -56,9 +55,6 @@ $(document).ready(function () {
                 <td class="text-nowrap text-center">${item[7]}</td>
                 <td class="text-nowrap text-center">${item[8]}</td>
                 <td class="text-nowrap text-center">${item[9]}</td>
-                <td class="text-nowrap text-center">${item[10]}</td>
-                <td class="text-nowrap text-center">${item[11]}</td>
-                <td class="text-nowrap text-center">${item[12]}</td>
                 <th class="text-nowrap text-center" style="width:100px;">
                 <div class="row">
                     <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="Beditar btn btn-danger" href="#">
@@ -82,18 +78,13 @@ $(document).ready(function () {
     });
     datos = valores.split("?");
     console.log(datos);
- 
-    $("#nombre").val(datos[1]);
-    $("#giro").val(datos[2]);
-    $("#calle_numero").val(datos[3]);
+    
+    idabono = datos[0];
+    $("#estado").val(datos[1]);
+    $("#cantidad").val(datos[2]);
+    $("#pago").val(datos[3]);
     $("#colonia").val(datos[4]);
-    $("#localidad").val(datos[5]);
-    $("#municipio").val(datos[6]);
-    $("#estado").val(datos[7]);
-    $("#pais").val(datos[8]);
-    $("#telefono").val(datos[9]);
-    $("#impresora").val(datos[10]);
-    $("#dueno").val(datos[11]);
+    $("#forma_pago").val(datos[5]);
     editar = true;
   });
 });

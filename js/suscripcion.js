@@ -2,7 +2,7 @@ $(document).ready(function () {
   //VUsuarios_ab
   let editar = false;
   let idSuscripcion = "";
-  optenerDatosTablaUsuarios();
+  obtenerDatosTablaUsuarios();
 
   $(".close").click(function () {
     $("#formulario").trigger("reset");
@@ -33,20 +33,21 @@ $(document).ready(function () {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
-        $("#mensaje").text(response);
+        $("#mensaje").text("Registro Exitoso");
         $("#mensaje").css("color", "green");
         $("#email").focus();
         $("#formulario").trigger("reset");
       } else {
-        $("#mensaje").text(response);
+        $("#mensaje").text("Registro fallido");
         $("#mensaje").css("color", "red");
         $("#email").focus();
       }
     });
+    obtenerDatosTablaUsuarios();
     e.preventDefault();
   });
 
-  function optenerDatosTablaUsuarios() {
+  function obtenerDatosTablaUsuarios() {
     $.ajax({
       url: "../Controllers/clienteab.php",
       type: "POST",
