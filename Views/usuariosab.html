@@ -38,21 +38,28 @@
                   </div>
                   <div id="combo"></div>
                   <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                  <button class="d-none d-lg-flex btn btn-primary ml-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                  <button class="d-none d-lg-flex btn btn-primary ml-3 agregar" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
                   <table style="border-radius: 10px;" class="table table-bordered table-hover table-striped table-light">
                     <thead class="thead-dark">
                       <tr class="encabezados">
-                        <th class="text-nowrap text-center" onclick="sortTable(0)">ID Usuarios AB</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(0)">RFC</th>
                         <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(2)">Apellido Paterno</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(3)">Apellido Materno</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(4)">Acceso</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(5)">Usuario</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(6)">Contraseña</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(2)">Codigo Postal</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(3)">Calle</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(4)">Colonia</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(5)">Localidad</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(6)">Municipio</th>
                         <th class="text-nowrap text-center" onclick="sortTable(7)">Estado</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(8)">Acciones</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(8)">Pais</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(9)">Telefono</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(10)">Fecha nacimiento</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(11)">Sexo</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(12)">Acceso</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(13)">Entrada</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(14)">Contrasena</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(15)">Accion</th>
                       </tr>
                     </thead>
                     <tbody id="cuerpo"></tbody>
