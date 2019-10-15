@@ -7,7 +7,8 @@
 
 
  $('.close').click(function () {
-    $('#formunegocio').trigger('reset');
+    $('#formulario').trigger('reset');
+    $("#mensaje").css("display", "none");
   });
 
  function optenerDatosTabla() {
@@ -22,6 +23,7 @@
                <tr>
                <td class="text-nowrap text-center">${datos.id}</td>
                <td class="text-nowrap text-center">${datos.nombre}</td>
+               <td class="text-nowrap text-center">${datos.giro}</td>
                <td class="text-nowrap text-center">${datos.domicilio}</td>
                <td class="text-nowrap text-center">${datos.ciudad}</td>
                <td class="text-nowrap text-center">${datos.telefono}</td>
@@ -43,7 +45,7 @@
  }
 
 
- $('#formunegocio').submit(function (e) {
+ $('#formulario').submit(function (e) {
    const postData = {
      id: idnegocio,
      nombre: $('#nombre').val(),
@@ -65,7 +67,7 @@
        },
        function (isConfirm){
            if(isConfirm){
-            $('#formunegocio').trigger('reset');
+            $('#formulario').trigger('reset');
             $('.modal').modal('hide');
             editar = false;
            }
@@ -92,12 +94,19 @@
    });
    datos = valores.split("?");
    idnegocio = datos[0];
-   $('#nombre').val(datos[1]);
-   $('#dom').val(datos[2]);
-   $('#cd').val(datos[3]);
-   $('#tel').val(datos[4]);
-   $('#impresora').val(datos[5]);
-   $('#incliente').val(datos[6]);
+   $('#Tnombre').val(datos[1]);
+   $('#Tgiro').val(datos[2]);
+   $('#Tdomicilio').val(datos[3]);
+   $('#Tcalle_numero').val(datos[4]);
+   $('#Tcolonia').val(datos[5]);
+   $('#Tlocalidad').val(datos[6]);
+   $('#Tmunicipio').val(datos[7]);
+   $('#Testado').val(datos[8]);
+   $('#Tpais').val(datos[9]);
+   $('#Ttelefono').val(datos[10]);
+   $('#Simpresora').val(datos[11]);
+   $('#Sdueno').val(datos[12]);
+   $('#Susuarioab').val(datos[13]);
    editar = true;
 
  });
