@@ -77,7 +77,7 @@ $(document).ready(function () {
                   <td class="text-nowrap text-center">${item[16]}</td>
                   <th class="text-nowrap text-center" style="width:100px;">
                   <div class="row">
-                      <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="BeditarUsuarios btn btn-danger" href="#">
+                      <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="Beditar btn btn-danger" href="#">
                         Editar
                       </a>
                   </div>
@@ -89,7 +89,7 @@ $(document).ready(function () {
       });
     }
 
-    $(document).on("click", ".BeditarUsuarios", function () {
+    $(document).on("click", ".Beditar", function () {
       var valores = "";
       // Obtenemos todos los valores contenidos en los <td> de la fila
       // seleccionada
