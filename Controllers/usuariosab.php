@@ -48,7 +48,7 @@ echo $conexion->consultaPreparada($datos_usuarioab,$consulta_usuarioab,1,$tipo_d
   //editar  
   $datos_usuarioab = array();
   array_push( $datos_usuarioab, 
- 
+
             $_POST['Trfc'],
             $_POST['Tnombre'],
             $_POST['Tcp'],
@@ -64,7 +64,7 @@ echo $conexion->consultaPreparada($datos_usuarioab,$consulta_usuarioab,1,$tipo_d
             $_POST['Sacceso'],
             $_POST['Sentrada_sistema'],
             $_POST['Pcontrasena'],
-            $_POST['Temail'],
+            $_POST['Temail']
           );
   
   $editar= "UPDATE persona INNER JOIN usuariosab ON persona.email=usuariosab.email SET rfc= ?, nombre = ?, cp = ?, calle_numero = ?, colonia = ?, localidad = ?, municipio = ?, 

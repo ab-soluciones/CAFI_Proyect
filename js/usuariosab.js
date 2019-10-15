@@ -2,7 +2,7 @@ $(document).ready(function () {
   //VUsuarios_ab
   let editar=false;
   let idusuario="";
- // optenerDatosTablaUsuarios();
+  optenerDatosTablaUsuarios();
 
 
   $('.close').click(function () {
@@ -54,9 +54,11 @@ $(document).ready(function () {
    function optenerDatosTablaUsuarios() {
     $.ajax({
       url: '../Controllers/usuariosab.php?tabla=tabla',
-      type: 'GET',
+      type: 'POST',
+
       success: function (response) {
         let datos = JSON.parse(response);
+        console.log(response);
         let template = '';
         $.each(datos, function(i, item) {
           alert(datos[i].PageName);
