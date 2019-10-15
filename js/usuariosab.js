@@ -41,7 +41,7 @@ $(document).ready(function () {
         $("#email").focus();
         $("#formulario").trigger("reset");
       } else {
-        $("#mensaje").text(response);
+        $("#mensaje").text("Registro fallido");
         $("#mensaje").css("color", "red");
         $("#email").focus();
       }
@@ -62,7 +62,7 @@ $(document).ready(function () {
         $.each(datos, function (i, item) {
           template += `
           <tr>
-                <td class="text-nowrap text-center d-none">${item[0]}</td>
+                <td class="text-nowrap text-center">${item[0]}</td>
                 <td class="text-nowrap text-center">${item[1]}</td>
                 <td class="text-nowrap text-center">${item[2]}</td>
                 <td class="text-nowrap text-center">${item[3]}</td>
@@ -83,14 +83,67 @@ $(document).ready(function () {
                     <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="BeditarUsuarios btn btn-danger" href="#">
                       Editar
                     </a>
+                    </div>
+                    <div class="row">
+                    <a  style="margin: 0 auto;" class="Beliminar btn btn-danger" href="#">
+                      Eliminado
+                    </a>
                 </div>
-            </th>
+                </th>
           `;
         });
         $("#cuerpo").html(template); 
       }
     });
   }
+  $(document).on("click",".Beliminar",function(){
+
+    swal({
+      title: "Are you sure?",
+      text: "Your will not be able to recover this imaginary file!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonClass: "btn-danger",
+      confirmButtonText: "Yes, delete it!",
+      closeOnConfirm: false
+    },
+    function(){
+      var valores = "";
+      $(this).parents("tr").find("td").each(function () {
+        valores += $(this).html() + "?";
+      });
+      datos = valores.split("?");
+      console.log(datos);
+      $("#email").val(datos[0]);
+      const postData = {
+        email: $("#email").val(datos[0]),
+        eliminado:"true"
+      };
+      $.ajax({
+        url: "../Controllers/usuariosab.php",
+        type: "POST",
+        data: postData,
+
+        success: function (response) {
+          if(response == "Eliminacion exitosa"){
+            swal(
+            "Eliminado!", 
+            "Registro Eliminado.", 
+            "success");
+          }else{
+            swal(
+            "Algo salio mal!", 
+            "Registro fallido.", 
+            "warning");
+          }
+          
+        }
+  
+      });
+      optenerDatosTablaUsuarios();
+    });
+    
+  });
 
   $(document).on("click", ".BeditarUsuarios", function () {
     var valores = "";

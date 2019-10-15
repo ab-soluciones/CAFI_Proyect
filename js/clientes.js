@@ -1,8 +1,7 @@
 $(document).ready(function () {
     //VUsuarios_ab
     let editar = false;
-    let idusuario = "";
-    optenerDatosTablaUsuarios();
+
   
     $(".close").click(function () {
       $("#formulario").trigger("reset");
@@ -18,8 +17,8 @@ $(document).ready(function () {
     });
   
     $("#login").keyup(function () {
-      var username = $("#login").val();
-      if (username.length >= 3) {
+      var username = $("#email").val();
+      if (username.length >= 7) {
         $(".contro").show();
         $.post("username_check.php", {
           username2: username
@@ -32,7 +31,7 @@ $(document).ready(function () {
     });
   
     $("#formulario").submit(function (e) {
-      $.post("../Controllers/usuariosab.php",$("#formulario").serialize() + '&accion=' + editar, function (response) {
+      $.post("../Controllers/clienteab.php",$("#formulario").serialize() + '&accion=' + editar, function (response) {
         console.log(response);
         $("#mensaje").css("display", "block");
         if (response == "Registro exitoso") {
@@ -45,14 +44,14 @@ $(document).ready(function () {
           $("#mensaje").css("color", "red");
           $("#email").focus();
         }
-        optenerDatosTablaUsuarios();
+        
       });
       e.preventDefault();
     });
   
     function optenerDatosTablaUsuarios() {
       $.ajax({
-        url: "../Controllers/usuariosab.php",
+        url: "../Controllers/clienteab.php",
         type: "POST",
         data: "tabla=tabla",
         success: function (response) {
@@ -62,7 +61,7 @@ $(document).ready(function () {
           $.each(datos, function (i, item) {
             template += `
             <tr>
-                  <td class="text-nowrap text-center d-none">${item[0]}</td>
+                  <td class="text-nowrap text-center">${item[0]}</td>
                   <td class="text-nowrap text-center">${item[1]}</td>
                   <td class="text-nowrap text-center">${item[2]}</td>
                   <td class="text-nowrap text-center">${item[3]}</td>
@@ -78,13 +77,14 @@ $(document).ready(function () {
                   <td class="text-nowrap text-center">${item[13]}</td>
                   <td class="text-nowrap text-center">${item[14]}</td>
                   <td class="text-nowrap text-center">${item[15]}</td>
+                  <td class="text-nowrap text-center">${item[16]}</td>
                   <th class="text-nowrap text-center" style="width:100px;">
                   <div class="row">
                       <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="BeditarUsuarios btn btn-danger" href="#">
                         Editar
                       </a>
                   </div>
-              </th>
+                  </th>
             `;
           });
           $("#cuerpo").html(template); 
@@ -117,6 +117,7 @@ $(document).ready(function () {
       $("#acceso").val(datos[13]);
       $("#entrada_sistema").val(datos[14]);
       $("#contrasena").val(datos[15]);
+      $("#negocio").val(datos[16]);
       
       editar = true;
     });
