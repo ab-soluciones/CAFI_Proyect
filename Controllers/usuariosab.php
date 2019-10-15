@@ -68,17 +68,16 @@ echo $conexion->consultaPreparada($datos_usuarioab,$consulta_usuarioab,1,$tipo_d
           );
   
   $editar= "UPDATE persona INNER JOIN usuariosab ON persona.email=usuariosab.email SET rfc= ?, nombre = ?, cp = ?, calle_numero = ?, colonia = ?, localidad = ?, municipio = ?, 
-                        estado = ?, pais = ?, telefono = ?,fecha_nacimiento= ?,sexo= ?, acceso = ?, entrada_sistema = ?, contrasena = ? WHERE persona.email= ?";
+            estado = ?, pais = ?, telefono = ?,fecha_nacimiento= ?,sexo= ?, acceso = ?, entrada_sistema = ?, contrasena = ? WHERE persona.email= ?";
   $tipo_datos = "ssssssssssssssss";
   //respuesta al front
   echo $conexion->consultaPreparada($datos_usuarioab,$editar,1,$tipo_datos);
 }
-}else if(isset($_POST['tabla']) === "tabla"){
+}else if(isset($_POST['tabla'])){
     $conexion = new Models\Conexion();
     $jsonstring = json_encode($conexion->obtenerDatosDeTabla("SELECT rfc,nombre,cp,calle_numero,colonia,localidad,municipio,estado,pais,telefono,fecha_nacimiento,
     sexo,acceso,entrada_sistema,contrasena FROM persona INNER JOIN usuariosab ON persona.email=usuariosab.email"));
     echo $jsonstring;
     
 }
-
 ?>
