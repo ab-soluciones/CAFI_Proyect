@@ -86,7 +86,7 @@ echo $conexion->consultaPreparada($datos_usuarioab,$consulta_usuarioab,1,$tipo_d
     $jsonstring = json_encode($conexion->consultaPreparada($datos,$consulta,2,"i"));
     echo $jsonstring;
     
-}else if(isset($_POST['email']) && isset($_POST['eliminado']) && $_POST['eliminado'] === 'true'){
+}else if(isset($_POST['email']) && isset($_POST['eliminado']) && $_POST['eliminado'] == 'true'){
   $conexion = new Models\Conexion();
   $email= $conexion->eliminar_simbolos($_POST['email']);
   $consulta = "UPDATE persona SET eliminado = ? WHERE email= ?";
