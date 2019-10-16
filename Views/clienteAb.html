@@ -44,20 +44,20 @@
                   <table style="border-radius: 10px;" class="table table-bordered table-hover table-striped table-light">
                     <thead class="thead-dark">
                       <tr class="encabezados">
-                        <th class="text-nowrap text-center" onclick="sortTable(0)">RFC</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(1)">Nombre</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(2)">Codigo Postal</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(3)">Calle</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(4)">Colonia</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(5)">Localidad</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(6)">Municipio</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(7)">Estado</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(8)">Pais</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(9)">Telefono</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(10)">Fecha nacimiento</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(11)">Sexo</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(12)">Entrada</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(13)">Contraseña</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(0)">EMAIL</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(1)">RFC</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(2)">Nombre</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(3)">Codigo Postal</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(4)">Calle</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(5)">Colonia</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(6)">Localidad</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(7)">Municipio</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(8)">Estado</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(9)">Pais</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(10)">Telefono</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(11)">Fecha nacimiento</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(12)">Sexo</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(13)">Entrada</th>
                         <th class="text-nowrap text-center" onclick="sortTable(14)">Accion</th>
                       </tr>
                     </thead>
@@ -88,7 +88,7 @@
                     <div class="d-block d-lg-flex row">
                       <div class="col-lg-4">
                         <h5 class="general">Email:</h5>
-                        <input id="email" class="form form-control" onkeypress="return check(event)" type="email" name="Eemail" placeholder="Email" autocomplete="new-password" required>
+                        <input id="email" class="form form-control" onkeypress="return check(event)" type="email" name="Temail" placeholder="Email" autocomplete="new-password" required>
                       </div>
                       <div class="col-lg-4">
                         <h5 class="general">RFC:</h5>
@@ -114,7 +114,7 @@
                       </div>
                       <div class="col-lg-4">
                         <h5 class="general">Localidad:</h5>
-                        <input id="colonia" class="form form-control" type="text" onkeypress="return check(event)" name="Tlocalidad" placeholder="Localidad" autocomplete="new-password" required><br>
+                        <input id="localidad" class="form form-control" type="text" onkeypress="return check(event)" name="Tlocalidad" placeholder="Localidad" autocomplete="new-password" required><br>
                       </div>
                       <div class="col-lg-4">
                         <h5 class="general">Municipio:</h5>
@@ -165,12 +165,6 @@
                         <h5 class="general">Teléfono:</h5>
                         <input id="telefono" class="form form-control" type="text" onkeypress="return check(event)" name="Ttelefono" placeholder="Teléfono" autocomplete="new-password" required><br>
                       </div>
-                      <div class="col-lg-12">
-                        <h5 class="general">Negocio:</h5>
-                        <select class="form form-control" id="negocio" name="Snegocio" required>
-                          <option value="Negocio"></option>
-                        </select>
-                      </div>
                       <div class="col-lg-4">
                         <h5 class="general">Fecha de nacimiento:</h5>
                         <input id="fecha_nacimiento" class="form form-control" type="date" onkeypress="return check(event)" name="Dfecha_nacimiento" placeholder="Fecha de nacimiento" autocomplete="new-password"><br>
@@ -207,7 +201,7 @@
               </div>
               <!-- Modal -->
         <script src="../js/user_jquery.js"></script>
-        <script src="../js/usuariosab.js"></script>
+        <script src="../js/clientes.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
       </body>

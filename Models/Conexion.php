@@ -9,7 +9,7 @@ class Conexion
         "host" => "localhost",
         "user" => "root",
         "pass" => "",
-        "db" => "cafi_bd"
+        "db" => "cafi_db"
 
     );
 
@@ -48,12 +48,13 @@ class Conexion
         //accion 1 para insertar o actualizar
         if($accion == 1){
             if($stmt->execute()){
-              $mensaje="Registro exitoso";
+              $mensaje="1";
             }else{
-              $mensaje="Ocurrio un problema, intente de nuevo";
+              $mensaje="0";
             }
           return $mensaje;
-        }else{
+        }else if($accion == 2){
+             //accion 2 para retornar datos en una matriz
             $stmt->execute();
             return mysqli_fetch_all($stmt->get_result());
         }

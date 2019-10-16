@@ -2,7 +2,7 @@ $(document).ready(function () {
   //VUsuarios_ab
   let editar = false;
   let idusuario = "";
-  optenerDatosTablaUsuarios();
+  obtenerDatosTablaUsuarios();
 
   $(".close").click(function () {
     $("#formulario").trigger("reset");
@@ -32,7 +32,7 @@ $(document).ready(function () {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
-        $("#mensaje").text(response);
+        $("#mensaje").text("Registro Exitoso");
         $("#mensaje").css("color", "green");
         $("#email").focus();
         $("#formulario").trigger("reset");
@@ -41,12 +41,12 @@ $(document).ready(function () {
         $("#mensaje").css("color", "red");
         $("#email").focus();
       }
-      optenerDatosTablaUsuarios();
+      obtenerDatosTablaUsuarios();
     });
     e.preventDefault();
   });
 
-  function optenerDatosTablaUsuarios() {
+  function obtenerDatosTablaUsuarios() {
     $.ajax({
       url: "../Controllers/usuariosab.php",
       type: "POST",
@@ -58,7 +58,7 @@ $(document).ready(function () {
         $.each(datos, function (i, item) {
           template += `
           <tr>
-                <td class="text-nowrap text-center">${item[0]}</td>
+                <td class="text-nowrap text-center idNed">${item[0]}</td>
                 <td class="text-nowrap text-center">${item[1]}</td>
                 <td class="text-nowrap text-center">${item[2]}</td>
                 <td class="text-nowrap text-center">${item[3]}</td>
@@ -93,21 +93,18 @@ $(document).ready(function () {
     });
   }
   $(document).on("click",".Beliminar",function(){
-
+    var valores = "";
+    $(this).parents("tr").find("td").
     swal({
-      title: "Are you sure?",
-      text: "Your will not be able to recover this imaginary file!",
+      title: "Alerta!",
+      text: "¿Esta seguro que desea eliminar?",
       type: "warning",
       showCancelButton: true,
       confirmButtonClass: "btn-danger",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Eliminar!",
       closeOnConfirm: false
     },
     function(){
-      var valores = "";
-      $(this).parents("tr").find("td").each(function () {
-        valores += $(this).html() + "?";
-      });
       datos = valores.split("?");
       console.log(datos);
       $("#email").val(datos[0]);
@@ -136,9 +133,8 @@ $(document).ready(function () {
         }
   
       });
-      optenerDatosTablaUsuarios();
     });
-    
+    obtenerDatosTablaUsuarios();
   });
 
   $(document).on("click", ".BeditarUsuarios", function () {
