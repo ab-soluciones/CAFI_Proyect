@@ -9,6 +9,23 @@ $(document).ready(function () {
     $("#mensaje").css("display", "none");
   });
 
+  function obtenerNegocios(){
+    $.ajax({
+      url: "../Controllers/suscripcion.php",
+      type: "POST",
+      data: "combo=combo",
+      success: function (response) {
+        console.log(response);
+        let datos = JSON.parse(response);
+        let template = "";
+        $.each(datos, function (i, item) {
+          template += `
+          <option><option>
+          `;
+        })
+    }
+  });
+  }
 
   $('.agregar').click(function(){
     editar = false;
@@ -29,7 +46,7 @@ $(document).ready(function () {
   });
 
   $("#formulario").submit(function (e) {
-    $.post("../Controllers/clienteab.php",$("#formulario").serialize() + '&idsuscripcion=' + idSuscripcion + '&accion=' + editar, function (response) {
+    $.post("../Controllers/suscripcion.php",$("#formulario").serialize() + '&idsuscripcion=' + idSuscripcion + '&accion=' + editar, function (response) {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
@@ -49,7 +66,7 @@ $(document).ready(function () {
 
   function obtenerDatosTablaUsuarios() {
     $.ajax({
-      url: "../Controllers/clienteab.php",
+      url: "../Controllers/suscripcion.php",
       type: "POST",
       data: "tabla=tabla",
       success: function (response) {
