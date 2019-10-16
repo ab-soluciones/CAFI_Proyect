@@ -2,6 +2,7 @@ $(document).ready(function () {
   //VUsuarios_ab
   let editar = false;
   let idnegocio = "";
+  obtenerDuenos();
   obtenerDatosTablaUsuarios();
 
   $(".close").click(function () {
@@ -14,9 +15,28 @@ $(document).ready(function () {
     editar = false;
   });
 
+  function obtenerDuenos(){
+    $.ajax({
+      url: "../Controllers/negocio.php",
+      type: "POST",
+      data: "combo=combo",
+
+      success: function (response) {
+        console.log(response);
+        let datos = JSON.parse(response);
+        let template = "";
+        $.each(datos, function (i, item) {
+          template += `
+          <option>${item[0]}<option>
+          `;
+        });
+        $("#clientes").html(template);
+    }
+  });
+  }
 
   $("#formulario").submit(function (e) {
-    $.post("../Controllers/negocios.php",$("#formulario").serialize() + '&idnegocio=' + idnegocio + '&accion=' + editar, function (response) {
+    $.post("../Controllers/negocio.php",$("#formulario").serialize() + '&idnegocios=' + idnegocio + '&accion=' + editar, function (response) {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
@@ -29,24 +49,24 @@ $(document).ready(function () {
         $("#mensaje").css("color", "red");
         $("#email").focus();
       }
+      obtenerDatosTablaUsuarios();
     });
-    obtenerDatosTablaUsuarios();
     e.preventDefault();
   });
 
   function obtenerDatosTablaUsuarios() {
     $.ajax({
-      url: "../Controllers/clienteab.php",
+      url: "../Controllers/negocio.php",
       type: "POST",
       data: "tabla=tabla",
       success: function (response) {
-
+        console.log(response);
        let datos = JSON.parse(response);
         let template = "";
         $.each(datos, function (i, item) {
           template += `
           <tr>
-                <td class="text-nowrap text-center">${item[0]}</td>
+                <td class="text-nowrap text-center d-none">${item[0]}</td>
                 <td class="text-nowrap text-center">${item[1]}</td>
                 <td class="text-nowrap text-center">${item[2]}</td>
                 <td class="text-nowrap text-center">${item[3]}</td>
@@ -57,16 +77,27 @@ $(document).ready(function () {
                 <td class="text-nowrap text-center">${item[8]}</td>
                 <td class="text-nowrap text-center">${item[9]}</td>
                 <td class="text-nowrap text-center">${item[10]}</td>
-                <td class="text-nowrap text-center">${item[11]}</td>
-                <td class="text-nowrap text-center">${item[12]}</td>
-                <th class="text-nowrap text-center" style="width:100px;">
-                <div class="row">
-                    <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="Beditar btn btn-danger" href="#">
-                      Editar
-                    </a>
-                </div>
-                </th>
-          `;
+                <td class="text-nowrap text-center">${item[11]}</td>`;
+                if(item[12] == null){
+                  template += `<td class="text-nowrap text-center"></td>
+                  '<th class="text-nowrap text-center" style="width:100px;">
+                  <div class="row">
+                      <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="Beditar btn btn-danger" href="#">
+                        Editar
+                      </a>
+                  </div>
+                  </th>`;
+                }else{
+                  template += `<td class="text-nowrap text-center">${item[12]}</td>
+                  '<th class="text-nowrap text-center" style="width:100px;">
+                  <div class="row">
+                      <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="Beditar btn btn-danger" href="#">
+                        Editar
+                      </a>
+                  </div>
+                  </th>`;
+                }
+
         });
         $("#cuerpo").html(template);
       }
@@ -82,7 +113,7 @@ $(document).ready(function () {
     });
     datos = valores.split("?");
     console.log(datos);
- 
+    idnegocio = datos[0];
     $("#nombre").val(datos[1]);
     $("#giro").val(datos[2]);
     $("#calle_numero").val(datos[3]);

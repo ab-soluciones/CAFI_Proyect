@@ -2,14 +2,13 @@
 include_once '../Models/Conexion.php';
 
 if(isset($_POST['Temail']) && isset($_POST['Trfc'])  && isset($_POST['Tnombre'])  && isset($_POST['Tcp'])  && isset($_POST['Tcalle_numero'])
-&& isset($_POST['Tcolonia'])  && isset($_POST['Tlocalidad'])  && isset($_POST['Tmunicipio'])  && isset($_POST['Testado']) && isset($_POST['Tpais'])  && isset($_POST['Ttelefono'])
+&& isset($_POST['Tcolonia'])  && isset($_POST['Tlocalidad'])  && isset($_POST['Tmunicipio'])  && isset($_POST['Sestado']) && isset($_POST['Tpais'])  && isset($_POST['Ttelefono'])
 && isset($_POST['Dfecha_nacimiento']) && isset($_POST['Ssexo']) && isset($_POST['Sacceso'])  && isset($_POST['Sentrada_sistema'] )  && isset($_POST['Pcontrasena']) && isset($_POST['accion']))
 {
 
 $conexion = new Models\Conexion();
 
 if($_POST['accion'] == 'false'){
-
 //guardar
 $datos_persona = array();
 $datos_usuarioab = array();
@@ -22,7 +21,7 @@ array_push( $datos_persona,
             $conexion->eliminar_simbolos($_POST['Tcolonia']),
             $conexion->eliminar_simbolos($_POST['Tlocalidad']),
             $conexion->eliminar_simbolos($_POST['Tmunicipio']),
-            $conexion->eliminar_simbolos($_POST['Testado']),
+            $conexion->eliminar_simbolos($_POST['Sestado']),
             $conexion->eliminar_simbolos($_POST['Tpais']),
             $conexion->eliminar_simbolos($_POST['Ttelefono']),
             $conexion->eliminar_simbolos($_POST['Dfecha_nacimiento']),
@@ -31,10 +30,10 @@ array_push( $datos_persona,
 );
 
 array_push( $datos_usuarioab,       
-           $conexion->conexion->eliminar_simbolos($_POST['Temail']),
-           $conexion->conexion->eliminar_simbolos($_POST['Sacceso']),
-           $conexion->conexion->eliminar_simbolos($_POST['Sentrada_sistema']),
-           $conexion->conexion->eliminar_simbolos($_POST['Pcontrasena'])
+           $conexion->eliminar_simbolos($_POST['Temail']),
+           $conexion->eliminar_simbolos($_POST['Sacceso']),
+           $conexion->eliminar_simbolos($_POST['Sentrada_sistema']),
+           $conexion->eliminar_simbolos($_POST['Pcontrasena'])
         );
 
 $consulta_persona = "INSERT INTO persona (email,rfc,nombre,cp,calle_numero,colonia,localidad,municipio,estado,pais,telefono,fecha_nacimiento,sexo,eliminado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -59,7 +58,7 @@ echo $conexion->consultaPreparada($datos_usuarioab,$consulta_usuarioab,1,$tipo_d
             $conexion->eliminar_simbolos($_POST['Tcolonia']),
             $conexion->eliminar_simbolos($_POST['Tlocalidad']),
             $conexion->eliminar_simbolos($_POST['Tmunicipio']),
-            $conexion->eliminar_simbolos($_POST['Testado']),
+            $conexion->eliminar_simbolos($_POST['Sestado']),
             $conexion->eliminar_simbolos($_POST['Tpais']),
             $conexion->eliminar_simbolos($_POST['Ttelefono']),
             $conexion->eliminar_simbolos($_POST['Dfecha_nacimiento']),

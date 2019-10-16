@@ -3,6 +3,7 @@ $(document).ready(function () {
   let editar = false;
   let idSuscripcion = "";
   obtenerDatosTablaUsuarios();
+  obtenerNegocios();
 
   $(".close").click(function () {
     $("#formulario").trigger("reset");
@@ -15,14 +16,14 @@ $(document).ready(function () {
       type: "POST",
       data: "combo=combo",
       success: function (response) {
-        console.log(response);
         let datos = JSON.parse(response);
         let template = "";
         $.each(datos, function (i, item) {
           template += `
-          <option><option>
+          <option value='${item[0]}'>${item[1]}<option>
           `;
-        })
+        });
+        $('#negociosD').html(template);
     }
   });
   }
@@ -59,8 +60,8 @@ $(document).ready(function () {
         $("#mensaje").css("color", "red");
         $("#email").focus();
       }
+      obtenerDatosTablaUsuarios();
     });
-    obtenerDatosTablaUsuarios();
     e.preventDefault();
   });
 
@@ -76,7 +77,7 @@ $(document).ready(function () {
         $.each(datos, function (i, item) {
           template += `
           <tr>
-                <td class="text-nowrap text-center">${item[0]}</td>
+                <td class="text-nowrap text-center d-none">${item[0]}</td>
                 <td class="text-nowrap text-center">${item[1]}</td>
                 <td class="text-nowrap text-center">${item[2]}</td>
                 <td class="text-nowrap text-center">${item[3]}</td>

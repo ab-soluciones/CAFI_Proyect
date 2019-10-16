@@ -9,8 +9,8 @@ if(isset($_POST['Tnombre']) && isset($_POST['Sgiro']) && isset($_POST['Tcalle_nu
 if($_POST['accion'] === 'false'){
 
 $conexion = new Models\Conexion();
-$idnegocio = 'NULL';
-$usuarioab = 'NULL';
+$idnegocio = NULL;
+$usuarioab = NULL;
 $datos_negocio = array();
 array_push( $datos_negocio,
             $idnegocio,
@@ -27,12 +27,12 @@ array_push( $datos_negocio,
             $conexion->eliminar_simbolos($_POST['Sdueno']),
             $usuarioab
 );
-    $consulta = "INSERT INTO negocio (idnegocios,nombre,giro,calle_numero,colonia,localidad,municipio,estado,telefono,impresora,dueno) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    $tipo_datos = "issssssssssss";
+    $consulta = "INSERT INTO negocios (idnegocios,nombre,giro,calle_numero,colonia,localidad,municipio,estado,pais,telefono,impresora,dueno,usuarioab) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $tipo_datos = "sssssssssssss";
 }else{
     
 $conexion = new Models\Conexion();
-$usuarioab='NULL';
+$usuarioab=NULL;
 $datos_negocio = array();
 array_push( $datos_negocio,
             $conexion->eliminar_simbolos($_POST['Tnombre']),
@@ -47,9 +47,9 @@ array_push( $datos_negocio,
             $conexion->eliminar_simbolos($_POST['Simpresora']),
             $conexion->eliminar_simbolos($_POST['Sdueno']),
             $usuarioab, 
-            $_POST['idnegocios'];
+            $_POST['idnegocios']
 );
-    $consulta= "UPDATE negocio SET nombre = ?, giro = ?, calle_numero = ?, colonia = ?, localidad = ?, municipio = ?, 
+    $consulta= "UPDATE negocios SET nombre = ?, giro = ?, calle_numero = ?, colonia = ?, localidad = ?, municipio = ?, 
     estado = ?, pais = ?, telefono = ?,impresora = ?, dueno = ?, usuarioab = ? WHERE idnegocios = ?";
     $tipo_datos = "ssssssssssssi";
 }
@@ -60,14 +60,15 @@ echo $conexion->consultaPreparada($datos_negocio,$consulta,1,$tipo_datos);
     //obtencion del json para pintar los renglones de la tabla
     $conexion = new Models\Conexion();
     $consulta = "SELECT * FROM negocios";
-    echo $conexion->obtenerDatosDeTabla($consulta);
-    
+    $jsonstring = json_encode($conexion->obtenerDatosDeTabla($consulta));
+    echo $jsonstring;
 }else if(isset($_POST['combo'])){
   //obtencion de json para pinta los renglones del combo box
   $conexion = new Models\Conexion();
   $consulta = "SELECT email FROM usuarioscafi WHERE acceso = ?";
   $datos = array();
   array_push($datos,"CEO");
-  echo $conexion->consultaPreparada($datos,$consulta,2,"s");
+  $jsonstring = json_encode($conexion->consultaPreparada($datos,$consulta,2,"s"));
+  echo $jsonstring; 
  }
 ?>

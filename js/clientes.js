@@ -42,8 +42,9 @@ $(document).ready(function () {
           $("#mensaje").css("color", "red");
           $("#email").focus();
         }
+        obtenerDatosTablaUsuarios();
       });
-      obtenerDatosTablaUsuarios();
+      
       e.preventDefault();
     });
 
@@ -52,8 +53,9 @@ $(document).ready(function () {
         url: "../Controllers/clienteab.php",
         type: "POST",
         data: "tabla=tabla",
-        success: function (response) {
 
+        success: function (response) {
+          console.log(response);
          let datos = JSON.parse(response);
           let template = "";
           $.each(datos, function (i, item) {
@@ -73,9 +75,7 @@ $(document).ready(function () {
                   <td class="text-nowrap text-center">${item[11]}</td>
                   <td class="text-nowrap text-center">${item[12]}</td>
                   <td class="text-nowrap text-center">${item[13]}</td>
-                  <td class="text-nowrap text-center">${item[14]}</td>
-                  <td class="text-nowrap text-center">${item[15]}</td>
-                  <td class="text-nowrap text-center">${item[16]}</td>
+                  <td class="text-nowrap text-center d-none">${item[14]}</td>
                   <th class="text-nowrap text-center" style="width:100px;">
                   <div class="row">
                       <a data-toggle="modal" data-target="#modalForm" style="margin: 0 auto;" class="Beditar btn btn-danger" href="#">
@@ -112,10 +112,8 @@ $(document).ready(function () {
       $("#telefono").val(datos[10]);
       $("#fecha_nacimiento").val(datos[11]);
       $("#sexo").val(datos[12]);
-      $("#acceso").val(datos[13]);
-      $("#entrada_sistema").val(datos[14]);
-      $("#contrasena").val(datos[15]);
-      $("#negocio").val(datos[16]);
+      $("#entrada_sistema").val(datos[13]);
+      $("#contrasena").val(datos[14]);
       editar = true;
     });
   });
