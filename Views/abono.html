@@ -15,7 +15,7 @@
     <script src="../js/jquery.js"></script>
     <script src="../js/index.js"></script>
 
-    <title>Suscripciones</title>
+    <title>Abono</title>
     <script>
       function cerrar() {
         window.close();
@@ -30,7 +30,7 @@
             <div class="col-lg-12">
               <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
-                  <button class="d-lg-none btn btn-primary col-12 mb-3 p-3 agregar" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                  <button class="agregar d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <i class="fa fa-search"></i>
@@ -44,15 +44,16 @@
                   <table style="border-radius: 10px;" class="table table-bordered table-hover table-striped table-light">
                     <thead class="thead-dark">
                       <tr class="encabezados">
-                        <th class="text-nowrap text-center" onclick="sortTable(0)">Fecha Activación</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(1)">Fecha Vencimiento</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(2)">Estado</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(3)">Monto</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(4)">Paquete</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(5)">Usuario Extra</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(6)">Negocio</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(7)">UsuarioAB</th>
-                        <th class="text-nowrap text-center" onclick="sortTable(8)">Accion</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(0)">ID</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(1)">Estado</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(2)">Cantidad</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(3)">Pago</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(4)">Forma Pago</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(5)">Cambio</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(6)">Fecha</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(7)">Hora</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(8)">Usuario CAFI</th>
+                        <th class="text-nowrap text-center" onclick="sortTable(9)">Adeudos</th>
                       </tr>
                     </thead>
                     <tbody id="cuerpo"></tbody>
@@ -81,45 +82,21 @@
                     <div id="mensaje" style="text-align: center; margin: 10px; font-weight: bold;"></div>
                     <div class="d-block d-lg-flex row">
                       <div class="col-lg-4">
-                        <h5 class="general">Fecha Activación:</h5>
-                        <input id="fecha_activacion" class="form form-control" onkeypress="return check(event)" type="date" name="Dfecha_activacion" placeholder="Fecha Activación" autocomplete="new-password">
+                        <h5 class="general">Cantidad:</h5>
+                        <input id="cantidad" class="form form-control" onkeypress="return check(event)" type="number" name="Ncantidad" placeholder="Cantidad" autocomplete="new-password" required>
                       </div>
                       <div class="col-lg-4">
-                        <h5 class="general">Fecha Vencimiento:</h5>
-                        <input id="fecha_vencimiento" class="form form-control" onkeypress="return check(event)" type="date" name="Dfecha_vencimiento" placeholder="Fecha Vencimiento" autocomplete="new-password">
+                        <h5 class="general">Pago:</h5>
+                        <input id="pago" class="form form-control" onkeypress="return check(event)" type="number" name="Npago" placeholder="Pago" autocomplete="new-password" required>
                       </div>
                       <div class="col-lg-4">
-                        <h5 class="general">Estado del sistema:</h5>
-                        <select class="form form-control" id="estado" name="Sestado">
-                          <option value="A">Activo</option>
-                          <option value="I">Inactivo</option>
-                      </select>
-                      </div>
-                    </div>
-                    <div class="d-block d-lg-flex row">
-                      <div class="col-lg-4">
-                        <h5 class="general">Paquete:</h5>
-                        <select class="form form-control" name="Spaquete" id="paquete">
-                          <option value="0">Elegir</option>
-                          <option value="1">Basic</option>
-                          <option value="2">Standard</option>
-                          <option value="3">Enterprise</option>
-                        </select>
+                        <h5 class="general">Forma de pago:</h5>
+                        <input id="forma_pago" class="form form-control" onkeypress="return check(event)" type="text" name="Tforma_pago" placeholder="Forma de pago" autocomplete="new-password" required>
                       </div>
                       <div class="col-lg-4">
-                        <h5 class="general">Usuario Extra:</h5>
-                        <input id="usuario_extra" class="form form-control" type="number" value="0" min="0" onkeypress="return check(event)" name="Susuario_extra" placeholder="Usuario Extra" autocomplete="new-password" required><br>
+                        <h5 class="general">Cambio:</h5>
+                        <input id="cambio" class="form form-control" onkeypress="return check(event)" type="number" name="Ncambio" placeholder="Cambio" autocomplete="new-password" required>
                       </div>
-
-                      <div class="col-lg-12 ocultar">
-                        <h5 class="general">Negocio:</h5>
-                        <select class="form form-control" id="negocio" name="Snegocio">
-                        </select>
-                      </div>
-                      <div class="col-lg-12">
-                          <h5 class="general">Monto:</h5>
-                          <input id="monto" class="form form-control" onkeypress="return check(event)" type="text" name="Tmonto" placeholder="Monto" autocomplete="new-password" required disabled>
-                        </div>
 
                         <input id="bclose" type="submit" class="mt-3 btn bg-dark text-primary btn-lg btn-block" value="Guardar">
                       </form>
@@ -130,9 +107,10 @@
               </div>
               <!-- Modal -->
         <script src="../js/user_jquery.js"></script>
-        <script src="../js/suscripcion.js"></script>
+        <script src="../js/usuariosab.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
       </body>
 
     </html>
