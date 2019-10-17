@@ -5,15 +5,12 @@ $(document).ready(function () {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
-        document.location.href='login.html';
-        $("#email").focus();
+        document.location.replace='login.html';
         $("#formulario").trigger("reset");
       } else {
         $("#mensaje").text("Usuario incorrecto");
         $("#mensaje").css("color", "red");
-        $("#email").focus();
       }
-      obtenerDatosTablaUsuarios();
     });
 
     e.preventDefault();
