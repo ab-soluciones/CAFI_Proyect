@@ -15,7 +15,7 @@
         <script src="../js/jquery.js"></script>
         <script src="../js/index.js"></script>
 
-    <title>Usuarios</title>
+    <title>Cliente AB</title>
     <script>
       function cerrar() {
         window.close();
@@ -34,7 +34,7 @@
             <div class="col-lg-12">
               <div id="tableContainer" class="d-block col-lg-12">
                 <div class="input-group mb-2">
-                  <button class="d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                  <button class="agregar d-lg-none btn btn-primary col-12 mb-3 p-3" data-toggle="modal" data-target="#modalForm">Agregar</button>
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <i class="fa fa-search"></i>
@@ -42,7 +42,7 @@
                   </div>
                   <div id="combo"></div>
                   <input class="form-control col-12 col-lg-4" type="text" id="busqueda" onkeypress="return check(event)" onkeyup="busqueda()" placeholder="Buscar..." title="Type in a name" value="">
-                  <button class="d-none d-lg-flex btn btn-primary ml-3 agregar" data-toggle="modal" data-target="#modalForm">Agregar</button>
+                  <button class="agregar d-none d-lg-flex btn btn-primary ml-3 agregar" data-toggle="modal" data-target="#modalForm">Agregar</button>
                 </div>
                 <div style="border-radius: 10px;" class="contenedorTabla table-responsive">
                   <table style="border-radius: 10px;" class="table table-bordered table-hover table-striped table-light">

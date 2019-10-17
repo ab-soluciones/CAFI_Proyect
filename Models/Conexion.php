@@ -58,9 +58,6 @@ class Conexion
             $stmt->execute();
             return mysqli_fetch_all($stmt->get_result());
         }
-        
-        $this->con->close();
-
     }
    public function eliminar_simbolos($string){
         $string = trim($string);
@@ -118,7 +115,6 @@ class Conexion
     public function obtenerDatosDeTabla($sql)
     {
         return mysqli_fetch_all($this->con->query($sql));
-        $this->con->close();
     }
 
 
@@ -144,6 +140,10 @@ class Conexion
         return $row;
     }
 
-    
+  
+    public function __destruct()
+    {
+        $this->con->close();
+    }
 
 }

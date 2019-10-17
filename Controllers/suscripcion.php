@@ -46,9 +46,22 @@ if(isset($_POST['Dfecha_activacion']) && isset($_POST['Dfecha_vencimiento']) && 
         $consulta= "UPDATE suscripcion SET fecha_activacion = ?, fecha_vencimiento = ?, estado = ?, monto = ?, paquete = ?, usuario_extra = ?, 
         usuarioab = ? WHERE idsuscripcion = ?";
         $tipo_datos = "ssssssss";
-    }
 
-    echo $conexion->consultaPreparada($datos_suscripcion,$consulta,1,$tipo_datos);
+        //se cambia el estado a los usuarios pertenecientes a ese negocio
+
+        $consulta2 = "UPDATE usuarioscafi SET entrada_sistema = ? WHERE negocio = ?";
+        $datos_uscafi = array();
+        array_push( $datos_uscafi,
+                    $conexion->eliminar_simbolos($_POST['Sestado']),
+                    $conexion->eliminar_simbolos($_POST['Snegocio'])
+                   );
+                   
+    
+    $respuesta = $conexion->consultaPreparada($datos_uscafi,$consulta,1,"si");
+    }
+    $respuesta = $conexion->consultaPreparada($datos_suscripcion,$consulta,1,$tipo_datos);
+
+    echo $respuesta;
     //respuesta al front
     
     }else if(isset($_POST['tabla'])){
