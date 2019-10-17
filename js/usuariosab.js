@@ -32,6 +32,10 @@ $(document).ready(function () {
       console.log(response);
       $("#mensaje").css("display", "block");
       if (response == "1") {
+        if(editar == true){
+          $('.modal').modal('hide');
+          $("#mensaje").css("display", "none");
+        }
         $("#mensaje").text("Registro Exitoso");
         $("#mensaje").css("color", "green");
         $("#email").focus();
@@ -58,7 +62,7 @@ $(document).ready(function () {
         $.each(datos, function (i, item) {
           template += `
           <tr>
-                <td class="text-nowrap text-center idNed">${item[0]}</td>
+                <td class="text-nowrap text-center email">${item[0]}</td>
                 <td class="text-nowrap text-center">${item[1]}</td>
                 <td class="text-nowrap text-center">${item[2]}</td>
                 <td class="text-nowrap text-center">${item[3]}</td>
@@ -93,8 +97,7 @@ $(document).ready(function () {
     });
   }
   $(document).on("click",".Beliminar",function(){
-    var valores = "";
-    $(this).parents("tr").find("td").
+    var valor = $(this).parents("tr").find("td").eq(0).text();
     swal({
       title: "Alerta!",
       text: "¿Esta seguro que desea eliminar?",
@@ -105,19 +108,19 @@ $(document).ready(function () {
       closeOnConfirm: false
     },
     function(){
-      datos = valores.split("?");
-      console.log(datos);
-      $("#email").val(datos[0]);
+      console.log($(".email").val());
       const postData = {
-        email: $("#email").val(datos[0]),
-        eliminado:"true"
+        email: valor,
+        eliminado: "true"
       };
+
       $.ajax({
         url: "../Controllers/usuariosab.php",
         type: "POST",
         data: postData,
 
         success: function (response) {
+          console.log(response);
           if(response == "1"){
             swal(
             "Eliminado!", 
@@ -129,9 +132,7 @@ $(document).ready(function () {
             "Registro fallido.", 
             "warning");
           }
-          
         }
-  
       });
     });
     obtenerDatosTablaUsuarios();
